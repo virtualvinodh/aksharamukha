@@ -1,0 +1,58 @@
+{
+  "name": "aksharamukha",
+  "version": "1.0.0",
+  "description": "Script Converter",
+  "productName": "Aksharamukha",
+  "cordovaId": "org.cordova.quasar.aksharamukha",
+  "author": "Vinodh Rajan <vinodh@virtualvinodh.com>",
+  "private": true,
+  "scripts": {
+    "lint": "eslint --ext .js,.vue src",
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "dependencies": {
+    "aksharamukha": "file:../aksharamukha-js",
+    "axios": "^0.18.0",
+    "clipboard": "^2.0.1",
+    "dom-to-image": "^2.6.0",
+    "html2canvas": "^1.0.0-alpha.12",
+    "jspdf": "^1.4.1",
+    "sanitize-html": "^1.19.0",
+    "underscore": "^1.9.1",
+    "unicode-properties": "^1.1.0",
+    "vue-analytics": "^5.16.0",
+    "vue-flip": "^0.2.4",
+    "vue-i18n": "^7.3.3",
+    "vue-pdf": "^3.3.1",
+    "vue-quill-editor": "^3.0.6",
+    "vue-social-sharing": "^2.3.3"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.1",
+    "devtron": "^1.4.0",
+    "electron": "^2.0.9",
+    "electron-debug": "^1.5.0",
+    "electron-devtools-installer": "^2.2.4",
+    "eslint": "^4.18.2",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-loader": "^2.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "eslint-plugin-vue": "^4.7.1",
+    "quasar-cli": "^0.17.20",
+    "strip-ansi": "^3.0.1"
+  },
+  "engines": {
+    "node": ">= 8.9.0",
+    "npm": ">= 5.6.0",
+    "yarn": ">= 1.6.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ]
+}
