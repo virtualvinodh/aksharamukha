@@ -589,10 +589,10 @@ def RetainGurmukhiNumerals(Strng):
     return RetainIndicNumerals(Strng, 'Gurmukhi')
 
 def SundaneseRemoveHistoric(Strng):
-    Strng = Strng.replace('᮪ᮻ', 'ᮢᮥ')
-    Strng = Strng.replace('᮪ᮼ', 'ᮣᮥ')
-    Strng = Strng.replace('ᮻ', 'ᮛᮥ')
-    Strng = Strng.replace('ᮼ', 'ᮜᮥ')
+    Strng = Strng.replace('᮪ᮻ', 'ᮢᮩ')
+    Strng = Strng.replace('᮪ᮼ', 'ᮣᮩ')
+    Strng = Strng.replace('ᮻ', 'ᮛᮩ')
+    Strng = Strng.replace('ᮼ', 'ᮜᮩ')
     Strng = Strng.replace('\u1BBD','\u1B98')
 
     return Strng

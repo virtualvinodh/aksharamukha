@@ -13,24 +13,24 @@ VowelMap =  [
             '\u1BBB\u02BD',
             '\u1BBC',
             '\u1BBC\u02BD',
-            '\u1B86\u02BD',
+            '\u1B88\u02BD',
             '\u1B83\u1B84\u02BD',
             '\u1B87\u02BD',
             '\u1B83\u1B85\u02BD',
             ]
 
 SouthVowelMap = [
-                '\u1B86',
+                '\u1B88',
                 '\u1B87',
                 ]
 
 ModernVowelMap = [
-                 '\u1B88',
+                 '\u1B86',
                  '\u1B89',
                  ]
 
 SinhalaVowelMap = [
-                  '\u1B88\u02BD'
+                  '\u1B86\u02BD'
                   ]
 
 VowelSignMap =  [
@@ -43,24 +43,24 @@ VowelSignMap =  [
                 '\u1BAA\u1BBB\u02BD',
                 '\u1BAA\u1BBC',
                 '\u1BAA\u1BBC\u02BD',
-                '\u1BA6\u02BD',
+                '\u1BA8\u02BD',
                 '\u1B84\u02BD',
                 '\u1BA7\u02BD',
                 '\u1B85\u02BD',
                 ]
 
 SouthVowelSignMap = [
-                     '\u1BA6',
+                     '\u1BA8',
                      '\u1BA7',
                     ]
 
 ModernVowelSignMap =[
-                     '\u1BA8',
+                     '\u1BA6',
                      '\u1BA9',
                     ]
 
 SinhalaVowelSignMap = [
-                      '\u1BA8\u02BD'
+                      '\u1BA6\u02BD'
                       ]
 
 AyogavahaMap = [
