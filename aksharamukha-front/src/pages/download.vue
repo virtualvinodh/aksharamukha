@@ -12,7 +12,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .q-body-1 {
   line-height: 1.75em;
   font-color: red;

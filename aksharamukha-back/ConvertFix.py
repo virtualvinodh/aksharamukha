@@ -797,7 +797,7 @@ def FixAvestan(Strng, reverse=False):
         Strng = re.sub("(("+ListV+")"+"|"+"("+ListC+"))"+"("+va+")",r'\1'+uu,Strng)
 
         Strng = Strng.replace(Avestan.ConsonantMap[15]  + '\u02BF', '\U00010B1D') ## TTE
-        Strng = Strng.replace(va + '\u02BF', '\U00010B32') # BHA
+        Strng = Strng.replace(va + '\u02BF', '\U00010B21') # BHA
 
         Strng = Strng.replace('𐬰\u02BF', '𐬲') ## ZHA
         Strng = Strng.replace('𐬢\u02BF','𐬤') ## NGVA

@@ -192,7 +192,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .cards {
   width: 100px;
 }

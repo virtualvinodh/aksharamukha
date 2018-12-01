@@ -1,9 +1,5 @@
 <template>
   <!-- Fix Urdu ai and au -->
-  <!-- favicon -->
-  <!-- http://rtz.tsadra.org/index.php/Terdzo-TSHI-036 -->
-  <!-- Normalize Tibetan -->
-
   <q-page class="q-pa-md">
     <div class="row">
       <div class="row col-xs-12 col-md-11 col-xl-5 q-ma-md float-div print-hide">
@@ -376,7 +372,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .float-div {
   display: inline-block;
   float: left;
