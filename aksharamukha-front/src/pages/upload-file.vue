@@ -18,7 +18,7 @@
     <i v-show="downloadWarning"> Your browser may try to block the downloads. In that case, please unblock and try again </i>
     <div v-for="(file, index) in files" :key="'file'+index" v-if="showContent">
       <b> {{file.name}} </b> <br/><br/>
-      <transliterate :text="file.content" :src="options.inputScript" :tgt="options.outputScript" :preserveSource="options.sourcePreserve"> </transliterate>
+      <transliterate :text="sanitize(file.content)" :src="options.inputScript" :tgt="options.outputScript" :preserveSource="options.sourcePreserve" :postOptions="options.postOptions" :preOptions="options.preOptions"> </transliterate>
       <br/><br/>
     </div>
   </q-page>
@@ -32,6 +32,7 @@ import Transliterate from '../components/Transliterate'
 import Controls2 from '../components/Controls2'
 import {QPageSticky, QUploader, QField} from 'quasar'
 import { ScriptMixin } from '../mixins/ScriptMixin'
+import sanitizeHtml from 'sanitize-html'
 
 export default {
   props: ['name'],
@@ -53,6 +54,9 @@ export default {
     }
   },
   methods: {
+    sanitize: function (html) {
+      return sanitizeHtml(html)
+    },
     convertView: async function () {
       this.readFiles()
       this.downloadWarning = false
@@ -80,6 +84,7 @@ export default {
       this.downloadWarning = true
       this.showContent = false
       this.options = this.optionsRet
+      console.log(this.options)
       await this.readFiles()
       console.log(this.files)
       for (var i = 0; i < this.files.length; i++) {
@@ -89,10 +94,10 @@ export default {
           target: this.options.outputScript,
           text: file.content,
           nativize: !this.options.sourcePreserve,
-          postOptions: this.postOptions,
-          preOptions: this.preOptions
+          postOptions: this.options.postOptions,
+          preOptions: this.options.preOptions
         }
-        console.log('here')
+        console.log(data)
         var dhis = this
         this.apiCall.post('/convert', data)
           .then(function (response) {

@@ -19,16 +19,19 @@ def RemoveSchwaHindi(Strng):
     VowS = "(" + '|'.join(GM.CrunchSymbols(GM.VowelSignsNV, 'Devanagari')) + ")"
     Cons = "(" + '|'.join(GM.CrunchSymbols(GM.Consonants, 'Devanagari')) + ")"
     Char = "(" + '|'.join(GM.CrunchSymbols(GM.Characters, 'Devanagari')) + ")"
-    Nas = "([ंँ]?)"
-    ISyl = "((" + VowI + "|" + "(" + Cons + VowS + "?" + ")" + Nas + '))'
+    Nas = "([ंःँ]?)"
+    ISyl = "((" + VowI + "|" + "(" + Cons + VowS + "?" + "))" + Nas +')'
     Syl = "((" + Cons + VowS + ')' + Nas + ")"
     SylAny = "((" + Cons + VowS + "?" + ')' + Nas + ")"
 
     vir = '्'
 
-    Strng = re.sub(ISyl+Cons+Syl+SylAny+"(?!" + Char + ")", r'\1\8' + vir + r'\9\16', Strng) # bhAratIya --> bhArtIy
+    Cons2 = '((' + Cons + vir + ')?' + Cons + ')'
+
+    Strng = re.sub(ISyl+Cons+Syl+SylAny+"(?!" + Char + ")", r'\1\8' + vir + r'\9\15', Strng) # bhAratIya --> bhArtIy
     Strng = re.sub(ISyl+Cons+Syl+"(?!" + Char + ")", r'\1\8' + vir + r'\9', Strng) # namakIn -> namkIn
-    Strng = re.sub(ISyl+Cons+"(?!" + Char + ")", r'\1\8' + vir, Strng) # kama -> kam
+    Strng = re.sub(ISyl+Cons2+"(?!" + Char + ")", r'\1\8' + vir, Strng) # kama -> kam
+    #Strng = re.sub(VowI + Nas + Cons2+"(?!" + Char + ")", r'\1\2\3' + vir, Strng)
 
     return Strng
 
@@ -38,14 +41,16 @@ def RemoveFinal(Strng, Target):
     VowS = "(" + '|'.join(GM.CrunchSymbols(GM.VowelSignsNV, Target)) + ")"
     Cons = "(" + '|'.join(GM.CrunchSymbols(GM.Consonants, Target)) + ")"
     Char = "(" + '|'.join(GM.CrunchSymbols(GM.Characters, Target)) + ")"
-    Nas = "([ंँ]?)"
+    Nas = "([ंःँ]?)"
     ISyl = "((" + VowI + "|" + "(" + Cons + VowS + "?" + ")" + Nas + '))'
     Syl = "((" + Cons + VowS + ')' + Nas + ")"
     SylAny = "((" + Cons + VowS + "?" + ')' + Nas + ")"
 
     vir = GM.CrunchList("ViramaMap", Target)[0]
+    Cons2 = '((' + Cons + vir + ')?' + Cons + ')'
 
-    Strng = re.sub(ISyl+Cons+"(?!" + Char + ")", r'\1\8' + vir, Strng) # kama -> kam
+    Strng = re.sub(ISyl+Cons2+"(?!" + Char + ")", r'\1\8' + vir, Strng) # kama -> kam
+    #Strng = re.sub(VowI + Nas + Cons2+"(?!" + Char + ")", r'\1\2\3' + vir, Strng)
 
     return Strng
 

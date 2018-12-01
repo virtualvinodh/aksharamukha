@@ -6,7 +6,7 @@
   helper="Enter the number of letters that you want to test"
   :count="3"
 >
-  <q-input suffix="letters" v-model="countTotal" @input="reset"/>
+  <q-input suffix="letters" v-model="countTotal" @input="resetSoft"/>
 </q-field>
 <div class="row q-mt-sm">
 <span class="q-mt-md"> Front: </span>
@@ -38,7 +38,7 @@
       <!-- <q-toggle color="dark" v-model="conjunctsShow" label="Include conjuncts" class="q-ml-sm q-mb-sm q-mt-sm"/> -->
 
 </div>
-<p class="q-body-1 q-mt-md"> Fill in the equivalent of {{script1}} letters in {{script2}} </p>
+<p class="q-body-1 q-mt-md"> Fill in the equivalent of {{script1}} letters in {{script2}} <q-spinner-comment color="dark" :size="30" v-show="loading"/></p>
   <transition
    enter-active-class="animated fadeIn"
    leave-active-class="animated fadeOut"
@@ -82,14 +82,14 @@
       label="Multiple Choice" left-label class="q-mt-md" />
   <q-btn label = "Verify answers" class="q-ma-lg" color="faded" @click="verify"></q-btn>
   <q-btn label = "Show answers" class="q-ma-lg" color="faded" @click="show"></q-btn>
-  <q-btn label = "Play again" class="q-ma-lg" color="faded" @click="reset"></q-btn>
+  <q-btn label = "Play again" class="q-ma-lg" color="faded" @click="resetSoft"></q-btn>
   Result : {{correct}} / {{countTotal}}
   <br/>
   </q-page>
 </template>
 
 <script>
-import {QCard, QCardTitle, QCardMain, QCardMedia, QCardActions, QField, QInput, QBtnToggle, QToggle, QSelect} from 'quasar'
+import {QCard, QCardTitle, QCardMain, QCardMedia, QCardActions, QField, QInput, QBtnToggle, QToggle, QSelect, QSpinnerComment} from 'quasar'
 import {ScriptMixin} from '../mixins/ScriptMixin'
 var _ = require('underscore')
 
@@ -105,6 +105,7 @@ export default {
     QInput,
     QBtnToggle,
     QToggle,
+    QSpinnerComment,
     QSelect
   },
   mixins: [ScriptMixin],
@@ -138,6 +139,7 @@ export default {
       randomListOld: [],
       randomOptions: [],
       common: [],
+      loading: true,
       resetV: true,
       selections: true
     }
@@ -164,13 +166,30 @@ export default {
       }
     },
     compoundsGen: async function () {
-      var compounds = this.compounds
+      this.loading = true
 
-      this.$q.loading.show({
-        delay: 400 // ms
-      })
+      var data = {
+        letters: this.compounds,
+        script1: this.script1,
+        script2: this.script2
+      }
 
-      compounds = JSON.stringify(compounds)
+      var dhis = this
+
+      this.apiCall.post('/commonletters', data)
+        .then(function (response) {
+          dhis.compounds1 = response.data['script1']
+          dhis.compounds2 = response.data['script2']
+
+          dhis.randomListGen()
+
+          dhis.loading = false
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+
+      /* compounds = JSON.stringify(compounds)
 
       this.compounds1 = await this.convertAsync('HK', this.script1, compounds, false, [], [])
       this.compounds1 = this.replaceCommaJSON(this.script1, this.compounds1)
@@ -198,7 +217,7 @@ export default {
 
       this.randomListGen()
 
-      this.$q.loading.hide()
+      this.$q.loading.hide() */
     },
     verify: function () {
       this.results = []
@@ -226,6 +245,12 @@ export default {
       this.answers = []
       this.resetV = !this.resetV
       this.compoundsGen()
+    },
+    resetSoft: function () {
+      this.results = []
+      this.answers = []
+      this.resetV = !this.resetV
+      this.randomListGen()
     },
     show: function () {
       this.results = []

@@ -121,7 +121,30 @@ export default {
       this.randomList2 = this.shuffle(this.randomList)
     },
     compoundsGen: async function () {
-      var compounds = this.compounds
+      this.loading = true
+
+      var data = {
+        letters: this.compounds,
+        script1: this.script1,
+        script2: this.script2
+      }
+
+      var dhis = this
+
+      this.apiCall.post('/commonletters', data)
+        .then(function (response) {
+          dhis.compounds1 = response.data['script1']
+          dhis.compounds2 = response.data['script2']
+
+          dhis.randomListGen()
+
+          dhis.loading = false
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+
+      /* var compounds = this.compounds
 
       this.loading = true
 
@@ -147,7 +170,7 @@ export default {
 
       this.randomListGen()
 
-      this.loading = false
+      this.loading = false */
     },
     verify: function () {
     },

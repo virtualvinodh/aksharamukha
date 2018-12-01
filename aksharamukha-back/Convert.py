@@ -13,8 +13,6 @@ from functools import cmp_to_key
 ### ITRANS features like comments implement
 ### Check Aksharamukha Todo list... and cross check and implement that
 ### Add HK-Itrans Option of Vishvas Vasuki
-### Can't ttype l_R in HK, must be added as an option
-### Update Candrabindu mappings in Telugu, Kannada, Saurashtra
 ### Remove Diacritics
 ### Add space before punctiations and then remove it
 
@@ -47,8 +45,6 @@ def convertInter(Strng,Source):
 
 # Conversion Module
 def convertScript(Strng,Source,Target):
-    Strng = PrP.PreProcess(Strng,Source,Target)
-
     #print(Target)
     #print(Target in GM.IndicScripts)
 

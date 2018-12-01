@@ -112,20 +112,20 @@ def NewaMurmurConsonants(Strng):
     return Strng
 
 def ModiRemoveLong(Strng):
-    Strng = Strng.replace('𑘃','𑘂')
+    Strng = Strng.replace('𑘂', '𑘃')
     Strng = Strng.replace('𑘅','𑘄')
-    Strng = Strng.replace('𑘲','𑘱')
+    Strng = Strng.replace('𑘱', '𑘲')
     Strng = Strng.replace('𑘴','𑘳')
 
-    Strng = Strng.replace('𑘆', '𑘨𑘱')
-    Strng = Strng.replace('𑘇', '𑘨𑘱')
-    Strng = Strng.replace('𑘈', '𑘩𑘱')
-    Strng = Strng.replace('𑘉', '𑘩𑘱')
+    Strng = Strng.replace('𑘆', '𑘨𑘲')
+    Strng = Strng.replace('𑘇', '𑘨𑘲')
+    Strng = Strng.replace('𑘈', '𑘩𑘲')
+    Strng = Strng.replace('𑘉', '𑘩𑘲')
 
-    Strng = Strng.replace('𑘵', '𑘿𑘨𑘱')
-    Strng = Strng.replace('𑘶', '𑘿𑘨𑘱')
-    Strng = Strng.replace('𑘷', '𑘿𑘩𑘱')
-    Strng = Strng.replace('𑘸', '𑘿𑘩𑘱')
+    Strng = Strng.replace('𑘵', '𑘿𑘨𑘲')
+    Strng = Strng.replace('𑘶', '𑘿𑘨𑘲')
+    Strng = Strng.replace('𑘷', '𑘿𑘩𑘲')
+    Strng = Strng.replace('𑘸', '𑘿𑘩𑘲')
 
     return Strng
 
@@ -602,7 +602,7 @@ def OriyaVa(Strng):
     va = Oriya.ConsonantMap[28]
     OriyaVa = '\u0B2C'
 
-    Strng =  Strng.replace(va,OriyaVa)
+    Strng =  re.sub('(?<!୍)' + va, OriyaVa, Strng)
 
     return Strng
 
@@ -642,11 +642,12 @@ def TamilAddFirstVarga(Strng):
 
 def SaurashtraHaru(Strng):
 
-    ListC = '|'.join([Saurashtra.ConsonantMap[x] for x in [19,24,25,27]])
+    ListC = '|'.join([Saurashtra.ConsonantMap[x] for x in [19,24,26,27]])
+    print(ListC)
     vir = Saurashtra.ViramaMap[0]
     ha = Saurashtra.ConsonantMap[32]
 
-    Strng = re.sub('('+ListC+')'+vir+ha,r'\1'+'\uA8B4',Strng);
+    Strng = re.sub('('+ListC+')'+vir+ha,r'\1'+'\uA8B4',Strng)
 
     return Strng
 

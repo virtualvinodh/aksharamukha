@@ -35,7 +35,7 @@ def ApplyScriptDefaults(Strng,Source,Target):
         Options += ['YaToYYa','KhandaTa']
 
     elif Target == 'Oriya':
-        Options += ['VaToBa','YaToYYa']
+        Options += ['OriyaVa','YaToYYa']
 
     elif Target == 'Sinhala':
         Options += []
@@ -63,6 +63,9 @@ def ApplyScriptDefaults(Strng,Source,Target):
 
     elif Target == "Multani":
         Options += ['MultaniAbjad']
+
+    elif Target == "Modi":
+        Options += ['ModiRemoveLong']
 
     else:
         Options += []

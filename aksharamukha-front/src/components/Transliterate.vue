@@ -57,10 +57,10 @@ export default {
         this.convertText = this.text
         return
       }
-      if (this.src === this.tgt) {
+      /* if (this.src === this.tgt && this.postOptions.length === 0 && this.preOptions.length === 0) {
         this.convertText = this.text.replace(/\n/g, '<br/>')
         return
-      }
+      } */
       var data = {
         source: this.src,
         target: this.tgt,

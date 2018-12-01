@@ -242,6 +242,10 @@ export default {
           path: 'lotus'
         },
         {
+          name: 'Nilakantha Dharani',
+          path: 'nilakantha'
+        },
+        {
           name: 'Karanda Mudra Dharani',
           path: 'karanda'
         },
@@ -375,6 +379,10 @@ export default {
 @font-face {
   font-family: 'Noto Serif Gujarati';
   src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts@b20c9c07139b22eb38013b1f80f9a5222c6058c6/phaseIII_only/unhinted/otf/NotoSerifGujarati/NotoSerifGujarati-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Khmer';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts@b20c9c07139b22eb38013b1f80f9a5222c6058c6/phaseIII_only/unhinted/otf/NotoSerifKhmer/NotoSerifKhmer-Regular.otf')
 }
 @font-face {
   font-family: 'Noto Sans OldPersian';
@@ -609,6 +617,9 @@ export default {
 .telugu {
   font-family: "Noto Sans Telugu"
 }
+.khmer {
+  font-family: "Noto Sans Khmer"
+}
 .meeteimayek {
   font-family: "Noto Sans Meetei Mayek"
 }
@@ -653,14 +664,15 @@ export default {
 }
 .taitham {
   font-family: "Lamphun";
-  font-size: 150%;
+  font-size: 175%;
 }
 .sylotinagri {
   font-family: "Noto Sans SylotiNagri"
 }
 .tamilgrantha {
   font-family: "e-Grantamil";
-  font-size: 90%;
+  font-size: 110%;
+  line-height: 1.5em;
 }
 .siddham {
   font-size: 120%;
@@ -718,5 +730,4 @@ export default {
 .laopali {
   font-family: "Lao Pali"
 }
-
 </style>

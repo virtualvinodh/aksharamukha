@@ -6,7 +6,7 @@
   helper="Enter the number of letters that you want to test"
   :count="3"
 >
-  <q-input suffix="letters" v-model="countTotal" @input="reset"/>
+  <q-input suffix="letters" v-model="countTotal" @input="resetSoft"/>
 </q-field>
 <div class="row q-mt-sm">
 <span class="q-mt-md"> Deck 1: </span>
@@ -38,7 +38,7 @@
       <!-- <q-toggle color="dark" v-model="conjunctsShow" label="Include conjuncts" class="q-ml-sm q-mb-sm q-mt-sm"/> -->
 
 </div>
-  <p class="q-body-1 q-ma-md"> Click a card in one deck and then click a card on the other deck to find a match </p>
+  <p class="q-body-1 q-ma-md"> Click a card in one deck and then click a card on the other deck to find a match <q-spinner-comment color="dark" :size="30" v-show="loading"/> </p>
   <transition
    enter-active-class="animated fadeIn"
    leave-active-class="animated fadeOut"
@@ -80,13 +80,13 @@
   <q-btn label = "Shuffle" class="q-ma-lg" color="faded" @click="shuffleCard"
           :class="{disabled:!isEmpty(colors1) && !isEmpty(colors2)}"></q-btn>
   <q-btn label = "Show answers" class="q-ma-lg" color="faded" @click="show"></q-btn>
-  <q-btn label = "Play again" class="q-ma-lg" color="faded" @click="reset"></q-btn>
+  <q-btn label = "Play again" class="q-ma-lg" color="faded" @click="resetSoft"></q-btn>
   <br/>
   </q-page>
 </template>
 
 <script>
-import {QCard, QCardTitle, QCardMain, QCardMedia, QCardActions, QField, QInput, QBtnToggle, QToggle, Notify, QSelect} from 'quasar'
+import {QCard, QCardTitle, QCardMain, QCardMedia, QCardActions, QField, QInput, QBtnToggle, QToggle, Notify, QSelect, QSpinnerComment} from 'quasar'
 import {ScriptMixin} from '../mixins/ScriptMixin'
 
 var _ = require('underscore')
@@ -103,6 +103,7 @@ export default {
     QInput,
     QBtnToggle,
     QToggle,
+    QSpinnerComment,
     QSelect
   },
   plugins: [Notify],
@@ -129,6 +130,7 @@ export default {
       randomListOld: [],
       resetV: true,
       compounds1: [],
+      loading: true,
       compounds2: []
     }
   },
@@ -148,11 +150,30 @@ export default {
       this.randomList2 = this.shuffle(this.randomList)
     },
     compoundsGen: async function () {
-      this.$q.loading.show({
-        delay: 400 // ms
-      })
+      this.loading = true
 
-      var compounds = this.compounds
+      var data = {
+        letters: this.compounds,
+        script1: this.script1,
+        script2: this.script2
+      }
+
+      var dhis = this
+
+      this.apiCall.post('/commonletters', data)
+        .then(function (response) {
+          dhis.compounds1 = response.data['script1']
+          dhis.compounds2 = response.data['script2']
+
+          dhis.randomListGen()
+
+          dhis.loading = false
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+
+      /* var compounds = this.compounds
 
       compounds = JSON.stringify(compounds)
 
@@ -180,11 +201,7 @@ export default {
       this.compounds2 = await this.convertAsync('HK', this.script2, JSON.stringify(common), false, [], [])
       this.compounds2 = this.replaceCommaJSON(this.script2, this.compounds2)
 
-      this.randomListGen()
-
-      this.$q.loading.hide()
-
-      console.log(this.randomList)
+      this.randomListGen() */
     },
     verify: function () {
     },
@@ -195,6 +212,14 @@ export default {
       this.colors2 = {}
       this.resetV = !this.resetV
       this.compoundsGen()
+    },
+    resetSoft: function () {
+      this.results = []
+      this.answers = []
+      this.colors1 = {}
+      this.colors2 = {}
+      this.resetV = !this.resetV
+      this.randomListGen()
     },
     shuffleCard: function () {
       if (this.isEmpty(this.colors1)) {

@@ -1,6 +1,8 @@
 <template>
   <!-- Fix Urdu ai and au -->
   <!-- favicon -->
+  <!-- http://rtz.tsadra.org/index.php/Terdzo-TSHI-036 -->
+  <!-- Normalize Tibetan -->
 
   <q-page class="q-pa-md">
     <div class="row">
@@ -53,7 +55,10 @@
       <div class="notice q-ma-sm" v-show="inputScript === 'Urdu'">Urdu is an abjad. Please read the script <router-link to="/describe/Urdu">notes</router-link> to read about Urdu reading conventions.</div>
     </div>
     <div class="q-ma-md print-hide">
-      <q-btn> <q-icon name="swap_horiz" @click.native="swap"/> </q-btn>
+      <div class="col">
+      <q-btn class="row"> <q-icon name="swap_horiz" @click.native="swap"/> </q-btn>
+      <!-- q-spinner-comment color="dark" :size="30" v-show="loading" class="row"/> -->
+      </div>
     </div>
     <div class="row col-xs-12 col-md-11 col-xl-5 q-ma-md float-div">
        <q-select
@@ -77,7 +82,7 @@
       <div class="notice q-ma-sm" v-show="String(convertText).includes('ఴ')">ఴ is a historic Telugu letter that is equivalent to Tamil ழ/Malayalam ഴ. Your font may not support this character.</div>
       <div class="notice q-ma-sm" v-show="String(convertText).includes('ഩ')">ഩ is a historic Malayalam letter that is equivalent to Tamil ன. Your font may not support this character.</div>
       <div class="notice q-ma-sm" v-show="String(convertText).includes('ఀ')">Your font may not support ఀ the Telugu Chandrabindu character.</div>
-      <div class="notice q-ma-sm" v-show="String(convertText).includes('ഀ')">Your font may not support ഀ the Malyalam Anusvara character. Try enabling traditional orthogrpahy to view the character properly.</div>
+      <div class="notice q-ma-sm" v-show="String(convertText).includes('ഀ')">Your font may not support ഀ the Malayalam Anusvara above character. Try enabling traditional orthogrpahy to view the character properly.</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'TamilGrantha'">This only works with e-Grantamil Font and uses a mixture of Tamil & Bengali codepoints to encode the characters. </div>
       <div class="notice q-ma-sm" v-show="outputScript === 'GranthaPandya'">This only works with e-Pandya font and uses Malayalam codepoints to encode Grantha (Pandya) characters.</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Vatteluttu'">This only works with e-Vatteluttu OT font and uses Tamil codepoints to encode Vatteluttu characters.</div>
@@ -142,7 +147,7 @@
 </style>
 
 <script>
-import {QEditor, QRadio, QBtn, QField, QBtnToggle, QToggle, QInput, QSelect, QOptionGroup, QAlert} from 'quasar'
+import {QEditor, QRadio, QBtn, QField, QBtnToggle, QToggle, QInput, QSelect, QOptionGroup, QAlert, QSpinnerComment} from 'quasar'
 import sanitizeHtml from 'sanitize-html'
 import html2canvas from 'html2canvas'
 import Controls from '../components/Controls'
@@ -168,12 +173,13 @@ export default {
     Controls,
     QInput,
     QSelect,
+    QSpinnerComment,
     QOptionGroup
   },
   data () {
     return {
       textInput: '',
-      indicSubset: ['Khmer', 'Burmese', 'Lao', 'Thai', 'Balinese', 'Javanese', 'Tibetan', 'LaoPali', 'TaiTham', 'Cham', 'Lepcha'],
+      indicSubset: ['Khmer', 'Burmese', 'Lao', 'Thai', 'Balinese', 'Javanese', 'Tibetan', 'LaoPali', 'TaiTham', 'Cham', 'Lepcha', 'Ahom'],
       beta: true,
       inputScript: '',
       outputScript: '',
@@ -185,6 +191,7 @@ export default {
       brahmiImg: '',
       fontSize: 100,
       dash: _,
+      loading: false,
       throttled: _.debounce(this.convert, 500)
     }
   },
@@ -236,6 +243,8 @@ export default {
         this.convertText = ''
         return
       }
+      this.loading = true
+
       var data = {
         source: this.inputScript,
         target: this.outputScript,
@@ -250,6 +259,7 @@ export default {
       this.apiCall.post('/convert', data)
         .then(function (response) {
           dhis.convertText = response.data
+          dhis.loading = false
         })
         .catch(function (error) {
           console.log(error)

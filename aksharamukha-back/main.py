@@ -36,6 +36,37 @@ def removeA(a):
     if a.count('a') == 1:
         return a.replace('a', '')
 
+@app.route('/api/commonletters', methods=['POST', 'GET'])
+def common_letters():
+    script1 = request.json['script1']
+    script2 = request.json['script2']
+    letters = request.json['letters']
+
+    results = {}
+
+    if script1 == 'Tamil':
+        pp = 'RemoveDiacriticsTamil'
+    else:
+        pp = 'RemoveDiacritics'
+
+    letters_script1 = [convert('HK', script1, x, False,[],[pp]) for x in letters]
+    letters_script2 = [convert('HK', script2, x, False,[],[pp]) for x in letters]
+
+    letters_script1_hk = [convert(script1, 'HK', x, False,[],[pp]) for x in letters_script1]
+    letters_script2_hk = [convert(script2, 'HK', x, False,[],[pp]) for x in letters_script2]
+
+    leters_common = set(letters_script1_hk) & set(letters_script2_hk)
+
+    letters_script1_common = [convert('HK', script1, x, False,[],[pp]) for x in leters_common]
+    letters_script2_common = [convert('HK', script2, x, False,[],[pp]) for x in leters_common]
+
+    results['script1'] = letters_script1_common
+    results['script2'] = letters_script2_common
+
+
+    return jsonify(results)
+
+
 @app.route('/api/syllabary', methods=['POST', 'GET'])
 def syllabary_list():
     results = {}
@@ -302,8 +333,7 @@ def convert_loop_src_post():
 
 
 def convert(src, tgt, txt, nativize, preoptions, postoptions):
-    for options in preoptions:
-      txt = getattr(PreProcess, options)(txt)
+    txt = PreProcess.PreProcess(txt,src,tgt)
 
     if 'siddhamUnicode' in postoptions and tgt == 'Siddham':
         tgt = 'SiddhamUnicode'
@@ -311,6 +341,9 @@ def convert(src, tgt, txt, nativize, preoptions, postoptions):
         tgt = 'Lao2'
     if 'siddhamUnicode' in preoptions and src == 'Siddham':
         src = 'SiddhamUnicode'
+
+    for options in preoptions:
+      txt = getattr(PreProcess, options)(txt)
 
     transliteration = Convert.convertScript(txt, src, tgt)
 

@@ -69,7 +69,6 @@ export const ScriptMixin = {
           { label: 'Sanskrit/Pali Orthography', value: 'SinhalaPali' }
         ],
         'Malayalam': [
-          { label: 'Sankrit/Prakrit Text', value: 'removeChillus' },
           { label: 'Prakrit orthography', value: 'MalayalamPrakrit' }
         ],
         'Siddham': [
@@ -112,9 +111,6 @@ export const ScriptMixin = {
         ],
         'Oriya': [
           { label: 'Use ଵ instead of ୱ', value: 'OriyaVaAlt' }
-        ],
-        'Modi': [
-          { label: 'Remove long and vocalic vowels', value: 'ModiRemoveLong' }
         ],
         'Siddham': [
           { label: 'Siddham Unicode', value: 'siddhamUnicode' },
@@ -198,7 +194,6 @@ export const ScriptMixin = {
       scriptsIndic: [
         {
           label: 'Ahom',
-          sublabel: 'Beta',
           value: 'Ahom'
         },
         {
@@ -207,13 +202,11 @@ export const ScriptMixin = {
         },
         {
           label: 'Avestan',
-          sublabel: 'Beta',
           value: 'Avestan'
         },
         {
           label: 'Balinese',
-          value: 'Balinese',
-          sublabel: 'Beta'
+          value: 'Balinese'
         },
         {
           label: 'Batak Karo',
@@ -254,21 +247,19 @@ export const ScriptMixin = {
         },
         {
           label: 'Buginese (Lontara)',
-          value: 'Buginese',
-          sublabel: 'Beta'
+          value: 'Buginese'
         },
         {
           label: 'Buhid',
           value: 'Buhid'
         },
         {
-          label: 'Burmese',
+          label: 'Burmese (Myanmar)',
           value: 'Burmese'
         },
         {
           label: 'Chakma',
-          value: 'Chakma',
-          sublabel: 'Beta'
+          value: 'Chakma'
         },
         {
           label: 'Cham',
@@ -297,8 +288,7 @@ export const ScriptMixin = {
         },
         {
           label: 'Javanese',
-          value: 'Javanese',
-          sublabel: 'Beta'
+          value: 'Javanese'
         },
         {
           label: 'Kaithi',
@@ -330,7 +320,6 @@ export const ScriptMixin = {
         },
         {
           label: 'Lepcha',
-          sublabel: 'Beta',
           value: 'Lepcha'
         },
         {
@@ -347,7 +336,6 @@ export const ScriptMixin = {
         },
         {
           label: 'Meetei Mayek',
-          sublabel: 'Beta',
           value: 'MeeteiMayek'
         },
         {
@@ -384,8 +372,7 @@ export const ScriptMixin = {
         },
         {
           label: 'Santali (Ol Chiki)',
-          value: 'Santali',
-          sublabel: 'Beta'
+          value: 'Santali'
         },
         {
           label: 'Saurashtra',
@@ -413,7 +400,6 @@ export const ScriptMixin = {
         },
         {
           label: 'Sundanese',
-          sublabel: 'Beta',
           value: 'Sundanese'
         },
         {
@@ -422,7 +408,6 @@ export const ScriptMixin = {
         },
         {
           label: 'Tagbanwa',
-          sublabel: 'Beta',
           value: 'Tagbanwa'
         },
         {
@@ -430,7 +415,7 @@ export const ScriptMixin = {
           value: 'Tagalog'
         },
         {
-          label: 'Tai Tham',
+          label: 'Tai Tham (Lanna)',
           sublabel: 'Beta',
           value: 'TaiTham'
         },
@@ -477,8 +462,7 @@ export const ScriptMixin = {
         },
         {
           label: 'Urdu',
-          value: 'Urdu',
-          sublabel: 'Beta'
+          value: 'Urdu'
         },
         {
           label: 'Vatteluttu',
@@ -504,8 +488,7 @@ export const ScriptMixin = {
         },
         {
           label: 'IPA',
-          value: 'IPA',
-          sublabel: 'Beta'
+          value: 'IPA'
         },
         {
           label: 'ISO',
@@ -521,8 +504,7 @@ export const ScriptMixin = {
         },
         {
           label: 'Cyrillic (Russian)',
-          value: 'RussianCyrillic',
-          sublabel: 'Beta'
+          value: 'RussianCyrillic'
         }
       ],
       scriptsRomanization: [

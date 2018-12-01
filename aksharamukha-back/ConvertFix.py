@@ -290,6 +290,9 @@ def FixBurmese(Strng,reverse=False):
         # Introduce Kinzi: ga + NGA + sub-Virama -> ga + NGA + exp-Virama + sub-Virama
         Strng = re.sub('('+Burmese.ConsonantMap[4]+')'+'('+'\u1039'+')',r'\1'+vir+r'\2',Strng)
 
+        # Introduce Repha
+        Strng = re.sub('(ရ)'+'('+'\u1039'+')',r'\1'+vir+r'\2',Strng)
+
         # Introduce Tall A: ka + AA -> ka + Tall A
         Strng = re.sub('(?<!\u1039)('+TallACons+')'+'('+E+'?)'+AA,r'\1\2'+'\u102B',Strng)
 
@@ -297,14 +300,13 @@ def FixBurmese(Strng,reverse=False):
         Strng = re.sub('('+TallACons+')(\u1039)('+ListC +')'+'('+E+'?)'+AA,r'\1\2\3\4'+'\u102B',Strng)
         Strng = re.sub('('+TallACons+')(\u1039)('+ListC +')'+'(\u1039)('+ListC +')'+'('+E+'?)'+AA,r'\1\2\3\4\5\6'+'\u102B',Strng)
 
-
-        Strng = re.sub('(?<=င်္)' + '('+TallACons+')'+'('+E+'?)'+AA,r'\1\2'+'\u102B',Strng)
+        Strng = re.sub('(?<=်္)' + '('+TallACons+')'+'('+E+'?)'+AA,r'\1\2'+'\u102B',Strng)
 
         # Remove Tall a Kinzi
 
         for x,y in zip(yrvh,yrvhsub):
             # Introduce subjoining forms: sub-virama + y/r/v/h -> subjoining y/r/v/h
-            Strng = Strng.replace('\u1039'+x,y)
+            Strng = re.sub('(?<!်)\u1039'+x,y,Strng)
 
         Strng = Strng.replace('ျါ','ျာ')
         Strng = Strng.replace('ြါ','ြာ')
@@ -318,6 +320,7 @@ def FixBurmese(Strng,reverse=False):
         Strng = Strng.replace("\u02F3", "့")
         Strng = Strng.replace("့်", "့်",)
 
+        Strng = Strng.replace("ာ္", "ာ်")
     else:
         Strng = Strng.replace("ဿ","သ္သ")
         Strng = Strng.replace("ည", "ဉ္ဉ")
@@ -331,6 +334,8 @@ def FixBurmese(Strng,reverse=False):
         Strng = Strng.replace('\u102B',AA)
         # Replace Kinzi with NGA + Virama
         Strng = Strng.replace(Burmese.ConsonantMap[4]+vir+vir,Burmese.ConsonantMap[4]+vir)
+        # Replace Repha
+        Strng = Strng.replace('ရ'+vir+vir,'ရ'+vir)
 
         for x,y in zip(yrvh,yrvhsub):
             # Replace subjoining forms: exp-virama + y/r/v/h <- subjoining y/r/v/h
@@ -640,7 +645,7 @@ def FixThaana(Strng,reverse=False):
 
 def FixSaurashtra(Strng, reverse = False):
     if not reverse:
-        pass
+        Strng = Strng.replace('ꢒ꣄ꢰ', 'ꢒ꣄‍ꢰ') # Ksha
     else:
         Strng = Strng.replace('ꢴ','꣄ꢲ')
 
@@ -663,8 +668,22 @@ def FixTibetan(Strng,reverse=False):
 
         Strng = Strng.replace(' ', '\u0F0B')
 
+        Strng = Strng.replace("ཛྷ༹", "ཞ")
+
+        Strng = Strng.replace("(", "༺")
+        Strng = Strng.replace(")", "༻")
+
+        Strng = Strng.replace("{", "༼")
+        Strng = Strng.replace("}", "༽")
+
 
     if reverse:
+        AspirateDecom= ["གྷ", "ཌྷ", "དྷ", "བྷ", "ཛྷ", "ྒྷ", "ྜྷ", "ྡྷ", "ྦྷ", "ྫྷ"]
+        AspirateAtomic = ["གྷ", "ཌྷ", "དྷ", "བྷ", "ཛྷ", "ྒྷ", "ྜྷ", "ྡྷ", "ྦྷ", "ྫྷ"]
+
+        for x, y in zip(AspirateDecom, AspirateAtomic):
+            Strng = Strng.replace(x, y)
+
         for x,y in zip(SubC,SubMinC):
             Strng = Strng.replace(y,x)
 
@@ -675,6 +694,19 @@ def FixTibetan(Strng,reverse=False):
             Strng = Strng.replace(x,y)
 
         Strng = Strng.replace('་', ' ')
+        Strng = Strng.replace("༔", "།")
+        Strng = Strng.replace("༈", "།")
+
+        Strng = Strng.replace("༺", "(")
+        Strng = Strng.replace("༻", ")")
+
+        Strng = Strng.replace("༼", "{")
+        Strng = Strng.replace("༽", "}")
+
+        Strng = Strng.replace("འ", "ཨ")
+        Strng = Strng.replace("ཇ", "ཛ")
+
+        Strng = Strng.replace("ཞ", "ཛྷ༹")
 
     return Strng
 
