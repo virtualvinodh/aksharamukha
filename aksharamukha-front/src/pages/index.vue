@@ -124,16 +124,9 @@
     leave-active-class="animated fadeOut"
     appear
   >
-    <q-alert
-      v-if="beta"
-      color="faded"
-      icon="build"
-      appear
-      :actions="[{ label: 'Dismiss', handler: () => { beta = false } }]"
-      class="q-mb-sm print-hide"
-    >
+    <div class="q-ma-lg q-body-1">
       This is a beta version of Aksharamukha. Please report any bugs found in <a href="https://github.com/virtualvinodh/aksharamukha/issues">Github</a>.
-    </q-alert>
+    </div>
   </transition>
   <a :href="brahmiImg" ref="imgDownload" :style="{'display': 'none'}" download="text.png"><button>Download</button></a>
   </q-page>

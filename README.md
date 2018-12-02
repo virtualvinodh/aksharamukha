@@ -11,3 +11,5 @@ The front end is written using Quasar and Vue. Use _npm install_ to install all 
 
 ## Back End
 The back end is written in Python 3 with Flask. After installing all the libraries, use _python3 main.py_ to intialize the backend server.
+
+The project is released under GNU AGPL 3.0 License
