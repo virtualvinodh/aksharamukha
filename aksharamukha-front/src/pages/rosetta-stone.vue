@@ -65,7 +65,7 @@ export default {
     return {
       options: {script: 'Devanagari', sourcePreserve: false},
       dash: _,
-      script2: 'HK',
+      script2: '',
       text: [],
       textTemp: '',
       sourcePreserve: false,
