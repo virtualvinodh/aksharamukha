@@ -125,7 +125,7 @@
     appear
   >
     <div class="q-ma-lg q-body-1">
-      This is a beta version of Aksharamukha. Please report any bugs found in <a href="https://github.com/virtualvinodh/aksharamukha/issues">Github</a>.
+      This is a new beta version of Aksharamukha. Please report any bugs found in <a href="https://github.com/virtualvinodh/aksharamukha/issues">Github</a>. <br/>The old version is still temporarily available <a href="http://www.virtualvinodh.com/aksharamkh/aksharamukha-old.php">here.</a>.
     </div>
   </transition>
   <a :href="brahmiImg" ref="imgDownload" :style="{'display': 'none'}" download="text.png"><button>Download</button></a>
@@ -170,6 +170,7 @@ export default {
       textInput: '',
       indicSubset: ['Khmer', 'Burmese', 'Lao', 'Thai', 'Balinese', 'Javanese', 'Tibetan', 'LaoPali', 'TaiTham', 'Cham', 'Lepcha', 'Ahom'],
       beta: true,
+      model: [],
       inputScript: '',
       outputScript: '',
       postOptions: [],
@@ -182,6 +183,22 @@ export default {
       dash: _,
       loading: false,
       throttled: _.debounce(this.convert, 500)
+    }
+  },
+  mounted () {
+    if (localStorage.inputScript) {
+      this.inputScript = localStorage.inputScript
+    }
+    if (localStorage.outputScript) {
+      this.outputScript = localStorage.outputScript
+    }
+  },
+  watch: {
+    inputScript (newScript) {
+      localStorage.inputScript = newScript
+    },
+    outputScript (newScript) {
+      localStorage.outputScript = newScript
     }
   },
   methods: {
