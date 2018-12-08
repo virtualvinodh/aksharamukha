@@ -16,6 +16,9 @@ def default(Strng):
 
     return Strng
 
+def egrantamil(Strng):
+    return Strng
+
 def MultaniAbjad(Strng):
     ListAll = "(" + "|".join(GM.CrunchSymbols(GM.Characters, 'Multani') + ["𑊓", "𑊍"]) + ")"
     ListC = "(" + "|".join(GM.CrunchSymbols(GM.Consonants, 'Multani') + ["𑊓", "𑊍"]) + ")"
@@ -463,6 +466,20 @@ def MToAnusvara(Strng,Target):
 
     return Strng
 
+def OriyaYYA(Strng):
+    return YYAEverywhere(Strng, 'Oriya')
+
+def BengaliYYA(Strng):
+    return YYAEverywhere(Strng, 'Bengali')
+
+def YYAEverywhere(Strng, Target):
+    Ya = GM.CrunchList('ConsonantMap', Target)[25]
+    YYa = GM.CrunchList('NuktaConsonantMap',Target)[7]
+
+    Strng = Strng.replace(Ya, YYa)
+
+    return Strng
+
 def YaToYYa(Strng,Target):
 
     ListC = '|'.join(GM.CrunchSymbols(GM.Characters, Target)+[GM.CrunchList('SignMap',Target)[0]])
@@ -475,12 +492,12 @@ def YaToYYa(Strng,Target):
 
     ListVarga = '|'.join(GM.CrunchList('ConsonantMap',Target)[0:25])
 
-    if Target in ['Assamese','Bengali']:
+    if Target in ['Assamese','Bengali', 'Oriya']:
         Strng = re.sub('('+ListC+')'+Ya,r'\1'+YYa,Strng)
         Strng = Strng.replace(vir+YYa,vir+Ya)
 
     #print(Target)
-
+    '''
     if Target == 'Oriya':
         #print('I am here for you')
         Strng = re.sub('('+ListVarga+')'+ Ya+'('+ListC+')',r'\1'+YYa+r'\2',Strng)
@@ -488,6 +505,7 @@ def YaToYYa(Strng,Target):
         Strng = re.sub(Ya + '(?!' + ListC + ')', YYa, Strng)
 
         Strng = Strng.replace(vir+Ya,vir+YYa)
+    '''
 
     return Strng
 

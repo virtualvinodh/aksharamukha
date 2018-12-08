@@ -48,7 +48,7 @@
     <transition-group
     name="flip-list"
     >
-      <q-card v-for="(i,index) in randomList" :key="i" inline class="cards q-ma-sm"
+      <q-card v-for="(i,index) in randomList" :key="i" inline class="cards q-ma-sm non-selectable"
        @click.native="select(parseInt(index), 1)" :color="typeof colors1[index] === 'undefined' ? '' : colors1[index]">
         <q-card-main align="center">
           <font size="6"><span :class="script1.toLowerCase()">{{compounds1[i]}}</span></font>
@@ -67,7 +67,7 @@
   <transition-group
     name="flip-list"
     >
-      <q-card v-for="(i,index) in randomList2" :key="i" inline class="cards q-ma-sm"
+      <q-card v-for="(i,index) in randomList2" :key="i" inline class="cards q-ma-sm non-selectable"
        @click.native="select(parseInt(index), 2)" :color="typeof colors2[index] === 'undefined' ? '' : colors2[index]">
         <q-card-main align="center">
           <font size="6"><span :class="script2.toLowerCase()"> {{compounds2[i]}} </span></font>

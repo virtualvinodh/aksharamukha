@@ -397,8 +397,8 @@ export default {
   src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts@8ff3c87757b0f8ceb4dc56556ef5c4b0b91cd9bd/unhinted/NotoSansTaiTham-Regular.ttf')
 }
 @font-face {
-  font-family: 'Noto Sans Grantha Beta';
-  src: url('../statics/NotoSansGrantha-Regular.otf')
+  font-family: 'Noto Sans Grantha2';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts@b20c9c07139b22eb38013b1f80f9a5222c6058c6/phaseIII_only/unhinted/otf/NotoSansGrantha/NotoSansGrantha-Regular.otf')
 }
 @font-face {
   font-family: 'Muktamsiddham';
@@ -407,6 +407,10 @@ export default {
 @font-face {
   font-family: 'MuktamsiddhamG';
   src: url('../statics/MuktamsiddhamG.ttf')
+}
+@font-face {
+  font-family: 'ApDevaSiddham';
+  src: url('../statics/ApDevaSiddham.ttf')
 }
 @font-face {
   font-family: 'Adinatha Tamil Brahmi';
@@ -669,6 +673,11 @@ export default {
 .sylotinagri {
   font-family: "Noto Sans SylotiNagri"
 }
+.granthagrantamil {
+  font-family: "e-Grantamil";
+  font-size: 110%;
+  line-height: 1.5em;
+}
 .tamilgrantha {
   font-family: "e-Grantamil";
   font-size: 110%;
@@ -682,7 +691,7 @@ export default {
   font-family: MuktamsiddhamG
 }
 .grantha {
-  font-family: "Noto Sans Grantha Beta";
+  font-family: "Noto Sans Grantha2";
   line-height: 2em;
 }
 .kharoshthi {

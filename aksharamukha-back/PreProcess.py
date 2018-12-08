@@ -13,6 +13,9 @@ def UrduShortNotShown(Strng):
 
     return Strng
 
+def egrantamil(Strng):
+    return Strng
+
 # consider adding an optional NUkta to the post consonantal position
 def RemoveSchwaHindi(Strng):
     VowI = "(" + '|'.join(GM.CrunchSymbols(GM.Vowels,'Devanagari')) + ")"

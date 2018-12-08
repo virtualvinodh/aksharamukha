@@ -2,8 +2,8 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
-        baseURL: 'https://aksharamukha-backend.appspot.com/api/',
-        // baseURL: 'http://localhost:8085/api',
+        // baseURL: 'https://aksharamukha-backend.appspot.com/api/',
+        baseURL: 'http://localhost:8085/api',
         timeout: 100000
       }),
       vowels: ['a', 'A', 'i', 'I', 'u', 'U', 'R', 'E', 'e', 'ai', 'O', 'o', 'au'],
@@ -63,7 +63,8 @@ export const ScriptMixin = {
           { label: 'Schwa deletion (Only word-final)', value: 'SchwaFinalGurmukhi' }
         ],
         'Grantha': [
-          { label: 'Prakrit orthography', value: 'GranthaPrakrit' }
+          { label: 'Prakrit orthography', value: 'GranthaPrakrit' },
+          { label: 'Use e-Grantamil encoding', value: 'egrantamil' }
         ],
         'Sinhala': [
           { label: 'Sanskrit/Pali Orthography', value: 'SinhalaPali' }
@@ -110,7 +111,8 @@ export const ScriptMixin = {
           { label: 'Enable murmured consonants', value: 'NewaMurmurConsonants' }
         ],
         'Oriya': [
-          { label: 'Use ଵ instead of ୱ', value: 'OriyaVaAlt' }
+          { label: 'Use ଵ instead of ୱ', value: 'OriyaVaAlt' },
+          { label: 'Use ୟ everywhere', value: 'OriyaYYA' }
         ],
         'Siddham': [
           { label: 'Siddham Unicode', value: 'siddhamUnicode' },
@@ -155,7 +157,8 @@ export const ScriptMixin = {
           { label: 'Kannada Numerals', value: 'RetainKannadaNumerals' }
         ],
         'Grantha': [
-          { label: 'Prakrit orthography', value: 'GranthaPrakrit' }
+          { label: 'Prakrit orthography', value: 'GranthaPrakrit' },
+          { label: 'Use e-Grantamil encoding', value: 'egrantamil' }
         ],
         'Urdu': [
           { label: 'Remove short vowels', value: 'UrduRemoveShortVowels' }
@@ -275,7 +278,7 @@ export const ScriptMixin = {
           value: 'Grantha'
         },
         {
-          label: 'Grantha (Pandya)',
+          label: 'Pandya Grantha',
           value: 'GranthaPandya'
         },
         {
@@ -537,7 +540,9 @@ export const ScriptMixin = {
   },
   computed: {
     scriptsOutput: function () {
-      return this.scripts
+      return this.scripts.filter(function (el) {
+        return el.value !== 'GranthaGrantamil'
+      })
       // return this.scripts.slice(1)
     },
     scriptsInput: function () {
@@ -570,6 +575,8 @@ export const ScriptMixin = {
         return 'siddhamunicode'
       } else if (postOptions.includes('LimbuDevanagariConvention') && tgt === 'Devanagari') {
         return 'limbudeva'
+      } else if (postOptions.includes('egrantamil') && tgt === 'Grantha') {
+        return 'granthagrantamil'
       } else {
         return tgt.toLowerCase()
       }
@@ -577,6 +584,8 @@ export const ScriptMixin = {
     getInputClass: function (src, preOptions = []) {
       if (preOptions.includes('siddhamUnicode') && src === 'Siddham') {
         return 'siddhamunicode'
+      } else if (preOptions.includes('egrantamil') && src === 'Grantha') {
+        return 'granthagrantamil'
       } else if (preOptions.includes('LimbuDevanagariConvention') && src === 'Devanagari') {
         return 'limbudeva'
       } else {

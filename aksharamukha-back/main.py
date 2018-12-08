@@ -6,6 +6,7 @@ import json
 import requests
 import html
 import itertools
+import unicodedata
 
 app = Flask(__name__)
 CORS(app)
@@ -29,8 +30,7 @@ def unique_everseen(iterable, key=None):
 
 @app.route('/', methods=['POST', 'GET'])
 def main_site():
-    return "You are here"
-
+    return "This is a backend for <a href=\"http://aksharamukha.appspot.com\">Aksharamukha</a>."
 
 def removeA(a):
     if a.count('a') == 1:
@@ -341,6 +341,10 @@ def convert(src, tgt, txt, nativize, preoptions, postoptions):
         tgt = 'Lao2'
     if 'siddhamUnicode' in preoptions and src == 'Siddham':
         src = 'SiddhamUnicode'
+    if 'egrantamil' in preoptions and src == 'Grantha':
+        src = 'GranthaGrantamil'
+    if 'egrantamil' in postoptions and tgt == 'Grantha':
+        tgt = 'GranthaGrantamil'
 
     for options in preoptions:
       txt = getattr(PreProcess, options)(txt)
