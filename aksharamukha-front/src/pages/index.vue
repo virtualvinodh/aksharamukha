@@ -3,7 +3,7 @@
   <q-page class="q-pa-md">
     <div class="row">
       <div class="row col-xs-12 col-md-11 col-xl-5 q-ma-md float-div print-hide">
-       <!-- <div class="row"> -->
+       <div class="row">
        <q-select
         filter
         inset
@@ -15,8 +15,9 @@
         class="col-xs-6 col-md-6 q-ma-sm"
         :options="scriptsInput"
       />
-      <!-- <q-btn class="col-xs-2 col-md-2 q-ma-sm"> Detect </q-btn> -->
-      <!-- </div> -->
+      <q-btn class="col-xs-4 col-md-4 q-ma-sm" v-show="inputPast !== ''"
+       @click="updateHist"> {{inputPast}} </q-btn>
+      </div>
     <q-input
       v-model.trim="textInput"
       type="textarea"
@@ -62,6 +63,7 @@
       </div>
     </div>
     <div class="row col-xs-12 col-md-11 col-xl-5 q-ma-md float-div">
+      <div class="row">
        <q-select
         filter
         autofocus-filter
@@ -72,6 +74,9 @@
         class="col-xs-6 col-md-6 q-ma-sm print-hide"
         :options="scriptsOutput"
       />
+      <q-btn class="col-xs-4 col-md-4 q-ma-sm" v-show="outputPast !== ''"
+       @click="updateHistOut"> {{outputPast}} </q-btn>
+      </div>
     <div
       v-html="sanitize(convertText)"
       ref="brahmiText"
@@ -191,32 +196,50 @@ export default {
       fontSize: 100,
       dash: _,
       loading: false,
+      inputPast: '',
+      outputPast: '',
       throttled: _.debounce(this.convert, 500)
     }
   },
   mounted () {
     if (localStorage.inputScript) {
-      // this.inputScript = localStorage.inputScript
+      this.inputPast = localStorage.inputScript
     }
     if (localStorage.outputScript) {
       this.outputScript = localStorage.outputScript
     }
+    if (localStorage.outputPast) {
+      this.outputPast = localStorage.outputPast
+    }
   },
   watch: {
-    inputScript (newScript) {
-      // localStorage.inputScript = newScript
+    inputScript (newScript, oldScript) {
+      this.inputPast = oldScript
+      localStorage.inputScript = newScript
     },
-    outputScript (newScript) {
+    outputScript (newScript, oldScript) {
+      if (oldScript !== '') {
+        this.outputPast = oldScript
+        localStorage.outputPast = oldScript
+      }
       localStorage.outputScript = newScript
     }
   },
   methods: {
+    updateHist: function () {
+      this.inputScript = this.inputPast
+      this.updateInput()
+    },
     updateInput: function () {
       this.$set(this, 'preOptions', [])
       if (this.inputScript === 'Urdu') {
         this.$set(this, 'preOptions', ['UrduShortNotShown'])
       }
       this.convert()
+    },
+    updateHistOut: function () {
+      this.outputScript = this.outputPast
+      this.updateOuput()
     },
     updateOuput: function () {
       this.$set(this, 'postOptions', [])
