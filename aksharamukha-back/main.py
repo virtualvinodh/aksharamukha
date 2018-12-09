@@ -6,6 +6,7 @@ import json
 import requests
 import html
 import itertools
+from collections import Counter
 import unicodedata
 
 app = Flask(__name__)
@@ -35,6 +36,34 @@ def main_site():
 def removeA(a):
     if a.count('a') == 1:
         return a.replace('a', '')
+
+@app.route('/api/autodetect', methods=['POST', 'GET'])
+def auto_detect():
+    scripts = []
+    text = request.json['text']
+
+    for uchar in text:
+        try:
+            scripts.append(unicodedata.name(uchar).split(' ')[0].lower())
+        except ValueError:
+            pass
+            # print('Script not found')
+
+    counts = Counter(scripts)
+    script_percent = []
+
+    # print(counts)
+
+    for script, count  in counts.items():
+        percent = count/len(scripts) * 100
+        script_percent.append((percent, script))
+
+    if len(script_percent) > 0:
+        script = sorted(script_percent)[-1][1]
+    else:
+        script = ''
+
+    return script
 
 @app.route('/api/commonletters', methods=['POST', 'GET'])
 def common_letters():

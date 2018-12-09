@@ -3,6 +3,7 @@
   <q-page class="q-pa-md">
     <div class="row">
       <div class="row col-xs-12 col-md-11 col-xl-5 q-ma-md float-div print-hide">
+       <!-- <div class="row"> -->
        <q-select
         filter
         inset
@@ -14,6 +15,8 @@
         class="col-xs-6 col-md-6 q-ma-sm"
         :options="scriptsInput"
       />
+      <!-- <q-btn class="col-xs-2 col-md-2 q-ma-sm"> Detect </q-btn> -->
+      <!-- </div> -->
     <q-input
       v-model.trim="textInput"
       type="textarea"
@@ -177,7 +180,7 @@ export default {
       indicSubset: ['Khmer', 'Burmese', 'Lao', 'Thai', 'Balinese', 'Javanese', 'Tibetan', 'LaoPali', 'TaiTham', 'Cham', 'Lepcha', 'Ahom'],
       beta: true,
       model: [],
-      inputScript: '',
+      inputScript: 'autodetect',
       outputScript: '',
       postOptions: [],
       preOptions: [],
@@ -193,7 +196,7 @@ export default {
   },
   mounted () {
     if (localStorage.inputScript) {
-      this.inputScript = localStorage.inputScript
+      // this.inputScript = localStorage.inputScript
     }
     if (localStorage.outputScript) {
       this.outputScript = localStorage.outputScript
@@ -201,7 +204,7 @@ export default {
   },
   watch: {
     inputScript (newScript) {
-      localStorage.inputScript = newScript
+      // localStorage.inputScript = newScript
     },
     outputScript (newScript) {
       localStorage.outputScript = newScript
@@ -211,7 +214,6 @@ export default {
     updateInput: function () {
       this.$set(this, 'preOptions', [])
       if (this.inputScript === 'Urdu') {
-        console.log('here333')
         this.$set(this, 'preOptions', ['UrduShortNotShown'])
       }
       this.convert()
@@ -249,13 +251,96 @@ export default {
       // manually hide the side menu while printing and bring it back when printing is complete
       window.print()
     },
-    convert: function () {
+    getScript: async function (text) {
+      var data = {
+        'text': text
+      }
+      return new Promise(resolve => {
+        this.apiCall.post('/autodetect', data)
+          .then(function (response) {
+            resolve(response.data)
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      })
+    },
+    convert: async function () {
       this.convertText += ' . . . '
-      if (this.textInput === '' || this.inputScript === '' || this.outputScript === '') {
+      if (this.textInput === '' || this.inputScript === '' || this.outputScript === '' ||
+        this.inputScript === 'undefined' || this.outputScript === 'undefined') {
         this.convertText = ''
         return
       }
       this.loading = true
+
+      if (this.inputScript === 'autodetect') {
+        var script = await this.getScript(this.textInput)
+        this.inputScript = script.charAt(0).toUpperCase() + script.slice(1)
+
+        var laoPali = ['ຆ', 'ຉ', 'ຌ', 'ຎ', 'ຏ', 'ຐ', 'ຑ', 'ຒ', 'ຓ', 'ຘ', 'ຠ', 'ຨ', 'ຩ', 'ຬ', '຺']
+
+        if (this.inputScript === 'Bengali') {
+          if (this.textInput.includes('ৰ') || this.textInput.includes('ৱ')) {
+            this.inputScript = 'Assamese'
+          }
+        } else if (this.inputScript === 'Thai') {
+          if (this.textInput.includes('ะ') || this.textInput.includes('ั')) {
+            this.$set(this, 'preOptions', ['ThaiOrthography'])
+          }
+        } else if (this.inputScript === 'Lao') {
+          if (laoPali.some(el => this.textInput.includes(el))) {
+            this.inputScript = 'LaoPali'
+
+            if (this.textInput.includes('ະ') || this.textInput.includes('ັ')) {
+              this.$set(this, 'preOptions', ['LaoTranscription'])
+            }
+          }
+        } else if (this.inputScript === 'Batak') {
+          this.inputScript = 'BatakKaro'
+        } else if (this.inputScript === 'Myanmar') {
+          this.inputScript = 'Burmese'
+        } else if (this.inputScript === 'Meetei') {
+          this.inputScript = 'MeeteiMayek'
+        } else if (this.inputScript === 'Old') {
+          this.inputScript = 'OldPersian'
+        } else if (this.inputScript === 'Phags-pa') {
+          this.inputScript = 'PhagsPa'
+        } else if (this.inputScript === 'Ol') {
+          this.inputScript = 'Santali'
+        } else if (this.inputScript === 'Sora') {
+          this.inputScript = 'SoraSompeng'
+        } else if (this.inputScript === 'Syloti') {
+          this.inputScript = 'SylotiNagri'
+        } else if (this.inputScript === 'Tai') {
+          this.inputScript = 'TaiTham'
+        } else if (this.inputScript === 'Warang') {
+          this.inputScript = 'WarangCiti'
+        } else if (this.inputScript === 'Siddham') {
+          this.$set(this, 'preOptions', ['siddhamUnicode'])
+        } else if (this.inputScript === 'Cyrillic') {
+          this.inputScript = 'RussianCyrillic'
+        } else if (this.inputScript === 'Arabic') {
+          this.inputScript = 'Urdu'
+          this.$set(this, 'preOptions', ['UrduShortNotShown'])
+        } else if (this.inputScript === 'Latin') {
+          var diacritics = ['ā', 'ī', 'ū', 'ṃ', 'ḥ', 'ś', 'ṣ', 'ṇ', 'ṛ', 'ṝ', 'ḷ', 'ḹ', 'ḻ', 'ṉ', 'ṟ', 'ṭ', 'ḍ', 'ṅ', 'ñ']
+          var Itrans = ['R^i', 'R^I', 'L^i', 'L^I', '.N', '~N', '~n', 'Ch', 'sh', 'Sh']
+          console.log(diacritics)
+          if (this.textInput.includes('ʰ')) {
+            this.inputScript = 'Titus'
+          } else if (this.textInput.includes('ē') || this.textInput.includes('ō') ||
+            this.textInput.includes('r̥')) {
+            this.inputScript = 'ISO'
+          } else if (diacritics.some(el => this.textInput.includes(el))) {
+            this.inputScript = 'IAST'
+          } else if (Itrans.some(el => this.textInput.includes(el))) {
+            this.inputScript = 'Itrans'
+          } else {
+            this.inputScript = 'HK'
+          }
+        }
+      }
 
       var data = {
         source: this.inputScript,

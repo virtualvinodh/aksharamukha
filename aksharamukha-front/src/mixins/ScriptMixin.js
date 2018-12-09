@@ -189,11 +189,11 @@ export const ScriptMixin = {
         ]
       },
       autodetect: [
-      /*  {
-        label: 'Auto-Detect',
-        value: 'autodetect',
-        icon: 'translate'
-      } */],
+        {
+          label: 'Auto-Detect',
+          value: 'autodetect',
+          icon: 'translate'
+        }],
       scriptsIndic: [
         {
           label: 'Ahom',

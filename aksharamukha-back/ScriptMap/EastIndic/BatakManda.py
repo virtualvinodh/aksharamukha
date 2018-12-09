@@ -123,8 +123,8 @@ SouthConsonantMap = [
                     ]
 
 NuktaConsonantMap =  [
-                     '\u1BC2\u02BD',
-                     '\u1BC2\u02BD',
+                     '\u1BC4\u1BE6\u02BD',
+                     '\u1BC4\u1BE6\u02BD',
                      '\u1BCE\u02BD',
                      '\u1BD0\u02BD',
                      '\u1BD1\u02BD',
