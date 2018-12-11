@@ -110,7 +110,7 @@ export default {
             var content = response.data
             content = content.replace(new RegExp('<br/>', 'g'), '\n')
             // content = content.replace(new RegExp('e-Grantamil 7', 'g'), 'Noto Sans Tamil')
-            // content = content.replace(new RegExp('e-Grantamil', 'g'), 'Noto Sans Grantha')
+            // content = content.replace(new RegExp('e-Grantamil', 'g'), 'Noto Sans Tamil')
 
             var blob = ''
             const e = document.createEvent('MouseEvents')
