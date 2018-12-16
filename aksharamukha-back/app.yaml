@@ -1,1 +1,22 @@
 runtime: python37
+
+handlers:
+- url: /
+  static_files: spa-mat/index.html
+  upload: spa-mat/index.html
+
+- url: /statics/(.*)
+  static_files: spa-mat/statics/\1
+  upload: spa-mat/statics/(.*)
+
+- url: /css/(.*)
+  static_files: spa-mat/css/\1
+  upload: spa-mat/css/(.*)
+
+- url: /js/(.*)
+  static_files: spa-mat/js/\1
+  upload: spa-mat/js/(.*)
+
+- url: /fonts/(.*)
+  static_files: spa-mat/fonts/\1
+  upload: spa-mat/fonts/(.*)

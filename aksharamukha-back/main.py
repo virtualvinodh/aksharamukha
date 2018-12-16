@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, redirect
 from flask_cors import CORS
 import re
 import Convert,PostOptions,PostProcess,PreProcess
@@ -29,9 +29,10 @@ def unique_everseen(iterable, key=None):
                 seen_add(k)
                 yield element
 
-@app.route('/', methods=['POST', 'GET'])
+@app.route('/demo', methods=['POST', 'GET'])
 def main_site():
-    return "This is a backend for <a href=\"http://aksharamukha.appspot.com\">Aksharamukha</a>."
+    return redirect("http://aksharamukha-api.appspot.com/spa-mat")
+    # return "This is a backend for <a href=\"http://aksharamukha.appspot.com\">Aksharamukha</a>."
 
 def removeA(a):
     if a.count('a') == 1:
