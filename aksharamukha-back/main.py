@@ -271,7 +271,7 @@ def fetch_site():
 
     params = 'source=' + request.args['source'] + '&target=' + request.args['target'] + '&preOptions=' + request.args['preOptions'] + '&postOptions=' + request.args['postOptions'] + '&nativize=' + request.args['nativize']
 
-    transurl = html.escape("http://aksharamukha-backend.appspot.com/api/website?"+params+'&url=')
+    transurl = html.escape("http://aksharamukha.appspot.com/api/website?"+params+'&url=')
 
     # fix double dot
     urlparts = url.split("/")

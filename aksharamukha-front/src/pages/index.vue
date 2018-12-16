@@ -198,7 +198,7 @@ export default {
       loading: false,
       inputPast: '',
       outputPast: '',
-      throttled: _.debounce(this.convert, 500)
+      throttled: _.debounce(this.convert, 300)
     }
   },
   mounted () {
