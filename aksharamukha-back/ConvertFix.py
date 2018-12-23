@@ -321,6 +321,8 @@ def FixBurmese(Strng,reverse=False):
         Strng = Strng.replace("့်", "့်",)
 
         Strng = Strng.replace("ာ္", "ာ်")
+
+        Strng = Strng.replace("ရ်္င်္ဂ", "ရ်္င္ဂ")
     else:
         Strng = Strng.replace("ဿ","သ္သ")
         Strng = Strng.replace("ည", "ဉ္ဉ")
@@ -1538,6 +1540,10 @@ def FixMalayalam(Strng, reverse=False):
     if not reverse:
         Strng = PostProcess.RetainDandasIndic(Strng, 'Malayalam', True)
         Strng = PostProcess.RetainIndicNumerals(Strng, 'Malayalam', True)
+
+    Chillus=['\u0D7A','\u0D7B','\u0D7C','\u0D7D','\u0D7E', 'ഩ‍്']
+
+    Anu = GM.CrunchSymbols(GM.CombiningSigns,'Malayalam')[1]
 
     return Strng
 

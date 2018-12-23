@@ -439,12 +439,13 @@ def MalayalamAnusvaraNasal(Strng):
     vir = Malayalam.ViramaMap[0]
     Anu = Malayalam.AyogavahaMap[1]
 
+    Chillus=['\u0D7A','\u0D7B','\u0D7C','\u0D7D','\u0D7E', 'ഩ‍്']
 
     for i in range(len(ListNNasal)):
         Strng = re.sub('('+Anu+')'+'('+ListCNasal[i]+')',ListNNasal[i]+vir+r'\2',Strng)
 
     for i in range(len(ListNAnu)):
-        Strng = re.sub('('+ListNAnu[i]+')'+'('+vir+')'+'('+ListCAnu[i]+')',Anu+r'\3',Strng)
+        Strng = re.sub('(?<![' + ".".join(Chillus) + '])' + '('+ListNAnu[i]+')'+'('+vir+')'+'('+ListCAnu[i]+')',Anu+r'\3',Strng)
 
     return Strng
 
