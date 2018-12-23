@@ -318,7 +318,7 @@ export default {
 }
 @font-face {
   font-family: 'Noto Sans Javanese';
-  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts@8ff3c87757b0f8ceb4dc56556ef5c4b0b91cd9bd/unhinted/NotoSansJavanese-Regular.ttf')
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansJavanese/NotoSansJavanese-Regular.otf')
 }
 @font-face {
   font-family: 'Noto Sans Avestan';
@@ -559,7 +559,7 @@ export default {
   font-family: "Noto Serif Bali"
 }
 .javanese {
-  font-family: "Javanese Text", "Noto Sans Javanese";
+  font-family: "Noto Sans Javanese", "Javanese Text";
 }
 .avestan {
   font-family: "Noto Sans Avestan";
