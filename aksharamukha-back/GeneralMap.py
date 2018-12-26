@@ -50,7 +50,7 @@ Aytham =['Aytham']
 om = ['OmMap']
 
 MainIndic = ['GranthaGrantamil', 'Multani', 'Ahom', 'Mahajani','Siddham', 'Vatteluttu', 'GranthaPandya', 'Khudawadi', 'Bhaiksuki', 'Sharada', 'Newa', 'SylotiNagri', 'Takri', 'Tirhuta', 'Modi', 'Kaithi', 'Kharoshthi','Lepcha','Chakma','Brahmi','MeeteiMayek','Limbu','Assamese','Bengali','Devanagari','Grantha','Gujarati','Gurmukhi','Kannada','Malayalam','Oriya','Saurashtra','Sinhala','Tamil','TamilBrahmi','TamilGrantha','Telugu','Urdu']
-EastIndic =['Rejang', 'Lao2','Buhid', 'Hanunoo', 'SiddhamUnicode', 'Tibetan','Lao','TaiTham','Cham','BatakKaro','BatakPakpak','BatakSima','BatakToba','BatakManda','LaoPali','PhagsPa','Buginese','Tagbanwa','Tagalog','Sundanese','Balinese','Burmese','Javanese','Khmer','Siddham','Ranjana','Thaana','Thai']
+EastIndic =['ZanabazarSquare','Rejang', 'Lao2','Buhid', 'Hanunoo', 'SiddhamUnicode', 'Tibetan','Lao','TaiTham','Cham','BatakKaro','BatakPakpak','BatakSima','BatakToba','BatakManda','LaoPali','PhagsPa','Buginese','Tagbanwa','Tagalog','Sundanese','Balinese','Burmese','Javanese','Khmer','Siddham','Ranjana','Thaana','Thai']
 NonIndic = ['OldPersian']
 Roman =['WarangCiti', 'SoraSompeng',"WX-kok",'Avestan','HK','IAST','ISO','Itrans','Titus','Titus','Velthuis','WX','Inter','IPA','TolongSiki','Santali','RussianCyrillic']
 RomanDiacritic = ['IAST','Titus','ISO','IPA']
@@ -78,6 +78,7 @@ DiacriticsRemovableTamil = ['ˇ', 'ˍ', 'ˆ', '˘', '\u00B7']
 ScriptAll = ['Aytham', 'Signs', 'CombiningSigns', 'VowelSigns', 'Vowels', 'Consonants', 'Numerals']
 
 IndicScripts = [
+               'ZanabazarSquare',
                'Rejang',
                'GranthaGrantamil',
                'Devanagari',

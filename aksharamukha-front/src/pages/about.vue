@@ -16,9 +16,17 @@
 
         <div class="q-body-1">Apart from the simple mapping of characters, Askharamukha also attempts to implement various script/language-specific orthographic conventions (where known) such as vowel lengths, gemination and nasalization. It also provides several customization options to fine-tune and get the desired orthography.</div> <br/>
 
-        <div class="q-body-1"><i>Aksharamukha as of now supports {{scriptsIndic.length}} scripts and {{scriptsLatin.length}} romanization methods.</i></div> <br/>
+        <div class="q-body-1"><i>Aksharamukha as of now supports <router-link to="/script-matrix">{{scriptsIndic.length + 2}} scripts</router-link> and <router-link to="/roman">{{scriptsLatin.length - 2}} romanization</router-link> methods.</i></div> <br/>
 
-         <div class="q-body-1">The source code is released under GNU AGPL and can be found in <a href="https://github.com/virtualvinodh/aksharamukha">Github</a>. Please report any bugs or suggestions over there.</div>
+        <div class="q-body-1">The scripts supported are:</div> <br/>
+
+        <div class="q-body-1"><span v-for="script in scriptsIndic.concat([{label: 'Cyrillic (Russian)', value: 'RussianCyrillic'}, {label: 'IPA', value: 'IPA'}])" :key="script.value"> <router-link :to="'/describe/' + script.value">{{script.label}}</router-link>, </span></div> <br/>
+
+        <div class="q-body-1">The Romanization Formats supported are:</div> <br/>
+
+        <div class="q-body-1"><span v-for="script in scriptsRomanization" :key="script.value">{{script.label}}, </span></div> <br/>
+
+        <div class="q-body-1">The source code is released under GNU AGPL and can be found in <a href="https://github.com/virtualvinodh/aksharamukha">Github</a>. Please report any bugs or suggestions over there.</div>
 
         <div class="q-display-1 q-mt-lg q-mb-md">Donate</div>
         <div class="q-body-1">If you'd like to donate to support and/or appreciate the work, you can send a donation through Paypal.</div>
@@ -84,5 +92,9 @@ export default {
   font-style:italic;
   font-size:14px;
   line-height:20px;
+}
+.scriptlist li {
+  float : left;
+  margin-right: 40px;
 }
 </style>

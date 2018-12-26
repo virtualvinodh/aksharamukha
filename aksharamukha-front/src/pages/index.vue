@@ -182,7 +182,7 @@ export default {
   data () {
     return {
       textInput: '',
-      indicSubset: ['Khmer', 'Burmese', 'Lao', 'Thai', 'Balinese', 'Javanese', 'Tibetan', 'LaoPali', 'TaiTham', 'Cham', 'Lepcha', 'Ahom'],
+      indicSubset: ['Khmer', 'Burmese', 'Lao', 'Thai', 'Balinese', 'Javanese', 'Tibetan', 'LaoPali', 'TaiTham', 'Cham', 'Lepcha', 'Ahom', 'ZanabazarSquare'],
       beta: true,
       model: [],
       inputScript: 'autodetect',
@@ -300,6 +300,7 @@ export default {
       if (this.inputScript === 'autodetect') {
         var script = await this.getScript(this.textInput)
         this.inputScript = script.charAt(0).toUpperCase() + script.slice(1)
+        console.log(this.inputScript)
 
         var laoPali = ['ຆ', 'ຉ', 'ຌ', 'ຎ', 'ຏ', 'ຐ', 'ຑ', 'ຒ', 'ຓ', 'ຘ', 'ຠ', 'ຨ', 'ຩ', 'ຬ', '຺']
 
@@ -343,6 +344,8 @@ export default {
           this.$set(this, 'preOptions', ['siddhamUnicode'])
         } else if (this.inputScript === 'Cyrillic') {
           this.inputScript = 'RussianCyrillic'
+        } else if (this.inputScript === 'Zanabazar') {
+          this.inputScript = 'ZanabazarSquare'
         } else if (this.inputScript === 'Arabic') {
           this.inputScript = 'Urdu'
           this.$set(this, 'preOptions', ['UrduShortNotShown'])

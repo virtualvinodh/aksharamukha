@@ -3,7 +3,7 @@
 import GeneralMap as GM
 from ScriptMap.Roman import Avestan
 from ScriptMap.MainIndic import Tamil,Malayalam,Gurmukhi,Oriya,Saurashtra,Sinhala,Urdu,Devanagari, Chakma, Limbu
-from ScriptMap.EastIndic import Tibetan, Thai, PhagsPa
+from ScriptMap.EastIndic import Tibetan, Thai, PhagsPa, ZanabazarSquare
 import ConvertFix as CF
 import re
 
@@ -977,5 +977,27 @@ def IPARemoveCross(Strng):
     return Strng
 
 def ChakmaAVowels(Strng):
+
+    return Strng
+
+def ZanabazarSquareContextual(Strng):
+    yrlv = ZanabazarSquare.ConsonantMap[25:29]
+    yrlv_sub = ['\U00011A3B', '\U00011A3C', '\U00011A3D', '\U00011A3E']
+
+    for x, y in zip(yrlv, yrlv_sub):
+        Strng = Strng.replace('\U00011A47' + x, y)
+    # Repha
+    Strng = re.sub('(?<!\U00011A47)' + yrlv[1] + '\U00011A47', '\U00011A3A', Strng)
+
+    return Strng
+
+def ZanabazarSquareAiAu(Strng):
+    Strng = Strng.replace('\U00011A04\U00011A0A', '\U00011A07')
+    Strng = Strng.replace('\U00011A06\U00011A0A', '\U00011A08')
+
+    return Strng
+
+def ZanabazarSquareMongolianFinal(Strng):
+    Strng = Strng.replace(ZanabazarSquare.ViramaMap[0], '\U00011A33')
 
     return Strng

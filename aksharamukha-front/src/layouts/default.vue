@@ -413,6 +413,10 @@ export default {
   src: url('../statics/ApDevaSiddham.ttf')
 }
 @font-face {
+  font-family: 'BabelStoneZanabazar';
+  src: url('../statics/BabelStoneZanabazar.woff')
+}
+@font-face {
   font-family: 'Adinatha Tamil Brahmi';
   src: url('../statics/AdinathaTamilBrahmi2.otf')
 }
@@ -702,6 +706,10 @@ export default {
   direction: rtl;
 }
 .tibetan {
+}
+.zanabazarsquare {
+  font-family: "BabelStoneZanabazar";
+  line-height: 3em;
 }
 .newa {
   font-family: "Noto Sans Newa"

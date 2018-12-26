@@ -2,8 +2,8 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
-        baseURL: 'https://aksharamukha.appspot.com/api/',
-        // baseURL: 'http://localhost:8085/api',
+        // baseURL: 'https://aksharamukha.appspot.com/api/',
+        baseURL: 'http://localhost:8085/api',
         timeout: 100000
       }),
       vowels: ['a', 'A', 'i', 'I', 'u', 'U', 'R', 'E', 'e', 'ai', 'O', 'o', 'au'],
@@ -186,6 +186,12 @@ export const ScriptMixin = {
           { label: 'Prakrit orthography', value: 'MalayalamPrakrit' },
           { label: 'Dandas', value: 'RetainMalayalamDanda' },
           { label: 'Malayalam Numerals', value: 'RetainMalayalamNumerals' }
+        ],
+        'ZanabazarSquare': [
+          { label: 'Contextual ya/ra/la/va & Repha', value: 'ZanabazarSquareContextual' },
+          { label: 'Alternate ai/au', value: 'ZanabazarSquareAiAu' },
+          { label: 'Mongolian final-mark', value: 'ZanabazarSquareMongolianFinal' }
+
         ]
       },
       autodetect: [
@@ -474,6 +480,10 @@ export const ScriptMixin = {
         {
           label: 'Warang Citi (Varang Kshiti)',
           value: 'WarangCiti'
+        },
+        {
+          label: 'Zanabazar Square',
+          value: 'ZanabazarSquare'
         }
       ],
       scriptsLatin: [
