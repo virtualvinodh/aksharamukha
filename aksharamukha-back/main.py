@@ -174,6 +174,9 @@ def syllabary_list():
         vowelsUnique.append('o')
         vowelsUnique.append('aO')
 
+    elif script1 == 'Khojki':
+        vowelsUnique.append('I')
+
     vowelsUnique = [x for x in sorted(vowelsUnique, key=vowelsAll.index) if x !='a']
 
     for cons in consonantUnique:

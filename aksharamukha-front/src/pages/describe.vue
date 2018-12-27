@@ -244,6 +244,7 @@ export default {
         'BatakSima': ['http://scriptsource.org/cms/scripts/page.php?item_id=script_detail&key=Batk', 'https://www.omniglot.com/writing/batak.htm'],
         'Avestan': ['http://scriptsource.org/cms/scripts/page.php?item_id=script_detail&key=Avst'],
         'PhagsPa': ['http://www.babelstone.co.uk/Phags-pa/Overview.html', 'http://www.babelstone.co.uk/Test/Phags-pa.html'],
+        'Khojki': ['http://std.dkuug.dk/jtc1/sc2/wg2/docs/n3883.pdf', 'http://scriptsource.org/cms/scripts/page.php?item_id=script_detail&key=Khoj'],
         'ZanabazarSquare': ['http://www.babelstone.co.uk/Fonts/Zanabazar.html', 'https://www.unicode.org/L2/L2014/14024-zanabazar-square.pdf', 'https://en.wikipedia.org/wiki/Zanabazar_Square_(Unicode_block)', 'http://scriptsource.org/cms/scripts/page.php?item_id=script_detail&key=Zanb']
       },
       notes: {
