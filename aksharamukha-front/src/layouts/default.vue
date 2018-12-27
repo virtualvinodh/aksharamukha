@@ -321,6 +321,10 @@ export default {
   src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansJavanese/NotoSansJavanese-Regular.otf')
 }
 @font-face {
+  font-family: 'Noto Sans Khojki';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansKhojki/NotoSansKhojki-Regular.otf')
+}
+@font-face {
   font-family: 'Noto Sans Avestan';
   src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts@8ff3c87757b0f8ceb4dc56556ef5c4b0b91cd9bd/unhinted/NotoSansAvestan-Regular.ttf')
 }
@@ -725,6 +729,9 @@ export default {
 }
 .bhaiksuki {
   font-family: "Noto Sans Bhaiksuki"
+}
+.khojki {
+  font-family: "Noto Sans Khojki"
 }
 .khudawadi {
   font-family: "Noto Sans Khudawadi"

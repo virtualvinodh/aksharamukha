@@ -13,6 +13,17 @@ def UrduShortNotShown(Strng):
 
     return Strng
 
+def swapEe(Strng):
+    Strng = Strng.replace('E', 'X@X@')
+    Strng = Strng.replace('e', 'E')
+    Strng = Strng.replace('X@X@','e')
+
+    Strng = Strng.replace('O', 'X@X@')
+    Strng = Strng.replace('o', 'O')
+    Strng = Strng.replace('X@X@','o')
+
+    return Strng
+
 def egrantamil(Strng):
     return Strng
 

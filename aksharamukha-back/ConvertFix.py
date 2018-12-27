@@ -1855,3 +1855,27 @@ def FixZanabazarSquare(Strng, reverse=False):
         Strng = Strng.replace('\U00011A47', vir)
 
     return Strng
+
+def FixKhojki(Strng, reverse=False):
+    sindhi = ['\U0001120B', '\U00011211', '\U0001121C', '\U00011222']
+    sindhiapprox = ['ˍ\U0001120A', 'ˍ\U00011210', 'ˍ\U00011216', 'ˍ\U00011221']
+
+    if not reverse:
+        for x, y in zip(sindhi, sindhiapprox):
+            Strng = Strng.replace(y, x)
+        Strng = PostProcess.InsertGeminationSign(Strng, 'Khojki')
+        # Move Shadda after consonant
+        Strng = re.sub('(\U00011237)(.)', r'\2\1', Strng)
+        # Reverse : Shadda + Nukta
+        Strng = Strng.replace('𑈷𑈶', '𑈶𑈷')
+        #Strng = re.sub('(' + GM.Germination['Khojki'] + ')', r'\2', Strng)
+    else:
+        for x, y in zip(sindhi, sindhiapprox):
+            Strng = Strng.replace(x, y)
+        # Reverse : Nukta + Shadda
+        Strng = Strng.replace('𑈶𑈷', '𑈷𑈶')
+        # Move Shadda before consonant
+        Strng = re.sub('(.)(\U00011237)', r'\2\1', Strng)
+        Strng = PostProcess.ReverseGeminationSign(Strng, 'Khojki')
+
+    return Strng

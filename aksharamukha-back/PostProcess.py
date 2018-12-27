@@ -1001,3 +1001,43 @@ def ZanabazarSquareMongolianFinal(Strng):
     Strng = Strng.replace(ZanabazarSquare.ViramaMap[0], '\U00011A33')
 
     return Strng
+
+def TamilRemoveApostrophe(Strng):
+    Strng = Strng.replace('ʼ', '')
+
+    return Strng
+
+def TamilRemoveNumbers(Strng):
+    numerals = ['²', '³', '⁴', '₂', '₃', '₄']
+
+    print('here')
+
+    for num in numerals:
+        print(num)
+        Strng = Strng.replace(num, '')
+
+    return Strng
+
+def TamilDisableSHA(Strng):
+    Strng = Strng.replace('ஶ', 'ஸ²')
+    Strng = CF.ShiftDiacritics(Strng,'Tamil')
+
+    return Strng
+
+def swapEe(Strng):
+    Strng = Strng.replace('e', 'X@X@')
+    Strng = Strng.replace('e', 'E')
+    Strng = Strng.replace('X@X@')
+
+    return Strng
+
+def capitalizeSentence(Strng):
+    Strng = re.sub(r"(\A\w)|"+            # start of string
+             "(?<!\.\w)([\.?!]\s*)\w|"+     # after a ?/!/. and a space,
+             "\w(?:\.\w)|"+
+             "(\n)\w|"+               # start/middle of acronym
+             "(?<=\w\.)\w",               # end of acronym
+             lambda x: x.group().upper(),
+             Strng)
+
+    return Strng

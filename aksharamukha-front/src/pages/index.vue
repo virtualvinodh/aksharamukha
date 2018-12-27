@@ -125,11 +125,12 @@
         :options="typeof postOptionsGroupSpecific[outputScript+inputScript] !== 'undefined' ? postOptionsGroupSpecific[outputScript+inputScript] : []"
         v-show="typeof postOptionsGroupSpecific[outputScript+inputScript] !== 'undefined'"
       />
-      <q-btn class="q-ma-sm btn print-hide" :data-clipboard-text="convertText.replace(/<br\/>/g, '\n')" @click="copy"> <q-icon name="file copy" /></q-btn>
-      <q-btn class="q-ma-sm print-hide" @click="imageConvert"> <q-icon name="photo camera" /></q-btn>
-      <q-btn class="q-ma-sm print-hide" @click="printDocument"> <q-icon name="print" /></q-btn>
-      <q-btn class="q-ma-sm print-hide" @click="fontSize += 20"> <q-icon name="zoom in" /></q-btn>
-      <q-btn class="q-ma-sm print-hide" @click="fontSize -= 20"> <q-icon name="zoom out" /></q-btn>
+      <q-btn class="q-ma-sm btn print-hide" :data-clipboard-text="convertText.replace(/<br\/>/g, '\n')" @click="copy"> <q-icon name="file copy" /><q-tooltip>Copy text</q-tooltip></q-btn>
+      <q-btn class="q-ma-sm print-hide" @click="imageConvert">
+        <q-icon name="photo camera" /><q-tooltip>Text screenshot</q-tooltip></q-btn>
+      <q-btn class="q-ma-sm print-hide" @click="printDocument"><q-tooltip>Print text</q-tooltip><q-icon name="print" /></q-btn>
+      <q-btn class="q-ma-sm print-hide" @click="fontSize += 20"> <q-icon name="zoom in" /><q-tooltip>Increase size</q-tooltip></q-btn>
+      <q-btn class="q-ma-sm print-hide" @click="fontSize -= 20"> <q-icon name="zoom out" /><q-tooltip>Decrease size</q-tooltip></q-btn>
     </div>
     </div>
     </div>
@@ -150,7 +151,7 @@
 </style>
 
 <script>
-import {QEditor, QRadio, QBtn, QField, QBtnToggle, QToggle, QInput, QSelect, QOptionGroup, QAlert, QSpinnerComment} from 'quasar'
+import {QTooltip, QEditor, QRadio, QBtn, QField, QBtnToggle, QToggle, QInput, QSelect, QOptionGroup, QAlert, QSpinnerComment} from 'quasar'
 import sanitizeHtml from 'sanitize-html'
 import html2canvas from 'html2canvas'
 import Controls from '../components/Controls'
@@ -177,7 +178,8 @@ export default {
     QInput,
     QSelect,
     QSpinnerComment,
-    QOptionGroup
+    QOptionGroup,
+    QTooltip
   },
   data () {
     return {

@@ -41,6 +41,15 @@ export const ScriptMixin = {
         'Tamil': [
           { label: 'Transcribe Tamil', value: 'TamilTranscribe' }
         ],
+        'Itrans': [
+          { label: 'E/O for long, e/o for short', value: 'swapEe' }
+        ],
+        'HK': [
+          { label: 'E/O for long, e/o for short', value: 'swapEe' }
+        ],
+        'Velthuis': [
+          { label: 'E/O for long, e/o for short', value: 'swapEe' }
+        ],
         'Limbu': [
           { label: 'SA-I for vowel length', value: 'LimbuSpellingSaI' }
         ],
@@ -95,11 +104,14 @@ export const ScriptMixin = {
       postOptionsGroup: {
         'Tamil': [
           { label: 'Use Grantha Visarga', value: 'TamilGranthaVisarga' },
-          { label: 'Disable ௐ', value: 'TamilOmDisable' },
           { label: 'Subscript numerals', value: 'TamilSubScript' },
-          { label: 'Medieval e/o with Pulli', value: 'MedievalTamilOrthography' },
           { label: 'Dandas', value: 'RetainTamilDanda' },
-          { label: 'Tamil Numerals', value: 'RetainTamilNumerals' }
+          { label: 'Disable ௐ', value: 'TamilOmDisable' },
+          { label: 'Disable ஶ', value: 'TamilDisableSHA' },
+          { label: 'Remove Apostrophe', value: 'TamilRemoveApostrophe' },
+          { label: 'Remove Diacritic Numerals', value: 'TamilRemoveNumbers' },
+          { label: 'Tamil Numerals', value: 'RetainTamilNumerals' },
+          { label: 'Medieval e/o with Pulli', value: 'MedievalTamilOrthography' }
         ],
         'Chakma': [
           {
@@ -164,7 +176,11 @@ export const ScriptMixin = {
           { label: 'Remove short vowels', value: 'UrduRemoveShortVowels' }
         ],
         'IAST': [
-          { label: 'Pali Text', value: 'IASTPali' }
+          { label: 'Pali Text', value: 'IASTPali' },
+          { label: 'Capitalize sentences', value: 'capitalizeSentence' }
+        ],
+        'ISO': [
+          { label: 'Capitalize sentences', value: 'capitalizeSentence' }
         ],
         'Kaithi': [
           { label: 'Retain spaces', value: 'KaithiRetainSpace' }
@@ -310,6 +326,10 @@ export const ScriptMixin = {
         {
           label: 'Kharoshthi',
           value: 'Kharoshthi'
+        },
+        {
+          label: 'Khojki',
+          value: 'Khojki'
         },
         {
           label: 'Khudawadi',
@@ -504,7 +524,7 @@ export const ScriptMixin = {
           value: 'IPA'
         },
         {
-          label: 'ISO',
+          label: 'ISO 15919',
           value: 'ISO'
         },
         {
