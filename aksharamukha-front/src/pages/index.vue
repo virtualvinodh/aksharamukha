@@ -74,7 +74,7 @@
         class="col-xs-6 col-md-6 q-ma-sm print-hide"
         :options="scriptsOutput"
       />
-      <q-btn class="col-xs-4 col-md-4 q-ma-sm" v-show="outputPast !== ''"
+      <q-btn class="col-xs-4 col-md-4 q-ma-sm print-hide" v-show="outputPast !== ''"
        @click="updateHistOut"> {{outputPast}} </q-btn>
       </div>
     <div
@@ -139,7 +139,7 @@
     leave-active-class="animated fadeOut"
     appear
   >
-    <div class="q-ma-lg q-body-1">
+    <div class="q-ma-lg q-body-1 print-hide">
       This is a new beta version of Aksharamukha. Please report any bugs found in <a href="https://github.com/virtualvinodh/aksharamukha/issues">Github</a>. <br/>The old version is still temporarily available <a href="http://www.virtualvinodh.com/aksharamkh/aksharamukha-old.php">here</a>.
     </div>
   </transition>
