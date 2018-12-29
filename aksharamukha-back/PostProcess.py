@@ -82,6 +82,11 @@ def tradOrtho(Strng):
 def siddhamap(Strng):
     return Strng
 
+def KhojkiRetainSpace(Strng):
+    Strng = Strng.replace('\U0001123A', ' ')
+
+    return Strng
+
 def BhaiksukiRetainSpace(Strng):
     Strng = Strng.replace('𑱃', ' ')
 

@@ -1869,7 +1869,12 @@ def FixKhojki(Strng, reverse=False):
         # Reverse : Shadda + Nukta
         Strng = Strng.replace('𑈷𑈶', '𑈶𑈷')
         #Strng = re.sub('(' + GM.Germination['Khojki'] + ')', r'\2', Strng)
+        # WordSeparatror
+        Strng = Strng.replace(' ', '\U0001123A')
     else:
+        # Reverse Word Separator
+        Strng = Strng.replace('\U0001123A', ' ')
+
         for x, y in zip(sindhi, sindhiapprox):
             Strng = Strng.replace(x, y)
         # Reverse : Nukta + Shadda
