@@ -57,7 +57,7 @@ export default {
     convertWeb: async function () {
       // assigning content
       this.minimize = false
-      this.urlT = 'http://aksharamukha-backend.appspot.com/api/website?url=' + this.url + '&source=' + this.options.inputScript +
+      this.urlT = 'http://aksharamukha.appspot.com/api/website?url=' + this.url + '&source=' + this.options.inputScript +
         '&target=' + this.options.outputScript + '&preOptions=' + JSON.stringify(this.options.preOptions) +
         '&postOptions=' + JSON.stringify(this.options.postOptions) + '&nativize=' + JSON.stringify(!this.options.sourcePreserve)
       // this.$refs.frame.contentWindow.document.body.innerHTML = await this.getSiteContent(this.url)

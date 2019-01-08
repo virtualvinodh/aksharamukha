@@ -390,10 +390,12 @@ def TamilTranscribe(Strng):
         Strng = re.sub('('+ConMedials+')'+'('+vir+')'+ConUnVoiced[i]+'(?!'+vir+')',r'\1\2'+ConVoicedS[i],Strng)
 
     Strng = Strng.replace(NRA,NDRA)
+
     # Intervocalic S
-    Strng = re.sub('(?<!'+'('+ListC[5]+'|'+ListSC[2]+')'+vir+')'+ListC[5]+'(?!'+vir+')',ListC[31],Strng)
+    Strng = re.sub('(?<!'+'('+ListC[5]+'|'+ListSC[2] +'|' + 'ட' + ')'+vir+')'+ListC[5]+'(?!'+vir+')',ListC[31],Strng)
 
     import string
+
     punct = "|".join(['\\'+x for x in list(string.punctuation.replace(".","").replace("?",""))])+"|\s"
 
     # CA + Spac | Punct + SA -> CCA
@@ -414,7 +416,7 @@ def TamilTranscribe(Strng):
     ## NNN to N, RR to R
 
     Strng = Strng.replace(ListSC[3],ListC[19])
-    Strng = Strng.replace(ListSC[2],ListC[26])
+    #Strng = Strng.replace(ListSC[2],ListC[26])
 
     return Strng
 

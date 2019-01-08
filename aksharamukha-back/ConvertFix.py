@@ -285,7 +285,7 @@ def FixBurmese(Strng,reverse=False):
 
     if not reverse:
         # Replace Explicit Virama + Cons -> Subjoining Virama + Cons
-        Strng = re.sub(vir+'('+ListC+')','\u1039'+r'\1',Strng)
+        Strng = re.sub('(?<!ာ)' + vir+'('+ListC+')','\u1039'+r'\1',Strng)
 
         # Introduce Kinzi: ga + NGA + sub-Virama -> ga + NGA + exp-Virama + sub-Virama
         Strng = re.sub('('+Burmese.ConsonantMap[4]+')'+'('+'\u1039'+')',r'\1'+vir+r'\2',Strng)
@@ -323,6 +323,8 @@ def FixBurmese(Strng,reverse=False):
         Strng = Strng.replace("ာ္", "ာ်")
 
         Strng = Strng.replace("ရ်္င်္ဂ", "ရ်္င္ဂ")
+
+        Strng = Strng.replace("ါ္", "ါ်")
     else:
         Strng = Strng.replace("ဿ","သ္သ")
         Strng = Strng.replace("ည", "ဉ္ဉ")
