@@ -376,7 +376,7 @@ def KhandaTa(Strng,Target, reverse=False): #Check for Bhakt - Khanda Ta not form
     ta = GM.CrunchSymbols(GM.Consonants, Target)[15]
     khandata = '\u09CE'
     vir = GM.CrunchSymbols(GM.VowelSigns,Target)[0]
-    ListC = '|'.join([GM.CrunchList('ConsonantMap', Target)[x] for x in [15,16,19,22,27,24,25,26]])
+    ListC = '|'.join([GM.CrunchList('ConsonantMap', Target)[x] for x in [15,16,19,22,27,24,25,26]] + ['ৰ'])
     #print ListC
     if not reverse:
         Strng = re.sub('(?<!' + vir + ')' + '('+ta+')'+'('+vir+')'+'(?!'+ListC+')',khandata, Strng)

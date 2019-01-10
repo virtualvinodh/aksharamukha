@@ -3,8 +3,8 @@
 # Script Mapping for Devanagari
 
 VowelMap =  [
+            '\uA805',
             '\uA800',
-            '\uA800\u02BD',
             '\uA801',
             '\uA801\u02BD',
             '\uA803',
@@ -14,9 +14,9 @@ VowelMap =  [
             'ꠟꠤ\u02BD',
             'ꠟꠤ\u02BD',
             '\uA804',
-            '\uA800\uA802',
-            '\uA805',
-            '\uA800\uA803',
+            '\uA805\uA802',
+            '\uA805\u02BD',
+            '\uA805\uA803',
             ]
 
 SouthVowelMap = [
