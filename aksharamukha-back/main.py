@@ -378,6 +378,8 @@ def convert(src, tgt, txt, nativize, preoptions, postoptions):
         src = 'GranthaGrantamil'
     if 'egrantamil' in postoptions and tgt == 'Grantha':
         tgt = 'GranthaGrantamil'
+    if 'nepaldevafont' in postoptions and tgt == 'Newa':
+        tgt = 'Devanagari'
 
     for options in preoptions:
       txt = getattr(PreProcess, options)(txt)

@@ -19,6 +19,9 @@ def default(Strng):
 def egrantamil(Strng):
     return Strng
 
+def nepaldevafont(Strng):
+    return Strng
+
 def MultaniAbjad(Strng):
     ListAll = "(" + "|".join(GM.CrunchSymbols(GM.Characters, 'Multani') + ["𑊓", "𑊍"]) + ")"
     ListC = "(" + "|".join(GM.CrunchSymbols(GM.Consonants, 'Multani') + ["𑊓", "𑊍"]) + ")"
@@ -1044,5 +1047,10 @@ def capitalizeSentence(Strng):
              "(?<=\w\.)\w",               # end of acronym
              lambda x: x.group().upper(),
              Strng)
+
+    return Strng
+
+def NewaDisableRepha(Strng):
+    Strng = Strng.replace('𑐬𑑂\u200D','𑐬𑑂')
 
     return Strng

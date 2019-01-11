@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import GeneralMap as GM
 from ScriptMap.Roman import Avestan, IAST
-from ScriptMap.MainIndic import Tamil,TamilGrantha, Limbu, MeeteiMayek, Urdu, Lepcha, Chakma, Kannada, Gurmukhi
+from ScriptMap.MainIndic import Tamil,TamilGrantha, Limbu, MeeteiMayek, Urdu, Lepcha, Chakma, Kannada, Gurmukhi, Newa
 from ScriptMap.EastIndic import Lao, TaiTham,Tibetan,Burmese,Khmer,Balinese,Javanese,Thai, Sundanese, PhagsPa, Cham, Thaana, Rejang, ZanabazarSquare
 import PostProcess
 import re
@@ -1884,5 +1884,16 @@ def FixKhojki(Strng, reverse=False):
         # Move Shadda before consonant
         Strng = re.sub('(.)(\U00011237)', r'\2\1', Strng)
         Strng = PostProcess.ReverseGeminationSign(Strng, 'Khojki')
+
+    return Strng
+
+def FixNewa(Strng, reverse=False):
+    if not reverse:
+        ListC ='|'.join(GM.CrunchSymbols(GM.Consonants,'Newa'))
+        ra = Newa.ConsonantMap[26]
+        vir = Newa.ViramaMap[0]
+        Strng = re.sub(ra + vir + '(' + ListC + ')', ra + vir + '\u200D' + r'\1', Strng)
+    else:
+        pass
 
     return Strng

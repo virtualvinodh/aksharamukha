@@ -58,7 +58,7 @@
     </div>
     <div class="q-ma-md print-hide">
       <div class="col">
-      <q-btn class="row"> <q-icon name="swap_horiz" @click.native="swap"/> </q-btn>
+      <q-btn class="row"> <q-icon name="swap_horiz" @click.native="swap"/> <q-tooltip>Swap Source & Target</q-tooltip> </q-btn>
       <!-- q-spinner-comment color="dark" :size="30" v-show="loading" class="row"/> -->
       </div>
     </div>
@@ -98,6 +98,8 @@
       <div class="notice q-ma-sm" v-show="outputScript === 'Vatteluttu'">This only works with e-Vatteluttu OT font and uses Tamil codepoints to encode Vatteluttu characters.</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Siddham' &&
         !postOptions.includes('siddhamUnicode')">This only works with MuktamSiddham font and uses Devanagari codepoints to encode Siddham characters.</div>
+      <div class="notice q-ma-sm" v-show="outputScript === 'Newa' &&
+        postOptions.includes('nepaldevafont')">This uses Devanagari codepoints to encode the characters. Please consider using an Unicode font</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Siddham' &&
         postOptions.includes('siddhamUnicode')">Works only with a Graphite-supporting browser like Firefox.</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Tamil' &&

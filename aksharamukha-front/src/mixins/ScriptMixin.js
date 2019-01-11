@@ -120,7 +120,10 @@ export const ScriptMixin = {
           }
         ],
         'Newa': [
-          { label: 'Enable murmured consonants', value: 'NewaMurmurConsonants' }
+          { label: 'Enable murmured consonants', value: 'NewaMurmurConsonants' },
+          { label: 'Disable Repha', value: 'NewaDisableRepha' },
+          { label: 'Use Devanagari-based Newa font', value: 'nepaldevafont' }
+
         ],
         'Oriya': [
           { label: 'Use ଵ instead of ୱ', value: 'OriyaVaAlt' },
@@ -610,6 +613,8 @@ export const ScriptMixin = {
         return 'limbudeva'
       } else if (postOptions.includes('egrantamil') && tgt === 'Grantha') {
         return 'granthagrantamil'
+      } else if (postOptions.includes('nepaldevafont') && tgt === 'Newa') {
+        return 'nepaldevafont'
       } else {
         return tgt.toLowerCase()
       }
