@@ -421,8 +421,8 @@ export default {
   src: url('../statics/ApDevaSiddham.ttf')
 }
 @font-face {
-  font-family: 'Nepal';
-  src: url('../statics/Nepal-lipi.ttf')
+  font-family: 'Nepal2';
+  src: url('../statics/Nepal-lipi2.woff')
 }
 @font-face {
   font-family: 'BabelStoneZanabazar';
@@ -766,6 +766,6 @@ export default {
   font-family: "Lao Pali"
 }
 .nepaldevafont {
-  font-family: "Nepal"
+  font-family: "Nepal2"
 }
 </style>
