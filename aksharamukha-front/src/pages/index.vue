@@ -99,7 +99,7 @@
       <div class="notice q-ma-sm" v-show="outputScript === 'Siddham' &&
         !postOptions.includes('siddhamUnicode')">This only works with MuktamSiddham font and uses Devanagari codepoints to encode Siddham characters.</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Newa' &&
-        postOptions.includes('nepaldevafont')">This uses Devanagari codepoints to encode the characters. Please consider using an Unicode font</div>
+        postOptions.includes('nepaldevafont')">This uses Devanagari codepoints to encode the characters. Without the specific font, the characters will just appear as Devanagari. Please consider using an Unicode font that uses the appropriate Newa (Nepal Lipi) codepoints.</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Siddham' &&
         postOptions.includes('siddhamUnicode')">Works only with a Graphite-supporting browser like Firefox.</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Tamil' &&
