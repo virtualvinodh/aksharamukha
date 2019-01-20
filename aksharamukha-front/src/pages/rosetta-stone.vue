@@ -5,8 +5,8 @@
       <div style="text-align: right">
         <span class="text-red-4"> X</span> : Approximate equivalent <br/>
         <span class="text-blue-4"> Y</span> : Equivalent with diacritic <br/>
-      </div>
-      Enter a word or a phrase that you want to see in all the other {{scriptsIndic.length}} scripts <br/><br/>
+      </div><br/>
+      Enter a word or a phrase that you want to see in all the other {{scriptsIndic.length}} scripts.     <span v-show="desc === 'tooltip'"> Hover over the word in a script to see a description about the script </span> <br/><br/>
       <div class="row">
       <q-select
         filter
@@ -28,8 +28,18 @@
         <q-btn class="q-ma-md" color="dark" @click="convert"> Convert </q-btn>
     </div>
     <q-toggle color="dark" v-model="sourcePreserve" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-sm"/>
+    <span class="q-ml-lg"> Script Descriptions</span>
+    <q-btn-toggle
+      v-model="desc"
+      toggle-color="dark"
+      class="q-ml-sm"
+      :options="[
+        {label: 'Tooltips', value: 'tooltip'},
+        {label: 'Text Blocks', value: 'textblock'}
+      ]"
+    />
     <br/>
-      <list-text :chars="text" :script2="script2" :script1="'Devanagari'" :sourcePreserve="sourcePreserve" @loaded="loading = false"> </list-text>
+      <list-text :chars="text" :script2="script2" :script1="'Devanagari'" :sourcePreserve="sourcePreserve" @loaded="loading = false" :desc="desc"> </list-text>
   </q-page>
 </template>
 
@@ -42,7 +52,7 @@ import Learncard from '../components/Learncard'
 import ListText from '../components/ListText'
 import Transliterate from '../components/Transliterate'
 import {ScriptMixin} from '../mixins/ScriptMixin'
-import {QPageSticky, QSelect, QField, QInput, QToggle, QSpinnerComment} from 'quasar'
+import {QPageSticky, QSelect, QField, QInput, QToggle, QSpinnerComment, QBtnToggle} from 'quasar'
 
 var _ = require('underscore')
 
@@ -59,7 +69,8 @@ export default {
     QField,
     QInput,
     QToggle,
-    QSpinnerComment
+    QSpinnerComment,
+    QBtnToggle
   },
   data () {
     return {
@@ -68,6 +79,7 @@ export default {
       script2: '',
       text: [],
       textTemp: '',
+      desc: 'tooltip',
       sourcePreserve: false,
       loading: false
     }

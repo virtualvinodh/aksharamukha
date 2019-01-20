@@ -541,6 +541,11 @@ export default {
   src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansKharoshthi/NotoSansKharoshthi-Regular.otf')
 }
 @font-face {
+  font-family: 'RanjanaUnicode';
+  src: url('../statics/RanjanaUNICODE1.0.ttf')
+
+}
+@font-face {
   font-family: 'Noto Sans Brahmi';
   src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansBrahmi/NotoSansBrahmi-Regular.otf')
 }
@@ -767,5 +772,8 @@ export default {
 }
 .nepaldevafont {
   font-family: "Nepal2"
+}
+.ranjana {
+  font-family: "RanjanaUnicode"
 }
 </style>

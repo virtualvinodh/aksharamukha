@@ -59,6 +59,12 @@ def convertScript(Strng,Source,Target):
             pass
             #print #"Fix"+Target+" doesn't exist - Reverse"
 
+        ## Support joiners for HK, Itrans and Velthuis
+
+        if Source == 'Aksharaa':
+            Strng = Strng.replace("__", "\u200C")
+            Strng = Strng.replace("++", "\u200D")
+
         punc =  '(' + '|'.join(["\u005C"+x for x in list(string.punctuation)]+ ['\s']
                     + [x.replace('.', '\.') for x in GM.CrunchSymbols(GM.Signs,Source)[1:3]]) + ')'
 
@@ -68,6 +74,8 @@ def convertScript(Strng,Source,Target):
         Strng = re.sub('^' + sOm + punc, tOm + r'\1', Strng)
         Strng = re.sub(punc + sOm + '$', r'\1' + tOm, Strng)
         Strng = re.sub('^' + sOm + '$', tOm, Strng)
+
+        SourceOld = Source
 
         Strng = convertInter(Strng,Source)
         Source = GM.Inter
@@ -105,6 +113,10 @@ def convertScript(Strng,Source,Target):
         ## a_i => a<dev>i<dev> ; a_u = a<dev>u<dev>
         Strng=Strng.replace('_' + GM.CrunchSymbols(GM.Vowels,Target)[2],  GM.CrunchSymbols(GM.Vowels,Target)[2])
         Strng=Strng.replace('_' + GM.CrunchSymbols(GM.Vowels,Target)[4],  GM.CrunchSymbols(GM.Vowels,Target)[4])
+
+        if SourceOld == 'Aksharaa':
+            vir = GM.CrunchList('ViramaMap', Target)[0]
+            Strng = Strng.replace(vir + "**", "\u200D" + vir)
 
         #print Strng
         # Apply Fixes on the Output based on the Script
