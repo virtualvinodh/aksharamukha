@@ -12,7 +12,7 @@
   <div v-for="script in scriptsIndic" :key="script.value">
     <div class="row q-ma-md">
       <div class="col-xs-2 col-lg-1 q-mr-xl">
-        {{script.label}}
+        <router-link :to="'/describe/' + script.value">{{script.label}}</router-link>
       </div>
       <div v-for="(char, index) in chars1[script.value]" :key="char+index" class="col-xs-2 col-lg-1 q-mb-lg" >
           <span :class="script.value.toLowerCase()">

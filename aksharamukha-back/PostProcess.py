@@ -16,6 +16,14 @@ def default(Strng):
 
     return Strng
 
+def ranjanalantsa(Strng):
+    Strng = Strng.replace('་', ' ')
+    return Strng
+
+def ranjanawartu(Strng):
+    Strng = Strng.replace('་', '࿎ ')
+    return Strng
+
 def egrantamil(Strng):
     return Strng
 

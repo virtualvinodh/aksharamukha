@@ -453,6 +453,14 @@ export default {
   src: url('../statics/e-Pandya.ttf')
 }
 @font-face {
+  font-family: 'JMYZK--LZT Lantsa';
+  src: url('../statics/JMYZK--LZT.ttf')
+}
+@font-face {
+  font-family: 'JMYZK--WDT Wartu';
+  src: url('../statics/JMYZK--WDT.ttf')
+}
+@font-face {
   font-family: 'Lamphun';
   src: url('../statics/lamphun.otf')
 }
@@ -775,5 +783,11 @@ export default {
 }
 .ranjana {
   font-family: "RanjanaUnicode"
+}
+.ranjanalantsa {
+  font-family: "JMYZK--LZT Lantsa"
+}
+.ranjanawartu {
+  font-family: "JMYZK--WDT Wartu"
 }
 </style>

@@ -170,6 +170,10 @@ export const ScriptMixin = {
           { label: 'Sanskrit/Pali Orthography', value: 'SinhalaPali' },
           { label: 'Enable all conjuncts', value: 'SinhalaConjuncts' }
         ],
+        'Ranjana': [
+          { label: 'Lantsa style (Tibetan)', value: 'ranjanalantsa' },
+          { label: 'Wartu style (Tibetan)', value: 'ranjanawartu' }
+        ],
         'Telugu': [
           { label: 'Dandas', value: 'RetainTeluguDanda' },
           { label: 'Telugu Numerals', value: 'RetainTeluguNumerals' }
@@ -658,7 +662,7 @@ export const ScriptMixin = {
           value: 'Sundanese',
           sscode: 'Sund',
           ssdesc: 'The Sundanese script is used to write the Sundanese language, spoken by about 27 million people on the Indonesian island of Java. Today, the language is generally written in either the Sundanese or the Latin script, but has historically also been written using other scripts. It is currently taught in schools and used for public signage.',
-          omnicode: 'sundanese.php',
+          omnicode: 'sundanese',
           wikicode: 'Sundanese_script'
         },
         {
@@ -984,6 +988,10 @@ export const ScriptMixin = {
         return 'granthagrantamil'
       } else if (postOptions.includes('nepaldevafont') && tgt === 'Newa') {
         return 'nepaldevafont'
+      } else if (postOptions.includes('ranjanalantsa') && tgt === 'Ranjana') {
+        return 'ranjanalantsa'
+      } else if (postOptions.includes('ranjanawartu') && tgt === 'Ranjana') {
+        return 'ranjanawartu'
       } else {
         return tgt.toLowerCase()
       }
