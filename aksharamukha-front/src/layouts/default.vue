@@ -63,6 +63,11 @@
           <q-item-side icon="cloud upload" />
           <q-item-main label="Convert Files"/>
         </q-item>
+        <!-- <q-collapsible icon="keyboard" label="Text Composer" >
+            <q-item :to="'/input/' + script.value" v-for="script in scriptsIndic" :key="script.value">
+              <q-item-main :label="script.label"/>
+            </q-item>
+        </q-collapsible> -->
         <q-collapsible icon="book" label="Sample Texts"  >
             <q-item :to="'/texts/' + text.path" v-for="text in texts" :key="text.path">
               <q-item-main :label="text.name"/>
@@ -445,6 +450,10 @@ export default {
   src: url('../statics/LaoPaliAlpha-Extralight.otf')
 }
 @font-face {
+  font-family: 'MithilaUni';
+  src: url('../statics/MithilaUni.ttf')
+}
+@font-face {
   font-family: 'e-Vatteluttu';
   src: url('../statics/e-VatteluttuOT.ttf')
 }
@@ -690,7 +699,7 @@ export default {
   font-family: "Noto Serif Ahom";
 }
 .tirhuta {
-  font-family: "Noto Sans Tirhuta";
+  font-family: "MithilaUni";
 }
 .oldpersian {
   font-family: "Noto Sans OldPersian";

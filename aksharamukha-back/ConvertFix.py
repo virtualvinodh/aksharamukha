@@ -1140,10 +1140,12 @@ def FixLimbu(Strng,reverse=False):
 
     ### ZWNJ with finalcons + ya/ra/la/va (perhaps do this for other scripts)ˍ
     if reverse:
+        Strng = Strng.replace("\u193A\u1922", "\u1922\u193A")
         Strng = re.sub('(' + '|'.join(FinalCons) + ')' + '(?=[ᤕᤖᤘ])', r'\1' + '\u200C', Strng)
         Strng = re.sub('([ᤀᤁᤂᤃᤄᤅᤆᤇᤈᤉᤊᤋᤌᤍᤎᤏᤐᤑᤒᤓᤔᤕᤖᤗᤘᤚᤛᤜᤠᤣᤥᤧᤨᤩᤪᤫ])᤺', r'\1' + '꞉', Strng)
         ## Modifying letter colon ## Fix this only with aH ᤆᤠ᤺ᤣ
     else:
+        Strng = Strng.replace("\u1922\u193A", "\u193A\u1922")
         Strng = Strng.replace('꞉', '᤺')
 
     for x,y in zip(FCons,FinalCons):

@@ -1,88 +1,55 @@
 <template>
   <!-- Fix Urdu ai and au -->
   <q-page class="q-pa-md">
+<q-tabs color="tertiary" no-pane-border animated swipeable position="bottom">
+  <!-- Tabs - notice slot="title" -->
+  <q-tab default slot="title" name="tab-1" icon="translate" label="Type"/>
+  <q-tab slot="title" name="tab-2" icon="keyboard" label="Mapping"/>
+  <q-tab slot="title" name="tab-3" icon="settings" label="Settings"/>
+  <q-tab slot="title" name="tab-4" icon="help" label="Help"/>
+    <h5 class="title"> {{getScriptObject(outputScript).label}} Text Composer : <span :class="getOutputClass(outputScript, postOptions)"> <transliterate text="akSaramukha" src="HK" :tgt="outputScript" sourcePreserve="false">
+    </transliterate> </span> </h5>
+  <!-- Targets -->
+  <q-tab-pane name="tab-1">
     <div class="row">
-      <div class="row col-xs-12 col-md-11 col-xl-5 q-ma-md float-div print-hide">
-       <div class="row">
-       <q-select
-        filter
-        inset
-        autofocus-filter
-        filter-placeholder="search"
-        @input="updateInput"
-        placeholder="Input Script"
-        v-model="inputScript"
-        class="col-xs-6 col-md-6 q-ma-sm"
-        :options="scriptsInput"
-      />
-      <q-btn class="col-xs-4 col-md-4 q-ma-sm" v-show="inputPast !== ''"
-       @click="updateHist"> {{inputPast}} </q-btn>
-      </div>
+    <div class="row col-xs-11 col-md-11 col-xl-11 q-ma-md float-div print-hide">
+  <div class="q-ma-md">
+  <span class="q-ma-sm">Keyboard scheme: </span> <q-btn-toggle
+  v-model="inputScript"
+  toggle-color="dark"
+  :options="[
+    {label: 'Aksharaa', value: 'Aksharaa'},
+    {label: 'HK', value: 'HK'},
+    {label: 'Itrans', value: 'Itrans'},
+    {label: 'Velthuis', value: 'Velthuis'}
+  ]"
+  :dense="$q.platform.is.mobile"
+/>
+</div>
+  <q-collapsible icon="functions" label="Insert special characters" :opened="false">
+    <div>
+<q-btn v-for="letter in letters[outputScript]" :key="letter" class="q-ma-xs" @click.native="insertChar(letter)"> <span :class="getOutputClass(outputScript, postOptions)"> {{letter}} </span> </q-btn>
+    </div>
+  </q-collapsible>
     <q-input
-      v-model.trim="textInput"
+      v-model="textInput"
+      ref="brahmiText"
       type="textarea"
       float-label="Input text"
       class="text-input col-xs-12 col-md-12 q-ma-sm"
-      :class="getInputClass(inputScript, preOptions)"
+      :class="getOutputClass(outputScript, postOptions)"
+      :style="{'font-size': fontSize + '%'}"
       autofocus
       @input="throttled"
       clearable
       color="dark"
       rows="10"
       :max-height="1500"
+      :loading="loading"
       ></q-input>
-      <div class="notice q-ma-sm" v-show="indicSubset.includes(inputScript)">Currently, only the cognate 'Indic' subset of the script is supported for conversion</div>
-      <q-option-group
-        color="dark"
-        type="checkbox"
-        inline
-        class="q-ml-sm q-mb-sm q-mt-sm"
-        v-model="preOptions"
-        @input="convert"
-        :options="typeof preOptionsGroup[inputScript] !== 'undefined' ? preOptionsGroup[inputScript] : []"
-        v-show="typeof preOptionsGroup[inputScript] !== 'undefined'"
-      />
-      <q-option-group
-        color="dark"
-        type="checkbox"
-        inline
-        class="q-ml-sm q-mb-sm q-mt-sm"
-        v-model="preOptions"
-        @input="convert"
-        :options="typeof preOptionsGroupSpecific[inputScript+outputScript] !== 'undefined' ? preOptionsGroupSpecific[inputScript+outputScript] : []"
-        v-show="typeof preOptionsGroupSpecific[inputScript+outputScript] !== 'undefined'"
-      />
       <div class="notice q-ma-sm" v-show="inputScript === 'Urdu'">Urdu is an abjad. Please read the script <router-link to="/describe/Urdu">notes</router-link> to read about Urdu reading conventions.</div>
       <div class="notice q-ma-sm" v-show="inputScript === 'Grantha' &&
         preOptions.includes('egrantamil')">This does not use the proper Unicode encoding. Please consider converting the text into Grantha Unicode.</div>
-    </div>
-    <div class="q-ma-md print-hide">
-      <div class="col">
-      <q-btn class="row"> <q-icon name="swap_horiz" @click.native="swap"/> <q-tooltip>Swap Source & Target</q-tooltip> </q-btn>
-      <!-- q-spinner-comment color="dark" :size="30" v-show="loading" class="row"/> -->
-      </div>
-    </div>
-    <div class="row col-xs-12 col-md-11 col-xl-5 q-ma-md float-div">
-      <div class="row">
-       <q-select
-        filter
-        autofocus-filter
-        @input="updateOuput"
-        filter-placeholder="search"
-        v-model="outputScript"
-        placeholder="Output Script"
-        class="col-xs-6 col-md-6 q-ma-sm print-hide"
-        :options="scriptsOutput"
-      />
-      <q-btn class="col-xs-4 col-md-4 q-ma-sm print-hide" v-show="outputPast !== ''"
-       @click="updateHistOut"> {{outputPast}} </q-btn>
-      </div>
-    <div
-      v-html="sanitize(convertText)"
-      ref="brahmiText"
-      class="text-output col-xs-12 col-md-12 q-pa-md q-pr-lg bg-grey-1 "
-      :class="getOutputClass(outputScript, postOptions)" :style="{'font-size': fontSize + '%'}"
-      ></div>
     <div class="col-xs-12 col-md-12 q-ma-sm print-hide">
       <div class="notice q-ma-sm" v-show="String(convertText).includes('ஶ')">ஶ is pronounced like a 'soft' ஷ </div>
       <div class="notice q-ma-sm" v-show="String(convertText).includes('ఴ')">ఴ is a historic Telugu letter that is equivalent to Tamil ழ/Malayalam ഴ. Your font may not support this character.</div>
@@ -112,7 +79,57 @@
       <div class="notice q-ma-sm" v-show="outputScript === 'Tamil' &&
             String(convertText).includes('𑌃')    ">This only works with Google Noto Tamil fonts </div>
 
-      <q-toggle color="dark" v-model="sourcePreserve" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-sm print-hide" @input="convert" />
+      <q-btn class="q-ma-sm btn print-hide" :data-clipboard-text="convertText.replace(/<br\/>/g, '\n')" @click="copy"> <q-icon name="file copy" /><q-tooltip>Copy text</q-tooltip></q-btn>
+      <q-btn class="q-ma-sm print-hide" @click="imageConvert">
+        <q-icon name="photo camera" /><q-tooltip>Text screenshot</q-tooltip></q-btn>
+      <q-btn class="q-ma-sm print-hide" @click="printDocument"><q-tooltip>Print text</q-tooltip><q-icon name="print" /></q-btn>
+      <q-btn class="q-ma-sm print-hide" @click="fontSize += 20"> <q-icon name="zoom in" /><q-tooltip>Increase size</q-tooltip></q-btn>
+      <q-btn class="q-ma-sm print-hide" @click="fontSize -= 20"> <q-icon name="zoom out" /><q-tooltip>Decrease size</q-tooltip></q-btn>
+    <br/>
+    </div>
+    </div>
+    </div>
+  </q-tab-pane>
+
+  <q-tab-pane name="tab-2">
+    <h5> Keyboard Mapping </h5>
+      <div>
+        <div class="row">
+          <div v-for="(char, index) in vowels2" :key="char+index" class="col-xs-2 col-lg-1 q-mb-lg">
+            <span :class="inputScript.toLowerCase()"> {{char}} </span> <br/>
+              <span :class="outputScript.toLowerCase()">
+                <span class="letter"> {{vowels1[index]}}
+              </span>
+            </span>
+          </div>
+        </div>
+        <hr/> <br/>
+        <div class="row">
+          <div v-for="(char, index) in consonants2" :key="char+index" class="col-xs-2 col-lg-1 q-mb-lg">
+            <span :class="inputScript.toLowerCase()"> {{char}} </span> <br/>
+              <span :class="outputScript.toLowerCase()">
+                <span class="letter"> {{consonants1[index]}}
+              </span>
+            </span>
+          </div>
+        </div>
+        <hr/> <br/>
+        <div class="row">
+          <div v-for="(char, index) in compounds2.slice(0,vowels2.length)" :key="char+index" class="col-xs-2 col-lg-1 q-mb-lg">
+            <span :class="inputScript.toLowerCase()"> {{char}} </span> <br/>
+              <span :class="outputScript.toLowerCase()">
+                <span class="letter"> {{compounds1[index]}}
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+  </q-tab-pane>
+
+  <q-tab-pane name="tab-3">
+    <h5> Settings </h5>
+
+    <q-toggle color="dark" v-model="sourcePreserve" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-sm print-hide" @input="convert" />
       <br/>
       <q-option-group
         color="dark"
@@ -134,24 +151,12 @@
         :options="typeof postOptionsGroupSpecific[outputScript+inputScript] !== 'undefined' ? postOptionsGroupSpecific[outputScript+inputScript] : []"
         v-show="typeof postOptionsGroupSpecific[outputScript+inputScript] !== 'undefined'"
       />
-      <q-btn class="q-ma-sm btn print-hide" :data-clipboard-text="convertText.replace(/<br\/>/g, '\n')" @click="copy"> <q-icon name="file copy" /><q-tooltip>Copy text</q-tooltip></q-btn>
-      <q-btn class="q-ma-sm print-hide" @click="imageConvert">
-        <q-icon name="photo camera" /><q-tooltip>Text screenshot</q-tooltip></q-btn>
-      <q-btn class="q-ma-sm print-hide" @click="printDocument"><q-tooltip>Print text</q-tooltip><q-icon name="print" /></q-btn>
-      <q-btn class="q-ma-sm print-hide" @click="fontSize += 20"> <q-icon name="zoom in" /><q-tooltip>Increase size</q-tooltip></q-btn>
-      <q-btn class="q-ma-sm print-hide" @click="fontSize -= 20"> <q-icon name="zoom out" /><q-tooltip>Decrease size</q-tooltip></q-btn>
-    </div>
-    </div>
-    </div>
-  <transition
-    enter-active-class="animated fadeIn"
-    leave-active-class="animated fadeOut"
-    appear
-  >
-    <div class="q-ma-lg q-body-1 print-hide">
-      This is a new beta version of Aksharamukha. Please report any bugs found in <a href="https://github.com/virtualvinodh/aksharamukha/issues">Github</a>. <br/>The old version is still temporarily available <a href="http://www.virtualvinodh.com/aksharamkh/aksharamukha-old.php">here</a>.
-    </div>
-  </transition>
+  </q-tab-pane>
+  <q-tab-pane name="tab-4">
+    <h5> Help </h5>
+    <br/>
+  </q-tab-pane>
+</q-tabs>
   <a :href="brahmiImg" ref="imgDownload" :style="{'display': 'none'}" download="text.png"><button>Download</button></a>
   </q-page>
 </template>
@@ -160,10 +165,11 @@
 </style>
 
 <script>
-import {QTooltip, QEditor, QRadio, QBtn, QField, QBtnToggle, QToggle, QInput, QSelect, QOptionGroup, QAlert, QSpinnerComment} from 'quasar'
+import {QTooltip, QEditor, QRadio, QBtn, QField, QBtnToggle, QToggle, QInput, QSelect, QOptionGroup, QAlert, QSpinnerComment, QTabs, QTab, QTabPane, QRouteTab, QCollapsible} from 'quasar'
 import sanitizeHtml from 'sanitize-html'
 import html2canvas from 'html2canvas'
 import Controls from '../components/Controls'
+import Transliterate from '../components/Transliterate'
 import { ScriptMixin } from '../mixins/ScriptMixin'
 import ClipboardJS from 'clipboard'
 
@@ -177,6 +183,7 @@ export default {
   mixins: [ScriptMixin],
   components: {
     QAlert,
+    Transliterate,
     QEditor,
     QRadio,
     QBtn,
@@ -188,107 +195,107 @@ export default {
     QSelect,
     QSpinnerComment,
     QOptionGroup,
-    QTooltip
+    QTooltip,
+    QTabs,
+    QTab,
+    QTabPane,
+    QRouteTab,
+    QCollapsible
   },
   data () {
     return {
       textInput: '',
       indicSubset: ['Khmer', 'Burmese', 'Lao', 'Thai', 'Balinese', 'Javanese', 'Tibetan', 'LaoPali', 'TaiTham', 'Cham', 'Lepcha', 'Ahom', 'ZanabazarSquare'],
+      letters: {
+        Grantha: ['𑍝', '𑍞', '𑍟', '𑌀', '𑍦', '𑍧', '𑍨', '𑍩', '𑍪', '𑍫', '𑍬', '𑍰', '𑍱', '𑍲', '𑍳', '𑍴', '⃰'],
+        Newa: ['𑑈', '𑑊', '𑑍', '𑑎', '𑑏', '𑑛', '𑑝'],
+        Tamil: ['௰', '௱', '௲', '௳', '௴', '௵', '௶', '௷', '௸', '௹', '௺'],
+        Tirhuta: [''],
+        Devanagari: '꣠꣡꣢꣣꣤꣥꣦꣧꣨꣩꣪꣫꣬꣭꣮꣯꣰꣱ꣲꣳꣴꣵꣶꣷ꣸꣹꣺ꣻ꣼ꣽ᳐᳑᳒᳓᳔᳕᳖᳗᳘᳙᳜᳝᳞᳟᳚᳛᳠᳡᳢᳣᳤᳥᳦᳧᳨ᳩᳪᳫᳬ᳭ᳮᳯᳰᳱᳲᳳ᳴ᳵᳶ᳷᳸᳹'.split(''),
+        Sinhala: ['෦', '෧', '෨', '෩', '෪', '෫', '෬', '෭', '෮', '෯', '෴', '𑇡', '𑇢', '𑇣', '𑇤', '𑇥', '𑇦', '𑇧', '𑇨', '𑇩', '𑇪', '𑇫', '𑇬', '𑇭', '𑇮', '𑇯', '𑇰', '𑇱', '𑇲', '𑇳', '𑇴'],
+        ZanabazarSquare: '',
+        Sharada: '𑇂 𑇃 𑇇 𑇉 𑇍 𑇚 𑇛 𑇜 𑇝 𑇞 𑇟'.split(' ')
+      },
+      desc: {
+        Grantha: '𑌗𑍍𑌰𑌨𑍍𑌥 𑌲𑌿𑌪𑌿'
+      },
       beta: true,
+      loading: false,
       model: [],
-      inputScript: 'autodetect',
-      outputScript: '',
+      inputScript: 'Aksharaa',
+      outputScript: this.$route.params.script,
       postOptions: [],
       preOptions: [],
-      sourcePreserve: false,
+      sourcePreserve: true,
       options: {},
       convertText: '',
       brahmiImg: '',
       fontSize: 100,
       dash: _,
-      loading: false,
       inputPast: '',
       outputPast: '',
-      throttled: _.debounce(this.convert, 300),
-      postOptionsScript: {},
-      preOptionsScript: {}
+      throttled: _.debounce(this.convert, 1000),
+      vowels1: '',
+      vowels2: '',
+      consonants1: '',
+      consonants2: '',
+      textInputOld: ''
     }
   },
   mounted () {
-    if (localStorage.inputScript) {
-      this.inputPast = localStorage.inputScript
-    }
-    if (localStorage.outputScript) {
-      this.outputScript = localStorage.outputScript
-    }
-    if (localStorage.outputPast) {
-      this.outputPast = localStorage.outputPast
-    }
-    if (localStorage.postOptionsScriptIndex) {
-      this.postOptionsScript = JSON.parse(localStorage.postOptionsScriptIndex)
-
-      if (typeof this.postOptionsScript[this.outputScript] === 'undefined') {
-        this.postOptionsScript[this.outputScript] = []
-      }
-      this.$set(this, 'postOptions', this.postOptionsScript[this.outputScript])
-    }
-    if (localStorage.preOptionsScriptIndex) {
-      this.preOptionsScript = JSON.parse(localStorage.preOptionsScriptIndex)
-
-      if (typeof this.preOptionsScript[this.inputScript] === 'undefined') {
-        this.preOptionsScript[this.inputScript] = []
-      }
-      this.$set(this, 'preOptions', this.preOptionsScript[this.inputScript])
-    }
+    this.compoundsGen()
   },
   watch: {
+    '$route' (to, from) {
+      this.outputScript = to.params.script
+      this.textInput = ''
+      this.compoundsGen()
+    },
     inputScript (newScript, oldScript) {
       this.inputPast = oldScript
-      localStorage.inputScript = newScript
     },
-    outputScript (newScript, oldScript) {
-      if (oldScript !== '') {
-        this.outputPast = oldScript
-        localStorage.outputPast = oldScript
-      }
-      localStorage.outputScript = newScript
-    },
-    postOptions (newOpt, oldOpt) {
-      this.postOptionsScript[this.outputScript] = newOpt
-      localStorage.postOptionsScriptIndex = JSON.stringify(this.postOptionsScript)
-
-      if (typeof this.postOptionsScript[this.outputScript] === 'undefined') {
-        this.postOptionsScript[this.outputScript] = []
-      }
-
-      this.$set(this, 'postOptions', this.postOptionsScript[this.outputScript])
-    },
-    preOptions (newOpt, oldOpt) {
-      this.preOptionsScript[this.inputScript] = newOpt
-      localStorage.preOptionsScriptIndex = JSON.stringify(this.preOptionsScript)
-
-      if (typeof this.preOptionsScript[this.inputScript] === 'undefined') {
-        this.preOptionsScript[this.inputScript] = []
-      }
-
-      this.$set(this, 'preOptions', this.preOptionsScript[this.inputScript])
+    textInput (newText, oldText) {
     }
   },
   methods: {
+    compoundsGen: async function () {
+      this.loading = true
+      var data = {
+        script1: this.outputScript,
+        script2: this.inputScript
+      }
+      var dhis = this
+      this.apiCall.post('/syllabary', data)
+        .then(function (response) {
+          // console.log(response.data)
+          dhis.vowels1 = response.data['vowelsScript1']
+          dhis.vowels2 = response.data['vowelsScript2']
+          dhis.consonants1 = response.data['consonantsScript1']
+          dhis.consonants2 = response.data['consonantsScript2']
+          dhis.compounds1 = response.data['compoundsScript1']
+          dhis.compounds2 = response.data['compoundsScript2']
+          dhis.loading = false
+          // console.log(dhis.compounds1)
+          // console.log(dhis.compounds2)
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+    },
+    insertChar: function (char) {
+      var position = this.$refs['brahmiText'].$refs.input.selectionStart
+      this.$refs['brahmiText'].$refs.input.focus()
+      this.textInput = [this.textInput.slice(0, position), char, this.textInput.slice(position)].join('')
+    },
     updateHist: function () {
       this.inputScript = this.inputPast
       this.updateInput()
     },
     updateInput: function () {
-      if (typeof this.preOptionsScript[this.inputScript] === 'undefined') {
-        this.preOptionsScript[this.inputScript] = []
-      }
-      this.$set(this, 'preOptions', this.preOptionsScript[this.inputScript])
-
+      this.$set(this, 'preOptions', [])
       if (this.inputScript === 'Urdu') {
         this.$set(this, 'preOptions', ['UrduShortNotShown'])
       }
-
       this.convert()
     },
     updateHistOut: function () {
@@ -296,10 +303,7 @@ export default {
       this.updateOuput()
     },
     updateOuput: function () {
-      if (typeof this.postOptionsScript[this.outputScript] === 'undefined') {
-        this.postOptionsScript[this.outputScript] = []
-      }
-      this.$set(this, 'postOptions', this.postOptionsScript[this.outputScript])
+      this.$set(this, 'postOptions', [])
       this.convert()
     },
     copy: function () {
@@ -354,81 +358,10 @@ export default {
       }
       this.loading = true
 
-      if (this.inputScript === 'autodetect') {
-        var script = await this.getScript(this.textInput)
-        this.inputScript = script.charAt(0).toUpperCase() + script.slice(1)
-        console.log(this.inputScript)
-
-        var laoPali = ['ຆ', 'ຉ', 'ຌ', 'ຎ', 'ຏ', 'ຐ', 'ຑ', 'ຒ', 'ຓ', 'ຘ', 'ຠ', 'ຨ', 'ຩ', 'ຬ', '຺']
-
-        if (this.inputScript === 'Bengali') {
-          if (this.textInput.includes('ৰ') || this.textInput.includes('ৱ')) {
-            this.inputScript = 'Assamese'
-          }
-        } else if (this.inputScript === 'Thai') {
-          if (this.textInput.includes('ะ') || this.textInput.includes('ั')) {
-            this.$set(this, 'preOptions', ['ThaiOrthography'])
-          }
-        } else if (this.inputScript === 'Lao') {
-          if (laoPali.some(el => this.textInput.includes(el))) {
-            this.inputScript = 'LaoPali'
-
-            if (this.textInput.includes('ະ') || this.textInput.includes('ັ')) {
-              this.$set(this, 'preOptions', ['LaoTranscription'])
-            }
-          }
-        } else if (this.inputScript === 'Batak') {
-          this.inputScript = 'BatakKaro'
-        } else if (this.inputScript === 'Myanmar') {
-          this.inputScript = 'Burmese'
-        } else if (this.inputScript === 'Meetei') {
-          this.inputScript = 'MeeteiMayek'
-        } else if (this.inputScript === 'Old') {
-          this.inputScript = 'OldPersian'
-        } else if (this.inputScript === 'Phags-pa') {
-          this.inputScript = 'PhagsPa'
-        } else if (this.inputScript === 'Ol') {
-          this.inputScript = 'Santali'
-        } else if (this.inputScript === 'Sora') {
-          this.inputScript = 'SoraSompeng'
-        } else if (this.inputScript === 'Syloti') {
-          this.inputScript = 'SylotiNagri'
-        } else if (this.inputScript === 'Tai') {
-          this.inputScript = 'TaiTham'
-        } else if (this.inputScript === 'Warang') {
-          this.inputScript = 'WarangCiti'
-        } else if (this.inputScript === 'Siddham') {
-          this.$set(this, 'preOptions', ['siddhamUnicode'])
-        } else if (this.inputScript === 'Cyrillic') {
-          this.inputScript = 'RussianCyrillic'
-        } else if (this.inputScript === 'Zanabazar') {
-          this.inputScript = 'ZanabazarSquare'
-        } else if (this.inputScript === 'Arabic') {
-          this.inputScript = 'Urdu'
-          this.$set(this, 'preOptions', ['UrduShortNotShown'])
-        } else if (this.inputScript === 'Latin') {
-          var diacritics = ['ā', 'ī', 'ū', 'ṃ', 'ḥ', 'ś', 'ṣ', 'ṇ', 'ṛ', 'ṝ', 'ḷ', 'ḹ', 'ḻ', 'ṉ', 'ṟ', 'ṭ', 'ḍ', 'ṅ', 'ñ']
-          var Itrans = ['R^i', 'R^I', 'L^i', 'L^I', '.N', '~N', '~n', 'Ch', 'sh', 'Sh']
-          console.log(diacritics)
-          if (this.textInput.includes('ʰ')) {
-            this.inputScript = 'Titus'
-          } else if (this.textInput.includes('ē') || this.textInput.includes('ō') ||
-            this.textInput.includes('r̥')) {
-            this.inputScript = 'ISO'
-          } else if (diacritics.some(el => this.textInput.includes(el))) {
-            this.inputScript = 'IAST'
-          } else if (Itrans.some(el => this.textInput.includes(el))) {
-            this.inputScript = 'Itrans'
-          } else {
-            this.inputScript = 'HK'
-          }
-        }
-      }
-
-      if (typeof this.preOptionsScript[this.inputScript] === 'undefined') {
-        this.preOptionsScript[this.inputScript] = []
-      }
-      this.$set(this, 'preOptions', this.preOptionsScript[this.inputScript])
+      var textDiff = this.textInput.replace(this.textInputOld, '')
+      console.log('The old text is ' + this.textInputOld)
+      console.log('The new text is ' + this.textInput)
+      console.log('The difference is ' + textDiff)
 
       var data = {
         source: this.inputScript,
@@ -444,6 +377,9 @@ export default {
       this.apiCall.post('/convert', data)
         .then(function (response) {
           dhis.convertText = response.data
+          dhis.textInput = response.data
+          dhis.textInput = dhis.textInput.replace(new RegExp('<br/>', 'g'), '\n')
+          dhis.textInputOld = dhis.textInput
           dhis.loading = false
         })
         .catch(function (error) {
@@ -572,5 +508,12 @@ export default {
 }
 .text-output {
   min-height: 230px;
+}
+.text-input {
+  line-height: 20px;
+}
+h5.title {
+  margin-bottom: -10px;
+  margin-top: 0px;
 }
 </style>
