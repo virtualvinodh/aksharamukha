@@ -402,6 +402,11 @@ def convert(src, tgt, txt, nativize, preoptions, postoptions):
     for options in postoptions:
       transliteration = getattr(PostProcess, options)(transliteration)
 
+    if src == "Tamil" and tgt == "IPA":
+        r = requests.get("http://anunaadam.appspot.com/api?text=" + txt + "&method=2")
+        r.encoding = r.apparent_encoding
+        transliteration = r.text
+
     return transliteration
 
 

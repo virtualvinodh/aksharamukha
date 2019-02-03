@@ -111,6 +111,7 @@
         postOptions.includes('siddhamUnicode')">Works only with a Graphite-supporting browser like Firefox.</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Tamil' &&
             String(convertText).includes('𑌃')    ">This only works with Google Noto Tamil fonts </div>
+      <div class="notice q-ma-sm" v-show="inputScript === 'Tamil' && outputScript === 'IPA'">The results displayed have been obtained from <a href="http://anunaadam.appspot.com" target="_blank">Anunaadam</a>. Use the tool for further options.</div>
 
       <q-toggle color="dark" v-model="sourcePreserve" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-sm print-hide" @input="convert" />
       <br/>
@@ -215,6 +216,9 @@ export default {
     }
   },
   mounted () {
+    if (localStorage.sourcePreserve) {
+      this.sourcePreserve = JSON.parse(localStorage.sourcePreserve)
+    }
     if (localStorage.inputScript) {
       this.inputPast = localStorage.inputScript
     }
@@ -242,6 +246,9 @@ export default {
     }
   },
   watch: {
+    sourcePreserve (newV, oldV) {
+      localStorage.sourcePreserve = JSON.stringify(newV)
+    },
     inputScript (newScript, oldScript) {
       this.inputPast = oldScript
       localStorage.inputScript = newScript
@@ -357,7 +364,7 @@ export default {
       if (this.inputScript === 'autodetect') {
         var script = await this.getScript(this.textInput)
         this.inputScript = script.charAt(0).toUpperCase() + script.slice(1)
-        console.log(this.inputScript)
+        // console.log(this.inputScript)
 
         var laoPali = ['ຆ', 'ຉ', 'ຌ', 'ຎ', 'ຏ', 'ຐ', 'ຑ', 'ຒ', 'ຓ', 'ຘ', 'ຠ', 'ຨ', 'ຩ', 'ຬ', '຺']
 
@@ -423,12 +430,12 @@ export default {
             this.inputScript = 'HK'
           }
         }
-      }
 
-      if (typeof this.preOptionsScript[this.inputScript] === 'undefined') {
-        this.preOptionsScript[this.inputScript] = []
+        if (typeof this.preOptionsScript[this.inputScript] !== 'undefined') {
+          console.log('here')
+          this.$set(this, 'preOptions', this.preOptionsScript[this.inputScript])
+        }
       }
-      this.$set(this, 'preOptions', this.preOptionsScript[this.inputScript])
 
       var data = {
         source: this.inputScript,

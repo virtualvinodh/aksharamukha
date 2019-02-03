@@ -63,11 +63,28 @@
           <q-item-side icon="cloud upload" />
           <q-item-main label="Convert Files"/>
         </q-item>
-        <!-- <q-collapsible icon="keyboard" label="Text Composer" >
-            <q-item :to="'/input/' + script.value" v-for="script in scriptsIndic" :key="script.value">
+        <q-collapsible icon="keyboard" label="Text Composer (Beta)" >
+             <!-- <q-item :to="'/input/' + script.value" v-for="script in scriptsIndic" :key="script.value">
               <q-item-main :label="script.label"/>
+            </q-item> -->
+            <!--
+            <q-item :to="'/input/Devanagari'">
+              <q-item-main label="Devanagari"/>
             </q-item>
-        </q-collapsible> -->
+             <q-item :to="'/input/Grantha'">
+              <q-item-main label="Grantha"/>
+            </q-item>
+            <q-item :to="'/input/Tamil'">
+              <q-item-main label="Tamil"/>
+            </q-item>
+             <q-item :to="'/input/Tirhuta'">
+              <q-item-main label="Tirhuta (Maithili)"/>
+            </q-item>
+             <q-item :to="'/input/Newa'">
+              <q-item-main :label="'Newa (Nepal Bhasa)'"/>
+            </q-item>
+            -->
+        </q-collapsible>
         <q-collapsible icon="book" label="Sample Texts"  >
             <q-item :to="'/texts/' + text.path" v-for="text in texts" :key="text.path">
               <q-item-main :label="text.name"/>
