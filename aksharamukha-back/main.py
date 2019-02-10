@@ -253,7 +253,11 @@ def describe_list():
 def fetch_site():
     url = request.args['url']
     r = requests.get(url)
+    if "UTF-8" not in r.encoding:
+        r.encoding = r.apparent_encoding
+
     htmlcontent = r.text
+
     #htmlcontent = htmlcontent.replace('href="/', 'href="' + url + '/')
 
     baseurl = re.sub('(https*://)([^/]+)/*.*', r'\1'+ r'\2', url,flags=re.IGNORECASE)

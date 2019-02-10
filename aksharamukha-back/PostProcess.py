@@ -742,7 +742,7 @@ def UrduAlternateUU(Strng):
     return Strng
 
 def TibetanNada(Strng):
-    Strng = Strng.replace('\u0F83','\u0F83')
+    Strng = Strng.replace('\u0F83','\u0F82')
 
     return Strng
 

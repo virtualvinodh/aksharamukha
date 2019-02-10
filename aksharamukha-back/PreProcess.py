@@ -363,8 +363,9 @@ def TamilTranscribe(Strng):
     ConVoicedJ =  [ListC[x] for x in [2,7,12,17,22]]
     ConVoicedS =  [ListC[x] for x in [2,31,12,17,22]]
 
-    ConNasalsSpace = '|'.join([ListC[x] for x in [4,9,19]])
-    ConNasals = '|'.join([ListC[x] for x in [14,24]])
+    ConNasalsAll = '|'.join([ListC[x] for x in [4, 9, 14, 19, 24]])
+    conNasalCa = '|'.join([ListC[x] for x in [9]])
+    ConNasalsGroup = [ConNasalsAll, conNasalCa, ConNasalsAll, ConNasalsAll, ConNasalsAll]
 
     ConMedials = '|'.join(ListC[25:28]+ListSC[0:2]+ListSC[3:4])
     Vowels = '|'.join(GM.CrunchSymbols(GM.Vowels+GM.VowelSignsNV, "Tamil"))
@@ -377,14 +378,16 @@ def TamilTranscribe(Strng):
     ### Do something about Eyelash ra in Transliterated text
 
     for i in range(len(ConUnVoiced)):
+        pass
         #Strng = re.sub('('+Vowels+Consonants+')'+ConUnVoiced[i]+'('+Vowels+Consonants+')',r'\1'+ConVoicedS[i]+r'\2',Strng)
         Strng = re.sub('('+Vowels+'|'+Consonants+'|'+Aytham+')'+ConUnVoiced[i]+'(?!'+vir+')',r'\1'+ConVoicedS[i],Strng)
 
         # Nasals + Unvoiced -> voiced
         # Rule applied even if spaced -> ulakaJ cuRRu -> ulakaJ juRRu; cenJu -> senju
-        Strng = re.sub('('+ConNasalsSpace+')'+'('+vir+')'+'( ?)'+ConUnVoiced[i],r'\1\2\3'+ConVoicedJ[i],Strng)
+        # Strng = re.sub('('+ConNasalsSpace+')'+'('+vir+')'+'( ?)'+ConUnVoiced[i],r'\1\2\3'+ConVoicedJ[i],Strng)
+
         # Only without space : vampu -> vambu;  varim panam -> varim panam
-        Strng = re.sub('('+ConNasals+')'+'('+vir+')'+ConUnVoiced[i],r'\1\2'+ConVoicedJ[i],Strng)
+        Strng = re.sub('('+ConNasalsGroup[i]+')'+'('+vir+')'+ConUnVoiced[i],r'\1\2'+ConVoicedJ[i],Strng)
 
         # Medials + Unvoiced -> Voiced
         Strng = re.sub('('+ConMedials+')'+'('+vir+')'+ConUnVoiced[i]+'(?!'+vir+')',r'\1\2'+ConVoicedS[i],Strng)
@@ -400,6 +403,18 @@ def TamilTranscribe(Strng):
 
     # CA + Spac | Punct + SA -> CCA
     Strng = re.sub('('+ListC[5]+vir+')'+'(('+punct+')+)'+'('+ListC[31]+')',r'\1\2'+ListC[5],Strng)
+
+    # JA + Spac | Punct + SA -> JCA
+    Strng = re.sub('('+ListC[9]+vir+')'+'(('+punct+')+)'+'('+ListC[31]+')',r'\1\2'+ListC[7],Strng)
+
+    # GA + Spac | Punct + KA ->
+    Strng = re.sub('('+ListC[4]+vir+')'+'(('+punct+')+)'+'('+ListC[0]+')',r'\1\2'+ListC[2],Strng)
+
+    # NA + Spac | Punct + TTA ->
+    Strng = re.sub('('+ListC[14]+vir+')'+'(('+punct+')+)'+'('+ListC[10]+')',r'\1\2'+ListC[12],Strng)
+
+    # NA + Spac | Punct + TA ->
+    Strng = re.sub('('+ListC[19]+vir+')'+'(('+punct+')+)'+'('+ListC[15]+')',r'\1\2'+ListC[17],Strng)
 
     # K + k -> hh
     Strng = Strng.replace(Tamil.Aytham[0]+ListC[0],ListC[32]+vir+ListC[32])
