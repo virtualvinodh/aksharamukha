@@ -1112,6 +1112,10 @@ export const ScriptMixin = {
           miscdesc: '',
           omnicode: '',
           wikicode: 'International_Phonetic_Alphabet',
+          font: {
+            'name': '',
+            'url': ''
+          },
           wikidesc: 'The International Phonetic Alphabet (IPA) is an alphabetic system of phonetic notation based primarily on the Latin alphabet. It was devised by the International Phonetic Association in the late 19th century as a standardized representation of the sounds of spoken language. The IPA is used by lexicographers, foreign language students and teachers, linguists, speech-language pathologists, singers, actors, constructed language creators and translators. The IPA is designed to represent only those qualities of speech that are part of oral language: phones, phonemes, intonation and the separation of words and syllables.'
         },
         {
@@ -1134,6 +1138,10 @@ export const ScriptMixin = {
           miscdesc: '',
           omnicode: '',
           wikicode: 'Russian_alphabet',
+          font: {
+            'name': '',
+            'url': ''
+          },
           wikidesc: 'The Russian alphabet uses letters from the Cyrillic script. The modern Russian alphabet consists of 33 letters. The Cyrillic script is a writing system used for various alphabets across Eurasia, particularly in Eastern Europe, the Caucasus, Central Asia, and North Asia. It is based on the Early Cyrillic alphabet developed during the 9th century AD at the Preslav Literary School in the First Bulgarian Empire. It is the basis of alphabets used in various languages, especially those of Orthodox Slavic origin, and non-Slavic languages influenced by Russian.'
         }
       ],
