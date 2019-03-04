@@ -59,11 +59,11 @@ def convertScript(Strng,Source,Target):
             pass
             #print #"Fix"+Target+" doesn't exist - Reverse"
 
-        ## Support joiners for HK, Itrans and Velthuis
+        ## Joiners {} : ZWNJ : () : ZWJ
+        Strng = Strng.replace("{}", "\u200C")
+        Strng = Strng.replace("()", "\u200D")
 
-        if Source == 'Aksharaa':
-            Strng = Strng.replace("__", "\u200C")
-            Strng = Strng.replace("++", "\u200D")
+        Strng = CF.VedicSvarasLatinIndic(Strng)
 
         punc =  '(' + '|'.join(["\u005C"+x for x in list(string.punctuation)]+ ['\s']
                     + [x.replace('.', '\.') for x in GM.CrunchSymbols(GM.Signs,Source)[1:3]]) + ')'
@@ -114,9 +114,9 @@ def convertScript(Strng,Source,Target):
         Strng=Strng.replace('_' + GM.CrunchSymbols(GM.Vowels,Target)[2],  GM.CrunchSymbols(GM.Vowels,Target)[2])
         Strng=Strng.replace('_' + GM.CrunchSymbols(GM.Vowels,Target)[4],  GM.CrunchSymbols(GM.Vowels,Target)[4])
 
-        if SourceOld == 'Aksharaa':
-            vir = GM.CrunchList('ViramaMap', Target)[0]
-            Strng = Strng.replace(vir + "**", "\u200D" + vir)
+        ## Joiners Vir + ZWJ
+        vir = GM.CrunchList('ViramaMap', Target)[0]
+        Strng = Strng.replace(vir + "[]", "\u200D" + vir)
 
         #print Strng
         # Apply Fixes on the Output based on the Script
@@ -143,6 +143,8 @@ def convertScript(Strng,Source,Target):
         Strng = CF.PostFixRomanOutput(Strng,Source,Target)
 
     elif Source in GM.IndicScripts and Target in GM.IndicScripts:
+        Strng = PrP.RemoveJoiners(Strng)
+
         Strng = CF.ShiftDiacritics(Strng,Source,reverse=True)
         try:
             Strng = getattr(__import__('ConvertFix'),"Fix"+Source)(Strng,reverse=True)
@@ -189,6 +191,7 @@ def convertScript(Strng,Source,Target):
         Strng = CF.FixIndicOutput(Strng, Source, Target)
 
     elif Source in GM.IndicScripts and Target in GM.LatinScripts:
+        Strng = PrP.RemoveJoiners(Strng)
         Strng = CF.ShiftDiacritics(Strng, Source, reverse=True)
         try:
             Strng = getattr(__import__('ConvertFix'),"Fix"+Source)(Strng,reverse=True)
@@ -227,10 +230,11 @@ def convertScript(Strng,Source,Target):
         # Remove all intermediate characters and fix Output
         Strng = CF.FixRomanOutput(Strng,Target)
 
+        Strng = CF.VedicSvarsIndicLatin(Strng)
+
         Strng = CF.PostFixRomanOutput(Strng,Source,Target)
 
         # Convert Syllabic lR -> l_R Important !!!
-
     elif Source in GM.SiddhamRanjana:
         Strng = SR.SiddhRanjConv(Strng,Source,reverse=True)
         Strng = convertScript(Strng,"HK",Target)

@@ -4,6 +4,7 @@ import GeneralMap as GM
 import re
 import string
 import PostProcess
+import ConvertFix as CF
 from ScriptMap.EastIndic import PhagsPa
 from ScriptMap.MainIndic import Tamil, Malayalam, Limbu
 ### Use escape char in all functions
@@ -25,6 +26,9 @@ def swapEe(Strng):
     return Strng
 
 def egrantamil(Strng):
+    return Strng
+
+def siddhammukta(Strng):
     return Strng
 
 # consider adding an optional NUkta to the post consonantal position
@@ -203,6 +207,17 @@ def PreProcess(Strng,Source,Target):
         for x,y in zip(AltForm,NormForm):
             Strng = Strng.replace(x,y)
 
+    if Source == 'IAST':
+        Strng = Strng.replace("aï", "a_i")
+        Strng = Strng.replace("aü", "a_u")
+
+    if Source == "ISO":
+        Strng = Strng.replace('a:i', 'a_i')
+        Strng = Strng.replace('a:u', 'a_u')
+
+    if Source == "ISO" or Source == "IAST" or Source == "Titus":
+        Strng = CF.VedicSvarasNonDiacritic(Strng)
+
     ## Normalize Input Strings
 
     Strng = normalize(Strng,Source)
@@ -212,6 +227,12 @@ def PreProcess(Strng,Source,Target):
     return Strng
 
 def UnSupThaana(Strng):
+
+    return Strng
+
+def RemoveJoiners(Strng):
+    Strng = Strng.replace("\u200D", "")
+    Strng = Strng.replace("\u200C", "")
 
     return Strng
 
@@ -303,11 +324,6 @@ def normalize(Strng,Source):
     ## Two Single Danda to Double Danda
 
     Strng = Strng.replace("।।","॥")
-
-    ## Remove Joiners
-
-    Strng = Strng.replace("\u200D", "")
-    Strng = Strng.replace("\u200C", "")
 
     ## Decomposed Limbu to precomposed
 

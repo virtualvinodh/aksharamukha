@@ -372,12 +372,14 @@ def convert_loop_src_post():
 def convert(src, tgt, txt, nativize, preoptions, postoptions):
     txt = PreProcess.PreProcess(txt,src,tgt)
 
-    if 'siddhamUnicode' in postoptions and tgt == 'Siddham':
-        tgt = 'SiddhamUnicode'
+    if 'siddhammukta' in postoptions and tgt == 'Siddham':
+        tgt = 'SiddhamDevanagari'
+    if 'siddhamap' in postoptions and tgt == 'Siddham':
+        tgt = 'SiddhamDevanagari'
+    if 'siddhammukta' in preoptions and src == 'Siddham':
+        src = 'SiddhamDevanagari'
     if 'LaoNative' in postoptions and tgt == 'Lao':
         tgt = 'Lao2'
-    if 'siddhamUnicode' in preoptions and src == 'Siddham':
-        src = 'SiddhamUnicode'
     if 'egrantamil' in preoptions and src == 'Grantha':
         src = 'GranthaGrantamil'
     if 'egrantamil' in postoptions and tgt == 'Grantha':

@@ -30,6 +30,76 @@ def egrantamil(Strng):
 def nepaldevafont(Strng):
     return Strng
 
+def UseAlternateVSU(Strng):
+    Strng = Strng.replace('𑖲', '𑗜')
+
+    return Strng
+
+def UseAlternateVSUU(Strng):
+    Strng = Strng.replace('𑖳', '𑗝')
+
+    return Strng
+
+def UseAlternateU(Strng):
+    Strng = Strng.replace('𑖄', '𑗛')
+
+    return Strng
+
+def UseAlternateI1(Strng):
+    Strng = Strng.replace('𑖂', '𑗘')
+
+    return Strng
+
+def UseAlternateI2(Strng):
+    Strng = Strng.replace('𑖂', '𑗙')
+
+    return Strng
+
+def UseAlternateII(Strng):
+    Strng = Strng.replace('𑖃',  '𑗚')
+
+    return Strng
+
+def ChakmaEnableAllConjuncts(Strng):
+    listC = '('+"|".join(sorted(GM.CrunchSymbols(GM.Consonants,"Chakma")+Chakma.VowelMap[:1],key=len,reverse=True))+')'
+    Strng = re.sub("\U00011134"+'('+listC+')',"\U00011133"+r'\1',Strng)
+
+    Strng = ChakmaGemination(Strng)
+
+    return Strng
+
+def ChakmaGemination(Strng, reverse = False):
+    ListC = "(" + "|".join(GM.CrunchSymbols(GM.Consonants, 'Chakma')) + ")"
+    virs = "([\U00011134 \U00011133])"
+    virExp = "\U00011134"
+    virDep = "\U00011133"
+    ListV = '('+"|".join(sorted(GM.CrunchSymbols(GM.VowelSignsNV,"Chakma"), key=len, reverse = True)) + ")"
+
+    if not reverse:
+        Strng = re.sub(ListC + virs + r'\1' + ListV, r'\1' + virExp + r'\3' , Strng)
+
+        Strng = re.sub(ListC + virExp + r'\1' + virDep + ListC, r'\1' + virExp + virDep + r'\2' , Strng)
+        Strng = re.sub(ListC + virDep + r'\1' + virDep + ListC, r'\1' + virExp + virDep + r'\2' , Strng)
+
+        Strng = re.sub(virDep + ListC + virExp + ListV, virExp + r'\1' + virExp + r'\2' , Strng)
+
+        # Strng = re.sub(ListC + virExp + virExp, r'\1' + virExp + r'\1' + virExp, Strng)
+    else:
+        Strng = re.sub(ListC + virExp + ListV, r'\1' + virExp + r'\1' + r'\2', Strng)
+        Strng = re.sub(ListC + virExp + virDep, r'\1' + virExp + r'\1' + virDep, Strng)
+
+
+    return Strng
+
+def ChakmaVowelsIndependent(Strng):
+    vowelDepA = ["𑄃𑄨", "𑄃𑄪", "𑄃𑄬"]
+    vowelIndep = ["\U00011104", "\U00011105" , "\U00011106"]
+
+    for x, y in zip(vowelDepA, vowelIndep):
+        Strng = Strng.replace(x, y)
+
+    return Strng
+
 def MultaniAbjad(Strng):
     ListAll = "(" + "|".join(GM.CrunchSymbols(GM.Characters, 'Multani') + ["𑊓", "𑊍"]) + ")"
     ListC = "(" + "|".join(GM.CrunchSymbols(GM.Consonants, 'Multani') + ["𑊓", "𑊍"]) + ")"
@@ -84,7 +154,7 @@ def LimbuSpellingSaI(Strng):
 
     return Strng
 
-def siddhamUnicode(Strng):
+def siddhammukta(Strng):
     return Strng
 
 def tradOrtho(Strng):
@@ -240,11 +310,6 @@ def MeeteiMayekremoveHistorical(Strng):
     for x,y in removePairs:
         Strng = Strng.replace(x,y)
 
-    return Strng
-
-def ChakmaEnableAllConjuncts(Strng):
-    listC = '('+"|".join(sorted(GM.CrunchSymbols(GM.Consonants,"Chakma")+Chakma.VowelMap[:1],key=len,reverse=True))+')'
-    Strng = re.sub("\U00011134"+'('+listC+')',"\U00011133"+r'\1',Strng)
     return Strng
 
 def TamilOmDisable(Strng):
@@ -498,20 +563,26 @@ def YYAEverywhere(Strng, Target):
     return Strng
 
 def YaToYYa(Strng,Target):
+    YYa = GM.CrunchList('NuktaConsonantMap',Target)[7]
 
-    ListC = '|'.join(GM.CrunchSymbols(GM.Characters, Target)+[GM.CrunchList('SignMap',Target)[0]])
+    ListC = '|'.join(GM.CrunchSymbols(GM.Characters, Target)+[GM.CrunchList('SignMap',Target)[0]] + ['ৰ'])
 
     ListS = '(' + '|'.join(GM.CrunchSymbols(GM.VowelSignsNV,Target)) + ')'
 
     Ya = GM.CrunchList('ConsonantMap', Target)[25]
-    YYa = GM.CrunchList('NuktaConsonantMap',Target)[7]
     vir = GM.CrunchSymbols(GM.VowelSigns,Target)[0]
 
     ListVarga = '|'.join(GM.CrunchList('ConsonantMap',Target)[0:25])
 
-    if Target in ['Assamese','Bengali', 'Oriya']:
+    if Target in ['Assamese','Bengali', 'Oriya', "Chakma"]:
         Strng = re.sub('('+ListC+')'+Ya,r'\1'+YYa,Strng)
-        Strng = Strng.replace(vir+YYa,vir+Ya)
+
+        if Target in ['Assamese', 'Bengali']:
+            Strng = Strng.replace(vir+YYa,vir+Ya)
+
+        if Target == "Chakma":
+            Strng = Strng.replace("𑄠𑄡", "𑄠𑄠")
+            Strng = Strng.replace(vir + YYa, "\U00011133" + YYa)
 
     #print(Target)
     '''
@@ -698,6 +769,9 @@ def SinhalaDefaultConjuncts(Strng):
 
     ## KSHA
 
+    Strng = Strng.replace('ර‍්‍ය', 'ර්ය')
+    Strng = Strng.replace('ර්‍ර', 'ර්ර')
+
     return Strng
 
 def IASTPali(Strng):
@@ -721,6 +795,8 @@ def SinhalaConjuncts(Strng):
     for x in ListC:
         for y in ListC:
             Strng = Strng.replace(x + vir + y, x + ZWJ + vir + y)
+
+    Strng = Strng.replace('ර‍්‍ය', 'ර්‍ය')
 
     return Strng
 

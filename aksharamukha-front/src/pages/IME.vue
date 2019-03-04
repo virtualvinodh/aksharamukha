@@ -1,12 +1,13 @@
 <template>
   <!-- Fix Urdu ai and au -->
   <q-page class="q-pa-md">
-<q-tabs color="tertiary" no-pane-border animated swipeable position="bottom">
+<q-tabs color="tertiary" no-pane-border animated swipeable inverted position="top">
   <!-- Tabs - notice slot="title" -->
   <q-tab default slot="title" name="tab-1" icon="translate" label="Type"/>
   <q-tab slot="title" name="tab-2" icon="keyboard" label="Mapping"/>
   <q-tab slot="title" name="tab-3" icon="settings" label="Settings"/>
-  <q-tab slot="title" name="tab-4" icon="help" label="Help"/>
+  <q-tab slot="title" name="tab-4" icon="font_download" label="Font" v-if="getScriptObject(outputScript).font.name !== ''"/>
+  <q-tab slot="title" name="tab-5" icon="help" label="Help"/>
     <h5 class="title"> {{getScriptObject(outputScript).label}} Text Composer : <span :class="getOutputClass(outputScript, postOptions)"> <transliterate text="akSaramukha" src="HK" :tgt="outputScript" sourcePreserve="false">
     </transliterate> </span> </h5>
   <!-- Targets -->
@@ -16,6 +17,7 @@
   <div class="q-ma-md">
   <span class="q-ma-sm">Keyboard scheme: </span> <q-btn-toggle
   v-model="inputScript"
+  @input="compoundsGen"
   toggle-color="dark"
   :options="[
     {label: 'Aksharaa', value: 'Aksharaa'},
@@ -32,6 +34,7 @@
     </div>
   </q-collapsible>
     <q-input
+      autofocus
       v-model="textInput"
       ref="brahmiText"
       type="textarea"
@@ -39,7 +42,6 @@
       class="text-input col-xs-12 col-md-12 q-ma-sm"
       :class="getOutputClass(outputScript, postOptions)"
       :style="{'font-size': fontSize + '%'}"
-      autofocus
       @input="throttled"
       clearable
       color="dark"
@@ -64,7 +66,9 @@
         postOptions.includes('egrantamil')">This does not use the proper Unicode encoding. Please consider disabling the e-Grantamil option and use Grantha Unicode.</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Vatteluttu'">This only works with e-Vatteluttu OT font and uses Tamil codepoints to encode Vatteluttu characters.</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Siddham' &&
-        !postOptions.includes('siddhamUnicode')">This only works with MuktamSiddham font and uses Devanagari codepoints to encode Siddham characters.</div>
+        postOptions.includes('siddhammukta')">This only works with MuktamSiddham font and uses Devanagari codepoints to encode Siddham characters.</div>
+      <div class="notice q-ma-sm" v-show="outputScript === 'Siddham' &&
+        postOptions.includes('siddhamap')">This only works with ApSiddhamDeva font and uses Devanagari codepoints to encode Siddham characters.</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Newa' &&
         postOptions.includes('nepaldevafont')">This uses Devanagari codepoints to encode the characters. Without the specific font, the characters will just appear as Devanagari. Please consider using an Unicode font that uses the appropriate Newa (Nepal Lipi) codepoints.</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Ranjana' &&
@@ -74,8 +78,6 @@
         postOptions.includes('ranjanalantsa')">This uses Tibetan codepoints to encode the characters. Without the specific font, the characters will just appear as Tibetan.</div>
      <div class="notice q-ma-sm" v-show="outputScript === 'Ranjana' &&
         postOptions.includes('ranjanawartu')">This uses Tibetan codepoints to encode the characters. Without the specific font, the characters will just appear as Tibetan.</div>
-      <div class="notice q-ma-sm" v-show="outputScript === 'Siddham' &&
-        postOptions.includes('siddhamUnicode')">Works only with a Graphite-supporting browser like Firefox.</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Tamil' &&
             String(convertText).includes('𑌃')    ">This only works with Google Noto Tamil fonts </div>
 
@@ -124,6 +126,16 @@
             </span>
           </div>
         </div>
+        <hr/> <br/>
+        <div class="row">
+          <div v-for="(char, index) in symbolsI" :key="char+index" class="col-xs-2 col-lg-1 q-mb-lg">
+            <span :class="inputScript.toLowerCase()"> {{char}} </span> <br/>
+              <span :class="outputScript.toLowerCase()">
+                <span class="letter"> {{symbolsO[index]}}
+              </span>
+            </span>
+          </div>
+        </div>
       </div>
   </q-tab-pane>
 
@@ -154,11 +166,36 @@
       />
   </q-tab-pane>
   <q-tab-pane name="tab-4">
+    <div v-if="getScriptObject(outputScript).font.name !== ''">
+    <h5> Font </h5>
+      <div class="q-body-1">The font used is {{getScriptObject(outputScript).font.name}}, which can be downloaded from <a :href="getScriptObject(outputScript).font.url">here</a>.</div>
+    <br/>
+    </div>
+  </q-tab-pane>
+  <q-tab-pane name="tab-5">
     <h5> Help </h5>
+    <div class="q-body-1">See <router-link :to="'/describe/'+outputScript">here</router-link> for information about the script. The default <i>Aksharaa</i> romanization format is used below.<br/><br/></div>
+    <div class="q-body-1"> {} is used to stop conjuncts formation. bud{}dha : <transliterate text="bud{}dha" src="Aksharaa" :tgt="outputScript"></transliterate> :: lak{}shha : <transliterate text="lak{}shha" src="Aksharaa" :tgt="outputScript"></transliterate></div> <br/>
+    <div v-if="outputScript === 'Kannada'">
+      <div class="q-body-1">Text composer allows you to form several type of variations of vottus. <br/> <ul> <li> kaar()ya : <span class="Kannada">ಕಾರ್‍ಯ</span> as opposed to kaarya : <span class="Kannada">ಕಾರ್ಯ</span></li> <li> kar()ma : <span class="Kannada">ಕರ್‍ಮ</span> as opposed to karma : <span class="Kannada">ಕರ್ಮ</span></li></ul> </div>
+    </div>
+    <div v-if="outputScript === 'Grantha'">
+      <div class="q-body-1">Text composer allows you to form several type of variations of conjuncts. <br/> <ul> <li> san[]ti : <span class="grantha">𑌸𑌨‍𑍍𑌤𑌿</span> as opposed to santi : <span class="grantha">𑌸𑌨𑍍𑌤𑌿</span></li> <li> kar[]ma : <span class="grantha">𑌕𑌰‍𑍍𑌮</span> as opposed to karma : <span class="grantha">𑌕𑌰𑍍𑌮</span></li><li> vish[]va : <span class="grantha">𑌵𑌿𑌶‍𑍍𑌵</span> as opposed to vishva : <span class="grantha">𑌵𑌿𑌶𑍍𑌵</span></li> <li> tat{}param : <span class="grantha">𑌤𑌤𑍍‌𑌪𑌰𑌮𑍍</span> as opposed to tatparam <span class="grantha">𑌤𑌤𑍍𑌪𑌰𑌮𑍍</span></li><li>yyam; : <span class="grantha">𑌯𑍍𑌯𑌁</span></li></ul> </div>
+    </div>
+    <div v-if="outputScript === 'Devanagari'">
+      <div class="q-body-1">Text composer allows you to form several type of variations of conjuncts seamlessly. <br/> <ul> <li> lakshh{}mii : <span class="Devanagari">लक्‌ष्मी</span></li> <li>lakshh()mii : <span class="Devanagari">लक्‍ष्मी</span></li> <li> n() : <span class="Devanagari">न्‍</span> </li> <li> kar()ma : <span class="Devanagari">कर्‍म</span></li> </ul> </div>
+    </div>
+    <div v-if="outputScript === 'Sinhala'">
+      <div class="q-body-1">Text composer allows you to form several type of Sinhala conjuncts seamlessly. <br/> <ul> <li> Touching consonants are formed using []. bud[]dha : <span class="sinhala">බුද‍්ධ</span>.</li> <li> Combining consonats are formed using (). bud()dha : <span class="sinhala">බුද්‍ධ</span>.</li> <li> Conjuncts of /ra/ and /ya/ can be disabled using {}. sat{}ya : <span class="sinhala">සත්‌ය</span>.</li> <li> Repha is formed using r(). kar()ma : <span class="sinhala">කර්‍ම</span> </li> </ul> The above assumes that the 'enable all conjuncts' option is not selected. If it is selected, it will overrride the above options. </div>
+    </div>
+    <div v-if="outputScript === 'Newa'">
+      <div class="q-body-1">Text composer allows you to switch between repha and eye-lash forms of /r/. <br/> <ul> <li> Repha is formed using r[]. kar[]ma : <span class="newa">𑐎𑐬‍𑑂𑐩</span>.</li> <li> The eye-lash form is formed as usual. karma : <span class="newa">𑐎𑐬𑑂𑐩</span>.</li> </ul> The above assumes that the 'Disable Repha' option is selected. If it is not selected, Repha will be formed in all cases overriding all of the above. It will also not work with the Devanagari-based Newa font.</div>
+    </div>
     <br/>
   </q-tab-pane>
 </q-tabs>
-  <a :href="brahmiImg" ref="imgDownload" :style="{'display': 'none'}" download="text.png"><button>Download</button></a>
+  <div  class="q-pa-lg" :class="getOutputClass(outputScript, postOptions)" ref="outputTextImg" v-show="screenshot" v-html="sanitize(textInputHTML)"></div>
+  <a :href="brahmiImg" ref="imgDownload" :style="{'display': 'none'}" download="text.png" @click="screenshot=false"><button>Download</button></a>
   </q-page>
 </template>
 
@@ -206,15 +243,21 @@ export default {
   data () {
     return {
       textInput: '',
-      indicSubset: ['Khmer', 'Burmese', 'Lao', 'Thai', 'Balinese', 'Javanese', 'Tibetan', 'LaoPali', 'TaiTham', 'Cham', 'Lepcha', 'Ahom', 'ZanabazarSquare'],
+      screenshot: false,
+      symbolsIndic: ['a\\\'', 'a\\"', 'a\\_', '\\m+', '\\m++', '\'', 'oM', '.', '..'],
+      symbols: ['\'', 'oM', '.', '..'],
+      symbolsI: [],
+      symbolsO: [],
+      indicSubset: ['TamilGrantha', 'Grantha', 'Assamese', 'Bengali', 'Devanagari', 'Gujarati', 'Gurmukhi', 'Kannada', 'Malayalam', 'Oriya', 'Tamil', 'Telugu'],
       letters: {
-        Grantha: ['𑍝', '𑍞', '𑍟', '𑌀', '𑍦', '𑍧', '𑍨', '𑍩', '𑍪', '𑍫', '𑍬', '𑍰', '𑍱', '𑍲', '𑍳', '𑍴', '⃰'],
+        Grantha: ['𑍝', '᳴', '॑', '᳚', 'ᳲ', 'ᳳ', '᳸', '᳹', '᳐', '᳒', '᳓', '⃰', '𑍞', '𑍟', '𑌀', '𑍦', '𑍧', '𑍨', '𑍩', '𑍪', '𑍫', '𑍬', '𑍰', '𑍱', '𑍲', '𑍳', '𑍴'],
         Newa: ['𑑈', '𑑊', '𑑍', '𑑎', '𑑏', '𑑛', '𑑝'],
         Tamil: ['௰', '௱', '௲', '௳', '௴', '௵', '௶', '௷', '௸', '௹', '௺'],
-        Tirhuta: [''],
         Devanagari: '꣠꣡꣢꣣꣤꣥꣦꣧꣨꣩꣪꣫꣬꣭꣮꣯꣰꣱ꣲꣳꣴꣵꣶꣷ꣸꣹꣺ꣻ꣼ꣽ᳐᳑᳒᳓᳔᳕᳖᳗᳘᳙᳜᳝᳞᳟᳚᳛᳠᳡᳢᳣᳤᳥᳦᳧᳨ᳩᳪᳫᳬ᳭ᳮᳯᳰᳱᳲᳳ᳴ᳵᳶ᳷᳸᳹'.split(''),
         Sinhala: ['෦', '෧', '෨', '෩', '෪', '෫', '෬', '෭', '෮', '෯', '෴', '𑇡', '𑇢', '𑇣', '𑇤', '𑇥', '𑇦', '𑇧', '𑇨', '𑇩', '𑇪', '𑇫', '𑇬', '𑇭', '𑇮', '𑇯', '𑇰', '𑇱', '𑇲', '𑇳', '𑇴'],
-        ZanabazarSquare: '',
+        Siddham: '𑗘 𑗙 𑗚 𑗛 𑗜 𑗝 𑗁 𑗄 𑗅 𑗆 𑗇 𑗈 𑗉 𑗊 𑗋 𑗌 𑗍 𑗎 𑗏 𑗐 𑗑 𑗒 𑗓 𑗔 𑗕 𑗗'.split(' '),
+        Tirhuta: '𑒀 𑓅 𑓆'.split(' '),
+        Kannada: 'ಆ್ಯ ೱ ೲ ಀ'.split(' '),
         Sharada: '𑇂 𑇃 𑇇 𑇉 𑇍 𑇚 𑇛 𑇜 𑇝 𑇞 𑇟'.split(' ')
       },
       desc: {
@@ -227,6 +270,7 @@ export default {
       outputScript: this.$route.params.script,
       postOptions: [],
       preOptions: [],
+      postOptionsIME: {},
       sourcePreserve: true,
       options: {},
       convertText: '',
@@ -235,16 +279,55 @@ export default {
       dash: _,
       inputPast: '',
       outputPast: '',
+      lineHeight: {
+        'Grantha': '2.3em'
+      },
       throttled: _.debounce(this.convert, 1000),
+      screenshotted: _.debounce(this.imageConvert2, 500),
       vowels1: '',
       vowels2: '',
       consonants1: '',
       consonants2: '',
-      textInputOld: ''
+      textInputOld: '',
+      inputDone: false,
+      selectionStart: 0
+    }
+  },
+  computed: {
+    textInputHTML: function () {
+      return this.textInput.replace(/\n/g, '<br/>') + '<br/>'
     }
   },
   mounted () {
     this.compoundsGen()
+    if (localStorage.postOptionsIMEIndex) {
+      this.postOptionsIME = JSON.parse(localStorage.postOptionsIMEIndex)
+
+      if (typeof this.postOptionsIME[this.outputScript] === 'undefined') {
+        this.postOptionsIME[this.outputScript] = []
+      }
+      this.$set(this, 'postOptions', this.postOptionsIME[this.outputScript])
+    }
+    if (localStorage.sourcePreserveIME) {
+      this.sourcePreserve = JSON.parse(localStorage.sourcePreserveIME)
+    }
+    if (localStorage.inputScriptIME) {
+      this.inputScript = localStorage.inputScriptIME
+    }
+  },
+  updated: function () {
+    console.log('The dom is updated ' + this.screenshot)
+    if (this.screenshot) {
+      this.screenshotted()
+    }
+    if (typeof this.lineHeight[this.outputScript] !== 'undefined') {
+      this.$refs['brahmiText'].$refs.input.style.lineHeight = '2.3em'
+    }
+    if (this.inputDone) {
+      this.$refs['brahmiText'].$refs.input.focus()
+      this.$refs['brahmiText'].$refs.input.setSelectionRange(this.selectionStart, this.selectionStart)
+      this.inputDone = false
+    }
   },
   watch: {
     '$route' (to, from) {
@@ -252,10 +335,21 @@ export default {
       this.textInput = ''
       this.compoundsGen()
     },
-    inputScript (newScript, oldScript) {
-      this.inputPast = oldScript
+    sourcePreserve (newV, oldV) {
+      localStorage.sourcePreserveIME = JSON.stringify(newV)
     },
-    textInput (newText, oldText) {
+    inputScript (newScript, oldScript) {
+      localStorage.inputScriptIME = newScript
+    },
+    postOptions (newOpt, oldOpt) {
+      this.postOptionsIME[this.outputScript] = newOpt
+      localStorage.postOptionsIMEIndex = JSON.stringify(this.postOptionsIME)
+
+      if (typeof this.postOptionsIME[this.outputScript] === 'undefined') {
+        this.postOptionsIME[this.outputScript] = []
+      }
+
+      this.$set(this, 'postOptions', this.postOptionsIME[this.outputScript])
     }
   },
   methods: {
@@ -282,30 +376,19 @@ export default {
         .catch(function (error) {
           console.log(error)
         })
+
+      var symbols = this.indicSubset.includes(this.outputScript) ? this.symbolsIndic : this.symbols
+
+      this.symbolsI = await this.convertAsync('HK', this.inputScript, JSON.stringify(symbols), true, [], [])
+
+      this.symbolsO = await this.convertAsync('HK', this.outputScript, JSON.stringify(symbols), false, [], [])
+      this.symbolsO = JSON.parse(this.symbolsO.replace(new RegExp('\\\\', 'g'), ''))
     },
     insertChar: function (char) {
       var position = this.$refs['brahmiText'].$refs.input.selectionStart
-      this.$refs['brahmiText'].$refs.input.focus()
       this.textInput = [this.textInput.slice(0, position), char, this.textInput.slice(position)].join('')
-    },
-    updateHist: function () {
-      this.inputScript = this.inputPast
-      this.updateInput()
-    },
-    updateInput: function () {
-      this.$set(this, 'preOptions', [])
-      if (this.inputScript === 'Urdu') {
-        this.$set(this, 'preOptions', ['UrduShortNotShown'])
-      }
-      this.convert()
-    },
-    updateHistOut: function () {
-      this.outputScript = this.outputPast
-      this.updateOuput()
-    },
-    updateOuput: function () {
-      this.$set(this, 'postOptions', [])
-      this.convert()
+      this['inputDone'] = true
+      this['selectionStart'] = position + char.length
     },
     copy: function () {
       this.$q.notify({
@@ -315,40 +398,12 @@ export default {
         timeout: 200
       })
     },
-    audodetect: function (Strng) {
-    },
-    demo: function () {
-      console.log('called')
-    },
     sanitize: function (html) {
       return sanitizeHtml(html)
-    },
-    swap: function () {
-      this.textInput = this.convertText.replace(new RegExp('<br/>', 'g'), '\n')
-      let temp = this.inputScript
-      this.inputScript = this.outputScript
-      this.outputScript = temp
-      this.convert()
-      this.postOptions = []
-      this.preOptions = []
     },
     printDocument: function () {
       // manually hide the side menu while printing and bring it back when printing is complete
       window.print()
-    },
-    getScript: async function (text) {
-      var data = {
-        'text': text
-      }
-      return new Promise(resolve => {
-        this.apiCall.post('/autodetect', data)
-          .then(function (response) {
-            resolve(response.data)
-          })
-          .catch(function (error) {
-            console.log(error)
-          })
-      })
     },
     convert: async function () {
       this.convertText += ' . . . '
@@ -359,10 +414,7 @@ export default {
       }
       this.loading = true
 
-      var textDiff = this.textInput.replace(this.textInputOld, '')
-      console.log('The old text is ' + this.textInputOld)
-      console.log('The new text is ' + this.textInput)
-      console.log('The difference is ' + textDiff)
+      // var textDiff = this.textInput.replace(this.textInputOld, '')
 
       var data = {
         source: this.inputScript,
@@ -388,8 +440,10 @@ export default {
         })
     },
     imageConvert: function () {
-      var node = this.$refs.brahmiText
-      console.log(node)
+      this.screenshot = true
+    },
+    imageConvert2: function () {
+      var node = this.$refs.outputTextImg
       var dhis = this
       this.$q.notify({
         type: 'info',
@@ -412,6 +466,7 @@ export default {
 
           image2.onload = function () {
             dhis.$refs.imgDownload.click()
+            this.convert = false
           }
         }
       })
@@ -478,10 +533,10 @@ export default {
         return null // all image is white
       }
 
-      var cropTop = scanY(true) - 20
-      var cropBottom = scanY(false) + 20
-      var cropLeft = scanX(true) - 20
-      var cropRight = scanX(false) + 20
+      var cropTop = scanY(true) - 50
+      var cropBottom = scanY(false) + 50
+      var cropLeft = scanX(true) - 50
+      var cropRight = scanX(false) + 50
       var cropWidth = cropRight - cropLeft
       var cropHeight = cropBottom - cropTop
 
@@ -510,11 +565,8 @@ export default {
 .text-output {
   min-height: 230px;
 }
-.text-input {
-  line-height: 20px;
-}
 h5.title {
-  margin-bottom: -10px;
-  margin-top: 0px;
+  margin-bottom: -25px;
+  margin-top: 10px;
 }
 </style>

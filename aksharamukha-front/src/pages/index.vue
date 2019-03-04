@@ -97,7 +97,9 @@
         postOptions.includes('egrantamil')">This does not use the proper Unicode encoding. Please consider disabling the e-Grantamil option and use Grantha Unicode.</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Vatteluttu'">This only works with e-Vatteluttu OT font and uses Tamil codepoints to encode Vatteluttu characters.</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Siddham' &&
-        !postOptions.includes('siddhamUnicode')">This only works with MuktamSiddham font and uses Devanagari codepoints to encode Siddham characters.</div>
+        postOptions.includes('siddhammukta')">This only works with MuktamSiddham font and uses Devanagari codepoints to encode Siddham characters.</div>
+      <div class="notice q-ma-sm" v-show="outputScript === 'Siddham' &&
+        postOptions.includes('siddhamap')">This only works with ApDevSiddham  font and uses Devanagari codepoints to encode Siddham characters.</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Newa' &&
         postOptions.includes('nepaldevafont')">This uses Devanagari codepoints to encode the characters. Without the specific font, the characters will just appear as Devanagari. Please consider using an Unicode font that uses the appropriate Newa (Nepal Lipi) codepoints.</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Ranjana' &&
@@ -107,8 +109,6 @@
         postOptions.includes('ranjanalantsa')">This uses Tibetan codepoints to encode the characters. Without the specific font, the characters will just appear as Tibetan.</div>
      <div class="notice q-ma-sm" v-show="outputScript === 'Ranjana' &&
         postOptions.includes('ranjanawartu')">This uses Tibetan codepoints to encode the characters. Without the specific font, the characters will just appear as Tibetan.</div>
-      <div class="notice q-ma-sm" v-show="outputScript === 'Siddham' &&
-        postOptions.includes('siddhamUnicode')">Works only with a Graphite-supporting browser like Firefox.</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Tamil' &&
             String(convertText).includes('𑌃')    ">This only works with Google Noto Tamil fonts </div>
       <div class="notice q-ma-sm" v-show="inputScript === 'Tamil' && outputScript === 'IPA'">The results displayed have been obtained from <a href="http://anunaadam.appspot.com" target="_blank">Anunaadam</a>. Use the tool for further options.</div>

@@ -40,6 +40,9 @@ def ApplyScriptDefaults(Strng,Source,Target):
     elif Target == 'Sinhala':
         Options += []
 
+    elif Target == 'Chakma':
+        Options += ['YaToYYa']
+
     elif Target == 'Gurmukhi':
         Options += ['GurmukhiTippiBindu','GurmukhiTippiGemination']
 

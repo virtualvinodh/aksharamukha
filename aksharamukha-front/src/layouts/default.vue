@@ -63,15 +63,30 @@
           <q-item-side icon="cloud upload" />
           <q-item-main label="Convert Files"/>
         </q-item>
-        <!-- <q-collapsible icon="keyboard" label="Text Composer (Beta)" >
+        <q-collapsible icon="keyboard" label="Text Composer (Beta)" >
             <q-item :to="'/input/Devanagari'">
               <q-item-main label="Devanagari"/>
             </q-item>
              <q-item :to="'/input/Grantha'">
               <q-item-main label="Grantha"/>
             </q-item>
+            <q-item :to="'/input/Kannada'">
+              <q-item-main label="Kannada"/>
+            </q-item>
+            <q-item :to="'/input/Ranjana'">
+              <q-item-main label="Ranjana"/>
+            </q-item>
+            <q-item :to="'/input/Siddham'">
+              <q-item-main label="Siddham"/>
+            </q-item>
+            <q-item :to="'/input/Sinhala'">
+              <q-item-main label="Sinhala"/>
+            </q-item>
             <q-item :to="'/input/Tamil'">
               <q-item-main label="Tamil"/>
+            </q-item>
+            <q-item :to="'/input/TamilGrantha'">
+              <q-item-main label="Tamil (with full Grantha"/>
             </q-item>
              <q-item :to="'/input/Tirhuta'">
               <q-item-main label="Tirhuta (Maithili)"/>
@@ -79,7 +94,7 @@
              <q-item :to="'/input/Newa'">
               <q-item-main :label="'Newa (Nepal Bhasa)'"/>
             </q-item>
-        </q-collapsible> -->
+        </q-collapsible>
         <q-collapsible icon="book" label="Sample Texts"  >
             <q-item :to="'/texts/' + text.path" v-for="text in texts" :key="text.path">
               <q-item-main :label="text.name"/>
@@ -198,8 +213,8 @@
           <!-- <vatteluttu text="ஶ்ரீ" class="demo1"> </vatteluttu> -->
           </q-btn>
           <div class="print-only">
-            Jinavani : ஜினவாணி <br/>
-            http://tamiljinavani.appspot.com
+            Aksharamukha <br/>
+            http://aksharamukha.appspot.com
           </div>
         </q-toolbar>
     </q-layout-footer>
@@ -542,6 +557,10 @@ export default {
   src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifAhom/NotoSerifAhom-Regular.otf')
 }
 @font-face {
+  font-family: 'Noto Sans Siddham';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSiddham/NotoSansSiddham-Regular.otf')
+}
+@font-face {
   font-family: 'Noto Sans Brahmi';
   src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansBrahmi/NotoSansBrahmi-Regular.otf')
 }
@@ -736,12 +755,13 @@ export default {
   font-size: 110%;
   line-height: 1.5em;
 }
-.siddham {
+.siddhammukta {
   font-size: 120%;
   font-family: Muktamsiddham
 }
-.siddhamunicode {
-  font-family: MuktamsiddhamG
+.siddham {
+  font-size: 100%;
+  font-family: "Noto Sans Siddham"
 }
 .grantha {
   font-family: "Noto Sans Grantha2";

@@ -21,6 +21,7 @@
         :chars2 = "guideChars[0][i-1]" :chars1="selectIndex(results,0,i-1)"
         v-for="i in letters[0].length" :key="'v1' + i">
         </list-char-all-latin>
+      <h6> South-Indic and Modern </h6>
         <list-char-all-latin :chars="letters[1][i-1]" :script1="script1" :script2="script2"
         :chars2 = "guideChars[1][i-1]" :chars1="selectIndex(results,1,i-1)"
         v-for="i in letters[1].length" :key="'v2' + i">
@@ -38,14 +39,17 @@
         :chars2 = "guideChars[4][i-1]" :chars1="selectIndex(results,4,i-1)"
         v-for="i in letters[4].length" :key="'v5' + i">
         </list-char-all-latin>
+      <h6> South-Indic </h6>
         <list-char-all-latin :chars="letters[5][i-1]" :script1="script1" :script2="script2"
         :chars2 = "guideChars[5][i-1]" :chars1="selectIndex(results,5,i-1)"
         v-for="i in letters[5].length" :key="'v6' + i">
         </list-char-all-latin>
+      <h6> Consonants with Nukta </h6>
         <list-char-all-latin :chars="letters[6][i-1]" :script1="script1" :script2="script2"
         :chars2 = "guideChars[6][i-1]" :chars1="selectIndex(results,6,i-1)"
         v-for="i in letters[6].length" :key="'v7' + i">
         </list-char-all-latin>
+      <h6> Sinhala Pre-nasalized </h6>
         <list-char-all-latin :chars="letters[7][i-1]" :script1="script1" :script2="script2"
         :chars2 = "guideChars[7][i-1]" :chars1="selectIndex(results,7,i-1)"
         v-for="i in letters[7].length" :key="'v8' + i">
@@ -55,11 +59,24 @@
         :chars2 = "guideChars[8][i-1]" :chars1="selectIndex(results,8,i-1)"
         v-for="i in letters[8].length" :key="'v9' + i">
         </list-char-all-latin>
+      <h5> Vedic </h5>
+        <list-char-all-latin :chars="letters[9][i-1]" :script1="script1" :script2="script2"
+        :chars2 = "guideChars[9][i-1]" :chars1="selectIndex(results,9,i-1)"
+        v-for="i in letters[9].length" :key="'v10' + i">
+        </list-char-all-latin>
+    </div>
+    <h5> Joiners </h5>
+    <div class="q-body-1">Joiners can be accessed using the following conventions with all the romanization formats.</div>
+    <div class="q-body-1">
+    <ul>
+      <li> () : Virama + ZWJ  - d()dha is converted to DA + Virama + ZWJ + DHA</li>
+      <li> [] : ZWJ + Virama - d[]dha is converted to DA + ZWJ + Virama + DHA </li>
+      <li> {} : Virama + ZWNJ - d{}dha is converted to DA + Virama + ZWNJ + DHA</li>
+    </ul>
     </div>
     <h5> Notes </h5>
       <div class="q-body-1">
-      <transliterate text="अइ" src="Devanagari" :tgt="script2"></transliterate> and <transliterate text="अउ" src="Devanagari" :tgt="script2"></transliterate> are converted to a_i and a_u respectively, to avoid confusion with /ai/ and /au/. Similarly, for <transliterate text="कइ" src="Devanagari" :tgt="script2"></transliterate> and  <transliterate text="कउ" src="Devanagari" :tgt="script2"></transliterate>, which become /ka_i/ and /ka_u/.
-
+        Sanskrit-specific romanization formats such as Velthuis, HK, IAST have been extended to support Vedic, South-Indic and Sinhala characters.
       </div>
   </q-page>
 </template>
@@ -109,7 +126,8 @@ export default {
       othersC2: ['qa', 'qha', 'g2a', 'z2a', 'r3a', 'r3ha', 'fa', 'Ya'].map(x => x.replace('a', '')),
       othersCS: ['n*ga', 'n*ja', 'n*Da', 'n*da', 'm*ba'].map(x => x.replace('a', '')),
       numerals: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-      otherSymbols: ['\'', 'oM', 'K', '.', '..'],
+      otherSymbols: ['a_i', 'a_u', '\'', 'oM', 'K', '.', '..'],
+      vedic: ['a\\\'', 'a\\"', 'a\\_', '\\m+', '\\m++'],
       guideChars: {},
       results: {}
     }
@@ -137,6 +155,7 @@ export default {
       letters.push(this.dash.chunk(this.othersC2, this.chunkSize))
       letters.push(this.dash.chunk(this.othersCS, this.chunkSize))
       letters.push(this.dash.chunk(this.otherSymbols, this.chunkSize))
+      letters.push(this.dash.chunk(this.vedic, this.chunkSize))
 
       this.letters = letters
 
@@ -149,9 +168,18 @@ export default {
       this.apiCall.post('/scriptmatrix', data)
         .then(function (response) {
           for (var key in response.data['results']) {
-            dhis.results[key] = JSON.parse(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"'))
+            console.log(key)
+            if (key !== 'Velthuis') {
+              dhis.results[key] = JSON.parse(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱'))
+            } else {
+              console.log(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱').replace(/""/g, '"\\"').replace(/\\"\\"/g, '\\""'))
+              dhis.results[key] = JSON.parse(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱').replace(/""/g, '"\\"').replace(/\\"\\"/g, '\\""'))
+            }
+            console.log('here3')
           }
-          dhis.guideChars = JSON.parse(response.data['guideChars'])
+          console.log('here4')
+          console.log(response.data['guideChars'].replace(/\\/g, ''))
+          dhis.guideChars = JSON.parse(response.data['guideChars'].replace(/\\/g, ''))
           dhis.loading = false
           console.log(dhis.results)
         })

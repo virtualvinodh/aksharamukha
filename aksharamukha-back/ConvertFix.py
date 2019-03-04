@@ -11,6 +11,46 @@ import re
 ## ListC check.. if LLA is there in ListC... just now it has only Consonant Map
 ### Rewrite all ListC, ListV as sorted(List,key=len,reverse=True)
 
+def VedicSvarasLatinIndic(Strng):
+    ## Vedic Svaras
+    Strng = Strng.replace('{\\m+}', 'ꣳ')
+    Strng = Strng.replace('\\m++', 'ꣴ')
+    Strng = Strng.replace('\\m+', 'ꣳ')
+
+    ### Introduce Vedic Svaras
+    Strng = Strng.replace('\\\'\'', '\\"').replace('\\"', '᳚')
+    Strng = Strng.replace('\\\'', '॑')
+    Strng = Strng.replace('\\`', '\\_').replace('\\_', '॒')
+
+    return Strng
+
+def VedicSvarsIndicLatin(Strng):
+    Strng = Strng.replace('᳚', '\\"')
+    Strng = Strng.replace('॑', '\\\'')
+    Strng = Strng.replace('॒', '\\_')
+    Strng = Strng.replace('ꣳ', '\\m+')
+    Strng = Strng.replace('ꣴ', '\\m++')
+
+    return Strng
+
+def VedicSvarasDiacrtics(Strng):
+    Strng = Strng.replace('\\\'', '̍')
+    Strng = Strng.replace('\\"', '̎')
+    Strng = Strng.replace('\\_', '̱')
+    Strng = Strng.replace('\\m++', 'gͫ̄')
+    Strng = Strng.replace('\\m+', 'gͫ')
+
+    return Strng
+
+def VedicSvarasNonDiacritic(Strng):
+    Strng = Strng.replace('̍', '\\\'')
+    Strng = Strng.replace('̎', '\\"')
+    Strng = Strng.replace('̱', '\\_')
+    Strng = Strng.replace('gͫ̄', '\\m++')
+    Strng = Strng.replace('gͫ', '\\m+')
+
+    return Strng
+
 def FixRomanOutput(Strng,Target):
 
     # Input:Devanagari & Output:ISO
@@ -92,6 +132,26 @@ def PostFixRomanOutput(Strng,Source,Target):
     if Target == "WarangCiti":
         Strng = FixWarangCiti(Strng)
 
+    if Target == "IAST":
+        Strng = VedicSvarasDiacrtics(Strng)
+        Strng = Strng.replace("a_i", "aï")
+        Strng = Strng.replace("a_u", "aü")
+
+    if Target == "ISO":
+        Strng = Strng.replace("\\’", "\\\'")
+        Strng = VedicSvarasDiacrtics(Strng)
+        Strng = Strng.replace("a_i", "a:i")
+        Strng = Strng.replace("a_u", "a:u")
+
+    if Target == "Titus":
+        Strng = VedicSvarasDiacrtics(Strng)
+
+    if Target == "Velthuis" or Target == "Itrans":
+        Strng = Strng.replace("\\.a", "\\\'")
+
+    if Target == "Aksharaa":
+        Strng = Strng.replace("\\a;", "\\\'")
+
     return Strng
 
 # Fixing the Indic Ouput for the standard corrections
@@ -115,11 +175,26 @@ def FixKharoshthi(Strng, reverse=False):
 
     return Strng
 
+def FixSiddham(Strng, reverse=False):
+    if not reverse:
+        pass
+    else:
+        ## reverse the alternate forms
+        Strng = Strng.replace('𑗜', '𑖲') # VS U
+        Strng = Strng.replace('𑗝', '𑖳') # VS UU
+        Strng = Strng.replace('𑖄', '𑗛') # VS U
+        Strng = Strng.replace('𑗘', '𑖂') # VS I1
+        Strng = Strng.replace('𑗙', '𑖂') # VS I2
+        Strng = Strng.replace('𑗚', '𑖃') # VS II
+
+    return Strng
+
 def FixBhaiksuki(Strng, reverse=False):
     if not reverse:
         Strng = Strng.replace(' ', '𑱃')
     else:
         Strng = Strng.replace('𑱃', ' ')
+
     return Strng
 
 def FixKhudawadi(Strng, reverse=False):
@@ -142,14 +217,26 @@ def FixTamil(Strng,reverse=False):
     ava = Tamil.SignMap[0]
     avaA = '\u0028\u0B86\u0029'
 
+    VedicSign = ['॑', '॒', '᳚']
+    TamilDiacritic = ['ʼ', 'ˮ', '꞉']
+
     if not reverse:
         Strng = Strng.replace(ava+ava,avaA)
         Strng = PostProcess.RetainDandasIndic(Strng, 'Tamil', True)
         Strng = PostProcess.RetainIndicNumerals(Strng, 'Tamil', True)
+
+        for x in TamilDiacritic:
+            for y in VedicSign:
+                Strng = Strng.replace(x + y, y + x)
+
     else:
         Strng = Strng.replace(avaA,ava+ava)
 
         Strng = Strng.replace('𑌃', '꞉')
+
+        for x in TamilDiacritic:
+            for y in VedicSign:
+                Strng = Strng.replace(y + x, x + y)
 
     return Strng
 
@@ -1347,23 +1434,32 @@ def FixChakma(Strng,reverse=False):
         Strng = Strng.replace("\U00011127","")
         Strng = Strng.replace("\u02BE","\U00011127")
     else:
+        Strng = PostProcess.ChakmaGemination(Strng, reverse = True)
+
         Strng = Strng.replace("\U00011127","\u02BE")
         Strng = re.sub("("+listC+")"+"(?!"+listV+'|\u02BE'+")",r'\1''\U00011127',Strng)
         Strng = Strng.replace("\u02BE","")
 
-    yrlvn = "("+"|".join(Chakma.ConsonantMap[19:20]+Chakma.ConsonantMap[25:29])+")"
+    yrlvn = "("+"|".join(Chakma.ConsonantMap[19:20]+Chakma.ConsonantMap[26:29])+")"
 
     if not reverse:
         # Subjoined consonants
         # Usual convention
         Strng = re.sub("\U00011134"+"(?="+yrlvn+")","\U00011133",Strng)
+
+        Strng = PostProcess.ChakmaGemination(Strng)
     else:
         # Reverse above
         Strng = Strng.replace("\U00011133","\U00011134")
 
-    ###  O/Sub-va lookign similar; check
+        # Reverse independetnet vowels to a-based vowels
+        vowelDepA = ["𑄃𑄨", "𑄃𑄪", "𑄃𑄬"]
+        vowelIndep = ["\U00011104", "\U00011105" , "\U00011106"]
 
-    ###  Unique Independent vowels etc
+        for x, y in zip(vowelDepA, vowelIndep):
+            Strng = Strng.replace(y, x)
+
+    ###  O/Sub-va lookign similar; check
 
     return Strng
 
@@ -1770,9 +1866,14 @@ def FixGrantha(Strng, reverse=False):
     if not reverse:
         Strng = Strng.replace('॑', '᳴')
         Strng = Strng.replace('᳚', '॑')
+        Strng = Strng.replace('ꣳ', '𑍞')
+        Strng = Strng.replace('ꣴ', '𑍟')
     else:
         Strng = Strng.replace('॑', '᳚')
         Strng = Strng.replace('᳴', '॑')
+        Strng = Strng.replace('𑍞', 'ꣳ')
+        Strng = Strng.replace('𑍟', 'ꣴ')
+
 
     return Strng
 
