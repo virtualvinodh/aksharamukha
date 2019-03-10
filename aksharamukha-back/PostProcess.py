@@ -1128,9 +1128,12 @@ def capitalizeSentence(Strng):
              "(?<!\.\w)([\.?!]\s*)\w|"+     # after a ?/!/. and a space,
              "\w(?:\.\w)|"+
              "(\n)\w|"+               # start/middle of acronym
+             "(\n(\"|\“|\'|\‘))\w|"+
              "(?<=\w\.)\w",               # end of acronym
              lambda x: x.group().upper(),
              Strng)
+
+    Strng = re.sub(r"(@)(.)", lambda x: x.groups()[1].upper(), Strng)
 
     return Strng
 

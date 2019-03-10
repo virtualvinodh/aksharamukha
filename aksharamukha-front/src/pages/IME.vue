@@ -19,12 +19,7 @@
   v-model="inputScript"
   @input="compoundsGen"
   toggle-color="dark"
-  :options="[
-    {label: 'Aksharaa', value: 'Aksharaa'},
-    {label: 'HK', value: 'HK'},
-    {label: 'Itrans', value: 'Itrans'},
-    {label: 'Velthuis', value: 'Velthuis'}
-  ]"
+  :options="inputOptions"
   :dense="$q.platform.is.mobile"
 />
 </div>
@@ -243,6 +238,20 @@ export default {
   data () {
     return {
       textInput: '',
+      inputOptions: '',
+      inputOptionsN: [
+        {label: 'Aksharaa', value: 'Aksharaa'},
+        {label: 'HK', value: 'HK'},
+        {label: 'Itrans', value: 'Itrans'},
+        {label: 'Velthuis', value: 'Velthuis'}
+      ],
+      inputOptionsD: [
+        {label: 'Aksharaa', value: 'Aksharaa'},
+        {label: 'HK', value: 'HK'},
+        {label: 'Itrans', value: 'Itrans'},
+        {label: 'Velthuis', value: 'Velthuis'},
+        {label: 'Devanagari', value: 'Devanagari'}
+      ],
       screenshot: false,
       symbolsIndic: ['a\\\'', 'a\\"', 'a\\_', '\\m+', '\\m++', '\'', 'oM', '.', '..'],
       symbols: ['\'', 'oM', '.', '..'],
@@ -299,7 +308,14 @@ export default {
     }
   },
   mounted () {
+    if (['Grantha', 'Newa', 'Ranjana', 'Tirhuta', 'Siddham'].includes(this.outputScript)) {
+      this.inputOptions = this.inputOptionsD
+    } else {
+      this.inputOptions = this.inputOptionsN
+    }
+
     this.compoundsGen()
+    console.log(localStorage.postOptionsIMEIndex)
     if (localStorage.postOptionsIMEIndex) {
       this.postOptionsIME = JSON.parse(localStorage.postOptionsIMEIndex)
 
@@ -316,7 +332,7 @@ export default {
     }
   },
   updated: function () {
-    console.log('The dom is updated ' + this.screenshot)
+    // console.log('The dom is updated ' + this.screenshot)
     if (this.screenshot) {
       this.screenshotted()
     }
@@ -333,6 +349,18 @@ export default {
     '$route' (to, from) {
       this.outputScript = to.params.script
       this.textInput = ''
+      if (['Grantha', 'Newa', 'Ranjana', 'Tirhuta', 'Siddham'].includes(this.outputScript)) {
+        this.inputOptions = this.inputOptionsD
+      } else {
+        this.inputOptions = this.inputOptionsN
+      }
+      if (typeof this.postOptionsIME[this.outputScript] === 'undefined') {
+        this.postOptionsIME[this.outputScript] = []
+      }
+      // console.log(this.postOptionsIME)
+      this.$set(this, 'postOptions', this.postOptionsIME[this.outputScript])
+      // console.log(this.postOptions)
+
       this.compoundsGen()
     },
     sourcePreserve (newV, oldV) {

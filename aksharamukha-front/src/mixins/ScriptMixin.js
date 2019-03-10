@@ -490,8 +490,8 @@ export const ScriptMixin = {
           omnicode: '',
           wikicode: 'Velvikudi_inscription',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'e-Pandya',
+            'url': 'https://github.com/virtualvinodh/aksharamukha/blob/master/aksharamukha-front/src/statics/e-Pandya.ttf'
           }
         },
         {
@@ -502,8 +502,8 @@ export const ScriptMixin = {
           omnicode: 'gujarati',
           wikicode: 'Gujarati_alphabet',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Noto Serif Gujarati',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifGujarati/NotoSerifGujarati-Regular.otf'
           }
         },
         {
@@ -514,8 +514,8 @@ export const ScriptMixin = {
           omnicode: 'hanunoo',
           wikicode: 'Hanunó%27o_alphabet',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Noto Sans Hanunoo',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansHanunoo/NotoSansHanunoo-Regular.otf'
           }
         },
         {
@@ -526,8 +526,8 @@ export const ScriptMixin = {
           omnicode: 'javanese',
           wikicode: 'Javanese_script',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Noto Sans Javanese',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansJavanese/NotoSansJavanese-Regular.otf'
           }
         },
         {
@@ -538,8 +538,8 @@ export const ScriptMixin = {
           omnicode: 'kaithi',
           wikicode: 'Kaithi',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Noto Sans Kaithi',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansKaithi/NotoSansKaithi-Regular.otf'
           }
         },
         {
@@ -574,8 +574,8 @@ export const ScriptMixin = {
           omnicode: 'khmer',
           wikicode: 'Khmer_alphabet',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Noto Sans Khmer',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifKhmer/NotoSerifKhmer-Regular.otf'
           }
         },
         {
@@ -586,8 +586,8 @@ export const ScriptMixin = {
           omnicode: 'khojki',
           wikicode: 'Khojki_script',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Noto Sans Khojki',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansKhojki/NotoSansKhojki-Regular.otf'
           }
         },
         {
@@ -598,8 +598,8 @@ export const ScriptMixin = {
           omnicode: 'sindhi',
           wikicode: 'Khudabadi_script',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Nodo Sans Khudawadi',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansKhudawadi/NotoSansKhudawadi-Regular.otf'
           }
         },
         {
@@ -620,8 +620,8 @@ export const ScriptMixin = {
           sscode: '',
           ssdesc: '',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Lao Pali (Alpha)',
+            'url': 'https://github.com/virtualvinodh/aksharamukha/blob/master/aksharamukha-front/src/statics/LaoPaliAlpha-Extralight.otf'
           },
           miscdesc: 'Lao (Pali) is the extended version of the Lao script to faithfully represent Pali and Sanskrit. Lao lacks several characters that are required to accurately express the phonology of those languages (unlike its neighbhouring scripts like Thai/Khmer). Therefore, Modern Lao cannot faithfully represent Pali words, and by extension, cannot transcript religious texts faithfully. In the 1930s, an additional set of characters were proposed to support Pali/Sanskrit by filling in the missing gaps. This also allows an etymological orthography for Lao (similar to Thai. The current Lao orthography is phonemic). But the addition met with little widespread support and finally by 1975, these additional characters were mostly out of use. But there is a revived interest in the characters. '
         },
@@ -633,8 +633,8 @@ export const ScriptMixin = {
           omnicode: 'lepcha',
           wikicode: 'Lepcha_script',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Noto Sans Lepcha',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansLepcha-Regular.ttf'
           }
         },
         {
@@ -645,8 +645,8 @@ export const ScriptMixin = {
           omnicode: 'limbu',
           wikicode: 'Limbu_alphabet',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Noto Sans Limbu',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansLimbu-Regular.ttf'
           }
         },
         {
@@ -657,8 +657,8 @@ export const ScriptMixin = {
           omnicode: 'malayalam',
           wikicode: 'Malayalam_script',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Noto Sans Malayalam',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansMalayalam/NotoSansMalayalam-Regular.otf'
           }
         },
         {
@@ -669,8 +669,8 @@ export const ScriptMixin = {
           omnicode: '',
           wikicode: 'Mahajani',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Noto Sans Mahajani',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansMahajani/NotoSansMahajani-Regular.otf'
           }
         },
         {
@@ -679,7 +679,11 @@ export const ScriptMixin = {
           sscode: 'Mtei',
           ssdesc: 'The Meetei Mayek script is used for writing the Meetei (also called Manipuri) language spoken by about 1,400,000 people in India, primarily the state of Manipur, Bangladesh, and Myanmar. The language has been largely written in the Bengali script since the 18th century, but Meetei Mayek writing has experienced a resurgence in the last hundred years. The origins of the script are controversial, most of the early documents having been destroyed in the 18th century. Some sources claim it has been used for almost 4,000 years, and others suggest it derived from the Bengali script as recently as the 17th century.',
           omnicode: 'manipuri',
-          wikicode: 'Meitei_script'
+          wikicode: 'Meitei_script',
+          font: {
+            'name': 'Noto Sans Meetei Mayek',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansMeeteiMayek-Regular.ttf'
+          }
         },
         {
           label: 'Modi',
@@ -689,8 +693,8 @@ export const ScriptMixin = {
           omnicode: 'modi',
           wikicode: 'Modi_script',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Modi',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansModi/NotoSansModi-Regular.otf'
           }
         },
         {
@@ -701,8 +705,8 @@ export const ScriptMixin = {
           omnicode: '',
           wikicode: 'Multani_alphabet',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Multani',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansMultani/NotoSansMultani-Regular.otf'
           }
         },
         {
@@ -725,8 +729,8 @@ export const ScriptMixin = {
           omnicode: 'opcuneiform',
           wikicode: 'Old_Persian_cuneiform',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Noto Sans Old Persian',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansOldPersian/NotoSansOldPersian-Regular.otf'
           }
         },
         {
@@ -785,8 +789,8 @@ export const ScriptMixin = {
           omnicode: 'redjang',
           wikicode: 'Rejang_script',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Noto Sans Rejang',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansRejang/NotoSansRejang-Regular.otf'
           }
         },
         {
@@ -797,8 +801,8 @@ export const ScriptMixin = {
           omnicode: 'santali',
           wikicode: 'Ol_Chiki_script',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Noto Sans Old Chiki',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansOlChiki/NotoSansOlChiki-Regular.otf'
           }
         },
         {
@@ -809,8 +813,8 @@ export const ScriptMixin = {
           omnicode: 'saurashtra',
           wikicode: 'Saurashtra_alphabet',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Noto Sans Saurashtra',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSaurashtra/NotoSansSaurashtra-Regular.otf'
           }
         },
         {
@@ -821,8 +825,8 @@ export const ScriptMixin = {
           omnicode: 'siddham',
           wikicode: 'Siddhaṃ_script',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Noto Sans Siddham',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSiddham/NotoSansSiddham-Regular.otf'
           }
         },
         {
@@ -833,8 +837,8 @@ export const ScriptMixin = {
           omnicode: 'sharda',
           wikicode: 'Sharada_script',
           font: {
-            'name': 'Noto Sans Siddham',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSiddham/NotoSansSiddham-Regular.otf'
+            'name': 'Noto Sans Sharada',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSharada/NotoSansSharada-Regular.otf'
           }
         },
         // {
@@ -861,8 +865,8 @@ export const ScriptMixin = {
           omnicode: 'sorangsompeng',
           wikicode: 'Sorang_Sompeng_alphabet',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Noto Sans SoraSompeng',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSoraSompeng/NotoSansSoraSompeng-Regular.otf'
           }
         },
         {
@@ -873,8 +877,8 @@ export const ScriptMixin = {
           omnicode: 'sundanese',
           wikicode: 'Sundanese_script',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Noto Sans Sundanese',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansSundanese-Regular.ttf'
           }
         },
         {
@@ -885,8 +889,8 @@ export const ScriptMixin = {
           omnicode: 'syloti',
           wikicode: 'Sylheti_Nagari',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Noto Sans SylotiNagri',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSylotiNagri/NotoSansSylotiNagri-Regular.otf'
           }
         },
         {
@@ -897,8 +901,8 @@ export const ScriptMixin = {
           omnicode: 'tagbanwa',
           wikicode: 'Tagbanwa',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Noto Sans Tagbanwa',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansTagbanwa-Regular.ttf'
           }
         },
         {
@@ -909,8 +913,8 @@ export const ScriptMixin = {
           omnicode: 'tagalog',
           wikicode: 'Baybayin',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Noto Sans Tagalog',
+            'url': 'Noto Sans Tagalog'
           }
         },
         {
@@ -922,8 +926,8 @@ export const ScriptMixin = {
           omnicode: 'lanna',
           wikicode: 'Tai_Tham_script',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Lamphun',
+            'url': 'http://wrdingham.co.uk/lanna/renderer_test.htm#fonts'
           }
         },
         {
@@ -934,8 +938,8 @@ export const ScriptMixin = {
           omnicode: 'takri',
           wikicode: 'Takri_alphabet',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Noto Sans Takri',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansTakri/NotoSansTakri-Regular.otf'
           }
         },
         {
@@ -984,8 +988,8 @@ export const ScriptMixin = {
           omnicode: 'telugu',
           wikicode: 'Telugu_script',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Lohit Telugu',
+            'url': 'https://pagure.io/lohit/tree/master'
           }
         },
         // Font not working
@@ -1050,8 +1054,8 @@ export const ScriptMixin = {
           wikidesc: 'The Urdu alphabet is the right-to-left alphabet used for the Urdu language. It is a modification of the Persian alphabet known as Perso-Arabic, which is itself a derivative of the Arabic alphabet. The Urdu alphabet has up to 58 letters. With 39 basic letters and no distinct letter cases, the Urdu alphabet is typically written in the calligraphic Nastaʿlīq script, whereas Arabic is more commonly in the Naskh style.',
           omnicode: 'urdu',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Noto Sans Nastaliq Urdu',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoNastaliqUrdu/NotoNastaliqUrdu-Regular.otf'
           }
         },
         {
@@ -1061,8 +1065,8 @@ export const ScriptMixin = {
           ssdesc: '',
           wikicode: 'Vatteluttu_alphabet',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'e-Vatteluttu',
+            'url': 'https://github.com/virtualvinodh/aksharamukha/blob/master/aksharamukha-front/src/statics/e-VatteluttuOT.ttf'
           },
           wikidesc: 'The Vaṭṭeḻuttu, also spelled Vattezhutthu (literally "Round Script") was an abugida writing system in southern India and Sri Lanka in the latter half of the 1st millennium AD. Vatteluttu was the common script for writing various forms of Tamil language in Pandya-Chera region till the 9th century and after that time it came to be replaced by the present-day Tamil script everywhere except in Kerala'
         },
@@ -1074,8 +1078,8 @@ export const ScriptMixin = {
           omnicode: 'varangkshiti',
           wikicode: 'Warang_Citi',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Noto Sans WarangCiti',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansWarangCiti/NotoSansWarangCiti-Regular.otf'
           }
         },
         {
@@ -1093,19 +1097,19 @@ export const ScriptMixin = {
       ],
       scriptsLatin: [
         {
-          label: 'Harvard-Kyoto',
+          label: 'Roman (Harvard-Kyoto)',
           value: 'HK'
         },
         {
-          label: 'ITRANS',
+          label: 'Roman (ITRANS)',
           value: 'Itrans'
         },
         {
-          label: 'IAST',
+          label: 'Roman (IAST)',
           value: 'IAST'
         },
         {
-          label: 'IPA',
+          label: 'Roman (IPA)',
           value: 'IPA',
           sscode: '',
           ssdesc: '',
@@ -1119,15 +1123,15 @@ export const ScriptMixin = {
           wikidesc: 'The International Phonetic Alphabet (IPA) is an alphabetic system of phonetic notation based primarily on the Latin alphabet. It was devised by the International Phonetic Association in the late 19th century as a standardized representation of the sounds of spoken language. The IPA is used by lexicographers, foreign language students and teachers, linguists, speech-language pathologists, singers, actors, constructed language creators and translators. The IPA is designed to represent only those qualities of speech that are part of oral language: phones, phonemes, intonation and the separation of words and syllables.'
         },
         {
-          label: 'ISO 15919',
+          label: 'Roman (ISO 15919)',
           value: 'ISO'
         },
         {
-          label: 'Titus',
+          label: 'Roman (Titus)',
           value: 'Titus'
         },
         {
-          label: 'Velthuis',
+          label: 'Roman (Velthuis)',
           value: 'Velthuis'
         },
         {
@@ -1202,7 +1206,9 @@ export const ScriptMixin = {
       return this.autodetect.slice().concat(this.scripts)
     },
     scripts: function () {
-      return this.scriptsIndic.slice().concat(this.scriptsLatin.slice())
+      var scriptAll = this.scriptsIndic.slice().concat(this.scriptsLatin.slice())
+      scriptAll.sort(this.compareObjects)
+      return scriptAll
     },
     compounds: function () {
       var compounds = []
@@ -1219,6 +1225,14 @@ export const ScriptMixin = {
     }
   },
   methods: {
+    compareObjects: function (a, b) {
+      if (a.label < b.label) {
+        return -1
+      } else if (a.label > b.label) {
+        return 1
+      }
+      return 0
+    },
     getScriptObject: function (name) {
       for (const s of this.scripts) {
         if (s.value === name) {

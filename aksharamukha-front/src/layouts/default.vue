@@ -565,6 +565,10 @@ export default {
   src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansBrahmi/NotoSansBrahmi-Regular.otf')
 }
 @font-face {
+  font-family: 'Noto Sans Ol Chiki';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansOlChiki/NotoSansOlChiki-Regular.otf')
+}
+@font-face {
   font-family: 'Noto Sans Rejang';
   src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansRejang/NotoSansRejang-Regular.otf')
 }
@@ -821,6 +825,9 @@ export default {
 }
 .nepaldevafont {
   font-family: "Nepal2"
+}
+.santali {
+  font-family: "Noto Sans Ol Chiki"
 }
 .ranjana {
   font-family: "RanjanaUnicode"
