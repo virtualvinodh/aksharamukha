@@ -55,6 +55,8 @@
       <div class="notice q-ma-sm" v-show="inputScript === 'Urdu'">Urdu is an abjad. Please read the script <router-link to="/describe/Urdu">notes</router-link> to read about Urdu reading conventions.</div>
       <div class="notice q-ma-sm" v-show="inputScript === 'Grantha' &&
         preOptions.includes('egrantamil')">This does not use the proper Unicode encoding. Please consider converting the text into Grantha Unicode.</div>
+      <div class="notice q-ma-sm" v-show="(outputScript === 'IAST' || outputScript === 'ISO') &&
+        postOptions.includes('capitalizeSentence')">To capitalize a specific word, add @ to the beginning of word. e.g. @<transliterate text="buddha" src="HK" :tgt="inputScript"></transliterate></div>
     </div>
     <div class="q-ma-md print-hide">
       <div class="col">
@@ -113,7 +115,7 @@
             String(convertText).includes('𑌃')    ">This only works with Google Noto Tamil fonts </div>
       <div class="notice q-ma-sm" v-show="inputScript === 'Tamil' && outputScript === 'IPA'">The results displayed have been obtained from <a href="http://anunaadam.appspot.com" target="_blank">Anunaadam</a>. Use the tool for further options.</div>
 
-      <q-toggle color="dark" v-model="sourcePreserve" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-sm print-hide" @input="convert" />
+      <span><q-toggle color="dark" v-model="sourcePreserve" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-sm print-hide" @input="convert" /><q-tooltip>Preserve the source as-is and don't change the text to improve readability</q-tooltip></span>
       <br/>
       <q-option-group
         color="dark"
@@ -164,7 +166,9 @@
 import {QTooltip, QEditor, QRadio, QBtn, QField, QBtnToggle, QToggle, QInput, QSelect, QOptionGroup, QAlert, QSpinnerComment} from 'quasar'
 import sanitizeHtml from 'sanitize-html'
 import html2canvas from 'html2canvas'
+import Transliterate from '../components/Transliterate'
 import Controls from '../components/Controls'
+
 import { ScriptMixin } from '../mixins/ScriptMixin'
 import ClipboardJS from 'clipboard'
 
@@ -189,7 +193,8 @@ export default {
     QSelect,
     QSpinnerComment,
     QOptionGroup,
-    QTooltip
+    QTooltip,
+    Transliterate
   },
   data () {
     return {
