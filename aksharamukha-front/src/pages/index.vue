@@ -15,8 +15,9 @@
         class="col-xs-6 col-md-6 q-ma-sm"
         :options="scriptsInput"
       />
-      <q-btn class="col-xs-4 col-md-4 q-ma-sm" v-show="inputPast !== ''"
+      <q-btn class="col-xs-3 col-md-3 q-ma-sm" v-show="inputPast !== ''"
        @click="updateHist"> {{inputPast}} </q-btn>
+      <q-icon name="history" size="25px" v-show="inputPast !== ''" class="print-hide"/>
       </div>
     <q-input
       v-model.trim="textInput"
@@ -76,8 +77,9 @@
         class="col-xs-6 col-md-6 q-ma-sm print-hide"
         :options="scriptsOutput"
       />
-      <q-btn class="col-xs-4 col-md-4 q-ma-sm print-hide" v-show="outputPast !== ''"
+      <q-btn class="col-xs-3 col-md-3 q-ma-sm print-hide" v-show="outputPast !== ''"
        @click="updateHistOut"> {{outputPast}} </q-btn>
+      <q-icon name="history" size="25px" v-show="outputPast !== ''" class="print-hide"/>
       </div>
     <div
       v-html="sanitize(convertText)"
@@ -140,7 +142,7 @@
       <q-btn class="q-ma-sm btn print-hide" :data-clipboard-text="convertText.replace(/<br\/>/g, '\n')" @click="copy"> <q-icon name="file copy" /><q-tooltip>Copy text</q-tooltip></q-btn>
       <q-btn class="q-ma-sm print-hide" @click="imageConvert">
         <q-icon name="photo camera" /><q-tooltip>Text screenshot</q-tooltip></q-btn>
-      <q-btn class="q-ma-sm print-hide" @click="printDocument"><q-tooltip>Print text</q-tooltip><q-icon name="print" /></q-btn>
+      <q-btn class="q-ma-sm print-hide" @click="printDocument"><q-tooltip class="print-hide">Print text</q-tooltip><q-icon name="print" /></q-btn>
       <q-btn class="q-ma-sm print-hide" @click="fontSize += 20"> <q-icon name="zoom in" /><q-tooltip>Increase size</q-tooltip></q-btn>
       <q-btn class="q-ma-sm print-hide" @click="fontSize -= 20"> <q-icon name="zoom out" /><q-tooltip>Decrease size</q-tooltip></q-btn>
     </div>

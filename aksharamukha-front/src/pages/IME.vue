@@ -3,18 +3,18 @@
   <q-page class="q-pa-md">
 <q-tabs color="tertiary" no-pane-border animated swipeable inverted position="top">
   <!-- Tabs - notice slot="title" -->
-  <q-tab default slot="title" name="tab-1" icon="translate" label="Type"/>
-  <q-tab slot="title" name="tab-2" icon="keyboard" label="Mapping"/>
-  <q-tab slot="title" name="tab-3" icon="settings" label="Settings"/>
-  <q-tab slot="title" name="tab-4" icon="font_download" label="Font" v-if="getScriptObject(outputScript).font.name !== ''"/>
-  <q-tab slot="title" name="tab-5" icon="help" label="Help"/>
-    <h5 class="title"> {{getScriptObject(outputScript).label}} Text Composer : <span :class="getOutputClass(outputScript, postOptions)"> <transliterate text="akSaramukha" src="HK" :tgt="outputScript" sourcePreserve="false">
+  <q-tab default slot="title" name="tab-1" icon="translate" label="Type" class="print-hide"/>
+  <q-tab slot="title" name="tab-2" icon="keyboard" label="Mapping" class="print-hide"/>
+  <q-tab slot="title" name="tab-3" icon="settings" label="Settings" class="print-hide"/>
+  <q-tab slot="title" name="tab-4" icon="font_download" class="print-hide" label="Font" v-if="getScriptObject(outputScript).font.name !== ''"/>
+  <q-tab slot="title" name="tab-5" icon="help" label="Help" class="print-hide"/>
+    <h5 class="title print-hide"> {{getScriptObject(outputScript).label}} Text Composer : <span :class="getOutputClass(outputScript, postOptions)"> <transliterate text="akSaramukha" src="HK" :tgt="outputScript" sourcePreserve="false">
     </transliterate> </span> </h5>
   <!-- Targets -->
   <q-tab-pane name="tab-1">
     <div class="row">
-    <div class="row col-xs-11 col-md-11 col-xl-11 q-ma-md float-div print-hide">
-  <div class="q-ma-md">
+    <div class="row col-xs-11 col-md-11 col-xl-11 q-ma-md float-div">
+  <div class="q-ma-md print-hide">
   <span class="q-ma-sm">Keyboard scheme: </span> <q-btn-toggle
   v-model="inputScript"
   @input="compoundsGen"
@@ -23,8 +23,8 @@
   :dense="$q.platform.is.mobile"
 />
 </div>
-  <q-collapsible icon="functions" label="Insert special characters" :opened="false">
-    <div>
+  <q-collapsible icon="functions" label="Insert special characters" :opened="false" class="print-hide">
+    <div class="print-hide">
 <q-btn v-for="letter in letters[outputScript]" :key="letter" class="q-ma-xs" @click.native="insertChar(letter)"> <span :class="getOutputClass(outputScript, postOptions)"> {{letter}} </span> </q-btn>
     </div>
   </q-collapsible>
@@ -79,7 +79,7 @@
       <q-btn class="q-ma-sm btn print-hide" :data-clipboard-text="convertText.replace(/<br\/>/g, '\n')" @click="copy"> <q-icon name="file copy" /><q-tooltip>Copy text</q-tooltip></q-btn>
       <q-btn class="q-ma-sm print-hide" @click="imageConvert">
         <q-icon name="photo camera" /><q-tooltip>Text screenshot</q-tooltip></q-btn>
-      <q-btn class="q-ma-sm print-hide" @click="printDocument"><q-tooltip>Print text</q-tooltip><q-icon name="print" /></q-btn>
+      <q-btn class="q-ma-sm print-hide" @click="printDocument"><q-tooltip class="print-hide">Print text</q-tooltip><q-icon name="print" /></q-btn>
       <q-btn class="q-ma-sm print-hide" @click="fontSize += 20"> <q-icon name="zoom in" /><q-tooltip>Increase size</q-tooltip></q-btn>
       <q-btn class="q-ma-sm print-hide" @click="fontSize -= 20"> <q-icon name="zoom out" /><q-tooltip>Decrease size</q-tooltip></q-btn>
     <br/> <br/>

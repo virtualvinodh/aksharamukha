@@ -479,6 +479,7 @@ def NasalToAnusvara(Strng,Target):
     for i in range(len(ListN)):
         #print '('+ListN[i]+')'+'('+vir+')'+'('+ListC[i]+')'
         Strng = re.sub(ListCAll + '(?<!' + vir + ')' + '('+ListN[i]+')'+'('+vir+')'+'('+ListC[i]+')',r'\1'+Anu+r'\4',Strng)
+        Strng = re.sub(ListCAll + '(?<!' + vir + ')' + '('+ListN[i]+')'+'('+vir+')'+'('+ListC[i]+')',r'\1'+Anu+r'\4',Strng)
 
     return Strng
 
