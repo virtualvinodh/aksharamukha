@@ -23,6 +23,7 @@
   :dense="$q.platform.is.mobile"
 />
 </div>
+<span class="q-ml-lg"> Use space to trigger conversion <q-toggle class="q-ma-md" v-model="spacetrigger"></q-toggle > </span>
   <q-collapsible icon="functions" label="Insert special characters" :opened="false" class="print-hide">
     <div class="print-hide">
 <q-btn v-for="letter in letters[outputScript]" :key="letter" class="q-ma-xs" @click.native="insertChar(letter)"> <span :class="getOutputClass(outputScript, postOptions)"> {{letter}} </span> </q-btn>
@@ -37,7 +38,7 @@
       class="text-input col-xs-12 col-md-12 q-ma-sm"
       :class="getOutputClass(outputScript, postOptions)"
       :style="{'font-size': fontSize + '%'}"
-      @input="throttled"
+      v-on="!spacetrigger ? {input: throttled} : {keyup: convertEnter}"
       clearable
       color="dark"
       rows="10"
@@ -238,6 +239,7 @@ export default {
   data () {
     return {
       textInput: '',
+      spacetrigger: false,
       inputOptions: '',
       inputOptionsN: [
         {label: 'Aksharaa', value: 'Aksharaa'},
@@ -315,7 +317,6 @@ export default {
     }
 
     this.compoundsGen()
-    console.log(localStorage.postOptionsIMEIndex)
     if (localStorage.postOptionsIMEIndex) {
       this.postOptionsIME = JSON.parse(localStorage.postOptionsIMEIndex)
 
@@ -329,6 +330,9 @@ export default {
     }
     if (localStorage.inputScriptIME) {
       this.inputScript = localStorage.inputScriptIME
+    }
+    if (localStorage.spacetrigger) {
+      this.spacetrigger = JSON.parse(localStorage.spacetrigger)
     }
   },
   updated: function () {
@@ -369,6 +373,9 @@ export default {
     inputScript (newScript, oldScript) {
       localStorage.inputScriptIME = newScript
     },
+    spacetrigger (newVal, oldVar) {
+      localStorage.spacetrigger = newVal
+    },
     postOptions (newOpt, oldOpt) {
       this.postOptionsIME[this.outputScript] = newOpt
       localStorage.postOptionsIMEIndex = JSON.stringify(this.postOptionsIME)
@@ -381,6 +388,11 @@ export default {
     }
   },
   methods: {
+    convertEnter: function (event) {
+      if (event.key === ' ' || event.key === 'Enter') {
+        this.convert()
+      }
+    },
     compoundsGen: async function () {
       this.loading = true
       var data = {
