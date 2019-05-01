@@ -20,8 +20,8 @@ VowelMap =  [
             ]
 
 SouthVowelMap = [
-                '\u0045',
-                '\u004F',
+                '^e',
+                '^o',
                 ]
 
 ModernVowelMap = [
@@ -32,9 +32,9 @@ ModernVowelMap = [
 SinhalaVowelMap = [
                   '\u0061\u002E\u0043'
                   ]
-    
+
 VowelSignMap =  VowelMap[1:]
-               
+
 SouthVowelSignMap = SouthVowelMap[:]
 
 ModernVowelSignMap = ModernVowelMap[:]
@@ -46,7 +46,7 @@ AyogavahaMap = [
                '\u004D',
                '\u0048'
                ]
-    
+
 ViramaMap =  [
              '\u00D7'
              ]
@@ -57,36 +57,36 @@ ConsonantMap =  [
                 '\u0067',
                 '\u0067\u0068',
                 '\u007E\u004E',
-                
+
                 '\u0063\u0068',
                 '\u0043\u0068',
                 '\u006A',
                 '\u006A\u0068',
                 '\u007E\u006E',
-                
+
                 '\u0054',
                 '\u0054\u0068',
                 '\u0044',
                 '\u0044\u0068',
                 '\u004E',
-                
+
                 '\u0074',
                 '\u0074\u0068',
                 '\u0064',
                 '\u0064\u0068',
                 '\u006E',
-                
+
                 '\u0070',
                 '\u0070\u0068',
                 '\u0062',
                 '\u0062\u0068',
                 '\u006D',
-                
+
                 '\u0079',
                 '\u0072',
                 '\u006C',
                 '\u0076',
-                
+
                 '\u0073\u0068',
                 '\u0053\u0068',
                 '\u0073',
@@ -94,10 +94,10 @@ ConsonantMap =  [
                 ]
 
 SouthConsonantMap = [
-                    '\u004C',
-                    '\u005A',
-                    '\u0072\u005E',
-                    '\u006E\u005E'
+                    'L',
+                    'zh',
+                    '\u005E\u0072',
+                    '\u005E\u006E'
                     ]
 
 NuktaConsonantMap =  [
@@ -117,12 +117,12 @@ SinhalaConsonantMap =[
                      '\u006E\u002A\u0044',
                      '\u006E\u002A\u0064',
                      '\u006D\u002A\u0062',
-                      ] 
+                      ]
 
 NuktaMap = [
            '\u0051'
            ]
-    
+
 OmMap = [
         '\u004F\u004D'
         ]
