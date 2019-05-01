@@ -60,6 +60,11 @@ def UseAlternateII(Strng):
 
     return Strng
 
+def GranthaOldau(Strng):
+    Strng = Strng.replace('𑍗', '𑍌')
+
+    return Strng
+
 def ChakmaEnableAllConjuncts(Strng):
     listC = '('+"|".join(sorted(GM.CrunchSymbols(GM.Consonants,"Chakma")+Chakma.VowelMap[:1],key=len,reverse=True))+')'
     Strng = re.sub("\U00011134"+'('+listC+')',"\U00011133"+r'\1',Strng)

@@ -199,6 +199,7 @@ export const ScriptMixin = {
           { label: 'Kannada Numerals', value: 'RetainKannadaNumerals' }
         ],
         'Grantha': [
+          { label: 'Use Grantha old AU vowel sign', value: 'GranthaOldau' },
           { label: 'Prakrit orthography', value: 'GranthaPrakrit' },
           { label: 'Use e-Grantamil encoding', value: 'egrantamil' }
         ],

@@ -46,7 +46,7 @@ VowelSignMap =  [
                 '\U00011347',
                 '\U00011348',
                 '\U0001134B',
-                '\U0001134C',
+                '\U00011357',
                 ]
 
 SouthVowelSignMap = [

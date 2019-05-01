@@ -335,8 +335,13 @@ def normalize(Strng,Source):
 
     Strng = Strng.replace("ฎ", "ฏ")
 
-    ## Replace
+    ## Replace Grantha old au with new au
 
+    Strng = Strng.replace('𑍌', '𑍗')
+
+    ## Replace Tibetan Chandra with Nada to the normal one
+
+    Strng = Strng.replace('\u0F82', '\u0F83')
 
     #Strng = Strng.replace('', "ຣ\uE00A")
 
