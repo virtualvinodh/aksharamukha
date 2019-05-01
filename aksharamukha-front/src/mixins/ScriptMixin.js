@@ -2,8 +2,8 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
-        // baseURL: 'https://aksharamukha.appspot.com/api/',
-        baseURL: 'http://localhost:8085/api',
+        baseURL: 'https://aksharamukha.appspot.com/api/',
+        // baseURL: 'http://localhost:8085/api',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -52,7 +52,7 @@ export const ScriptMixin = {
           { label: 'Transcribe Tamil', value: 'TamilTranscribe' }
         ],
         'Itrans': [
-          { label: 'E/O for long, e/o for short', value: 'swapEe' }
+          { label: 'E/O for long, e/o for short', value: 'swapEeItrans' }
         ],
         'HK': [
           { label: 'E/O for long, e/o for short', value: 'swapEe' }

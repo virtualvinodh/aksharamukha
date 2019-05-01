@@ -25,6 +25,17 @@ def swapEe(Strng):
 
     return Strng
 
+def swapEeItrans(Strng):
+    Strng = Strng.replace('^e', 'X@X@')
+    Strng = Strng.replace('e', '^e')
+    Strng = Strng.replace('X@X@','e')
+
+    Strng = Strng.replace('^o', 'X@X@')
+    Strng = Strng.replace('o', '^o')
+    Strng = Strng.replace('X@X@','o')
+
+    return Strng
+
 def egrantamil(Strng):
     return Strng
 
@@ -196,13 +207,12 @@ def RomanPreFix(Strng,Source):
     return Strng
 
 def PreProcess(Strng,Source,Target):
-
     if Source in GM.RomanDiacritic:
         Strng = Strng.lower()
 
     if Source == 'Itrans':
-        AltForm = ['aa','ii','uu','RRi','RRI','LLi','LLI','N^','JN','chh','shh','x','GY','.n','.m','.h','AUM']
-        NormForm = ['A','I','U','R^i','R^I','L^i','L^I','~N','~n','Ch','Sh','kSh','j~n','M','M','','OM']
+        AltForm = ['aa','ii','uu','RRi','RRI','LLi','LLI','N^','JN','chh','shh','x','GY','.n','.m','.h','AUM', 'E', 'O']
+        NormForm = ['A','I','U','R^i','R^I','L^i','L^I','~N','~n','Ch','Sh','kSh','j~n','M','M','','OM', '^e', '^o']
 
         for x,y in zip(AltForm,NormForm):
             Strng = Strng.replace(x,y)
