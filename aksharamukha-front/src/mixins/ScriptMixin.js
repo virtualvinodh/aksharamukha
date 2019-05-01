@@ -113,6 +113,7 @@ export const ScriptMixin = {
       },
       postOptionsGroup: {
         'Tamil': [
+          { label: 'Old orthography', value: 'oldtamilortho' },
           { label: 'Use Grantha Visarga', value: 'TamilGranthaVisarga' },
           { label: 'Subscript numerals', value: 'TamilSubScript' },
           { label: 'Dandas', value: 'RetainTamilDanda' },
@@ -1307,6 +1308,8 @@ export const ScriptMixin = {
         return 'ranjanalantsa'
       } else if (postOptions.includes('ranjanawartu') && tgt === 'Ranjana') {
         return 'ranjanawartu'
+      } else if (postOptions.includes('oldtamilortho') && tgt === 'Tamil') {
+        return 'tamilold'
       } else {
         return tgt.toLowerCase()
       }

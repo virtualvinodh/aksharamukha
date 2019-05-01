@@ -305,6 +305,8 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css?family=Mukta+Malar&subset=latin-ext,tamil');
+
 .footer-img {
   height: 20px;
 }
@@ -606,6 +608,10 @@ export default {
   font-size: 30px;
   margin-top: 25px;
   margin-left: 5px;
+}
+.tamilold {
+  font-family: "Mukta Malar Regular";
+  font-feature-settings: "ss04", "kern";
 }
 .tamil {
   font-family: "Noto Sans Tamil"
