@@ -12,7 +12,7 @@
         v-model="script1"
         @input="compoundsGen"
         class="q-ma-sm col-md-3"
-        :options="scriptsOutput"
+        :options="scriptsIndic"
       />
 <span class="q-ml-md q-mt-md"> Guide: </span>
        <q-select
@@ -50,7 +50,7 @@
       <!-- <q-toggle color="dark" v-model="conjunctsShow" label="Include conjuncts" class="q-ml-sm q-mb-sm q-mt-sm"/> -->
 
 </div>
-<div class="q-body-1">The below may be empty, if the script does not have a way to denote conjuncts, such as the lack of Virama and/or final consonants.</div>
+<div class="q-body-1 q-mt-lg">Select a script to view all possible conjuncts associated with the script. The below may be empty, if the script does not have a way to denote conjuncts, such as the lack of Virama and/or final consonants.</div>
       <h5>Final Consonants <q-spinner-comment color="dark" :size="30" v-show="loading"/> </h5>
       <span v-for="(conjunct, index) in conjuncts1S1" :key="conjunct+index + 'a'">
          <learncard :script1="script1" :text1="conjunct" :script2="script2" :text2="conjuncts1S2[index]"> </learncard>
@@ -83,7 +83,6 @@
 </style>
 
 <script>
-import Controls2 from '../components/Controls2'
 import Learncard from '../components/Learncard'
 import Transliterate from '../components/Transliterate'
 import {ScriptMixin} from '../mixins/ScriptMixin'
@@ -96,7 +95,6 @@ export default {
   name: 'PageIndex',
   mixins: [ScriptMixin],
   components: {
-    Controls2,
     QPageSticky,
     Transliterate,
     Learncard,
@@ -124,7 +122,7 @@ export default {
       postOptionCon: ['SinhalaConjuncts', 'ChakmaEnableAllConjuncts'],
       vowel: 'a',
       text: '',
-      script1: 'Telugu',
+      script1: '',
       script2: 'IAST',
       conjuncts5: 'rtsny'.split(',').map(x => x.trim()),
       conjuncts4: 'ktry, ktvy, kṣṇy, kṣmy, kstr, gdvy, gdhry, ṅkty, ṅktr, ṅktv, ṅkṣṇ, ṅkṣm, ṅkṣy, ṅkṣv, ṅgdhy, ṅgdhv, ṅghry, tkṣm, tkṣv, ttry, tstr, tsthy, tspr, tsphy, ddvy, nttv, ntry, ntvy, ntst, ntsth, ntsn, ntsp, ntsy, ntsr, ntsv, nddhy, nddhv, ndry, ndvy, ndhry, nstr, nsphy, ptry, psny, rkṣṇ, rkṣy, rksv, rṅgy, rjmy, rttr, rtny, rtry, rtvy, rtsn, rtsy, rddhy, rdry, rdvy, rdhny, rśvy, rṣṭy, rṣṇy, lgvy, ṣṭry, stry, sthny'.split(',').map(x => x.trim()),
@@ -142,7 +140,7 @@ export default {
       conjuncts1S1: [],
       conjuncts1S2: [],
       vowelOptions: [],
-      loading: 'true'
+      loading: false
     }
   },
   watch: {
@@ -151,13 +149,13 @@ export default {
     }
   },
   mounted: async function () {
-    this.script1 = this.scriptRandom().value
+    // this.script1 = this.scriptRandom().value
 
     var vowelsIAST = ['a', 'ā', 'i', 'ī', 'u', 'ū', 'ṛ', 'ĕ', 'e', 'ai', 'ŏ', 'o', 'au']
     vowelsIAST.forEach(function (vowel) {
       this.vowelOptions.push({label: vowel, value: vowel})
     }.bind(this))
-    this.compoundsGen()
+    // this.compoundsGen()
   },
   methods: {
     compoundsGen: async function () {

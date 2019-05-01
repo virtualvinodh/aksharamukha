@@ -2,7 +2,7 @@
   <q-page>
     <q-slide-transition>
       <div class="print-hide" v-show="minimize">
-        <controls2 v-model="options" :extra="false"> </controls2>
+        <controls-io v-model="options" :extra="false"> </controls-io>
         <div class="row">
           <q-field
             icon="web asset"
@@ -21,14 +21,17 @@
   </q-page>
 </template>
 
-<style>
+<style scoped>
 .url-bar {
+}
+.rajan {
+  font-family: Ariel;
 }
 </style>
 
 <script>
 import Transliterate from '../components/Transliterate'
-import Controls2 from '../components/Controls2'
+import ControlsIo from '../components/ControlsIo'
 import {QPageSticky, QUploader, QField, QInput, QSlideTransition} from 'quasar'
 import {ScriptMixin} from '../mixins/ScriptMixin'
 
@@ -36,7 +39,7 @@ export default {
   props: ['name'],
   mixins: [ScriptMixin],
   components: {
-    Controls2,
+    ControlsIo,
     QPageSticky,
     Transliterate,
     QUploader,

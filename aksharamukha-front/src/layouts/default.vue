@@ -55,11 +55,11 @@
           <q-item-side icon="translate" />
           <q-item-main label="Converter"/>
         </q-item>
-        <q-item to="/website">
+        <q-item to="/website/">
           <q-item-side icon="web" />
           <q-item-main label="Convert Websites"/>
         </q-item>
-        <q-item to="/upload">
+        <q-item to="/upload/">
           <q-item-side icon="cloud upload" />
           <q-item-main label="Convert Files"/>
         </q-item>
@@ -358,15 +358,15 @@ export default {
 }
 @font-face {
   font-family: 'Noto Sans Avestan';
-  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansAvestan-Regular.ttf')
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansAvestan/NotoSansAvestan-Regular.otf')
 }
 @font-face {
   font-family: 'Noto Sans Buginese';
-  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansBuginese-Regular.ttf')
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansBuginese/NotoSansBuginese-Regular.otf')
 }
 @font-face {
   font-family: 'Noto Sans Tagalog';
-  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansTagalog-Regular.ttf')
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansTagalog/NotoSansTagalog-Regular.otf')
 }
 @font-face {
   font-family: 'Noto Sans Malayalam';
@@ -374,19 +374,19 @@ export default {
 }
 @font-face {
   font-family: 'Noto Sans Tagbanwa';
-  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansTagbanwa-Regular.ttf')
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansTagbanwa/NotoSansTagbanwa-Regular.otf')
 }
 @font-face {
   font-family: 'Noto Sans Sundanese';
-  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansSundanese-Regular.ttf')
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSundanese/NotoSansSundanese-Regular.otf')
 }
 @font-face {
   font-family: 'Noto Sans Cham';
-  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansCham-Regular.ttf')
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansCham/NotoSansCham-Regular.otf')
 }
 @font-face {
   font-family: 'Noto Sans Chakma';
-  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansChakma-Regular.ttf')
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansChakma/NotoSansChakma-Regular.otf')
 }
 @font-face {
   font-family: 'Noto Sans Telugu';
@@ -394,19 +394,19 @@ export default {
 }
 @font-face {
   font-family: 'Noto Sans Batak';
-  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansBatak-Regular.ttf')
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansBatak/NotoSansBatak-Regular.otf')
 }
 @font-face {
   font-family: 'Noto Sans Lepcha';
-  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansLepcha-Regular.ttf')
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansLepcha/NotoSansLepcha-Regular.otf')
 }
 @font-face {
   font-family: 'Noto Sans Limbu';
-  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansLimbu-Regular.ttf')
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansLimbu/NotoSansLimbu-Regular.otf')
 }
 @font-face {
   font-family: 'Noto Sans Meetei Mayek';
-  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansMeeteiMayek-Regular.ttf')
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansMeeteiMayek/NotoSansMeeteiMayek-Regular.otf')
 }
 @font-face {
   font-family: 'Noto Sans Nastaliq Urdu';

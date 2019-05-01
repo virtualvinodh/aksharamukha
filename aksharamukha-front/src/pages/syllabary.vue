@@ -14,7 +14,7 @@
         v-model="script1"
         @input="compoundsGen"
         class="q-ma-sm col-md-3"
-        :options="scriptsOutput"
+        :options="scriptsIndic"
       />
 <span class="q-ml-md q-mt-md"> Guide: </span>
        <q-select
@@ -28,10 +28,11 @@
         class="q-ma-sm col-md-3"
         :options="scriptsOutput"
       />
-
       <!-- <q-toggle color="dark" v-model="conjunctsShow" label="Include conjuncts" class="q-ml-sm q-mb-sm q-mt-sm"/> -->
 
 </div>
+      <div class="q-mt-lg">Select a script to view its syllabary</div>
+
       <h5> Vowels <q-spinner-comment color="dark" :size="30" v-show="loading"/> </h5>
       <span v-for="(vowel, index) in vowels1" :key="vowel+index+'k'">
          <learncard :script1="script1" :text1="vowel" :script2="script2" :text2="vowels2[index]"> </learncard>
@@ -54,7 +55,6 @@
 </style>
 
 <script>
-import Controls2 from '../components/Controls2'
 import Learncard from '../components/Learncard'
 import Transliterate from '../components/Transliterate'
 import {ScriptMixin} from '../mixins/ScriptMixin'
@@ -64,7 +64,6 @@ export default {
   name: 'PageIndex',
   mixins: [ScriptMixin],
   components: {
-    Controls2,
     QPageSticky,
     Transliterate,
     Learncard,
@@ -75,7 +74,7 @@ export default {
     return {
       options: {script: 'Devanagari', sourcePreserve: false},
       text: '',
-      script1: 'Telugu',
+      script1: '',
       script2: 'IAST',
       vowels1: ['...'],
       vowels2: ['...'],
@@ -83,7 +82,7 @@ export default {
       consonants2: ['...'],
       compounds1: ['...'],
       compounds2: ['...'],
-      loading: true
+      loading: false
     }
   },
   watch: {
@@ -92,8 +91,8 @@ export default {
     }
   },
   mounted: function () {
-    this.script1 = this.scriptRandom().value
-    this.compoundsGen()
+    // this.script1 = this.scriptRandom().value
+    // this.compoundsGen()
     // console.log(this.vowels1)
   },
   methods: {

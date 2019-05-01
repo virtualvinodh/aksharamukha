@@ -130,5 +130,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.vinodh {
+  font-family: calibri;
+}
 </style>

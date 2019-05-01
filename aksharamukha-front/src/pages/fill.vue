@@ -18,7 +18,6 @@
         filter-placeholder="search"
         placeholder="Input Script"
         v-model="script1"
-        @input="reset"
         class="q-ma-sm col-md-3"
         :options="scriptsOutput"
       />
@@ -30,11 +29,10 @@
         filter-placeholder="search"
         placeholder="Input Script"
         v-model="script2"
-        @input="reset"
         class="q-ma-sm col-md-3"
         :options="scriptsOutput"
       />
-
+<q-btn class="q-ml-md q-mt-md" @click="reset"> Play </q-btn>
       <!-- <q-toggle color="dark" v-model="conjunctsShow" label="Include conjuncts" class="q-ml-sm q-mb-sm q-mt-sm"/> -->
 
 </div>
@@ -110,9 +108,9 @@ export default {
   },
   mixins: [ScriptMixin],
   mounted: function () {
-    this.script1 = this.scriptRandom().value
-    this.script2 = this.scriptRandom().value
-    this.compoundsGen()
+    // this.script1 = this.scriptRandom().value
+    // this.script2 = this.scriptRandom().value
+    // this.compoundsGen()
   },
   computed: {
     correct: function () {
@@ -139,7 +137,7 @@ export default {
       randomListOld: [],
       randomOptions: [],
       common: [],
-      loading: true,
+      loading: false,
       resetV: true,
       selections: true
     }
@@ -241,10 +239,12 @@ export default {
       }
     },
     reset: function () {
-      this.results = []
-      this.answers = []
-      this.resetV = !this.resetV
-      this.compoundsGen()
+      if (this.script1 !== '' && this.script2 !== '') {
+        this.results = []
+        this.answers = []
+        this.resetV = !this.resetV
+        this.compoundsGen()
+      }
     },
     resetSoft: function () {
       this.results = []

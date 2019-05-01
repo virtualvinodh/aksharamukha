@@ -69,8 +69,8 @@ export default {
   plugins: [Notify],
   mixins: [ScriptMixin],
   mounted: function () {
-    this.script = this.scriptRandom().value
-    this.compoundsGen()
+    // this.script = this.scriptRandom().value
+    // this.compoundsGen()
   },
   data () {
     return {
@@ -84,7 +84,7 @@ export default {
       resetV: true,
       compoundsF: '',
       compoundsT: '',
-      loading: true
+      loading: false
     }
   },
   methods: {

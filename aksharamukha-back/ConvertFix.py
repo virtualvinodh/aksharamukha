@@ -395,10 +395,13 @@ def FixBurmese(Strng,reverse=False):
             # Introduce subjoining forms: sub-virama + y/r/v/h -> subjoining y/r/v/h
             Strng = re.sub('(?<!်)\u1039'+x,y,Strng)
 
-        Strng = Strng.replace('ျါ','ျာ')
-        Strng = Strng.replace('ြါ','ြာ')
-        Strng = Strng.replace('ျေါ','ျော')
-        Strng = Strng.replace('ြေါ','ြော')
+        Strng = re.sub('ျါ','ျာ', Strng)
+
+        Strng = re.sub('(?<!ဂ)ြါ','ြာ', Strng)
+
+        Strng = re.sub('ျေါ','ျော', Strng)
+
+        Strng = re.sub('(?<!ဂ)ြေါ','ြော', Strng)
 
 
         Strng = Strng.replace("သ္သ", "ဿ")
