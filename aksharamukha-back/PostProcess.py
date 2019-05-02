@@ -27,6 +27,9 @@ def ranjanawartu(Strng):
 def egrantamil(Strng):
     return Strng
 
+def tibetandbumed(Strng):
+    return Strng
+
 def oldtamilortho(Strng):
     return Strng
 

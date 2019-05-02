@@ -503,6 +503,10 @@ export default {
   src: url('../statics/lamphun.otf')
 }
 @font-face {
+  font-family: 'Tibetan Dbu Med';
+  src: url('../statics/Qomolangma-Betsu.ttf')
+}
+@font-face {
   font-family: 'AnnaPurna';
   src: url('../statics/AnnapurnaSIL-TT-Regular.ttf')
 }
@@ -615,6 +619,9 @@ export default {
 }
 .tamil {
   font-family: "Noto Sans Tamil"
+}
+.tibetandbumed {
+  font-family: "Tibetan Dbu Med";
 }
 .buhid {
   font-family: "Noto Sans Buhid"

@@ -25,8 +25,8 @@ SouthVowelMap = [
                 ]
 
 ModernVowelMap = [
-                 '\u0061\u002E\u0063',
-                 '\u0041\u002E\u0063',
+                 'e.c',
+                 'A.c',
                  ]
 
 SinhalaVowelMap = [
@@ -96,7 +96,7 @@ ConsonantMap =  [
 SouthConsonantMap = [
                     'L',
                     'zh',
-                    '\u005E\u0072',
+                    'R',
                     '\u005E\u006E'
                     ]
 

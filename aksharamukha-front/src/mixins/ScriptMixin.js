@@ -178,7 +178,8 @@ export const ScriptMixin = {
         ],
         'Tibetan': [
           { label: 'Use <i>Bindu with nada</i>', value: 'TibetanNada' },
-          { label: 'Use space', value: 'TibetanTsheg' }
+          { label: 'Use space', value: 'TibetanTsheg' },
+          { label: 'Use Dbu Med (Ume) style', value: 'tibetandbumed' }
         ],
         'Sinhala': [
           { label: 'Sanskrit/Pali Orthography', value: 'SinhalaPali' },
@@ -1310,6 +1311,8 @@ export const ScriptMixin = {
         return 'ranjanawartu'
       } else if (postOptions.includes('oldtamilortho') && tgt === 'Tamil') {
         return 'tamilold'
+      } else if (postOptions.includes('tibetandbumed') && tgt === 'Tibetan') {
+        return 'tibetandbumed'
       } else {
         return tgt.toLowerCase()
       }
