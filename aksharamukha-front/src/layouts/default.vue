@@ -61,7 +61,7 @@
         </q-item>
         <q-item to="/upload/">
           <q-item-side icon="cloud upload" />
-          <q-item-main label="Convert Files"/>
+          <q-item-main label="Convert Files (Batch)"/>
         </q-item>
         <q-collapsible icon="keyboard" label="Text Composer (Beta)" >
             <q-item :to="'/input/Devanagari'">
