@@ -81,7 +81,14 @@ def common_letters():
     script_sort = sorted([script1, script2])
     suffix = script_sort[0] + '_' + script_sort[1]
 
-    f = open ('resources/common_letters/common_letters_' + suffix + '.json', 'r', encoding='utf-8')
+    if script_sort[0] <= 'Buhid':
+        index = '1'
+    elif script_sort[0] <= 'Kharoshthi':
+        index = '2'
+    else:
+        index = '3'
+
+    f = open ('resources/common_letters' + index + '/common_letters_' + suffix + '.json', 'r', encoding='utf-8')
     commonletters = json.loads(f.read())
     f.close()
 
@@ -231,6 +238,11 @@ def conjuncts_list():
     print('The post options are :: ')
     print(postoptions)
 
+    if script1[0:3] < 'Tir':
+        index = '1'
+    else:
+        index = '2'
+
     """
     for key, value in conj.items():
         result_script1 = list(unique_everseen([convert('IAST', script1, x, False,[],[]) for x in value]))
@@ -243,16 +255,16 @@ def conjuncts_list():
 
     if script1 == 'Sinhala':
         if 'SinhalaConjuncts' in postoptions:
-            file = 'resources/conjuncts/conjuncts_' + script1 + '_' + vowel + '_all' + '.json'
+            file = 'resources/conjuncts'+ index + '/conjuncts_' + script1 + '_' + vowel + '_all' + '.json'
         else:
-            file = 'resources/conjuncts/conjuncts_' + script1 +  '_' + vowel + '.json'
+            file = 'resources/conjuncts'+ index + '/conjuncts_' + script1 +  '_' + vowel + '.json'
     elif script1 == 'Chakma':
         if 'ChakmaEnableAllConjuncts' in postoptions:
-            file = 'resources/conjuncts/conjuncts_' + script1 + '_' + vowel + '_all' + '.json'
+            file = 'resources/conjuncts'+ index + '/conjuncts_' + script1 + '_' + vowel + '_all' + '.json'
         else:
-            file = 'resources/conjuncts/conjuncts_' + script1 +  '_' + vowel + '.json'
+            file = 'resources/conjuncts'+ index + '/conjuncts_' + script1 +  '_' + vowel + '.json'
     else:
-        file = 'resources/conjuncts/conjuncts_' + script1 +  '_' + vowel + '.json'
+        file = 'resources/conjuncts'+ index + '/conjuncts_' + script1 +  '_' + vowel + '.json'
 
     f = open (file, 'r', encoding='utf-8')
     conjuncts = f.read()

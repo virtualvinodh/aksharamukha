@@ -4,6 +4,7 @@ import importlib
 import json
 import io
 import itertools
+import os
 from aksharamukha import convert, unique_everseen, removeA
 
 # Script Mapping JSON
@@ -211,6 +212,11 @@ def generate_conjuncts():
     results = {}
     postoptions = []
 
+    if script1[0:3] < 'Tir':
+        index = '1'
+    else:
+        index = '2'
+
     for vowel in vowels:
       i = i + 1
 
@@ -225,7 +231,7 @@ def generate_conjuncts():
 
           results[key] = [convert('IAST', script1, x, False,[], postoptions) for x in actual_result]
 
-      f = io.open("resources/conjuncts/conjuncts_" + script1 + "_" + vowel + ".json", mode="w", encoding="utf-8")
+      f = io.open("resources/conjuncts"+ index + "/conjuncts_" + script1 + "_" + vowel + ".json", mode="w", encoding="utf-8")
       f.write(json.dumps(results, ensure_ascii = False, sort_keys=True, indent=4))
       f.close()
 
@@ -239,7 +245,7 @@ def generate_conjuncts():
 
             results[key] = [convert('IAST', script1, x, False,[], postoptions) for x in actual_result]
 
-        f = io.open("resources/conjuncts/conjuncts_" + script1 + "_" + vowel + "_all.json", mode="w", encoding="utf-8")
+        f = io.open("resources/conjuncts"+ index + "/conjuncts_" + script1 + "_" + vowel + "_all.json", mode="w", encoding="utf-8")
         f.write(json.dumps(results, ensure_ascii = False, sort_keys=True, indent=4))
         f.close()
 
@@ -280,20 +286,27 @@ def generate_common_letters():
     script_sort = sorted([script1, script2])
     suffix = script_sort[0] + '_' + script_sort[1]
 
-    f = io.open("resources/common_letters/common_letters_" + suffix + ".json", mode="w", encoding="utf-8")
+    if script_sort[0] <= 'Buhid':
+        index = '1'
+    elif script_sort[0] <= 'Kharoshthi':
+        index = '2'
+    else:
+        index = '3'
+
+    f = io.open("resources/common_letters" + index + "/common_letters_" + suffix + ".json", mode="w", encoding="utf-8")
     f.write(json.dumps(results, ensure_ascii = False, sort_keys=True, indent=4))
     f.close()
 
 if __name__ == "__main__":
   print('Generating Script Mapping as Json')
-  generate_script_map()
+  #generate_script_map()
   print('Generating Script Matrix')
-  generate_script_matrix()
+  #generate_script_matrix()
   print('Generating Syllabary')
-  generate_syllables()
+  #generate_syllables()
   print('Generating Conjuncts')
   generate_conjuncts()
-  print('Generating Common Letters')
+  #print('Generating Common Letters')
   generate_common_letters()
 
 
