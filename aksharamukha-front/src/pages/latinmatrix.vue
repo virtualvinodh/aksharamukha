@@ -165,7 +165,7 @@ export default {
         guide: this.script2
       }
       var dhis = this
-      this.apiCall.post('/scriptmatrix', data)
+      this.apiCall.post('/latinmatrix', data)
         .then(function (response) {
           for (var key in response.data['results']) {
             console.log(key)

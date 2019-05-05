@@ -99,6 +99,27 @@ def common_letters():
 
     return jsonify(results)
 
+@app.route('/api/latinmatrix', methods=['POST', 'GET'])
+def latinmatrix_list():
+    results_final = {}
+    results = {}
+    results_hk = {}
+    guide = request.json['guide']
+    scripts = request.json['scripts']
+    chars = request.json['chars']
+
+    for script in scripts:
+        results[script] = convert('HK', script, json.dumps(chars).replace(' ',''), False,[],[])
+        results_hk[script] = convert(script, 'HK', results[script], False,[],[])
+
+    guide_chars = convert('HK', guide, json.dumps(chars).replace(' ',''), False,[],[])
+
+    results_final['results'] = results
+    results_final['resultsHK'] = results_hk
+    results_final['guideChars'] = guide_chars
+
+    return jsonify(results_final)
+
 
 @app.route('/api/syllabary', methods=['POST', 'GET'])
 def syllabary_list():

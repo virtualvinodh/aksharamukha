@@ -100,7 +100,6 @@ def generate_script_matrix():
       f.write(json.dumps(results_final, ensure_ascii = False, sort_keys=True, indent=4))
       f.close()
 
-
 ## Generate Syllables
 def generate_syllables():
     results = {}
@@ -305,9 +304,10 @@ if __name__ == "__main__":
   print('Generating Syllabary')
   #generate_syllables()
   print('Generating Conjuncts')
-  generate_conjuncts()
-  #print('Generating Common Letters')
-  generate_common_letters()
+  #generate_conjuncts()
+  print('Generating Common Letters')
+  #generate_common_letters()
+
 
 
 
