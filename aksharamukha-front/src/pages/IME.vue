@@ -23,7 +23,7 @@
   :dense="$q.platform.is.mobile"
 />
 </div>
-<span class="q-ml-lg"> Use space to trigger conversion <q-toggle class="q-ma-md" v-model="spacetrigger"></q-toggle > </span>
+<span class="q-ml-lg"> Use space to trigger conversion <q-toggle class="q-ma-md" v-model="spacetrigger" color="dark"></q-toggle > </span>
   <q-collapsible icon="functions" label="Insert special characters" :opened="false" class="print-hide">
     <div class="print-hide">
 <q-btn v-for="letter in letters[outputScript]" :key="letter" class="q-ma-xs" @click.native="insertChar(letter)"> <span :class="getOutputClass(outputScript, postOptions)"> {{letter}} </span> </q-btn>

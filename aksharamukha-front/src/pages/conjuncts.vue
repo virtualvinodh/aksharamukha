@@ -151,7 +151,7 @@ export default {
   mounted: async function () {
     // this.script1 = this.scriptRandom().value
 
-    var vowelsIAST = ['a', 'ā', 'i', 'ī', 'u', 'ū', 'ṛ', 'ĕ', 'e', 'ai', 'ŏ', 'o', 'au']
+    var vowelsIAST = ['a', 'ā', 'i', 'ī', 'u', 'ū', 'ṛ', 'ĕ', 'e', 'ai', 'ŏ', 'o', 'au', 'aṃ', 'aḥ']
     vowelsIAST.forEach(function (vowel) {
       this.vowelOptions.push({label: vowel, value: vowel})
     }.bind(this))
@@ -159,14 +159,17 @@ export default {
   },
   methods: {
     compoundsGen: async function () {
-      var finCons = ['k', 'kh', 'g', 'gh', 'ṅ', 'c', 'ch', 'j', 'jh', 'ñ', 'ṭ', 'ṭh', 'ḍ', 'ḍh', 'ṇ', 't', 'th', 'd', 'dh', 'n', 'p', 'ph', 'b', 'bh', 'm', 'y', 'r', 'l', 'v', 'ś', 'ṣ', 's', 'h', 'l̤']
       this.loading = true
+
+      /*
+      var finCons = ['k', 'kh', 'g', 'gh', 'ṅ', 'c', 'ch', 'j', 'jh', 'ñ', 'ṭ', 'ṭh', 'ḍ', 'ḍh', 'ṇ', 't', 'th', 'd', 'dh', 'n', 'p', 'ph', 'b', 'bh', 'm', 'y', 'r', 'l', 'v', 'ś', 'ṣ', 's', 'h', 'l̤']
 
       finCons.forEach(function (char) {
         this.conjuncts1.push(this.vowel + char)
       }.bind(this))
-      console.log(this.conjuncts6)
+
       var conjAll = {}
+
       for (var i = 1; i <= 5; i++) {
         console.log(i)
         var conjunctsV = 'conjuncts' + i
@@ -180,26 +183,12 @@ export default {
         }
 
         conjAll[conjunctsVS1] = conjunctsa
-
-        /*
-
-        this[conjunctsVS1] = await this.convertAsync('IAST', this.script1, JSON.stringify(conjunctsa), true, [], [])
-        this[conjunctsVS1] = this.replaceCommaJSON(this.script1, this[conjunctsVS1])
-
-        var conjuctsIAST = await this.convertAsync(this.script1, 'IAST', JSON.stringify(this[conjunctsVS1]), true, [], ['removeChillus'])
-        conjunctsa = _.intersection(conjuctsIAST, conjunctsa)
-        conjunctsa = _.uniq(conjunctsa)
-
-        this[conjunctsVS1] = await this.convertAsync('IAST', this.script1, JSON.stringify(conjunctsa), true, this.postOptionCon, [])
-        this[conjunctsVS1] = this.replaceCommaJSON(this.script1, this[conjunctsVS1])
-
-        this[conjunctsVS2] = await this.convertAsync('IAST', this.script2, JSON.stringify(conjunctsa), true, [], [])
-        this[conjunctsVS2] = this.replaceCommaJSON(this.script2, this[conjunctsVS2])
-
-        */
       }
+
+      */
+
       var data = {
-        conj: conjAll,
+        vowel: this.vowel,
         script1: this.script1,
         script2: this.script2,
         postoptions: this.postOptionCon

@@ -353,6 +353,10 @@ def normalize(Strng,Source):
 
     Strng = Strng.replace('\u0F82', '\u0F83')
 
+    ## Replace Candra A iwht regualr AE
+
+    Strng = Strng.replace('ॲ', 'ऍ')
+
     #Strng = Strng.replace('', "ຣ\uE00A")
 
     return Strng

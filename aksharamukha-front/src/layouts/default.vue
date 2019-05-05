@@ -622,6 +622,7 @@ export default {
 }
 .tibetandbumed {
   font-family: "Tibetan Dbu Med";
+  line-height: 2.3em;
 }
 .buhid {
   font-family: "Noto Sans Buhid"

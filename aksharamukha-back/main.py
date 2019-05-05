@@ -8,35 +8,18 @@ import html
 import itertools
 from collections import Counter
 import unicodedata
+import io
+
+from aksharamukha import convert, unique_everseen, removeA
+
 
 app = Flask(__name__)
 CORS(app)
-
-def unique_everseen(iterable, key=None):
-    "List unique elements, preserving order. Remember all elements ever seen."
-    # unique_everseen('AAAABBBCCDAABBB') --> A B C D
-    # unique_everseen('ABBCcAD', str.lower) --> A B C D
-    seen = set()
-    seen_add = seen.add
-    if key is None:
-        for element in itertools.filterfalse(seen.__contains__, iterable):
-            seen_add(element)
-            yield element
-    else:
-        for element in iterable:
-            k = key(element)
-            if k not in seen:
-                seen_add(k)
-                yield element
 
 @app.route('/demo', methods=['POST', 'GET'])
 def main_site():
     return redirect("http://aksharamukha-api.appspot.com/spa-mat")
     # return "This is a backend for <a href=\"http://aksharamukha.appspot.com\">Aksharamukha</a>."
-
-def removeA(a):
-    if a.count('a') == 1:
-        return a.replace('a', '')
 
 @app.route('/api/autodetect', methods=['POST', 'GET'])
 def auto_detect():
@@ -70,6 +53,8 @@ def auto_detect():
 def common_letters():
     script1 = request.json['script1']
     script2 = request.json['script2']
+
+    """
     letters = request.json['letters']
 
     results = {}
@@ -92,13 +77,25 @@ def common_letters():
 
     results['script1'] = letters_script1_common
     results['script2'] = letters_script2_common
+    """
+    script_sort = sorted([script1, script2])
+    suffix = script_sort[0] + '_' + script_sort[1]
 
+    f = open ('resources/common_letters/common_letters_' + suffix + '.json', 'r', encoding='utf-8')
+    commonletters = json.loads(f.read())
+    f.close()
+
+    results = {}
+
+    results['script1'] = commonletters[script1]
+    results['script2'] = commonletters[script2]
 
     return jsonify(results)
 
 
 @app.route('/api/syllabary', methods=['POST', 'GET'])
 def syllabary_list():
+    """
     results = {}
     vowelsAll = ['a', 'A', 'i', 'I', 'u', 'U', 'R', 'RR', 'lR', 'lRR', 'E', 'e', 'ai', 'O', 'o', 'au', 'aE', 'AE', 'aO', 'aM', 'aH', 'a~']
     script1 = request.json['script1']
@@ -192,24 +189,49 @@ def syllabary_list():
     compoundsScript1 = list(unique_everseen([convert('HK', script1, x, False,[],[pp]) for x in compound]))
     compoundsScript1 = [x for x in compoundsScript1  if x not in consonantsScript1]
     compoundsScript2 = [convert(script1, script2, x, False,[],[]) for x in compoundsScript1]
+    """
 
-    results['vowelsScript1'] = vowelsScript1
-    results['vowelsScript2'] = vowelsScript2
-    results['consonantsScript1'] = consonantsScript1
-    results['consonantsScript2'] = consonantsScript2
-    results['compoundsScript1'] = compoundsScript1
-    results['compoundsScript2'] = compoundsScript2
+
+    script1 = request.json['script1']
+    script2 = request.json['script2']
+
+    f = open ('resources/syllabary/syllabary_' + script1 + '.json', 'r', encoding='utf-8')
+    syllabary = f.read()
+    syllabary = syllabary.replace('،', ',').replace(" ", "")
+    f.close()
+
+    if script2 != 'Velthuis':
+        syllabary_guide = convert(script1, script2, syllabary, False,[],[])
+        syllabary_guide = json.loads(syllabary_guide.replace('،', ','))
+    else:
+        syllabary_guide = convert(script1, script2, syllabary, False,[],[]).replace('""', '"\\"').replace('&"', '&\\"')
+        syllabary_guide = json.loads(syllabary_guide)
+
+    syllabary = json.loads(syllabary)
+
+    results = {}
+
+    results['vowelsScript1'] = syllabary['vowels']
+    results['vowelsScript2'] = syllabary_guide['vowels']
+    results['consonantsScript1'] = syllabary['consonants']
+    results['consonantsScript2'] = syllabary_guide['consonants']
+    results['compoundsScript1'] = syllabary['compounds']
+    results['compoundsScript2'] = syllabary_guide['compounds']
 
     return jsonify(results)
 
 @app.route('/api/conjuncts', methods=['POST', 'GET'])
 def conjuncts_list():
-    results = {}
     script1 = request.json['script1']
     script2 = request.json['script2']
-    conj = request.json['conj']
+    vowel = request.json['vowel']
+
     postoptions = request.json['postoptions']
 
+    print('The post options are :: ')
+    print(postoptions)
+
+    """
     for key, value in conj.items():
         result_script1 = list(unique_everseen([convert('IAST', script1, x, False,[],[]) for x in value]))
         result_iast = [convert(script1, 'IAST', x, False,['removeChillus'],[]) for x in result_script1]
@@ -217,11 +239,57 @@ def conjuncts_list():
 
         results[key] = [convert('IAST', script1, x, False,[], postoptions) for x in actual_result]
         results[key[:-1] + '2'] = [convert('IAST', script2, x, False,[], []) for x in actual_result]
+    """
+
+    if script1 == 'Sinhala':
+        if 'SinhalaConjuncts' in postoptions:
+            file = 'resources/conjuncts/conjuncts_' + script1 + '_' + vowel + '_all' + '.json'
+        else:
+            file = 'resources/conjuncts/conjuncts_' + script1 +  '_' + vowel + '.json'
+    elif script1 == 'Chakma':
+        if 'ChakmaEnableAllConjuncts' in postoptions:
+            file = 'resources/conjuncts/conjuncts_' + script1 + '_' + vowel + '_all' + '.json'
+        else:
+            file = 'resources/conjuncts/conjuncts_' + script1 +  '_' + vowel + '.json'
+    else:
+        file = 'resources/conjuncts/conjuncts_' + script1 +  '_' + vowel + '.json'
+
+    f = open (file, 'r', encoding='utf-8')
+    conjuncts = f.read()
+    conjuncts = conjuncts.replace('،', ',').replace(" ", "")
+    f.close()
+
+    if script2 != 'Velthuis':
+        conjuncts_guide = convert(script1, script2, conjuncts, False,[],[])
+        conjuncts_guide = PostProcess.RetainIndicNumerals(conjuncts_guide, script2, True)
+        conjuncts_guide = json.loads(conjuncts_guide.replace('،', ','))
+    else:
+        conjuncts_guide = convert(script1, script2, conjuncts, False,[],[]).replace('""', '"\\"').replace('&"', '&\\"')
+        conjuncts_guide = json.loads(PostProcess.RetainIndicNumerals(conjuncts_guide, script2, True))
+
+    conjuncts = json.loads(conjuncts)
+
+    results = {}
+
+    results['conjuncts1S1'] = conjuncts['conjuncts1S1']
+    results['conjuncts2S1'] = conjuncts['conjuncts2S1']
+    results['conjuncts3S1'] = conjuncts['conjuncts3S1']
+    results['conjuncts4S1'] = conjuncts['conjuncts4S1']
+    results['conjuncts5S1'] = conjuncts['conjuncts5S1']
+
+    results['conjuncts1S2'] = conjuncts_guide['conjuncts1S1']
+    results['conjuncts2S2'] = conjuncts_guide['conjuncts2S1']
+    results['conjuncts3S2'] = conjuncts_guide['conjuncts3S1']
+    results['conjuncts4S2'] = conjuncts_guide['conjuncts4S1']
+    results['conjuncts5S2'] = conjuncts_guide['conjuncts5S1']
 
     return jsonify(results)
 
 @app.route('/api/scriptmatrix', methods=['POST', 'GET'])
 def scriptmatrix_list():
+    guide = request.json['guide']
+    charnums = request.json['charnums']
+    """
     results_final = {}
     results = {}
     results_hk = {}
@@ -238,6 +306,11 @@ def scriptmatrix_list():
     results_final['results'] = results
     results_final['resultsHK'] = results_hk
     results_final['guideChars'] = guide_chars
+    """
+
+    f = open ('resources/script_matrix/script_matrix_' + guide + charnums + '.json', 'r', encoding='utf-8')
+    results_final = json.loads(f.read(), encoding = "utf-8")
+    f.close()
 
     return jsonify(results_final)
 
@@ -367,54 +440,6 @@ def convert_loop_src_post():
     # print(results)
 
     return jsonify(results)
-
-
-def convert(src, tgt, txt, nativize, preoptions, postoptions):
-    txt = PreProcess.PreProcess(txt,src,tgt)
-
-    if 'siddhammukta' in postoptions and tgt == 'Siddham':
-        tgt = 'SiddhamDevanagari'
-    if 'siddhamap' in postoptions and tgt == 'Siddham':
-        tgt = 'SiddhamDevanagari'
-    if 'siddhammukta' in preoptions and src == 'Siddham':
-        src = 'SiddhamDevanagari'
-    if 'LaoNative' in postoptions and tgt == 'Lao':
-        tgt = 'Lao2'
-    if 'egrantamil' in preoptions and src == 'Grantha':
-        src = 'GranthaGrantamil'
-    if 'egrantamil' in postoptions and tgt == 'Grantha':
-        tgt = 'GranthaGrantamil'
-    if 'nepaldevafont' in postoptions and tgt == 'Newa':
-        tgt = 'Devanagari'
-    if 'ranjanalantsa' in postoptions and tgt == 'Ranjana':
-        tgt = 'Tibetan'
-        nativize = False
-    if 'ranjanawartu' in postoptions and tgt == 'Ranjana':
-        tgt = 'Tibetan'
-        nativize = False
-
-    for options in preoptions:
-      txt = getattr(PreProcess, options)(txt)
-
-    transliteration = Convert.convertScript(txt, src, tgt)
-
-    if nativize:
-      transliteration =  PostOptions.ApplyScriptDefaults(transliteration, src, tgt)
-      if tgt != 'Tamil':
-        transliteration = PostProcess.RemoveDiacritics(transliteration)
-      else:
-        transliteration = PostProcess.RemoveDiacriticsTamil(transliteration)
-
-    for options in postoptions:
-      transliteration = getattr(PostProcess, options)(transliteration)
-
-    if src == "Tamil" and tgt == "IPA":
-        r = requests.get("http://anunaadam.appspot.com/api?text=" + txt + "&method=2")
-        r.encoding = r.apparent_encoding
-        transliteration = r.text
-
-    return transliteration
-
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8085, debug=True)

@@ -153,7 +153,7 @@ export default {
       this.loading = true
 
       var data = {
-        letters: this.compounds,
+        // letters: this.compounds,
         script1: this.script1,
         script2: this.script2
       }

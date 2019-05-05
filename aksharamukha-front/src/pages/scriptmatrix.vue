@@ -172,19 +172,30 @@ export default {
 
       this.letters = letters
 
+      // console.log(JSON.stringify(letters))
+      // console.log(JSON.stringify(this.scriptsIndic.map(x => x.value)))
+
+      /*
       var data = {
         chars: letters,
         scripts: this.scriptsIndic.map(x => x.value),
         guide: this.script2
+      } */
+
+      var data = {
+        // Number of characters per row
+        charnums: typeof this.$q.platform.is.mobile === 'undefined' ? '5' : '3',
+        guide: this.script2
       }
+
       var dhis = this
       this.apiCall.post('/scriptmatrix', data)
         .then(function (response) {
           for (var key in response.data['results']) {
-            dhis.results[key] = JSON.parse(response.data['results'][key].replace(/،/g, ','))
-            dhis.resultsHK[key] = JSON.parse(response.data['resultsHK'][key])
+            dhis.results[key] = response.data['results'][key]
+            dhis.resultsHK[key] = response.data['resultsHK'][key]
           }
-          dhis.guideChars = JSON.parse(response.data['guideChars'])
+          dhis.guideChars = response.data['guideChars']
           dhis.loading = false
         })
         .catch(function (error) {

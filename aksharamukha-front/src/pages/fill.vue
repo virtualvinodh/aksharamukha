@@ -45,9 +45,7 @@
     <span :key="resetV">
       <q-card v-for="(i,index) in randomList" :key="i" inline class="cards q-ma-sm"
        :text-color="colors(index)">
-        <q-card-title>
-          <q-input placeholder="answer" ref="'q' + i" v-model="answers['q' + index]" :class="script2.toLowerCase()"></q-input>
-        </q-card-title>
+        <q-input class="q-ml-xl q-mr-xl" placeholder="answer" ref="'q' + i" v-model="answers['q' + index]" :class="script2.toLowerCase()"></q-input>
         <q-card-main align="center">
           <font size="7"><span :class="script1.toLowerCase()">{{compounds1[i]}}</span></font>
         </q-card-main>
@@ -167,7 +165,7 @@ export default {
       this.loading = true
 
       var data = {
-        letters: this.compounds,
+        // letters: this.compounds,
         script1: this.script1,
         script2: this.script2
       }
@@ -269,5 +267,7 @@ export default {
 .cards {
   width:140px;
 }
-
+.q-card-title {
+  width:20px;
+}
 </style>
