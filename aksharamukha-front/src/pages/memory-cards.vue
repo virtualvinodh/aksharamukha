@@ -6,7 +6,7 @@
   helper="Enter the number of letters that you want to test"
   :count="3"
 >
-  <q-input suffix="letters" v-model="countTotal" @input="resetSoft"/>
+  <q-input suffix="letters" v-model="countTotal" @input="resetHard"/>
 </q-field>
 <span class="q-mt-md"> Script: </span>
        <q-select
@@ -128,14 +128,17 @@ export default {
     verify: function () {
     },
     resetHard: function () {
-      this.resetV = !this.resetV
-      this.selected = ['', '']
-      this.matched = []
-      this.autoclick = false
-      this.compoundsGen()
+      if (this.countTotal !== '') {
+        this.resetV = !this.resetV
+        this.selected = ['', '']
+        this.matched = []
+        this.autoclick = false
+        this.compoundsGen()
+      }
     },
     resetSoft: function () {
-      if (this.randomList.length > 0) {
+      console.log('here')
+      if (this.randomList.length > 0 && this.countTotal !== '') {
         this.resetV = !this.resetV
         this.matched = []
         this.selected = ['', '']
