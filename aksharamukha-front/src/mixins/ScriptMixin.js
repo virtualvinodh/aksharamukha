@@ -2,8 +2,8 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
-        // baseURL: 'https://aksharamukha.appspot.com/api/',
-        baseURL: 'http://localhost:8085/api',
+        baseURL: 'https://aksharamukha.appspot.com/api/',
+        // baseURL: 'http://localhost:8085/api',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -70,16 +70,16 @@ export const ScriptMixin = {
           { label: 'Lao Orthography', value: 'LaoTranscription' }
         ],
         'Devanagari': [
-          { label: 'Schwa deletion (Hindi)', value: 'RemoveSchwaHindi' }
+          { label: 'Schwa deletion (Hindi) <div class="q-mt-sm"> (e.g. राम → rām, सबसे → sabse) </div>', value: 'RemoveSchwaHindi' }
         ],
         'Gujarati': [
-          { label: 'Schwa deletion (Only word-final)', value: 'SchwaFinalGujarati' }
+          { label: 'Schwa deletion (Only word-final) <div class="q-mt-sm"> (e.g. राम → rām) </div>', value: 'SchwaFinalGujarati' }
         ],
         'Bengali': [
-          { label: 'Schwa deletion (Only word-final)', value: 'SchwaFinalBengali' }
+          { label: 'Schwa deletion (Only word-final) <div class="q-mt-sm"> (e.g. রাম → rām) </div>', value: 'SchwaFinalBengali' }
         ],
         'Gurmukhi': [
-          { label: 'Schwa deletion (Only word-final)', value: 'SchwaFinalGurmukhi' }
+          { label: 'Schwa deletion (Only word-final) <div class="q-mt-sm"> (e.g. ਰਾਮ → rām) </div>', value: 'SchwaFinalGurmukhi' }
         ],
         'Grantha': [
           { label: 'Prakrit orthography', value: 'GranthaPrakrit' },

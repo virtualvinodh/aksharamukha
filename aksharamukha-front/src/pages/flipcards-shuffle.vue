@@ -181,8 +181,10 @@ export default {
       }
     },
     resetSoft: function () {
-      this.resetV = !this.resetV
-      this.randomListGen()
+      if (this.script1 !== '' && this.script2 !== '' && this.randomList.length > 0) {
+        this.resetV = !this.resetV
+        this.randomListGen()
+      }
     },
     shuffleCard: function () {
       this.randomList = this.shuffle(this.randomList)

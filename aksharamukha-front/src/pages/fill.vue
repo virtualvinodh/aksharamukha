@@ -245,10 +245,12 @@ export default {
       }
     },
     resetSoft: function () {
-      this.results = []
-      this.answers = []
-      this.resetV = !this.resetV
-      this.randomListGen()
+      if (this.script1 !== '' && this.script2 !== '' && this.randomList.length > 0) {
+        this.results = []
+        this.answers = []
+        this.resetV = !this.resetV
+        this.randomListGen()
+      }
     },
     show: function () {
       this.results = []
