@@ -135,11 +135,13 @@ export default {
       this.compoundsGen()
     },
     resetSoft: function () {
-      this.resetV = !this.resetV
-      this.matched = []
-      this.selected = ['', '']
-      this.autoclick = false
-      this.randomListGen()
+      if (this.randomList.length > 0) {
+        this.resetV = !this.resetV
+        this.matched = []
+        this.selected = ['', '']
+        this.autoclick = false
+        this.randomListGen()
+      }
     },
     shuffleCard: function () {
       this.randomList = this.shuffle(this.randomList)

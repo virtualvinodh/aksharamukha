@@ -23,7 +23,7 @@
           label-width="1"
           class="q-ma-sm col-md-8"
         >
-          <q-input v-model="textTemp" />
+          <q-input v-model.trim="textTemp" />
         </q-field>
         <q-btn class="q-ma-md" color="dark" @click="convert"> Convert </q-btn>
     </div>
