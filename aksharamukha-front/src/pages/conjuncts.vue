@@ -10,7 +10,7 @@
         filter-placeholder="search"
         placeholder="Input Script"
         v-model="script1"
-        @input="compoundsGen"
+        v-on="{input: $q.platform.is.mobile ? updateLazy : compoundsGen}"
         class="q-ma-sm col-md-3"
         :options="scriptsIndic"
       />
@@ -22,7 +22,7 @@
         filter-placeholder="search"
         placeholder="Input Script"
         v-model="script2"
-        @input="compoundsGen"
+        v-on="{input: $q.platform.is.mobile ? updateLazy : compoundsGen}"
         class="q-ma-sm col-md-3"
         :options="scriptsOutput"
       />
@@ -34,7 +34,7 @@
         filter-placeholder="search"
         placeholder="Input Script"
         v-model="vowel"
-        @input="compoundsGen"
+        v-on="{input: $q.platform.is.mobile ? updateLazy : compoundsGen}"
         class="q-ma-sm col-md-1"
         :options="vowelOptions"
       />
@@ -44,7 +44,7 @@
         type="checkbox"
         class="col-xs-12 col-lg-3 q-ml-xl q-mr-md"
         v-model="postOptionCon"
-        @input="compoundsGen"
+        v-on="{input: $q.platform.is.mobile ? updateLazy : compoundsGen}"
         :options="typeof conjunctsOptions[script1] !== 'undefined' ? conjunctsOptions[script1] : []"
       />
       <!-- <q-toggle color="dark" v-model="conjunctsShow" label="Include conjuncts" class="q-ml-sm q-mb-sm q-mt-sm"/> -->
@@ -158,6 +158,20 @@ export default {
     // this.compoundsGen()
   },
   methods: {
+    updateLazy: function () {
+      this.conjuncts2S1 = []
+      this.conjuncts2S2 = []
+      this.conjuncts3S1 = []
+      this.conjuncts3S2 = []
+      this.conjuncts4S1 = []
+      this.conjuncts4S2 = []
+      this.conjuncts5S1 = []
+      this.conjuncts5S2 = []
+      this.conjuncts1S1 = []
+      this.conjuncts1S2 = []
+
+      this.compoundsGen()
+    },
     compoundsGen: async function () {
       this.loading = true
 

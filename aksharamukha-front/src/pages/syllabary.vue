@@ -12,7 +12,7 @@
         filter-placeholder="search"
         placeholder="Input Script"
         v-model="script1"
-        @input="compoundsGen"
+        v-on="{input: $q.platform.is.mobile ? updateLazy : compoundsGen}"
         class="q-ma-sm col-md-3"
         :options="scriptsIndic"
       />
@@ -24,7 +24,7 @@
         filter-placeholder="search"
         placeholder="Input Script"
         v-model="script2"
-        @input="compoundsGen"
+        v-on="{input: $q.platform.is.mobile ? updateLazy : compoundsGen}"
         class="q-ma-sm col-md-3"
         :options="scriptsOutput"
       />
@@ -96,6 +96,16 @@ export default {
     // console.log(this.vowels1)
   },
   methods: {
+    updateLazy: function () {
+      this.vowels1 = ['...']
+      this.vowels2 = ['...']
+      this.consonants1 = ['...']
+      this.consonants2 = ['...']
+      this.compounds1 = ['...']
+      this.compounds2 = ['...']
+
+      this.compoundsGen()
+    },
     compoundsGen: async function () {
       this.loading = true
       var data = {
