@@ -119,8 +119,13 @@ def convertScript(Strng,Source,Target):
         Strng = Strng.replace(vir + "[]", "\u200D" + vir)
 
         #print Strng
+
+        #print(Strng)
+
         # Apply Fixes on the Output based on the Script
         Strng = CF.FixIndicOutput(Strng, Source, Target)
+
+        #print(Strng)
 
     elif Source in GM.LatinScripts and Target in GM.LatinScripts:
         try:
@@ -188,6 +193,7 @@ def convertScript(Strng,Source,Target):
 
         #Strng = Strng.replace(GM.CrunchList('OmMap', Source)[0],GM.CrunchList('OmMap', Target)[0])
         # Apply Fixes on the Output based on the Script
+
         Strng = CF.FixIndicOutput(Strng, Source, Target)
 
     elif Source in GM.IndicScripts and Target in GM.LatinScripts:

@@ -57,6 +57,19 @@ export default {
       minimize: true
     }
   },
+  mounted: function () {
+    if (typeof this.$route.query.website !== 'undefined' && this.$route.query.src !== 'undefined' && this.$route.query.tgt !== 'undefined') {
+      this.url = this.$route.query.website
+      var src = this.$route.query.src
+      this.options['inputScript'] = src.charAt(0).toUpperCase() + src.slice(1)
+      var tgt = this.$route.query.tgt
+      this.options['outputScript'] = tgt.charAt(0).toUpperCase() + tgt.slice(1)
+      this.options['postOptions'] = []
+      this.options['preOptions'] = []
+      console.log(this.options)
+      this.convertWeb()
+    }
+  },
   methods: {
     convertWeb: async function () {
       // assigning content
@@ -74,6 +87,7 @@ export default {
         this.urlT = 'http://aksharamukha.appspot.com/api/website?url=' + this.url + '&source=' + this.options.inputScript +
           '&target=' + this.options.outputScript + '&preOptions=' + JSON.stringify(this.options.preOptions) +
           '&postOptions=' + JSON.stringify(this.options.postOptions) + '&nativize=' + JSON.stringify(!this.options.sourcePreserve)
+        console.log(this.urlT)
         // this.$refs.frame.contentWindow.document.body.innerHTML = await this.getSiteContent(this.url)
       }
     },

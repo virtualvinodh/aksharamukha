@@ -1127,6 +1127,12 @@ def TamilRemoveNumbers(Strng):
 
     return Strng
 
+def NewaSpecialTa(Strng):
+
+    Strng = Strng.replace('𑐟𑑂', '𑐟𑑂‍') #Ta+virama -> ta + virama + ZWJ
+
+    return Strng
+
 def TamilDisableSHA(Strng):
     Strng = Strng.replace('ஶ', 'ஸ²')
     Strng = CF.ShiftDiacritics(Strng,'Tamil')
@@ -1155,6 +1161,6 @@ def capitalizeSentence(Strng):
     return Strng
 
 def NewaDisableRepha(Strng):
-    Strng = Strng.replace('𑐬𑑂\u200D','𑐬𑑂')
+    Strng = Strng.replace('𑐬𑑂', '𑐬𑑂\u200D')
 
     return Strng

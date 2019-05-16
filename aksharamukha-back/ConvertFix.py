@@ -1998,7 +1998,8 @@ def FixNewa(Strng, reverse=False):
         ListC ='|'.join(GM.CrunchSymbols(GM.Consonants,'Newa'))
         ra = Newa.ConsonantMap[26]
         vir = Newa.ViramaMap[0]
-        Strng = re.sub(ra + vir + '(' + ListC + ')', ra + vir + '\u200D' + r'\1', Strng)
+        ## The default behavior of Repha has been proposed to change
+        # Strng = re.sub(ra + vir + '(' + ListC + ')', ra + vir + '\u200D' + r'\1', Strng)
     else:
         pass
 

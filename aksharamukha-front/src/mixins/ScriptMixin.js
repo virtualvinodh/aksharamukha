@@ -137,6 +137,7 @@ export const ScriptMixin = {
         'Newa': [
           { label: 'Enable murmured consonants', value: 'NewaMurmurConsonants' },
           { label: 'Disable Repha', value: 'NewaDisableRepha' },
+          { label: 'Use special TA-conjunct', value: 'NewaSpecialTa' },
           { label: 'Use Devanagari-based Newa font', value: 'nepaldevafont' }
 
         ],

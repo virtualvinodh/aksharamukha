@@ -19,6 +19,7 @@
       <span class="text-red-2"> X</span> : Approximate equivalent <br/>
       <span class="text-blue-4"> Y</span> : Equivalent with diacritic <br/>
       </div>
+      <div class="q-ma-md q-body-1" v-if="$q.platform.is.mobile">The page might take several minutes to load completely in a mobile browser and could be unresponsive while doing so. Please have some patience. Alternatively, you can also view the page in a desktop browser.</div>
       <div v-if="letters.length > 0">
         <h5> Vowels</h5>
         <list-char-all :chars="letters[0][i-1]" :script1="script1" :script2="script2"
