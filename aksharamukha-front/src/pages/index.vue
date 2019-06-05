@@ -16,7 +16,7 @@
         :options="scriptsInput"
       />
       <q-btn class="col-xs-3 col-md-3 q-ma-sm" v-show="inputPast !== ''"
-       @click="updateHist" dense> <small>{{inputPast}}</small> </q-btn>
+       @click="updateHist" dense> <small>{{getScriptObject(inputPast).label}}</small> </q-btn>
       <q-icon name="history" size="25px" v-show="inputPast !== ''" class="print-hide"/>
       </div>
     <q-input
@@ -78,7 +78,7 @@
         :options="scriptsOutput"
       />
       <q-btn class="col-xs-3 col-md-3 q-ma-sm print-hide" v-show="outputPast !== ''"
-       @click="updateHistOut" dense> <small>{{outputPast}}</small> </q-btn>
+       @click="updateHistOut" dense> <small>{{getScriptObject(outputPast).label}}</small> </q-btn>
       <q-icon name="history" size="25px" v-show="outputPast !== ''" class="print-hide"/>
       </div>
     <div

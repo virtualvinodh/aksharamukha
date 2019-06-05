@@ -9,7 +9,7 @@
   <q-input suffix="letters" v-model="countTotal" @input="resetSoft"/>
 </q-field>
 <div class="row q-mt-sm">
-<span class="q-mt-md"> Front: </span>
+<span class="q-mt-md"> Main: </span>
        <q-select
         filter
         inset
@@ -21,7 +21,7 @@
         class="q-ma-sm col-md-3"
         :options="scriptsOutput"
       />
-<span class="q-ml-md q-mt-md"> Back: </span>
+<span class="q-ml-md q-mt-md"> Option: </span>
        <q-select
         filter
         inset
