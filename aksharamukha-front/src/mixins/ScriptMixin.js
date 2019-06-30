@@ -1197,7 +1197,8 @@ export const ScriptMixin = {
           label: 'Devanagari',
           value: 'Devanagari'
         }
-      ]
+      ],
+      indicSubset: ['Khmer', 'Burmese', 'Lao', 'Thai', 'Balinese', 'Javanese', 'Tibetan', 'LaoPali', 'TaiTham', 'Cham', 'Lepcha', 'Ahom', 'ZanabazarSquare']
     }
   },
   computed: {
@@ -1244,7 +1245,10 @@ export const ScriptMixin = {
           return s
         }
       }
-      return null
+      if (name === 'autodetect') {
+        return this.autodetect[0]
+      }
+      return { label: '', value: '' }
     },
     getDescription: function (script, link = true) {
       var desc

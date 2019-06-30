@@ -2,7 +2,7 @@
   <q-page>
     <q-slide-transition>
       <div class="print-hide" v-show="minimize">
-        <controls-io v-model="options"> </controls-io>
+        <controls-io v-model="options" :multiple="false"> </controls-io>
         <div class="row">
           <q-field
             icon="web asset"
@@ -18,7 +18,8 @@
       </div>
     </q-slide-transition>
     <q-btn flat :icon="minimize ? 'call made' : 'call received' " @click="minimize = !minimize" color="dark"/>
-    <iframe width="99%" class="window-height" style="border:none;" ref="frame" :src="urlT"> </iframe>
+    <span v-show="!loading && urlT !== ''">The website is loading. Please wait. If the website doesn't load, click <a :href="urlT">here</a></span>
+    <iframe width="99%" class="window-height" style="border:none;" ref="frame" :src="urlT" @load="load" v-if="urlT !== ''"> </iframe>
   </q-page>
 </template>
 
@@ -54,7 +55,8 @@ export default {
       url: '',
       urlT: '',
       text: '',
-      minimize: true
+      minimize: true,
+      loading: false
     }
   },
   mounted: function () {
@@ -71,7 +73,13 @@ export default {
     }
   },
   methods: {
+    load: function () {
+      this.loading = true
+      console.log('The webpage is loaded')
+    },
     convertWeb: async function () {
+      this.urlT = ''
+      this.loading = false
       // assigning content
       if (typeof this.options.inputScript === 'undefined' || typeof this.options.outputScript === 'undefined' || this.options.inputScript === '' || this.options.outputScript === '') {
         this.$q.notify({

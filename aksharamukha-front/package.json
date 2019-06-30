@@ -11,7 +11,7 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "cheerio": "^1.0.0-rc.2",
     "clipboard": "^2.0.1",
     "dom-to-image": "^2.6.0",
@@ -26,6 +26,7 @@
     "vue-i18n": "^7.3.3",
     "vue-pdf": "^3.3.1",
     "vue-quill-editor": "^3.0.6",
+    "vue-scrollto": "^2.15.0",
     "vue-social-sharing": "^2.3.3"
   },
   "devDependencies": {
@@ -44,7 +45,7 @@
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-standard": "^3.0.1",
     "eslint-plugin-vue": "^4.7.1",
-    "quasar-cli": "^0.17.20",
+    "quasar-cli": "^0.17.25",
     "strip-ansi": "^3.0.1"
   },
   "engines": {

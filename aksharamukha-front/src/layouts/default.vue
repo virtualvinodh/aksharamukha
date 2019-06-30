@@ -476,7 +476,7 @@ export default {
 }
 @font-face {
   font-family: 'Lao Pali';
-  src: url('../statics/LaoPaliAlpha-Extralight.otf')
+  src: url('../statics/Lanexang_Mon4.otf')
 }
 @font-face {
   font-family: 'MithilaUni';
@@ -500,7 +500,7 @@ export default {
 }
 @font-face {
   font-family: 'Lamphun';
-  src: url('../statics/lamphun.otf')
+  src: url('../statics/Hariphunchai.otf')
 }
 @font-face {
   font-family: 'Tibetan Dbu Med';

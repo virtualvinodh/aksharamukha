@@ -1,6 +1,6 @@
 <template>
   <!-- Fix Urdu ai and au -->
-  <q-page class="q-pa-md">
+  <q-page class="q-pa-md" id="scrollstart">
     <div class="row">
       <div class="row col-xs-12 col-md-11 col-xl-5 q-ma-md float-div print-hide">
        <div class="row">
@@ -32,32 +32,10 @@
       rows="10"
       :max-height="1500"
       ></q-input>
-      <div class="notice q-ma-sm" v-show="indicSubset.includes(inputScript)">Currently, only the cognate 'Indic' subset of the script is supported for conversion</div>
-      <q-option-group
-        color="dark"
-        type="checkbox"
-        inline
-        class="q-ml-sm q-mb-sm q-mt-sm"
-        v-model="preOptions"
-        @input="convert"
-        :options="typeof preOptionsGroup[inputScript] !== 'undefined' ? preOptionsGroup[inputScript] : []"
-        v-show="typeof preOptionsGroup[inputScript] !== 'undefined'"
-      />
-      <q-option-group
-        color="dark"
-        type="checkbox"
-        inline
-        class="q-ml-sm q-mb-sm q-mt-sm"
-        v-model="preOptions"
-        @input="convert"
-        :options="typeof preOptionsGroupSpecific[inputScript+outputScript] !== 'undefined' ? preOptionsGroupSpecific[inputScript+outputScript] : []"
-        v-show="typeof preOptionsGroupSpecific[inputScript+outputScript] !== 'undefined'"
-      />
-      <div class="notice q-ma-sm" v-show="inputScript === 'Urdu'">Urdu is an abjad. Please read the script <router-link to="/describe/Urdu">notes</router-link> to read about Urdu reading conventions.</div>
-      <div class="notice q-ma-sm" v-show="inputScript === 'Grantha' &&
-        preOptions.includes('egrantamil')">This does not use the proper Unicode encoding. Please consider converting the text into Grantha Unicode.</div>
-      <div class="notice q-ma-sm" v-show="(outputScript === 'IAST' || outputScript === 'ISO') &&
-        postOptions.includes('capitalizeSentence')">To capitalize a specific word, add @ to the beginning of word. e.g. @<transliterate text="buddha" src="HK" :tgt="inputScript"></transliterate></div>
+    <input-notice :inputScript="inputScript" :outputScript="outputScript" :preOptions="preOptions"
+       :postOptions="postOptions"></input-notice>
+    <input-options :inputScript="inputScript" :outputScript="outputScript" :preOptionsInput="preOptions"
+      :postOptions="postOptions" v-model="preOptions" @input="convert"></input-options>
     </div>
     <div class="q-ma-md print-hide">
       <div class="col">
@@ -87,76 +65,30 @@
       class="text-output col-xs-12 col-md-12 q-pa-md q-pr-lg bg-grey-1 "
       :class="getOutputClass(outputScript, postOptions)" :style="{'font-size': fontSize + '%'}"
       ></div>
-    <div class="col-xs-12 col-md-12 q-ma-sm print-hide">
-      <div class="notice q-ma-sm" v-show="String(convertText).includes('ஶ')">ஶ is pronounced like a 'soft' ஷ </div>
-      <div class="notice q-ma-sm" v-show="String(convertText).includes('ఴ')">ఴ is a historic Telugu letter that is equivalent to Tamil ழ/Malayalam ഴ. Your font may not support this character.</div>
-      <div class="notice q-ma-sm" v-show="String(convertText).includes('ഩ')">ഩ is a historic Malayalam letter that is equivalent to Tamil ன. Your font may not support this character.</div>
-      <div class="notice q-ma-sm" v-show="String(convertText).includes('ఀ')">Your font may not support ఀ the Telugu Chandrabindu character.</div>
-      <div class="notice q-ma-sm" v-show="String(convertText).includes('ഀ')">Your font may not support ഀ the Malayalam Anusvara above character. Try enabling traditional orthogrpahy to view the character properly.</div>
-      <div class="notice q-ma-sm" v-show="outputScript === 'TamilGrantha'">This only works with <a href="http://virtualvinodh.com/download/e-Grantamil.ttf">e-Grantamil Font</a> and uses a mixture of Tamil & Bengali codepoints to encode the characters. </div>
-      <div class="notice q-ma-sm" v-show="outputScript === 'GranthaPandya'">This only works with e-Pandya font and uses Malayalam codepoints to encode Grantha (Pandya) characters.</div>
-      <div class="notice q-ma-sm" v-show="outputScript === 'Grantha' &&
-        !postOptions.includes('egrantamil')">This uses a Unicode Grantha font. It can be downloaded from <a href="https://github.com/googlei18n/noto-fonts/tree/master/phaseIII_only/unhinted/otf/NotoSansGrantha">here.</a></div>
-      <div class="notice q-ma-sm" v-show="outputScript === 'Grantha' &&
-        postOptions.includes('egrantamil')">This does not use the proper Unicode encoding. Please consider disabling the e-Grantamil option and use Grantha Unicode.</div>
-      <div class="notice q-ma-sm" v-show="outputScript === 'Vatteluttu'">This only works with e-Vatteluttu OT font and uses Tamil codepoints to encode Vatteluttu characters.</div>
-      <div class="notice q-ma-sm" v-show="outputScript === 'Siddham' &&
-        postOptions.includes('siddhammukta')">This only works with MuktamSiddham font and uses Devanagari codepoints to encode Siddham characters.</div>
-      <div class="notice q-ma-sm" v-show="outputScript === 'Siddham' &&
-        postOptions.includes('siddhamap')">This only works with ApDevSiddham  font and uses Devanagari codepoints to encode Siddham characters.</div>
-      <div class="notice q-ma-sm" v-show="outputScript === 'Newa' &&
-        postOptions.includes('nepaldevafont')">This uses Devanagari codepoints to encode the characters. Without the specific font, the characters will just appear as Devanagari. Please consider using an Unicode font that uses the appropriate Newa (Nepal Lipi) codepoints.</div>
-      <div class="notice q-ma-sm" v-show="outputScript === 'Ranjana' &&
-        !postOptions.includes('ranjanalantsa') &&
-        !postOptions.includes('ranjanawartu')">This uses Devanagari codepoints to encode the characters. Without the specific font, the characters will just appear as Devanagari.</div>
-     <div class="notice q-ma-sm" v-show="outputScript === 'Ranjana' &&
-        postOptions.includes('ranjanalantsa')">This uses Tibetan codepoints to encode the characters. Without the specific font, the characters will just appear as Tibetan.</div>
-     <div class="notice q-ma-sm" v-show="outputScript === 'Ranjana' &&
-        postOptions.includes('ranjanawartu')">This uses Tibetan codepoints to encode the characters. Without the specific font, the characters will just appear as Tibetan.</div>
-      <div class="notice q-ma-sm" v-show="outputScript === 'Tamil' &&
-            String(convertText).includes('𑌃')    ">This only works with Google Noto Tamil fonts </div>
-      <div class="notice q-ma-sm" v-show="inputScript === 'Tamil' && outputScript === 'IPA'">The results displayed have been obtained from <a href="http://anunaadam.appspot.com" target="_blank">Anunaadam</a>. Use the tool for further options.</div>
-      <span><q-toggle color="dark" v-model="sourcePreserve" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-sm print-hide" @input="convert" /><q-tooltip>Preserve the source as-is and don't change the text to improve readability</q-tooltip></span>
-      <br/>
-      <q-option-group
-        color="dark"
-        type="checkbox"
-        inline
-        class="q-ml-sm q-mb-sm q-mt-sm print-hide"
-        v-model="postOptions"
-        @input="convert"
-        :options="typeof postOptionsGroup[outputScript] !== 'undefined' ? postOptionsGroup[outputScript] : []"
-        v-show="typeof postOptionsGroup[outputScript] !== 'undefined'"
-      />
-      <q-option-group
-        color="dark"
-        type="checkbox"
-        inline
-        class="q-ml-sm q-mb-sm q-mt-sm print-hide"
-        v-model="postOptions"
-        @input="convert"
-        :options="typeof postOptionsGroupSpecific[outputScript+inputScript] !== 'undefined' ? postOptionsGroupSpecific[outputScript+inputScript] : []"
-        v-show="typeof postOptionsGroupSpecific[outputScript+inputScript] !== 'undefined'"
-      />
-      <q-btn class="q-ma-sm btn print-hide" :data-clipboard-text="convertText.replace(/<br\/>/g, '\n')" @click="copy"> <q-icon name="file copy" /><q-tooltip>Copy text</q-tooltip></q-btn>
-      <q-btn class="q-ma-sm print-hide" @click="imageConvert">
-        <q-icon name="photo camera" /><q-tooltip>Text screenshot</q-tooltip></q-btn>
-      <q-btn class="q-ma-sm print-hide" @click="printDocument"><q-tooltip class="print-hide">Print text</q-tooltip><q-icon name="print" /></q-btn>
-      <q-btn class="q-ma-sm print-hide" @click="fontSize += 20"> <q-icon name="zoom in" /><q-tooltip>Increase size</q-tooltip></q-btn>
-      <q-btn class="q-ma-sm print-hide" @click="fontSize -= 20"> <q-icon name="zoom out" /><q-tooltip>Decrease size</q-tooltip></q-btn>
-    </div>
-    </div>
+    <output-notice :inputScript="inputScript" :outputScript="outputScript" :postOptions="postOptions"
+     :convertText="convertText"></output-notice>
+      <div class="q-mt-sm"><output-buttons @fontsizeinc="fontSize += 20" @fontsizedec="fontSize -= 20"
+       @printdoc="printDocument" @screenshot="imageConvert" @copytext="copy" :convertText="convertText"></output-buttons></div>
+      <span><q-toggle color="dark" v-model="sourcePreserve" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-md print-hide" @input="convert" /><q-tooltip>Preserve the source as-is and don't change the text to improve readability</q-tooltip></span>
+    <output-options :inputScript="inputScript" :outputScript="outputScript" :postOptionsInput="postOptions"
+       :convertText="convertText"
+        v-model="postOptions" @input="convert"></output-options>    </div>
     </div>
   <transition
     enter-active-class="animated fadeIn"
     leave-active-class="animated fadeOut"
     appear
   >
-    <div class="q-ma-lg q-body-1 print-hide">
+    <div class="q-ma-lg q-body-1 print-hide" id="scrollend">
       This is a new beta version of Aksharamukha. Please report any bugs found in <a href="https://github.com/virtualvinodh/aksharamukha/issues">Github</a>. <br/>The old version is still temporarily available <a href="http://www.virtualvinodh.com/aksharamkh/aksharamukha-old.php">here</a>.
     </div>
   </transition>
   <a :href="brahmiImg" ref="imgDownload" :style="{'display': 'none'}" download="text.png"><button>Download</button></a>
+<q-page-sticky position="top-right" :offset="[18, 18]" v-show="scrollExists">
+    <span><q-btn round color="dark" @click="scrolldown" icon="arrow_downward" v-show="!scrolled"/><q-tooltip>Scroll down</q-tooltip> </span>
+    <span><q-btn round color="dark" @click="scrollup" icon="arrow_upward" v-show="scrolled"/>
+    <q-tooltip>Scroll up</q-tooltip> </span>
+  </q-page-sticky>
   </q-page>
 </template>
 
@@ -164,19 +96,20 @@
 </style>
 
 <script>
-import {QTooltip, QEditor, QRadio, QBtn, QField, QBtnToggle, QToggle, QInput, QSelect, QOptionGroup, QAlert, QSpinnerComment} from 'quasar'
+import {QTooltip, QEditor, QRadio, QBtn, QField, QBtnToggle, QToggle, QInput, QSelect, QOptionGroup, QAlert, QSpinnerComment, QPageSticky} from 'quasar'
 import sanitizeHtml from 'sanitize-html'
 import html2canvas from 'html2canvas'
 import Transliterate from '../components/Transliterate'
 import Controls from '../components/Controls'
-
+import InputOptions from '../components/InputOptions'
+import OutputOptions from '../components/OutputOptions'
+import InputNotice from '../components/InputNotice'
+import OutputNotice from '../components/OutputNotice'
+import OutputButtons from '../components/OutputButtons'
+import scrollTo from 'vue-scrollto'
 import { ScriptMixin } from '../mixins/ScriptMixin'
-import ClipboardJS from 'clipboard'
 
 var _ = require('underscore')
-
-var clipboard = new ClipboardJS('.btn')
-console.log(clipboard)
 
 export default {
   name: 'PageIndex',
@@ -195,14 +128,20 @@ export default {
     QSpinnerComment,
     QOptionGroup,
     QTooltip,
-    Transliterate
+    Transliterate,
+    InputOptions,
+    OutputOptions,
+    InputNotice,
+    OutputNotice,
+    OutputButtons,
+    QPageSticky
   },
   data () {
     return {
       textInput: '',
-      indicSubset: ['Khmer', 'Burmese', 'Lao', 'Thai', 'Balinese', 'Javanese', 'Tibetan', 'LaoPali', 'TaiTham', 'Cham', 'Lepcha', 'Ahom', 'ZanabazarSquare'],
       beta: true,
       model: [],
+      scrolled: false,
       inputScript: 'autodetect',
       outputScript: '',
       postOptions: [],
@@ -218,7 +157,8 @@ export default {
       outputPast: '',
       throttled: _.debounce(this.convert, 300),
       postOptionsScript: {},
-      preOptionsScript: {}
+      preOptionsScript: {},
+      scrollExists: false
     }
   },
   mounted () {
@@ -249,6 +189,13 @@ export default {
         this.preOptionsScript[this.inputScript] = []
       }
       this.$set(this, 'preOptions', this.preOptionsScript[this.inputScript])
+    }
+  },
+  updated: function () {
+    if (window.innerWidth > document.body.clientWidth) {
+      this.scrollExists = true
+    } else {
+      this.scrollExists = false
     }
   },
   watch: {
@@ -288,6 +235,14 @@ export default {
     }
   },
   methods: {
+    scrolldown: function () {
+      scrollTo.scrollTo('#scrollend', 1000)
+      this.scrolled = true
+    },
+    scrollup: function () {
+      scrollTo.scrollTo('.q-toolbar-title', 1000)
+      this.scrolled = false
+    },
     updateHist: function () {
       this.inputScript = this.inputPast
       this.updateInput()
