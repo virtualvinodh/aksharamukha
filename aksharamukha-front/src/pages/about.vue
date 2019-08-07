@@ -20,21 +20,25 @@
 
         <div class="q-body-1">The scripts supported are:</div> <br/>
 
-        <div class="q-body-1"><span v-for="script in scriptsIndic.concat([{label: 'Cyrillic (Russian)', value: 'RussianCyrillic'}, {label: 'IPA', value: 'IPA'}])" :key="script.value"> <router-link :to="'/describe/' + script.value">{{script.label}}</router-link>, </span></div> <br/>
+        <div class="q-body-1"><i><span v-for="script in scriptsIndic.concat([{label: 'Cyrillic (Russian)', value: 'RussianCyrillic'}, {label: 'IPA', value: 'IPA'}])" :key="script.value"> <router-link :to="'/describe/' + script.value">{{script.label}}</router-link>, </span></i></div> <br/>
 
         <div class="q-body-1">The Romanization Formats supported are:</div> <br/>
 
-        <div class="q-body-1"><span v-for="script in scriptsRomanization" :key="script.value">{{script.label}}, </span></div> <br/>
+        <div class="q-body-1"><i><span v-for="script in scriptsRomanization" :key="script.value">{{script.label}}, </span></i></div> <br/>
+
+        <div class="q-body-1">Aksharamukha is also available as a <a href="https://pypi.org/project/aksharamukha/">Python package</a>. You can read the usage instructions <a href="http://aksharamukha.appspot.com/#/python">here</a>. Additionally, there is a <a href="http://aksharamukha.appspot.com/#/web-api">REST API</a> for reasonable public consumption.
+        </div><br/>
 
         <div class="q-body-1">The source code is released under GNU AGPL and can be found in <a href="https://github.com/virtualvinodh/aksharamukha">Github</a>. Please report any bugs or suggestions over there.</div>
 
         <div class="q-display-1 q-mt-lg q-mb-md">Donate</div>
-        <div class="q-body-1">If you'd like to donate to support and/or appreciate the work, you can send a donation through Paypal.</div>
+        <div class="q-body-1">If you'd like to donate to support and/or appreciate the work, you can send a donation through Paypal.</div> <br/>
           <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-          <input type="hidden" name="cmd" value="_s-xclick">
-          <input type="hidden" name="hosted_button_id" value="Z4UVDAFR396KC">
-          <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-          <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+
+          <input type="hidden" name="cmd" value="_s-xclick" />
+          <input type="hidden" name="hosted_button_id" value="99JUSCQZ879CS" />
+          <input type="image" src="https://www.paypalobjects.com/en_US/DK/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+          <img alt="" border="0" src="https://www.paypal.com/en_DE/i/scr/pixel.gif" width="1" height="1" />
           </form>
         <div class="q-display-1 q-mt-lg q-mb-md">Feedback</div>
         <div class="q-body-1">Please send your feedback/comments to vinodh@virtualvinodh.com</div>

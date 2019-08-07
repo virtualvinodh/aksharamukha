@@ -1,11 +1,11 @@
-import GeneralMap as GM
-import ScriptMap as SM
+from aksharamukha import GeneralMap as GM
+from aksharamukha import ScriptMap as SM
 import importlib
 import json
 import io
 import itertools
 import os
-from aksharamukha import convert, unique_everseen, removeA
+from aksharamukha.transliterate import convert, unique_everseen, removeA
 
 # Script Mapping JSON
 

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-import GeneralMap as GM
-from ScriptMap.Roman import Avestan, IAST
-from ScriptMap.MainIndic import Tamil,TamilGrantha, Limbu, MeeteiMayek, Urdu, Lepcha, Chakma, Kannada, Gurmukhi, Newa
-from ScriptMap.EastIndic import Lao, TaiTham,Tibetan,Burmese,Khmer,Balinese,Javanese,Thai, Sundanese, PhagsPa, Cham, Thaana, Rejang, ZanabazarSquare
-import PostProcess
+from . import GeneralMap as GM
+from aksharamukha.ScriptMap.Roman import Avestan, IAST
+from aksharamukha.ScriptMap.MainIndic import Tamil,TamilGrantha, Limbu, MeeteiMayek, Urdu, Lepcha, Chakma, Kannada, Gurmukhi, Newa
+from aksharamukha.ScriptMap.EastIndic import Lao, TaiTham,Tibetan,Burmese,Khmer,Balinese,Javanese,Thai, Sundanese, PhagsPa, Cham, Thaana, Rejang, ZanabazarSquare
+from . import PostProcess
 import re
 
 ## Test Syllable initial conjunct
@@ -158,8 +158,8 @@ def PostFixRomanOutput(Strng,Source,Target):
 # Indic Fix are mandatory corrections to the immediate ouput.
 def FixIndicOutput(Strng,Source,Target):
     try:
-        Strng = getattr(__import__('ConvertFix'),"Fix"+Target)(Strng)
-    except AttributeError:
+        Strng = globals()["Fix"+Target](Strng)
+    except KeyError:
         pass
         #print #"Fix"+Target+" doesn't exist"
 
@@ -218,7 +218,7 @@ def FixTamil(Strng,reverse=False):
     avaA = '\u0028\u0B86\u0029'
 
     VedicSign = ['॑', '॒', '᳚']
-    TamilDiacritic = ['ʼ', 'ˮ', '꞉']
+    TamilDiacritic = ['ʼ', 'ˮ', '꞉']#, '²', '³', '⁴', '₂', '₃', '₄']
 
     if not reverse:
         Strng = Strng.replace(ava+ava,avaA)
@@ -1816,7 +1816,8 @@ def FixTaiTham(Strng,reverse=False):
 
 # Transcription for Native Lao
 def LaoTranscribe(Strng,reverse=False):
-    import PostProcess as pp
+    from . import PostProcess as pp
+
     shortA, conjA = '\u0EB0', '\u0EB1'
 
     if not reverse:
@@ -1828,7 +1829,7 @@ def LaoTranscribe(Strng,reverse=False):
 
 # Transcription for Pali Lao
 def LaoPaliTranscribe(Strng,reverse=False):
-    import PostProcess as pp
+    from . import PostProcess as pp
     shortA, conjA = '\u0EB0', '\u0EB1'
 
     if not reverse:

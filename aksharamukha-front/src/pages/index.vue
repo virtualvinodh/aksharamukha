@@ -313,6 +313,21 @@ export default {
           })
       })
     },
+    getPre: async function (text, source) {
+      var data = {
+        'text': text,
+        'source': source
+      }
+      return new Promise(resolve => {
+        this.apiCall.post('/detectpre', data)
+          .then(function (response) {
+            resolve(response.data)
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      })
+    },
     convert: async function () {
       this.convertText += ' . . . '
       if (this.textInput === '' || this.inputScript === '' || this.outputScript === '' ||
@@ -323,78 +338,16 @@ export default {
       this.loading = true
 
       if (this.inputScript === 'autodetect') {
-        var script = await this.getScript(this.textInput)
-        this.inputScript = script.charAt(0).toUpperCase() + script.slice(1)
-        // console.log(this.inputScript)
-
-        var laoPali = ['ຆ', 'ຉ', 'ຌ', 'ຎ', 'ຏ', 'ຐ', 'ຑ', 'ຒ', 'ຓ', 'ຘ', 'ຠ', 'ຨ', 'ຩ', 'ຬ', '຺']
-
-        if (this.inputScript === 'Bengali') {
-          if (this.textInput.includes('ৰ') || this.textInput.includes('ৱ')) {
-            this.inputScript = 'Assamese'
-          }
-        } else if (this.inputScript === 'Thai') {
-          if (this.textInput.includes('ะ') || this.textInput.includes('ั')) {
-            this.$set(this, 'preOptions', ['ThaiOrthography'])
-          }
-        } else if (this.inputScript === 'Lao') {
-          if (laoPali.some(el => this.textInput.includes(el))) {
-            this.inputScript = 'LaoPali'
-
-            if (this.textInput.includes('ະ') || this.textInput.includes('ັ')) {
-              this.$set(this, 'preOptions', ['LaoTranscription'])
-            }
-          }
-        } else if (this.inputScript === 'Batak') {
-          this.inputScript = 'BatakKaro'
-        } else if (this.inputScript === 'Myanmar') {
-          this.inputScript = 'Burmese'
-        } else if (this.inputScript === 'Meetei') {
-          this.inputScript = 'MeeteiMayek'
-        } else if (this.inputScript === 'Old') {
-          this.inputScript = 'OldPersian'
-        } else if (this.inputScript === 'Phags-pa') {
-          this.inputScript = 'PhagsPa'
-        } else if (this.inputScript === 'Ol') {
-          this.inputScript = 'Santali'
-        } else if (this.inputScript === 'Sora') {
-          this.inputScript = 'SoraSompeng'
-        } else if (this.inputScript === 'Syloti') {
-          this.inputScript = 'SylotiNagri'
-        } else if (this.inputScript === 'Tai') {
-          this.inputScript = 'TaiTham'
-        } else if (this.inputScript === 'Warang') {
-          this.inputScript = 'WarangCiti'
-        } else if (this.inputScript === 'Siddham') {
-          this.$set(this, 'preOptions', ['siddhamUnicode'])
-        } else if (this.inputScript === 'Cyrillic') {
-          this.inputScript = 'RussianCyrillic'
-        } else if (this.inputScript === 'Zanabazar') {
-          this.inputScript = 'ZanabazarSquare'
-        } else if (this.inputScript === 'Arabic') {
-          this.inputScript = 'Urdu'
-          this.$set(this, 'preOptions', ['UrduShortNotShown'])
-        } else if (this.inputScript === 'Latin') {
-          var diacritics = ['ā', 'ī', 'ū', 'ṃ', 'ḥ', 'ś', 'ṣ', 'ṇ', 'ṛ', 'ṝ', 'ḷ', 'ḹ', 'ḻ', 'ṉ', 'ṟ', 'ṭ', 'ḍ', 'ṅ', 'ñ']
-          var Itrans = ['R^i', 'R^I', 'L^i', 'L^I', '.N', '~N', '~n', 'Ch', 'sh', 'Sh']
-          console.log(diacritics)
-          if (this.textInput.includes('ʰ')) {
-            this.inputScript = 'Titus'
-          } else if (this.textInput.includes('ē') || this.textInput.includes('ō') ||
-            this.textInput.includes('r̥')) {
-            this.inputScript = 'ISO'
-          } else if (diacritics.some(el => this.textInput.includes(el))) {
-            this.inputScript = 'IAST'
-          } else if (Itrans.some(el => this.textInput.includes(el))) {
-            this.inputScript = 'Itrans'
-          } else {
-            this.inputScript = 'HK'
-          }
-        }
+        this.inputScript = await this.getScript(this.textInput)
 
         if (typeof this.preOptionsScript[this.inputScript] !== 'undefined') {
-          console.log('here')
           this.$set(this, 'preOptions', this.preOptionsScript[this.inputScript])
+        }
+
+        var preOptionsTemp = await this.getPre(this.textInput, this.inputScript)
+
+        if (['Thai', 'Lao', 'LaoPali', 'Urdu'].includes(this.inputScript)) {
+          this.preOptions = preOptionsTemp
         }
       }
 

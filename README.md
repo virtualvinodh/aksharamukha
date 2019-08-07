@@ -4,13 +4,26 @@ Aksharamukha aims to provide transliteration a.k.a script conversion between var
 
 It is a total rewrite of the PHP-based version available [here](https://launchpad.net/aksharamukha) and [here](https://github.com/nareshv/aksharamukha).
 
-Aksharamukha as of now supports 66 scripts and 8 romanization methods.
+Aksharamukha as of now supports 71 scripts and 8 romanization methods.
 
 ## Front End
 The front end is written using Quasar and Vue. Use _npm install_ to install all the dependencies and then use _quasar dev_ to start the front end. Also, please point the api to localhost at mixins/ScriptMixin.js.
 
 ## Back End
 The back end is written in Python 3 with Flask. After installing all the libraries, use _python3 main.py_ to intialize the backend server.
+
+## Python Package
+Aksharamukha is also available as a [Python package](https://pypi.org/project/aksharamukha/).
+
+Use the following command to install the package.
+
+```pip install aksharamukha```
+
+You can read the usage instructions [here](http://aksharamukha.appspot.com/#/python)
+
+## Rest API
+
+There is a REST API for reasonable public consumption. You can read about it [here](http://aksharamukha.appspot.com/#/web-api)
 
 ## JSON Resources
 Frequently used script resources have been made available as JSON files under aksharamukha-back/resources.

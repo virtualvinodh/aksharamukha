@@ -6,7 +6,7 @@
         <span class="text-red-4"> X</span> : Approximate equivalent <br/>
         <span class="text-blue-4"> Y</span> : Equivalent with diacritic <br/>
       </div><br/>
-      Enter a word or a phrase that you want to see in all the other {{scriptsIndic.length}} scripts.     <span v-show="desc === 'tooltip'"> Hover over the word in a script to see a description about the script </span> <br/><br/>
+      Enter a word or a phrase that you want to see in all the other {{scriptsIndic.length + 2}} scripts.     <span v-show="desc === 'tooltip'"> Hover over the word in a script to see a description about the script </span> <br/><br/>
       <div class="row">
       <q-select
         filter

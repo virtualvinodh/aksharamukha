@@ -4,8 +4,8 @@
 
 ## Generate without Short Vowels - Only include for preserver "Source"
 
-import PostProcess as PP
-import GeneralMap as GM
+from . import PostProcess as PP
+from . import GeneralMap as GM
 
 def ApplyScriptDefaults(Strng,Source,Target):
     Options = []
@@ -75,8 +75,8 @@ def ApplyScriptDefaults(Strng,Source,Target):
 
     for Option in Options:
         if Option.find(Target) != -1:
-            Strng = getattr(__import__('PostProcess'),Option)(Strng)
+            Strng = getattr(PP,Option)(Strng)
         else:
-            Strng = getattr(__import__('PostProcess'),Option)(Strng,Target)
+            Strng = getattr(PP,Option)(Strng,Target)
 
     return Strng

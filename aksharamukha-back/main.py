@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, redirect
 from flask_cors import CORS
 import re
-import Convert,PostOptions,PostProcess,PreProcess
+from aksharamukha import Convert,PostOptions,PostProcess,PreProcess
 import json
 import requests
 import html
@@ -10,8 +10,7 @@ from collections import Counter
 import unicodedata
 import io
 
-from aksharamukha import convert, unique_everseen, removeA
-
+from aksharamukha.transliterate import convert, unique_everseen, removeA, auto_detect, detect_preoptions
 
 app = Flask(__name__)
 CORS(app)
@@ -22,32 +21,12 @@ def main_site():
     # return "This is a backend for <a href=\"http://aksharamukha.appspot.com\">Aksharamukha</a>."
 
 @app.route('/api/autodetect', methods=['POST', 'GET'])
-def auto_detect():
-    scripts = []
-    text = request.json['text']
+def auto_detect_request():
+    return auto_detect(request.json['text'])
 
-    for uchar in text:
-        try:
-            scripts.append(unicodedata.name(uchar).split(' ')[0].lower())
-        except ValueError:
-            pass
-            # print('Script not found')
-
-    counts = Counter(scripts)
-    script_percent = []
-
-    # print(counts)
-
-    for script, count  in counts.items():
-        percent = count/len(scripts) * 100
-        script_percent.append((percent, script))
-
-    if len(script_percent) > 0:
-        script = sorted(script_percent)[-1][1]
-    else:
-        script = ''
-
-    return script
+@app.route('/api/detectpre', methods=['POST', 'GET'])
+def detect_pre_request():
+    return jsonify(detect_preoptions(request.json['text'], request.json['source']))
 
 @app.route('/api/commonletters', methods=['POST', 'GET'])
 def common_letters():
@@ -410,6 +389,54 @@ def fetch_site():
     htmlcontent = PostProcess.RetainDandasIndic(htmlcontent, request.args['target'], True)
 
     return htmlcontent
+
+@app.route('/api/public', methods=['POST', 'GET'])
+def convert_public():
+    #print('There requests are')
+    #print(request.json)
+
+    nativize = True
+    preoptions = []
+    postoptions = []
+
+    if 'preoptions' in request.values:
+        preoptions = request.values['preoptions'].split(',')
+
+    if 'postoptions' in request.values:
+        postoptions = request.values['postoptions'].split(',')
+
+    if 'nativize' in request.values:
+        if request.values['nativize'] == 'False' or request.values['nativize'] == 'false':
+            nativize = False
+
+    if 'source' not in request.values:
+        source = auto_detect(request.values['text'])
+        preoptions = detect_preoptions(request.values['text'], source)
+    else:
+        source = request.values['source']
+
+    if 'text' in request.values:
+        text = convert(source, request.values['target'], request.values['text'], nativize, preoptions, postoptions)
+    else:
+        text = ''
+
+    return text
+
+@app.route('/api/plugin', methods=['POST', 'GET'])
+def convert_plugin():
+    #print('There requests are')
+    #print(request.json)
+
+    print('preoptions' not in request.values)
+    print(request.values['source'])
+    print(request.values['target'])
+
+    if 'text' in request.values:
+        text = convert(request.values['source'], request.values['target'], request.values['text'], True, [], [])
+    else:
+        text = ''
+
+    return text
 
 
 @app.route('/api/convert', methods=['POST', 'GET'])

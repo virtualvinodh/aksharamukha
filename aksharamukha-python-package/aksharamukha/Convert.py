@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import GeneralMap as GM, PreProcess as PrP, ConvertFix as CF
-import PostProcess as PP
-import ScriptMap.EastIndic.SiddhamRanjana as SR
+from . import GeneralMap as GM, PreProcess as PrP, ConvertFix as CF
+from . import PostProcess as PP
+import aksharamukha.ScriptMap.EastIndic.SiddhamRanjana as SR
 import string
 import re
 from functools import cmp_to_key
@@ -54,7 +54,7 @@ def convertScript(Strng,Source,Target):
 
     if Source in GM.LatinScripts and Target in GM.IndicScripts:
         try:
-            Strng = getattr(__import__('ConvertFix'),"Fix"+Source)(Strng,reverse=True)
+            Strng = getattr(CF,"Fix"+Source)(Strng,reverse=True)
         except AttributeError:
             pass
             #print #"Fix"+Target+" doesn't exist - Reverse"
@@ -129,7 +129,7 @@ def convertScript(Strng,Source,Target):
 
     elif Source in GM.LatinScripts and Target in GM.LatinScripts:
         try:
-            Strng = getattr(__import__('ConvertFix'),"Fix"+Source)(Strng,reverse=True)
+            Strng = getattr(CF,"Fix"+Source)(Strng,reverse=True)
         except AttributeError:
             pass
             #print #"Fix"+Target+" doesn't exist - Reverse"
@@ -152,7 +152,7 @@ def convertScript(Strng,Source,Target):
 
         Strng = CF.ShiftDiacritics(Strng,Source,reverse=True)
         try:
-            Strng = getattr(__import__('ConvertFix'),"Fix"+Source)(Strng,reverse=True)
+            Strng = getattr(CF,"Fix"+Source)(Strng,reverse=True)
         except AttributeError:
             pass
             #print #"Fix"+Target+" doesn't exist - Reverse"
@@ -200,7 +200,7 @@ def convertScript(Strng,Source,Target):
         Strng = PrP.RemoveJoiners(Strng)
         Strng = CF.ShiftDiacritics(Strng, Source, reverse=True)
         try:
-            Strng = getattr(__import__('ConvertFix'),"Fix"+Source)(Strng,reverse=True)
+            Strng = getattr(CF,"Fix"+Source)(Strng,reverse=True)
         except AttributeError:
             pass
             #print #"Fix"+Target+" doesn't exist - Reverse"

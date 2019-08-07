@@ -145,8 +145,14 @@
             </q-item>
         </q-collapsible>
         <q-collapsible icon="build" label="Technical" >
-          <q-item to="/api">
-            <q-item-main label="API" />
+          <q-item to="/web-api">
+            <q-item-main label="Web API" />
+          </q-item>
+          <q-item to="/python">
+            <q-item-main label="Python package" />
+          </q-item>
+          <q-item to="/documentation">
+            <q-item-main label="Documentation" />
           </q-item>
           <q-item to="/plugin">
             <q-item-main label="Website Plugin" />
@@ -500,7 +506,7 @@ export default {
 }
 @font-face {
   font-family: 'Lamphun';
-  src: url('../statics/Hariphunchai.otf')
+  src: url('../statics/Pali_Tilok.ttf')
 }
 @font-face {
   font-family: 'Tibetan Dbu Med';
@@ -758,7 +764,7 @@ export default {
 }
 .taitham {
   font-family: "Lamphun";
-  font-size: 175%;
+  font-size: 150%;
 }
 .sylotinagri {
   font-family: "Noto Sans SylotiNagri"

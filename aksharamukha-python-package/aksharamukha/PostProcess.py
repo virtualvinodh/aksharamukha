@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
-import GeneralMap as GM
-from ScriptMap.Roman import Avestan
-from ScriptMap.MainIndic import Tamil,Malayalam,Gurmukhi,Oriya,Saurashtra,Sinhala,Urdu,Devanagari, Chakma, Limbu
-from ScriptMap.EastIndic import Tibetan, Thai, PhagsPa, ZanabazarSquare
-import ConvertFix as CF
+from . import GeneralMap as GM
+from . import ScriptMap
+from aksharamukha.ScriptMap.Roman import Avestan
+from aksharamukha.ScriptMap.MainIndic import Tamil,Malayalam,Gurmukhi,Oriya,Saurashtra,Sinhala,Urdu,Devanagari, Chakma, Limbu
+from aksharamukha.ScriptMap.EastIndic import Tibetan, Thai, PhagsPa, ZanabazarSquare
+from . import ConvertFix as CF
 import re
 
 ### Write Lotsssss of Comments

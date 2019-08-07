@@ -10,16 +10,16 @@ from functools import reduce
 
 def ScriptPath(Script):
     if Script in MainIndic:
-        return 'ScriptMap.MainIndic.'+Script
+        return 'aksharamukha.ScriptMap.MainIndic.'+Script
     elif Script in EastIndic:
-        return 'ScriptMap.EastIndic.'+Script
+        return 'aksharamukha.ScriptMap.EastIndic.'+Script
     elif Script in Roman:
-        return 'ScriptMap.Roman.'+Script
+        return 'aksharamukha.ScriptMap.Roman.'+Script
     elif Script in NonIndic:
-        return 'ScriptMap.NonIndic.'+Script
+        return 'aksharamukha.ScriptMap.NonIndic.'+Script
 
 def retCharList(charList):
-    return getattr(__import__('GeneralMap'),charList)
+    return globals()[charList]
 
 def CrunchSymbols(Part,Script):
     ModScript = importlib.import_module(ScriptPath(Script))

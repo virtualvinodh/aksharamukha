@@ -14,10 +14,26 @@ export default [
   },
 
   {
-    path: '/api',
+    path: '/web-api',
     component: () => import('layouts/default'),
     children: [
-      { path: '', component: () => import('pages/api') }
+      { path: '', component: () => import('pages/web-api') }
+    ]
+  },
+
+  {
+    path: '/python',
+    component: () => import('layouts/default'),
+    children: [
+      { path: '', component: () => import('pages/python') }
+    ]
+  },
+
+  {
+    path: '/documentation',
+    component: () => import('layouts/default'),
+    children: [
+      { path: '', component: () => import('pages/documentation') }
     ]
   },
 

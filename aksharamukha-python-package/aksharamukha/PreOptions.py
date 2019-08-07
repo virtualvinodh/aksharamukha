@@ -7,11 +7,15 @@ def ApplyPreProcessing(Strng,Source,Target):
         Options = ['PhagsPaArrange']
     else:
         Options = []
-        
+
+    print('Getting preprocesssing ')
+
     for Option in Options:
         if Option.find(Target) != -1:
-            Strng = getattr(__import__('PreProcess'),Option)(Strng,Source)
+            Strng = getattr(PP,Option)(Strng,Source)
+            print (Strng)
         else:
-            Strng = getattr(__import__('PreProcess'),Option)(Strng,Target)
-            
-    return Strng        
+            Strng = getattr(PP,Option)(Strng,Target)
+            print(Strng)
+
+    return Strng

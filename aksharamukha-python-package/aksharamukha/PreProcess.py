@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
-import GeneralMap as GM
+from . import GeneralMap as GM
 import re
 import string
-import PostProcess
-import ConvertFix as CF
-from ScriptMap.EastIndic import PhagsPa
-from ScriptMap.MainIndic import Tamil, Malayalam, Limbu
+from . import PostProcess
+from . import ConvertFix as CF
+from aksharamukha.ScriptMap.EastIndic import PhagsPa
+from aksharamukha.ScriptMap.MainIndic import Tamil, Malayalam, Limbu
 ### Use escape char in all functions
 
 def UrduShortNotShown(Strng):

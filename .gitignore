@@ -30,3 +30,21 @@ aksharamukha-front/src-cordova/
 aksharamukha-back/build/
 
 aksharamukha-desktop-release/
+
+aksharamukha-python-package/aksharamukha\.egg-info/
+
+aksharamukha-python-package/build/
+
+aksharamukha-python-package/dist/
+
+aksharamukha-python-package/aksharamukha/ScriptMap/MainIndic/__pycache__/
+
+aksharamukha-python-package/aksharamukha/ScriptMap/EastIndic/__pycache__/
+
+aksharamukha-python-package/aksharamukha/ScriptMap/__pycache__/
+
+aksharamukha-python-package/aksharamukha/ScriptMap/NonIndic/__pycache__/
+
+aksharamukha-python-package/aksharamukha/ScriptMap/Roman/__pycache__/
+
+aksharamukha-python-package/aksharamukha/__pycache__/
