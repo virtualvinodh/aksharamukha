@@ -119,7 +119,7 @@ def detect_preoptions(text, inputScript):
         if 'ະ' in text or 'ັ' in text:
             preoptions = ['LaoTranscription']
     elif inputScript == 'Urdu':
-            preOptions = ['UrduShortNotShown']
+            preoptions = ['UrduShortNotShown']
 
     return preoptions
 
