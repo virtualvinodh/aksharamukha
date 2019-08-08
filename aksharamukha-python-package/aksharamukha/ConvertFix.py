@@ -1778,11 +1778,12 @@ def FixTaiTham(Strng,reverse=False):
             Strng = Strng.replace(y,x)
 
     if not reverse:
-        Strng = Strng.replace("\u1A63\u1A74","\u1A74\u1A63") # kAM -> kMA (Like Thai ำ )
+        # Strng = Strng.replace("\u1A63\u1A74","\u1A74\u1A63") # kAM -> kMA (Like Thai ำ )
+        pass
         # Check above in Pali texts
-
     else:
-        Strng = Strng.replace("\u1A74\u1A63","\u1A63\u1A74") # kAM <- kMA
+        #Strng = Strng.replace("\u1A74\u1A63","\u1A63\u1A74") # kAM <- kMA
+        pass
 
     ListC ='|'.join(GM.CrunchSymbols(GM.Consonants,'TaiTham'))
     ng = TaiTham.ConsonantMap[4]+vir

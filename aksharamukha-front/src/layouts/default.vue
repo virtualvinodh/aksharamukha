@@ -505,8 +505,12 @@ export default {
   src: url('../statics/JMYZK--WDT.ttf')
 }
 @font-face {
-  font-family: 'Lamphun';
+  font-family: 'PaliTilok';
   src: url('../statics/Pali_Tilok.ttf')
+}
+@font-face {
+  font-family: 'Lamphun';
+  src: url('../statics/Pali_Khottabun.ttf')
 }
 @font-face {
   font-family: 'Tibetan Dbu Med';
@@ -763,6 +767,10 @@ export default {
   font-family: "Noto Sans Takri";
 }
 .taitham {
+  font-family: "PaliTilok";
+  font-size: 150%;
+}
+.taithamlao {
   font-family: "Lamphun";
   font-size: 150%;
 }

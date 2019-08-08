@@ -2,8 +2,8 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
-        // baseURL: 'https://aksharamukha.appspot.com/api/',
-        baseURL: 'http://localhost:8085/api',
+        baseURL: 'https://aksharamukha.appspot.com/api/',
+        // baseURL: 'http://localhost:8085/api',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -177,6 +177,9 @@ export const ScriptMixin = {
         ],
         'Lao': [
           { label: 'Lao Nativization', value: 'LaoNative' }
+        ],
+        'TaiTham': [
+          { label: 'Tai Tham Lao', value: 'TaiThamLao' }
         ],
         'Tibetan': [
           { label: 'Use <i>Bindu with nada</i>', value: 'TibetanNada' },
@@ -930,8 +933,8 @@ export const ScriptMixin = {
           omnicode: 'lanna',
           wikicode: 'Tai_Tham_script',
           font: {
-            'name': 'Lamphun',
-            'url': 'http://wrdingham.co.uk/lanna/renderer_test.htm#fonts'
+            'name': 'Pali Tilok',
+            'url': 'https://github.com/virtualvinodh/aksharamukha/blob/master/aksharamukha-front/src/statics/Pali_Tilok.ttf'
           }
         },
         {
@@ -1318,6 +1321,8 @@ export const ScriptMixin = {
         return 'tamilold'
       } else if (postOptions.includes('tibetandbumed') && tgt === 'Tibetan') {
         return 'tibetandbumed'
+      } else if (postOptions.includes('TaiThamLao') && tgt === 'TaiTham') {
+        return 'taithamlao'
       } else {
         return tgt.toLowerCase()
       }

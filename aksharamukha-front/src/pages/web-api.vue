@@ -57,6 +57,10 @@
 
     <p class="q-body-1">All script identifiers and the various flags for Pre- and Post-Options are listed in detail <router-link to='/documentation'>here</router-link> along with their description.</p>
 
+    <h5> High Volume Requests </h5> <br/>
+
+    <p class="q-body-1">Please be considerate in your API requests. Please do not use the public API for high volume requests, as you will end up overloading the GAE instance(s) and, eventually, shut it down (as I have a spending limit). I'm not explicitly limiting anything, assuming that people are reasonable entities :) If you'd like to use it for high volume requests, feel free to deploy it in your own server (the code is open source after all) or contact me vinodh@virtualvinodh.com.</p>
+
   </q-page>
 </template>
 

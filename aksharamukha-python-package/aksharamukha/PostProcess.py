@@ -25,6 +25,9 @@ def ranjanawartu(Strng):
     Strng = Strng.replace('་', '࿎ ')
     return Strng
 
+def TaiThamLao(Strng):
+    return Strng
+
 def egrantamil(Strng):
     return Strng
 
