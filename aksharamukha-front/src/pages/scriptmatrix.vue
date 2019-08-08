@@ -90,7 +90,6 @@
 </style>
 
 <script>
-import Controls from '../components/Controls'
 import Learncard from '../components/Learncard'
 import ListCharAll from '../components/ListCharAll'
 import Transliterate from '../components/Transliterate'
@@ -103,7 +102,6 @@ export default {
   name: 'PageIndex',
   mixins: [ScriptMixin],
   components: {
-    Controls,
     QPageSticky,
     Transliterate,
     Learncard,

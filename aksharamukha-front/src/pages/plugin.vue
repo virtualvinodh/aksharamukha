@@ -7,16 +7,12 @@
 <script>
 import { QTooltip, QPageSticky } from 'quasar'
 import { ScriptMixin } from '../mixins/ScriptMixin'
-import Controls from '../components/Controls'
-import Transliterate from '../components/Transliterate'
 
 export default {
   // name: 'PageName',
   mixins: [ScriptMixin],
   components: {
     QTooltip,
-    Controls,
-    Transliterate,
     QPageSticky
   },
   data () {

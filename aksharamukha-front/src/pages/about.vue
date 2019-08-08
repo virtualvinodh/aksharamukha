@@ -1,7 +1,7 @@
 <template>
     <q-page padding>
       <q-page-sticky position="top-right">
-        <controls v-model="options" :extra="false" :minimizeO="false"> </controls>
+        <controls-plug v-model="options" :extra="false" :minimizeO="false"> </controls-plug>
       </q-page-sticky>
         <div class="quote q-color-tertiary">
         <div class="q-mb-md">
@@ -49,7 +49,7 @@
 <script>
 import { QTooltip, QPageSticky } from 'quasar'
 import { ScriptMixin } from '../mixins/ScriptMixin'
-import Controls from '../components/Controls'
+import ControlsPlug from '../components/ControlsPlug'
 import Transliterate from '../components/Transliterate'
 
 export default {
@@ -57,7 +57,7 @@ export default {
   mixins: [ScriptMixin],
   components: {
     QTooltip,
-    Controls,
+    ControlsPlug,
     Transliterate,
     QPageSticky
   },

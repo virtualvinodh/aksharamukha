@@ -202,7 +202,6 @@
 import {QTooltip, QEditor, QRadio, QBtn, QField, QBtnToggle, QToggle, QInput, QSelect, QOptionGroup, QAlert, QSpinnerComment, QTabs, QTab, QTabPane, QRouteTab, QCollapsible} from 'quasar'
 import sanitizeHtml from 'sanitize-html'
 import html2canvas from 'html2canvas'
-import Controls from '../components/Controls'
 import Transliterate from '../components/Transliterate'
 import { ScriptMixin } from '../mixins/ScriptMixin'
 import ClipboardJS from 'clipboard'
@@ -224,7 +223,6 @@ export default {
     QField,
     QBtnToggle,
     QToggle,
-    Controls,
     QInput,
     QSelect,
     QSpinnerComment,

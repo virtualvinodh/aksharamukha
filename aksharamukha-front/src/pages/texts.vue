@@ -2,7 +2,7 @@
   <q-page padding class="book-content q-mt-lg">
     <div class="print-hide">
       <q-page-sticky position="top-right">
-        <controls v-model="options" :minimizeO="true"> </controls>
+        <controls-plug v-model="options" :minimizeO="true"> </controls-plug>
       </q-page-sticky>
     </div>
       <transliterate :text="text" src="Devanagari" :tgt="options.script" :sourcePreserve="options.sourcePreserve" :postOptions="options.postOptions">
@@ -15,12 +15,12 @@
 
 <script>
 import Transliterate from '../components/Transliterate'
-import Controls from '../components/Controls'
+import ControlsPlug from '../components/ControlsPlug'
 import {QPageSticky, QInnerLoading, QSpinnerComment} from 'quasar'
 
 export default {
   components: {
-    Controls,
+    ControlsPlug,
     QPageSticky,
     Transliterate,
     QInnerLoading,

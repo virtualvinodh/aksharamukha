@@ -100,7 +100,6 @@ import {QTooltip, QEditor, QRadio, QBtn, QField, QBtnToggle, QToggle, QInput, QS
 import sanitizeHtml from 'sanitize-html'
 import html2canvas from 'html2canvas'
 import Transliterate from '../components/Transliterate'
-import Controls from '../components/Controls'
 import InputOptions from '../components/InputOptions'
 import OutputOptions from '../components/OutputOptions'
 import InputNotice from '../components/InputNotice'
@@ -122,7 +121,6 @@ export default {
     QField,
     QBtnToggle,
     QToggle,
-    Controls,
     QInput,
     QSelect,
     QSpinnerComment,
