@@ -344,9 +344,10 @@ export default {
           this.$set(this, 'preOptions', this.preOptionsScript[this.inputScript])
         }
 
-        var preOptionsTemp = await this.getPre(this.textInput, this.inputScript)
-
+        // Check with the list of scripts in transliterate.detect_preoptions()
+        // scripts available tehre must be added here
         if (['Thai', 'Lao', 'LaoPali', 'Urdu'].includes(this.inputScript)) {
+          var preOptionsTemp = await this.getPre(this.textInput, this.inputScript)
           this.preOptions = preOptionsTemp
         }
       }

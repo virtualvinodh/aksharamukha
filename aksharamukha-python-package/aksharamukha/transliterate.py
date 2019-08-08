@@ -61,7 +61,7 @@ def auto_detect(text):
         if 'ৰ' in text or 'ৱ' in text:
             inputScript = 'Assamese'
     elif inputScript == 'Lao':
-        if any(char in text for char in lao):
+        if any(char in text for char in laoPali):
             inputScript = 'LaoPali'
     elif inputScript == 'Batak':
         inputScript = 'BatakKaro'
@@ -97,7 +97,7 @@ def auto_detect(text):
         if 'ʰ' in text:
             inputScript = 'Titus'
         elif any(char in text for char in diacritics):
-            if ē in text or 'ō' in text or 'r̥' in text:
+            if 'ē' in text or 'ō' in text or 'r̥' in text:
                 inputScript = 'ISO'
             else:
                 inputScript = 'IAST'
@@ -108,6 +108,8 @@ def auto_detect(text):
 
     return inputScript
 
+# Cross check with inded convert() funciton within autodetect
+# scripts available here must be added there
 def detect_preoptions(text, inputScript):
     preoptions = []
     if inputScript == 'Thai':
