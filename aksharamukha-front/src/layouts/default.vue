@@ -313,6 +313,12 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css?family=Mukta+Malar&subset=latin-ext,tamil');
 
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans&display=swap');
+
+.russiancyrillic {
+  font-family: 'Noto Sans', sans-serif;
+}
+
 .footer-img {
   height: 20px;
 }

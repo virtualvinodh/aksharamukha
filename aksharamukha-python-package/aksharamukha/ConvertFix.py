@@ -132,6 +132,9 @@ def PostFixRomanOutput(Strng,Source,Target):
     if Target == "WarangCiti":
         Strng = FixWarangCiti(Strng)
 
+    if Target == "RomanReadable":
+        Strng = FixRomanReadable(Strng)
+
     if Target == "IAST":
         Strng = VedicSvarasDiacrtics(Strng)
         Strng = Strng.replace("a_i", "aï")
@@ -1196,6 +1199,26 @@ def FixSoraSompeng(Strng, reverse = False):
         Strng = re.sub(ListC + '(?!' + ListV + ')', r'\1' + 'ə', Strng)
 
     return Strng
+
+
+def FixRomanReadable(Strng, reverse = False):
+    Strng = Strng.replace("Mk", "ngk")
+    Strng = Strng.replace("Mg", "ngg")
+    Strng = Strng.replace("Mc", "njc")
+    Strng = Strng.replace("Mj", "njj")
+    Strng = Strng.replace("Md", "nd")
+    Strng = Strng.replace("Mt", "nt")
+    Strng = Strng.replace("M", 'm')
+
+    Strng = Strng.replace("ngk", "nk")
+    Strng = Strng.replace("ngg", "ng")
+    Strng = Strng.replace("njc", "nc")
+    Strng = Strng.replace("njj", "nj")
+
+    Strng = Strng.replace("jnj", "jny")
+
+    return Strng
+
 
 def FixWarangCiti(Strng, reverse = False):
     ListC = "(" + "|".join(GM.CrunchSymbols(GM.Consonants, 'WarangCiti')) + ')'

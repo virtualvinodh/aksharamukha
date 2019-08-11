@@ -2,8 +2,8 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
-        baseURL: 'https://aksharamukha.appspot.com/api/',
-        // baseURL: 'http://localhost:8085/api',
+        // baseURL: 'https://aksharamukha.appspot.com/api/',
+        baseURL: 'http://localhost:8085/api',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -49,7 +49,8 @@ export const ScriptMixin = {
       ayogavahasAll: ['~', 'M', 'H'],
       preOptionsGroup: {
         'Tamil': [
-          { label: 'Transcribe Tamil', value: 'TamilTranscribe' }
+          { label: 'Transcribe Tamil', value: 'TamilTranscribe' },
+          { label: 'க2 க3 க4 -> க² க³ க⁴', value: 'TamilNumeralSub' }
         ],
         'Itrans': [
           { label: 'E/O for long, e/o for short', value: 'swapEeItrans' }
@@ -99,6 +100,9 @@ export const ScriptMixin = {
         ],
         'IAST': [
           { label: 'Pali Text', value: 'IASTPali' }
+        ],
+        'RussianCyrillic': [
+          { label: 'Pali Text', value: 'CyrillicPali' }
         ],
         'Urdu': [
           { label: 'Short vowels not shown', value: 'UrduShortNotShown' }
@@ -219,6 +223,11 @@ export const ScriptMixin = {
         'IAST': [
           { label: 'Pali Text', value: 'IASTPali' },
           { label: 'Capitalize sentences', value: 'capitalizeSentence' }
+        ],
+        'RussianCyrillic': [
+          { label: 'Pali Text', value: 'CyrillicPali' },
+          { label: 'Capitalize sentences', value: 'capitalizeSentence' },
+          { label: 'Remove Diacritics', value: 'removeDiacritics' }
         ],
         'ISO': [
           { label: 'Capitalize sentences', value: 'capitalizeSentence' }
@@ -1112,6 +1121,10 @@ export const ScriptMixin = {
         {
           label: 'Roman (Harvard-Kyoto)',
           value: 'HK'
+        },
+        {
+          label: 'Roman (Readable)',
+          value: 'RomanReadable'
         },
         {
           label: 'Roman (ITRANS)',

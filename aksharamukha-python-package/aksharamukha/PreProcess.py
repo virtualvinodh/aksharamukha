@@ -14,6 +14,26 @@ def UrduShortNotShown(Strng):
 
     return Strng
 
+def TamilNumeralSub(Strng):
+    ListC = '(' + '[கசடதபஜஸ]' + ')'
+    ListV = '(' + '|'.join(GM.CrunchSymbols(GM.VowelSigns, 'Tamil')) + ')'
+
+    Strng = re.sub(ListC + ListV + '2', r'\1\2' + '²', Strng)
+    Strng = re.sub(ListC + ListV + '3', r'\1\2' + '³', Strng)
+    Strng = re.sub(ListC + ListV + '4', r'\1\2' + '⁴', Strng)
+
+    Strng = re.sub(ListC + '2', r'\1' + '²', Strng)
+    Strng = re.sub(ListC + '3', r'\1' + '³', Strng)
+    Strng = re.sub(ListC + '4', r'\1' + '⁴', Strng)
+
+    Strng = Strng.replace('ரு\'', 'ருʼ')
+    Strng = Strng.replace('ரு’', 'ருʼ')
+
+    Strng = Strng.replace('ம்\'', 'ம்ʼ')
+    Strng = Strng.replace('ம்’', 'ம்ʼ')
+
+    return Strng
+
 def swapEe(Strng):
     Strng = Strng.replace('E', 'X@X@')
     Strng = Strng.replace('e', 'E')
@@ -184,6 +204,11 @@ def SinhalaPali(Strng):
 
 def IASTPali(Strng):
     Strng = Strng.replace('ḷ', 'l̤')
+
+    return Strng
+
+def CyrillicPali(Strng):
+    Strng = Strng.replace('л̣', 'л̤',)
 
     return Strng
 
