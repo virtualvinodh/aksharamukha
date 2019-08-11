@@ -1199,6 +1199,10 @@ export const ScriptMixin = {
         {
           label: 'Titus',
           value: 'Titus'
+        },
+        {
+          label: 'Roman (Readable)',
+          value: 'RomanReadable'
         }
       ],
       scriptsIME: [
