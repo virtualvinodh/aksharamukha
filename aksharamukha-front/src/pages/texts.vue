@@ -7,10 +7,14 @@
     </div>
       <transliterate :text="text" src="Devanagari" :tgt="options.script" :sourcePreserve="options.sourcePreserve" :postOptions="options.postOptions">
       </transliterate>
+      <span class = "demo"></span>
   </q-page>
 </template>
 
-<style>
+<style scoped>
+  .demo {
+      font-family: Ariel;
+  }
 </style>
 
 <script>

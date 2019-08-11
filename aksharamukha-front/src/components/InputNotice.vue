@@ -4,7 +4,7 @@
       <div class="notice q-ma-sm" v-show="inputScript === 'Urdu'">Urdu is an abjad. Please read the script <router-link to="/describe/Urdu">notes</router-link> to read about Urdu reading conventions.</div>
       <div class="notice q-ma-sm" v-show="inputScript === 'Grantha' &&
         preOptions.includes('egrantamil')">This does not use the proper Unicode encoding. Please consider converting the text into Grantha Unicode.</div>
-      <div class="notice q-ma-sm" v-show="(outputScript === 'IAST' || outputScript === 'ISO') &&
+      <div class="notice q-ma-sm" v-show="(outputScript === 'IAST' || outputScript === 'ISO' || outputScript === 'WarangCiti') &&
         postOptions.includes('capitalizeSentence')">To capitalize a specific word, add @ to the beginning of word. e.g. @<transliterate text="buddha" src="HK" :tgt="inputScript"></transliterate></div>
   </span>
 </template>

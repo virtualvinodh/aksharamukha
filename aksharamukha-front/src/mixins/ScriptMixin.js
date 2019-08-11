@@ -81,6 +81,9 @@ export const ScriptMixin = {
         'Gurmukhi': [
           { label: 'Schwa deletion (Only word-final) <div class="q-mt-sm"> (e.g. ਰਾਮ → rām) </div>', value: 'SchwaFinalGurmukhi' }
         ],
+        'WarangCiti': [
+          { label: 'Schwa deletion (Only word-final) <div class="q-mt-sm"> (e.g. <span class="warangciti">𑣜𑣁𑣖</span> → rām) </div>', value: 'SchwaFinalWarangCiti' }
+        ],
         'Grantha': [
           { label: 'Prakrit orthography', value: 'GranthaPrakrit' },
           { label: 'Use e-Grantamil encoding', value: 'egrantamil' }
@@ -222,6 +225,9 @@ export const ScriptMixin = {
         ],
         'Khojki': [
           { label: 'Retain spaces', value: 'KhojkiRetainSpace' }
+        ],
+        'WarangCiti': [
+          { label: 'Capitalize sentences', value: 'capitalizeSentence' }
         ],
         'Kaithi': [
           { label: 'Retain spaces', value: 'KaithiRetainSpace' }

@@ -71,7 +71,9 @@ def RemoveFinal(Strng, Target):
     VowS = "(" + '|'.join(GM.CrunchSymbols(GM.VowelSignsNV, Target)) + ")"
     Cons = "(" + '|'.join(GM.CrunchSymbols(GM.Consonants, Target)) + ")"
     Char = "(" + '|'.join(GM.CrunchSymbols(GM.Characters, Target)) + ")"
-    Nas = "([ंःँ]?)"
+
+    Nas = "([" + '|'.join(GM.CrunchList('AyogavahaMap',Target)) + "]?)"
+
     ISyl = "((" + VowI + "|" + "(" + Cons + VowS + "?" + ")" + Nas + '))'
     Syl = "((" + Cons + VowS + ')' + Nas + ")"
     SylAny = "((" + Cons + VowS + "?" + ')' + Nas + ")"
@@ -79,7 +81,8 @@ def RemoveFinal(Strng, Target):
     vir = GM.CrunchList("ViramaMap", Target)[0]
     Cons2 = '((' + Cons + vir + ')?' + Cons + ')'
 
-    Strng = re.sub(ISyl+Cons2+"(?!" + Char + ")", r'\1\8' + vir, Strng) # kama -> kam
+    Strng = re.sub(ISyl + Cons2+"(?!" + Char + ")", r'\1\8' + vir, Strng) # kama -> kam
+
     #Strng = re.sub(VowI + Nas + Cons2+"(?!" + Char + ")", r'\1\2\3' + vir, Strng)
 
     return Strng
@@ -99,6 +102,27 @@ def SchwaFinalGujarati(Strng):
 def SchwaFinalBengali(Strng):
 
     Strng = RemoveFinal(Strng, 'Bengali')
+
+    return Strng
+
+def SchwaFinalWarangCiti(Strng):
+    Target = "WarangCiti"
+
+    VowI = "(" + '|'.join(GM.CrunchSymbols(GM.Vowels,Target)) + ")"
+    VowS = "(" + '|'.join(GM.CrunchSymbols(GM.VowelSignsNV, Target)) + ")"
+    Cons = "(" + '|'.join(GM.CrunchSymbols(GM.Consonants, Target)) + ")"
+    Char = "(" + '|'.join(GM.CrunchSymbols(GM.Characters, Target)) + ")"
+
+    Nas = "([" + '|'.join(GM.CrunchList('AyogavahaMap',Target)) + "]?)"
+
+    ISyl = "((" + VowI + "|" + "(" + Cons + VowS + "?" + ")" + Nas + '))'
+    Syl = "((" + Cons + VowS + ')' + Nas + ")"
+    SylAny = "((" + Cons + VowS + "?" + ')' + Nas + ")"
+
+    vir = '\u02BB'
+    Cons2 = '((' + Cons + vir + ')?' + Cons + ')'
+
+    Strng = re.sub(ISyl+Cons2+"(?!" + Char + ")", r'\1\8' + vir, Strng) # kama -> kam
 
     return Strng
 
@@ -227,6 +251,9 @@ def PreProcess(Strng,Source,Target):
 
     if Source == "ISO" or Source == "IAST" or Source == "Titus":
         Strng = CF.VedicSvarasNonDiacritic(Strng)
+
+    if Source == "WarangCiti":
+        Strng = Strng.replace('\u200D', '\u00D7')
 
     ## Normalize Input Strings
 

@@ -70,6 +70,9 @@ def ApplyScriptDefaults(Strng,Source,Target):
     elif Target == "Modi":
         Options += ['ModiRemoveLong']
 
+    elif Target == "WarangCiti":
+        Options += ['WarangCitiModernOrthogaphy']
+
     else:
         Options += []
 

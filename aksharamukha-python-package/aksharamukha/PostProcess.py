@@ -80,6 +80,14 @@ def DevanagariACandra(Strng):
 
     return Strng
 
+def WarangCitiModernOrthogaphy(Strng):
+    Strng = re.sub('([\U000118D4\U000118D5\U000118CC\U000118CB\U000118CF\U000118CE\U000118D2\U000118D1\U000118D5\U000118D4\U000118D8\U000118D7\U000118DB])(\u200D)(𑣙)', r'\1', Strng)
+    Strng = Strng.replace('𑣝', '𑣞')
+
+    Strng = Strng.replace('\u200D', '')
+
+    return Strng
+
 def ChakmaEnableAllConjuncts(Strng):
     listC = '('+"|".join(sorted(GM.CrunchSymbols(GM.Consonants,"Chakma")+Chakma.VowelMap[:1],key=len,reverse=True))+')'
     Strng = re.sub("\U00011134"+'('+listC+')',"\U00011133"+r'\1',Strng)

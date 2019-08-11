@@ -1199,12 +1199,51 @@ def FixSoraSompeng(Strng, reverse = False):
 
 def FixWarangCiti(Strng, reverse = False):
     ListC = "(" + "|".join(GM.CrunchSymbols(GM.Consonants, 'WarangCiti')) + ')'
+    ListV = "(" + "|".join(GM.CrunchSymbols(GM.Vowels, 'WarangCiti') + ['\u200D']) + ')'
 
     if not reverse:
+        Strng = re.sub(ListC + ListC, r'\1' + '\u200D' + r'\2', Strng)
+
+        # Remove the inherent vowel
+        Strng = re.sub(ListC + '(\U000118C1\U000118D9\u02BE)', r'\1' + '\u00BD', Strng)
+
         Strng = re.sub(ListC + '(\U000118C1)', r'\1', Strng)
+
+        Strng = re.sub(ListV + '(\U000118C0)', r'\1' + '\u200D' + r'\2', Strng)
+
+        Strng = Strng.replace('\u02BE', '')
+
+        Strng = Strng.replace("𑣟\u02BF", "𑣙𑣗") # Remove Warang Citi Nukta
+
+        # Brining back 'AA'
+
+        Strng = Strng.replace('\u00BD', '\U000118C1')
+
     else:
-        ListV = "(" + "|".join(GM.CrunchSymbols(GM.Vowels, 'WarangCiti')) + ')'
+        Strng = Strng.lower()
+        ## Replace hb -> vQ
+        Strng = Strng.replace("𑣙𑣗", "𑣟\u02BF") # Introduce Warang Citi Nukta
+        Strng = Strng.replace('\u00D7', '\u200D')
+
+        ## Reintroduce vowel AA
+        Strng = re.sub(ListC + '(\U000118C1)', r'\1' + '\u00BD',Strng)
+        Strng = re.sub('(\u02BF)' + '(\U000118C1)', r'\1' + '\U000118C1\u00BD',Strng)
+
+        # Introduce the inhernt  Vowel
         Strng = re.sub(ListC + '(?!' + ListV + ')', r'\1' + '\U000118C1', Strng)
+
+        ## Retain Aspirates
+        Strng = re.sub('([\U000118D4\U000118D5\U000118CC\U000118CB\U000118CF\U000118CE\U000118D2\U000118D1\U000118D5\U000118D4\U000118D8\U000118D7\U000118DB])(\u200D)(𑣙)', r'\1' + '\u00D6' + r'\3', Strng)
+        Strng = Strng.replace('\u200D', '')
+        Strng = Strng.replace('\u00D6', '\u200D')
+
+        ## Move vowel signs and nUkta viQ -> vQi
+        Strng = re.sub('(𑣁)' + '(\u02BF)' + ListV , r'\2\3', Strng)
+
+        ## Remove a if necessary
+        Strng = Strng.replace('𑣁' + '\u02BB', '')
+
+        Strng = Strng.replace('\U000118C1\u00BD', '\U000118C1\U000118D9\u02BE')
 
     return Strng
 

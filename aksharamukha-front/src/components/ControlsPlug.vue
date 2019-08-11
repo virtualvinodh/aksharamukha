@@ -27,6 +27,8 @@
     </div>
     </q-slide-transition>
     <q-btn flat :icon="minimize ? 'call made' : 'call received' " @click="minimize = !minimize" color="dark"/>
+    <span class = "demo"></span>
+
   </div>
 </template>
 
@@ -78,5 +80,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.demo {
+  font-family: Ariel;
+}
 </style>
