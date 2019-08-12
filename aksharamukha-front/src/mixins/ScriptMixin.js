@@ -2,8 +2,8 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
-        // baseURL: 'https://aksharamukha.appspot.com/api/',
-        baseURL: 'http://localhost:8085/api',
+        baseURL: 'https://aksharamukha.appspot.com/api/',
+        // baseURL: 'http://localhost:8085/api',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -50,7 +50,7 @@ export const ScriptMixin = {
       preOptionsGroup: {
         'Tamil': [
           { label: 'Transcribe Tamil', value: 'TamilTranscribe' },
-          { label: 'க2 க3 க4 -> க² க³ க⁴', value: 'TamilNumeralSub' }
+          { label: '<span class="tamil">க2 க3 க4 -> க² க³ க⁴</span>', value: 'TamilNumeralSub' }
         ],
         'Itrans': [
           { label: 'E/O for long, e/o for short', value: 'swapEeItrans' }
@@ -230,6 +230,9 @@ export const ScriptMixin = {
           { label: 'Remove Diacritics', value: 'removeDiacritics' }
         ],
         'ISO': [
+          { label: 'Capitalize sentences', value: 'capitalizeSentence' }
+        ],
+        'RomanReadable': [
           { label: 'Capitalize sentences', value: 'capitalizeSentence' }
         ],
         'Khojki': [

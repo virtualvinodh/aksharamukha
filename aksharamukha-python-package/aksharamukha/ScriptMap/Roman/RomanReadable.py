@@ -96,8 +96,8 @@ ConsonantMap =  [
 SouthConsonantMap = [
                     'l',
                     'zh',
-                    'n',
-                    'r'
+                    'r',
+                    'n'
                     ]
 
 NuktaConsonantMap =  [
@@ -112,11 +112,11 @@ NuktaConsonantMap =  [
                      ]
 
 SinhalaConsonantMap =[
-                     'nga',
-                     'nja',
-                     'nda',
-                     'nda',
-                     'mba',
+                     'ng',
+                     'nj',
+                     'nd\'',
+                     'nd',
+                     'mb',
                       ]
 
 NuktaMap = [

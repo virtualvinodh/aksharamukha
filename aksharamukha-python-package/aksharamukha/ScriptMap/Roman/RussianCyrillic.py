@@ -20,7 +20,7 @@ VowelMap =  [
             ]
 
 SouthVowelMap = [
-                'ӗ',
+                '\u044D\u0306',
                 '\u043E\u0306',
                 ]
 
