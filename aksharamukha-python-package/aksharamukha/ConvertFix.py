@@ -1202,20 +1202,30 @@ def FixSoraSompeng(Strng, reverse = False):
 
 
 def FixRomanReadable(Strng, reverse = False):
-    Strng = Strng.replace("Mk", "ngk")
-    Strng = Strng.replace("Mg", "ngg")
-    Strng = Strng.replace("Mc", "njc")
-    Strng = Strng.replace("Mj", "njj")
-    Strng = Strng.replace("Md", "nd")
-    Strng = Strng.replace("Mt", "nt")
-    Strng = Strng.replace("M", 'm')
+    if not reverse:
+        Strng = re.sub('([aiueo])nj([aeiou])', r'\1' + 'ny' + r'\2', Strng)
+        Strng = re.sub('(\W)nj([aeiou])', r'\1' + 'ny' + r'\2', Strng)
+        Strng = re.sub('^nj([aeiou])', 'ny' + r'\1', Strng)
 
-    Strng = Strng.replace("ngk", "nk")
-    Strng = Strng.replace("ngg", "ng")
-    Strng = Strng.replace("njc", "nc")
-    Strng = Strng.replace("njj", "nj")
+        Strng = Strng.replace("njnj", "nny")
 
-    Strng = Strng.replace("jnj", "jny")
+        Strng = Strng.replace("Mk", "ngk")
+        Strng = Strng.replace("Mg", "ngg")
+        Strng = Strng.replace("Mc", "njc")
+        Strng = Strng.replace("Mj", "njj")
+        Strng = Strng.replace("Md", "nd")
+        Strng = Strng.replace("Mt", "nt")
+        Strng = Strng.replace("M", 'm')
+
+        Strng = Strng.replace("ngk", "nk")
+        Strng = Strng.replace("ngg", "ng")
+        Strng = Strng.replace("njc", "nc")
+        Strng = Strng.replace("njj", "nj")
+
+        Strng = Strng.replace("jnj", "jny")
+
+    else:
+        pass
 
     return Strng
 

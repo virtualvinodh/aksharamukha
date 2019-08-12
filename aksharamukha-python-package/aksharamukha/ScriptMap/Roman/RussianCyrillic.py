@@ -108,7 +108,7 @@ NuktaConsonantMap =  [
                      '\u0440\u0324',
                      '\u0440\u0324\u0445',
                      '\u0444',
-                     '\u0439\u0307'
+                     '\u0439\u0323'
                      ]
 
 SinhalaConsonantMap =[

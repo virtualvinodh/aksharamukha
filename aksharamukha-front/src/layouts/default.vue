@@ -313,12 +313,6 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css?family=Mukta+Malar&subset=latin-ext,tamil');
 
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans&display=swap');
-
-.russiancyrillic {
-  font-family: 'Noto Sans', sans-serif;
-}
-
 .footer-img {
   height: 20px;
 }
@@ -615,6 +609,11 @@ export default {
   src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansKharoshthi/NotoSansKharoshthi-Regular.otf')
 }
 @font-face {
+  font-family: 'Noto Sans Regular';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/hinted/ttf/NotoSans/NotoSans-Regular.ttf')
+}
+
+@font-face {
   font-family: 'RanjanaUnicode';
   src: url('../statics/RanjanaUNICODE1.0.ttf')
 
@@ -629,6 +628,11 @@ export default {
   margin-top: 25px;
   margin-left: 5px;
 }
+
+.russiancyrillic {
+  font-family: 'Noto Sans Regular';
+}
+
 .tamilold {
   font-family: "Mukta Malar Regular";
   font-feature-settings: "ss04", "kern";
