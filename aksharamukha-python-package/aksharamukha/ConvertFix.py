@@ -11,6 +11,35 @@ import re
 ## ListC check.. if LLA is there in ListC... just now it has only Consonant Map
 ### Rewrite all ListC, ListV as sorted(List,key=len,reverse=True)
 
+def OriyaIPAFixPre(Strng):
+    Strng = Strng.replace('ଂ', 'ଙ୍')
+    Strng = Strng.replace('ଃ', 'ହ୍')
+
+    return Strng
+
+def OriyaIPAFix(Strng):
+    Strng = Strng.replace('ə', 'ɔ')
+    Strng = Strng.replace('j', 'd͡ʒ')
+    Strng = Strng.replace('\u1E8F', 'j')
+    Strng = Strng.replace('kʂ', 'kʰ')
+    Strng = Strng.replace('ʂ', 's̪')
+    Strng = Strng.replace('ʃ', 's̪')
+    Strng = Strng.replace('ʋ', 'u̯')
+
+    Strng = Strng.replace('t͡s', 't͡ʃ')
+
+    Strng = Strng.replace('ɪ', 'i')
+    Strng = Strng.replace('iː', 'i')
+    Strng = Strng.replace('uː', 'u')
+    Strng = Strng.replace('eː', 'e')
+    Strng = Strng.replace('oː', 'o')
+    Strng = Strng.replace('ɾɨ', 'ɾu')
+    Strng = Strng.replace('ɾɨː', 'ɾu')
+    Strng = Strng.replace('lɨ', 'lu')
+    Strng = Strng.replace('lɨː', 'lu')
+
+    return Strng
+
 def VedicSvarasLatinIndic(Strng):
     ## Vedic Svaras
     Strng = Strng.replace('{\\m+}', 'ꣳ')

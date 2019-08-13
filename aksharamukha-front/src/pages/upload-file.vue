@@ -10,7 +10,7 @@
         class="q-ma-md col-md-5"
       >
         <q-uploader url=""  hide-upload-button clearable extensions=".txt, .html, .htm, .xml, .json, .itx"
-           stack-label="Click on the + icon to add. You can add multiple files. Only .txt, .xml, .html, .itx, and .json extensions are allowed" auto-expand hide-upload-progress multiple ref="uploadF" :style="{width:'150px'}"/>
+           stack-label="+ icon to add. You can add multiple files. Only .txt, .xml, .html, .itx, and .json extensions are allowed" auto-expand hide-upload-progress multiple ref="uploadF" :style="{width:'250px'}"/>
     </q-field>
     <q-btn class="q-ma-md" color="dark" @click="convertDownload"> Convert & Download </q-btn>
     <q-btn class="q-ma-md" color="dark" @click="convertView"> Convert & View </q-btn>

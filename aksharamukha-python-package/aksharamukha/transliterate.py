@@ -1,5 +1,6 @@
 import re
 from . import Convert,PostOptions,PostProcess,PreProcess
+from . import ConvertFix
 import json
 import requests
 import html
@@ -150,6 +151,9 @@ def convert(src, tgt, txt, nativize, preoptions, postoptions):
     for options in preoptions:
       txt = getattr(PreProcess, options)(txt)
 
+    if src == "Oriya" and tgt == "IPA":
+        txt = ConvertFix.OriyaIPAFixPre(txt)
+
     transliteration = Convert.convertScript(txt, src, tgt)
 
     if nativize:
@@ -166,6 +170,9 @@ def convert(src, tgt, txt, nativize, preoptions, postoptions):
         r = requests.get("http://anunaadam.appspot.com/api?text=" + txt + "&method=2")
         r.encoding = r.apparent_encoding
         transliteration = r.text
+
+    if src == "Oriya" and tgt == "IPA":
+        transliteration = ConvertFix.OriyaIPAFix(transliteration)
 
     return transliteration
 
