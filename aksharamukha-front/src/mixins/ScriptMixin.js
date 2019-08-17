@@ -1259,6 +1259,26 @@ export const ScriptMixin = {
     }
   },
   methods: {
+    getResultPost: function (url, data = {}) {
+      return new Promise(resolve => {
+        this.$axios.post(url, data)
+          .then(function (response) {
+            resolve(response)
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      })
+    },
+    readFile: function (url) {
+      return new Promise(resolve => {
+        var reader = new FileReader()
+        reader.onload = function () {
+          resolve(reader.result)
+        }
+        reader.readAsDataURL(url)
+      })
+    },
     compareObjects: function (a, b) {
       if (a.label < b.label) {
         return -1

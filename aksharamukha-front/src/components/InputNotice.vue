@@ -6,6 +6,7 @@
         preOptions.includes('egrantamil')">This does not use the proper Unicode encoding. Please consider converting the text into Grantha Unicode.</div>
       <div class="notice q-ma-sm" v-show="(outputScript === 'IAST' || outputScript === 'ISO' || outputScript === 'WarangCiti' || outputScript === 'RussianCyrillic' || outputScript === 'RomanReadable') &&
         postOptions.includes('capitalizeSentence')">To capitalize a specific word, add @ to the beginning of word. e.g. @<transliterate text="buddha" src="HK" :tgt="inputScript"></transliterate></div>
+      <div class="notice q-ma-sm" v-show="OCRPerformed">The text has been automatically recognized from the uploaded image. Please proof-read the text for errors,</div>
   </span>
 </template>
 
@@ -19,7 +20,7 @@ export default {
   components: {
     Transliterate
   },
-  props: ['inputScript', 'outputScript', 'preOptions', 'postOptions'],
+  props: ['inputScript', 'outputScript', 'preOptions', 'postOptions', 'OCRPerformed'],
   data () {
     return {}
   }

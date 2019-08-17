@@ -20,3 +20,14 @@ handlers:
 - url: /fonts/(.*)
   static_files: spa-mat/fonts/\1
   upload: spa-mat/fonts/(.*)
+
+- url: /#/.*
+  static_files: spa-mat/index2.html
+  upload: spa-mat/index2.html
+
+- url: /api/.*
+  script: auto
+
+- url: /.*
+  static_files: spa-mat/index.html
+  upload: spa-mat/index.html
