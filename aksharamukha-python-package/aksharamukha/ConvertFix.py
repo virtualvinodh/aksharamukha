@@ -189,6 +189,10 @@ def PostFixRomanOutput(Strng,Source,Target):
 # Fixing the Indic Ouput for the standard corrections
 # Indic Fix are mandatory corrections to the immediate ouput.
 def FixIndicOutput(Strng,Source,Target):
+    vir = GM.CrunchList('ViramaMap', Target)[0]
+
+    Strng = Strng.replace(vir + '_', vir)
+
     try:
         Strng = globals()["Fix"+Target](Strng)
     except KeyError:
@@ -388,6 +392,33 @@ def FixKhmer(Strng,reverse=False):
 
     return Strng
 
+def FixShan(Strng, reverse=False):
+    if not reverse:
+        Strng = Strng.replace('်ရ', 'ြ')
+        Strng = Strng.replace('်ယ', 'ျ')
+        Strng = Strng.replace('်ဝ', 'ွ')
+        Strng = Strng.replace('်ႁ', 'ှ')
+
+        ## Maintain the order of the medials
+        Strng = re.sub('(ှ)' + '([ျြွ])', r'\2\1', Strng)
+        Strng = Strng.replace("\u103C\u103B", "\u103B\u103C")
+        Strng = Strng.replace("\u103D\u103B", "\u103B\u103D")
+        Strng = Strng.replace("ွ\u103C", "\u103Cွ")
+
+    else:
+        Strng = Strng.replace('ြ', '်ရ')
+        Strng = Strng.replace('ျ', '်ယ')
+        Strng = Strng.replace('ွ', '်ဝ')
+        Strng = Strng.replace('ှ', '်ႁ')
+
+        ## Reverse the order of the medials
+        Strng = re.sub('([ျြွ])' + '(ှ)', r'\2\1', Strng)
+        Strng = Strng.replace("\u103B\u103C", "\u103C\u103B")
+        Strng = Strng.replace("\u103B\u103D", "\u103D\u103B")
+        Strng = Strng.replace("\u103Cွ", "ွ\u103C")
+
+    return Strng
+
 # Burmese - Tall A + Subjoning Consonants
 def FixBurmese(Strng,reverse=False):
     ListC ='|'.join(GM.CrunchSymbols(GM.Consonants,'Burmese'))
@@ -444,10 +475,27 @@ def FixBurmese(Strng,reverse=False):
 
         Strng = Strng.replace("ာ္", "ာ်")
 
-        Strng = Strng.replace("ရ်္င်္ဂ", "ရ်္င္ဂ")
+        Strng = re.sub("(ရ်္င်္)" + "(" + ListC + ")", "ရ်္င္" + r'\2', Strng)
 
         Strng = Strng.replace("ါ္", "ါ်")
+
+        Strng = Strng.replace("\u103A\u1039\u101A", "\u103B")
+        Strng = Strng.replace('\u103C\u103A\u1039ဝ', "\u103Cွ")
+
+        ## Maintain the order of the medials
+        Strng = re.sub('(ှ)' + '([ျြွ])', r'\2\1', Strng)
+        Strng = Strng.replace("\u103C\u103B", "\u103B\u103C")
+        Strng = Strng.replace("\u103D\u103B", "\u103B\u103D")
+        Strng = Strng.replace("ွ\u103C", "\u103Cွ")
+
+        #Strng = Strng.replace("\u103A\u1039", "\u1039")
     else:
+        ## Reverse the order of the medials
+        Strng = re.sub('([ျြွ])' + '(ှ)', r'\2\1', Strng)
+        Strng = Strng.replace("\u103B\u103C", "\u103C\u103B")
+        Strng = Strng.replace("\u103B\u103D", "\u103D\u103B")
+        Strng = Strng.replace("\u103Cွ", "ွ\u103C")
+
         Strng = Strng.replace("ဿ","သ္သ")
         Strng = Strng.replace("ည", "ဉ္ဉ")
 
@@ -1880,8 +1928,8 @@ def FixTaiTham(Strng,reverse=False):
 
     if not reverse:
         # Strng = Strng.replace("\u1A63\u1A74","\u1A74\u1A63") # kAM -> kMA (Like Thai ำ )
-        pass
         # Check above in Pali texts
+        pass
     else:
         #Strng = Strng.replace("\u1A74\u1A63","\u1A63\u1A74") # kAM <- kMA
         pass
@@ -1908,11 +1956,18 @@ def FixTaiTham(Strng,reverse=False):
 
         Strng = Strng.replace('ᩅ᩠ᨿᩤ','ᩅ᩠ᨿᩣ') ## vyA (Tall) to vyA (normal)
 
+        Strng = Strng.replace('\u1A55\u1A60\u1A3F', '\u1A60\u1A3F\u1A55') # Fix krya
+
+        Strng = Strng.replace('\u1A60\u1A47', vir + '\u1A47') ## Fonts don't support SSA conjunct
+
     else:
         Strng = Strng.replace('ᩔ', 'ᩈ᩠ᩈ') ## Reverse great sa
         Strng = re.sub('('+ListC+')'+'\u1A58',r'\1' + ng,Strng) # Reverse: Kai mang Lai -> ng + virama
         Strng = Strng.replace('\u1A60',vir) # Regular Virama for Transliteration
         Strng = Strng.replace("ᩤ", AA) # Reverse Tall A
+
+        Strng = Strng.replace('\u1A60\u1A3F\u1A55', '\u1A55\u1A60\u1A3F') # Rever krya
+
 
     return Strng
 

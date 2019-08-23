@@ -2,8 +2,8 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
-        baseURL: 'https://aksharamukha.appspot.com/api/',
-        // baseURL: 'http://localhost:8085/api',
+        // baseURL: 'https://aksharamukha.appspot.com/api/',
+        baseURL: 'http://localhost:8085/api',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -285,6 +285,19 @@ export const ScriptMixin = {
             'name': 'Noto Sans Ahom',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifAhom/NotoSerifAhom-Regular.otf'
           }
+        },
+        {
+          label: 'Ariyaka',
+          value: 'Ariyaka',
+          sscode: '',
+          ssdesc: '',
+          wikicode: '',
+          omnicode: 'ariyaka',
+          font: {
+            'name': 'Ariyaka',
+            'url': 'https://www.omniglot.com/fonts/ariyaka.zip'
+          },
+          miscdesc: 'The Ariyaka alphabet was invented by King Mongkut Rama IV of Siam (1804-1868) as an alternative alphabet for Pali. He considered the Khmer alphabet, which was commonly used to write Pali, to be too complicated and decided to create an alphabet that was easier to use and more Western in appearance. (From <a href="https://www.omniglot.com/writing/ariyaka.php">Omniglot</a>)'
         },
         {
           label: 'Assamese',
@@ -855,6 +868,19 @@ export const ScriptMixin = {
           }
         },
         {
+          label: 'Shan',
+          value: 'Shan',
+          sscode: '',
+          ssdesc: '',
+          omnicode: 'shan',
+          wikicode: 'Shan_language#Alphabet',
+          font: {
+            'name': '',
+            'url': ''
+          },
+          miscdesc: 'Shan is a Tai language spoken by about 3.3 million people in the Shan States of Burma in the northeast of the country, and also in parts of northern Thailand and in the Xishuangbanna (Sipsongpanna) Dai Autonomous Prefecture of Yunnan province in southwestern China.The Shan script is used in Burma to write Shan, although few Shan speakers can read and write in the Shan script. (from <a href="https://www.omniglot.com/writing/shan.htm">Omniglot</a>)'
+        },
+        {
           label: 'Sharada',
           value: 'Sharada',
           sscode: 'Shrd',
@@ -1226,7 +1252,7 @@ export const ScriptMixin = {
           value: 'Devanagari'
         }
       ],
-      indicSubset: ['Khmer', 'Burmese', 'Lao', 'Thai', 'Balinese', 'Javanese', 'Tibetan', 'LaoPali', 'TaiTham', 'Cham', 'Lepcha', 'Ahom', 'ZanabazarSquare']
+      indicSubset: ['Shan', 'Khmer', 'Burmese', 'Lao', 'Thai', 'Balinese', 'Javanese', 'Tibetan', 'LaoPali', 'TaiTham', 'Cham', 'Lepcha', 'Ahom', 'ZanabazarSquare']
     }
   },
   computed: {
@@ -1302,7 +1328,7 @@ export const ScriptMixin = {
       var desc
       var omniext
 
-      if (script.value === 'Sundanese') {
+      if (script.value === 'Sundanese' || script.value === 'Ariyaka') {
         omniext = '.php'
       } else {
         omniext = '.htm'

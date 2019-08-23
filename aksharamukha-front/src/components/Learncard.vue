@@ -33,8 +33,8 @@ export default {
 
 <style scoped>
 .cards {
-  width:140px;
-  height:170px;
+  width:200px;
+  height:210px;
 }
 .tamil {
   font-size: 100%;
