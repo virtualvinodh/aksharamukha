@@ -179,8 +179,6 @@ export default {
     }
   },
   mounted () {
-    console.log(keys)
-
     if (localStorage.sourcePreserve) {
       this.sourcePreserve = JSON.parse(localStorage.sourcePreserve)
     }
