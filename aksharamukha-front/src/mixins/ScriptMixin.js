@@ -286,6 +286,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifAhom/NotoSerifAhom-Regular.otf'
           }
         },
+        /*
         {
           label: 'Ariyaka',
           value: 'Ariyaka',
@@ -299,6 +300,7 @@ export const ScriptMixin = {
           },
           miscdesc: 'The Ariyaka alphabet was invented by King Mongkut Rama IV of Siam (1804-1868) as an alternative alphabet for Pali. He considered the Khmer alphabet, which was commonly used to write Pali, to be too complicated and decided to create an alphabet that was easier to use and more Western in appearance. (From <a href="https://www.omniglot.com/writing/ariyaka.php">Omniglot</a>)'
         },
+        */
         {
           label: 'Assamese',
           value: 'Assamese',
@@ -867,6 +869,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSiddham/NotoSansSiddham-Regular.otf'
           }
         },
+        /*
         {
           label: 'Shan',
           value: 'Shan',
@@ -880,6 +883,7 @@ export const ScriptMixin = {
           },
           miscdesc: 'Shan is a Tai language spoken by about 3.3 million people in the Shan States of Burma in the northeast of the country, and also in parts of northern Thailand and in the Xishuangbanna (Sipsongpanna) Dai Autonomous Prefecture of Yunnan province in southwestern China.The Shan script is used in Burma to write Shan, although few Shan speakers can read and write in the Shan script. (from <a href="https://www.omniglot.com/writing/shan.htm">Omniglot</a>)'
         },
+        */
         {
           label: 'Sharada',
           value: 'Sharada',
