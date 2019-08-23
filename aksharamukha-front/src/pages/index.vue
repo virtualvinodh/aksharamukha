@@ -118,6 +118,8 @@ import OutputButtons from '../components/OutputButtons'
 import scrollTo from 'vue-scrollto'
 import { ScriptMixin } from '../mixins/ScriptMixin'
 
+import keys from '../keys.js'
+
 var _ = require('underscore')
 
 export default {
@@ -177,6 +179,8 @@ export default {
     }
   },
   mounted () {
+    console.log(keys)
+
     if (localStorage.sourcePreserve) {
       this.sourcePreserve = JSON.parse(localStorage.sourcePreserve)
     }
@@ -272,7 +276,7 @@ export default {
       // console.log(data)
 
       // console.log('Sending Results')
-      var result = await this.getResultPost('https://vision.googleapis.com/v1/images:annotate?key=AIzaSyAMMaFVt_ECeuzV-FqB-HFDaXTst-u5Y0w', data)
+      var result = await this.getResultPost('https://vision.googleapis.com/v1/images:annotate?key=' + keys.api_key, data)
       // console.log('Got the results back')
       this.textInput = result.data.responses[0].fullTextAnnotation.text
       this.convert()
