@@ -143,7 +143,7 @@ export default {
         ['n*ga', 'n*ja', 'n*Da', 'n*da', 'm*ba'],
         ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
         ['\'', 'oM', 'K', '.', '..'],
-        [ 'kka', 'kkha', 'kga', 'kgha', 'kGa', 'kca', 'kcha', 'kja', 'kjha', 'kJa', 'kTa', 'kTha', 'kDa', 'kDha', 'kNa', 'kta', 'ktha', 'kda', 'kdha', 'kna', 'kpa', 'kpha', 'kba', 'kbha', 'kma', 'kya', 'kra', 'kla', 'kva', 'kza', 'kSa', 'ksa', 'ak', 'k' ],
+        [ 'kka', 'kkha', 'kga', 'kgha', 'kGa', 'kca', 'kcha', 'kja', 'kjha', 'kJa', 'kTa', 'kTha', 'kDa', 'kDha', 'kNa', 'kta', 'ktha', 'kda', 'kdha', 'kna', 'kpa', 'kpha', 'kba', 'kbha', 'kma', 'kya', 'kra', 'kla', 'kva', 'kza', 'kSa', 'ksa', 'k_ha', 'ak', 'k' ],
         ['ka', 'kA', 'ki', 'kI', 'ku', 'kU', 'kR', 'kRR', 'klR', 'klRR', 'ke', 'kai', 'ko', 'kau'],
         ['kE', 'kO', 'kaE', 'kAE', 'kaO'],
         ['kaM', 'kaH', 'ka~']
@@ -160,7 +160,7 @@ export default {
           ['n*ga', 'n*ja', 'n*Da', 'n*da', 'm*ba'],
           ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
           ['\'', 'oM', 'K', '.', '..'],
-          [ 'kka', 'kkha', 'kga', 'kgha', 'kGa', 'kca', 'kcha', 'kja', 'kjha', 'kJa', 'kTa', 'kTha', 'kDa', 'kDha', 'kNa', 'kta', 'ktha', 'kda', 'kdha', 'kna', 'kpa', 'kpha', 'kba', 'kbha', 'kma', 'kya', 'kra', 'kla', 'kva', 'kza', 'kSa', 'ksa', 'ak', 'k' ],
+          [ 'kka', 'kkha', 'kga', 'kgha', 'kGa', 'kca', 'kcha', 'kja', 'kjha', 'kJa', 'kTa', 'kTha', 'kDa', 'kDha', 'kNa', 'kta', 'ktha', 'kda', 'kdha', 'kna', 'kpa', 'kpha', 'kba', 'kbha', 'kma', 'kya', 'kra', 'kla', 'kva', 'kza', 'kSa', 'ksa', 'k_ha', 'ak', 'k' ],
           ['ka', 'kA', 'ki', 'kI', 'ku', 'kU', 'kR', 'kRR', 'klR', 'klRR', 'ke', 'kai', 'ko', 'kau'],
           ['kE', 'kO', 'kaE', 'kAE', 'kaO'],
           ['kaM', 'kaH', 'ka~']
@@ -176,7 +176,7 @@ export default {
           ['n*ga', 'n*ja', 'n*Da', 'n*da', 'm*ba'],
           ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
           ['\'', 'oM', 'K', '.', '..'],
-          [ 'kka', 'kkha', 'kga', 'kgha', 'kGa', 'kca', 'kcha', 'kja', 'kjha', 'kJa', 'kTa', 'kTha', 'kDa', 'kDha', 'kNa', 'kta', 'ktha', 'kda', 'kdha', 'kna', 'kpa', 'kpha', 'kba', 'kbha', 'kma', 'kya', 'kra', 'kla', 'kva', 'kza', 'kSa', 'ksa', 'ak', 'k' ],
+          [ 'kka', 'kkha', 'kga', 'kgha', 'kGa', 'kca', 'kcha', 'kja', 'kjha', 'kJa', 'kTa', 'kTha', 'kDa', 'kDha', 'kNa', 'kta', 'ktha', 'kda', 'kdha', 'kna', 'kpa', 'kpha', 'kba', 'kbha', 'kma', 'kya', 'kra', 'kla', 'kva', 'kza', 'kSa', 'ksa', 'k_ha', 'ak', 'k' ],
           ['ka', 'kA', 'ki', 'kI', 'ku', 'kU', 'kR', 'kRR', 'klR', 'klRR', 'ke', 'kai', 'ko', 'kau'],
           ['kE', 'kO', 'kaE', 'kAE', 'kaO'],
           ['kaM', 'kaH', 'ka~']
@@ -192,7 +192,7 @@ export default {
           ['n*ga', 'n*ja', 'n*Da', 'n*da', 'm*ba'],
           ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
           ['\'', 'oM', 'K', '.', '..'],
-          [ 'kka', 'kkha', 'kga', 'kgha', 'kGa', 'kca', 'kcha', 'kja', 'kjha', 'kJa', 'kTa', 'kTha', 'kDa', 'kDha', 'kNa', 'kta', 'ktha', 'kda', 'kdha', 'kna', 'kpa', 'kpha', 'kba', 'kbha', 'kma', 'kya', 'kra', 'kla', 'kva', 'kza', 'kSa', 'ksa', 'ak', 'k' ],
+          [ 'kka', 'kkha', 'kga', 'kgha', 'kGa', 'kca', 'kcha', 'kja', 'kjha', 'kJa', 'kTa', 'kTha', 'kDa', 'kDha', 'kNa', 'kta', 'ktha', 'kda', 'kdha', 'kna', 'kpa', 'kpha', 'kba', 'kbha', 'kma', 'kya', 'kra', 'kla', 'kva', 'kza', 'kSa', 'ksa', 'k_ha', 'ak', 'k' ],
           ['ka', 'kA', 'ki', 'kI', 'ku', 'kU', 'kR', 'kRR', 'klR', 'klRR', 'ke', 'kai', 'ko', 'kau'],
           ['kE', 'kO', 'kaE', 'kAE', 'kaO'],
           ['kaM', 'kaH', 'ka~']

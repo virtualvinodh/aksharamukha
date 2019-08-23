@@ -68,6 +68,11 @@ def auto_detect(text):
         inputScript = 'BatakKaro'
     elif inputScript == 'Myanmar':
         inputScript = 'Burmese'
+
+        shan = ['ႃ', '\u1086', '\u1084', 'ၵ', 'ၶ', 'ၷ', 'ꧠ', 'ၸ', 'ꧡ', 'ꩡ', 'ꧢ', 'ၺ', 'ꩦ', 'ꩧ', 'ꩨ', 'ꩩ', 'ꧣ', 'ၻ', 'ꩪ', 'ၼ','ၽ', 'ꧤ', 'ႁ', 'ꩮ', 'ၹ', 'ၾ']
+        if any([char in text for char in shan]):
+            inputScript = 'Shan'
+
     elif inputScript == 'Meetei':
         inputScript = 'MeeteiMayek'
     elif inputScript == 'Old':

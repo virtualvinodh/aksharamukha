@@ -312,6 +312,7 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Mukta+Malar&subset=latin-ext,tamil');
+@import url('https://fonts.googleapis.com/css?family=Padauk&display=swap');
 
 .footer-img {
   height: 20px;
@@ -517,6 +518,10 @@ export default {
   src: url('../statics/Qomolangma-Betsu.ttf')
 }
 @font-face {
+  font-family: 'Ariyaka';
+  src: url('../statics/ariyaka.ttf')
+}
+@font-face {
   font-family: 'AnnaPurna';
   src: url('../statics/AnnapurnaSIL-TT-Regular.ttf')
 }
@@ -631,6 +636,11 @@ export default {
 
 .russiancyrillic {
   font-family: 'Noto Sans Regular';
+}
+
+.ariyaka {
+  font-family: 'Ariyaka';
+  line-height: 1.5em;
 }
 
 .tamilold {

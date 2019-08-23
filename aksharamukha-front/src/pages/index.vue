@@ -31,11 +31,21 @@
       color="dark"
       rows="10"
       :max-height="1500"
+      @clear="OCRPerformed = false"
       ></q-input>
     <input-notice :inputScript="inputScript" :outputScript="outputScript" :preOptions="preOptions"
-       :postOptions="postOptions"></input-notice>
+       :postOptions="postOptions" :OCRPerformed="OCRPerformed"></input-notice>
     <input-options :inputScript="inputScript" :outputScript="outputScript" :preOptionsInput="preOptions"
       :postOptions="postOptions" v-model="preOptions" @input="convert"></input-options>
+    <div class="row">
+      <q-btn class="q-ma-sm print-hide col-xs-1 col-md-1" @click="uploadImage" v-show="displayImageButton"> <q-icon name="add photo alternate" /><q-tooltip>Upload image</q-tooltip></q-btn>
+      <span v-show="showFileUpload" class="q-ma-sm">
+            <q-uploader url="" clearable extensions=".jpg, .jpeg, .png, .bmp, .ico" @add="showConvertImage" @remove:cancel="hideConvertButton"
+               auto-expand hide-upload-button ref="uploadF" :style="{width:'200px'}"/>
+            <q-btn class="q-mt-sm" v-show="displayButton" @click="performOCR"> <small> Convert </small> </q-btn>
+            <q-spinner-comment color="dark" :size="30" v-show="loadingOCR" class="q-ma-sm"/>
+      </span>
+    </div>
     </div>
     <div class="q-ma-md print-hide">
       <div class="col">
@@ -80,7 +90,7 @@
     appear
   >
     <div class="q-ma-lg q-body-1 print-hide" id="scrollend">
-      This is a new beta version of Aksharamukha. Please report any bugs found in <a href="https://github.com/virtualvinodh/aksharamukha/issues">Github</a>. <br/>The old version is still temporarily available <a href="http://www.virtualvinodh.com/aksharamkh/aksharamukha-old.php">here</a>.
+      Please report any bugs found in <a href="https://github.com/virtualvinodh/aksharamukha/issues">Github</a>.
     </div>
   </transition>
   <a :href="brahmiImg" ref="imgDownload" :style="{'display': 'none'}" download="text.png"><button>Download</button></a>
@@ -96,7 +106,7 @@
 </style>
 
 <script>
-import {QTooltip, QEditor, QRadio, QBtn, QField, QBtnToggle, QToggle, QInput, QSelect, QOptionGroup, QAlert, QSpinnerComment, QPageSticky} from 'quasar'
+import {QTooltip, QEditor, QRadio, QBtn, QField, QBtnToggle, QToggle, QInput, QSelect, QOptionGroup, QAlert, QSpinnerComment, QPageSticky, QUploader} from 'quasar'
 import sanitizeHtml from 'sanitize-html'
 import html2canvas from 'html2canvas'
 import Transliterate from '../components/Transliterate'
@@ -132,11 +142,18 @@ export default {
     InputNotice,
     OutputNotice,
     OutputButtons,
-    QPageSticky
+    QPageSticky,
+    QUploader
   },
   data () {
     return {
       textInput: '',
+      OCRPerformed: false,
+      showFileUpload: false,
+      imageFile: '',
+      loadingOCR: false,
+      displayButton: false,
+      displayImageButton: true,
       beta: true,
       model: [],
       scrolled: false,
@@ -233,6 +250,53 @@ export default {
     }
   },
   methods: {
+    performOCR: async function () {
+      this.loadingOCR = true
+
+      var base64 = await this.readFile(this.imageFile)
+      var data = {
+        'requests': [
+          {
+            'image': {
+              'content': base64.split(',')[1]
+            },
+            'features': [
+              {
+                'type': 'DOCUMENT_TEXT_DETECTION'
+              }
+            ]
+          }
+        ]
+      }
+
+      // console.log(data)
+
+      // console.log('Sending Results')
+      var result = await this.getResultPost('https://vision.googleapis.com/v1/images:annotate?key=AIzaSyAMMaFVt_ECeuzV-FqB-HFDaXTst-u5Y0w', data)
+      // console.log('Got the results back')
+      this.textInput = result.data.responses[0].fullTextAnnotation.text
+      this.convert()
+      this.$refs.uploadF.reset()
+
+      this.displayButton = false
+      this.loadingOCR = false
+      this.showFileUpload = false
+      this.displayImageButton = true
+
+      this.OCRPerformed = true
+    },
+    uploadImage: function () {
+      this.showFileUpload = true
+      document.getElementsByClassName('q-uploader-input')[0].click()
+      this.displayImageButton = false
+    },
+    showConvertImage: function (files) {
+      this.imageFile = files[0]
+      this.displayButton = true
+    },
+    hideConvertButton: function (file) {
+      this.displayButton = false
+    },
     scrolldown: function () {
       scrollTo.scrollTo('#scrollend', 1000)
       this.scrolled = true
