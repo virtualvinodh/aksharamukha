@@ -69,9 +69,36 @@ def auto_detect(text):
     elif inputScript == 'Myanmar':
         inputScript = 'Burmese'
 
-        shan = ['ႃ', '\u1086', '\u1084', 'ၵ', 'ၶ', 'ၷ', 'ꧠ', 'ၸ', 'ꧡ', 'ꩡ', 'ꧢ', 'ၺ', 'ꩦ', 'ꩧ', 'ꩨ', 'ꩩ', 'ꧣ', 'ၻ', 'ꩪ', 'ၼ','ၽ', 'ꧤ', 'ႁ', 'ꩮ', 'ၹ', 'ၾ']
-        if any([char in text for char in shan]):
-            inputScript = 'Shan'
+        mon = ['ၚ', 'ၛ', '္ည', 'ၞ', 'ၟ', 'ၠ', 'ဳ', 'ဨ']
+        if any([char in text for char in mon]):
+            inputScript = 'Mon'
+
+        countSub = {'Shan': 0, 'TaiLaing': 0, 'KhamtiShan': 0}
+
+        text = text.replace('ႃ', '')
+
+        for uchar in text:
+            try:
+                char = unicodedata.name(uchar).lower()
+            except:
+                pass
+            if 'shan' in char:
+                countSub['Shan'] += 1
+            elif 'tai laing' in char:
+                countSub['TaiLaing'] += 1
+            elif 'khamti' in char:
+                countSub['KhamtiShan'] += 1
+
+        import operator
+        sorted_x = sorted(countSub.items(), key=operator.itemgetter(1))
+
+        if countSub['Shan'] > 0 or countSub['TaiLaing'] > 0 or countSub['KhamtiShan'] > 0:
+            inputScript = sorted_x[-1][0]
+
+
+        #shan = ['ႃ', '\u1086', '\u1084', 'ၵ', 'ၶ', 'ၷ', 'ꧠ', 'ၸ', 'ꧡ', 'ꩡ', 'ꧢ', 'ၺ', 'ꩦ', 'ꩧ', 'ꩨ', 'ꩩ', 'ꧣ', 'ၻ', 'ꩪ', 'ၼ','ၽ', 'ꧤ', 'ႁ', 'ꩮ', 'ၹ', 'ၾ']
+        #if any([char in text for char in shan]):
+            #inputScript = 'Shan'
 
     elif inputScript == 'Meetei':
         inputScript = 'MeeteiMayek'

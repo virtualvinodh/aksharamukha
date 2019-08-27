@@ -955,6 +955,44 @@ def ThaiVisargaSaraA(Strng):
 
     return Strng
 
+def ThaiSajjhayaOrthography(Strng):
+    ## reverse digraphs
+    Strng = CF.ThaiReverseVowelSigns(Strng, True)
+    Strng = CF.ThaiDigraphConjuncts(Strng, True)
+    Strng = CF.ThaiReverseVowelSigns(Strng)
+
+    Script = "Thai"
+
+    Strng = Strng.replace('ฺ', '์')
+
+    cons = "|".join(GM.CrunchSymbols(GM.Consonants, Script)+GM.CrunchList('VowelMap',Script)[0:1])
+    EAIO = "".join(GM.CrunchList('VowelSignMap',Script)[9:12]+GM.CrunchList('SinhalaVowelSignMap',Script)[:])
+
+    # short a for conjuncts : t(a)ssa
+    Strng = re.sub('(?<![' + EAIO + '])' + '(' + cons + ')' + '(' + cons + ')' + '(์)', r'\1' + 'ั' + r'\2\3', Strng)
+
+    cons_others  = '([ยรลวศษสหฬ])' # avarga
+
+    Strng = re.sub('(?<![' + EAIO + '])' + '(' + cons + ')' + '(' + cons + ')' + '(์)', r'\1' + 'ั' + r'\2\3', Strng)
+
+    # varga + avaraga or avarga + varga add joiner
+    # hma, mha etc.
+    Strng = re.sub('(' + cons + ')' + '(์)' + '([' + EAIO + ']?)' + cons_others , r'\1' + '๎' + r'\3\4', Strng)
+    Strng = re.sub(cons_others + '(์)' + '([' + EAIO + ']?)' + '(' + cons + ')', r'\1' + '๎' + r'\3\4', Strng)
+
+    ## ssa, lla, nna do no add joiner
+    Strng = re.sub(cons_others + '(๎)' + '([' + EAIO + ']?)' + r'\1' , r'\1' + '์' + r'\3\1', Strng)
+
+    #reorder dve sme
+    Strng = re.sub('(' + cons  + ')' + '(๎)' + '([' + EAIO + '])' + '(' + cons + ')', r'\3\1\2\4', Strng)
+
+    Strng = Strng.replace('ง์', 'ง')
+
+    #Strng = re.sub('([ยรลวศษสหฬ])(์)', r'\1' + '๎', Strng)
+
+    return Strng
+
+
 def ThaiTranscription(Strng):
 
     ## reverse digraphs

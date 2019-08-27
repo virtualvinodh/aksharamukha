@@ -392,6 +392,51 @@ def FixKhmer(Strng,reverse=False):
 
     return Strng
 
+def FixKhamtiShan(Strng, reverse=False):
+    if not reverse:
+        Strng = Strng.replace('်ꩳ', 'ြ')
+        Strng = Strng.replace('်ယ', 'ျ')
+        Strng = Strng.replace('်ဝ', 'ွ')
+
+        ## Maintain the order of the medials
+        Strng = Strng.replace("\u103C\u103B", "\u103B\u103C")
+        Strng = Strng.replace("\u103D\u103B", "\u103B\u103D")
+        Strng = Strng.replace("ႂ\u103C", "\u103Cွ")
+    else:
+        Strng = Strng.replace("\u103B\u103C", "\u103C\u103B")
+        Strng = Strng.replace("\u103B\u103D", "\u103D\u103B")
+        Strng = Strng.replace("\u103Cႂ", "ႂ\u103C")
+
+        Strng = Strng.replace('ြ', '်ꩳ')
+        Strng = Strng.replace('ျ', '်ယ')
+        Strng = Strng.replace('ွ', '်ဝ')
+
+    return Strng
+
+def FixTaiLaing(Strng, reverse=False):
+    if not reverse:
+        Strng = Strng.replace('်ꩺ', 'ြ')
+        Strng = Strng.replace('်ယ', 'ျ')
+        Strng = Strng.replace('်ဝ', 'ႂ')
+
+        ## Maintain the order of the medials
+        Strng = Strng.replace("\u103C\u103B", "\u103B\u103C")
+        Strng = Strng.replace("\u103D\u103B", "\u103B\u103D")
+        Strng = Strng.replace("ႂ\u103C", "\u103Cႂ")
+
+        Strng = Strng.replace('ႂျ','်၀ျ')
+
+    else:
+        Strng = Strng.replace("\u103B\u103C", "\u103C\u103B")
+        Strng = Strng.replace("\u103B\u103D", "\u103D\u103B")
+        Strng = Strng.replace("\u103Cႂ", "ႂ\u103C")
+
+        Strng = Strng.replace('ြ', '်ꩺ')
+        Strng = Strng.replace('ျ', '်ယ')
+        Strng = Strng.replace('ႂ', '်ဝ')
+
+    return Strng
+
 def FixShan(Strng, reverse=False):
     if not reverse:
         Strng = Strng.replace('်ရ', 'ြ')
@@ -406,16 +451,64 @@ def FixShan(Strng, reverse=False):
         Strng = Strng.replace("ွ\u103C", "\u103Cွ")
 
     else:
-        Strng = Strng.replace('ြ', '်ရ')
-        Strng = Strng.replace('ျ', '်ယ')
-        Strng = Strng.replace('ွ', '်ဝ')
-        Strng = Strng.replace('ှ', '်ႁ')
-
         ## Reverse the order of the medials
         Strng = re.sub('([ျြွ])' + '(ှ)', r'\2\1', Strng)
         Strng = Strng.replace("\u103B\u103C", "\u103C\u103B")
         Strng = Strng.replace("\u103B\u103D", "\u103D\u103B")
         Strng = Strng.replace("\u103Cွ", "ွ\u103C")
+
+        Strng = Strng.replace('ြ', '်ရ')
+        Strng = Strng.replace('ျ', '်ယ')
+        Strng = Strng.replace('ွ', '်ဝ')
+        Strng = Strng.replace('ှ', '်ႁ')
+
+    return Strng
+
+def FixMon(Strng, reverse=False):
+    pairs = [('င', 'ၚ'),('ဉ', 'ည'), ('ဈ', 'ၛ')]
+
+    for x, y in pairs:
+        Strng = Strng.replace(y, x)
+
+    Strng = FixBurmese(Strng, reverse)
+
+    Strng = Strng.replace('ည', '\uE001') #
+
+    for x, y in pairs:
+        Strng = Strng.replace(x, y)
+
+    Strng = Strng.replace('\uE001', 'ည\u1039ည')
+
+    medials_cons_mon = ['\u1039န', '\u1039မ', '\u1039လ']
+    medials_mon = ['ၞ', 'ၟ', 'ၠ']
+
+    if not reverse:
+        for x, y in zip(medials_cons_mon, medials_mon):
+            Strng = Strng.replace(x, y)
+
+        Strng = Strng.replace('ၠြ', 'ြၠ')
+
+        # Contigous Mon Medials
+        for i, med1 in enumerate(medials_mon):
+            for j, med2 in enumerate(medials_mon):
+                Strng = Strng.replace(med1 + med2, medials_cons_mon[i] + medials_cons_mon[j])
+
+        # Contiguous Medials + ya, ra and va
+        for i, med in enumerate(medials_mon):
+            Strng = Strng.replace(med + 'ျ', medials_cons_mon[i] + 'ျ')
+
+            Strng = Strng.replace('ရ်' + med,  'ရ်' + medials_cons_mon[i])
+            Strng = Strng.replace('ၚ်' + med,  'ၚ်' + medials_cons_mon[i])
+
+
+        # RA + Medial
+    else:
+        Strng = Strng.replace('်ရၠ', 'ၠ်ရ')
+
+        for x, y in zip(medials_cons_mon, medials_mon):
+            Strng = Strng.replace(y, x)
+
+        Strng = Strng.replace('\u1039', '်')
 
     return Strng
 
@@ -487,6 +580,10 @@ def FixBurmese(Strng,reverse=False):
         Strng = Strng.replace("\u103C\u103B", "\u103B\u103C")
         Strng = Strng.replace("\u103D\u103B", "\u103B\u103D")
         Strng = Strng.replace("ွ\u103C", "\u103Cွ")
+
+        ## Introduce repha for ra and ga
+        Strng = Strng.replace('ရျ', 'ရ်္ယ')
+        Strng = Strng.replace('ငျ', 'င်္ယ')
 
         #Strng = Strng.replace("\u103A\u1039", "\u1039")
     else:

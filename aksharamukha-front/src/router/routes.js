@@ -4,7 +4,6 @@ export default [
     path: '/',
     redirect: '/converter'
   },
-
   {
     path: '/upload',
     component: () => import('layouts/default'),
@@ -183,6 +182,6 @@ export default [
 
   { // Always leave this as last one
     path: '*',
-    component: () => import('pages/404')
+    redirect: '/converter'
   }
 ]

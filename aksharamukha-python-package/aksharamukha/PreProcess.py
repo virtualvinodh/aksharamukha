@@ -62,6 +62,20 @@ def egrantamil(Strng):
 def siddhammukta(Strng):
     return Strng
 
+def ThaiSajjhayaOrthography(Strng):
+    Script = "Thai"
+
+    #cons = "|".join(GM.CrunchSymbols(GM.Consonants, Script)+GM.CrunchList('VowelMap',Script)[0:1])
+    #EAIO = "".join(GM.CrunchList('VowelSignMap',Script)[9:12]+GM.CrunchList('SinhalaVowelSignMap',Script)[:])
+    ## Reorder dve
+    #Strng = re.sub('([' + EAIO + '])' + '(' + cons  + ')' + '(๎)' + '(' + cons + ')', r'\2\3\1\4', Strng)
+
+    Strng = Strng.replace('์', 'ฺ')
+    Strng = Strng.replace('๎', 'ฺ')
+    Strng = Strng.replace('ั', '')
+
+    return Strng
+
 # consider adding an optional NUkta to the post consonantal position
 def RemoveSchwaHindi(Strng):
     VowI = "(" + '|'.join(GM.CrunchSymbols(GM.Vowels,'Devanagari')) + ")"

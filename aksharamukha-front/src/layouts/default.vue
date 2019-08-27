@@ -559,7 +559,7 @@ export default {
 }
 @font-face {
   font-family: 'Noto Sans Newa';
-  src: url('../statics/NotoSansNewa-Regular_New.otf')
+  src: url('https://cdn.jsdelivr.net/gh/googlefonts/noto-fonts/phaseIII_only/unhinted/otf/NotoSansNewa/NotoSansNewa-Regular.otf');
 }
 @font-face {
   font-family: 'Noto Sans Sharada';

@@ -2,8 +2,8 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
-        baseURL: 'https://aksharamukha.appspot.com/api/',
-        // baseURL: 'http://localhost:8085/api',
+        // baseURL: 'https://aksharamukha.appspot.com/api/',
+        baseURL: 'http://localhost:8085/api',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -65,7 +65,9 @@ export const ScriptMixin = {
           { label: 'SA-I for vowel length', value: 'LimbuSpellingSaI' }
         ],
         'Thai': [
-          { label: 'Thai Orthography', value: 'ThaiOrthography' }
+          { label: 'Thai Orthography', value: 'ThaiOrthography' },
+          { label: 'Sajjhaya Orthography', value: 'ThaiSajjhayaOrthography' }
+
         ],
         'LaoPali': [
           { label: 'Lao Orthography', value: 'LaoTranscription' }
@@ -176,6 +178,7 @@ export const ScriptMixin = {
         ],
         'Thai': [
           { label: 'Thai Orthography', value: 'ThaiTranscription' },
+          { label: 'Sajjhaya Orthography', value: 'ThaiSajjhayaOrthography' },
           { label: 'Sara /a/ ะ as Visarga', value: 'ThaiVisargaSaraA' }
 
         ],
@@ -286,7 +289,6 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifAhom/NotoSerifAhom-Regular.otf'
           }
         },
-        /*
         {
           label: 'Ariyaka',
           value: 'Ariyaka',
@@ -298,9 +300,8 @@ export const ScriptMixin = {
             'name': 'Ariyaka',
             'url': 'https://www.omniglot.com/fonts/ariyaka.zip'
           },
-          miscdesc: 'The Ariyaka alphabet was invented by King Mongkut Rama IV of Siam (1804-1868) as an alternative alphabet for Pali. He considered the Khmer alphabet, which was commonly used to write Pali, to be too complicated and decided to create an alphabet that was easier to use and more Western in appearance. (From <a href="https://www.omniglot.com/writing/ariyaka.php">Omniglot</a>)'
+          miscdesc: 'The Ariyaka alphabet was invented by King Mongkut Rama IV of Siam (1804-1868) as an alternative alphabet for Pali. He considered the Khmer alphabet, which was commonly used to write Pali, to be too complicated and decided to create an alphabet that was easier to use and more Western in appearance.'
         },
-        */
         {
           label: 'Assamese',
           value: 'Assamese',
@@ -595,6 +596,19 @@ export const ScriptMixin = {
           }
         },
         {
+          label: 'Khamti Shan',
+          value: 'KhamtiShan',
+          sscode: '',
+          ssdesc: '',
+          omnicode: '',
+          wikicode: '',
+          miscdesc: 'Khamti Shan is spoken by 50,000 people in Myanmar and India. The language has a long literary tradition which was lost as people forgot their script. In the last 5 years the script has undergone a resurgence in a new form and after a pilot literacy programme is to be taught throughout the region.',
+          font: {
+            'name': '',
+            'url': ''
+          }
+        },
+        {
           label: 'Kharoshthi',
           value: 'Kharoshthi',
           sscode: 'Khar',
@@ -738,6 +752,18 @@ export const ScriptMixin = {
           }
         },
         {
+          label: 'Mon',
+          value: 'Mon',
+          sscode: '',
+          ssdesc: '',
+          omnicode: 'mon',
+          miscdesc: 'Mon is an Austroasiatic language spoken in parts of Myanmar/Burma and Thailand. In 2004 there were 850,000 speakers, mainly in Mon State, and also in the Tanintharyi Region and Kayin State in southern Myanmar.',
+          font: {
+            'name': '',
+            'url': ''
+          }
+        },
+        {
           label: 'Multani',
           value: 'Multani',
           sscode: 'Mult',
@@ -869,7 +895,6 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSiddham/NotoSansSiddham-Regular.otf'
           }
         },
-        /*
         {
           label: 'Shan',
           value: 'Shan',
@@ -881,9 +906,8 @@ export const ScriptMixin = {
             'name': '',
             'url': ''
           },
-          miscdesc: 'Shan is a Tai language spoken by about 3.3 million people in the Shan States of Burma in the northeast of the country, and also in parts of northern Thailand and in the Xishuangbanna (Sipsongpanna) Dai Autonomous Prefecture of Yunnan province in southwestern China.The Shan script is used in Burma to write Shan, although few Shan speakers can read and write in the Shan script. (from <a href="https://www.omniglot.com/writing/shan.htm">Omniglot</a>)'
+          miscdesc: 'Shan is a Tai language spoken by about 3.3 million people in the Shan States of Burma in the northeast of the country, and also in parts of northern Thailand and in the Xishuangbanna (Sipsongpanna) Dai Autonomous Prefecture of Yunnan province in southwestern China.The Shan script is used in Burma to write Shan, although few Shan speakers can read and write in the Shan script.'
         },
-        */
         {
           label: 'Sharada',
           value: 'Sharada',
@@ -970,6 +994,19 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Tagalog',
             'url': 'Noto Sans Tagalog'
+          }
+        },
+        {
+          label: 'Tai Laing',
+          value: 'TaiLaing',
+          sscode: '',
+          ssdesc: '',
+          omnicode: '',
+          wikicode: '',
+          miscdesc: 'The Tai Laing are a language group of about 100,000 speakers living along the Irrawaddy River in Myanmar. The writing system is part of their history that has not completely died out and there is interest in reviving it. While the script is not taught formally in schools, it is taught during school breaks.',
+          font: {
+            'name': '',
+            'url': ''
           }
         },
         {
@@ -1340,6 +1377,10 @@ export const ScriptMixin = {
 
       if (typeof script.miscdesc === 'string' && script.miscdesc !== '') {
         desc = script.miscdesc
+
+        if (typeof script.omnicode === 'string' && script.omnicode !== '' && link) {
+          desc += ' See: <a href="https://www.omniglot.com/writing/' + script.omnicode + omniext + '" target="_blank">Omniglot<a>'
+        }
       } else if (typeof script.wikidesc === 'string' && script.wikidesc !== '') {
         desc = script.wikidesc
 
