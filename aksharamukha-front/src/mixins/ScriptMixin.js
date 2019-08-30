@@ -2,8 +2,8 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
-        baseURL: 'https://aksharamukha.appspot.com/api/',
-        // baseURL: 'http://localhost:8085/api',
+        // baseURL: 'https://aksharamukha.appspot.com/api/',
+        baseURL: 'http://localhost:8085/api',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -642,6 +642,20 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Khojki',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansKhojki/NotoSansKhojki-Regular.otf'
+          }
+        },
+        {
+          label: 'Khom Thai',
+          value: 'KhomThai',
+          sscode: '',
+          ssdesc: '',
+          miscdesc: 'This is an old Thai script sometimes found in religious documents, and still commonly used for labeling amulets, magical pictures (yantras) and Thai tattoos. It it mainly used for writing in the Pali language. Khom Thai has clear similarities with the Khmer script of Cambodia.',
+          miscsrc: '(from <a href="http://www.skyknowledge.com/khomthai.htm"> Skyknowledge</a>)',
+          omnicode: '',
+          wikicode: '',
+          font: {
+            'name': 'Patimokkha',
+            'url': 'https://github.com/virtualvinodh/aksharamukha/blob/master/aksharamukha-front/src/statics/Patimokkha.otf'
           }
         },
         {
@@ -1377,6 +1391,10 @@ export const ScriptMixin = {
 
       if (typeof script.miscdesc === 'string' && script.miscdesc !== '') {
         desc = script.miscdesc
+
+        if (link) {
+          desc += script.miscsrc
+        }
 
         if (typeof script.omnicode === 'string' && script.omnicode !== '' && link) {
           desc += ' See: <a href="https://www.omniglot.com/writing/' + script.omnicode + omniext + '" target="_blank">Omniglot<a>'

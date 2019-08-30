@@ -225,9 +225,11 @@ export default {
         'TaiLaing': ['https://www.unicode.org/wg2/docs/n3976.pdf', 'https://www.unicode.org/notes/tn11/'],
         'KhamtiShan': ['https://www.unicode.org/L2/L2008/08181-n3423r.pdf', 'https://www.unicode.org/notes/tn11/'],
         'Mon': ['https://en.wikipedia.org/wiki/Mon_language#Alphabet', 'https://www.unicode.org/notes/tn11/'],
-        'ZanabazarSquare': ['http://www.babelstone.co.uk/Fonts/Zanabazar.html', 'https://www.unicode.org/L2/L2014/14024-zanabazar-square.pdf', 'https://en.wikipedia.org/wiki/Zanabazar_Square_(Unicode_block)']
+        'ZanabazarSquare': ['http://www.babelstone.co.uk/Fonts/Zanabazar.html', 'https://www.unicode.org/L2/L2014/14024-zanabazar-square.pdf', 'https://en.wikipedia.org/wiki/Zanabazar_Square_(Unicode_block)'],
+        'KhomThai': ['http://www.skyknowledge.com/khomthai.htm', 'https://commons.wikimedia.org/wiki/Category:Khom_Thai_Script', 'http://eprints.hud.ac.uk/id/eprint/34345/']
       },
       notes: {
+        'KhomThai': 'The font used encodes Khom Thai using Thai Unicode characters. In the absence of the font, the text will appear as plain Thai. The font is also specifically aimed for only Pali, therefore, it misses Sanskrit-specific characters that include the independent vowels of /ṛ/, /ṝ/, /ḷ/, /ḹ/, /ai/ and /au/, the dependent vowel signs /ḷ/, /ḹ/ and /au/ and the consonants /ś/ and /ṣ/. They have been approximated to closest possible letter. Traditionally, Khom Thai can express both Sanskrit and Pali. <br/><br/> The font also does not support punctuation marks and other extraneous modern signs which will appear as dotted circles in the text.',
         'Mon': 'The Sanskrit characters /ṛ/, /ṝ/, /ḷ/,  /ḹ/, /ś/ and /ṣ/ were directly adopted from the corresponding Burmese characters for the sake of completing the Indic character reportoire.',
         'Shan': 'The Sanskrit characters /ṛ/, /ṝ/, /ḷ/,  /ḹ/, /ś/ and /ṣ/ were directly adopted from the corresponding Burmese characters for the sake of completing the Indic character reportoire.',
         'KhamtiShan': '',

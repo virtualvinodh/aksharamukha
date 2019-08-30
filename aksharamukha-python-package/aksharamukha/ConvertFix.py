@@ -988,6 +988,9 @@ def ReverseVowelSigns(Strng,Script,reverse=False):
     EAIO = "|".join(sorted(GM.CrunchSymbols(GM.VowelSignsNV,Script)[9:12]+GM.CrunchSymbols(GM.VowelSignsNV,Script)[17:],key=len,reverse=True))
     cons = "|".join(GM.CrunchSymbols(GM.Consonants,Script))
 
+    if Script == "Thai":
+        EAIO += "|ใ"
+
     if Script == "Lao":
         cons = "|".join(GM.CrunchSymbols(GM.Consonants,Script) + ['ດ','ບ','ຟ'])
 
@@ -997,6 +1000,11 @@ def ReverseVowelSigns(Strng,Script,reverse=False):
         Strng = re.sub("("+cons+")("+EAIO+")(?!("+EAIO+")"+a+")",r"\2\1",Strng)
     else:
         Strng = re.sub("("+EAIO+")"+"("+cons+")",r'\2\1',Strng)
+
+    return Strng
+
+def FixKhomThai(Strng, reverse=False):
+    Strng = ThaiReverseVowelSigns(Strng,reverse)
 
     return Strng
 

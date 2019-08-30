@@ -9,7 +9,7 @@ from aksharamukha.transliterate import convert, unique_everseen, removeA
 
 # Script Mapping JSON
 
-scripts = '["Ariyaka", "Shan", "KhamtiShan", "Mon", "TaiLaing", "Ahom","Assamese","Avestan","Balinese","BatakKaro","BatakManda","BatakPakpak","BatakToba","BatakSima","Bengali","Brahmi","Bhaiksuki","Buginese","Buhid","Burmese","Chakma","Cham","Devanagari","Grantha","GranthaPandya","Gujarati","Hanunoo","Javanese","Kaithi","Kannada","Kharoshthi","Khmer","Khojki","Khudawadi","Lao","LaoPali","Lepcha","Limbu","Malayalam","Mahajani","MeeteiMayek","Modi","Multani","Newa","OldPersian","Oriya","PhagsPa","Gurmukhi","Ranjana","Rejang","Santali","Saurashtra","Siddham","Sharada","Sinhala","SoraSompeng","Sundanese","SylotiNagri","Tagbanwa","Tagalog","TaiTham","Takri","Tamil","TamilGrantha","TamilBrahmi","Telugu","Thaana","Thai","Tibetan","Tirhuta","Urdu","Vatteluttu","WarangCiti","ZanabazarSquare"]'
+scripts = '["KhomThai", "Ariyaka", "Shan", "KhamtiShan", "Mon", "TaiLaing", "Ahom","Assamese","Avestan","Balinese","BatakKaro","BatakManda","BatakPakpak","BatakToba","BatakSima","Bengali","Brahmi","Bhaiksuki","Buginese","Buhid","Burmese","Chakma","Cham","Devanagari","Grantha","GranthaPandya","Gujarati","Hanunoo","Javanese","Kaithi","Kannada","Kharoshthi","Khmer","Khojki","Khudawadi","Lao","LaoPali","Lepcha","Limbu","Malayalam","Mahajani","MeeteiMayek","Modi","Multani","Newa","OldPersian","Oriya","PhagsPa","Gurmukhi","Ranjana","Rejang","Santali","Saurashtra","Siddham","Sharada","Sinhala","SoraSompeng","Sundanese","SylotiNagri","Tagbanwa","Tagalog","TaiTham","Takri","Tamil","TamilGrantha","TamilBrahmi","Telugu","Thaana","Thai","Tibetan","Tirhuta","Urdu","Vatteluttu","WarangCiti","ZanabazarSquare"]'
 scripts = json.loads(scripts)
 
 roman = ["IAST", "IPA", "ISO", "RussianCyrillic", "Titus", "HK", "Itrans", "Velthuis"]
@@ -203,6 +203,8 @@ def generate_conjuncts():
   conj = '{"conjuncts1S1":["ak","akh","ag","agh","aṅ","ac","ach","aj","ajh","añ","aṭ","aṭh","aḍ","aḍh","aṇ","at","ath","ad","adh","an","ap","aph","ab","abh","am","ay","ar","al","av","aś","aṣ","as","ah","al̤"],"conjuncts2S1":["kka","kkha","kca","kcha","kṇa","kta","ktha","kna","kpa","kpha","kma","kya","kra","kla","kva","kśa","kṣa","ksa","khkha","khna","khya","khva","gga","ggha","gja","gḍa","gṇa","gda","gdha","gna","gba","gbha","gma","gya","gra","gla","gva","ghna","ghma","ghya","ghra","ghva","ṅka","ṅkha","ṅga","ṅgha","ṅṅa","ṅca","ṅja","ṅta","ṅda","ṅdha","ṅna","ṅpa","ṅbha","ṅma","ṅya","ṅra","ṅva","ṅśa","ṅsa","ṅha","cca","ccha","cña","cma","cya","cra","cva","chya","jja","jjha","jña","jma","jya","jra","jva","jha","jhña","cña","cha","ñja","ñjha","ñña","ñśa","ñha","ṭka","ṭkha","ṭca","ṭcha","ṭṭa","ṭṇa","ṭta","ṭpa","ṭpha","ṭma","ṭya","ṭva","ṭśa","ṭṣa","ṭsa","ṭhya","ḍga","ḍgha","ḍja","ḍḍa","ḍḍha","ḍda","ḍdha","ḍba","ḍbha","ḍma","ḍya","ḍra","ḍla","ḍva","ḍhya","ḍhra","ḍhva","ṇṭa","ṇṭha","ṇḍa","ṇḍha","ṇṇa","ṇna","ṇma","ṇya","ṇva","ṇha","tka","tkha","tta","ttha","tna","tpa","tpha","tma","tya","tra","tva","tṣa","tsa","thna","thya","thra","thva","dga","dgha","dda","ddha","dna","dba","dbha","dma","dya","dra","dva","dhna","dhma","dhya","dhra","dhva","nka","nkha","nga","ngha","nta","ntha","nda","ndha","nna","npa","npha","nba","nbha","nma","nya","nra","nva","nṣa","nsa","nha","pka","pkha","pca","pcha","pṭa","pṇa","pta","pna","ppa","ppha","pma","pya","pra","pla","pva","pśa","psa","bga","bja","bda","bdha","bba","bbha","bya","bra","bla","bva","bhṇa","bhna","bhma","bhya","bhra","bhla","bhva","mṇa","mna","mpa","mpha","mba","mbha","mma","mya","mra","mla","mva","mha","yya","yva","rka","rka","hra","gra","gha","rca","rcha","rja","rja","hra","ṭra","ḍra","ḍha","rṇa","rta","rtha","rda","rdha","rna","rpa","rpha","rba","rbha","rma","rya","rla","rva","rśa","rṣa","rsa","rha","lka","lga","lda","lpa","lpha","lba","lbha","lma","lya","lla","lva","lśa","lha","vṇa","vna","vya","vra","vla","śca","ścha","śna","śpa","śma","śya","śra","śla","śva","śśa","ṣka","ṣkha","ṣṭa","ṣṭha","ṣṇa","ṣpa","ṣpha","ṣma","ṣya","ṣra","ṣva","ṣṣa","ska","skha","sta","stha","sna","spa","spha","sma","sya","sra","sva","ssa","hṇa","hna","hma","hya","hra","hla","hva","l̤ha"],"conjuncts3S1":["kkra","kkla","kkva","kkṣa","ktya","ktra","ktva","kthna","kthya","knya","kpra","kpla","kmya","krya","klya","kśma","kśra","kśla","kśva","kṣṇa","kṣma","kṣya","kṣra","kṣva","ksta","kstha","ksna","kspa","kspha","ksma","ksya","ksra","ksva","ggra","gghya","gghra","gjña","gjya","gjva","gdya","gdra","gdva","gdhya","gdhra","gdhva","gnya","gbra","gbhya","gbhra","gmya","grya","grva","gvya","gvra","ghnya","ghrya","ghvya","ṅkta","ṅktha","ṅkya","ṅkra","ṅkla","ṅkva","ṅkṣa","ṅksa","ṅkhya","ṅgdha","ṅgya","ṅgra","ṅgva","ṅghna","ṅghya","ṅghra","ṅtra","ṅtva","ṅdhya","ṅnya","ṅnra","ṅpra","ṅvya","ṅvra","ṅsva","ccya","cchma","cchya","cchra","cchla","cchva","cñya","jjña","jjya","jjva","jjhya","jñya","jñva","jmya","jrya","jvya","ñcma","ñcya","ñcva","ñchna","ñchya","ñchra","ñchla","ñchva","ñjña","ñjma","ñjya","ñjva","ñśma","ñśya","ñśra","ñśla","ñśva","ṭkra","ṭkṣa","ṭṭya","ṭtra","ṭtva","ṭpra","ṭśra","ṭśla","ṭsta","ṭstha","ṭsna","ṭspa","ṭsva","ḍgya","ḍgra","ḍghra","ḍjña","ḍjya","ḍḍhya","ḍḍhva","ḍdva","ḍbra","ḍbhya","ḍbhra","ḍvya","ṇṭya","ṇṭhya","ṇḍḍha","ṇḍya","ṇḍra","ṇḍva","ṇḍhya","ṇḍhra","ṇvya","tkya","tkra","tkla","tkva","tkṣa","tkhya","ttna","ttma","ttya","ttra","ttva","ttsa","tthya","tnya","tnva","tpra","tpla","tmya","tyva","trya","trva","tvya","tska","tskha","tsta","tstha","tsna","tspa","tspha","tsma","tsya","tsra","tsva","thnya","thvya","dgra","dgla","dghna","dghra","ddya","ddra","ddva","ddhma","ddhya","ddhra","ddhva","dbra","dbhya","dbhra","dbhva","dmya","drya","drva","dvya","dvra","dhnya","dhrya","dhvya","dhvra","nkra","nkla","nkva","nkṣa","nkhya","ngra","ngla","nghna","nghra","ntta","nttha","ntma","ntya","ntra","ntva","ntsa","nthya","nddha","ndma","ndya","ndra","ndva","ndhma","ndhya","ndhra","ndhva","nnya","nnva","npra","npla","npsa","nbra","nbhra","nmya","nmra","nmla","nyva","nvya","nvra","nska","nskha","nsta","nstha","nsna","nspa","nspha","nsma","nsya","nsra","nsva","nhya","nhra","nhva","pkṣa","ptya","ptra","ptva","pnya","ppra","prya","pśya","psna","psya","psva","bgra","bjya","bdya","bdhya","bdhva","bbra","bbhya","bvya","bhrya","bhrva","bhvya","mnya","mpya","mpra","mpla","mpsa","mbya","mbra","mbva","mbhya","mbhra","mmya","mmra","mmla","mrya","rkca","rkta","rktha","rkpa","rkya","rkṣa","rksa","rkhya","rgga","rggha","rgja","rgbha","rgya","rgra","rgla","rgva","rghna","rghya","rghra","rṅkha","rṅga","rccha","rcya","rjña","rjma","rjya","rjva","rñja","rḍya","rḍhya","rṇṇa","rṇya","rṇva","rtta","rtna","rtma","rtya","rtra","rtva","rtsa","rthya","rddha","rdma","rdya","rdra","rdva","rdhna","rdhma","rdhya","rdhra","rdhva","rnya","rnva","rpya","rbra","rbhya","rbhra","rbhva","rmya","rmra","rmla","ryya","rvya","rvra","rvla","rśma","rśya","rśva","rṣṭa","rṣṭha","rṣṇa","rṣma","rṣya","rṣva","rsra","rsva","rhya","rhra","rhla","rhva","lkya","lgva","lpya","lbya","lbhya","llya","lvya","lhya","vnya","ścya","śnya","śmya","śrya","śrva","śvya","ṣkya","ṣkra","ṣkla","ṣkva","ṣkṣa","ṣṭya","ṣṭra","ṣṭva","ṣṭhya","ṣṭhva","ṣṇya","ṣṇva","ṣpya","ṣpra","ṣpla","ṣmya","skra","stma","stya","stra","stva","stsa","sthna","sthya","snya","spra","sphya","smya","srya","svya","ssya","ssva","hnya","hmya","hvya"],"conjuncts4S1":["ktrya","ktvya","kṣṇya","kṣmya","kstra","gdvya","gdhrya","ṅktya","ṅktra","ṅktva","ṅkṣṇa","ṅkṣma","ṅkṣya","ṅkṣva","ṅgdhya","ṅgdhva","ṅghrya","tkṣma","tkṣva","ttrya","tstra","tsthya","tspra","tsphya","ddvya","nttva","ntrya","ntvya","ntsta","ntstha","ntsna","ntspa","ntsya","ntsra","ntsva","nddhya","nddhva","ndrya","ndvya","ndhrya","nstra","nsphya","ptrya","psnya","rkṣṇa","rkṣya","rksva","rṅgya","rjmya","rttra","rtnya","rtrya","rtvya","rtsna","rtsya","rddhya","rdrya","rdvya","rdhnya","rśvya","rṣṭya","rṣṇya","lgvya","ṣṭrya","strya","sthnya"],"conjuncts5S1":["rtsnya"]}'
   vowels = ['a', 'ā', 'i', 'ī', 'u', 'ū', 'ṛ', 'ĕ', 'e', 'ai', 'ŏ', 'o', 'au', 'aṃ', 'aḥ']
 
+  scripts = ['KhomThai']
+
   total = len(scripts) * len(vowels)
 
   i = 0
@@ -253,6 +255,8 @@ def generate_common_letters():
 
   script_combinations = list(itertools.combinations(scriptsAll, 2))
 
+  script_combinations = [scriptC for scriptC in script_combinations if "KhomThai" in scriptC]
+
   total = len(script_combinations)
 
   i = 0
@@ -300,13 +304,13 @@ def generate_common_letters():
 
 if __name__ == "__main__":
   print('Generating Script Mapping as Json')
-  #generate_script_map()
+  generate_script_map()
   print('Generating Script Matrix')
-  #generate_script_matrix()
+  generate_script_matrix()
   print('Generating Syllabary')
-  #generate_syllables()
+  generate_syllables()
   print('Generating Conjuncts')
-  #generate_conjuncts()
+  generate_conjuncts()
   print('Generating Common Letters')
   generate_common_letters()
 

@@ -518,6 +518,10 @@ export default {
   src: url('../statics/Qomolangma-Betsu.ttf')
 }
 @font-face {
+  font-family: 'Patimokkha';
+  src: url('../statics/Patimokkha.otf')
+}
+@font-face {
   font-family: 'Ariyaka';
   src: url('../statics/ariyaka.ttf')
 }
@@ -789,6 +793,10 @@ export default {
 .taitham {
   font-family: "PaliTilok";
   font-size: 150%;
+}
+.khomthai {
+  font-family: "Patimokkha";
+  font-size: 130%;
 }
 .taithamlao {
   font-family: "Lamphun";
