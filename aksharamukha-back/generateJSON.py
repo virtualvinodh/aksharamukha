@@ -9,7 +9,7 @@ from aksharamukha.transliterate import convert, unique_everseen, removeA
 
 # Script Mapping JSON
 
-scripts = '["Ahom","Assamese","Avestan","Balinese","BatakKaro","BatakManda","BatakPakpak","BatakToba","BatakSima","Bengali","Brahmi","Bhaiksuki","Buginese","Buhid","Burmese","Chakma","Cham","Devanagari","Grantha","GranthaPandya","Gujarati","Hanunoo","Javanese","Kaithi","Kannada","Kharoshthi","Khmer","Khojki","Khudawadi","Lao","LaoPali","Lepcha","Limbu","Malayalam","Mahajani","MeeteiMayek","Modi","Multani","Newa","OldPersian","Oriya","PhagsPa","Gurmukhi","Ranjana","Rejang","Santali","Saurashtra","Siddham","Sharada","Sinhala","SoraSompeng","Sundanese","SylotiNagri","Tagbanwa","Tagalog","TaiTham","Takri","Tamil","TamilGrantha","TamilBrahmi","Telugu","Thaana","Thai","Tibetan","Tirhuta","Urdu","Vatteluttu","WarangCiti","ZanabazarSquare"]'
+scripts = '["Ariyaka", "Shan", "KhamtiShan", "Mon", "TaiLaing", "Ahom","Assamese","Avestan","Balinese","BatakKaro","BatakManda","BatakPakpak","BatakToba","BatakSima","Bengali","Brahmi","Bhaiksuki","Buginese","Buhid","Burmese","Chakma","Cham","Devanagari","Grantha","GranthaPandya","Gujarati","Hanunoo","Javanese","Kaithi","Kannada","Kharoshthi","Khmer","Khojki","Khudawadi","Lao","LaoPali","Lepcha","Limbu","Malayalam","Mahajani","MeeteiMayek","Modi","Multani","Newa","OldPersian","Oriya","PhagsPa","Gurmukhi","Ranjana","Rejang","Santali","Saurashtra","Siddham","Sharada","Sinhala","SoraSompeng","Sundanese","SylotiNagri","Tagbanwa","Tagalog","TaiTham","Takri","Tamil","TamilGrantha","TamilBrahmi","Telugu","Thaana","Thai","Tibetan","Tirhuta","Urdu","Vatteluttu","WarangCiti","ZanabazarSquare"]'
 scripts = json.loads(scripts)
 
 roman = ["IAST", "IPA", "ISO", "RussianCyrillic", "Titus", "HK", "Itrans", "Velthuis"]
@@ -211,7 +211,7 @@ def generate_conjuncts():
     results = {}
     postoptions = []
 
-    if script1[0:3] < 'Tir':
+    if script1[0:3] < 'Mod':
         index = '1'
     else:
         index = '2'
@@ -285,12 +285,14 @@ def generate_common_letters():
     script_sort = sorted([script1, script2])
     suffix = script_sort[0] + '_' + script_sort[1]
 
-    if script_sort[0] <= 'Buhid':
+    if script_sort[0] <= 'BatakToba':
         index = '1'
-    elif script_sort[0] <= 'Kharoshthi':
+    elif script_sort[0] <= 'Grantha':
         index = '2'
-    else:
+    elif script_sort[0] <= 'Khudawadi':
         index = '3'
+    else:
+        index = '4'
 
     f = io.open("resources/common_letters" + index + "/common_letters_" + suffix + ".json", mode="w", encoding="utf-8")
     f.write(json.dumps(results, ensure_ascii = False, sort_keys=True, indent=4))
@@ -306,7 +308,7 @@ if __name__ == "__main__":
   print('Generating Conjuncts')
   #generate_conjuncts()
   print('Generating Common Letters')
-  #generate_common_letters()
+  generate_common_letters()
 
 
 

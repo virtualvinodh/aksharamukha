@@ -60,12 +60,14 @@ def common_letters():
     script_sort = sorted([script1, script2])
     suffix = script_sort[0] + '_' + script_sort[1]
 
-    if script_sort[0] <= 'Buhid':
+    if script_sort[0] <= 'BatakToba':
         index = '1'
-    elif script_sort[0] <= 'Kharoshthi':
+    elif script_sort[0] <= 'Grantha':
         index = '2'
-    else:
+    elif script_sort[0] <= 'Khudawadi':
         index = '3'
+    else:
+        index = '4'
 
     f = open ('resources/common_letters' + index + '/common_letters_' + suffix + '.json', 'r', encoding='utf-8')
     commonletters = json.loads(f.read())
@@ -238,7 +240,7 @@ def conjuncts_list():
     print('The post options are :: ')
     print(postoptions)
 
-    if script1[0:3] < 'Tir':
+    if script1[0:3] < 'Mod':
         index = '1'
     else:
         index = '2'
