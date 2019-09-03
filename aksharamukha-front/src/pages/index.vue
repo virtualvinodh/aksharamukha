@@ -70,15 +70,16 @@
       <q-icon name="history" size="25px" v-show="outputPast !== ''" class="print-hide"/>
       </div>
     <div
-      v-html="sanitize(convertText)"
       ref="brahmiText"
       class="text-output col-xs-12 col-md-12 q-pa-md q-pr-lg bg-grey-1 "
-      :class="getOutputClass(outputScript, postOptions)" :style="{'font-size': fontSize + '%'}"
-      ></div>
+      >
+       <span :class="getOutputClass(outputScript, postOptions)" :style="{'font-size': fontSize + '%'}"
+        v-html="sanitize(convertText)"></span>
+      </div>
     <output-notice :inputScript="inputScript" :outputScript="outputScript" :postOptions="postOptions"
      :convertText="convertText"></output-notice>
       <div class="q-mt-sm"><output-buttons @fontsizeinc="fontSize += 20" @fontsizedec="fontSize -= 20"
-       @printdoc="printDocument" @screenshot="imageConvert" @copytext="copy" :convertText="convertText"></output-buttons></div>
+       @printdoc="printDocument" @screenshot="imageConvert" @copytext="copy" :convertText="convertText" :content="downHTML"></output-buttons></div>
       <span><q-toggle color="dark" v-model="sourcePreserve" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-md print-hide" @input="convert" /><q-tooltip>Preserve the source as-is and don't change the text to improve readability</q-tooltip></span>
     <output-options :inputScript="inputScript" :outputScript="outputScript" :postOptionsInput="postOptions"
        :convertText="convertText"
@@ -252,6 +253,9 @@ export default {
     }
   },
   methods: {
+    downHTML: function () {
+      this.downloadHTML(this.$refs.brahmiText.innerHTML)
+    },
     performOCR: async function () {
       this.loadingOCR = true
 

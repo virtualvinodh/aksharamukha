@@ -2,8 +2,8 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
-        // baseURL: 'https://aksharamukha.appspot.com/api/',
-        baseURL: 'http://localhost:8085/api',
+        baseURL: 'https://aksharamukha.appspot.com/api/',
+        // baseURL: 'http://localhost:8085/api',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -1340,6 +1340,26 @@ export const ScriptMixin = {
     }
   },
   methods: {
+    downloadHTML: function (content) {
+      var warning = '<span class="printhide">Proper display of the some of the text below may depend on webfonts, which in turn require being connected to the internet<br/> </span> <br/>'
+
+      var doc = '<html><head><meta charset="utf-8"/><link rel="stylesheet" type="text/css" href="http://www.virtualvinodh.com/aksharamkh/fonts.css"></head><body>' + warning + content + '</span></body></html>'
+
+      var blob = ''
+      const e = document.createEvent('MouseEvents')
+      const a = document.createElement('a')
+
+      a.download = 'text.html'
+
+      blob = new Blob([doc], {type: 'plain/html'})
+      a.dataset.downloadurl = ['text/html', a.download, a.href].join(':')
+
+      console.log(blob)
+
+      a.href = window.URL.createObjectURL(blob)
+      e.initEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
+      a.dispatchEvent(e)
+    },
     getResultPost: function (url, data = {}) {
       return new Promise(resolve => {
         this.$axios.post(url, data)

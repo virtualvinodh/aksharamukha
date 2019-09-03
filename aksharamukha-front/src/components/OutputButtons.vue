@@ -6,6 +6,7 @@
       <q-btn class="q-ma-sm print-hide" @click="$emit('printdoc')"><q-tooltip class="print-hide">Print text</q-tooltip><q-icon name="print" /></q-btn>
       <q-btn class="q-ma-sm print-hide" @click="$emit('fontsizeinc')"> <q-icon name="zoom in" /><q-tooltip>Increase size</q-tooltip></q-btn>
       <q-btn class="q-ma-sm print-hide" @click="$emit('fontsizedec')"> <q-icon name="zoom out" /><q-tooltip>Decrease size</q-tooltip></q-btn>
+      <q-btn class="q-ma-sm print-hide" @click="content"><q-icon name="cloud download"></q-icon> &nbsp; HTML</q-btn>
   </span>
 </template>
 
@@ -18,7 +19,7 @@ console.log(clipboard)
 
 export default {
   // name: 'ComponentName',
-  props: ['convertText'],
+  props: ['convertText', 'content'],
   components: {
     QBtn,
     QTooltip

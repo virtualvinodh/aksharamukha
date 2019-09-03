@@ -83,6 +83,7 @@
       <q-btn class="q-ma-sm print-hide" @click="printDocument"><q-tooltip class="print-hide">Print text</q-tooltip><q-icon name="print" /></q-btn>
       <q-btn class="q-ma-sm print-hide" @click="fontSize += 20"> <q-icon name="zoom in" /><q-tooltip>Increase size</q-tooltip></q-btn>
       <q-btn class="q-ma-sm print-hide" @click="fontSize -= 20"> <q-icon name="zoom out" /><q-tooltip>Decrease size</q-tooltip></q-btn>
+      <q-btn class="q-ma-sm print-hide" @click="downloadHTML2"><q-icon name="cloud download"></q-icon> &nbsp; HTML</q-btn>
     <br/> <br/>
     <div class="q-body-1">This is an experimental feature. Please report any feature requests/suggestions/bugs at <a href="https://github.com/virtualvinodh/aksharamukha">Github</a> or alternatively send a mail to vinodh@virtualvinodh.com</div>
     </div>
@@ -386,6 +387,9 @@ export default {
     }
   },
   methods: {
+    downloadHTML2: function () {
+      this.downloadHTML('<div class="' + this.getOutputClass(this.outputScript, this.postOptions) + '">' + this.textInput.replace(/\n/g, '<br/>') + '</div>')
+    },
     convertEnter: function (event) {
       if (event.key === ' ' || event.key === 'Enter') {
         this.convert()

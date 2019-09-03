@@ -157,6 +157,11 @@ def detect_preoptions(text, inputScript):
     return preoptions
 
 def convert(src, tgt, txt, nativize, preoptions, postoptions):
+    if tgt == "" or tgt == "Ignore":
+        return txt
+    if preoptions == [] and postoptions == [] and nativize == False and src == tgt:
+        return txt
+
     txt = PreProcess.PreProcess(txt,src,tgt)
 
     if 'siddhammukta' in postoptions and tgt == 'Siddham':

@@ -48,7 +48,7 @@ export default {
   },
   data () {
     return {
-      postOptions: []
+      postOptions: this.postOptionsInput
     }
   },
   mounted: function () {

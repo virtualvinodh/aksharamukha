@@ -29,6 +29,14 @@ export default [
   },
 
   {
+    path: '/composer',
+    component: () => import('layouts/default'),
+    children: [
+      { path: '', component: () => import('pages/composer') }
+    ]
+  },
+
+  {
     path: '/documentation',
     component: () => import('layouts/default'),
     children: [
