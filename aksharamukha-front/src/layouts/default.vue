@@ -206,7 +206,7 @@
     </q-layout-drawer>
     <q-page-container class="page">
       <br/>
-      <div class="alert" v-if="visibleAlert">
+      <div :class="$q.platform.is.mobile ? 'alert2': 'alert'" v-if="visibleAlert">
       <q-alert
           color="grey-7"
           icon="favorite"
@@ -345,6 +345,14 @@ export default {
 }
 
 .alert a:visited {
+  color:white;
+}
+
+.alert2 a:link {
+  color:white;
+}
+
+.alert2 a:visited {
   color:white;
 }
 
