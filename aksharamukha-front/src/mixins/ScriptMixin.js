@@ -398,7 +398,11 @@ export const ScriptMixin = {
           sscode: 'Batk',
           ssdesc: 'The Batak script is used to write the six Batak languages (Toba, Karo, Dairi, Mandailing, Simalungun and Angkola) spoken collectively by approximately 3 million people on the Indonesian island of Sumatra. It is one of several scripts indigenous to the Indonesian archipelago, descended from the Old Kawi script, which in turn is derived from the Pallava, and ultimately the Brahmi, script. This is the variant used by the Simalungun language.',
           omnicode: 'batak',
-          wikicode: 'Batak_script'
+          wikicode: 'Batak_script',
+          font: {
+            'name': 'Noto Sans Batak',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansBatak-Regular.ttf'
+          }
         },
         {
           label: 'Bengali',

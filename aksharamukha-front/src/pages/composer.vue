@@ -119,7 +119,7 @@ In case of multiple outputs for the primary, the text is split into lines by def
           <span v-if="token.type=='secondary'">
             <transliterate :text="token.value" :src="chooseInput(token)" :tgt="scriptO" :sourcePreserve="choosePS(token)" :postOptions="postOptionsScriptComposer[scriptO]" :preOptions="preOptions">
             </transliterate>
-            <span v-if="index !== chooseTgt(token).length-1"><br/></span>
+            <span v-if="index !== chooseTgt(token).length-1"><br/><br/></span>
           </span>
 
         </span>
