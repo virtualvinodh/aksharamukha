@@ -29,6 +29,22 @@ export default [
   },
 
   {
+    path: '/learn',
+    component: () => import('layouts/default'),
+    children: [
+      { path: '', component: () => import('pages/learn') }
+    ]
+  },
+
+  {
+    path: '/explore',
+    component: () => import('layouts/default'),
+    children: [
+      { path: '', component: () => import('pages/explore') }
+    ]
+  },
+
+  {
     path: '/composer',
     component: () => import('layouts/default'),
     children: [
@@ -89,22 +105,6 @@ export default [
     component: () => import('layouts/default'),
     children: [
       { path: '', component: () => import('pages/latinmatrix') }
-    ]
-  },
-
-  {
-    path: '/syllabary',
-    component: () => import('layouts/default'),
-    children: [
-      { path: '', component: () => import('pages/syllabary') }
-    ]
-  },
-
-  {
-    path: '/conjuncts',
-    component: () => import('layouts/default'),
-    children: [
-      { path: '', component: () => import('pages/conjuncts') }
     ]
   },
 

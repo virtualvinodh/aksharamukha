@@ -1,10 +1,10 @@
 <template>
   <q-card inline class="cards q-ma-sm non-selectable">
     <q-card-title>
-      <span :class="script2.toLowerCase()">{{text2}}</span>
+      <div :class="script2.toLowerCase()">{{text2}}</div>
     </q-card-title>
     <q-card-main align="center">
-      <font size="7"><span :class="script1.toLowerCase()">{{text1}}</span></font>
+      <font size="7"><div :class="script1.toLowerCase()">{{text1}}</div></font>
     </q-card-main>
   </q-card>
 </template>
@@ -34,7 +34,6 @@ export default {
 <style scoped>
 .cards {
   width:200px;
-  height:210px;
 }
 .tamil {
   font-size: 100%;

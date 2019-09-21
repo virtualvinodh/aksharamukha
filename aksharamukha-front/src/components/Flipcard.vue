@@ -1,16 +1,20 @@
 <template>
-  <vue-flip :active-click="true" width="140px" height="120px" transition="2s" class="q-ma-sm flip cursor-pointer">
+  <vue-flip :active-click="true" width="160px" height="120px" transition="2s" class="q-ma-sm flip cursor-pointer">
         <div slot="front">
           <q-card inline class="cards">
             <q-card-main align="center" :style="script1 === 'tamil' ? 'tamil' : ''">
+              <font size="7"><span :class="script2.toLowerCase()">&nbsp;</span></font>
               <font size="7"><span :class="script1.toLowerCase()">{{text1}}</span></font>
+              <font size="7"><span :class="script2.toLowerCase()">&nbsp;</span></font>
             </q-card-main>
           </q-card>
         </div>
         <div slot="back">
           <q-card inline class="cards" color="tertiary">
             <q-card-main align="center" :style="script2 === 'tamil' ? 'tamil' : ''">
+              <font size="7"><span :class="script1.toLowerCase()">&nbsp;</span></font>
               <font size="7"><span :class="script2.toLowerCase()">{{text2}}</span></font>
+              <font size="7"><span :class="script1.toLowerCase()">&nbsp;</span></font>
             </q-card-main>
           </q-card>
         </div>
@@ -45,8 +49,7 @@ export default {
 
 <style scoped>
 .cards {
-  width:140px;
-  height:120px;
+  width:160px;
 }
 .flip {
   display: inline-block;

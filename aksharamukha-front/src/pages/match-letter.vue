@@ -289,7 +289,7 @@ export default {
 
 <style scoped>
 .cards {
-  width: 100px;
+  width: 120px;
 }
 .flip-list-move {
   transition: transform 1s;

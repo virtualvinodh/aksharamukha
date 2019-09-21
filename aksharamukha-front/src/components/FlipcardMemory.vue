@@ -3,6 +3,7 @@
         <div slot="front">
           <q-card inline class="cards" color="tertiary">
             <q-card-main>
+              <font size="7"><span :class="script.toLowerCase()">.</span></font>
             </q-card-main>
           </q-card>
         </div>
@@ -40,7 +41,6 @@ export default {
 <style scoped>
 .cards {
   width:140px;
-  height:120px;
 }
 .flip {
   display: inline-block;

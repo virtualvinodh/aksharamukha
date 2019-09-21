@@ -51,19 +51,21 @@
       > <!-- link to other tools -->
         <!-- Options to create pseudo epigraphs -->
         <!-- Icon -->
+        <q-collapsible icon="translate" label="Conversion"  >
         <q-item to="/converter">
-          <q-item-side icon="translate" />
+          <q-item-side icon="sync"/>
           <q-item-main label="Converter"/>
         </q-item>
         <q-item to="/composer">
           <q-item-side icon="language" />
           <q-item-main label="Composer (Multiple scripts)"/>
         </q-item>
-        <q-collapsible icon="cloud upload" label="Websites & Files"  >
         <q-item to="/website/">
+          <q-item-side icon="web" />
           <q-item-main label="Convert Websites"/>
         </q-item>
         <q-item to="/upload/">
+          <q-item-side icon="cloud upload" />
           <q-item-main label="Convert Files (Batch)"/>
         </q-item>
         </q-collapsible>
@@ -104,6 +106,11 @@
               <q-item-main :label="text.name"/>
             </q-item>
         </q-collapsible>
+        <hr/>
+        <q-item to="/explore">
+          <q-item-side icon="navigation" />
+          <q-item-main label="Explore"/>
+        </q-item>
         <q-collapsible icon="edit" label="Scripts" >
             <q-item to="/roman">
               <q-item-main label="Roman Transliteration Schemes"/>
@@ -126,30 +133,21 @@
           <q-item-side icon="view column" />
             <q-item-main label="Rosetta Stone"/>
           </q-item>
-        <q-collapsible icon="school" label="Learn & Play" >
-            <q-item to="/syllabary">
-              <q-item-main label="Learn: Syllabary"/>
-            </q-item>
-            <q-item to="/conjuncts">
-              <q-item-main label="Learn: Conjuncts"/>
-            </q-item>
+        <q-collapsible icon="videogame_asset" label="Games" >
             <q-item to="/fill">
-               <q-item-side icon="videogame_asset" />
               <q-item-main label="Fill"/>
             </q-item>
             <q-item to="/match-letter">
-               <q-item-side icon="videogame_asset" />
               <q-item-main label="Match" />
             </q-item>
             <q-item to="/flipcards-shuffle">
-               <q-item-side icon="videogame_asset" />
               <q-item-main label="Flipcards" />
             </q-item>
             <q-item to="/memory-cards">
-               <q-item-side icon="videogame_asset" />
               <q-item-main label="Memorize"  />
             </q-item>
         </q-collapsible>
+        <hr/>
         <q-collapsible icon="build" label="Technical" >
           <q-item to="/web-api">
             <q-item-main label="Web API" />
