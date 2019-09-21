@@ -14,6 +14,18 @@ def UrduShortNotShown(Strng):
 
     return Strng
 
+def AnuChandraEqDeva(Strng):
+
+    return AnuChandraEq(Strng, 'Devanagari')
+
+def AnuChandraEq(Strng, script):
+    Chandrabindu = GM.CrunchList('AyogavahaMap', script)[0]
+    Anusvara = GM.CrunchList('AyogavahaMap', script)[1]
+
+    Strng = Strng.replace(Chandrabindu, Anusvara)
+
+    return Strng
+
 def TamilNumeralSub(Strng):
     ListC = '(' + '[கசடதபஜஸ]' + ')'
     ListV = '(' + '|'.join(GM.CrunchSymbols(GM.VowelSigns, 'Tamil')) + ')'

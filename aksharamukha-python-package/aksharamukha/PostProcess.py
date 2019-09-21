@@ -17,6 +17,17 @@ def default(Strng):
 
     return Strng
 
+def NasaltoAnsvaraIASTISO(Strng):
+    Strng = Strng.replace('ṁ', 'ṃ')
+
+    Strng = re.sub('(ṃ)(k|g)', 'ṅ' + r'\2', Strng)
+    Strng = re.sub('(ṃ)(c|j)', 'ñ' + r'\2', Strng)
+    Strng = re.sub('(ṃ)(ṭ|ḍ)', 'ṇ' + r'\2', Strng)
+    Strng = re.sub('(ṃ)(t|d)', 'n' + r'\2', Strng)
+    Strng = re.sub('(ṃ)(p|b)', 'm' + r'\2', Strng)
+
+    return Strng
+
 def removeDiacritics(Strng):
     diacritics = ['\u0331', '\u0306', '\u0323', '\u035F', '\u0324', '\u035F', '\u0307', '\u0301', '\u0303', '\u0310', '\u0306', '\u0302', '\u0304']
 
