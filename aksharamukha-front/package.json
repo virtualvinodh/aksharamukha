@@ -18,6 +18,7 @@
     "dotenv": "^8.1.0",
     "html2canvas": "^1.0.0-alpha.12",
     "jspdf": "^1.4.1",
+    "jszip": "^3.2.2",
     "moo": "^0.5.0",
     "request-promise": "^4.2.2",
     "sanitize-html": "^1.19.0",

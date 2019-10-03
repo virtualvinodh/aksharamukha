@@ -1527,6 +1527,14 @@ def FixDevanagari(Strng, reverse=False):
 
         Strng = Strng.replace('ज़़','ॹ')
 
+        Strng = Strng.replace('ऱ्', 'ऱ्‌') ## Prevent RRA from forming conjuncts
+
+        ## Except for YA and HA
+
+        Strng = Strng.replace('ऱ्‌य', 'ऱ्य')
+        Strng = Strng.replace('ऱ्‌ह', 'ऱ्ह')
+
+
     else:
         Strng = PostProcess.DevanagariPrishtamatra(Strng, reverse=True)
         Strng = Strng.replace('ॽ', 'ʔ')
