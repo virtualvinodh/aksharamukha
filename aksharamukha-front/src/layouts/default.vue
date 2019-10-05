@@ -51,9 +51,8 @@
       > <!-- link to other tools -->
         <!-- Options to create pseudo epigraphs -->
         <!-- Icon -->
-        <q-collapsible icon="translate" label="Conversion"  >
         <q-item to="/converter">
-          <q-item-side icon="sync"/>
+          <q-item-side icon="translate"/>
           <q-item-main label="Converter"/>
         </q-item>
         <q-item to="/composer">
@@ -68,7 +67,6 @@
           <q-item-side icon="cloud upload" />
           <q-item-main label="Convert Files (Batch)"/>
         </q-item>
-        </q-collapsible>
         <q-collapsible icon="keyboard" label="Input (Beta)" >
             <q-item :to="'/input/Devanagari'">
               <q-item-main label="Devanagari"/>
@@ -101,16 +99,12 @@
               <q-item-main :label="'Newa (Nepal Bhasa)'"/>
             </q-item>
         </q-collapsible>
+        <hr/>
         <q-collapsible icon="book" label="Sample Texts"  >
             <q-item :to="'/texts/' + text.path" v-for="text in texts" :key="text.path">
               <q-item-main :label="text.name"/>
             </q-item>
         </q-collapsible>
-        <hr/>
-        <q-item to="/explore">
-          <q-item-side icon="navigation" />
-          <q-item-main label="Explore"/>
-        </q-item>
         <q-collapsible icon="edit" label="Scripts" >
             <q-item to="/roman">
               <q-item-main label="Roman Transliteration Schemes"/>
@@ -133,20 +127,6 @@
           <q-item-side icon="view column" />
             <q-item-main label="Rosetta Stone"/>
           </q-item>
-        <q-collapsible icon="videogame_asset" label="Games" >
-            <q-item to="/fill">
-              <q-item-main label="Fill"/>
-            </q-item>
-            <q-item to="/match-letter">
-              <q-item-main label="Match" />
-            </q-item>
-            <q-item to="/flipcards-shuffle">
-              <q-item-main label="Flipcards" />
-            </q-item>
-            <q-item to="/memory-cards">
-              <q-item-main label="Memorize"  />
-            </q-item>
-        </q-collapsible>
         <hr/>
         <q-collapsible icon="build" label="Technical" >
           <q-item to="/web-api">
@@ -162,7 +142,6 @@
             <q-item-main label="Website Plugin" />
           </q-item>
         <q-item to="/help">
-            <q-item-side icon="help" />
             <q-item-main label="Help" />
         </q-item>
           </q-collapsible>
@@ -511,7 +490,7 @@ export default {
 }
 @font-face {
   font-family: 'BabelStoneZanabazar';
-  src: url('../statics/BabelStoneZanabazar.woff')
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansZanabazarSquare/NotoSansZanabazarSquare-Regular.otf')
 }
 @font-face {
   font-family: 'Adinatha Tamil Brahmi';

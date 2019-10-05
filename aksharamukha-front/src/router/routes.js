@@ -29,22 +29,6 @@ export default [
   },
 
   {
-    path: '/learn',
-    component: () => import('layouts/default'),
-    children: [
-      { path: '', component: () => import('pages/learn') }
-    ]
-  },
-
-  {
-    path: '/explore',
-    component: () => import('layouts/default'),
-    children: [
-      { path: '', component: () => import('pages/explore') }
-    ]
-  },
-
-  {
     path: '/composer',
     component: () => import('layouts/default'),
     children: [
