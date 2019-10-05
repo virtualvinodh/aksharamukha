@@ -93,22 +93,6 @@ export default [
   },
 
   {
-    path: '/syllabary',
-    component: () => import('layouts/default'),
-    children: [
-      { path: '', component: () => import('pages/syllabary') }
-    ]
-  },
-
-  {
-    path: '/conjuncts',
-    component: () => import('layouts/default'),
-    children: [
-      { path: '', component: () => import('pages/conjuncts') }
-    ]
-  },
-
-  {
     path: '/fill',
     component: () => import('layouts/default'),
     children: [

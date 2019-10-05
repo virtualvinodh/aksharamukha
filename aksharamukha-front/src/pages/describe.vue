@@ -12,13 +12,20 @@
         :options="scriptsOutput"
       />
     </q-page-sticky>
-      <h4> {{getScriptObject(script1).label}} <q-spinner-comment color="dark" :size="30" v-show="loading"/> </h4>
+<h4> {{getScriptObject(script1).label}} <q-spinner-comment color="dark" :size="30" v-show="loading"/> </h4>
+      <div class="q-body-1" v-html="getDescription(getScriptObject(script1))">
+      </div> <br/> <q-chip class="q-ma-xs" color="dark" v-for="tag in tags"
+      :key="tag" small tag> {{tag}} </q-chip><br/> <br/>
+<q-tabs color="tertiary" no-pane-border animated swipeable inverted position="top">
+  <!-- Tabs - notice slot="title" -->
+  <q-tab default slot="title" name="tab-1" icon="info" label="Overview" class="print-hide"/> <br/>
+  <q-tab slot="title" name="tab-2" icon="keyboard" label="Syllabary" class="print-hide"/>
+  <q-tab slot="title" name="tab-3" icon="keyboard" label="Conjuncts" class="print-hide"/>
+
+  <q-tab-pane name="tab-1" keep-alive>
       <div style="text-align: right">
       <span class="text-red-2"> X</span> : Approximate equivalent <br/>
       <span class="text-blue-4"> Y</span> : Equivalent with diacritic <br/>
-      </div>
-      <br/>
-      <div class="q-body-1" v-html="getDescription(getScriptObject(script1))">
       </div>
       <h5> Vowels</h5>
       <list-char :chars="charList[0]" :script1="script1" :script2="script2" :chars1="charListC['script1'][0]"
@@ -86,19 +93,33 @@
       <ol v-if="links[script1]" class="q-body-1">
       <li v-for="link in links[script1]" :key="link"> <a :href="link"> {{link}} </a> </li>
       </ol>
+  </q-tab-pane>
+  <q-tab-pane name="tab-2" keep-alive>
+    <syllabary :script1="script1" :script2="script2"> </syllabary>
+  </q-tab-pane>
+  <q-tab-pane name="tab-3" keep-alive>
+    <conjuncts :script1="script1" :script2="script2"> </conjuncts>
+  </q-tab-pane>
 
+</q-tabs>
   </q-page>
 </template>
 
-<style>
+<style scoped>
+h4 {
+  margin-top: -20px;
+}
 </style>
 
 <script>
 import Learncard from '../components/Learncard'
 import ListChar from '../components/ListChar'
 import Transliterate from '../components/Transliterate'
+import Syllabary from '../components/Syllabary'
+import Conjuncts from '../components/Conjuncts'
+
 import {ScriptMixin} from '../mixins/ScriptMixin'
-import {QPageSticky, QSelect, QSpinnerComment} from 'quasar'
+import {QPageSticky, QSelect, QSpinnerComment, QTabs, QTab, QTabPane, QRouteTab, QChip} from 'quasar'
 
 var _ = require('underscore')
 
@@ -107,13 +128,24 @@ export default {
   mixins: [ScriptMixin],
   components: {
     QPageSticky,
+    QChip,
+    Syllabary,
     QSpinnerComment,
     Transliterate,
     Learncard,
     QSelect,
-    ListChar
+    ListChar,
+    QTabs,
+    QTab,
+    QTabPane,
+    QRouteTab,
+    Conjuncts
   },
   computed: {
+    tags: function () {
+      let script = this.getScriptObject(this.script1)
+      return script.language.concat(script.invented, script.status)
+    },
     conj: function () {
       var conj = []
       conj = this.dash.flatten(this.charList[3]).map(x => 'k' + x)

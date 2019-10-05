@@ -52,21 +52,21 @@
         <!-- Options to create pseudo epigraphs -->
         <!-- Icon -->
         <q-item to="/converter">
-          <q-item-side icon="translate" />
+          <q-item-side icon="translate"/>
           <q-item-main label="Converter"/>
         </q-item>
         <q-item to="/composer">
           <q-item-side icon="language" />
           <q-item-main label="Composer (Multiple scripts)"/>
         </q-item>
-        <q-collapsible icon="cloud upload" label="Websites & Files"  >
         <q-item to="/website/">
+          <q-item-side icon="web" />
           <q-item-main label="Convert Websites"/>
         </q-item>
         <q-item to="/upload/">
+          <q-item-side icon="cloud upload" />
           <q-item-main label="Convert Files (Batch)"/>
         </q-item>
-        </q-collapsible>
         <q-collapsible icon="keyboard" label="Input (Beta)" >
             <q-item :to="'/input/Devanagari'">
               <q-item-main label="Devanagari"/>
@@ -99,6 +99,7 @@
               <q-item-main :label="'Newa (Nepal Bhasa)'"/>
             </q-item>
         </q-collapsible>
+        <hr/>
         <q-collapsible icon="book" label="Sample Texts"  >
             <q-item :to="'/texts/' + text.path" v-for="text in texts" :key="text.path">
               <q-item-main :label="text.name"/>
@@ -126,30 +127,7 @@
           <q-item-side icon="view column" />
             <q-item-main label="Rosetta Stone"/>
           </q-item>
-        <q-collapsible icon="school" label="Learn & Play" >
-            <q-item to="/syllabary">
-              <q-item-main label="Learn: Syllabary"/>
-            </q-item>
-            <q-item to="/conjuncts">
-              <q-item-main label="Learn: Conjuncts"/>
-            </q-item>
-            <q-item to="/fill">
-               <q-item-side icon="videogame_asset" />
-              <q-item-main label="Fill"/>
-            </q-item>
-            <q-item to="/match-letter">
-               <q-item-side icon="videogame_asset" />
-              <q-item-main label="Match" />
-            </q-item>
-            <q-item to="/flipcards-shuffle">
-               <q-item-side icon="videogame_asset" />
-              <q-item-main label="Flipcards" />
-            </q-item>
-            <q-item to="/memory-cards">
-               <q-item-side icon="videogame_asset" />
-              <q-item-main label="Memorize"  />
-            </q-item>
-        </q-collapsible>
+        <hr/>
         <q-collapsible icon="build" label="Technical" >
           <q-item to="/web-api">
             <q-item-main label="Web API" />
@@ -164,7 +142,6 @@
             <q-item-main label="Website Plugin" />
           </q-item>
         <q-item to="/help">
-            <q-item-side icon="help" />
             <q-item-main label="Help" />
         </q-item>
           </q-collapsible>
@@ -513,7 +490,7 @@ export default {
 }
 @font-face {
   font-family: 'BabelStoneZanabazar';
-  src: url('../statics/BabelStoneZanabazar.woff')
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansZanabazarSquare/NotoSansZanabazarSquare-Regular.otf')
 }
 @font-face {
   font-family: 'Adinatha Tamil Brahmi';
