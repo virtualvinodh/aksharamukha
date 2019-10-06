@@ -2,8 +2,8 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
-        // baseURL: 'https://aksharamukha.appspot.com/api/',
-        baseURL: 'http://localhost:8085/api',
+        baseURL: 'https://aksharamukha.appspot.com/api/',
+        // baseURL: 'http://localhost:8085/api',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -589,6 +589,22 @@ export const ScriptMixin = {
           },
           language: ['Sanskrit & Pali', 'Pali'],
           status: ['Living', 'Majority'],
+          invented: ['Derived: Brahmi'],
+          region: ['North Indic', 'Indic']
+        },
+        {
+          label: 'Dogra',
+          value: 'Dogra',
+          sscode: 'Dogr',
+          wikidesc: 'Dogri script is the original script of the Dogri language. It is very close to the Takri script.',
+          omnicode: '',
+          wikicode: 'Dogri_script',
+          font: {
+            'name': '',
+            'url': ''
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Extinct'],
           invented: ['Derived: Brahmi'],
           region: ['North Indic', 'Indic']
         },
@@ -1500,8 +1516,8 @@ export const ScriptMixin = {
           wikicode: 'Horizontal_square_script',
           omnicode: 'mhss',
           font: {
-            'name': 'Babel Stone Zanabazar',
-            'url': 'http://www.babelstone.co.uk/Fonts/Download/BabelStoneZanabazar.ttf'
+            'name': 'Noto Sans ZanabazarSquare',
+            'url': 'https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/unhinted/otf/NotoSansZanabazarSquare'
           },
           language: ['Sanskrit & Pali', 'Pali'],
           status: ['Extinct', 'Medieval'],

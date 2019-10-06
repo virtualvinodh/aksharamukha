@@ -15,7 +15,8 @@
     <q-btn class="q-ma-md" color="dark" @click="convertDownload"> Convert & Download </q-btn>
     <q-btn class="q-ma-md" color="dark" @click="convertView"> Convert & View </q-btn>
     <q-btn class="q-ma-md" color="dark" @click="clear"> Clear Files </q-btn> <br/>
-    <i v-show="downloadWarning"> Your browser may try to block the downloads. In that case, please unblock and try again </i>
+    <div class="q-body-1" v-show="downloadWarning"> <i>Your browser may try to block the downloads. In that case, please unblock and try again. </i></div>
+    <div class="q-body-1" v-show="docxWarning"> <br/><i>You are converting MS Word files. You may have to set the font of the converted text to match the target script manually in MS Word. </i></div>
     <div v-show="loading">Converting the file(s). Large files might take some time to convert.<q-spinner-comment color="dark" :size="30" /> </div>
     <div v-for="(file, index) in files" :key="'file'+index" v-if="showContent">
       <b> {{file.name}} </b> <br/><br/>
@@ -40,6 +41,9 @@ import ControlsIo from '../components/ControlsIo'
 import {QPageSticky, QUploader, QField, QSpinnerComment} from 'quasar'
 import { ScriptMixin } from '../mixins/ScriptMixin'
 import sanitizeHtml from 'sanitize-html'
+import { saveAs } from 'file-saver'
+
+var JSZip = require('jszip')
 
 export default {
   props: ['name'],
@@ -59,7 +63,8 @@ export default {
       files: [],
       showContent: false,
       loading: false,
-      downloadWarning: false
+      downloadWarning: false,
+      docxWarning: false
     }
   },
   methods: {
@@ -84,9 +89,42 @@ export default {
       this.files = []
       for (var i = 0; i < this.$refs.uploadF.queue.length; i++) {
         var file = this.$refs.uploadF.queue[i]
-        var text = await this.readFileText(file)
-        this.files.push({name: file.name, content: text})
+        var ext = file.name.split('.')[1]
+        var text = ''
+        if (ext === 'docx') {
+          this.docxWarning = true
+          var contentZ = await this.readFileBinary(file)
+          text = await this.readDocX(contentZ)
+        } else {
+          text = await this.readFileText(file)
+        }
+        if (ext === 'docx') {
+          this.files.push({name: file.name, content: text[0], zip: text[1]})
+        } else {
+          this.files.push({name: file.name, content: text})
+        }
       }
+    },
+    readDocX: function (contentZ) {
+      return new Promise(resolve => {
+        var newZip = new JSZip()
+        newZip.loadAsync(contentZ)
+          .then(function (zip) {
+            newZip.file('word/document.xml').async('string')
+              .then(function (content) {
+                resolve([content, newZip])
+              })
+          })
+      })
+    },
+    readFileBinary: function (url) {
+      return new Promise(resolve => {
+        var reader = new FileReader()
+        reader.onload = function () {
+          resolve(reader.result)
+        }
+        reader.readAsBinaryString(url)
+      })
     },
     readFileText: function (url) {
       return new Promise(resolve => {
@@ -138,23 +176,23 @@ export default {
                 // content = content.replace(new RegExp('e-Grantamil', 'g'), 'Noto Sans Tamil')
 
                 var blob = ''
-                const e = document.createEvent('MouseEvents')
-                const a = document.createElement('a')
-                console.log(data.target)
-                a.download = dhis.options.inputScript + '_' + scriptLabel + '_' + file.name
+                var downloadName = dhis.options.inputScript + '_' + scriptLabel + '_' + file.name
                 if (file.name.includes('.txt')) {
-                  blob = new Blob([content], {type: 'text/plain'})
-                  a.dataset.downloadurl = ['text/plain', a.download, a.href].join(':')
+                  blob = new Blob([content], {type: 'text/plain;charset=utf-8'})
+                  saveAs(blob, downloadName)
                 } else if (file.name.includes('.xml')) {
-                  blob = new Blob([content], {type: 'text/xml'})
-                  a.dataset.downloadurl = ['text/plain', a.download, a.href].join(':')
+                  blob = new Blob([content], {type: 'text/xml;charset=utf-8'})
+                  saveAs(blob, downloadName)
+                } else if (file.name.includes('.docx')) {
+                  file.zip.file('word/document.xml', content)
+                  file.zip.generateAsync({type: 'blob'})
+                    .then(function (blob) {
+                      saveAs(blob, downloadName)
+                    })
                 } else {
-                  blob = new Blob([content], {type: 'plain/html'})
-                  a.dataset.downloadurl = ['text/html', a.download, a.href].join(':')
+                  blob = new Blob([content], {type: 'plain/html;charset=utf-8'})
+                  saveAs(blob, downloadName)
                 }
-                a.href = window.URL.createObjectURL(blob)
-                e.initEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
-                a.dispatchEvent(e)
               })
               .catch(function (error) {
                 console.log(error)
@@ -167,6 +205,8 @@ export default {
     },
     clear: function () {
       this.$refs.uploadF.reset()
+      this.downloadWarning = false
+      this.docxWarning = false
     }
   }
 }
