@@ -16,7 +16,7 @@
       <div class="q-body-1" v-html="getDescription(getScriptObject(script1))">
       </div> <br/> <q-chip class="q-ma-xs" color="dark" v-for="tag in tags"
       :key="tag" small tag> {{tag}} </q-chip><br/> <br/>
-<q-tabs color="tertiary" no-pane-border animated swipeable inverted position="top">
+<q-tabs color="tertiary" no-pane-border inverted position="top">
   <!-- Tabs - notice slot="title" -->
   <q-tab default slot="title" name="tab-1" icon="info" label="Overview" class="print-hide"/> <br/>
   <q-tab slot="title" name="tab-2" icon="keyboard" label="Syllabary" class="print-hide"/>

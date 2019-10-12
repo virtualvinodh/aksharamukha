@@ -119,6 +119,10 @@
               <q-item-main :label="'IPA'"/>
             </q-item>
         </q-collapsible>
+        <!-- <q-item to="/explore">
+          <q-item-side icon="navigation" />
+            <q-item-main label="Explore"/>
+          </q-item> -->
         <q-item to="/script-matrix">
           <q-item-side icon="table chart" />
             <q-item-main label="Script Matrix"/>

@@ -200,6 +200,10 @@ def convert(src, tgt, txt, nativize, preoptions, postoptions):
       else:
         transliteration = PostProcess.RemoveDiacriticsTamil(transliteration)
 
+    if 'RemoveDiacritics' in postoptions:
+      if tgt == 'Tamil':
+        postoptions = map(lambda x: 'RemoveDiacriticsTamil' if x == 'RemoveDiacritics' else x, postoptions)
+
     for options in postoptions:
       transliteration = getattr(PostProcess, options)(transliteration)
 

@@ -2,8 +2,8 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
-        baseURL: 'https://aksharamukha.appspot.com/api/',
-        // baseURL: 'http://localhost:8085/api',
+        // baseURL: 'https://aksharamukha.appspot.com/api/',
+        baseURL: 'http://localhost:8085/api',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -600,11 +600,11 @@ export const ScriptMixin = {
           omnicode: '',
           wikicode: 'Dogri_script',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Noto Serif Dogra',
+            'url': 'https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/unhinted/otf/NotoSerifDogra'
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Extinct'],
+          status: ['Extinct', 'Pre-Modern'],
           invented: ['Derived: Brahmi'],
           region: ['North Indic', 'Indic']
         },
@@ -927,7 +927,7 @@ export const ScriptMixin = {
             'name': 'Noto Sans Meetei Mayek',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansMeeteiMayek-Regular.ttf'
           },
-          language: ['Others'],
+          language: ['Only Pali'],
           status: ['Living', 'Minority'],
           invented: ['Derived: Brahmi'],
           region: ['East Indic', 'Indic']

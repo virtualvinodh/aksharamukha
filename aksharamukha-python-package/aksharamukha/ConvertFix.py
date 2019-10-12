@@ -1375,10 +1375,12 @@ def FixSoraSompeng(Strng, reverse = False):
 
     if not reverse:
         Strng = re.sub(ListC + '(ə)', r'\1', Strng)
-        Strng = Strng.replace('ə', '\U000110E6')
+        Strng = Strng.replace('ə', '\U000110E6\U000110E8')
     else:
         ListV = "(" + "|".join(GM.CrunchSymbols(GM.Vowels, 'SoraSompeng')) + ')'
         Strng = re.sub(ListC + '(?!' + ListV + ')', r'\1' + 'ə', Strng)
+
+        Strng = Strng.replace('𑃦𑃨', 'ə')
 
     return Strng
 

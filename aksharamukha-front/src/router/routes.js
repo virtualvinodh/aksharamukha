@@ -29,6 +29,14 @@ export default [
   },
 
   {
+    path: '/explore',
+    component: () => import('layouts/default'),
+    children: [
+      { path: '', component: () => import('pages/explore') }
+    ]
+  },
+
+  {
     path: '/composer',
     component: () => import('layouts/default'),
     children: [
