@@ -80,7 +80,7 @@
      :convertText="convertText"></output-notice>
       <div class="q-mt-sm"><output-buttons @fontsizeinc="fontSize += 20" @fontsizedec="fontSize -= 20"
        @printdoc="printDocument" @screenshot="imageConvert" @copytext="copy" :convertText="convertText" :content="downHTML"></output-buttons></div>
-      <span><q-toggle color="dark" v-model="sourcePreserve" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-md print-hide" @input="convert" /><q-tooltip>Preserve the source as-is and don't change the text to improve readability</q-tooltip></span>
+      <span><q-toggle color="dark" v-model="sourcePreserve" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-md print-hide" @input="convert" /><q-tooltip>Preserve the source as-is and don't change the text to improve readability. May use archaic characters and/or diacritics.</q-tooltip></span>
     <output-options :inputScript="inputScript" :outputScript="outputScript" :postOptionsInput="postOptions"
        :convertText="convertText"
         v-model="postOptions" @input="convert"></output-options>    </div>

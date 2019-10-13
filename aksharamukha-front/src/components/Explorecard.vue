@@ -12,6 +12,8 @@
     >
     <q-card-main align="center" :key="text1"  :style="{zoom: zoomfactor, 'margin-top': !hidetitle ? '' : '5px'}" @click.native="clicked">
       <span class="text-red-4" v-if="approx"><font size="7"><span :class="script1.toLowerCase()">{{text1}}</span></font></span>
+      <div class="text-grey-6" v-if="approx"> {{text2}} </div>
+
       <span v-else><font size="7"><span :class="script1.toLowerCase()">{{text1}}</span></font></span>
 
     </q-card-main>
@@ -25,7 +27,7 @@ import { ScriptMixin } from '../mixins/ScriptMixin'
 
 export default {
   // name: 'ComponentName',
-  props: ['text1', 'script1', 'hidetitle', 'approx'],
+  props: ['text1', 'script1', 'hidetitle', 'approx', 'text2'],
   mixins: [ScriptMixin],
   components: {
     QCard,

@@ -119,17 +119,13 @@
               <q-item-main :label="'IPA'"/>
             </q-item>
         </q-collapsible>
-        <!-- <q-item to="/explore">
+        <q-item to="/explore">
           <q-item-side icon="navigation" />
             <q-item-main label="Explore"/>
-          </q-item> -->
+          </q-item>
         <q-item to="/script-matrix">
           <q-item-side icon="table chart" />
             <q-item-main label="Script Matrix"/>
-          </q-item>
-        <q-item to="/rosetta-stone">
-          <q-item-side icon="view column" />
-            <q-item-main label="Rosetta Stone"/>
           </q-item>
         <hr/>
         <q-collapsible icon="build" label="Technical" >

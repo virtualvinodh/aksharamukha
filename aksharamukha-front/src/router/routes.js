@@ -54,10 +54,7 @@ export default [
 
   {
     path: '/rosetta-stone',
-    component: () => import('layouts/default'),
-    children: [
-      { path: '', component: () => import('pages/rosetta-stone') }
-    ]
+    redirect: '/explore'
   },
 
   {

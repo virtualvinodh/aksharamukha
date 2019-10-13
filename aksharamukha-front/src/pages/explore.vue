@@ -11,22 +11,23 @@
         Region
       </q-btn>
       <q-btn class="q-ma-sm" @click="current" :color="activeButton === 'current' ? 'dark' : ''">
-        Current use
+        Usage
       </q-btn>
       <q-btn class="q-ma-sm" @click="linguistic" :color="activeButton === 'linguistic' ? 'dark' : ''">
-        Capability
+        Language Capability
       </q-btn>
       <q-btn class="q-ma-sm" @click="derivatic" :color="activeButton === 'derivatic' ? 'dark' : ''">
         Derivation
       </q-btn>
     </div>
     <div class="q-ma-sm">
-    <i>Filters: </i>
-    <q-btn rounded flat dense v-for="tag in tagsAll" :key="tag + 'v'" @click="tagClick(tag)">
-    <q-chip :color="tagsActive.includes(tag) ? 'green-3' : 'red-3'" dense tag>
-      {{tag}}
-    </q-chip>
-    </q-btn>
+    <q-collapsible label="<i>Further filters</i>" icon="category" :opened="!$q.platform.is.mobile">
+      <q-btn rounded flat dense v-for="tag in tagsAll" :key="tag + 'v'" @click="tagClick(tag)">
+        <q-chip :color="tagsActive.includes(tag) ? 'green-3' : 'red-3'" dense tag>
+          {{tag}}
+        </q-chip>
+      </q-btn>
+    </q-collapsible>
     </div>
       <div class="row" v-if="type === 'explorecard'">
       <q-select
@@ -83,18 +84,17 @@
       />
       <q-btn class="q-ma-md" color="dark" @click="getLetters"> Convert </q-btn>
     </div>
-    <q-btn-toggle v-model="type" :options="typeoptions"  toggle-color="dark" class="col-md-2 q-ma-sm"
+    <q-btn-toggle v-model="type" :options="typeoptions"  toggle-color="dark" class="col-md-2 q-ma-md"
        @input="getLetters"></q-btn-toggle>
-    <q-toggle class="q-ma-md col-md-2" v-model="showapprox" label="Show approximations" v-if="type == 'explorecard'"> </q-toggle>
-    <q-toggle class="q-ma-md col-md-2" v-model="highapprox" label="Highlight approximations" v-if="type == 'explorecardsent'"> </q-toggle>
-    <q-toggle color="dark" v-model="sourcePreserve" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-sm"
-     v-if="type == 'explorecardsent'" @input="getLetters"/>
+    <q-toggle class="q-ma-md col-md-2" v-model="showapprox" label="Show approx. equivalents" v-if="type == 'explorecard'"> </q-toggle>
+    <q-toggle class="q-ma-md col-md-2" v-model="highapprox" label="Highlight approx. equivalents" v-if="type == 'explorecardsent'"> </q-toggle>
+    <span v-if="type == 'explorecardsent'"><q-toggle color="dark" v-model="sourcePreserve" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-sm" @input="getLetters"/><q-tooltip>Preserve the source as-is and don't change the text to improve readability. May use archaic characters and/or diacritics.</q-tooltip></span>
 
     <div v-show="loading" class="q-ma-xs"><q-spinner-comment color="dark" :size="30" v-show="loading"/> </div>
-      <div style="text-align: right" class="q-ma-md">
+      <!-- <div style="text-align: right" class="q-ma-md">
         <span class="text-red-4"> X</span> : Approximate equivalent <br/>
-      </div><br/>
-  <div class="q-body-1 q-mb-md" v-if="$q.platform.is.mobile"> Tap on the text to view more information about the text </div>
+      </div><br/> -->
+  <div class="q-body-1 q-mb-md" v-if="$q.platform.is.mobile"> Tap on the text to view more information about the script. </div><br/><br/>
   <transition-group
    enter-active-class="animated fadeIn"
    leave-active-class="animated fadeOut"
@@ -102,7 +102,8 @@
     >
    <div v-for="category in Object.keys(scriptsCategorizedFilter)" :key="category"
      v-if="scriptsCategorizedFilter[category].length > 0">
-    <q-collapsible opened :label="category + ' (' + scriptsCategorizedFilter[category].length +  ' scripts)'"
+    <q-collapsible opened
+    :label="scriptsCategorizedFilter[category].length == 1 ? category + ' (' + scriptsCategorizedFilter[category].length +  ' script)' : category + ' (' + scriptsCategorizedFilter[category].length +  ' scripts)'"
       :header-style="{'font-size': '125%'}" class="q-mb-md">
       <component :text1="chars1[script.value]" :script1="script.value" @click="clicked(script)"
        v-for="script in scriptsCategorizedFilter[category]" :key="category + script.value" :hidetitle="hidetitle"
@@ -156,7 +157,7 @@
 
 <script>
 import {tree} from 'vued3tree'
-import { QSelect, QChip, QBtnToggle, QBtn, QModal, CloseOverlay, QCollapsible, QPageSticky, QField, QToggle, QSpinnerComment, QInput } from 'quasar'
+import { QSelect, QTooltip, QChip, QBtnToggle, QBtn, QModal, CloseOverlay, QCollapsible, QPageSticky, QField, QToggle, QSpinnerComment, QInput } from 'quasar'
 import Explorecard from '../components/Explorecard'
 import Explorecardsent from '../components/Explorecardsent'
 import Transliterate from '../components/Transliterate'
@@ -170,6 +171,7 @@ export default {
     tree,
     QBtn,
     QToggle,
+    QTooltip,
     QBtnToggle,
     QCollapsible,
     QChip,

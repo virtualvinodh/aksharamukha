@@ -2,8 +2,8 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
-        // baseURL: 'https://aksharamukha.appspot.com/api/',
-        baseURL: 'http://localhost:8085/api',
+        baseURL: 'https://aksharamukha.appspot.com/api/',
+        // baseURL: 'http://localhost:8085/api',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -311,6 +311,7 @@ export const ScriptMixin = {
           status: ['Extinct', 'Pre-Modern'],
           invented: ['Invented'],
           region: ['South East Asian: Mainland', 'South East Asian'],
+          miscsrc: '(from Omniglot)',
           miscdesc: 'The Ariyaka alphabet was invented by King Mongkut Rama IV of Siam (1804-1868) as an alternative alphabet for Pali. He considered the Khmer alphabet, which was commonly used to write Pali, to be too complicated and decided to create an alphabet that was easier to use and more Western in appearance.'
         },
         {
@@ -729,6 +730,7 @@ export const ScriptMixin = {
           ssdesc: '',
           omnicode: '',
           wikicode: '',
+          miscsrc: '(from <a href="https://www.unicode.org/L2/L2008/08181-n3423r.pdf">L2/08-181</a>)',
           miscdesc: 'Khamti Shan is spoken by 50,000 people in Myanmar and India. The language has a long literary tradition which was lost as people forgot their script. In the last 5 years the script has undergone a resurgence in a new form and after a pilot literacy programme is to be taught throughout the region.',
           font: {
             'name': '',
@@ -850,6 +852,7 @@ export const ScriptMixin = {
           status: ['Living', 'Minority'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Mainland', 'South East Asian'],
+          miscsrc: '',
           miscdesc: 'Lao (Pali) is the extended version of the Lao script to faithfully represent Pali and Sanskrit. Lao lacks several characters that are required to accurately express the phonology of those languages (unlike its neighbhouring scripts like Thai/Khmer). Therefore, Modern Lao cannot faithfully represent Pali words, and by extension, cannot transcript religious texts faithfully. In the 1930s, an additional set of characters were proposed to support Pali/Sanskrit by filling in the missing gaps. This also allows an etymological orthography for Lao (similar to Thai. The current Lao orthography is phonemic). But the addition met with little widespread support and finally by 1975, these additional characters were mostly out of use. But there is a revived interest in the characters. '
         },
         {
@@ -954,6 +957,7 @@ export const ScriptMixin = {
           sscode: '',
           ssdesc: '',
           omnicode: 'mon',
+          miscsrc: '(from Omniglot)',
           miscdesc: 'Mon is an Austroasiatic language spoken in parts of Myanmar/Burma and Thailand. In 2004 there were 850,000 speakers, mainly in Mon State, and also in the Tanintharyi Region and Kayin State in southern Myanmar.',
           font: {
             'name': '',
@@ -1155,6 +1159,7 @@ export const ScriptMixin = {
           status: ['Living', 'Minority'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Mainland', 'South East Asian'],
+          miscsrc: '(from Omniglot)',
           miscdesc: 'Shan is a Tai language spoken by about 3.3 million people in the Shan States of Burma in the northeast of the country, and also in parts of northern Thailand and in the Xishuangbanna (Sipsongpanna) Dai Autonomous Prefecture of Yunnan province in southwestern China.The Shan script is used in Burma to write Shan, although few Shan speakers can read and write in the Shan script.'
         },
         {
@@ -1281,6 +1286,7 @@ export const ScriptMixin = {
           ssdesc: '',
           omnicode: '',
           wikicode: '',
+          miscsrc: '(from <a href="https://unicode.org/L2/L2011/11130-mymr-extras.pdf">L2/11-130</a>)',
           miscdesc: 'The Tai Laing are a language group of about 100,000 speakers living along the Irrawaddy River in Myanmar. The writing system is part of their history that has not completely died out and there is interest in reviving it. While the script is not taught formally in schools, it is taught during school breaks.',
           font: {
             'name': '',
@@ -1345,6 +1351,7 @@ export const ScriptMixin = {
           value: 'TamilGrantha',
           sscode: '',
           ssdesc: '',
+          miscsrc: '',
           miscdesc: 'Tamil (Extended) represents the attempts to use the full complimentary set of Grantha letters to fill the gaps in the Tamil script (as compared to the pan-Indic system). Modern Tamil only adopts /ja/, /śa/, /ṣa/, /ha/ and the compound /śrī/ from Grantha into its character reportoire. This was probably done instead of using superscript numerals to increase the readability of the text (and the possible wide-spread familiarity with Grantha script few decades ago).',
           omnicode: '',
           wikicode: '',
