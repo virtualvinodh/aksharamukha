@@ -2,8 +2,8 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
-        baseURL: 'https://aksharamukha.appspot.com/api/',
-        // baseURL: 'http://localhost:8085/api',
+        // baseURL: 'https://aksharamukha.appspot.com/api/',
+        baseURL: 'http://localhost:8085/api',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -292,7 +292,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifAhom/NotoSerifAhom-Regular.otf'
           },
           language: ['Others'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi'],
           region: ['East Indic', 'Indic']
         },
@@ -308,7 +308,7 @@ export const ScriptMixin = {
             'url': 'https://www.omniglot.com/fonts/ariyaka.zip'
           },
           language: ['Only Pali', 'Pali'],
-          status: ['Extinct', 'Pre-Modern'],
+          status: ['Extinct', 'Extinct: Pre-Modern'],
           invented: ['Invented'],
           region: ['South East Asian: Mainland', 'South East Asian'],
           miscsrc: '(from Omniglot)',
@@ -327,7 +327,7 @@ export const ScriptMixin = {
             'url': ''
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Majority'],
+          status: ['Living', 'Living: Major'],
           invented: ['Derived: Brahmi'],
           region: ['East Indic', 'Indic']
         },
@@ -343,7 +343,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansAvestan-Regular.ttf'
           },
           language: ['Others'],
-          status: ['Extinct', 'Ancient'],
+          status: ['Extinct', 'Extinct: Ancient'],
           invented: ['Derived: Aramaic'],
           region: ['West Asian']
         },
@@ -359,7 +359,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifBalinese/NotoSerifBalinese-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Insular', 'South East Asian']
         },
@@ -376,7 +376,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansBatak-Regular.ttf'
           },
           language: ['Others'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Insular', 'South East Asian']
         },
@@ -393,7 +393,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansBatak-Regular.ttf'
           },
           language: ['Others'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Insular', 'South East Asian']
         },
@@ -410,7 +410,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansBatak-Regular.ttf'
           },
           language: ['Others'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Insular', 'South East Asian']
         },
@@ -427,7 +427,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansBatak-Regular.ttf'
           },
           language: ['Others'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Insular', 'South East Asian']
         },
@@ -444,7 +444,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansBatak-Regular.ttf'
           },
           language: ['Others'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Insular', 'South East Asian']
         },
@@ -460,7 +460,7 @@ export const ScriptMixin = {
             'url': ''
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Majority'],
+          status: ['Living', 'Living: Major'],
           invented: ['Derived: Brahmi'],
           region: ['East Indic', 'Indic']
         },
@@ -476,7 +476,7 @@ export const ScriptMixin = {
             'url': ''
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Extinct', 'Ancient'],
+          status: ['Extinct', 'Extinct: Ancient'],
           invented: ['Derived: Brahmi'],
           region: ['Pan-Indic', 'Indic']
         },
@@ -492,7 +492,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansBhaiksuki/NotoSansBhaiksuki-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Extinct', 'Ancient'],
+          status: ['Extinct', 'Extinct: Ancient'],
           invented: ['Derived: Brahmi'],
           region: ['North Indic', 'Indic']
         },
@@ -508,7 +508,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansBuginese-Regular.ttf'
           },
           language: ['Others'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Insular', 'South East Asian']
         },
@@ -524,7 +524,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansBuhid/NotoSansBuhid-Regular.otf'
           },
           language: ['Others'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Insular', 'South East Asian']
         },
@@ -540,7 +540,7 @@ export const ScriptMixin = {
             'url': ''
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Majority'],
+          status: ['Living', 'Living: Major'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Mainland', 'South East Asian']
         },
@@ -556,7 +556,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansChakma-Regular.ttf'
           },
           language: ['Only Pali', 'Pali'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Mainland', 'South East Asian']
         },
@@ -573,7 +573,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansCham-Regular.ttf'
           },
           language: ['Others'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Insular', 'South East Asian']
         },
@@ -589,7 +589,7 @@ export const ScriptMixin = {
             'url': ''
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Majority'],
+          status: ['Living', 'Living: Major'],
           invented: ['Derived: Brahmi'],
           region: ['North Indic', 'Indic']
         },
@@ -605,7 +605,7 @@ export const ScriptMixin = {
             'url': 'https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/unhinted/otf/NotoSerifDogra'
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Extinct', 'Pre-Modern'],
+          status: ['Extinct', 'Extinct: Pre-Modern'],
           invented: ['Derived: Brahmi'],
           region: ['North Indic', 'Indic']
         },
@@ -622,7 +622,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansGrantha/NotoSansGrantha-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South Indic', 'Indic']
         },
@@ -639,7 +639,7 @@ export const ScriptMixin = {
             'url': 'https://github.com/virtualvinodh/aksharamukha/blob/master/aksharamukha-front/src/statics/e-Pandya.ttf'
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Extinct', 'Ancient'],
+          status: ['Extinct', 'Extinct: Ancient'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South Indic', 'Indic']
         },
@@ -655,7 +655,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifGujarati/NotoSerifGujarati-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Majority'],
+          status: ['Living', 'Living: Major'],
           invented: ['Derived: Brahmi'],
           region: ['West Indic', 'Indic']
         },
@@ -671,7 +671,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansHanunoo/NotoSansHanunoo-Regular.otf'
           },
           language: ['Others'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Insular', 'South East Asian']
         },
@@ -687,7 +687,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansJavanese/NotoSansJavanese-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Insular', 'South East Asian']
         },
@@ -703,7 +703,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansKaithi/NotoSansKaithi-Regular.otf'
           },
           language: ['Only Pali', 'Pali'],
-          status: ['Extinct', 'Pre-Modern'],
+          status: ['Extinct', 'Extinct: Pre-Modern'],
           invented: ['Derived: Brahmi'],
           region: ['North Indic', 'Indic']
         },
@@ -711,7 +711,7 @@ export const ScriptMixin = {
           label: 'Kannada',
           value: 'Kannada',
           sscode: 'Knda',
-          ssdesc: 'The Kannada script is used for writing the Kannada language spoken by over 35 million people in southern India. It is also used for writing Konkani, a South Indian language with over 3 million speakers, Tulu, with almost 2 million speakers, and a number of south Indian minority languages including Badaga, Kudiya and Paniya. The script is closely related to Telugu writing; both languages were written using the Old Kanarese script until the 1500s when it diverged into two distinct varieties.',
+          ssdesc: 'The Kannada script is used for writing the Kannada language spoken by over 35 million people in southern India. It is also used for writing Konkani, a South Indian language with over 3 million speakers, Tulu, with almost 2 million speakers, and a number of south Indian Living: Minor languages including Badaga, Kudiya and Paniya. The script is closely related to Telugu writing; both languages were written using the Old Kanarese script until the 1500s when it diverged into two distinct varieties.',
           omnicode: 'kannada',
           wikicode: 'Kannada_alphabet',
           font: {
@@ -719,7 +719,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansKannada/NotoSansKannada-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Majority'],
+          status: ['Living', 'Living: Major'],
           invented: ['Derived: Brahmi'],
           region: ['South Indic', 'Indic']
         },
@@ -737,7 +737,7 @@ export const ScriptMixin = {
             'url': ''
           },
           language: ['Only Pali', 'Pali'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Mainland', 'South East Asian']
         },
@@ -753,7 +753,7 @@ export const ScriptMixin = {
             'url': ''
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Extinct', 'Ancient'],
+          status: ['Extinct', 'Extinct: Ancient'],
           invented: ['Derived: Aramaic'],
           region: ['West Indic', 'Indic']
         },
@@ -761,7 +761,7 @@ export const ScriptMixin = {
           label: 'Khmer (Cambodian)',
           value: 'Khmer',
           sscode: 'Khmr',
-          ssdesc: 'The Khmer script is an abugida, descended from the Brahmic script Pallava. It is used for writing Khmer, the official language of Cambodia. The script is also sometimes used for writing minority languages in Cambodia, such as Brao and Mnong.',
+          ssdesc: 'The Khmer script is an abugida, descended from the Brahmic script Pallava. It is used for writing Khmer, the official language of Cambodia. The script is also sometimes used for writing Living: Minor languages in Cambodia, such as Brao and Mnong.',
           omnicode: 'khmer',
           wikicode: 'Khmer_alphabet',
           font: {
@@ -769,7 +769,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifKhmer/NotoSerifKhmer-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Majority'],
+          status: ['Living', 'Living: Major'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Mainland', 'South East Asian']
         },
@@ -785,7 +785,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansKhojki/NotoSansKhojki-Regular.otf'
           },
           language: ['Others'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi'],
           region: ['West Indic', 'Indic']
         },
@@ -803,7 +803,7 @@ export const ScriptMixin = {
             'url': 'https://github.com/virtualvinodh/aksharamukha/blob/master/aksharamukha-front/src/statics/Patimokkha.otf'
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Mainland', 'South East Asian']
         },
@@ -819,7 +819,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansKhudawadi/NotoSansKhudawadi-Regular.otf'
           },
           language: ['Only Pali', 'Pali'],
-          status: ['Extinct', 'Pre-Modern'],
+          status: ['Extinct', 'Extinct: Pre-Modern'],
           invented: ['Derived: Brahmi'],
           region: ['West Indic', 'Indic']
         },
@@ -827,7 +827,7 @@ export const ScriptMixin = {
           label: 'Lao',
           value: 'Lao',
           sscode: 'Laoo',
-          ssdesc: 'The Lao script is used for writing the Lao language, and is also the official script of a number of minority languages in Laos. The Lao language is closely related to Thai; there is a considerable Lao-speaking population in Thailand who write their language with the Thai script. However, the Lao script underwent a number of reforms which caused significant divergence from the Thai script.',
+          ssdesc: 'The Lao script is used for writing the Lao language, and is also the official script of a number of Living: Minor languages in Laos. The Lao language is closely related to Thai; there is a considerable Lao-speaking population in Thailand who write their language with the Thai script. However, the Lao script underwent a number of reforms which caused significant divergence from the Thai script.',
           omnicode: 'lao',
           wikicode: 'Lao_alphabet',
           font: {
@@ -835,7 +835,7 @@ export const ScriptMixin = {
             'url': ''
           },
           language: ['Others'],
-          status: ['Living', 'Majority'],
+          status: ['Living', 'Living: Major'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Mainland', 'South East Asian']
         },
@@ -849,7 +849,7 @@ export const ScriptMixin = {
             'url': 'https://github.com/virtualvinodh/aksharamukha/blob/master/aksharamukha-front/src/statics/LaoPaliAlpha-Extralight.otf'
           },
           language: ['Only Pali', 'Pali'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Mainland', 'South East Asian'],
           miscsrc: '',
@@ -867,7 +867,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansLepcha-Regular.ttf'
           },
           language: ['Others'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi'],
           region: ['East Indic', 'Indic']
         },
@@ -883,7 +883,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansLimbu-Regular.ttf'
           },
           language: ['Others'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi'],
           region: ['North Indic', 'Indic']
         },
@@ -891,7 +891,7 @@ export const ScriptMixin = {
           label: 'Malayalam',
           value: 'Malayalam',
           sscode: 'Mlym',
-          ssdesc: 'The Malayalam script is used for writing the Malayalam language, the official language of the Indian state of Kerala, and a number of minority languages spoken in India. Until the 16th century Malayalam was written in the vattezhuthu script, a Brahmic script which developed alongside Grantha writing, from which the modern Malayalam script descended.',
+          ssdesc: 'The Malayalam script is used for writing the Malayalam language, the official language of the Indian state of Kerala, and a number of Living: Minor languages spoken in India. Until the 16th century Malayalam was written in the vattezhuthu script, a Brahmic script which developed alongside Grantha writing, from which the modern Malayalam script descended.',
           omnicode: 'malayalam',
           wikicode: 'Malayalam_script',
           font: {
@@ -899,7 +899,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansMalayalam/NotoSansMalayalam-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Majority'],
+          status: ['Living', 'Living: Major'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South Indic', 'Indic']
         },
@@ -915,7 +915,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansMahajani/NotoSansMahajani-Regular.otf'
           },
           language: ['Others'],
-          status: ['Extinct', 'Pre-Modern'],
+          status: ['Extinct', 'Extinct: Pre-Modern'],
           invented: ['Derived: Brahmi'],
           region: ['North Indic', 'Indic']
         },
@@ -931,7 +931,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansMeeteiMayek-Regular.ttf'
           },
           language: ['Only Pali'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi'],
           region: ['East Indic', 'Indic']
         },
@@ -947,7 +947,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansModi/NotoSansModi-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Extinct', 'Pre-Modern'],
+          status: ['Extinct', 'Extinct: Pre-Modern'],
           invented: ['Derived: Brahmi'],
           region: ['North Indic', 'Indic']
         },
@@ -964,7 +964,7 @@ export const ScriptMixin = {
             'url': ''
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Mainland', 'South East Asian']
         },
@@ -980,7 +980,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansMultani/NotoSansMultani-Regular.otf'
           },
           language: ['Others'],
-          status: ['Extinct', 'Pre-Modern'],
+          status: ['Extinct', 'Extinct: Pre-Modern'],
           invented: ['Derived: Brahmi'],
           region: ['West Indic', 'Indic']
         },
@@ -996,7 +996,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansNewa/NotoSansNewa-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi'],
           region: ['North Indic', 'Indic']
         },
@@ -1012,7 +1012,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansOldPersian/NotoSansOldPersian-Regular.otf'
           },
           language: ['Others'],
-          status: ['Extinct', 'Ancient'],
+          status: ['Extinct', 'Extinct: Ancient'],
           invented: ['Derived: Cuneiform'],
           region: ['West Asian']
         },
@@ -1020,7 +1020,7 @@ export const ScriptMixin = {
           label: 'Oriya',
           value: 'Oriya',
           sscode: 'Orya',
-          ssdesc: 'The Odia (formerly Oriya) script is used for writing the Odia language, the official language of the Indian state of Orissa, as well as a number of Dravidian and Munda minority languages spoken in that region. It is also used in Orissa for transcribing Sanskrit texts. The earliest inscriptions in the Odia language have been dated to 1051 AD, written in the Kalinga script from which modern Odia writing is derived.',
+          ssdesc: 'The Odia (formerly Oriya) script is used for writing the Odia language, the official language of the Indian state of Orissa, as well as a number of Dravidian and Munda Living: Minor languages spoken in that region. It is also used in Orissa for transcribing Sanskrit texts. The earliest inscriptions in the Odia language have been dated to 1051 AD, written in the Kalinga script from which modern Odia writing is derived.',
           omnicode: 'oriya',
           wikicode: 'Odia_alphabet',
           font: {
@@ -1028,7 +1028,7 @@ export const ScriptMixin = {
             'url': ''
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Majority'],
+          status: ['Living', 'Living: Major'],
           invented: ['Derived: Brahmi'],
           region: ['East Indic', 'Indic']
         },
@@ -1044,7 +1044,7 @@ export const ScriptMixin = {
             'url': ''
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Extinct', 'Medieval'],
+          status: ['Extinct', 'Extinct: Medieval'],
           invented: ['Derived: Brahmi'],
           region: ['Central Asian']
         },
@@ -1060,7 +1060,7 @@ export const ScriptMixin = {
             'url': ''
           },
           language: ['Only Pali', 'Pali'],
-          status: ['Living', 'Majority'],
+          status: ['Living', 'Living: Major'],
           invented: ['Derived: Brahmi'],
           region: ['West Indic', 'Indic']
         },
@@ -1076,7 +1076,7 @@ export const ScriptMixin = {
             'url': 'https://github.com/virtualvinodh/aksharamukha/blob/master/aksharamukha-front/src/statics/RanjanaUNICODE1.0.TTF'
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi'],
           region: ['North Indic', 'Indic']
         },
@@ -1092,7 +1092,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansRejang/NotoSansRejang-Regular.otf'
           },
           language: ['Others'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Insular', 'South East Asian']
         },
@@ -1108,7 +1108,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansOlChiki/NotoSansOlChiki-Regular.otf'
           },
           language: ['Only Pali', 'Pali'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Invented'],
           region: ['East Indic', 'Indic']
         },
@@ -1124,7 +1124,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSaurashtra/NotoSansSaurashtra-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Invented'],
           region: ['South Indic', 'Indic']
         },
@@ -1140,7 +1140,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSiddham/NotoSansSiddham-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi'],
           region: ['East Asian']
         },
@@ -1156,7 +1156,7 @@ export const ScriptMixin = {
             'url': ''
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Mainland', 'South East Asian'],
           miscsrc: '(from Omniglot)',
@@ -1174,7 +1174,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSharada/NotoSansSharada-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi'],
           region: ['North Indic', 'Indic']
         },
@@ -1194,7 +1194,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSinhala/NotoSansSinhala-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Majority'],
+          status: ['Living', 'Living: Major'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South Indic', 'Indic']
         },
@@ -1210,7 +1210,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSoraSompeng/NotoSansSoraSompeng-Regular.otf'
           },
           language: ['Others'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Invented'],
           region: ['East Indic', 'Indic']
 
@@ -1227,7 +1227,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansSundanese-Regular.ttf'
           },
           language: ['Others'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Insular', 'South East Asian']
         },
@@ -1243,7 +1243,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSylotiNagri/NotoSansSylotiNagri-Regular.otf'
           },
           language: ['Others'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi'],
           region: ['East Indic', 'Indic']
         },
@@ -1259,7 +1259,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansTagbanwa-Regular.ttf'
           },
           language: ['Others'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Insular', 'South East Asian']
         },
@@ -1275,7 +1275,7 @@ export const ScriptMixin = {
             'url': 'Noto Sans Tagalog'
           },
           language: ['Others'],
-          status: ['Living', 'Minority', 'Derived: Pallava'],
+          status: ['Living', 'Living: Minor', 'Derived: Pallava'],
           invented: ['Derived: Brahmi'],
           region: ['South East Asian: Insular', 'South East Asian']
         },
@@ -1293,7 +1293,7 @@ export const ScriptMixin = {
             'url': ''
           },
           language: ['Only Pali', 'Pali'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Mainland', 'South East Asian']
         },
@@ -1310,7 +1310,7 @@ export const ScriptMixin = {
             'url': 'https://github.com/virtualvinodh/aksharamukha/blob/master/aksharamukha-front/src/statics/Pali_Tilok.ttf'
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Mainland', 'South East Asian']
         },
@@ -1326,7 +1326,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansTakri/NotoSansTakri-Regular.otf'
           },
           language: ['Only Pali', 'Pali'],
-          status: ['Extinct', 'Pre-Modern'],
+          status: ['Extinct', 'Extinct: Pre-Modern'],
           invented: ['Derived: Brahmi'],
           region: ['West Indic', 'Indic']
         },
@@ -1342,7 +1342,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansTamil/NotoSansTamil-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Majority'],
+          status: ['Living', 'Living: Major'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South Indic', 'Indic']
         },
@@ -1360,7 +1360,7 @@ export const ScriptMixin = {
             'url': 'http://virtualvinodh.com/download/e-Grantamil.ttf'
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South Indic', 'Indic']
         },
@@ -1377,7 +1377,7 @@ export const ScriptMixin = {
             'url': ''
           },
           language: ['Others'],
-          status: ['Extinct', 'Ancient'],
+          status: ['Extinct', 'Extinct: Ancient'],
           invented: ['Derived: Brahmi'],
           region: ['South Indic', 'Indic']
         },
@@ -1385,7 +1385,7 @@ export const ScriptMixin = {
           label: 'Telugu',
           value: 'Telugu',
           sscode: 'Telu',
-          ssdesc: 'The Telugu script is used for writing the Telugu language, a Dravidian language spoken by almost 70,000,000 people in South India. The Telugu script is also used for writing a number of minority languages in Southern India, including Chenchu, Savara and Manna-Dora to which the Telugu language is related. The script is closely related to the Kannada script.',
+          ssdesc: 'The Telugu script is used for writing the Telugu language, a Dravidian language spoken by almost 70,000,000 people in South India. The Telugu script is also used for writing a number of Living: Minor languages in Southern India, including Chenchu, Savara and Manna-Dora to which the Telugu language is related. The script is closely related to the Kannada script.',
           omnicode: 'telugu',
           wikicode: 'Telugu_script',
           font: {
@@ -1393,7 +1393,7 @@ export const ScriptMixin = {
             'url': 'https://pagure.io/lohit/tree/master'
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Majority'],
+          status: ['Living', 'Living: Major'],
           invented: ['Derived: Brahmi'],
           region: ['South Indic', 'Indic']
         },
@@ -1414,7 +1414,7 @@ export const ScriptMixin = {
             'url': ''
           },
           language: ['Others'],
-          status: ['Living', 'Majority'],
+          status: ['Living', 'Living: Major'],
           invented: ['Derived: Perso-Arabic'],
           region: ['South Asian: Other']
         },
@@ -1422,7 +1422,7 @@ export const ScriptMixin = {
           label: 'Thai',
           value: 'Thai',
           sscode: 'Thai',
-          ssdesc: 'The Thai script is used primarily for writing the Thai language, as well as Northern Thai, Northeastern Thai, Southern Thai, and Thai Song, which are separate languages. It is also used to write a number of minority languages in Thailand, Laos and China, as well as Pali, which is widely used in Buddhist temples and monasteries. Both the Thai language and script are closely related to Laotian. The script is of Indic origin, derived from Old Khmer.',
+          ssdesc: 'The Thai script is used primarily for writing the Thai language, as well as Northern Thai, Northeastern Thai, Southern Thai, and Thai Song, which are separate languages. It is also used to write a number of Living: Minor languages in Thailand, Laos and China, as well as Pali, which is widely used in Buddhist temples and monasteries. Both the Thai language and script are closely related to Laotian. The script is of Indic origin, derived from Old Khmer.',
           omnicode: 'thai',
           wikicode: 'Thai_alphabet',
           font: {
@@ -1430,7 +1430,7 @@ export const ScriptMixin = {
             'url': ''
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Majority'],
+          status: ['Living', 'Living: Major'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Mainland', 'South East Asian']
         },
@@ -1446,7 +1446,7 @@ export const ScriptMixin = {
             'url': ''
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Majority'],
+          status: ['Living', 'Living: Major'],
           invented: ['Derived: Brahmi'],
           region: ['Central Asian']
         },
@@ -1462,7 +1462,7 @@ export const ScriptMixin = {
             'url': 'http://vedicastrology.wikidot.com/local--files/mithilakshara-font/MithilaUni.ttf'
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi'],
           region: ['East Indic', 'Indic']
         },
@@ -1479,7 +1479,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoNastaliqUrdu/NotoNastaliqUrdu-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Living', 'Majority'],
+          status: ['Living', 'Living: Major'],
           invented: ['Derived: Perso-Arabic'],
           region: ['North Indic', 'Indic']
         },
@@ -1494,7 +1494,7 @@ export const ScriptMixin = {
             'url': 'https://github.com/virtualvinodh/aksharamukha/blob/master/aksharamukha-front/src/statics/e-VatteluttuOT.ttf'
           },
           language: ['Others'],
-          status: ['Extinct', 'Medieval'],
+          status: ['Extinct', 'Extinct: Medieval'],
           invented: ['Derived: Brahmi'],
           region: ['South Indic', 'Indic'],
           wikidesc: 'The Vaṭṭeḻuttu, also spelled Vattezhutthu (literally "Round Script") was an abugida writing system in southern India and Sri Lanka in the latter half of the 1st millennium AD. Vatteluttu was the common script for writing various forms of Tamil language in Pandya-Chera region till the 9th century and after that time it came to be replaced by the present-day Tamil script everywhere except in Kerala'
@@ -1511,7 +1511,7 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansWarangCiti/NotoSansWarangCiti-Regular.otf'
           },
           language: ['Others'],
-          status: ['Living', 'Minority'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Invented'],
           region: ['East Indic', 'Indic']
         },
@@ -1527,7 +1527,7 @@ export const ScriptMixin = {
             'url': 'https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/unhinted/otf/NotoSansZanabazarSquare'
           },
           language: ['Sanskrit & Pali', 'Pali'],
-          status: ['Extinct', 'Medieval'],
+          status: ['Extinct', 'Extinct: Medieval'],
           invented: ['Derived: Brahmi'],
           region: ['Central Asian']
         }
@@ -1641,7 +1641,7 @@ export const ScriptMixin = {
       Region: ['South Asia', 'East Asian', 'South East Asia'],
       RegionExpand: ['Iran', 'India', 'Sri Lanka', 'Burmese', 'Philippines', 'Indonesia', 'Japan'],
       Status: ['Living', 'Extinct'],
-      StatusExpand: ['Extinct', 'Majority', 'Minority'],
+      StatusExpand: ['Extinct', 'Living: Major', 'Living: Minor'],
       indicSubset: ['Shan', 'Khmer', 'Burmese', 'Lao', 'Thai', 'Balinese', 'Javanese', 'Tibetan', 'LaoPali', 'TaiTham', 'Cham', 'Lepcha', 'Ahom', 'ZanabazarSquare']
     }
   },

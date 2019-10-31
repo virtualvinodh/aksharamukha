@@ -241,7 +241,7 @@ export default {
       scriptDescription: {},
       alphabet: 'abcdefghijklmnopqrstuvwxyz'.toUpperCase().split(''),
       languages: ['Sanskrit & Pali', 'Only Pali', 'Others'],
-      status: ['Extinct', 'Minority', 'Majority'],
+      status: ['Extinct', 'Living: Minor', 'Living: Major'],
       derivation: ['Invented', 'Derived: Aramaic', 'Derived: Perso-Arabic', 'Derived: Cuneiform', 'Derived: Brahmi'],
       regions: ['Pan-Indic', 'East Indic', 'West Indic', 'North Indic', 'South Indic', 'South East Asian: Mainland', 'South East Asian: Insular', 'Central Asian', 'East Asian', 'South Asian: Other', 'West Asian'],
       tagsActive: [],
@@ -318,7 +318,7 @@ export default {
     },
     tagsAll: function () {
       let arr = []
-      return arr.concat(this.languages, ['Pali'], this.status, this.derivation, ['Derived: Pallava'], this.regions, ['Indic', 'South East Asian'])
+      return arr.concat(this.languages, ['Pali'], this.status, ['Living', 'Extinct: Ancient', 'Extinct: Medieval', 'Extinct: Pre-Modern'], this.derivation, ['Derived: Pallava'], this.regions, ['Indic', 'South East Asian'])
     },
     tags: function () {
       if (this.scriptcurrent !== '') {
