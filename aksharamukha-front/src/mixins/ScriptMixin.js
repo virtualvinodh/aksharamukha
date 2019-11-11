@@ -69,6 +69,10 @@ export const ScriptMixin = {
           { label: 'Sajjhaya Orthography', value: 'ThaiSajjhayaOrthography' }
 
         ],
+        'TaiTham': [
+          { label: 'Tai Tham Lao', value: 'TaiThamLao' },
+          { label: 'Tai Kuen', value: 'TaiKuen' }
+        ],
         'LaoPali': [
           { label: 'Lao Orthography', value: 'LaoTranscription' }
         ],
@@ -190,7 +194,8 @@ export const ScriptMixin = {
           { label: 'Lao Nativization', value: 'LaoNative' }
         ],
         'TaiTham': [
-          { label: 'Tai Tham Lao', value: 'TaiThamLao' }
+          { label: 'Tai Tham Lao', value: 'TaiThamLao' },
+          { label: 'Tai Kuen', value: 'TaiKuen' }
         ],
         'Tibetan': [
           { label: 'Use <i>Bindu with nada</i>', value: 'TibetanNada' },
@@ -1824,6 +1829,8 @@ export const ScriptMixin = {
         return 'tibetandbumed'
       } else if (postOptions.includes('TaiThamLao') && tgt === 'TaiTham') {
         return 'taithamlao'
+      } else if (postOptions.includes('TaiKuen') && tgt === 'TaiTham') {
+        return 'taikuen'
       } else {
         return tgt.toLowerCase()
       }
@@ -1835,6 +1842,10 @@ export const ScriptMixin = {
         return 'granthagrantamil'
       } else if (preOptions.includes('LimbuDevanagariConvention') && src === 'Devanagari') {
         return 'limbudeva'
+      } else if (preOptions.includes('TaiThamLao') && src === 'TaiTham') {
+        return 'taithamlao'
+      } else if (preOptions.includes('TaiKuen') && src === 'TaiTham') {
+        return 'taikuen'
       } else {
         return src.toLowerCase()
       }

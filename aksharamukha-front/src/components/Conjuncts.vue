@@ -24,6 +24,7 @@
       />
       <!-- <q-toggle color="dark" v-model="conjunctsShow" label="Include conjuncts" class="q-ml-sm q-mb-sm q-mt-sm"/> -->
 </div>
+<div class="q-body-1 q-mt-lg">The below may be empty, if the script does not have a way to denote conjuncts, such as the lack of Virama and/or final consonants.</div>
       <h5>Final Consonants <q-spinner-comment color="dark" :size="30" v-show="loading"/> </h5>
       <span v-for="(conjunct, index) in conjuncts1S1" :key="conjunct+index + 'a'">
          <learncard :script1="script1" :text1="conjunct" :script2="script2" :text2="conjuncts1S2[index]"> </learncard>

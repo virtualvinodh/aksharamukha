@@ -74,6 +74,12 @@ def egrantamil(Strng):
 def siddhammukta(Strng):
     return Strng
 
+def TaiKuen(Strng):
+    return Strng
+
+def TaiThamLao(Strng):
+    return Strng
+
 def ThaiSajjhayaOrthography(Strng):
     Script = "Thai"
 

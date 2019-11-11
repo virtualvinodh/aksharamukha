@@ -191,8 +191,16 @@
   src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/ariyaka.TTF')
 }
 @font-face {
-  font-family: 'AnnaPurna';
-  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/AnnapurnaSIL-TT-Regular.ttf')
+  font-family: 'Ariyaka';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/ariyaka.TTF')
+}
+@font-face {
+  font-family: 'Mukta Malar Regular';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/MuktaMalar-Regular.ttf')
+}
+@font-face {
+  font-family: 'A Tai Tham KH New';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/A-Tai-Tham-KH-New-V2.ttf')
 }
 @font-face {
   font-family: 'Noto Sans Modi';
@@ -556,4 +564,7 @@
 }
 .ranjanawartu {
   font-family: "JMYZK--WDT Wartu"
+}
+.taikuen {
+  font-family: "A Tai Tham KH New"
 }

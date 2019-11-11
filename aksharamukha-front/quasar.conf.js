@@ -67,7 +67,8 @@ module.exports = function (ctx) {
       plugins: [
         'Notify',
         'LoadingBar',
-        'Loading'
+        'Loading',
+        'Meta'
       ],
       config: {
         loadingBar: {

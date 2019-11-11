@@ -50,6 +50,9 @@ def ranjanawartu(Strng):
     Strng = Strng.replace('་', '࿎ ')
     return Strng
 
+def TaiKuen(Strng):
+    return Strng
+
 def TaiThamLao(Strng):
     return Strng
 

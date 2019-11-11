@@ -257,7 +257,7 @@ def generate_common_letters():
 
   script_combinations = list(itertools.combinations(scriptsAll, 2))
 
-  script_combinations = [scriptC for scriptC in script_combinations if "Dogra" in scriptC]
+  script_combinations = [scriptC for scriptC in script_combinations if "SoraSompeng" in scriptC]
 
   total = len(script_combinations)
 
@@ -306,15 +306,15 @@ def generate_common_letters():
 
 if __name__ == "__main__":
   print('Generating Script Mapping as Json')
-  #generate_script_map()
+  generate_script_map()
   print('Generating Script Matrix')
-  #generate_script_matrix()
+  generate_script_matrix()
   print('Generating Syllabary')
-  #generate_syllables()
+  generate_syllables()
   print('Generating Conjuncts')
-  generate_conjuncts()
+  #generate_conjuncts()
   print('Generating Common Letters')
-  #generate_common_letters()
+  generate_common_letters()
 
 
 

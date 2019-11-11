@@ -13,7 +13,7 @@
          <learncard :script1="script1" :text1="compound" :script2="script2" :text2="compounds2[index]"> </learncard>
       </span>
       <span v-else>
-        <br/>
+        <br/><br/><br/><br/>
       </span>
     </span>
 </template>
