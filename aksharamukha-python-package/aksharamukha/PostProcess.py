@@ -17,6 +17,57 @@ def default(Strng):
 
     return Strng
 
+
+def SoyomboSanskritPalatals(Strng):
+    tsaSeries = ['𑩵','𑩶','𑩷']
+    caSeries = ['𑩡','𑩢','𑩣']
+
+    for x, y in zip(tsaSeries,caSeries):
+        Strng = Strng.replace(x, y)
+
+    return Strng
+
+def TibetanSanskritPalatals(Strng):
+    caSeries = ['ཅ','ཆ','ཇ','ཇྷ']
+    tsaSeries = ['ཙ','ཚ','ཛ','ཛྷ']
+
+    for x, y in zip(tsaSeries,caSeries):
+        Strng = Strng.replace(x, y)
+
+    return Strng
+
+def ZanabazarSanskritPalatals(Strng):
+    tsaSeries = ['𑨣', '𑨤', '𑨥']
+    caSeries = ['𑨐','𑨑','𑨒']
+
+    for x, y in zip(tsaSeries,caSeries):
+        Strng = Strng.replace(x, y)
+
+    return Strng
+
+def SoyomboFinals(Strng):
+
+    return Strng
+
+def SoyomboInitials(Strng):
+    viraCon = ['\U00011A7C\U00011A99', '\U00011A7D\U00011A99', '\U00011A81\U00011A99']
+    initial = ['\U00011A86', '\U00011A87', '\U00011A89']
+
+    for x, y in zip(viraCon, initial):
+        Strng = Strng.replace(x, y)
+
+    return Strng
+
+def ZanzabarSpaceTsheg(Strng):
+    Strng = Strng.replace(' ', '\U00011A41')
+
+    return Strng
+
+def SoyomboSpaceTscheg(Strng):
+    Strng = Strng.replace(' ', '\U00011A9A')
+
+    return Strng
+
 def NasaltoAnsvaraIASTISO(Strng):
     Strng = Strng.replace('ṁ', 'ṃ')
 

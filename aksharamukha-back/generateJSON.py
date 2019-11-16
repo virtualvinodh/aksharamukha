@@ -104,6 +104,8 @@ def generate_script_matrix():
 def generate_syllables():
     results = {}
 
+    scripts_syllabary = ['Mahajani']
+
     for script1 in scripts_syllabary:
       vowelsAll = ['a', 'A', 'i', 'I', 'u', 'U', 'R', 'RR', 'lR', 'lRR', 'E', 'e', 'ai', 'O', 'o', 'au', 'aE', 'AE', 'aO', 'aM', 'aH', 'a~']
 
@@ -257,7 +259,7 @@ def generate_common_letters():
 
   script_combinations = list(itertools.combinations(scriptsAll, 2))
 
-  script_combinations = [scriptC for scriptC in script_combinations if "SoraSompeng" in scriptC]
+  script_combinations = [scriptC for scriptC in script_combinations if "Mahajani" in scriptC]
 
   total = len(script_combinations)
 

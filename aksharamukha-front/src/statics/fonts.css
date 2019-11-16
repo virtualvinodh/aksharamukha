@@ -305,6 +305,16 @@
   src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansBrahmi/NotoSansBrahmi-Regular.otf')
 }
 
+@font-face {
+  font-family: 'Noto Sans Soyombo';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSoyombo/NotoSansSoyombo-Regular.otf')
+}
+
+.soyombo {
+  font-family: 'Noto Sans Soyombo';
+  font-size: 130%;
+}
+
 .russiancyrillic {
   font-family: 'Noto Sans Regular';
 }

@@ -2,8 +2,8 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
-        // baseURL: 'https://aksharamukha.appspot.com/api/',
-        baseURL: 'http://localhost:8085/api',
+        baseURL: 'https://aksharamukha.appspot.com/api/',
+        // baseURL: 'http://localhost:8085/api',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -197,7 +197,14 @@ export const ScriptMixin = {
           { label: 'Tai Tham Lao', value: 'TaiThamLao' },
           { label: 'Tai Kuen', value: 'TaiKuen' }
         ],
+        'Soyombo': [
+          { label: 'Use Sanskrit palatals', value: 'SoyomboSanskritPalatals' },
+          { label: 'Use Mongolian finals', value: 'SoyomboFinals' },
+          { label: 'Use initial-form /ra/, /la/, /sa/', value: 'SoyomboInitials' },
+          { label: 'Use Tsheg', value: 'SoyomboSpaceTscheg' }
+        ],
         'Tibetan': [
+          { label: 'Use Sanskrit palatals', value: 'TibetanSanskritPalatals' },
           { label: 'Use <i>Bindu with nada</i>', value: 'TibetanNada' },
           { label: 'Use space', value: 'TibetanTsheg' },
           { label: 'Use Dbu Med (Ume) style', value: 'tibetandbumed' }
@@ -273,6 +280,8 @@ export const ScriptMixin = {
           { label: 'Malayalam Numerals', value: 'RetainMalayalamNumerals' }
         ],
         'ZanabazarSquare': [
+          { label: 'Use Sanskrit palatals', value: 'ZanabazarSanskritPalatals' },
+          { label: 'Use Tsheg', value: 'ZanzabarSpaceTsheg' },
           { label: 'Contextual ya/ra/la/va & Repha', value: 'ZanabazarSquareContextual' },
           { label: 'Alternate ai/au', value: 'ZanabazarSquareAiAu' },
           { label: 'Mongolian final-mark', value: 'ZanabazarSquareMongolianFinal' }
@@ -1218,7 +1227,22 @@ export const ScriptMixin = {
           status: ['Living', 'Living: Minor'],
           invented: ['Invented'],
           region: ['East Indic', 'Indic']
-
+        },
+        {
+          label: 'Soyombo',
+          value: 'Soyombo',
+          sscode: 'Soyo',
+          ssdesc: 'The Soyombo script was developed by the Mongolian monk and scholar Bogdo Zanabazar in 1686 to write Mongolian. According to legend, Zanabazar based the script on letter-like signs he saw in the sky one night. Other theories suggest that the shapes of the letters may have been based on the Ranjana script of Nepal. Soyombo can also be used to write Tibetan and Sanskrit.',
+          omnicode: 'soyombo',
+          wikicode: 'Soyombo_script',
+          font: {
+            'name': 'Noto Sans Soyombo',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSoyombo/NotoSansSoyombo-Regular.otf'
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Extinct', 'Extinct: Medieval'],
+          invented: ['Derived: Brahmi'],
+          region: ['Central Asian']
         },
         {
           label: 'Sundanese',

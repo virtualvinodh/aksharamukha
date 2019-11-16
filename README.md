@@ -4,7 +4,7 @@ Aksharamukha aims to provide transliteration a.k.a script conversion between var
 
 It is a total rewrite of the PHP-based version available [here](https://launchpad.net/aksharamukha) and [here](https://github.com/nareshv/aksharamukha).
 
-Aksharamukha as of now supports 71 scripts and 8 romanization methods.
+Aksharamukha as of now supports 79 scripts and 7 romanization methods.
 
 ## Front End
 The front end is written using Quasar and Vue. Use _npm install_ to install all the dependencies and then use _quasar dev_ to start the front end. Also, please point the api to localhost at mixins/ScriptMixin.js.

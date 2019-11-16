@@ -206,6 +206,56 @@ def FixIndicOutput(Strng,Source,Target):
 
     return Strng
 
+def FixSoyombo(Strng, reverse=False):
+    finVir = ['\U00011A5E\U00011A99','\U00011A5C\U00011A99','\U00011A60\U00011A99','\U00011A6D\U00011A99','\U00011A6F\U00011A99','\U00011A72\U00011A99','\U00011A74\U00011A99','\U00011A7C\U00011A99','\U00011A7D\U00011A99','\U00011A7F\U00011A99','\U00011A81\U00011A99']
+    fin = ['\U00011A8A','\U00011A8B','\U00011A8C','\U00011A8D','\U00011A8E','\U00011A8F','\U00011A90','\U00011A91','\U00011A92','\U00011A93','\U00011A94']
+
+    if not reverse:
+        Strng = Strng.replace('𑩜𑪙𑪀', '\U00011A83')  #KSSA
+        Strng = Strng.replace('\U00011A7F\U00011A99', '\U00011A88') # Fix shka
+
+        ## Gemination ##
+        Strng = re.sub('(?<!𑪙)(.)𑪙' + r'\1', r'\1' + '\U00011A98', Strng)
+
+        consList = '(' + '|'.join(GM.CrunchSymbols(GM.Consonants, 'Soyombo')) + ')'
+
+        # final consonats
+        if '\u02BE' in Strng:
+            for x, y in zip (finVir, fin):
+                Strng = re.sub(x + '(?!' + consList + ')' , y, Strng)
+
+            Strng = re.sub('𑪈(?!' + consList + ')' , '\U00011A93', Strng)
+
+            Strng = Strng.replace('\u02BE', '')
+
+        ## remove final virama when not followed by a consonant
+        Strng = re.sub('\U00011A99(?!' + consList + ')' , '', Strng)
+    else:
+        Strng = Strng.replace('\U00011A9A', ' ') ## Reverse Tsheg
+        Strng = Strng.replace('\U00011A83', '𑩜𑪙𑪀')  #KSSA
+
+        ## Gemination ##
+        Strng = re.sub('(.)\U00011A98', r'\1' + '\U00011A99' + r'\1', Strng)
+
+        viraCon = ['\U00011A7C\U00011A99', '\U00011A7D\U00011A99', '\U00011A81\U00011A99', '\U00011A7F\U00011A99']
+        initial = ['\U00011A86', '\U00011A87', '\U00011A89', '\U00011A88']
+
+        for x, y in zip(viraCon, initial):
+            Strng = Strng.replace(y, x)
+
+        tsaSeries = ['𑩵','𑩶','𑩷']
+        caSeries = ['𑩡','𑩢','𑩣']
+
+        for x, y in zip(tsaSeries,caSeries):
+            Strng = Strng.replace(y, x)
+
+        ## initial ##
+
+        for x, y in zip(finVir, fin):
+            Strng = Strng.replace(y, x)
+
+    return Strng
+
 def FixKharoshthi(Strng, reverse=False):
     Strng = KharoshthiNumerals(Strng, reverse)
 
@@ -951,6 +1001,8 @@ def FixTibetan(Strng,reverse=False):
     if reverse:
         AspirateDecom= ["གྷ", "ཌྷ", "དྷ", "བྷ", "ཛྷ", "ྒྷ", "ྜྷ", "ྡྷ", "ྦྷ", "ྫྷ"]
         AspirateAtomic = ["གྷ", "ཌྷ", "དྷ", "བྷ", "ཛྷ", "ྒྷ", "ྜྷ", "ྡྷ", "ྦྷ", "ྫྷ"]
+
+        Strng = Strng.replace('ཇྷ', 'ཛྷ') ## JHA -> DZHA
 
         for x, y in zip(AspirateDecom, AspirateAtomic):
             Strng = Strng.replace(x, y)
@@ -2218,6 +2270,14 @@ def FixZanabazarSquare(Strng, reverse=False):
         # KSSA
         Strng = Strng.replace('𑨋𑩇𑨯','𑨲')
     else:
+        Strng = Strng.replace('\U00011A41', ' ')
+
+        tsaSeries = ['𑨣', '𑨤', '𑨥']
+        caSeries = ['𑨐','𑨑','𑨒']
+
+        for x, y in zip(tsaSeries,caSeries):
+            Strng = Strng.replace(y, x)
+
         # subjoining contextual y/r/l/v
         for x, y in zip(yrlv, yrlv_sub):
             Strng = Strng.replace(y, '\U00011A47' + x)
