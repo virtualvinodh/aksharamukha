@@ -19,8 +19,8 @@
         <li> Please make sure the whale icon in the status bar stays steady before proceeding (This ensures docker is up and running).
         <li> Windows might prevent you from running the below files. If that occurs, please select <i>More info</i> and click on <i>Run anyway</i>. </li>
         <li> Open  <i> install aksharamukha</i> to install. It will attempt to download the necessary files and setup everything. This initial setup may last a while depending on your connection speed. Eventually, the screen will close after the installation.</li>
-        <li> Once everything is installed, open <i>run Aksharamukha</i>. This should open a new browser window. Aksharamukha is now be available locally at: <i>http://localhost:12345</i>.</li>
-        <li> If you want to stop Aksharamukha, open <i>stop Aksharamukha</i></li>
+        <li> Once everything is installed, open <i>run Aksharamukha</i>. This should open a new browser window. Aksharamukha is now available locally at: <i>http://localhost:12345</i>.</li>
+        <li> If you want to stop Aksharamukha, open <i>stop Aksharamukha</i>.</li>
       </ul>
     </div>
 

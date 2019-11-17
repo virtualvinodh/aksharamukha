@@ -6,11 +6,14 @@ It is a total rewrite of the PHP-based version available [here](https://launchpa
 
 Aksharamukha as of now supports 79 scripts and 7 romanization methods.
 
+## Docker
+You can use the docker-compose.yaml file to orchestrate the containers. It will start the necessary containers for the frontend/backend and, also, bind the webapp to localhost:12345. This would be easiest way to run the app locally.
+
 ## Front End
 The front end is written using Quasar and Vue. Use _npm install_ to install all the dependencies and then use _quasar dev_ to start the front end. Also, please point the api to localhost at mixins/ScriptMixin.js.
 
 ## Back End
-The back end is written in Python 3 with Flask. After installing all the libraries, use _python3 main.py_ to intialize the backend server.
+The back end is written in Python 3 with Flask. After installing all the necessary libraries, use _python3 main.py_ to intialize the backend server.
 
 ## Python Package
 Aksharamukha is also available as a [Python package](https://pypi.org/project/aksharamukha/).
