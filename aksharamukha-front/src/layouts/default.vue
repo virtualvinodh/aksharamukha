@@ -145,6 +145,10 @@
             <q-item-main label="Help" />
         </q-item>
           </q-collapsible>
+         <q-item to="/download">
+          <q-item-side icon="cloud_download" />
+          <q-item-main label="Download"/>
+        </q-item>
          <q-item to="/about">
           <q-item-side icon="info" />
           <q-item-main label="About"/>

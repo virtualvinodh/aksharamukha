@@ -13,6 +13,14 @@ export default [
   },
 
   {
+    path: '/download',
+    component: () => import('layouts/default'),
+    children: [
+      { path: '', component: () => import('pages/download') }
+    ]
+  },
+
+  {
     path: '/web-api',
     component: () => import('layouts/default'),
     children: [
