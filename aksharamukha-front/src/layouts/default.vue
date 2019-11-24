@@ -19,7 +19,7 @@
 
         <q-btn
           round
-          size="xl"
+          size="lg"
           text-color="white"
           color="#5D8D89"
           to ="/converter"
@@ -368,8 +368,8 @@ export default {
 
 .title-ka {
   font-family: "Kharoshthi Ka";
-  font-size: 30px;
-  margin-top: 25px;
+  font-size: 25px;
+  margin-top: 20px;
   margin-left: 5px;
 }
 

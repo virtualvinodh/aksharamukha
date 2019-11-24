@@ -7,6 +7,7 @@ from aksharamukha.ScriptMap.MainIndic import Tamil,Malayalam,Gurmukhi,Oriya,Saur
 from aksharamukha.ScriptMap.EastIndic import Tibetan, Thai, PhagsPa, ZanabazarSquare
 from . import ConvertFix as CF
 import re
+import functools
 
 ### Write Lotsssss of Comments
 ### Rewrite all ListC, ListV as sorted(List,key=len,reverse=True). Then Correctrulu may be unnecessary
@@ -258,6 +259,7 @@ def LimbuSpellingSaI(Strng):
 
     for x, y in zip(FCons, FinalCons):
         Strng = Strng.replace('\u193A' + y, x)
+        Strng = Strng.replace('\u193A\u1922' + y, '\u1922' + x)
 
     return Strng
 
@@ -406,6 +408,13 @@ def GranthaPrakrit(Strng):
     ## Replace Anusvara with Anusvara above
     Strng = Strng.replace("𑌂", "𑌀")
     Strng = InsertGeminationSign(Strng, 'Grantha')
+
+    ## not at the beginning of words
+    pat = r'\s𑌂.'
+    Strng = functools.reduce(lambda s, m: s.replace(m, ReverseGeminationSign(m, 'Grantha')), re.findall(pat, Strng), Strng)
+
+    pat = r'𑍍𑌂.'
+    Strng = functools.reduce(lambda s, m: s.replace(m, ReverseGeminationSign(m, 'Grantha')), re.findall(pat, Strng), Strng)
 
     return Strng
     ## Insert Gemination Sign

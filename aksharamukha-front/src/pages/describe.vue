@@ -19,8 +19,8 @@
 <q-tabs color="tertiary" no-pane-border inverted position="top">
   <!-- Tabs - notice slot="title" -->
   <q-tab default slot="title" name="tab-1" icon="info" label="Overview" class="print-hide"/> <br/>
-  <q-tab slot="title" name="tab-2" icon="keyboard" label="Syllabary" class="print-hide"/>
-  <q-tab slot="title" name="tab-3" icon="keyboard" label="Conjuncts" class="print-hide"/>
+  <q-tab slot="title" name="tab-2" icon="keyboard" label="Syllabary" class="print-hide" v-if="!['IPA', 'RussianCyrillic'].includes(script1)"/>
+  <q-tab slot="title" name="tab-3" icon="keyboard" label="Conjuncts" class="print-hide"  v-if="!['IPA', 'RussianCyrillic'].includes(script1)"/>
 
   <q-tab-pane name="tab-1" keep-alive>
       <div style="text-align: right">

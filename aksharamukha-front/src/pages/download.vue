@@ -22,6 +22,10 @@
         <li> Once everything is installed, open <i>run Aksharamukha</i>. This should open a new browser window. Aksharamukha is now available locally at: <i>http://localhost:12345</i>.</li>
         <li> If you want to stop Aksharamukha, open <i>stop Aksharamukha</i>.</li>
       </ul>
+
+      <h5> Updating Aksharamukha </h5>
+
+      <div class="q-body-1">You can update the local copy of Aksharamukha by clicking on the <i> install aksharamukha </i> file again. This updates the local copy in case there are new updates. It is probabably useful to update your copy every couple of months at least.</div>
     </div>
 
   </q-page>

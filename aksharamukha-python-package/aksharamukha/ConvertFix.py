@@ -209,16 +209,14 @@ def FixIndicOutput(Strng,Source,Target):
 def FixSoyombo(Strng, reverse=False):
     finVir = ['\U00011A5E\U00011A99','\U00011A5C\U00011A99','\U00011A60\U00011A99','\U00011A6D\U00011A99','\U00011A6F\U00011A99','\U00011A72\U00011A99','\U00011A74\U00011A99','\U00011A7C\U00011A99','\U00011A7D\U00011A99','\U00011A7F\U00011A99','\U00011A81\U00011A99']
     fin = ['\U00011A8A','\U00011A8B','\U00011A8C','\U00011A8D','\U00011A8E','\U00011A8F','\U00011A90','\U00011A91','\U00011A92','\U00011A93','\U00011A94']
+    consList = '(' + '|'.join(GM.CrunchSymbols(GM.Consonants, 'Soyombo')) + ')'
 
     if not reverse:
         Strng = Strng.replace('𑩜𑪙𑪀', '\U00011A83')  #KSSA
-        Strng = Strng.replace('\U00011A7F\U00011A99', '\U00011A88') # Fix shka
+        Strng = re.sub('\U00011A7F\U00011A99' + '(?=' + consList + ')' , '\U00011A88', Strng) # Fix shka
 
         ## Gemination ##
         Strng = re.sub('(?<!𑪙)(.)𑪙' + r'\1', r'\1' + '\U00011A98', Strng)
-
-        consList = '(' + '|'.join(GM.CrunchSymbols(GM.Consonants, 'Soyombo')) + ')'
-
         # final consonats
         if '\u02BE' in Strng:
             for x, y in zip (finVir, fin):

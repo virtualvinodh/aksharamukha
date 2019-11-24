@@ -60,7 +60,9 @@ def common_letters():
     script_sort = sorted([script1, script2])
     suffix = script_sort[0] + '_' + script_sort[1]
 
-    if script_sort[0] <= 'BatakToba':
+    if 'Soyombo' in suffix:
+        index = '5'
+    elif script_sort[0] <= 'BatakToba':
         index = '1'
     elif script_sort[0] <= 'Grantha':
         index = '2'

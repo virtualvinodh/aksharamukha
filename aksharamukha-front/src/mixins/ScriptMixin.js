@@ -2,7 +2,7 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
-        baseURL: 'http://localhost:8085/api',
+        baseURL: 'https://aksharamukha.appspot.com/api/',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -46,8 +46,8 @@ export const ScriptMixin = {
       ayogavahasAll: ['~', 'M', 'H'],
       preOptionsGroup: {
         'Tamil': [
-          { label: 'Transcribe Tamil', value: 'TamilTranscribe' },
-          { label: '<span class="tamil">க2 க3 க4 -> க² க³ க⁴</span>', value: 'TamilNumeralSub' }
+          { label: 'Transcribe Tamil <br/><small><span class="tamil">மதம், நகம்</span> → madam, nagam</small>', value: 'TamilTranscribe' },
+          { label: '<span class="tamil">க2 க3 க4 → க² க³ க⁴</span>', value: 'TamilNumeralSub' }
         ],
         'Itrans': [
           { label: 'E/O for long, e/o for short', value: 'swapEeItrans' }
@@ -62,8 +62,8 @@ export const ScriptMixin = {
           { label: 'SA-I for vowel length', value: 'LimbuSpellingSaI' }
         ],
         'Thai': [
-          { label: 'Thai Orthography', value: 'ThaiOrthography' },
-          { label: 'Sajjhaya Orthography', value: 'ThaiSajjhayaOrthography' }
+          { label: 'Thai orthography text <br/><small><div>e.g. พุทธะ</div></small>', value: 'ThaiOrthography' },
+          { label: 'Sajjhaya orthography text <br/><small><div>e.g. พุท์ธ</div></small>', value: 'ThaiSajjhayaOrthography' }
 
         ],
         'TaiTham': [
@@ -71,39 +71,39 @@ export const ScriptMixin = {
           { label: 'Tai Kuen', value: 'TaiKuen' }
         ],
         'LaoPali': [
-          { label: 'Lao Orthography', value: 'LaoTranscription' }
+          { label: 'Lao orthography text<small><div class="laopali">e.g. ພຸທຘະ</div></small>', value: 'LaoTranscription' }
         ],
         'Devanagari': [
-          { label: 'Schwa deletion (Hindi) <div class="q-mt-sm"> (e.g. राम → rām, सबसे → sabse) </div>', value: 'RemoveSchwaHindi' },
+          { label: 'Schwa deletion (Hindi) <small><div class="q-mt-sm">राम → rām, सबसे → sabse</div></small>', value: 'RemoveSchwaHindi' },
           { label: 'Anusvara and Chandrabindu equivalent', value: 'AnuChandraEqDeva' }
         ],
         'Gujarati': [
-          { label: 'Schwa deletion (Only word-final) <div class="q-mt-sm"> (e.g. राम → rām) </div>', value: 'SchwaFinalGujarati' }
+          { label: 'Schwa deletion (Only word-final) <br/><small><div class="q-mt-sm">राम → rām</div></small>', value: 'SchwaFinalGujarati' }
         ],
         'Bengali': [
-          { label: 'Schwa deletion (Only word-final) <div class="q-mt-sm"> (e.g. রাম → rām) </div>', value: 'SchwaFinalBengali' }
+          { label: 'Schwa deletion (Only word-final) <br/><small><div class="q-mt-sm">রাম → rām</div></small>', value: 'SchwaFinalBengali' }
         ],
         'Gurmukhi': [
-          { label: 'Schwa deletion (Only word-final) <div class="q-mt-sm"> (e.g. ਰਾਮ → rām) </div>', value: 'SchwaFinalGurmukhi' }
+          { label: 'Schwa deletion (Only word-final) <br/><small><div class="q-mt-sm">ਰਾਮ → rām</div</small>>', value: 'SchwaFinalGurmukhi' }
         ],
         'WarangCiti': [
-          { label: 'Schwa deletion (Only word-final) <div class="q-mt-sm"> (e.g. <span class="warangciti">𑣜𑣁𑣖</span> → rām) </div>', value: 'SchwaFinalWarangCiti' }
+          { label: 'Schwa deletion (Only word-final) <br/><small><div class="q-mt-sm"><span class="warangciti">𑣜𑣁𑣖</span> → rām</div></small>', value: 'SchwaFinalWarangCiti' }
         ],
         'Grantha': [
-          { label: 'Prakrit orthography', value: 'GranthaPrakrit' },
+          { label: 'Prakrit orthography<br/><small><div class="grantha">e.g. 𑌬𑍁𑌂𑌧𑌀</div></small>' },
           { label: 'Use e-Grantamil encoding', value: 'egrantamil' }
         ],
         'Sinhala': [
-          { label: 'Sanskrit/Pali Orthography', value: 'SinhalaPali' }
+          { label: 'Sanskrit/Pali orthography text<br/><small><span class="sinhala">e.g. නමො භගවතෙ</span>', value: 'SinhalaPali' }
         ],
         'Malayalam': [
-          { label: 'Prakrit orthography', value: 'MalayalamPrakrit' }
+          { label: 'Prakrit orthography text', value: 'MalayalamPrakrit' }
         ],
         'Siddham': [
-          { label: 'Devanagari-based Siddham Font', value: 'siddhammukta' }
+          { label: 'Devanagari-based Siddham font', value: 'siddhammukta' }
         ],
         'IAST': [
-          { label: 'Pali Text', value: 'IASTPali' }
+          { label: 'Pali text', value: 'IASTPali' }
         ],
         'RussianCyrillic': [
           { label: 'Pali Text', value: 'CyrillicPali' }
@@ -114,138 +114,138 @@ export const ScriptMixin = {
       },
       preOptionsGroupSpecific: {
         'DevanagariLimbu': [
-          { label: 'Use Limbu Devanagari conventions', value: 'LimbuDevanagariConvention' }
+          { label: 'Limbu Devanagari conventions<br/><small><span class="limbudev">e.g. ए़ ओ़ ए़ः के़ को़ के़ः</span></small>', value: 'LimbuDevanagariConvention' }
         ]
       },
       postOptionsGroupSpecific: {
         'DevanagariLimbu': [
-          { label: 'Use Limbu Devanagari conventions', value: 'LimbuDevanagariConvention' }
+          { label: 'Use Limbu Devanagari conventions<small><br/><span class="limbu">ᤀᤧ ᤀᤨ ᤀᤧ᤺ ᤁᤧ ᤁᤨ ᤁᤧ᤺</span> → <span class="limbudev">ए़ ओ़ ए़ः के़ को़ के़ः</span></small>', value: 'LimbuDevanagariConvention' }
         ]
       },
       postOptionsGroup: {
         'Tamil': [
-          { label: 'Old orthography', value: 'oldtamilortho' },
-          { label: 'Use Grantha Visarga', value: 'TamilGranthaVisarga' },
-          { label: 'Subscript numerals', value: 'TamilSubScript' },
-          { label: 'Dandas', value: 'RetainTamilDanda' },
-          { label: 'Disable ௐ', value: 'TamilOmDisable' },
-          { label: 'Disable ஶ', value: 'TamilDisableSHA' },
-          { label: 'Remove Apostrophe', value: 'TamilRemoveApostrophe' },
-          { label: 'Remove Diacritic Numerals', value: 'TamilRemoveNumbers' },
-          { label: 'Tamil Numerals', value: 'RetainTamilNumerals' },
-          { label: 'Medieval e/o with Pulli', value: 'MedievalTamilOrthography' }
+          { label: 'Old orthography<br/><small><span class="tamil">லை னா</span> → <span class="tamilold">லை னா</span></small>', value: 'oldtamilortho' },
+          { label: 'Use Grantha Visarga<br/><small><span class="tamil">நம꞉ → நம𑌃</span></small>', value: 'TamilGranthaVisarga' },
+          { label: 'Subscript numerals<br/><small><span class="tamil">க²க³க⁴ → க₂க₃க₄</span></small>', value: 'TamilSubScript' },
+          { label: 'Dandas<br/><small><span class="tamil">. .. → । ॥</span></small>', value: 'RetainTamilDanda' },
+          { label: 'Disable ௐ<br/><small><span class="tamil">ௐ → ஓம்</span></small>', value: 'TamilOmDisable' },
+          { label: 'Disable ஶ<br/><small><span class="tamil">ஶ → ஸ²</span></small>', value: 'TamilDisableSHA' },
+          { label: 'Remove apostrophe<br/><small><span class="tamil">ருʼம்ʼ → ரும்</span></small>', value: 'TamilRemoveApostrophe' },
+          { label: 'Remove diacritic numerals<br/><small><span class="tamil">க²க³க⁴ → ககக</span></small>', value: 'TamilRemoveNumbers' },
+          { label: 'Tamil numerals<br/><small><span class="tamil">123 → ௧௨௩</span></small>', value: 'RetainTamilNumerals' },
+          { label: 'Medieval e/o with Pulli<br/><small><span class="tamil">ஒ ஓ கொ கோ → ஒ் ஒ கெ்ா கொ</span></small>', value: 'MedievalTamilOrthography' }
         ],
         'Chakma': [
           {
-            label: 'Enable all conjuncts',
+            label: 'Enable all conjuncts<br/><small><span class="chakma">𑄇𑄴𑄈𑄧 𑄉𑄴𑄊𑄧 𑄚𑄴𑄖𑄧 → 𑄇𑄳𑄈𑄧 𑄉𑄳𑄊𑄧 𑄚𑄳𑄖𑄧</span></small>',
             value: 'ChakmaEnableAllConjuncts'
           },
           {
-            label: 'Enable independent i, u and e',
+            label: 'Enable independent i, u and e<br/><small><span class="chakma">𑄃𑄨 𑄃𑄪 𑄃𑄬 → 𑄄 𑄅 𑄆</span></small>',
             value: 'ChakmaVowelsIndependent'
           }
         ],
         'Newa': [
           { label: 'Enable murmured consonants', value: 'NewaMurmurConsonants' },
-          { label: 'Disable Repha', value: 'NewaDisableRepha' },
-          { label: 'Use special TA-conjunct', value: 'NewaSpecialTa' },
-          { label: 'Use Devanagari-based Newa font', value: 'nepaldevafont' }
+          { label: 'Disable Repha<br/><small><span class="newa">𑐢𑐬𑑂𑐩 → 𑐢𑐬𑑂‍𑐩</span></small>', value: 'NewaDisableRepha' },
+          { label: 'Use special /ta/ conjunct<br/><small><span class="newa">𑐟𑑂𑐥𑐟𑑂𑐩𑐟𑑂𑐰 → 𑐟𑑂‍𑐥𑐟𑑂‍𑐩𑐟𑑂‍𑐰</span></small>', value: 'NewaSpecialTa' },
+          { label: 'Use Devanagari-based Newa font<br/><small><span class="newa">𑐧𑐸𑐡𑑂𑐢𑑅</span> →<span class="nepaldevafont">बुद्धः</span></small>', value: 'nepaldevafont' }
 
         ],
         'Oriya': [
-          { label: 'Use ଵ instead of ୱ', value: 'OriyaVaAlt' },
-          { label: 'Use ୟ everywhere', value: 'OriyaYYA' }
+          { label: 'Use ଵ instead of ୱ<br/><small>ଭୱତି → ଭଵତି</small>', value: 'OriyaVaAlt' },
+          { label: 'Use ୟ everywhere<br/><small>ଯୟାତି ଯଜ୍ଞ → ୟୟାତି ୟଜ୍ଞ</small>', value: 'OriyaYYA' }
         ],
         'Bengali': [
-          { label: 'Use য় everywhere', value: 'BengaliYYA' }
+          { label: 'Use য় everywhere<br/><small>যয়াতি যজ্ঞ → য়য়াতি য়জ্ঞ</small>', value: 'BengaliYYA' }
         ],
         'Siddham': [
-          { label: 'Variant vowel sign U <span class="siddham">𑗜</span>', value: 'UseAlternateVSU' },
-          { label: 'Variant vowel sign UU <span class="siddham">𑗝</span>', value: 'UseAlternateVSUU' },
-          { label: 'Variant I <span class="siddham">𑗘</span>', value: 'UseAlternateI1' },
-          { label: 'Variant I <span class="siddham">𑗙</span>', value: 'UseAlternateI2' },
-          { label: 'Variant II <span class="siddham">𑗚</span>', value: 'UseAlternateII' },
-          { label: 'Variant U <span class="siddham">𑗛</span>', value: 'UseAlternateU' },
+          { label: 'Variant vowel sign U <span class="siddham">𑗜</span><br/><small> <span class="siddham">𑖎𑖲𑖚𑖲𑖦𑖲 → 𑖎𑗜𑖚𑗜𑖦𑗜</span></small>', value: 'UseAlternateVSU' },
+          { label: 'Variant vowel sign UU <span class="siddham">𑗝</span><br/><small> <span class="siddham">𑖎𑖳𑖚𑖳𑖦𑖳 → 𑖎𑖳𑖚𑖳𑖦𑖳</span></small>', value: 'UseAlternateVSUU' },
+          { label: 'Variant I 1 <br/><small><span class="siddham">𑖂 → 𑗘</span></small>', value: 'UseAlternateI1' },
+          { label: 'Variant I 2 <br/><small><span class="siddham">𑖂 → 𑗙</span></small>', value: 'UseAlternateI2' },
+          { label: 'Variant II <br/><small><span class="siddham">𑖃 → 𑗚</span></small>', value: 'UseAlternateII' },
+          { label: 'Variant U <br/><small><span class="siddham">𑖄 → 𑗛</span></small>', value: 'UseAlternateU' },
           { label: 'Use MuktamSiddham font', value: 'siddhammukta' },
           { label: 'Use ApDevSiddham font', value: 'siddhamap' }
         ],
         'Devanagari': [
           { label: 'Use ॲ instead of ऍ', value: 'DevanagariACandra' },
-          { label: 'Prishthamatra orthography', value: 'DevanagariPrishtamatra' }
+          { label: 'Prishthamatra orthography<br/><small>के कै को कौ → कॎ कॎे कॎा कॎा</small>', value: 'DevanagariPrishtamatra' }
         ],
         'Gurmukhi': [
-          { label: 'Use Yakaash', value: 'GurmukhiYakaash' },
-          { label: 'Gurmukhi Numerals', value: 'RetainGurmukhiNumerals' }
+          { label: 'Use Yakaash<br/><small>ਕ੍ਯ → ਕੵ</small>', value: 'GurmukhiYakaash' },
+          { label: 'Gurmukhi Numerals<br/><small>123 → ੧੨੩</small>', value: 'RetainGurmukhiNumerals' }
 
         ],
         'Thai': [
-          { label: 'Thai Orthography', value: 'ThaiTranscription' },
-          { label: 'Sajjhaya Orthography', value: 'ThaiSajjhayaOrthography' },
-          { label: 'Sara /a/ ะ as Visarga', value: 'ThaiVisargaSaraA' }
+          { label: 'Thai Orthography<br/><small><div>พุทฺธ → พุทธะ</div></small>', value: 'ThaiTranscription' },
+          { label: 'Sajjhaya Orthography<br/><small><div>พุทฺธ → พุท์ธ</div></small>', value: 'ThaiSajjhayaOrthography' },
+          { label: 'Sara a ะ as Visarga<br/><small><div>นมัห์ → นมะ</div></small>', value: 'ThaiVisargaSaraA' }
 
         ],
         'LaoPali': [
-          { label: 'Lao Orthography', value: 'LaoTranscription' }
+          { label: 'Lao Orthography<br/><small><span class="laopali">ພຸທ຺ຘ → ພຸທຘະ</span></small>', value: 'LaoTranscription' }
         ],
         'Lao': [
-          { label: 'Lao Nativization', value: 'LaoNative' }
+          { label: 'Lao Nativization<br/><small><span class="lao">ພຸທທັງ ຄັຈຈາມິ ສັພພັງ → ພຸດທັງ ຄັຈສາມິ ສັບພັງ</span></small>', value: 'LaoNative' }
         ],
         'TaiTham': [
-          { label: 'Tai Tham Lao', value: 'TaiThamLao' },
-          { label: 'Tai Kuen', value: 'TaiKuen' }
+          { label: 'Tai Tham Lao<br/><small><span class="taitham">ᨻᩩᨴ᩠ᨵ</span> → <span class="taithamlao">ᨻᩩᨴ᩠ᨵ</span>', value: 'TaiThamLao' },
+          { label: 'Tai Kuen<br/><small><span class="taitham">ᨻᩩᨴ᩠ᨵ</span> → <span class="taikuen">ᨻᩩᨴ᩠ᨵ</span>', value: 'TaiKuen' }
         ],
         'Soyombo': [
-          { label: 'Use Sanskrit palatals', value: 'SoyomboSanskritPalatals' },
-          { label: 'Use Mongolian finals', value: 'SoyomboFinals' },
-          { label: 'Use initial-form /ra/, /la/, /sa/', value: 'SoyomboInitials' },
-          { label: 'Use Tsheg', value: 'SoyomboSpaceTscheg' }
+          { label: 'Use Sanskrit palatals<br/><small><span class="soyombo">𑩵 𑩶 𑩷 → 𑩡 𑩢 𑩣</span></small>', value: 'SoyomboSanskritPalatals' },
+          { label: 'Use Mongolian finals<br/><small><span class="soyombo">ak ag ad → 𑩐𑪋 𑩐𑪊 𑩐𑪍</span></small>', value: 'SoyomboFinals' },
+          { label: 'Use initial-form /ra/, /la/, /sa/<br/><small><span class="soyombo">𑩼𑪙𑩫 𑩽𑪙𑩫 𑪁𑪙𑩫 → 𑪆𑩫 𑪇𑩫 𑪉𑩫</span></small>', value: 'SoyomboInitials' },
+          { label: 'Use Tsheg<br/><small><span class="soyombo">𑩯 𑩴𑩖 → 𑩯𑪚𑩴𑩖</span></small>', value: 'SoyomboSpaceTscheg' }
         ],
         'Tibetan': [
-          { label: 'Use Sanskrit palatals', value: 'TibetanSanskritPalatals' },
-          { label: 'Use <i>Bindu with nada</i>', value: 'TibetanNada' },
-          { label: 'Use space', value: 'TibetanTsheg' },
-          { label: 'Use Dbu Med (Ume) style', value: 'tibetandbumed' }
+          { label: 'Use Sanskrit palatals<br/><small><span class="tibetan">ཙ ཚ ཛ ཛྷ → ཅ ཆ ཇ ཇྷ</span></small>', value: 'TibetanSanskritPalatals' },
+          { label: 'Use <i>Bindu with nada</i><br/><small><span class="tibetan">ཨྃ → ཨྂ</span></small>', value: 'TibetanNada' },
+          { label: 'Use space<br/><small><span class="tibetan">ན་མོ → ན མོ</span></small>', value: 'TibetanTsheg' },
+          { label: 'Use Dbu Med (Ume) style<br/><small><span class="tibetan">བུདྡྷཿ</span> → <span class="tibetandbumed">བུདྡྷཿ</span></small>', value: 'tibetandbumed' }
         ],
         'Sinhala': [
-          { label: 'Sanskrit/Pali Orthography', value: 'SinhalaPali' },
-          { label: 'Enable all conjuncts', value: 'SinhalaConjuncts' }
+          { label: 'Sanskrit/Pali Orthography<br/><small><span class="sinhala">නමෝ භගවතේ → නමො භගවතෙ</span></small>', value: 'SinhalaPali' },
+          { label: 'Enable all conjuncts<span><br/><small><span class="sinhala">බුද්ධස්ස → බුද්‍ධස‍්ස</span></small>', value: 'SinhalaConjuncts' }
         ],
         'Ranjana': [
-          { label: 'Lantsa style (Tibetan)', value: 'ranjanalantsa' },
-          { label: 'Wartu style (Tibetan)', value: 'ranjanawartu' }
+          { label: 'Lantsa style (Tibetan)<br/><small><span class="ranjana">बुद्धः</span> → <span class="ranjanalantsa">བུདྡྷཿ</span></small>', value: 'ranjanalantsa' },
+          { label: 'Wartu style (Tibetan)<br/><small><span class="ranjana">बुद्धः</span> → <span class="ranjanawartu">བུདྡྷཿ</span></small>', value: 'ranjanawartu' }
         ],
         'Telugu': [
-          { label: 'Dandas', value: 'RetainTeluguDanda' },
-          { label: 'Telugu Numerals', value: 'RetainTeluguNumerals' }
+          { label: 'Dandas<br/><small><span class="telugu">. .. → । ॥</span></small>', value: 'RetainTeluguDanda' },
+          { label: 'Telugu Numerals<br/><small><span class="telugu">123 → ౧౨౩</span></small>', value: 'RetainTeluguNumerals' }
         ],
         'Gujarati': [
-          { label: 'Dandas', value: 'RetainGujaratiDanda' }
+          { label: 'Dandas<br/><small><span class="gujarati">. .. → । ॥</span></small>', value: 'RetainGujaratiDanda' }
         ],
         'Kannada': [
-          { label: 'Dandas', value: 'RetainKannadaDanda' },
-          { label: 'Kannada Numerals', value: 'RetainKannadaNumerals' }
+          { label: 'Dandas<br/><small><span class="kannada">. .. → । ॥</span></small>', value: 'RetainKannadaDanda' },
+          { label: 'Kannada Numerals<br/><small><span class="kannada">123 → ೧೨೩</span></small>', value: 'RetainKannadaNumerals' }
         ],
         'Grantha': [
-          { label: 'Use Grantha old AU vowel sign', value: 'GranthaOldau' },
-          { label: 'Prakrit orthography', value: 'GranthaPrakrit' },
+          { label: 'Use Grantha old AU vowel sign <br/><small><div class="grantha">𑌕𑍗 → 𑌕𑍌</div></small>', value: 'GranthaOldau' },
+          { label: 'Prakrit orthography <br/><small><div class="grantha">𑌬𑍁𑌦𑍍𑌧𑌂 → 𑌬𑍁𑌂𑌧𑌀</div></small>', value: 'GranthaPrakrit' },
           { label: 'Use e-Grantamil encoding', value: 'egrantamil' }
         ],
         'Urdu': [
-          { label: 'Remove short vowels', value: 'UrduRemoveShortVowels' }
+          { label: 'Remove short vowels<br/><small><span class="urdu">ہِنْدُوسْتانْ ← ہندوستان</span>', value: 'UrduRemoveShortVowels' }
         ],
         'IAST': [
           { label: 'Pali Text', value: 'IASTPali' },
           { label: 'Capitalize sentences', value: 'capitalizeSentence' },
-          { label: 'Anusvara to Nasal', value: 'NasaltoAnsvaraIASTISO' }
+          { label: 'Anusvara to Nasal<br/><small>gaṃgā → gaṅgā</small>', value: 'NasaltoAnsvaraIASTISO' }
         ],
         'RussianCyrillic': [
           { label: 'Pali Text', value: 'CyrillicPali' },
           { label: 'Capitalize sentences', value: 'capitalizeSentence' },
-          { label: 'Remove Diacritics', value: 'removeDiacritics' }
+          { label: 'Remove Diacritics<br/><small><span class="russiancyrillic">сам̣кр̣там̣ → самкртам</span>', value: 'removeDiacritics' }
         ],
         'ISO': [
           { label: 'Capitalize sentences', value: 'capitalizeSentence' },
-          { label: 'Anusvara to Nasal', value: 'NasaltoAnsvaraIASTISO' }
+          { label: 'Anusvara to Nasal<br/><small>gaṁgā → gaṅgā</small>', value: 'NasaltoAnsvaraIASTISO' }
         ],
         'RomanReadable': [
           { label: 'Capitalize sentences', value: 'capitalizeSentence' }
@@ -263,25 +263,25 @@ export const ScriptMixin = {
           { label: 'Retain spaces', value: 'BhaiksukiRetainSpace' }
         ],
         'Limbu': [
-          { label: 'SA-I for vowel length', value: 'LimbuSpellingSaI' }
+          { label: 'SA-I for vowel length<small><br/><span class="limbu">ᤁ᤺ᤢᤰ → ᤁᤢᤁ᤻</span></small>', value: 'LimbuSpellingSaI' }
         ],
         'Sundanese': [
-          { label: 'Sundanese historical conjuncts', value: 'SundaneseHistoricConjuncts' }
+          { label: 'Sundanese historical conjuncts<br/><small><span class="sundanese">ᮊ᮪ᮙ ᮊ᮪ᮝ ᮃᮊ᮪ ᮃᮙ᮪ → ᮊᮬ ᮊᮭ ᮃᮾ ᮃᮿ</span></small>', value: 'SundaneseHistoricConjuncts' }
         ],
         'Malayalam': [
-          { label: 'Dot Reph', value: 'dotReph' },
-          { label: 'Archaic II & AU', value: 'archaicAIAU' },
-          { label: 'Traditional orthography', value: 'tradOrtho' },
-          { label: 'Prakrit orthography', value: 'MalayalamPrakrit' },
-          { label: 'Dandas', value: 'RetainMalayalamDanda' },
-          { label: 'Malayalam Numerals', value: 'RetainMalayalamNumerals' }
+          { label: 'Dot Reph<br/><small><span class="malayalam">ധർമ → ധൎമ</span>', value: 'dotReph' },
+          { label: 'Archaic II & AU<br/><small><span class="malayalam">ഈ കൗ → ൟ കൌ</span>', value: 'archaicAIAU' },
+          { label: 'Traditional orthography<br/><small><span class="malayalam">തു തൂ</span> → <span class="malayalamold">തു തൂ</span>', value: 'tradOrtho' },
+          { label: 'Prakrit orthography<br/><small><span class="malayalam">ബുദ്ധ → ബുംധ</span>', value: 'MalayalamPrakrit' },
+          { label: 'Dandas<br/><small><span class="malayalam">. .. → । ॥</span>', value: 'RetainMalayalamDanda' },
+          { label: 'Malayalam Numerals<br/><small><span class="malayalam">123 → ൧൨൩</span>', value: 'RetainMalayalamNumerals' }
         ],
         'ZanabazarSquare': [
-          { label: 'Use Sanskrit palatals', value: 'ZanabazarSanskritPalatals' },
-          { label: 'Use Tsheg', value: 'ZanzabarSpaceTsheg' },
-          { label: 'Contextual ya/ra/la/va & Repha', value: 'ZanabazarSquareContextual' },
-          { label: 'Alternate ai/au', value: 'ZanabazarSquareAiAu' },
-          { label: 'Mongolian final-mark', value: 'ZanabazarSquareMongolianFinal' }
+          { label: 'Use Sanskrit palatals<br/><small><span class="zanabazarsquare">𑨣 𑨤 𑨥 → 𑨐 𑨑 𑨒</span>', value: 'ZanabazarSanskritPalatals' },
+          { label: 'Use Tsheg<br/><small><span class="zanabazarsquare">𑨝 𑨢𑨆 → 𑨝𑩁𑨢𑨆</span>', value: 'ZanzabarSpaceTsheg' },
+          { label: 'Contextual ya/ra/la/va & Repha<br/><small><span class="zanabazarsquare">𑨋𑩇𑨪 𑨋𑩇𑨫 𑨋𑩇𑨬 𑨋𑩇𑨭 𑨫𑩇𑨋 → 𑨋𑨻 𑨋𑨼 𑨋𑨽 𑨋𑨾 𑨺𑨋</span>', value: 'ZanabazarSquareContextual' },
+          { label: 'Alternate ai/au<br/><small><span class="zanabazarsquare">𑨀𑨄𑨊 𑨀𑨆𑨊 → 𑨀𑨇 𑨀𑨈</span>', value: 'ZanabazarSquareAiAu' },
+          { label: 'Mongolian final-mark<br/><small><span class="zanabazarsquare">𑨀𑨋𑨴 → 𑨀𑨋𑨳</span>', value: 'ZanabazarSquareMongolianFinal' }
         ]
       },
       autodetect: [
@@ -1576,6 +1576,10 @@ export const ScriptMixin = {
           value: 'IAST'
         },
         {
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Latin'],
+          region: ['Eurasia'],
           label: 'Roman (IPA)',
           value: 'IPA',
           sscode: '',
@@ -1602,6 +1606,10 @@ export const ScriptMixin = {
           value: 'Velthuis'
         },
         {
+          language: ['Others'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Greek'],
+          region: ['Eurasia'],
           label: 'Cyrillic (Russian)',
           value: 'RussianCyrillic',
           sscode: '',
