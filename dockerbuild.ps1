@@ -18,7 +18,7 @@ docker build -t virtualvinodh/aksharamukha-front .
 
 cd ..\..\aksharamukha-back
 
-docker build -t virtualvinodh.com/aksharamukha-back .
+docker build --no-cache -t virtualvinodh.com/aksharamukha-back .
 
 docker push virtualvinodh/aksharamukha-fonts
 docker push virtualvinodh/aksharamukha-front

@@ -124,7 +124,7 @@ NuktaMap = [
            ]
 
 OmMap = [
-        '\u004F\u004D'
+        'oM'
         ]
 
 SignMap =[

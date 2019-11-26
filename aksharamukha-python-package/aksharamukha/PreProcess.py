@@ -292,11 +292,32 @@ def PreProcess(Strng,Source,Target):
         Strng = Strng.lower()
 
     if Source == 'Itrans':
-        AltForm = ['aa','ii','uu','RRi','RRI','LLi','LLI','N^','JN','chh','shh','x','GY','.n','.m','.h','AUM', 'E', 'O']
-        NormForm = ['A','I','U','R^i','R^I','L^i','L^I','~N','~n','Ch','Sh','kSh','j~n','M','M','','OM', '^e', '^o']
+        sOm = 'OM'
+        tOm = 'oM'
+
+        punc =  '(' + '|'.join(["\u005C"+x for x in list(string.punctuation)]+ ['\s']
+                    + [x.replace('.', '\.') for x in GM.CrunchSymbols(GM.Signs,Source)[1:3]]) + ')'
+
+        Strng = re.sub(punc + sOm + punc, r'\1' + tOm + r'\2', Strng)
+        Strng = re.sub('^' + sOm + punc, tOm + r'\1', Strng)
+        Strng = re.sub(punc + sOm + '$', r'\1' + tOm, Strng)
+        Strng = re.sub('^' + sOm + '$', tOm, Strng)
+
+        punc = '(\s)'
+
+        Strng = re.sub(punc + sOm + punc, r'\1' + tOm + r'\2', Strng)
+        Strng = re.sub('^' + sOm + punc, tOm + r'\1', Strng)
+        Strng = re.sub(punc + sOm + '$', r'\1' + tOm, Strng)
+        Strng = re.sub('^' + sOm + '$', tOm, Strng)
+
+
+        AltForm = ['O', 'aa','ii','uu','RRi','RRI','LLi','LLI','N^','JN','chh','shh','x','GY','.n','.m','.h', 'AUM', 'E']
+        NormForm = ['^o', 'A','I','U','R^i','R^I','L^i','L^I','~N','~n','Ch','Sh','kSh','j~n','M','M','','oM', '^e']
 
         for x,y in zip(AltForm,NormForm):
             Strng = Strng.replace(x,y)
+
+        Strng = Strng.replace('OM', 'oM')
 
     if Source == 'IAST':
         Strng = Strng.replace("aï", "a_i")

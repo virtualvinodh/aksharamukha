@@ -3,10 +3,10 @@
       <q-btn class="q-ma-sm btn print-hide" @click="$emit('copytext')" :data-clipboard-text="convertText.replace(/<br\/>/g, '\n')"> <q-icon name="file copy" /><q-tooltip>Copy text</q-tooltip></q-btn>
       <q-btn class="q-ma-sm print-hide" @click="$emit('screenshot')">
         <q-icon name="photo camera" /><q-tooltip>Text screenshot</q-tooltip></q-btn>
-      <q-btn class="q-ma-sm print-hide" @click="$emit('printdoc')"><q-tooltip class="print-hide">Print text</q-tooltip><q-icon name="print" /></q-btn>
+      <q-btn class="q-ma-sm print-hide" @click="$emit('printdoc')" v-if="!$q.platform.is.cordova"><q-tooltip class="print-hide">Print text</q-tooltip><q-icon name="print" /></q-btn>
       <q-btn class="q-ma-sm print-hide" @click="$emit('fontsizeinc')"> <q-icon name="zoom in" /><q-tooltip>Increase size</q-tooltip></q-btn>
       <q-btn class="q-ma-sm print-hide" @click="$emit('fontsizedec')"> <q-icon name="zoom out" /><q-tooltip>Decrease size</q-tooltip></q-btn>
-      <q-btn class="q-ma-sm print-hide" @click="content"><q-icon name="cloud download"></q-icon> &nbsp; HTML</q-btn>
+      <q-btn class="q-ma-sm print-hide" @click="content" v-if="!$q.platform.is.cordova"><q-icon name="cloud download"></q-icon> &nbsp; HTML</q-btn>
   </span>
 </template>
 

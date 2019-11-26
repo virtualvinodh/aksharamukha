@@ -63,12 +63,19 @@ def convertScript(Strng,Source,Target):
         Strng = Strng.replace("{}", "\u200C")
         Strng = Strng.replace("()", "\u200D")
 
-        Strng = CF.VedicSvarasLatinIndic(Strng)
+        Strng = CF.VedicSvarasLatinIndic(Strng, Source)
 
         punc =  '(' + '|'.join(["\u005C"+x for x in list(string.punctuation)]+ ['\s']
                     + [x.replace('.', '\.') for x in GM.CrunchSymbols(GM.Signs,Source)[1:3]]) + ')'
 
         sOm, tOm = GM.CrunchList('OmMap', Source)[0],GM.CrunchList('OmMap', Target)[0]
+
+        Strng = re.sub(punc + sOm + punc, r'\1' + tOm + r'\2', Strng)
+        Strng = re.sub('^' + sOm + punc, tOm + r'\1', Strng)
+        Strng = re.sub(punc + sOm + '$', r'\1' + tOm, Strng)
+        Strng = re.sub('^' + sOm + '$', tOm, Strng)
+
+        punc = '(\s)'
 
         Strng = re.sub(punc + sOm + punc, r'\1' + tOm + r'\2', Strng)
         Strng = re.sub('^' + sOm + punc, tOm + r'\1', Strng)

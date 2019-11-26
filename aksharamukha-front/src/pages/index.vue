@@ -1,6 +1,14 @@
 <template>
   <!-- Fix Urdu ai and au -->
   <q-page class="q-pa-md" id="scrollstart">
+          <q-alert
+          color="red-4"
+          icon="signal_cellular_alt"
+          appear
+          :actions="[{ label: 'Retry', handler: retryPage }]"
+          class="q-mb-sm q-mr-xl"
+          v-if="!checkifOnline && $q.platform.is.cordova"
+        > You're not currently connected. Please activate your mobile data or Wi-Fi to use the app.  </q-alert>
     <div class="row">
       <div class="row col-xs-12 col-md-11 col-xl-5 q-ma-md float-div print-hide">
        <div class="row">
@@ -38,7 +46,7 @@
     <input-options :inputScript="inputScript" :outputScript="outputScript" :preOptionsInput="preOptions"
       :postOptions="postOptions" v-model="preOptions" @input="convert"></input-options>
     <div class="row">
-      <q-btn class="q-ma-sm print-hide col-xs-1 col-md-1" @click="uploadImage" v-show="displayImageButton"> <q-icon name="add photo alternate" /><q-tooltip>Upload image</q-tooltip></q-btn>
+      <q-btn class="q-ma-sm print-hide col-xs-1 col-md-1" @click="uploadImage" v-show="displayImageButton" v-if="!$q.platform.is.cordova"> <q-icon name="add photo alternate" /><q-tooltip>Upload image</q-tooltip></q-btn>
       <span v-show="showFileUpload" class="q-ma-sm">
             <q-uploader url="" clearable extensions=".jpg, .jpeg, .png, .bmp, .ico" @add="showConvertImage" @remove:cancel="hideConvertButton"
                auto-expand hide-upload-button ref="uploadF" :style="{width:'200px'}"/>
@@ -122,6 +130,7 @@ import { ScriptMixin } from '../mixins/ScriptMixin'
 import keys from '../keys.js'
 
 var _ = require('underscore')
+const isOnline = require('is-online')
 
 export default {
   name: 'PageIndex',
@@ -163,6 +172,7 @@ export default {
   data () {
     return {
       textInput: '',
+      checkifOnline: true,
       OCRPerformed: false,
       showFileUpload: false,
       imageFile: '',
@@ -192,6 +202,8 @@ export default {
     }
   },
   mounted () {
+    this.checkOnline()
+
     if (localStorage.sourcePreserve) {
       this.sourcePreserve = JSON.parse(localStorage.sourcePreserve)
     }
@@ -267,6 +279,17 @@ export default {
   methods: {
     downHTML: function () {
       this.downloadHTML(this.$refs.brahmiText.innerHTML)
+    },
+    retryPage: function () {
+      this.checkOnline()
+
+      if (this.checkifOnline) {
+        document.location.reload(true)
+        this.convert()
+      }
+    },
+    checkOnline: async function () {
+      this.checkifOnline = await isOnline()
     },
     performOCR: async function () {
       this.loadingOCR = true
@@ -410,6 +433,11 @@ export default {
     },
     convert: async function () {
       this.convertText += ' . . . '
+
+      if (this.$q.platform.is.cordova) {
+        this.checkOnline()
+      }
+
       if (this.textInput === '' || this.inputScript === '' || this.outputScript === '' ||
         this.inputScript === 'undefined' || this.outputScript === 'undefined') {
         this.convertText = ''
@@ -476,7 +504,25 @@ export default {
           dhis.brahmiImg = cropped
 
           image2.onload = function () {
-            dhis.$refs.imgDownload.click()
+            if (dhis.$q.platform.is.cordova) {
+              var params = {data: dhis.brahmiImg, prefix: 'aksharamukha_', format: 'PNG', quality: 100, mediaScanner: true}
+              window.imageSaver.saveBase64Image(params,
+                function (filePath) {
+                  console.log('File saved on ' + filePath)
+                  dhis.$q.notify({
+                    type: 'info',
+                    message: 'The image has been saved in your gallery. Please check there.',
+                    position: 'center',
+                    timeout: 5000
+                  })
+                },
+                function (msg) {
+                  console.error(msg)
+                }
+              )
+            } else {
+              dhis.$refs.imgDownload.click()
+            }
           }
         }
       })

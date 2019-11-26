@@ -63,7 +63,7 @@
           <q-item-side icon="web" />
           <q-item-main label="Convert Websites"/>
         </q-item>
-        <q-item to="/upload/">
+        <q-item to="/upload/" v-if="!$q.platform.is.cordova">
           <q-item-side icon="cloud upload" />
           <q-item-main label="Convert Files (Batch)"/>
         </q-item>
@@ -145,7 +145,7 @@
             <q-item-main label="Help" />
         </q-item>
           </q-collapsible>
-         <q-item to="/download">
+         <q-item to="/download" v-if="!$q.platform.is.cordova">
           <q-item-side icon="cloud_download" />
           <q-item-main label="Download"/>
         </q-item>
@@ -171,7 +171,7 @@
                       description="Indic Script Converter"
                       quote="Try out this Indic Script Converter and convert between 75 scripts"
                       hashtags="scripts, indic, orthography, brahmic, writing system, unicode"
-                      inline-template>
+                      inline-template v-if="!$q.platform.is.cordova">
   <div class="social">
       <network network="facebook" class="q-ma-md cursor-pointer">
         <img src="../statics/facebook.svg" width="20px">

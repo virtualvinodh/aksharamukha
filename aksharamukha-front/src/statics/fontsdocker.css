@@ -103,6 +103,10 @@
   src: url('http://localhost:9899/NotoSansKannada-Regular.otf')
 }
 @font-face {
+  font-family: 'Noto Sans Devanagari';
+  src: url('http://localhost:9899/NotoSansDevanagari-Regular.otf')
+}
+@font-face {
   font-family: 'Noto Sans Tai Tham';
   src: url('http://localhost:9899/NotoSansTaiTham-Regular.ttf')
 }
@@ -450,6 +454,9 @@
 }
 .modi {
   font-family: "Noto Sans Modi";
+}
+.devanagari {
+  font-family: "Noto Sans Devanagari";
 }
 .multani {
   font-family: "Noto Sans Multani";

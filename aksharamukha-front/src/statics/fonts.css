@@ -103,6 +103,18 @@
   src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansKannada/NotoSansKannada-Regular.otf')
 }
 @font-face {
+  font-family: 'Noto Sans Devanagari';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansDevanagari/NotoSansDevanagari-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans GunjalaGondi';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansGunjalaGondi/NotoSansGunjalaGondi-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans MasaramGondi';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansMasaramGondi/NotoSansMasaramGondi-Regular.otf')
+}
+@font-face {
   font-family: 'Noto Sans Tai Tham';
   src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansTaiTham-Regular.ttf')
 }
@@ -385,6 +397,15 @@
 .cham {
   font-family: "Noto Sans Cham"
 }
+
+.gunjalagondi {
+  font-family: "Noto Sans GunjalaGondi"
+}
+
+.masaramgondi {
+  font-family: "Noto Sans MasaramGondi"
+}
+
 .malayalam {
   font-family: "Noto Sans Malayalam"
 }
@@ -450,6 +471,9 @@
 }
 .modi {
   font-family: "Noto Sans Modi";
+}
+.devanagari {
+  font-family: "Noto Sans Devanagari";
 }
 .multani {
   font-family: "Noto Sans Multani";

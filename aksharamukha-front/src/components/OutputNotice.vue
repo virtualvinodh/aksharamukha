@@ -28,6 +28,8 @@
      <div class="notice q-ma-sm" v-show="outputScript === 'KhomThai'">This uses Thai codepoints to encode the characters. Without the specific font, the characters will just appear as Thai.</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Tamil' &&
             String(convertText).includes('𑌃')    ">This only works with Google Noto Tamil fonts </div>
+      <div class="notice q-ma-sm" v-show="String(convertText).includes('॒') || String(convertText).includes('᳚') ||
+            String(convertText).includes('॑')">This text uses Vedic notational marks. Without an appropriate font, the text would not be rendered properly. Look into the individual <router-link :to="'/describe/' + outputScript">script</router-link> page for a working font.</div>
       <div class="notice q-ma-sm" v-show="inputScript === 'Tamil' && outputScript === 'IPA'">The results displayed have been obtained from <a href="http://anunaadam.appspot.com" target="_blank">Anunaadam</a>. Use the tool for further options.</div>
   </span>
 </template>

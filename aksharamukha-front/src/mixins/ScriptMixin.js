@@ -2,7 +2,7 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
-        baseURL: 'https://aksharamukha.appspot.com/api/',
+        baseURL: 'http://localhost:8085/api',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -596,8 +596,8 @@ export const ScriptMixin = {
           omnicode: 'devanagari',
           wikicode: 'Devanagari',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'Noto Sans Devanagari',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansDevanagari/NotoSansDevanagari-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Pali'],
           status: ['Living', 'Living: Major'],
@@ -618,6 +618,38 @@ export const ScriptMixin = {
           language: ['Sanskrit & Pali', 'Pali'],
           status: ['Extinct', 'Extinct: Pre-Modern'],
           invented: ['Derived: Brahmi'],
+          region: ['North Indic', 'Indic']
+        },
+        {
+          label: 'Gondi (Gunjala)',
+          value: 'GunjalaGondi',
+          sscode: 'Gong',
+          ssdesc: 'The Gunjala Gondi script, also known as Koytura Gunjala Lipi, is named after the village of Gunjala in the Indian state of Telangana (formerly part of Andhra Pradesh) where manuscripts written in the script were recently found. The script is used to write the Gondi language and is distinct from the Masaram Gondi script designed in 1928 by Munshi Mangal Singh Masaram.\nGunjala Gondi manuscripts have been dated to 1750 and reference events as early as the 6th and 7th centuries. The script is cursive, hand-written sources showing syllables of a word connected using pen strokes. It does not appear to be genetically related to other scripts, although it strongly resembles the Modi script in appearance and style.',
+          omnicode: '',
+          wikicode: 'Gunjala_Gondi_Lipi',
+          font: {
+            'name': 'Noto Sans Gunjala Gondi',
+            'url': 'https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/unhinted/otf/NotoSansGunjalaGondi'
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi'],
+          region: ['North Indic', 'Indic']
+        },
+        {
+          label: 'Gondi (Masaram)',
+          value: 'MasaramGondi',
+          sscode: 'Gonm',
+          ssdesc: 'The Gondi language belongs to the Central Dravidian group and is spoken by about 2 million people in the South Indian states of Madhya Pradesh, Gujarat, Andhra Pradesh, Maharashtra and Chhattisgarh. The language is usually written in the  Devanagari or  Telugu scripts, but, in 1928, Munshi Mangal Singh Masaram designed a script specifically for the Gondi language. An older script for writing Gondi,  Gunjala Gondi, is being revived in some places.',
+          omnicode: '',
+          wikicode: 'Gondi_writing',
+          font: {
+            'name': 'Noto Sans Masaram Gondi',
+            'url': 'https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/unhinted/otf/NotoSansMasaramGondi'
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Invented'],
           region: ['North Indic', 'Indic']
         },
         {

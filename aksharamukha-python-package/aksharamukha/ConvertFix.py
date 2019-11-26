@@ -40,16 +40,28 @@ def OriyaIPAFix(Strng):
 
     return Strng
 
-def VedicSvarasLatinIndic(Strng):
+def VedicSvarasLatinIndic(Strng, Source):
     ## Vedic Svaras
     Strng = Strng.replace('{\\m+}', 'ꣳ')
     Strng = Strng.replace('\\m++', 'ꣴ')
     Strng = Strng.replace('\\m+', 'ꣳ')
 
+    Strng = Strng.replace('\\`', '\\_') ## Alternate form of Anudatta
+    Strng = Strng.replace('\\\'\'', '\\"') ## Alternate form of Dirdha udatta
+
+    Ayogavaha = GM.CrunchList('AyogavahaMap', Source)
+    Svaras = ['\\_', '\\"', '\\\'']
+
+    ## Svap the order of Svara + Ayogavaha -> Ayogaaha + Svara
+    ## Indic syllable boundaries
+    for x in Ayogavaha:
+        for y in Svaras:
+            Strng = Strng.replace(y + x, x + y)
+
     ### Introduce Vedic Svaras
-    Strng = Strng.replace('\\\'\'', '\\"').replace('\\"', '᳚')
+    Strng = Strng.replace('\\"', '᳚')
     Strng = Strng.replace('\\\'', '॑')
-    Strng = Strng.replace('\\`', '\\_').replace('\\_', '॒')
+    Strng = Strng.replace('\\_', '॒')
 
     return Strng
 
@@ -62,12 +74,26 @@ def VedicSvarsIndicLatin(Strng):
 
     return Strng
 
-def VedicSvarasDiacrtics(Strng):
+def VedicSvarasDiacrtics(Strng, Target):
+    Strng = Strng.replace('{\\m+}', '\\m+')
+    Strng = Strng.replace('\\`', '\\_') ## Alternate form of Anudatta
+    Strng = Strng.replace('\\\'\'', '\\"') ## Alternate form of Dirdha udatta
+
     Strng = Strng.replace('\\\'', '̍')
     Strng = Strng.replace('\\"', '̎')
     Strng = Strng.replace('\\_', '̱')
     Strng = Strng.replace('\\m++', 'gͫ̄')
     Strng = Strng.replace('\\m+', 'gͫ')
+
+    Ayogavaha = GM.CrunchList('AyogavahaMap', Target)
+    Svaras = ['̍', '̎', '̱']
+
+    ## Svap the order of Svara + Ayogavaha -> Ayogaaha + Svara
+    ## Indic syllable boundaries
+    for x in Ayogavaha:
+        for y in Svaras:
+            Strng = Strng.replace(x + y, y + x)
+
 
     return Strng
 
@@ -165,18 +191,18 @@ def PostFixRomanOutput(Strng,Source,Target):
         Strng = FixRomanReadable(Strng)
 
     if Target == "IAST":
-        Strng = VedicSvarasDiacrtics(Strng)
+        Strng = VedicSvarasDiacrtics(Strng, Target)
         Strng = Strng.replace("a_i", "aï")
         Strng = Strng.replace("a_u", "aü")
 
     if Target == "ISO":
         Strng = Strng.replace("\\’", "\\\'")
-        Strng = VedicSvarasDiacrtics(Strng)
+        Strng = VedicSvarasDiacrtics(Strng, Target)
         Strng = Strng.replace("a_i", "a:i")
         Strng = Strng.replace("a_u", "a:u")
 
     if Target == "Titus":
-        Strng = VedicSvarasDiacrtics(Strng)
+        Strng = VedicSvarasDiacrtics(Strng, Target)
 
     if Target == "Velthuis" or Target == "Itrans":
         Strng = Strng.replace("\\.a", "\\\'")
@@ -203,6 +229,43 @@ def FixIndicOutput(Strng,Source,Target):
     # Shifting Vowel Signs and Diacritics
     # க²ா ->  கா²
     Strng = ShiftDiacritics(Strng,Target,reverse=False)
+
+    return Strng
+
+def FixMasaramGondi(Strng, reverse=False):
+    consList = '(' + '|'.join(GM.CrunchSymbols(GM.Consonants, 'MasaramGondi')) + ')'
+
+    if not reverse:
+        Strng = Strng.replace('𑴌𑵅𑴪','\U00011D2E') # KSSA
+        Strng = Strng.replace('𑴓𑵅𑴕','\U00011D2F') # JNYA
+        Strng = Strng.replace('𑴛𑵅𑴦','\U00011D30') # TRA
+
+        ## remove final virama when not followed by a consonant
+        Strng = re.sub('\U00011D45(?!' + consList + ')' , '\U00011D44', Strng)
+    else:
+        Strng = Strng.replace('\U00011D2E', '𑴌𑵅𑴪') # KSSA
+        Strng = Strng.replace('\U00011D2F', '𑴓𑵅𑴕') # JNYA
+        Strng = Strng.replace('\U00011D30', '𑴛𑵅𑴦') # TRA
+
+        Strng = Strng.replace('\U00011D44','\U00011D45')
+
+    return Strng
+
+
+def FixGunjalaGondi(Strng, reverse=False):
+    consList = '(' + '|'.join(GM.CrunchSymbols(GM.Consonants, 'GunjalaGondi')) + ')'
+
+    if not reverse:
+        Strng = re.sub('(\U00011D7A\u02BE)([\U00011D7B\U00011D7C\U00011D80\U00011D81])', '\U00011D95' + r'\1', Strng)
+        Strng = re.sub('(\U00011D7A\u02BF)([\U00011D7D\U00011D7E\U00011D82\U00011D83])', '\U00011D95' + r'\1', Strng)
+
+        Strng = Strng.replace('\u02BE', '')
+        Strng = Strng.replace('\u02BF', '')
+
+        ## remove final virama when not followed by a consonant
+        Strng = re.sub('\U00011D97(?!' + consList + ')' , '', Strng)
+    else:
+        pass
 
     return Strng
 
@@ -266,7 +329,7 @@ def FixSiddham(Strng, reverse=False):
         ## reverse the alternate forms
         Strng = Strng.replace('𑗜', '𑖲') # VS U
         Strng = Strng.replace('𑗝', '𑖳') # VS UU
-        Strng = Strng.replace('𑖄', '𑗛') # VS U
+        Strng = Strng.replace('𑗛', '𑖄') # VS U
         Strng = Strng.replace('𑗘', '𑖂') # VS I1
         Strng = Strng.replace('𑗙', '𑖂') # VS I2
         Strng = Strng.replace('𑗚', '𑖃') # VS II
