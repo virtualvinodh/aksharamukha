@@ -16,7 +16,7 @@
 
       <a href="http://aksharamukha.appspot.com/api/public?source=HK&target=Tamil&text=bRhaspati_gaMgA&nativize=false&postoptions=TamilSubScript,TamilRemoveApostrophe">http://aksharamukha.appspot.com/api/public?source=HK&target=Tamil&text=bRhaspati_gaMgA&nativize=false&postoptions=TamilSubScript,TamilRemoveApostrophe</a> <br/><br/>
 
-      <a href="http://aksharamukha.appspot.com/api/public?source=Thai&target=Devanagari&text=พุทธัง_สะระณัง_คัจฉามิ&nativize=false&preoptions=ThaiOrthography">http://aksharamukha.appspot.com/api/public?source=Thai&target=Devanagari&text=พุทธัง_สะระณัง_คัจฉามิ&nativize=false&preoptions=ThaiOrthography</a> <br/><br/>
+      <a href="http://aksharamukha.appspot.com/api/public?source=Thai&target=Devanagari&text=พุทธัง%20สะระณัง%20คัจฉามิ&nativize=false&preoptions=ThaiOrthography">http://aksharamukha.appspot.com/api/public?source=Thai&target=Devanagari&text=พุทธัง%20สะระณัง%20คัจฉามิ&nativize=false&preoptions=ThaiOrthography</a> <br/><br/>
 
     <p class="q-body-1">Of course, the API supports both GET and POST requests.</p>
 

@@ -163,9 +163,9 @@ function appendTool() {
 
 // Selection Items
 
-var selectInit = '<span class="aksharamukha-selection"><input name="scriptinput" list="script-list" id="aksharamukhaselect" placeholder="Select output script"/>'
-var selectEnd = '</datalist></span>'
-var selectMid = '<datalist id="script-list">'
+var selectInit = '<span class="aksharamukha-selection"><select name="scriptinput" id="aksharamukhaselect" placeholder="Select output script"/>'
+var selectEnd = '</select></span>'///</datalist></span>'
+var selectMid = '' // '<datalist id="script-list">'
 
 selectMid += '<option value="Original"> Original script </option>'
 selectMid += '<option value="IAST">IAST</option>'
