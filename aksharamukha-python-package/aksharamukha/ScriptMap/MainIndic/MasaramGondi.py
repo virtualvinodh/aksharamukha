@@ -150,8 +150,8 @@ OmMap = [
 
 SignMap =[
          '\u02BD\u02BD\u02BD',
-         '.',
-         '..'
+         '\u0964',
+         '\u0965'
          ]
 
 Aytham =[AyogavahaMap[2]+'\u02BD']

@@ -186,8 +186,9 @@
 </social-sharing>
     </q-layout-drawer>
     <q-page-container class="page">
+      <span v-if="!$q.platform.is.cordova">
+      <div :class="$q.platform.is.mobile ? 'alert2': 'alert'" v-if="visibleAlert && !$q.platform.is.mobile">
       <br/>
-      <div :class="$q.platform.is.mobile ? 'alert2': 'alert'" v-if="visibleAlert">
       <q-alert
           color="grey-7"
           icon="favorite"
@@ -196,6 +197,17 @@
           class="q-mb-sm"
         > Like Aksharamukha? Consider <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LRY7AE7SXDHTN&source=url">supporting</a> it! </q-alert>
       </div>
+      <div :class="$q.platform.is.mobile ? 'alert2': 'alert'" v-if="$q.platform.is.mobile && !hideAndroid">
+      <br/>
+      <q-alert
+          color="grey-7"
+          icon="android"
+          appear
+          :actions="[{ label: 'Dismiss', handler: hideAndroidHand }]"
+          class="q-mb-sm"
+        > Aksharamukha now available as an <a href="https://play.google.com/store/apps/details?id=org.cordova.quasar.aksharamukha">Android app</a>!</q-alert>
+      </div>
+    </span>
       <router-view/>
     </q-page-container>
     <q-layout-footer v-show="showFooter" class="print-hide">
@@ -241,6 +253,7 @@ export default {
   data () {
     return {
       leftDrawerOpen: true,
+      hideAndroid: false,
       showFooter: true,
       randomScript: '',
       visibleAlert: true,
@@ -295,9 +308,16 @@ export default {
     if (localStorage.visibleAlert) {
       this.visibleAlert = JSON.parse(localStorage.visibleAlert)
     }
+    if (localStorage.hideAndroid) {
+      this.hideAndroid = JSON.parse(localStorage.hideAndroid)
+    }
   },
   methods: {
     openURL,
+    hideAndroidHand: function () {
+      this.hideAndroid = true
+      localStorage.hideAndroid = JSON.stringify(this.hideAndroid)
+    },
     hideAlert: function () {
       this.visibleAlert = false
       localStorage.visibleAlert = JSON.stringify(this.visibleAlert)

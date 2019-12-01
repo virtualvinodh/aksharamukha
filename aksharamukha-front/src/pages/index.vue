@@ -87,7 +87,8 @@
     <output-notice :inputScript="inputScript" :outputScript="outputScript" :postOptions="postOptions"
      :convertText="convertText"></output-notice>
       <div class="q-mt-sm"><output-buttons @fontsizeinc="fontSize += 20" @fontsizedec="fontSize -= 20"
-       @printdoc="printDocument" @screenshot="imageConvert" @copytext="copy" :convertText="convertText" :content="downHTML"></output-buttons></div>
+       @printdoc="printDocument" @screenshot="imageConvert(downloadImage.bind(this))" @copytext="copy" :convertText="convertText" :content="downHTML"></output-buttons></div>
+      <q-btn icon="share" label="text" class="q-ma-sm" @click="shareCordovaText" v-if="$q.platform.is.cordova"/> <q-btn icon="share" label="image" class="q-ma-sm" @click="imageConvert(shareCordovaImage.bind(this))" v-if="$q.platform.is.cordova" /> <br/>
       <span><q-toggle color="dark" v-model="sourcePreserve" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-md print-hide" @input="convert" /><q-tooltip>Preserve the source as-is and don't change the text to improve readability. May use archaic characters and/or diacritics.</q-tooltip></span>
     <output-options :inputScript="inputScript" :outputScript="outputScript" :postOptionsInput="postOptions"
        :convertText="convertText"
@@ -204,6 +205,8 @@ export default {
   mounted () {
     this.checkOnline()
 
+    // this.runCode()
+
     if (localStorage.sourcePreserve) {
       this.sourcePreserve = JSON.parse(localStorage.sourcePreserve)
     }
@@ -277,6 +280,27 @@ export default {
     }
   },
   methods: {
+    /* runCode: function () {
+      console.log('getting called')
+      window.languagePluginLoader.then(async () => {
+        console.log('inside')
+        window.pyodide.loadPackage('micropip').then(async () => {
+          console.log('inside2')
+          this.textInput = 'vinod'
+          this.result = await window.pyodide.runPythonAsync(`
+  def do_work(*args):
+      from aksharamukha import transliterate
+      import js
+      print('vinod')
+      return transliterate.process('` + this.inputScript + `','` + this.outputScript + `','` + this.textInput + `')
+
+  import micropip
+  micropip.install('aksharamukha').then(do_work)
+            `)
+          console.log(this.result)
+        })
+      })
+    }, */
     downHTML: function () {
       this.downloadHTML(this.$refs.brahmiText.innerHTML)
     },
@@ -431,8 +455,79 @@ export default {
           })
       })
     },
+    downloadImage: function () {
+      var dhis = this
+      if (dhis.$q.platform.is.cordova) {
+        var params = {data: dhis.brahmiImg, prefix: 'aksharamukha_', format: 'PNG', quality: 100, mediaScanner: true}
+        window.imageSaver.saveBase64Image(params,
+          function (filePath) {
+            console.log('File saved on ' + filePath)
+            dhis.$q.notify({
+              type: 'info',
+              message: 'The image has been saved in your gallery. Please check there.',
+              position: 'center',
+              timeout: 5000
+            })
+          },
+          function (msg) {
+            console.error(msg)
+          }
+        )
+      } else {
+        dhis.$refs.imgDownload.click()
+      }
+    },
+    shareCordovaImage: function () {
+      var dhis = this
+
+      var params = {data: dhis.brahmiImg, prefix: 'aksharamukha_', format: 'PNG', quality: 100, mediaScanner: true}
+      window.imageSaver.saveBase64Image(params,
+        function (filePath) {
+          var options = {
+            message: '',
+            subject: '', // fi. for email
+            files: [filePath], // an array of filenames either locally or remotely
+            chooserTitle: 'Pick an app' // Android only, you can override the default share sheet title
+          }
+
+          var onSuccess = function (result) {
+            console.log('Share completed? ' + result.completed)
+            console.log('Shared to app: ' + result.app)
+          }
+
+          var onError = function (msg) {
+            console.log('Sharing failed with message: ' + msg)
+          }
+
+          window.plugins.socialsharing.shareWithOptions(options, onSuccess, onError)
+        },
+        function (msg) {
+          console.error(msg)
+        }
+      )
+    },
+    shareCordovaText: function () {
+      var options = {
+        message: this.convertText,
+        subject: this.convertText, // fi. for email
+        chooserTitle: 'Pick an app' // Android only, you can override the default share sheet title
+      }
+
+      var onSuccess = function (result) {
+        console.log('Share completed? ' + result.completed)
+        console.log('Shared to app: ' + result.app)
+      }
+
+      var onError = function (msg) {
+        console.log('Sharing failed with message: ' + msg)
+      }
+
+      window.plugins.socialsharing.shareWithOptions(options, onSuccess, onError)
+    },
     convert: async function () {
       this.convertText += ' . . . '
+
+      // this.runCode()
 
       if (this.$q.platform.is.cordova) {
         this.checkOnline()
@@ -480,7 +575,7 @@ export default {
           console.log(error)
         })
     },
-    imageConvert: function () {
+    imageConvert: function (func) {
       var node = this.$refs.brahmiText
       console.log(node)
       var dhis = this
@@ -503,27 +598,7 @@ export default {
           image2.src = cropped
           dhis.brahmiImg = cropped
 
-          image2.onload = function () {
-            if (dhis.$q.platform.is.cordova) {
-              var params = {data: dhis.brahmiImg, prefix: 'aksharamukha_', format: 'PNG', quality: 100, mediaScanner: true}
-              window.imageSaver.saveBase64Image(params,
-                function (filePath) {
-                  console.log('File saved on ' + filePath)
-                  dhis.$q.notify({
-                    type: 'info',
-                    message: 'The image has been saved in your gallery. Please check there.',
-                    position: 'center',
-                    timeout: 5000
-                  })
-                },
-                function (msg) {
-                  console.error(msg)
-                }
-              )
-            } else {
-              dhis.$refs.imgDownload.click()
-            }
-          }
+          image2.onload = func
         }
       })
     },

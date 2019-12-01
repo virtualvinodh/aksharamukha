@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, redirect
 from flask_cors import CORS
 import re
-from aksharamukha import Convert,PostOptions,PostProcess,PreProcess
+from aksharamukha import Convert,PostOptions,PostProcess,PreProcess, GeneralMap
 import json
 import requests
 import html
@@ -14,6 +14,12 @@ from aksharamukha.transliterate import convert, unique_everseen, removeA, auto_d
 
 app = Flask(__name__)
 CORS(app)
+
+try:
+  import googleclouddebugger
+  googleclouddebugger.enable()
+except ImportError:
+  pass
 
 @app.route('/demo', methods=['POST', 'GET'])
 def main_site():
@@ -428,17 +434,18 @@ def convert_public():
 
 @app.route('/api/plugin', methods=['POST', 'GET'])
 def convert_plugin():
-    #print('There requests are')
-    #print(request.json)
+    source = request.json['source']
 
-    print('preoptions' not in request.values)
-    print(request.values['source'])
-    print(request.values['target'])
+    if request.json['source'] == 'autodetect':
+        source = auto_detect(request.json['text'])
+        preoptions = detect_preoptions(request.json['text'], source)
 
-    if 'text' in request.values:
-        text = convert(request.values['source'], request.values['target'], request.values['text'], True, [], [])
+    print(source)
+
+    if source not in GeneralMap.Transliteration:
+        text = convert(source, request.json['target'], request.json['text'], request.json['nativize'], request.json['preOptions'], request.json['postOptions'])
     else:
-        text = ''
+        text = request.json['text']
 
     return text
 

@@ -1,21 +1,6 @@
-export const ScriptMixin = {
+const ScriptMixin = {
   data () {
     return {
-      apiCall: this.$axios.create({
-        // baseURL: 'https://aksharamukha.appspot.com/api/',
-        baseURL: 'http://localhost:8085/api',
-        timeout: 100000
-      }),
-      wikipediaCall: this.$axios.create({
-        // baseURL: 'https://aksharamukha.appspot.com/api/',
-        baseURL: 'https://en.wikipedia.org/w',
-        timeout: 100000
-      }),
-      scriptSourceCall: this.$axios.create({
-        // baseURL: 'https://aksharamukha.appspot.com/api/',
-        baseURL: 'http://scriptsource.org/cms/scripts/page.php?item_id=script_detail&key=Zanb',
-        timeout: 100000
-      }),
       vowels: ['a', 'A', 'i', 'I', 'u', 'U', 'R', 'E', 'e', 'ai', 'O', 'o', 'au'],
       consonants: ['k', 'kh', 'g', 'gh', 'G',
         'c', 'ch', 'j', 'jh', 'J',
@@ -49,7 +34,8 @@ export const ScriptMixin = {
       ayogavahasAll: ['~', 'M', 'H'],
       preOptionsGroup: {
         'Tamil': [
-          { label: 'Transcribe Tamil', value: 'TamilTranscribe' }
+          { label: 'Transcribe Tamil <br/><small><span class="tamil">மதம், நகம்</span> → madam, nagam</small>', value: 'TamilTranscribe' },
+          { label: '<span class="tamil">க2 க3 க4 → க² க³ க⁴</span>', value: 'TamilNumeralSub' }
         ],
         'Itrans': [
           { label: 'E/O for long, e/o for short', value: 'swapEeItrans' }
@@ -64,38 +50,48 @@ export const ScriptMixin = {
           { label: 'SA-I for vowel length', value: 'LimbuSpellingSaI' }
         ],
         'Thai': [
-          { label: 'Thai Orthography', value: 'ThaiOrthography' }
+          { label: 'Thai orthography text <br/><small><div>e.g. พุทธะ</div></small>', value: 'ThaiOrthography' },
+          { label: 'Sajjhaya orthography text <br/><small><div>e.g. พุท์ธ</div></small>', value: 'ThaiSajjhayaOrthography' }
+
+        ],
+        'TaiTham': [
+          { label: 'Tai Tham Lao', value: 'TaiThamLao' },
+          { label: 'Tai Kuen', value: 'TaiKuen' }
         ],
         'LaoPali': [
-          { label: 'Lao Orthography', value: 'LaoTranscription' }
+          { label: 'Lao orthography text<small><div class="laopali">e.g. ພຸທຘະ</div></small>', value: 'LaoTranscription' }
         ],
         'Devanagari': [
-          { label: 'Schwa deletion (Hindi) <div class="q-mt-sm"> (e.g. राम → rām, सबसे → sabse) </div>', value: 'RemoveSchwaHindi' }
+          { label: 'Schwa deletion (Hindi) <small><div class="q-mt-sm">राम → rām, सबसे → sabse</div></small>', value: 'RemoveSchwaHindi' },
+          { label: 'Anusvara and Chandrabindu equivalent', value: 'AnuChandraEqDeva' }
         ],
         'Gujarati': [
-          { label: 'Schwa deletion (Only word-final) <div class="q-mt-sm"> (e.g. राम → rām) </div>', value: 'SchwaFinalGujarati' }
+          { label: 'Schwa deletion (Only word-final) <br/><small><div class="q-mt-sm">राम → rām</div></small>', value: 'SchwaFinalGujarati' }
         ],
         'Bengali': [
-          { label: 'Schwa deletion (Only word-final) <div class="q-mt-sm"> (e.g. রাম → rām) </div>', value: 'SchwaFinalBengali' }
+          { label: 'Schwa deletion (Only word-final) <br/><small><div class="q-mt-sm">রাম → rām</div></small>', value: 'SchwaFinalBengali' }
         ],
         'Gurmukhi': [
-          { label: 'Schwa deletion (Only word-final) <div class="q-mt-sm"> (e.g. ਰਾਮ → rām) </div>', value: 'SchwaFinalGurmukhi' }
+          { label: 'Schwa deletion (Only word-final) <br/><small><div class="q-mt-sm">ਰਾਮ → rām</div</small>>', value: 'SchwaFinalGurmukhi' }
+        ],
+        'WarangCiti': [
+          { label: 'Schwa deletion (Only word-final) <br/><small><div class="q-mt-sm"><span class="warangciti">𑣜𑣁𑣖</span> → rām</div></small>', value: 'SchwaFinalWarangCiti' }
         ],
         'Grantha': [
-          { label: 'Prakrit orthography', value: 'GranthaPrakrit' },
+          { label: 'Prakrit orthography<br/><small><div class="grantha">e.g. 𑌬𑍁𑌂𑌧𑌀</div></small>' },
           { label: 'Use e-Grantamil encoding', value: 'egrantamil' }
         ],
         'Sinhala': [
-          { label: 'Sanskrit/Pali Orthography', value: 'SinhalaPali' }
+          { label: 'Sanskrit/Pali orthography text<br/><small><span class="sinhala">e.g. නමො භගවතෙ</span></small>', value: 'SinhalaPali' }
         ],
         'Malayalam': [
-          { label: 'Prakrit orthography', value: 'MalayalamPrakrit' }
+          { label: 'Prakrit orthography text', value: 'MalayalamPrakrit' }
         ],
         'Siddham': [
-          { label: 'Devanagari-based Siddham Font', value: 'siddhammukta' }
+          { label: 'Devanagari-based Siddham font', value: 'siddhammukta' }
         ],
-        'IAST': [
-          { label: 'Pali Text', value: 'IASTPali' }
+        'RussianCyrillic': [
+          { label: 'Pali Text', value: 'CyrillicPali' }
         ],
         'Urdu': [
           { label: 'Short vowels not shown', value: 'UrduShortNotShown' }
@@ -103,122 +99,149 @@ export const ScriptMixin = {
       },
       preOptionsGroupSpecific: {
         'DevanagariLimbu': [
-          { label: 'Use Limbu Devanagari conventions', value: 'LimbuDevanagariConvention' }
+          { label: 'Limbu Devanagari conventions<br/><small><span class="limbudev">e.g. ए़ ओ़ ए़ः के़ को़ के़ः</span></small>', value: 'LimbuDevanagariConvention' }
         ]
       },
       postOptionsGroupSpecific: {
         'DevanagariLimbu': [
-          { label: 'Use Limbu Devanagari conventions', value: 'LimbuDevanagariConvention' }
+          { label: 'Use Limbu Devanagari conventions<small><br/><span class="limbu">ᤀᤧ ᤀᤨ ᤀᤧ᤺ ᤁᤧ ᤁᤨ ᤁᤧ᤺</span> → <span class="limbudev">ए़ ओ़ ए़ः के़ को़ के़ः</span></small>', value: 'LimbuDevanagariConvention' }
         ]
       },
       postOptionsGroup: {
         'Tamil': [
-          { label: 'Old orthography', value: 'oldtamilortho' },
-          { label: 'Use Grantha Visarga', value: 'TamilGranthaVisarga' },
-          { label: 'Subscript numerals', value: 'TamilSubScript' },
-          { label: 'Dandas', value: 'RetainTamilDanda' },
-          { label: 'Disable ௐ', value: 'TamilOmDisable' },
-          { label: 'Disable ஶ', value: 'TamilDisableSHA' },
-          { label: 'Remove Apostrophe', value: 'TamilRemoveApostrophe' },
-          { label: 'Remove Diacritic Numerals', value: 'TamilRemoveNumbers' },
-          { label: 'Tamil Numerals', value: 'RetainTamilNumerals' },
-          { label: 'Medieval e/o with Pulli', value: 'MedievalTamilOrthography' }
+          { label: 'Old orthography<br/><small><span class="tamil">லை னா</span> → <span class="tamilold">லை னா</span></small>', value: 'oldtamilortho' },
+          { label: 'Use Grantha Visarga<br/><small><span class="tamil">நம꞉ → நம𑌃</span></small>', value: 'TamilGranthaVisarga' },
+          { label: 'Subscript numerals<br/><small><span class="tamil">க²க³க⁴ → க₂க₃க₄</span></small>', value: 'TamilSubScript' },
+          { label: 'Dandas<br/><small><span class="tamil">. .. → । ॥</span></small>', value: 'RetainTamilDanda' },
+          { label: 'Disable ௐ<br/><small><span class="tamil">ௐ → ஓம்</span></small>', value: 'TamilOmDisable' },
+          { label: 'Disable ஶ<br/><small><span class="tamil">ஶ → ஸ²</span></small>', value: 'TamilDisableSHA' },
+          { label: 'Remove apostrophe<br/><small><span class="tamil">ருʼம்ʼ → ரும்</span></small>', value: 'TamilRemoveApostrophe' },
+          { label: 'Remove diacritic numerals<br/><small><span class="tamil">க²க³க⁴ → ககக</span></small>', value: 'TamilRemoveNumbers' },
+          { label: 'Tamil numerals<br/><small><span class="tamil">123 → ௧௨௩</span></small>', value: 'RetainTamilNumerals' },
+          { label: 'Medieval e/o with Pulli<br/><small><span class="tamil">ஒ ஓ கொ கோ → ஒ் ஒ கெ்ா கொ</span></small>', value: 'MedievalTamilOrthography' }
         ],
         'Chakma': [
           {
-            label: 'Enable all conjuncts',
+            label: 'Enable all conjuncts<br/><small><span class="chakma">𑄇𑄴𑄈𑄧 𑄉𑄴𑄊𑄧 𑄚𑄴𑄖𑄧 → 𑄇𑄳𑄈𑄧 𑄉𑄳𑄊𑄧 𑄚𑄳𑄖𑄧</span></small>',
             value: 'ChakmaEnableAllConjuncts'
           },
           {
-            label: 'Enable independent i, u and e',
+            label: 'Enable independent i, u and e<br/><small><span class="chakma">𑄃𑄨 𑄃𑄪 𑄃𑄬 → 𑄄 𑄅 𑄆</span></small>',
             value: 'ChakmaVowelsIndependent'
           }
         ],
         'Newa': [
           { label: 'Enable murmured consonants', value: 'NewaMurmurConsonants' },
-          { label: 'Disable Repha', value: 'NewaDisableRepha' },
-          { label: 'Use special TA-conjunct', value: 'NewaSpecialTa' },
-          { label: 'Use Devanagari-based Newa font', value: 'nepaldevafont' }
+          { label: 'Disable Repha<br/><small><span class="newa">𑐢𑐬𑑂𑐩 → 𑐢𑐬𑑂‍𑐩</span></small>', value: 'NewaDisableRepha' },
+          { label: 'Use special /ta/ conjunct<br/><small><span class="newa">𑐟𑑂𑐥𑐟𑑂𑐩𑐟𑑂𑐰 → 𑐟𑑂‍𑐥𑐟𑑂‍𑐩𑐟𑑂‍𑐰</span></small>', value: 'NewaSpecialTa' },
+          { label: 'Use Devanagari-based Newa font<br/><small><span class="newa">𑐧𑐸𑐡𑑂𑐢𑑅</span> →<span class="nepaldevafont">बुद्धः</span></small>', value: 'nepaldevafont' }
 
         ],
         'Oriya': [
-          { label: 'Use ଵ instead of ୱ', value: 'OriyaVaAlt' },
-          { label: 'Use ୟ everywhere', value: 'OriyaYYA' }
+          { label: 'Use ଵ instead of ୱ<br/><small>ଭୱତି → ଭଵତି</small>', value: 'OriyaVaAlt' },
+          { label: 'Use ୟ everywhere<br/><small>ଯୟାତି ଯଜ୍ଞ → ୟୟାତି ୟଜ୍ଞ</small>', value: 'OriyaYYA' }
         ],
         'Bengali': [
-          { label: 'Use য় everywhere', value: 'BengaliYYA' }
+          { label: 'Use য় everywhere<br/><small>যয়াতি যজ্ঞ → য়য়াতি য়জ্ঞ</small>', value: 'BengaliYYA' }
         ],
         'Siddham': [
-          { label: 'Variant vowel sign U <span class="siddham">𑗜</span>', value: 'UseAlternateVSU' },
-          { label: 'Variant vowel sign UU <span class="siddham">𑗝</span>', value: 'UseAlternateVSUU' },
-          { label: 'Variant I <span class="siddham">𑗘</span>', value: 'UseAlternateI1' },
-          { label: 'Variant I <span class="siddham">𑗙</span>', value: 'UseAlternateI2' },
-          { label: 'Variant II <span class="siddham">𑗚</span>', value: 'UseAlternateII' },
-          { label: 'Variant U <span class="siddham">𑗛</span>', value: 'UseAlternateU' },
+          { label: 'Variant vowel sign U <span class="siddham">𑗜</span><br/><small> <span class="siddham">𑖎𑖲𑖚𑖲𑖦𑖲 → 𑖎𑗜𑖚𑗜𑖦𑗜</span></small>', value: 'UseAlternateVSU' },
+          { label: 'Variant vowel sign UU <span class="siddham">𑗝</span><br/><small> <span class="siddham">𑖎𑖳𑖚𑖳𑖦𑖳 → 𑖎𑖳𑖚𑖳𑖦𑖳</span></small>', value: 'UseAlternateVSUU' },
+          { label: 'Variant I 1 <br/><small><span class="siddham">𑖂 → 𑗘</span></small>', value: 'UseAlternateI1' },
+          { label: 'Variant I 2 <br/><small><span class="siddham">𑖂 → 𑗙</span></small>', value: 'UseAlternateI2' },
+          { label: 'Variant II <br/><small><span class="siddham">𑖃 → 𑗚</span></small>', value: 'UseAlternateII' },
+          { label: 'Variant U <br/><small><span class="siddham">𑖄 → 𑗛</span></small>', value: 'UseAlternateU' },
           { label: 'Use MuktamSiddham font', value: 'siddhammukta' },
           { label: 'Use ApDevSiddham font', value: 'siddhamap' }
         ],
         'Devanagari': [
           { label: 'Use ॲ instead of ऍ', value: 'DevanagariACandra' },
-          { label: 'Prishthamatra orthography', value: 'DevanagariPrishtamatra' }
+          { label: 'Prishthamatra orthography<br/><small>के कै को कौ → कॎ कॎे कॎा कॎा</small>', value: 'DevanagariPrishtamatra' }
         ],
         'Gurmukhi': [
-          { label: 'Use Yakaash', value: 'GurmukhiYakaash' },
-          { label: 'Gurmukhi Numerals', value: 'RetainGurmukhiNumerals' }
+          { label: 'Use Yakaash<br/><small>ਕ੍ਯ → ਕੵ</small>', value: 'GurmukhiYakaash' },
+          { label: 'Gurmukhi Numerals<br/><small>123 → ੧੨੩</small>', value: 'RetainGurmukhiNumerals' }
 
         ],
         'Thai': [
-          { label: 'Thai Orthography', value: 'ThaiTranscription' },
-          { label: 'Sara /a/ ะ as Visarga', value: 'ThaiVisargaSaraA' }
+          { label: 'Thai Orthography<br/><small><div>พุทฺธ → พุทธะ</div></small>', value: 'ThaiTranscription' },
+          { label: 'Sajjhaya Orthography<br/><small><div>พุทฺธ → พุท์ธ</div></small>', value: 'ThaiSajjhayaOrthography' },
+          { label: 'Sara a ะ as Visarga<br/><small><div>นมัห์ → นมะ</div></small>', value: 'ThaiVisargaSaraA' }
 
         ],
         'LaoPali': [
-          { label: 'Lao Orthography', value: 'LaoTranscription' }
+          { label: 'Lao Orthography<br/><small><span class="laopali">ພຸທ຺ຘ → ພຸທຘະ</span></small>', value: 'LaoTranscription' }
         ],
         'Lao': [
-          { label: 'Lao Nativization', value: 'LaoNative' }
+          { label: 'Lao Nativization<br/><small><span class="lao">ພຸທທັງ ຄັຈຈາມິ ສັພພັງ → ພຸດທັງ ຄັຈສາມິ ສັບພັງ</span></small>', value: 'LaoNative' }
+        ],
+        'TaiTham': [
+          { label: 'Tai Tham Lao<br/><small><span class="taitham">ᨻᩩᨴ᩠ᨵ</span> → <span class="taithamlao">ᨻᩩᨴ᩠ᨵ</span></small>', value: 'TaiThamLao' },
+          { label: 'Tai Kuen<br/><small><span class="taitham">ᨻᩩᨴ᩠ᨵ</span> → <span class="taikuen">ᨻᩩᨴ᩠ᨵ</span></small>', value: 'TaiKuen' }
+        ],
+        'Soyombo': [
+          { label: 'Use Sanskrit palatals<br/><small><span class="soyombo">𑩵 𑩶 𑩷 → 𑩡 𑩢 𑩣</span></small>', value: 'SoyomboSanskritPalatals' },
+          { label: 'Use Mongolian finals<br/><small><span class="soyombo">ak ag ad → 𑩐𑪋 𑩐𑪊 𑩐𑪍</span></small>', value: 'SoyomboFinals' },
+          { label: 'Use initial-form /ra/, /la/, /sa/<br/><small><span class="soyombo">𑩼𑪙𑩫 𑩽𑪙𑩫 𑪁𑪙𑩫 → 𑪆𑩫 𑪇𑩫 𑪉𑩫</span></small>', value: 'SoyomboInitials' },
+          { label: 'Use Tsheg<br/><small><span class="soyombo">𑩯 𑩴𑩖 → 𑩯𑪚𑩴𑩖</span></small>', value: 'SoyomboSpaceTscheg' }
         ],
         'Tibetan': [
-          { label: 'Use <i>Bindu with nada</i>', value: 'TibetanNada' },
-          { label: 'Use space', value: 'TibetanTsheg' },
-          { label: 'Use Dbu Med (Ume) style', value: 'tibetandbumed' }
+          { label: 'Use Sanskrit palatals<br/><small><span class="tibetan">ཙ ཚ ཛ ཛྷ → ཅ ཆ ཇ ཇྷ</span></small>', value: 'TibetanSanskritPalatals' },
+          { label: 'Use <i>Bindu with nada</i><br/><small><span class="tibetan">ཨྃ → ཨྂ</span></small>', value: 'TibetanNada' },
+          { label: 'Use space<br/><small><span class="tibetan">ན་མོ → ན མོ</span></small>', value: 'TibetanTsheg' },
+          { label: 'Use Dbu Med (Ume) style<br/><small><span class="tibetan">བུདྡྷཿ</span> → <span class="tibetandbumed">བུདྡྷཿ</span></small>', value: 'tibetandbumed' }
         ],
         'Sinhala': [
-          { label: 'Sanskrit/Pali Orthography', value: 'SinhalaPali' },
-          { label: 'Enable all conjuncts', value: 'SinhalaConjuncts' }
+          { label: 'Sanskrit/Pali Orthography<br/><small><span class="sinhala">නමෝ භගවතේ → නමො භගවතෙ</span></small>', value: 'SinhalaPali' },
+          { label: 'Enable all conjuncts<span><br/><small><span class="sinhala">බුද්ධස්ස → බුද්‍ධස‍්ස</span></small>', value: 'SinhalaConjuncts' }
         ],
         'Ranjana': [
-          { label: 'Lantsa style (Tibetan)', value: 'ranjanalantsa' },
-          { label: 'Wartu style (Tibetan)', value: 'ranjanawartu' }
+          { label: 'Lantsa style (Tibetan)<br/><small><span class="ranjana">बुद्धः</span> → <span class="ranjanalantsa">བུདྡྷཿ</span></small>', value: 'ranjanalantsa' },
+          { label: 'Wartu style (Tibetan)<br/><small><span class="ranjana">बुद्धः</span> → <span class="ranjanawartu">བུདྡྷཿ</span></small>', value: 'ranjanawartu' }
         ],
         'Telugu': [
-          { label: 'Dandas', value: 'RetainTeluguDanda' },
-          { label: 'Telugu Numerals', value: 'RetainTeluguNumerals' }
+          { label: 'Dandas<br/><small><span class="telugu">. .. → । ॥</span></small>', value: 'RetainTeluguDanda' },
+          { label: 'Telugu Numerals<br/><small><span class="telugu">123 → ౧౨౩</span></small>', value: 'RetainTeluguNumerals' }
         ],
         'Gujarati': [
-          { label: 'Dandas', value: 'RetainGujaratiDanda' }
+          { label: 'Dandas<br/><small><span class="gujarati">. .. → । ॥</span></small>', value: 'RetainGujaratiDanda' }
         ],
         'Kannada': [
-          { label: 'Dandas', value: 'RetainKannadaDanda' },
-          { label: 'Kannada Numerals', value: 'RetainKannadaNumerals' }
+          { label: 'Dandas<br/><small><span class="kannada">. .. → । ॥</span></small>', value: 'RetainKannadaDanda' },
+          { label: 'Kannada Numerals<br/><small><span class="kannada">123 → ೧೨೩</span></small>', value: 'RetainKannadaNumerals' }
         ],
         'Grantha': [
-          { label: 'Use Grantha old AU vowel sign', value: 'GranthaOldau' },
-          { label: 'Prakrit orthography', value: 'GranthaPrakrit' },
+          { label: 'Use Grantha old AU vowel sign <br/><small><div class="grantha">𑌕𑍗 → 𑌕𑍌</div></small>', value: 'GranthaOldau' },
+          { label: 'Prakrit orthography <br/><small><div class="grantha">𑌬𑍁𑌦𑍍𑌧𑌂 → 𑌬𑍁𑌂𑌧𑌀</div></small>', value: 'GranthaPrakrit' },
           { label: 'Use e-Grantamil encoding', value: 'egrantamil' }
         ],
         'Urdu': [
-          { label: 'Remove short vowels', value: 'UrduRemoveShortVowels' }
+          { label: 'Remove short vowels<br/><small><span class="urdu">ہِنْدُوسْتانْ ← ہندوستان</span></small>', value: 'UrduRemoveShortVowels' }
         ],
         'IAST': [
-          { label: 'Pali Text', value: 'IASTPali' },
+          { label: 'Capitalize sentences', value: 'capitalizeSentence' },
+          { label: 'Anusvara to Nasal<br/><small>gaṃgā → gaṅgā</small>', value: 'NasaltoAnsvaraIASTISO' }
+        ],
+        'IASTPali': [
           { label: 'Capitalize sentences', value: 'capitalizeSentence' }
         ],
+        'RussianCyrillic': [
+          { label: 'Pali Text', value: 'CyrillicPali' },
+          { label: 'Capitalize sentences', value: 'capitalizeSentence' },
+          { label: 'Remove Diacritics<br/><small><span class="russiancyrillic">сам̣кр̣там̣ → самкртам</span></small>', value: 'removeDiacritics' }
+        ],
         'ISO': [
+          { label: 'Capitalize sentences', value: 'capitalizeSentence' },
+          { label: 'Anusvara to Nasal<br/><small>gaṁgā → gaṅgā</small>', value: 'NasaltoAnsvaraIASTISO' }
+        ],
+        'RomanReadable': [
           { label: 'Capitalize sentences', value: 'capitalizeSentence' }
         ],
         'Khojki': [
           { label: 'Retain spaces', value: 'KhojkiRetainSpace' }
+        ],
+        'WarangCiti': [
+          { label: 'Capitalize sentences', value: 'capitalizeSentence' }
         ],
         'Kaithi': [
           { label: 'Retain spaces', value: 'KaithiRetainSpace' }
@@ -227,24 +250,25 @@ export const ScriptMixin = {
           { label: 'Retain spaces', value: 'BhaiksukiRetainSpace' }
         ],
         'Limbu': [
-          { label: 'SA-I for vowel length', value: 'LimbuSpellingSaI' }
+          { label: 'SA-I for vowel length<small><br/><span class="limbu">ᤁ᤺ᤢᤰ → ᤁᤢᤁ᤻</span></small>', value: 'LimbuSpellingSaI' }
         ],
         'Sundanese': [
-          { label: 'Sundanese historical conjuncts', value: 'SundaneseHistoricConjuncts' }
+          { label: 'Sundanese historical conjuncts<br/><small><span class="sundanese">ᮊ᮪ᮙ ᮊ᮪ᮝ ᮃᮊ᮪ ᮃᮙ᮪ → ᮊᮬ ᮊᮭ ᮃᮾ ᮃᮿ</span></small>', value: 'SundaneseHistoricConjuncts' }
         ],
-        'MeeteiMayek': [],
         'Malayalam': [
-          { label: 'Dot Reph', value: 'dotReph' },
-          { label: 'Archaic II & AU', value: 'archaicAIAU' },
-          { label: 'Traditional orthography', value: 'tradOrtho' },
-          { label: 'Prakrit orthography', value: 'MalayalamPrakrit' },
-          { label: 'Dandas', value: 'RetainMalayalamDanda' },
-          { label: 'Malayalam Numerals', value: 'RetainMalayalamNumerals' }
+          { label: 'Dot Reph<br/><small><span class="malayalam">ധർമ → ധൎമ</span></small>', value: 'dotReph' },
+          { label: 'Archaic II & AU<br/><small><span class="malayalam">ഈ കൗ → ൟ കൌ</span></small>', value: 'archaicAIAU' },
+          { label: 'Traditional orthography<br/><small><span class="malayalam">തു തൂ</span> → <span class="malayalamold">തു തൂ</span></small>', value: 'tradOrtho' },
+          { label: 'Prakrit orthography<br/><small><span class="malayalam">ബുദ്ധ → ബുംധ</span></small>', value: 'MalayalamPrakrit' },
+          { label: 'Dandas<br/><small><span class="malayalam">. .. → । ॥</span></small>', value: 'RetainMalayalamDanda' },
+          { label: 'Malayalam Numerals<br/><small><span class="malayalam">123 → ൧൨൩</span></small>', value: 'RetainMalayalamNumerals' }
         ],
         'ZanabazarSquare': [
-          { label: 'Contextual ya/ra/la/va & Repha', value: 'ZanabazarSquareContextual' },
-          { label: 'Alternate ai/au', value: 'ZanabazarSquareAiAu' },
-          { label: 'Mongolian final-mark', value: 'ZanabazarSquareMongolianFinal' }
+          { label: 'Use Sanskrit palatals<br/><small><span class="zanabazarsquare">𑨣 𑨤 𑨥 → 𑨐 𑨑 𑨒</span></small>', value: 'ZanabazarSanskritPalatals' },
+          { label: 'Use Tsheg<br/><small><span class="zanabazarsquare">𑨝 𑨢𑨆 → 𑨝𑩁𑨢𑨆</span></small>', value: 'ZanzabarSpaceTsheg' },
+          { label: 'Contextual ya/ra/la/va & Repha<br/><small><span class="zanabazarsquare">𑨋𑩇𑨪 𑨋𑩇𑨫 𑨋𑩇𑨬 𑨋𑩇𑨭 𑨫𑩇𑨋 → 𑨋𑨻 𑨋𑨼 𑨋𑨽 𑨋𑨾 𑨺𑨋</span></small>', value: 'ZanabazarSquareContextual' },
+          { label: 'Alternate ai/au<br/><small><span class="zanabazarsquare">𑨀𑨄𑨊 𑨀𑨆𑨊 → 𑨀𑨇 𑨀𑨈</span></small>', value: 'ZanabazarSquareAiAu' },
+          { label: 'Mongolian final-mark<br/><small><span class="zanabazarsquare">𑨀𑨋𑨴 → 𑨀𑨋𑨳</span></small>', value: 'ZanabazarSquareMongolianFinal' }
         ]
       },
       autodetect: [
@@ -264,7 +288,29 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Ahom',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifAhom/NotoSerifAhom-Regular.otf'
-          }
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi'],
+          region: ['East Indic', 'Indic']
+        },
+        {
+          label: 'Ariyaka',
+          value: 'Ariyaka',
+          sscode: '',
+          ssdesc: '',
+          wikicode: '',
+          omnicode: 'ariyaka',
+          font: {
+            'name': 'Ariyaka',
+            'url': 'https://www.omniglot.com/fonts/ariyaka.zip'
+          },
+          language: ['Only Pali', 'Pali'],
+          status: ['Extinct', 'Extinct: Pre-Modern'],
+          invented: ['Invented'],
+          region: ['South East Asian: Mainland', 'South East Asian'],
+          miscsrc: '(from Omniglot)',
+          miscdesc: 'The Ariyaka alphabet was invented by King Mongkut Rama IV of Siam (1804-1868) as an alternative alphabet for Pali. He considered the Khmer alphabet, which was commonly used to write Pali, to be too complicated and decided to create an alphabet that was easier to use and more Western in appearance.'
         },
         {
           label: 'Assamese',
@@ -277,7 +323,11 @@ export const ScriptMixin = {
           font: {
             'name': '',
             'url': ''
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Brahmi'],
+          region: ['East Indic', 'Indic']
         },
         {
           label: 'Avestan',
@@ -289,7 +339,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Avestan',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansAvestan-Regular.ttf'
-          }
+          },
+          language: ['Others'],
+          status: ['Extinct', 'Extinct: Ancient'],
+          invented: ['Derived: Aramaic'],
+          region: ['West Asian']
         },
         {
           label: 'Balinese',
@@ -301,7 +355,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Serif Balinese',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifBalinese/NotoSerifBalinese-Regular.otf'
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Insular', 'South East Asian']
         },
         {
           label: 'Batak Karo',
@@ -314,7 +372,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Batak',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansBatak-Regular.ttf'
-          }
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Insular', 'South East Asian']
         },
         {
           label: 'Batak Mandailing',
@@ -327,7 +389,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Batak',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansBatak-Regular.ttf'
-          }
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Insular', 'South East Asian']
         },
         {
           label: 'Batak Pakpak',
@@ -340,7 +406,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Batak',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansBatak-Regular.ttf'
-          }
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Insular', 'South East Asian']
         },
         {
           label: 'Batak Toba',
@@ -353,7 +423,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Batak',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansBatak-Regular.ttf'
-          }
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Insular', 'South East Asian']
         },
         {
           label: 'Batak Simalungun',
@@ -362,7 +436,15 @@ export const ScriptMixin = {
           sscode: 'Batk',
           ssdesc: 'The Batak script is used to write the six Batak languages (Toba, Karo, Dairi, Mandailing, Simalungun and Angkola) spoken collectively by approximately 3 million people on the Indonesian island of Sumatra. It is one of several scripts indigenous to the Indonesian archipelago, descended from the Old Kawi script, which in turn is derived from the Pallava, and ultimately the Brahmi, script. This is the variant used by the Simalungun language.',
           omnicode: 'batak',
-          wikicode: 'Batak_script'
+          wikicode: 'Batak_script',
+          font: {
+            'name': 'Noto Sans Batak',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansBatak-Regular.ttf'
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Insular', 'South East Asian']
         },
         {
           label: 'Bengali',
@@ -374,7 +456,11 @@ export const ScriptMixin = {
           font: {
             'name': '',
             'url': ''
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Brahmi'],
+          region: ['East Indic', 'Indic']
         },
         {
           label: 'Brahmi',
@@ -386,7 +472,11 @@ export const ScriptMixin = {
           font: {
             'name': '',
             'url': ''
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Extinct', 'Extinct: Ancient'],
+          invented: ['Derived: Brahmi'],
+          region: ['Pan-Indic', 'Indic']
         },
         {
           label: 'Bhaiksuki',
@@ -398,7 +488,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Bhaiksuki',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansBhaiksuki/NotoSansBhaiksuki-Regular.otf'
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Extinct', 'Extinct: Ancient'],
+          invented: ['Derived: Brahmi'],
+          region: ['North Indic', 'Indic']
         },
         {
           label: 'Buginese (Lontara)',
@@ -410,7 +504,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Buginese',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansBuginese-Regular.ttf'
-          }
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Insular', 'South East Asian']
         },
         {
           label: 'Buhid',
@@ -422,7 +520,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Nnoto Sans Buhid',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansBuhid/NotoSansBuhid-Regular.otf'
-          }
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Insular', 'South East Asian']
         },
         {
           label: 'Burmese (Myanmar)',
@@ -434,7 +536,11 @@ export const ScriptMixin = {
           font: {
             'name': '',
             'url': ''
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Mainland', 'South East Asian']
         },
         {
           label: 'Chakma',
@@ -446,7 +552,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Chakma',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansChakma-Regular.ttf'
-          }
+          },
+          language: ['Only Pali', 'Pali'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Mainland', 'South East Asian']
         },
         {
           label: 'Cham',
@@ -459,7 +569,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Cham',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansCham-Regular.ttf'
-          }
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Insular', 'South East Asian']
         },
         {
           label: 'Devanagari',
@@ -469,9 +583,61 @@ export const ScriptMixin = {
           omnicode: 'devanagari',
           wikicode: 'Devanagari',
           font: {
-            'name': '',
-            'url': ''
-          }
+            'name': 'Noto Sans Devanagari',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansDevanagari/NotoSansDevanagari-Regular.otf'
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Brahmi'],
+          region: ['North Indic', 'Indic']
+        },
+        {
+          label: 'Dogra',
+          value: 'Dogra',
+          sscode: 'Dogr',
+          wikidesc: 'Dogri script is the original script of the Dogri language. It is very close to the Takri script.',
+          omnicode: '',
+          wikicode: 'Dogri_script',
+          font: {
+            'name': 'Noto Serif Dogra',
+            'url': 'https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/unhinted/otf/NotoSerifDogra'
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Extinct', 'Extinct: Pre-Modern'],
+          invented: ['Derived: Brahmi'],
+          region: ['North Indic', 'Indic']
+        },
+        {
+          label: 'Gondi (Gunjala)',
+          value: 'GunjalaGondi',
+          sscode: 'Gong',
+          ssdesc: 'The Gunjala Gondi script, also known as Koytura Gunjala Lipi, is named after the village of Gunjala in the Indian state of Telangana (formerly part of Andhra Pradesh) where manuscripts written in the script were recently found. The script is used to write the Gondi language and is distinct from the Masaram Gondi script designed in 1928 by Munshi Mangal Singh Masaram.\nGunjala Gondi manuscripts have been dated to 1750 and reference events as early as the 6th and 7th centuries. The script is cursive, hand-written sources showing syllables of a word connected using pen strokes. It does not appear to be genetically related to other scripts, although it strongly resembles the Modi script in appearance and style.',
+          omnicode: '',
+          wikicode: 'Gunjala_Gondi_Lipi',
+          font: {
+            'name': 'Noto Sans Gunjala Gondi',
+            'url': 'https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/unhinted/otf/NotoSansGunjalaGondi'
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi'],
+          region: ['North Indic', 'Indic']
+        },
+        {
+          label: 'Gondi (Masaram)',
+          value: 'MasaramGondi',
+          sscode: 'Gonm',
+          ssdesc: 'The Gondi language belongs to the Central Dravidian group and is spoken by about 2 million people in the South Indian states of Madhya Pradesh, Gujarat, Andhra Pradesh, Maharashtra and Chhattisgarh. The language is usually written in the  Devanagari or  Telugu scripts, but, in 1928, Munshi Mangal Singh Masaram designed a script specifically for the Gondi language. An older script for writing Gondi,  Gunjala Gondi, is being revived in some places.',
+          omnicode: '',
+          wikicode: 'Gondi_writing',
+          font: {
+            'name': 'Noto Sans Masaram Gondi',
+            'url': 'https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/unhinted/otf/NotoSansMasaramGondi'
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Invented'],
+          region: ['North Indic', 'Indic']
         },
         {
           label: 'Grantha',
@@ -484,10 +650,14 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Grantha',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansGrantha/NotoSansGrantha-Regular.otf'
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South Indic', 'Indic']
         },
         {
-          label: 'Pandya Grantha',
+          label: 'Grantha (Pandya)',
           value: 'GranthaPandya',
           sscode: '',
           ssdesc: '',
@@ -497,7 +667,11 @@ export const ScriptMixin = {
           font: {
             'name': 'e-Pandya',
             'url': 'https://github.com/virtualvinodh/aksharamukha/blob/master/aksharamukha-front/src/statics/e-Pandya.ttf'
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Extinct', 'Extinct: Ancient'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South Indic', 'Indic']
         },
         {
           label: 'Gujarati',
@@ -509,7 +683,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Serif Gujarati',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifGujarati/NotoSerifGujarati-Regular.otf'
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Brahmi'],
+          region: ['West Indic', 'Indic']
         },
         {
           label: 'Hanunoo',
@@ -521,7 +699,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Hanunoo',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansHanunoo/NotoSansHanunoo-Regular.otf'
-          }
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Insular', 'South East Asian']
         },
         {
           label: 'Javanese',
@@ -533,7 +715,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Javanese',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansJavanese/NotoSansJavanese-Regular.otf'
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Insular', 'South East Asian']
         },
         {
           label: 'Kaithi',
@@ -545,19 +731,45 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Kaithi',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansKaithi/NotoSansKaithi-Regular.otf'
-          }
+          },
+          language: ['Only Pali', 'Pali'],
+          status: ['Extinct', 'Extinct: Pre-Modern'],
+          invented: ['Derived: Brahmi'],
+          region: ['North Indic', 'Indic']
         },
         {
           label: 'Kannada',
           value: 'Kannada',
           sscode: 'Knda',
-          ssdesc: 'The Kannada script is used for writing the Kannada language spoken by over 35 million people in southern India. It is also used for writing Konkani, a South Indian language with over 3 million speakers, Tulu, with almost 2 million speakers, and a number of south Indian minority languages including Badaga, Kudiya and Paniya. The script is closely related to Telugu writing; both languages were written using the Old Kanarese script until the 1500s when it diverged into two distinct varieties.',
+          ssdesc: 'The Kannada script is used for writing the Kannada language spoken by over 35 million people in southern India. It is also used for writing Konkani, a South Indian language with over 3 million speakers, Tulu, with almost 2 million speakers, and a number of south Indian Living: Minor languages including Badaga, Kudiya and Paniya. The script is closely related to Telugu writing; both languages were written using the Old Kanarese script until the 1500s when it diverged into two distinct varieties.',
           omnicode: 'kannada',
           wikicode: 'Kannada_alphabet',
           font: {
             'name': 'Noto Sans Kannada',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansKannada/NotoSansKannada-Regular.otf'
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Brahmi'],
+          region: ['South Indic', 'Indic']
+        },
+        {
+          label: 'Khamti Shan',
+          value: 'KhamtiShan',
+          sscode: '',
+          ssdesc: '',
+          omnicode: '',
+          wikicode: '',
+          miscsrc: '(from <a href="https://www.unicode.org/L2/L2008/08181-n3423r.pdf">L2/08-181</a>)',
+          miscdesc: 'Khamti Shan is spoken by 50,000 people in Myanmar and India. The language has a long literary tradition which was lost as people forgot their script. In the last 5 years the script has undergone a resurgence in a new form and after a pilot literacy programme is to be taught throughout the region.',
+          font: {
+            'name': '',
+            'url': ''
+          },
+          language: ['Only Pali', 'Pali'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Mainland', 'South East Asian']
         },
         {
           label: 'Kharoshthi',
@@ -569,19 +781,27 @@ export const ScriptMixin = {
           font: {
             'name': '',
             'url': ''
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Extinct', 'Extinct: Ancient'],
+          invented: ['Derived: Aramaic'],
+          region: ['West Indic', 'Indic']
         },
         {
           label: 'Khmer (Cambodian)',
           value: 'Khmer',
           sscode: 'Khmr',
-          ssdesc: 'The Khmer script is an abugida, descended from the Brahmic script Pallava. It is used for writing Khmer, the official language of Cambodia. The script is also sometimes used for writing minority languages in Cambodia, such as Brao and Mnong.',
+          ssdesc: 'The Khmer script is an abugida, descended from the Brahmic script Pallava. It is used for writing Khmer, the official language of Cambodia. The script is also sometimes used for writing Living: Minor languages in Cambodia, such as Brao and Mnong.',
           omnicode: 'khmer',
           wikicode: 'Khmer_alphabet',
           font: {
             'name': 'Noto Sans Khmer',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifKhmer/NotoSerifKhmer-Regular.otf'
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Mainland', 'South East Asian']
         },
         {
           label: 'Khojki',
@@ -593,7 +813,29 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Khojki',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansKhojki/NotoSansKhojki-Regular.otf'
-          }
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi'],
+          region: ['West Indic', 'Indic']
+        },
+        {
+          label: 'Khom Thai',
+          value: 'KhomThai',
+          sscode: '',
+          ssdesc: '',
+          miscdesc: 'This is an old Thai script sometimes found in religious documents, and still commonly used for labeling amulets, magical pictures (yantras) and Thai tattoos. It it mainly used for writing in the Pali language. Khom Thai has clear similarities with the Khmer script of Cambodia.',
+          miscsrc: '(from <a href="http://www.skyknowledge.com/khomthai.htm"> Skyknowledge</a>)',
+          omnicode: '',
+          wikicode: '',
+          font: {
+            'name': 'Patimokkha',
+            'url': 'https://github.com/virtualvinodh/aksharamukha/blob/master/aksharamukha-front/src/statics/Patimokkha.otf'
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Mainland', 'South East Asian']
         },
         {
           label: 'Khudawadi',
@@ -605,19 +847,27 @@ export const ScriptMixin = {
           font: {
             'name': 'Nodo Sans Khudawadi',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansKhudawadi/NotoSansKhudawadi-Regular.otf'
-          }
+          },
+          language: ['Only Pali', 'Pali'],
+          status: ['Extinct', 'Extinct: Pre-Modern'],
+          invented: ['Derived: Brahmi'],
+          region: ['West Indic', 'Indic']
         },
         {
           label: 'Lao',
           value: 'Lao',
           sscode: 'Laoo',
-          ssdesc: 'The Lao script is used for writing the Lao language, and is also the official script of a number of minority languages in Laos. The Lao language is closely related to Thai; there is a considerable Lao-speaking population in Thailand who write their language with the Thai script. However, the Lao script underwent a number of reforms which caused significant divergence from the Thai script.',
+          ssdesc: 'The Lao script is used for writing the Lao language, and is also the official script of a number of Living: Minor languages in Laos. The Lao language is closely related to Thai; there is a considerable Lao-speaking population in Thailand who write their language with the Thai script. However, the Lao script underwent a number of reforms which caused significant divergence from the Thai script.',
           omnicode: 'lao',
           wikicode: 'Lao_alphabet',
           font: {
             'name': '',
             'url': ''
-          }
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Mainland', 'South East Asian']
         },
         {
           label: 'Lao (Pali)',
@@ -628,6 +878,11 @@ export const ScriptMixin = {
             'name': 'Lao Pali (Alpha)',
             'url': 'https://github.com/virtualvinodh/aksharamukha/blob/master/aksharamukha-front/src/statics/LaoPaliAlpha-Extralight.otf'
           },
+          language: ['Only Pali', 'Pali'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Mainland', 'South East Asian'],
+          miscsrc: '',
           miscdesc: 'Lao (Pali) is the extended version of the Lao script to faithfully represent Pali and Sanskrit. Lao lacks several characters that are required to accurately express the phonology of those languages (unlike its neighbhouring scripts like Thai/Khmer). Therefore, Modern Lao cannot faithfully represent Pali words, and by extension, cannot transcript religious texts faithfully. In the 1930s, an additional set of characters were proposed to support Pali/Sanskrit by filling in the missing gaps. This also allows an etymological orthography for Lao (similar to Thai. The current Lao orthography is phonemic). But the addition met with little widespread support and finally by 1975, these additional characters were mostly out of use. But there is a revived interest in the characters. '
         },
         {
@@ -640,7 +895,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Lepcha',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansLepcha-Regular.ttf'
-          }
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi'],
+          region: ['East Indic', 'Indic']
         },
         {
           label: 'Limbu',
@@ -652,19 +911,27 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Limbu',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansLimbu-Regular.ttf'
-          }
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi'],
+          region: ['North Indic', 'Indic']
         },
         {
           label: 'Malayalam',
           value: 'Malayalam',
           sscode: 'Mlym',
-          ssdesc: 'The Malayalam script is used for writing the Malayalam language, the official language of the Indian state of Kerala, and a number of minority languages spoken in India. Until the 16th century Malayalam was written in the vattezhuthu script, a Brahmic script which developed alongside Grantha writing, from which the modern Malayalam script descended.',
+          ssdesc: 'The Malayalam script is used for writing the Malayalam language, the official language of the Indian state of Kerala, and a number of Living: Minor languages spoken in India. Until the 16th century Malayalam was written in the vattezhuthu script, a Brahmic script which developed alongside Grantha writing, from which the modern Malayalam script descended.',
           omnicode: 'malayalam',
           wikicode: 'Malayalam_script',
           font: {
             'name': 'Noto Sans Malayalam',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansMalayalam/NotoSansMalayalam-Regular.otf'
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South Indic', 'Indic']
         },
         {
           label: 'Mahajani',
@@ -676,7 +943,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Mahajani',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansMahajani/NotoSansMahajani-Regular.otf'
-          }
+          },
+          language: ['Others'],
+          status: ['Extinct', 'Extinct: Pre-Modern'],
+          invented: ['Derived: Brahmi'],
+          region: ['North Indic', 'Indic']
         },
         {
           label: 'Meetei Mayek (Manipuri)',
@@ -688,7 +959,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Meetei Mayek',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansMeeteiMayek-Regular.ttf'
-          }
+          },
+          language: ['Only Pali'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi'],
+          region: ['East Indic', 'Indic']
         },
         {
           label: 'Modi',
@@ -700,7 +975,28 @@ export const ScriptMixin = {
           font: {
             'name': 'Modi',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansModi/NotoSansModi-Regular.otf'
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Extinct', 'Extinct: Pre-Modern'],
+          invented: ['Derived: Brahmi'],
+          region: ['North Indic', 'Indic']
+        },
+        {
+          label: 'Mon',
+          value: 'Mon',
+          sscode: '',
+          ssdesc: '',
+          omnicode: 'mon',
+          miscsrc: '(from Omniglot)',
+          miscdesc: 'Mon is an Austroasiatic language spoken in parts of Myanmar/Burma and Thailand. In 2004 there were 850,000 speakers, mainly in Mon State, and also in the Tanintharyi Region and Kayin State in southern Myanmar.',
+          font: {
+            'name': '',
+            'url': ''
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Mainland', 'South East Asian']
         },
         {
           label: 'Multani',
@@ -712,7 +1008,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Multani',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansMultani/NotoSansMultani-Regular.otf'
-          }
+          },
+          language: ['Others'],
+          status: ['Extinct', 'Extinct: Pre-Modern'],
+          invented: ['Derived: Brahmi'],
+          region: ['West Indic', 'Indic']
         },
         {
           label: 'Newa (Nepal Bhasa)',
@@ -724,7 +1024,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Newa',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansNewa/NotoSansNewa-Regular.otf'
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi'],
+          region: ['North Indic', 'Indic']
         },
         {
           label: 'Old Persian',
@@ -736,19 +1040,27 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Old Persian',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansOldPersian/NotoSansOldPersian-Regular.otf'
-          }
+          },
+          language: ['Others'],
+          status: ['Extinct', 'Extinct: Ancient'],
+          invented: ['Derived: Cuneiform'],
+          region: ['West Asian']
         },
         {
           label: 'Oriya',
           value: 'Oriya',
           sscode: 'Orya',
-          ssdesc: 'The Odia (formerly Oriya) script is used for writing the Odia language, the official language of the Indian state of Orissa, as well as a number of Dravidian and Munda minority languages spoken in that region. It is also used in Orissa for transcribing Sanskrit texts. The earliest inscriptions in the Odia language have been dated to 1051 AD, written in the Kalinga script from which modern Odia writing is derived.',
+          ssdesc: 'The Odia (formerly Oriya) script is used for writing the Odia language, the official language of the Indian state of Orissa, as well as a number of Dravidian and Munda Living: Minor languages spoken in that region. It is also used in Orissa for transcribing Sanskrit texts. The earliest inscriptions in the Odia language have been dated to 1051 AD, written in the Kalinga script from which modern Odia writing is derived.',
           omnicode: 'oriya',
           wikicode: 'Odia_alphabet',
           font: {
             'name': '',
             'url': ''
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Brahmi'],
+          region: ['East Indic', 'Indic']
         },
         {
           label: 'PhagsPa',
@@ -760,7 +1072,11 @@ export const ScriptMixin = {
           font: {
             'name': '',
             'url': ''
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Extinct', 'Extinct: Medieval'],
+          invented: ['Derived: Brahmi'],
+          region: ['Central Asian']
         },
         {
           label: 'Punjabi (Gurmukhi)',
@@ -772,7 +1088,11 @@ export const ScriptMixin = {
           font: {
             'name': '',
             'url': ''
-          }
+          },
+          language: ['Only Pali', 'Pali'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Brahmi'],
+          region: ['West Indic', 'Indic']
         },
         {
           label: 'Ranjana (Lantsa)',
@@ -784,7 +1104,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Ranjana Unicode',
             'url': 'https://github.com/virtualvinodh/aksharamukha/blob/master/aksharamukha-front/src/statics/RanjanaUNICODE1.0.TTF'
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi'],
+          region: ['North Indic', 'Indic']
         },
         {
           label: 'Rejang',
@@ -796,7 +1120,27 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Rejang',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansRejang/NotoSansRejang-Regular.otf'
-          }
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Insular', 'South East Asian']
+        },
+        {
+          label: 'Rohingya (Hanifi)',
+          value: 'HanifiRohingya',
+          sscode: 'Rohg',
+          ssdesc: 'Hanifi Rohingya is one of four scripts used for writing the Rohingya language, spoken by about 1,500,000 people, mostly in Myanmar. There are also significant Rohingya-speaking refugee communities in Bangladesh and Thailand. The Rohingya language has been written in the  Arabic script for over 200 years, during which time it has also been written in  Myanmar and a modified Latin script known as Rohingyalish. Around 1960, Rohingya scholars began to see a need for a unique writing system which reflected their own language, and Molana Hanif created the Hanifi Rohingya script.',
+          omnicode: 'rohingya',
+          wikicode: 'Hanifi_Rohingya_script',
+          font: {
+            'name': 'Noto Sans HanifiRohingya',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansHanifiRohingya/NotoSansHanifiRohingya-Regular.otf'
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Invented'],
+          region: ['South East Asian: Mainland', 'South East Asian']
         },
         {
           label: 'Santali (Ol Chiki)',
@@ -808,7 +1152,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Old Chiki',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansOlChiki/NotoSansOlChiki-Regular.otf'
-          }
+          },
+          language: ['Only Pali', 'Pali'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Invented'],
+          region: ['East Indic', 'Indic']
         },
         {
           label: 'Saurashtra',
@@ -820,7 +1168,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Saurashtra',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSaurashtra/NotoSansSaurashtra-Regular.otf'
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Invented'],
+          region: ['South Indic', 'Indic']
         },
         {
           label: 'Siddham',
@@ -832,7 +1184,29 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Siddham',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSiddham/NotoSansSiddham-Regular.otf'
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi'],
+          region: ['East Asian']
+        },
+        {
+          label: 'Shan',
+          value: 'Shan',
+          sscode: '',
+          ssdesc: '',
+          omnicode: 'shan',
+          wikicode: 'Shan_language#Alphabet',
+          font: {
+            'name': '',
+            'url': ''
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Mainland', 'South East Asian'],
+          miscsrc: '(from Omniglot)',
+          miscdesc: 'Shan is a Tai language spoken by about 3.3 million people in the Shan States of Burma in the northeast of the country, and also in parts of northern Thailand and in the Xishuangbanna (Sipsongpanna) Dai Autonomous Prefecture of Yunnan province in southwestern China.The Shan script is used in Burma to write Shan, although few Shan speakers can read and write in the Shan script.'
         },
         {
           label: 'Sharada',
@@ -844,7 +1218,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Sharada',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSharada/NotoSansSharada-Regular.otf'
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi'],
+          region: ['North Indic', 'Indic']
         },
         // {
         //   label: 'Siddham',
@@ -860,7 +1238,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Sinhala',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSinhala/NotoSansSinhala-Regular.otf'
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South Indic', 'Indic']
         },
         {
           label: 'Sora Sompeng',
@@ -872,7 +1254,27 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans SoraSompeng',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSoraSompeng/NotoSansSoraSompeng-Regular.otf'
-          }
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Invented'],
+          region: ['East Indic', 'Indic']
+        },
+        {
+          label: 'Soyombo',
+          value: 'Soyombo',
+          sscode: 'Soyo',
+          ssdesc: 'The Soyombo script was developed by the Mongolian monk and scholar Bogdo Zanabazar in 1686 to write Mongolian. According to legend, Zanabazar based the script on letter-like signs he saw in the sky one night. Other theories suggest that the shapes of the letters may have been based on the Ranjana script of Nepal. Soyombo can also be used to write Tibetan and Sanskrit.',
+          omnicode: 'soyombo',
+          wikicode: 'Soyombo_script',
+          font: {
+            'name': 'Noto Sans Soyombo',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSoyombo/NotoSansSoyombo-Regular.otf'
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Extinct', 'Extinct: Medieval'],
+          invented: ['Derived: Brahmi'],
+          region: ['Central Asian']
         },
         {
           label: 'Sundanese',
@@ -884,7 +1286,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Sundanese',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansSundanese-Regular.ttf'
-          }
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Insular', 'South East Asian']
         },
         {
           label: 'Syloti Nagari',
@@ -896,7 +1302,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans SylotiNagri',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSylotiNagri/NotoSansSylotiNagri-Regular.otf'
-          }
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi'],
+          region: ['East Indic', 'Indic']
         },
         {
           label: 'Tagbanwa',
@@ -908,7 +1318,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Tagbanwa',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansTagbanwa-Regular.ttf'
-          }
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Insular', 'South East Asian']
         },
         {
           label: 'Tagalog',
@@ -920,7 +1334,29 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Tagalog',
             'url': 'Noto Sans Tagalog'
-          }
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor', 'Derived: Pallava'],
+          invented: ['Derived: Brahmi'],
+          region: ['South East Asian: Insular', 'South East Asian']
+        },
+        {
+          label: 'Tai Laing',
+          value: 'TaiLaing',
+          sscode: '',
+          ssdesc: '',
+          omnicode: '',
+          wikicode: '',
+          miscsrc: '(from <a href="https://unicode.org/L2/L2011/11130-mymr-extras.pdf">L2/11-130</a>)',
+          miscdesc: 'The Tai Laing are a language group of about 100,000 speakers living along the Irrawaddy River in Myanmar. The writing system is part of their history that has not completely died out and there is interest in reviving it. While the script is not taught formally in schools, it is taught during school breaks.',
+          font: {
+            'name': '',
+            'url': ''
+          },
+          language: ['Only Pali', 'Pali'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Mainland', 'South East Asian']
         },
         {
           label: 'Tai Tham (Lanna)',
@@ -931,9 +1367,13 @@ export const ScriptMixin = {
           omnicode: 'lanna',
           wikicode: 'Tai_Tham_script',
           font: {
-            'name': 'Lamphun',
-            'url': 'http://wrdingham.co.uk/lanna/renderer_test.htm#fonts'
-          }
+            'name': 'Pali Tilok',
+            'url': 'https://github.com/virtualvinodh/aksharamukha/blob/master/aksharamukha-front/src/statics/Pali_Tilok.ttf'
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Mainland', 'South East Asian']
         },
         {
           label: 'Takri',
@@ -945,7 +1385,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Takri',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansTakri/NotoSansTakri-Regular.otf'
-          }
+          },
+          language: ['Only Pali', 'Pali'],
+          status: ['Extinct', 'Extinct: Pre-Modern'],
+          invented: ['Derived: Brahmi'],
+          region: ['West Indic', 'Indic']
         },
         {
           label: 'Tamil',
@@ -957,20 +1401,29 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Tamil',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansTamil/NotoSansTamil-Regular.otf'
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South Indic', 'Indic']
         },
         {
-          label: 'Tamil (with full Grantha)',
+          label: 'Tamil (Extended)',
           value: 'TamilGrantha',
           sscode: '',
           ssdesc: '',
-          miscdesc: 'Tamil (with full Grantha) represents the attempts to use the full complimentary set of Grantha letters to fill the gaps in the Tamil script (as compared to the pan-Indic system). Modern Tamil only adopts /ja/, /śa/, /ṣa/, /ha/ and the compound /śrī/ from Grantha into its character reportoire. This was probably done instead of using superscript numerals to increase the readability of the text (and the possible wide-spread familiarity with Grantha script few decades ago).',
+          miscsrc: '',
+          miscdesc: 'Tamil (Extended) represents the attempts to use the full complimentary set of Grantha letters to fill the gaps in the Tamil script (as compared to the pan-Indic system). Modern Tamil only adopts /ja/, /śa/, /ṣa/, /ha/ and the compound /śrī/ from Grantha into its character reportoire. This was probably done instead of using superscript numerals to increase the readability of the text (and the possible wide-spread familiarity with Grantha script few decades ago).',
           omnicode: '',
           wikicode: '',
           font: {
             'name': 'e-Grantamil',
             'url': 'http://virtualvinodh.com/download/e-Grantamil.ttf'
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South Indic', 'Indic']
         },
         {
           label: 'Tamil Brahmi',
@@ -983,19 +1436,27 @@ export const ScriptMixin = {
           font: {
             'name': '',
             'url': ''
-          }
+          },
+          language: ['Others'],
+          status: ['Extinct', 'Extinct: Ancient'],
+          invented: ['Derived: Brahmi'],
+          region: ['South Indic', 'Indic']
         },
         {
           label: 'Telugu',
           value: 'Telugu',
           sscode: 'Telu',
-          ssdesc: 'The Telugu script is used for writing the Telugu language, a Dravidian language spoken by almost 70,000,000 people in South India. The Telugu script is also used for writing a number of minority languages in Southern India, including Chenchu, Savara and Manna-Dora to which the Telugu language is related. The script is closely related to the Kannada script.',
+          ssdesc: 'The Telugu script is used for writing the Telugu language, a Dravidian language spoken by almost 70,000,000 people in South India. The Telugu script is also used for writing a number of Living: Minor languages in Southern India, including Chenchu, Savara and Manna-Dora to which the Telugu language is related. The script is closely related to the Kannada script.',
           omnicode: 'telugu',
           wikicode: 'Telugu_script',
           font: {
             'name': 'Lohit Telugu',
             'url': 'https://pagure.io/lohit/tree/master'
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Brahmi'],
+          region: ['South Indic', 'Indic']
         },
         // Font not working
         // {
@@ -1012,19 +1473,27 @@ export const ScriptMixin = {
           font: {
             'name': '',
             'url': ''
-          }
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Perso-Arabic'],
+          region: ['South Asian: Other']
         },
         {
           label: 'Thai',
           value: 'Thai',
           sscode: 'Thai',
-          ssdesc: 'The Thai script is used primarily for writing the Thai language, as well as Northern Thai, Northeastern Thai, Southern Thai, and Thai Song, which are separate languages. It is also used to write a number of minority languages in Thailand, Laos and China, as well as Pali, which is widely used in Buddhist temples and monasteries. Both the Thai language and script are closely related to Laotian. The script is of Indic origin, derived from Old Khmer.',
+          ssdesc: 'The Thai script is used primarily for writing the Thai language, as well as Northern Thai, Northeastern Thai, Southern Thai, and Thai Song, which are separate languages. It is also used to write a number of Living: Minor languages in Thailand, Laos and China, as well as Pali, which is widely used in Buddhist temples and monasteries. Both the Thai language and script are closely related to Laotian. The script is of Indic origin, derived from Old Khmer.',
           omnicode: 'thai',
           wikicode: 'Thai_alphabet',
           font: {
             'name': '',
             'url': ''
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Mainland', 'South East Asian']
         },
         {
           label: 'Tibetan',
@@ -1036,7 +1505,11 @@ export const ScriptMixin = {
           font: {
             'name': '',
             'url': ''
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Brahmi'],
+          region: ['Central Asian']
         },
         {
           label: 'Tirhuta (Maithili)',
@@ -1048,7 +1521,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Mithila Uni',
             'url': 'http://vedicastrology.wikidot.com/local--files/mithilakshara-font/MithilaUni.ttf'
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi'],
+          region: ['East Indic', 'Indic']
         },
         {
           label: 'Urdu',
@@ -1061,7 +1538,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans Nastaliq Urdu',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoNastaliqUrdu/NotoNastaliqUrdu-Regular.otf'
-          }
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Perso-Arabic'],
+          region: ['North Indic', 'Indic']
         },
         {
           label: 'Vatteluttu',
@@ -1073,10 +1554,14 @@ export const ScriptMixin = {
             'name': 'e-Vatteluttu',
             'url': 'https://github.com/virtualvinodh/aksharamukha/blob/master/aksharamukha-front/src/statics/e-VatteluttuOT.ttf'
           },
+          language: ['Others'],
+          status: ['Extinct', 'Extinct: Medieval'],
+          invented: ['Derived: Brahmi'],
+          region: ['South Indic', 'Indic'],
           wikidesc: 'The Vaṭṭeḻuttu, also spelled Vattezhutthu (literally "Round Script") was an abugida writing system in southern India and Sri Lanka in the latter half of the 1st millennium AD. Vatteluttu was the common script for writing various forms of Tamil language in Pandya-Chera region till the 9th century and after that time it came to be replaced by the present-day Tamil script everywhere except in Kerala'
         },
         {
-          label: 'Warang Citi (Varang Kshiti)',
+          label: 'Warang Citi',
           value: 'WarangCiti',
           sscode: 'Wara',
           ssdesc: 'The Warang Citi script is used for writing the Ho language spoken largely in the state of Jharkhand in eastern India. The script displays a number of similarities with other scripts including Latin and Brahmi; scholars generally believe it is the result of borrowing into it. ',
@@ -1085,7 +1570,11 @@ export const ScriptMixin = {
           font: {
             'name': 'Noto Sans WarangCiti',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansWarangCiti/NotoSansWarangCiti-Regular.otf'
-          }
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Invented'],
+          region: ['East Indic', 'Indic']
         },
         {
           label: 'Zanabazar Square',
@@ -1095,15 +1584,23 @@ export const ScriptMixin = {
           wikicode: 'Horizontal_square_script',
           omnicode: 'mhss',
           font: {
-            'name': 'Babel Stone Zanabazar',
-            'url': 'http://www.babelstone.co.uk/Fonts/Download/BabelStoneZanabazar.ttf'
-          }
+            'name': 'Noto Sans ZanabazarSquare',
+            'url': 'https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/unhinted/otf/NotoSansZanabazarSquare'
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Extinct', 'Extinct: Medieval'],
+          invented: ['Derived: Brahmi'],
+          region: ['Central Asian']
         }
       ],
       scriptsLatin: [
         {
           label: 'Roman (Harvard-Kyoto)',
           value: 'HK'
+        },
+        {
+          label: 'Roman (Readable)',
+          value: 'RomanReadable'
         },
         {
           label: 'Roman (ITRANS)',
@@ -1114,6 +1611,14 @@ export const ScriptMixin = {
           value: 'IAST'
         },
         {
+          label: 'Roman (IAST: Pāḷi)',
+          value: 'IASTPali'
+        },
+        {
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Latin'],
+          region: ['Eurasia'],
           label: 'Roman (IPA)',
           value: 'IPA',
           sscode: '',
@@ -1140,6 +1645,10 @@ export const ScriptMixin = {
           value: 'Velthuis'
         },
         {
+          language: ['Others'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Greek'],
+          region: ['Eurasia'],
           label: 'Cyrillic (Russian)',
           value: 'RussianCyrillic',
           sscode: '',
@@ -1172,12 +1681,20 @@ export const ScriptMixin = {
           value: 'IAST'
         },
         {
+          label: 'IAST (Pāḷi)',
+          value: 'IASTPali'
+        },
+        {
           label: 'ISO',
           value: 'ISO'
         },
         {
           label: 'Titus',
           value: 'Titus'
+        },
+        {
+          label: 'Roman (Readable)',
+          value: 'RomanReadable'
         }
       ],
       scriptsIME: [
@@ -1198,7 +1715,11 @@ export const ScriptMixin = {
           value: 'Devanagari'
         }
       ],
-      indicSubset: ['Khmer', 'Burmese', 'Lao', 'Thai', 'Balinese', 'Javanese', 'Tibetan', 'LaoPali', 'TaiTham', 'Cham', 'Lepcha', 'Ahom', 'ZanabazarSquare']
+      Region: ['South Asia', 'East Asian', 'South East Asia'],
+      RegionExpand: ['Iran', 'India', 'Sri Lanka', 'Burmese', 'Philippines', 'Indonesia', 'Japan'],
+      Status: ['Living', 'Extinct'],
+      StatusExpand: ['Extinct', 'Living: Major', 'Living: Minor'],
+      indicSubset: ['Shan', 'Khmer', 'Burmese', 'Lao', 'Thai', 'Balinese', 'Javanese', 'Tibetan', 'LaoPali', 'TaiTham', 'Cham', 'Lepcha', 'Ahom', 'ZanabazarSquare']
     }
   },
   computed: {
@@ -1231,6 +1752,46 @@ export const ScriptMixin = {
     }
   },
   methods: {
+    downloadHTML: function (content) {
+      var warning = '<span class="printhide">Proper display of the some of the text below may depend on webfonts, which in turn require being connected to the internet<br/> </span> <br/>'
+
+      var doc = '<html><head><meta charset="utf-8"/><link rel="stylesheet" type="text/css" href="http://www.virtualvinodh.com/aksharamkh/fonts.css"></head><body>' + warning + content + '</span></body></html>'
+
+      var blob = ''
+      const e = document.createEvent('MouseEvents')
+      const a = document.createElement('a')
+
+      a.download = 'text.html'
+
+      blob = new Blob([doc], {type: 'plain/html'})
+      a.dataset.downloadurl = ['text/html', a.download, a.href].join(':')
+
+      console.log(blob)
+
+      a.href = window.URL.createObjectURL(blob)
+      e.initEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
+      a.dispatchEvent(e)
+    },
+    getResultPost: function (url, data = {}) {
+      return new Promise(resolve => {
+        this.$axios.post(url, data)
+          .then(function (response) {
+            resolve(response)
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      })
+    },
+    readFile: function (url) {
+      return new Promise(resolve => {
+        var reader = new FileReader()
+        reader.onload = function () {
+          resolve(reader.result)
+        }
+        reader.readAsDataURL(url)
+      })
+    },
     compareObjects: function (a, b) {
       if (a.label < b.label) {
         return -1
@@ -1250,11 +1811,22 @@ export const ScriptMixin = {
       }
       return { label: '', value: '' }
     },
+    getScriptObjectLabel: function (label) {
+      for (const s of this.scripts) {
+        if (s.label === label) {
+          return s
+        }
+      }
+      if (name === 'autodetect') {
+        return this.autodetect[0]
+      }
+      return { label: '', value: '' }
+    },
     getDescription: function (script, link = true) {
       var desc
       var omniext
 
-      if (script.value === 'Sundanese') {
+      if (script.value === 'Sundanese' || script.value === 'Ariyaka') {
         omniext = '.php'
       } else {
         omniext = '.htm'
@@ -1262,6 +1834,14 @@ export const ScriptMixin = {
 
       if (typeof script.miscdesc === 'string' && script.miscdesc !== '') {
         desc = script.miscdesc
+
+        if (link) {
+          desc += script.miscsrc
+        }
+
+        if (typeof script.omnicode === 'string' && script.omnicode !== '' && link) {
+          desc += ' See: <a href="https://www.omniglot.com/writing/' + script.omnicode + omniext + '" target="_blank">Omniglot<a>'
+        }
       } else if (typeof script.wikidesc === 'string' && script.wikidesc !== '') {
         desc = script.wikidesc
 
@@ -1319,6 +1899,10 @@ export const ScriptMixin = {
         return 'tamilold'
       } else if (postOptions.includes('tibetandbumed') && tgt === 'Tibetan') {
         return 'tibetandbumed'
+      } else if (postOptions.includes('TaiThamLao') && tgt === 'TaiTham') {
+        return 'taithamlao'
+      } else if (postOptions.includes('TaiKuen') && tgt === 'TaiTham') {
+        return 'taikuen'
       } else {
         return tgt.toLowerCase()
       }
@@ -1330,6 +1914,10 @@ export const ScriptMixin = {
         return 'granthagrantamil'
       } else if (preOptions.includes('LimbuDevanagariConvention') && src === 'Devanagari') {
         return 'limbudeva'
+      } else if (preOptions.includes('TaiThamLao') && src === 'TaiTham') {
+        return 'taithamlao'
+      } else if (preOptions.includes('TaiKuen') && src === 'TaiTham') {
+        return 'taikuen'
       } else {
         return src.toLowerCase()
       }

@@ -210,6 +210,9 @@ def PostFixRomanOutput(Strng,Source,Target):
     if Target == "Aksharaa":
         Strng = Strng.replace("\\a;", "\\\'")
 
+    if Target == "HanifiRohingya":
+        Strng = FixHanifiRohingya(Strng)
+
     return Strng
 
 # Fixing the Indic Ouput for the standard corrections
@@ -232,6 +235,61 @@ def FixIndicOutput(Strng,Source,Target):
 
     return Strng
 
+def FixHanifiRohingya(Strng, reverse=False):
+    consList = '(' + '|'.join(GM.CrunchSymbols(GM.Consonants, 'HanifiRohingya')+['\U00010D17', '\U00010D19']) + ')'
+    vowList = '(' + '|'.join(GM.CrunchSymbols(GM.Vowels, 'HanifiRohingya')) + ')'
+
+    vowListNotA = '(' + '|'.join(GM.CrunchSymbols(GM.Vowels, 'HanifiRohingya')[1:]) + ')'
+
+    consListLookBehind = ''.join(map(lambda x: '(?<!' + x + ')', GM.CrunchSymbols(GM.Consonants, 'HanifiRohingya')))
+
+    ## Add Urdu specific characters
+
+    if not reverse:
+        Strng = re.sub(consListLookBehind + vowList, '\U00010D00' + r'\1', Strng ) # Add Vowel Carrier
+        Strng = re.sub(consList + r'\1', r'\1' + '\U00010D27', Strng) # Add Gemination
+
+        Strng = re.sub(vowListNotA + '𐴀𐴟', r'\1' + '\U00010D17', Strng) # koi, kui etc
+        Strng = re.sub(vowListNotA + '𐴀𐴞', r'\1' + '\U00010D19', Strng) # kou etc. using the dipthong character
+
+        Strng = Strng.replace('\U00010D24\\', '\U00010D25') #swap tone 2
+        Strng = Strng.replace('\U00010D24/', '\U00010D26') #swap tone 3
+
+        Strng = Strng.replace('_', '\U00010D22') # Map Sukun
+
+    else:
+        tones = '([\U00010D24\U00010D25\U00010D26])'
+        Strng = re.sub('(\U00010D00)' + tones + vowList, r'\1\3\2', Strng) # Swap Vowel-carrier + tone + vowelsign
+        Strng = re.sub(consList + tones + vowList, r'\1\3\2', Strng) # swap cons + tone + vowel sign
+
+        Strng = re.sub(vowListNotA.replace('\U00010D00', '') + '\U00010D17' , r'\1' + '𐴀𐴟', Strng) #swap tone 2
+        Strng = re.sub(vowListNotA.replace('\U00010D00', '') +'\U00010D19', r'\1' + '𐴀𐴞' , Strng) #swap tone 3
+
+        Strng = Strng.replace('\U00010D00', '') # remove vowel carrier
+        Strng = re.sub('(.)' + '\U00010D27', r'\1\1' , Strng) # reverse gemination
+
+        Strng = Strng.replace('\U00010D25', '\U00010D24\\') #swap tone 2
+        Strng = Strng.replace('\U00010D26', '\U00010D24/') # swap tone 3
+
+        Strng = re.sub(consList + '\U00010D17' , r'\1' + '\U00010D16\u02BE', Strng) # cons + dipth.y -> y + nukta
+
+        Strng = re.sub(consList +'\U00010D19', r'\1' + '\U00010D18\u02BE', Strng) # cons + dipth.w -> v + nukta
+
+        Strng = Strng.replace('\U00010D22', '_') #remove Sukun
+
+        Strng = Strng.replace('𐴜', '𐴖') # v -> w; Archaic v is not used anyway
+
+    # Punctuation
+    if ( not reverse):
+        for x,y in zip([',','?',';'],['،','؟','؛']):
+            Strng = Strng.replace(x,y)
+    else :
+        for x,y in zip([',','?',';'],['،','؟','؛']):
+            Strng = Strng.replace(y,x)
+
+
+    return Strng
+
 def FixMasaramGondi(Strng, reverse=False):
     consList = '(' + '|'.join(GM.CrunchSymbols(GM.Consonants, 'MasaramGondi')) + ')'
 
@@ -240,12 +298,18 @@ def FixMasaramGondi(Strng, reverse=False):
         Strng = Strng.replace('𑴓𑵅𑴕','\U00011D2F') # JNYA
         Strng = Strng.replace('𑴛𑵅𑴦','\U00011D30') # TRA
 
+        Strng = re.sub(consList + '\U00011D45\U00011D26', r'\1' + '\U00011D47', Strng) # kra
+        Strng = re.sub('\U00011D26\U00011D45' + consList, '\U00011D46' + r'\1', Strng) # rka
+
         ## remove final virama when not followed by a consonant
         Strng = re.sub('\U00011D45(?!' + consList + ')' , '\U00011D44', Strng)
     else:
         Strng = Strng.replace('\U00011D2E', '𑴌𑵅𑴪') # KSSA
         Strng = Strng.replace('\U00011D2F', '𑴓𑵅𑴕') # JNYA
         Strng = Strng.replace('\U00011D30', '𑴛𑵅𑴦') # TRA
+
+        Strng = Strng.replace('\U00011D47', '\U00011D45\U00011D26',) # kra
+        Strng = Strng.replace('\U00011D46', '\U00011D26\U00011D45') # rka
 
         Strng = Strng.replace('\U00011D44','\U00011D45')
 
@@ -1202,6 +1266,8 @@ def FixAvestan(Strng, reverse=False):
         Strng = Strng.replace('𐬅', '𐬁𐬩')
 
         Strng = Strng.replace(ii, ya).replace(uu, va)
+
+        print('I am here')
 
         Strng = Strng.replace('\U00010B1D', Avestan.ConsonantMap[15]  + '\u02BF')
         Strng = Strng.replace('𐬣', Avestan.ConsonantMap[4])
