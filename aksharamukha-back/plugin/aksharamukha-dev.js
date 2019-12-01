@@ -1,5 +1,9 @@
 // require ./ScriptMixin.js
 
+// Author: Vinodh Rajan vinodh@virtualvinodh.com
+// Website: http://www.virtualvinodh.com
+// Plugin: Web plugin for http://www.aksharamukha.appspot.com
+
 // Global Data
 var apiURL = "https://aksharamukha.appspot.com/api/plugin"
 
