@@ -31,6 +31,7 @@
 
         <div class="q-body-1">The source code is released under GNU AGPL and can be found in <a href="https://github.com/virtualvinodh/aksharamukha">Github</a>. Please report any bugs or suggestions over there.</div>
 
+        <span v-if="!$q.platform.is.cordova">
         <div class="q-display-1 q-mt-lg q-mb-md">Donate</div>
         <div class="q-body-1">If you'd like to donate to support and/or appreciate the work, you can send a donation through Paypal.</div> <br/>
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
@@ -39,6 +40,7 @@
 <input type="image" src="https://www.paypalobjects.com/en_GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
 <img alt="" border="0" src="https://www.paypal.com/en_IN/i/scr/pixel.gif" width="1" height="1" />
 </form>
+</span>
 
         <div class="q-display-1 q-mt-lg q-mb-md">Feedback</div>
         <div class="q-body-1">Please send your feedback/comments to vinodh@virtualvinodh.com</div>

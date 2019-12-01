@@ -1,3 +1,4 @@
 Flask==1.0.2
 Flask-CORS==3.0.6
 Requests==2.20.1
+google-python-cloud-debugger

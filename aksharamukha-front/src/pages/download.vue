@@ -1,5 +1,7 @@
 <template>
   <q-page padding>
+    <div class="q-display-1 q-mt-lg q-mb-md">Android</div>
+    <div class="q-body-1">You can download the android wrapper for the site in the <a href="https://play.google.com/store/apps/details?id=org.cordova.quasar.aksharamukha">Play store</a>.</div>
     <div class="q-display-1 q-mt-lg q-mb-md">Docker</div>
     <div class="q-body-1">Aksharamukha is now available as a docker container. Please follow the below steps to run Aksharamukha locally in your system.</div>
     <div class="q-body-1">

@@ -2,7 +2,7 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
-        baseURL: 'http://localhost:8085/api',
+        baseURL: 'https://aksharamukha.appspot.com/api/',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -94,16 +94,13 @@ export const ScriptMixin = {
           { label: 'Use e-Grantamil encoding', value: 'egrantamil' }
         ],
         'Sinhala': [
-          { label: 'Sanskrit/Pali orthography text<br/><small><span class="sinhala">e.g. නමො භගවතෙ</span>', value: 'SinhalaPali' }
+          { label: 'Sanskrit/Pali orthography text<br/><small><span class="sinhala">e.g. නමො භගවතෙ</span></small>', value: 'SinhalaPali' }
         ],
         'Malayalam': [
           { label: 'Prakrit orthography text', value: 'MalayalamPrakrit' }
         ],
         'Siddham': [
           { label: 'Devanagari-based Siddham font', value: 'siddhammukta' }
-        ],
-        'IAST': [
-          { label: 'Pali text', value: 'IASTPali' }
         ],
         'RussianCyrillic': [
           { label: 'Pali Text', value: 'CyrillicPali' }
@@ -191,8 +188,8 @@ export const ScriptMixin = {
           { label: 'Lao Nativization<br/><small><span class="lao">ພຸທທັງ ຄັຈຈາມິ ສັພພັງ → ພຸດທັງ ຄັຈສາມິ ສັບພັງ</span></small>', value: 'LaoNative' }
         ],
         'TaiTham': [
-          { label: 'Tai Tham Lao<br/><small><span class="taitham">ᨻᩩᨴ᩠ᨵ</span> → <span class="taithamlao">ᨻᩩᨴ᩠ᨵ</span>', value: 'TaiThamLao' },
-          { label: 'Tai Kuen<br/><small><span class="taitham">ᨻᩩᨴ᩠ᨵ</span> → <span class="taikuen">ᨻᩩᨴ᩠ᨵ</span>', value: 'TaiKuen' }
+          { label: 'Tai Tham Lao<br/><small><span class="taitham">ᨻᩩᨴ᩠ᨵ</span> → <span class="taithamlao">ᨻᩩᨴ᩠ᨵ</span></small>', value: 'TaiThamLao' },
+          { label: 'Tai Kuen<br/><small><span class="taitham">ᨻᩩᨴ᩠ᨵ</span> → <span class="taikuen">ᨻᩩᨴ᩠ᨵ</span></small>', value: 'TaiKuen' }
         ],
         'Soyombo': [
           { label: 'Use Sanskrit palatals<br/><small><span class="soyombo">𑩵 𑩶 𑩷 → 𑩡 𑩢 𑩣</span></small>', value: 'SoyomboSanskritPalatals' },
@@ -231,17 +228,19 @@ export const ScriptMixin = {
           { label: 'Use e-Grantamil encoding', value: 'egrantamil' }
         ],
         'Urdu': [
-          { label: 'Remove short vowels<br/><small><span class="urdu">ہِنْدُوسْتانْ ← ہندوستان</span>', value: 'UrduRemoveShortVowels' }
+          { label: 'Remove short vowels<br/><small><span class="urdu">ہِنْدُوسْتانْ ← ہندوستان</span></small>', value: 'UrduRemoveShortVowels' }
         ],
         'IAST': [
-          { label: 'Pali Text', value: 'IASTPali' },
           { label: 'Capitalize sentences', value: 'capitalizeSentence' },
           { label: 'Anusvara to Nasal<br/><small>gaṃgā → gaṅgā</small>', value: 'NasaltoAnsvaraIASTISO' }
+        ],
+        'IASTPali': [
+          { label: 'Capitalize sentences', value: 'capitalizeSentence' }
         ],
         'RussianCyrillic': [
           { label: 'Pali Text', value: 'CyrillicPali' },
           { label: 'Capitalize sentences', value: 'capitalizeSentence' },
-          { label: 'Remove Diacritics<br/><small><span class="russiancyrillic">сам̣кр̣там̣ → самкртам</span>', value: 'removeDiacritics' }
+          { label: 'Remove Diacritics<br/><small><span class="russiancyrillic">сам̣кр̣там̣ → самкртам</span></small>', value: 'removeDiacritics' }
         ],
         'ISO': [
           { label: 'Capitalize sentences', value: 'capitalizeSentence' },
@@ -269,19 +268,19 @@ export const ScriptMixin = {
           { label: 'Sundanese historical conjuncts<br/><small><span class="sundanese">ᮊ᮪ᮙ ᮊ᮪ᮝ ᮃᮊ᮪ ᮃᮙ᮪ → ᮊᮬ ᮊᮭ ᮃᮾ ᮃᮿ</span></small>', value: 'SundaneseHistoricConjuncts' }
         ],
         'Malayalam': [
-          { label: 'Dot Reph<br/><small><span class="malayalam">ധർമ → ധൎമ</span>', value: 'dotReph' },
-          { label: 'Archaic II & AU<br/><small><span class="malayalam">ഈ കൗ → ൟ കൌ</span>', value: 'archaicAIAU' },
-          { label: 'Traditional orthography<br/><small><span class="malayalam">തു തൂ</span> → <span class="malayalamold">തു തൂ</span>', value: 'tradOrtho' },
-          { label: 'Prakrit orthography<br/><small><span class="malayalam">ബുദ്ധ → ബുംധ</span>', value: 'MalayalamPrakrit' },
-          { label: 'Dandas<br/><small><span class="malayalam">. .. → । ॥</span>', value: 'RetainMalayalamDanda' },
-          { label: 'Malayalam Numerals<br/><small><span class="malayalam">123 → ൧൨൩</span>', value: 'RetainMalayalamNumerals' }
+          { label: 'Dot Reph<br/><small><span class="malayalam">ധർമ → ധൎമ</span></small>', value: 'dotReph' },
+          { label: 'Archaic II & AU<br/><small><span class="malayalam">ഈ കൗ → ൟ കൌ</span></small>', value: 'archaicAIAU' },
+          { label: 'Traditional orthography<br/><small><span class="malayalam">തു തൂ</span> → <span class="malayalamold">തു തൂ</span></small>', value: 'tradOrtho' },
+          { label: 'Prakrit orthography<br/><small><span class="malayalam">ബുദ്ധ → ബുംധ</span></small>', value: 'MalayalamPrakrit' },
+          { label: 'Dandas<br/><small><span class="malayalam">. .. → । ॥</span></small>', value: 'RetainMalayalamDanda' },
+          { label: 'Malayalam Numerals<br/><small><span class="malayalam">123 → ൧൨൩</span></small>', value: 'RetainMalayalamNumerals' }
         ],
         'ZanabazarSquare': [
-          { label: 'Use Sanskrit palatals<br/><small><span class="zanabazarsquare">𑨣 𑨤 𑨥 → 𑨐 𑨑 𑨒</span>', value: 'ZanabazarSanskritPalatals' },
-          { label: 'Use Tsheg<br/><small><span class="zanabazarsquare">𑨝 𑨢𑨆 → 𑨝𑩁𑨢𑨆</span>', value: 'ZanzabarSpaceTsheg' },
-          { label: 'Contextual ya/ra/la/va & Repha<br/><small><span class="zanabazarsquare">𑨋𑩇𑨪 𑨋𑩇𑨫 𑨋𑩇𑨬 𑨋𑩇𑨭 𑨫𑩇𑨋 → 𑨋𑨻 𑨋𑨼 𑨋𑨽 𑨋𑨾 𑨺𑨋</span>', value: 'ZanabazarSquareContextual' },
-          { label: 'Alternate ai/au<br/><small><span class="zanabazarsquare">𑨀𑨄𑨊 𑨀𑨆𑨊 → 𑨀𑨇 𑨀𑨈</span>', value: 'ZanabazarSquareAiAu' },
-          { label: 'Mongolian final-mark<br/><small><span class="zanabazarsquare">𑨀𑨋𑨴 → 𑨀𑨋𑨳</span>', value: 'ZanabazarSquareMongolianFinal' }
+          { label: 'Use Sanskrit palatals<br/><small><span class="zanabazarsquare">𑨣 𑨤 𑨥 → 𑨐 𑨑 𑨒</span></small>', value: 'ZanabazarSanskritPalatals' },
+          { label: 'Use Tsheg<br/><small><span class="zanabazarsquare">𑨝 𑨢𑨆 → 𑨝𑩁𑨢𑨆</span></small>', value: 'ZanzabarSpaceTsheg' },
+          { label: 'Contextual ya/ra/la/va & Repha<br/><small><span class="zanabazarsquare">𑨋𑩇𑨪 𑨋𑩇𑨫 𑨋𑩇𑨬 𑨋𑩇𑨭 𑨫𑩇𑨋 → 𑨋𑨻 𑨋𑨼 𑨋𑨽 𑨋𑨾 𑨺𑨋</span></small>', value: 'ZanabazarSquareContextual' },
+          { label: 'Alternate ai/au<br/><small><span class="zanabazarsquare">𑨀𑨄𑨊 𑨀𑨆𑨊 → 𑨀𑨇 𑨀𑨈</span></small>', value: 'ZanabazarSquareAiAu' },
+          { label: 'Mongolian final-mark<br/><small><span class="zanabazarsquare">𑨀𑨋𑨴 → 𑨀𑨋𑨳</span></small>', value: 'ZanabazarSquareMongolianFinal' }
         ]
       },
       autodetect: [
@@ -1140,6 +1139,22 @@ export const ScriptMixin = {
           region: ['South East Asian: Insular', 'South East Asian']
         },
         {
+          label: 'Rohingya (Hanifi)',
+          value: 'HanifiRohingya',
+          sscode: 'Rohg',
+          ssdesc: 'Hanifi Rohingya is one of four scripts used for writing the Rohingya language, spoken by about 1,500,000 people, mostly in Myanmar. There are also significant Rohingya-speaking refugee communities in Bangladesh and Thailand. The Rohingya language has been written in the  Arabic script for over 200 years, during which time it has also been written in  Myanmar and a modified Latin script known as Rohingyalish. Around 1960, Rohingya scholars began to see a need for a unique writing system which reflected their own language, and Molana Hanif created the Hanifi Rohingya script.',
+          omnicode: 'rohingya',
+          wikicode: 'Hanifi_Rohingya_script',
+          font: {
+            'name': 'Noto Sans HanifiRohingya',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansHanifiRohingya/NotoSansHanifiRohingya-Regular.otf'
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Invented'],
+          region: ['South East Asian: Mainland', 'South East Asian']
+        },
+        {
           label: 'Santali (Ol Chiki)',
           value: 'Santali',
           sscode: 'Olck',
@@ -1608,6 +1623,10 @@ export const ScriptMixin = {
           value: 'IAST'
         },
         {
+          label: 'Roman (IAST: Pāḷi)',
+          value: 'IASTPali'
+        },
+        {
           language: ['Others'],
           status: ['Living', 'Living: Minor'],
           invented: ['Derived: Latin'],
@@ -1672,6 +1691,10 @@ export const ScriptMixin = {
         {
           label: 'IAST',
           value: 'IAST'
+        },
+        {
+          label: 'IAST (Pāḷi)',
+          value: 'IASTPali'
         },
         {
           label: 'ISO',
