@@ -64,6 +64,11 @@ if (target != 'Original') {
     if (scriptsLTR.includes(target)) {
       textsTran = textsTran.replace(/،/g, ',')
     }
+
+    if (target == "IPA") {
+      textsTran = textsTran.replace(/"̆/g, '')
+    }
+
     textsTran = JSON.parse(textsTran)
   } catch (e) {
     console.log(e)

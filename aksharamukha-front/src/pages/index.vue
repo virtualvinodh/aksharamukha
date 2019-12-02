@@ -235,6 +235,15 @@ export default {
       }
       this.$set(this, 'preOptions', this.preOptionsScript[this.inputScript])
     }
+
+    if (typeof this.$route.query.target !== 'undefined') {
+      this.outputScript = this.$route.query.target
+    }
+
+    if (typeof this.$route.query.text !== 'undefined') {
+      this.textInput = this.$route.query.text
+      this.convert()
+    }
   },
   updated: function () {
     if (window.innerWidth > document.body.clientWidth) {
