@@ -341,7 +341,7 @@
   font-feature-settings: "ss04", "kern";
 }
 .tamil {
-  font-family: "Noto Sans Tamil" !important !important
+  font-family: "Noto Sans Tamil" !important;
 }
 .tibetandbumed {
   font-family: "Tibetan Dbu Med" !important;
