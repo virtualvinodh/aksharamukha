@@ -56,7 +56,11 @@ if (src.includes('preoptions')) {
   preOptionsURL = unescape(src).split("preoptions=")[1].split("&")[0].split(',');
 }
 
-async function translit( element, ind, source ){
+async function translit( element, ind, source, targetOld, target){
+
+outputClassOld = ScriptMixin.methods.getOutputClass(targetOld, postOptionsListOld)
+outputClass = ScriptMixin.methods.getOutputClass(target, postOptionsList)
+
 if (target != 'Original') {
   textsTran = await transliterateReq(source, target, !preservePrevious, JSON.stringify(nodesListAll[ind]), postOptionsList, preOptionsList)
   var textsTranOrig = textsTran
@@ -85,6 +89,10 @@ if (target != 'Original') {
   while (node = nodes.nextNode()) {
     if (node.nodeValue.trim() != '') {
       node.nodeValue = textsTran[i]
+      if (node.parentNode.classList.length > 0 && outputClassOld !== '' ) {
+        node.parentNode.classList.remove(outputClassOld)
+      }
+      node.parentNode.classList.add(outputClass)
       i += 1
     }
   }
@@ -418,12 +426,12 @@ async function transliterate() {
       if (targetOld != "" ) {
         // console.log('removing')
         // console.log(ScriptMixin.methods.getOutputClass(targetOld, postOptionsList))
-        transContent[i].classList.remove(ScriptMixin.methods.getOutputClass(targetOld, postOptionsListOld))
+        //transContent[i].classList.remove(ScriptMixin.methods.getOutputClass(targetOld, postOptionsListOld))
       }
 
-      transContent[i].classList.add(ScriptMixin.methods.getOutputClass(target, postOptionsList))
+      //transContent[i].classList.add(ScriptMixin.methods.getOutputClass(target, postOptionsList))
 
-      await translit(transContent[i], i, source)
+      await translit(transContent[i], i, source, targetOld, target)
 
       //getResult(transContent[i], i, source, targetOld)
     }
