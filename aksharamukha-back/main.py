@@ -435,15 +435,15 @@ def convert_public():
 @app.route('/api/plugin', methods=['POST', 'GET'])
 def convert_plugin():
     source = request.json['source']
+    preoptions = request.json['preOptions']
+    #print(request.json['text'])
 
     if request.json['source'] == 'autodetect':
-        source = auto_detect(request.json['text'])
+        source = auto_detect(request.json['text'], plugin = True)
         preoptions = detect_preoptions(request.json['text'], source)
 
-    print(source)
-
     if source not in GeneralMap.Transliteration:
-        text = convert(source, request.json['target'], request.json['text'], request.json['nativize'], request.json['preOptions'], request.json['postOptions'])
+        text = convert(source, request.json['target'], request.json['text'], request.json['nativize'], preoptions, request.json['postOptions'])
     else:
         text = request.json['text']
 

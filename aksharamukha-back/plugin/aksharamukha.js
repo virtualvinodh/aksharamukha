@@ -2062,7 +2062,7 @@ if (src.includes('preoptions')) {
 }
 async function translit(element, ind, source) {
     if (target != 'Original') {
-        textsTran = await transliterateReq(source, target, preservePrevious, JSON.stringify(nodesListAll[ind]), postOptionsList, preOptionsList)
+        textsTran = await transliterateReq(source, target, !preservePrevious, JSON.stringify(nodesListAll[ind]), postOptionsList, preOptionsList)
         var textsTranOrig = textsTran
         try {
             if (scriptsLTR.includes(target)) {
@@ -2378,5 +2378,5 @@ function optionsToggle() {
         button.innerHTML = 'Show options'
     }
 }
-window.onload = appendTool
+window.addEventListener('load', appendTool)
 console.log('Aksharamukha plugin is loaded')

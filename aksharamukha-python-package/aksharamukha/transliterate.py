@@ -30,7 +30,7 @@ def unique_everseen(iterable, key=None):
                 seen_add(k)
                 yield element
 
-def auto_detect(text):
+def auto_detect(text, plugin = False):
     scripts = []
 
     for uchar in text:
@@ -43,17 +43,29 @@ def auto_detect(text):
     counts = Counter(scripts)
     script_percent = []
 
-    # print(counts)
-
     for script, count  in counts.items():
         percent = count/len(scripts) * 100
         script_percent.append((percent, script))
 
-    if len(script_percent) > 0:
-        script = sorted(script_percent)[-1][1]
-    else:
-        script = ''
+    #print(sorted(script_percent))
 
+    if not plugin:
+        if len(script_percent) > 0:
+            script = sorted(script_percent)[-1][1]
+        else:
+            script = ''
+    else:
+        #print('here')
+        if len(script_percent) > 0:
+            if sorted(script_percent)[-1][1] == 'latin':
+                script = sorted(script_percent)[-2][1]
+            else:
+                script = sorted(script_percent)[-1][1]
+        else:
+            script = ''
+
+    #print('the script is')
+    #print(script)
     inputScript = script[0].upper() + script[1:]
 
     laoPali = ['ຆ', 'ຉ', 'ຌ', 'ຎ', 'ຏ', 'ຐ', 'ຑ', 'ຒ', 'ຓ', 'ຘ', 'ຠ', 'ຨ', 'ຩ', 'ຬ', '຺']
