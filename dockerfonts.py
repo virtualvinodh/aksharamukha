@@ -18,10 +18,10 @@ for i, font in enumerate(fonts[:]):
 
   print('Downloading ' + filename + ' ' + str(i+1))
 
-  '''r = requests.get(font)
+  r = requests.get(font)
 
   with open('./aksharamukha-fonts/' + filename, 'wb') as f:
-    f.write(r.content)'''
+    f.write(r.content)
 
 with open('./aksharamukha-front/src/statics/fontsdocker.css', 'w') as f:
     f.write(content)

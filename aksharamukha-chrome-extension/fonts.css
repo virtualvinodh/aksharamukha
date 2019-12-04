@@ -1,0 +1,608 @@
+@font-face {
+  font-family: 'Noto Sans Tamil';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansTamil/NotoSansTamil-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Saurashtra';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSaurashtra/NotoSansSaurashtra-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Serif Bali';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifBalinese/NotoSerifBalinese-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Serif Dogra';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifDogra/NotoSerifDogra-Regular.otf')
+}
+@font-face {
+  font-family: 'e-Grantamil';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/e-Grantamil.ttf')
+}
+@font-face {
+  font-family: 'Noto Sans Javanese';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansJavanese/NotoSansJavanese-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans HanifiRohingya';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansHanifiRohingya/NotoSansHanifiRohingya-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Khojki';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansKhojki/NotoSansKhojki-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Avestan';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansAvestan/NotoSansAvestan-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Buginese';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansBuginese/NotoSansBuginese-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Tagalog';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansTagalog/NotoSansTagalog-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Malayalam';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansMalayalam/NotoSansMalayalam-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Tagbanwa';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansTagbanwa/NotoSansTagbanwa-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Sundanese';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSundanese/NotoSansSundanese-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Cham';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansCham/NotoSansCham-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Chakma';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansChakma/NotoSansChakma-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Telugu';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/Lohit-Telugu.ttf')
+}
+@font-face {
+  font-family: 'Noto Sans Batak';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansBatak/NotoSansBatak-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Lepcha';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansLepcha/NotoSansLepcha-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Limbu';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansLimbu/NotoSansLimbu-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Meetei Mayek';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansMeeteiMayek/NotoSansMeeteiMayek-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Nastaliq Urdu';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoNastaliqUrdu/NotoNastaliqUrdu-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Serif Gujarati';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifGujarati/NotoSerifGujarati-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Khmer';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifKhmer/NotoSerifKhmer-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans OldPersian';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansOldPersian/NotoSansOldPersian-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Sinhala';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSinhala/NotoSansSinhala-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Kannada';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansKannada/NotoSansKannada-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Devanagari';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansDevanagari/NotoSansDevanagari-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans GunjalaGondi';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansGunjalaGondi/NotoSansGunjalaGondi-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans MasaramGondi';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansMasaramGondi/NotoSansMasaramGondi-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Tai Tham';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansTaiTham-Regular.ttf')
+}
+@font-face {
+  font-family: 'Noto Sans Grantha2';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansGrantha/NotoSansGrantha-Regular.otf')
+}
+@font-face {
+  font-family: 'Muktamsiddham';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/Muktamsiddham.otf')
+}
+@font-face {
+  font-family: 'MuktamsiddhamG';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/MuktamsiddhamG.ttf')
+}
+@font-face {
+  font-family: 'ApDevaSiddham';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/ApDevaSiddham.ttf')
+}
+@font-face {
+  font-family: 'Nepal2';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/Nepal-lipi2.woff')
+}
+@font-face {
+  font-family: 'BabelStoneZanabazar';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansZanabazarSquare/NotoSansZanabazarSquare-Regular.otf')
+}
+@font-face {
+  font-family: 'Adinatha Tamil Brahmi';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/AdinathaTamilBrahmi2.otf')
+}
+@font-face {
+  font-family: 'Kharoshthi Ka';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/ka-khar.otf')
+}
+@font-face {
+  font-family: 'Meera';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/Meera-Regular.ttf')
+}
+@font-face {
+  font-family: 'Lao Pali';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/Lanexang_Mon4.otf')
+}
+@font-face {
+  font-family: 'MithilaUni';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/MithilaUni.ttf')
+}
+@font-face {
+  font-family: 'e-Vatteluttu';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/e-VatteluttuOT.ttf')
+}
+@font-face {
+  font-family: 'e-Pandya';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/e-Pandya.ttf')
+}
+@font-face {
+  font-family: 'JMYZK--LZT Lantsa';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/JMYZK--LZT.ttf')
+}
+@font-face {
+  font-family: 'JMYZK--WDT Wartu';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/JMYZK--WDT.ttf')
+}
+@font-face {
+  font-family: 'PaliTilok';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/Pali_Tilok.ttf')
+}
+@font-face {
+  font-family: 'Lamphun';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/Pali_Khottabun.ttf')
+}
+@font-face {
+  font-family: 'Tibetan Dbu Med';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/Qomolangma-Betsu.ttf')
+}
+@font-face {
+  font-family: 'Patimokkha';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/Patimokkha.ttf')
+}
+@font-face {
+  font-family: 'Ariyaka';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/ariyaka.TTF')
+}
+@font-face {
+  font-family: 'Ariyaka';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/ariyaka.TTF')
+}
+@font-face {
+  font-family: 'Mukta Malar Regular';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/MuktaMalar-Regular.ttf')
+}
+@font-face {
+  font-family: 'A Tai Tham KH New';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/A-Tai-Tham-KH-New-V2.ttf')
+}
+@font-face {
+  font-family: 'Noto Sans Modi';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansModi/NotoSansModi-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Multani';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansMultani/NotoSansMultani-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans SoraSompeng';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSoraSompeng/NotoSansSoraSompeng-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Mahajani';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansMahajani/NotoSansMahajani-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Kaithi';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansKaithi/NotoSansKaithi-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Tirhuta';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansTirhuta/NotoSansTirhuta-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Takri';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansTakri/NotoSansTakri-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans SylotiNagri';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSylotiNagri/NotoSansSylotiNagri-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Newa';
+  src: url('https://cdn.jsdelivr.net/gh/googlefonts/noto-fonts/phaseIII_only/unhinted/otf/NotoSansNewa/NotoSansNewa-Regular.otf');
+}
+@font-face {
+  font-family: 'Noto Sans Sharada';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSharada/NotoSansSharada-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Bhaiksuki';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansBhaiksuki/NotoSansBhaiksuki-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Khudawadi';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansKhudawadi/NotoSansKhudawadi-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Serif Ahom';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifAhom/NotoSerifAhom-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Siddham';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSiddham/NotoSansSiddham-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Brahmi';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansBrahmi/NotoSansBrahmi-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Ol Chiki';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansOlChiki/NotoSansOlChiki-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Rejang';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansRejang/NotoSansRejang-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Buhid';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansBuhid/NotoSansBuhid-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Hanunoo';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansHanunoo/NotoSansHanunoo-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans WarangCiti';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansWarangCiti/NotoSansWarangCiti-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans PhagsPa';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansPhagsPa/NotoSansPhagsPa-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Kharoshthi';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansKharoshthi/NotoSansKharoshthi-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Regular';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/hinted/ttf/NotoSans/NotoSans-Regular.ttf')
+}
+
+@font-face {
+  font-family: 'RanjanaUnicode';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/RanjanaUNICODE1.0.TTF')
+
+}
+@font-face {
+  font-family: 'Noto Sans Brahmi';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansBrahmi/NotoSansBrahmi-Regular.otf')
+}
+
+@font-face {
+  font-family: 'Noto Sans Soyombo';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSoyombo/NotoSansSoyombo-Regular.otf')
+}
+
+.soyombo {
+  font-family: 'Noto Sans Soyombo' !important;
+  font-size: 130%;
+}
+
+.russiancyrillic {
+  font-family: 'Noto Sans Regular' !important;
+}
+
+.ariyaka {
+  font-family: 'Ariyaka' !important;
+  line-height: 1.5em;
+}
+
+.tamilold {
+  font-family: "Mukta Malar Regular" !important;
+  font-feature-settings: "ss04", "kern";
+}
+.tamil {
+  font-family: "Noto Sans Tamil" !important !important
+}
+.tibetandbumed {
+  font-family: "Tibetan Dbu Med" !important;
+  line-height: 2.3em;
+}
+.buhid {
+  font-family: "Noto Sans Buhid" !important
+}
+.rejang {
+  font-family: "Noto Sans Rejang" !important
+}
+.hanunoo {
+  font-family: "Noto Sans Hanunoo" !important
+}
+.saurashtra {
+  font-family: "Noto Sans Saurashtra" !important
+}
+.sorasompeng {
+  font-family: "Noto Sans SoraSompeng" !important
+}
+.warangciti {
+  font-family: "Noto Sans WarangCiti" !important
+}
+.balinese {
+  font-family: "Noto Serif Bali" !important
+}
+.kannada {
+  font-family: "Noto Sans Kannada" !important
+}
+.javanese {
+  font-family: "Noto Sans Javanese", "Javanese Text" !important;
+}
+.avestan {
+  font-family: "Noto Sans Avestan" !important;
+  direction: rtl;
+}
+.buginese {
+  font-family: "Noto Sans Buginese" !important
+}
+.sinhala {
+  font-family: "Noto Sans Sinhala" !important
+}
+.dogra {
+  font-family: "Noto Serif Dogra" !important
+}
+.tagalog {
+  font-family: "Noto Sans Tagalog" !important
+}
+.tagbanwa {
+  font-family: "Noto Sans Tagbanwa" !important;
+  writing-mode: bt-lr;
+
+}
+.sundanese {
+  font-family: "Noto Sans Sundanese" !important
+}
+.cham {
+  font-family: "Noto Sans Cham" !important
+}
+
+.gunjalagondi {
+  font-family: "Noto Sans GunjalaGondi" !important
+}
+
+.masaramgondi {
+  font-family: "Noto Sans MasaramGondi" !important
+}
+
+.malayalam {
+  font-family: "Noto Sans Malayalam" !important
+}
+.malayalamold {
+  font-family: "Meera" !important;
+  font-size:130%;
+  line-height:125%;
+
+}
+.chakma {
+  font-family: "Noto Sans Chakma" !important
+}
+.lepcha {
+  font-family: "Noto Sans Lepcha" !important
+}
+.limbu {
+  font-family: "Noto Sans Limbu" !important
+}
+.batakkaro {
+  font-family: "Noto Sans Batak" !important
+}
+.batakmanda {
+  font-family: "Noto Sans Batak" !important
+}
+.batakpakpak {
+  font-family: "Noto Sans Batak" !important
+}
+.bataksima {
+  font-family: "Noto Sans Batak" !important
+}
+.bataktoba {
+  font-family: "Noto Sans Batak" !important
+}
+.telugu {
+  font-family: "Noto Sans Telugu" !important
+}
+.khmer {
+  font-family: "Noto Sans Khmer" !important
+}
+.meeteimayek {
+  font-family: "Noto Sans Meetei Mayek" !important
+}
+.tolongsiki {
+  font-family: "kellytolong" !important
+}
+.tamilbrahmi {
+  font-family: "Adinatha Tamil Brahmi" !important
+}
+.phagspa {
+  font-family: "Microsoft PhagsPa", "Noto Sans PhagsPa" !important;
+  writing-mode: vertical-lr;
+  line-height: 1.8em;
+}
+.urdu {
+  font-family: "Noto Sans Nastaliq Urdu" !important;
+  direction: rtl;
+}
+.kaithi {
+  font-family: "Noto Sans Kaithi" !important;
+}
+.gujarati {
+  font-family: "Noto Serif Gujarati" !important;
+}
+.modi {
+  font-family: "Noto Sans Modi" !important;
+}
+.devanagari {
+  font-family: "Noto Sans Devanagari" !important;
+}
+.multani {
+  font-family: "Noto Sans Multani" !important;
+}
+.hanifirohingya {
+  font-family: "Noto Sans HanifiRohingya" !important;
+  direction: rtl;
+}
+.ahom {
+  font-family: "Noto Serif Ahom" !important;
+}
+.tirhuta {
+  font-family: "MithilaUni" !important;
+}
+.oldpersian {
+  font-family: "Noto Sans OldPersian" !important;
+}
+.takri {
+  font-family: "Noto Sans Takri" !important;
+}
+.taitham {
+  font-family: "PaliTilok" !important;
+  font-size: 150%;
+}
+.khomthai {
+  font-family: "Patimokkha" !important;
+  font-size: 130%;
+}
+.taithamlao {
+  font-family: "Lamphun" !important;
+  font-size: 150%;
+}
+.sylotinagri {
+  font-family: "Noto Sans SylotiNagri" !important
+}
+.granthagrantamil {
+  font-family: "e-Grantamil" !important;
+  font-size: 110%;
+  line-height: 1.5em;
+}
+.tamilgrantha {
+  font-family: "e-Grantamil" !important;
+  font-size: 110%;
+  line-height: 1.5em;
+}
+.siddhammukta {
+  font-size: 120%;
+  font-family: Muktamsiddham
+}
+.siddham {
+  font-size: 100%;
+  font-family: "Noto Sans Siddham" !important
+}
+.grantha {
+  font-family: "Noto Sans Grantha2" !important;
+  line-height: 2em;
+}
+.kharoshthi {
+   font-family: "Segoe UI Historic", "Noto Sans Kharoshthi" !important;
+  direction: rtl;
+}
+.thaana {
+  direction: rtl;
+}
+.tibetan {
+  font-size:150%;
+}
+.zanabazarsquare {
+  font-family: "BabelStoneZanabazar" !important;
+  line-height: 3em;
+}
+.newa {
+  font-family: "Noto Sans Newa" !important
+}
+.sharada {
+  font-family: "Noto Sans Sharada" !important
+}
+.mahajani {
+  font-family: "Noto Sans Mahajani" !important
+}
+.multani {
+  font-family: "Noto Sans Multani" !important
+}
+.bhaiksuki {
+  font-family: "Noto Sans Bhaiksuki" !important
+}
+.khojki {
+  font-family: "Noto Sans Khojki" !important
+}
+.khudawadi {
+  font-family: "Noto Sans Khudawadi" !important
+}
+.granthapandya {
+  font-family: "e-Pandya" !important
+}
+.vatteluttu {
+  font-family: "e-Vatteluttu" !important
+}
+.brahmi {
+  font-family: "Segoe UI Historic", "Noto Sans Brahmi" !important
+}
+.siddhamap {
+  font-family: "ApDevaSiddham" !important
+}
+.limbudeva {
+  font-family: "AnnaPurna" !important
+}
+.laopali {
+  font-family: "Lao Pali" !important
+}
+.nepaldevafont {
+  font-family: "Nepal2" !important
+}
+.santali {
+  font-family: "Noto Sans Ol Chiki" !important
+}
+.ranjana {
+  font-family: "RanjanaUnicode" !important
+}
+.ranjanalantsa {
+  font-family: "JMYZK--LZT Lantsa" !important
+}
+.ranjanawartu {
+  font-family: "JMYZK--WDT Wartu" !important
+}
+.taikuen {
+  font-family: "A Tai Tham KH New" !important
+}

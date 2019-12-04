@@ -1,0 +1,20 @@
+{
+  "name": "Aksharamukha: Script Converter",
+  "short_name": "Aksharamukha",
+  "description": "Aksharamukha aims to provide script conversion between various scripts within the Indic/Asian cultural sphere.",
+  "version": "0.0.0.1",
+  "manifest_version": 2,
+  "permissions": ["contextMenus", "storage", "tabs", "activeTab", "http://*/", "https://*/"],
+  "background": {
+    "scripts": ["ScriptMixin.js", "background.js", "options.js"],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "options.html"
+  },
+  "icons": {
+   "16": "16.png",
+   "48": "48.png",
+  "128": "128.png"
+ }
+}

@@ -23,6 +23,10 @@
   src: url('http://localhost:9899/NotoSansJavanese-Regular.otf')
 }
 @font-face {
+  font-family: 'Noto Sans HanifiRohingya';
+  src: url('http://localhost:9899/NotoSansHanifiRohingya-Regular.otf')
+}
+@font-face {
   font-family: 'Noto Sans Khojki';
   src: url('http://localhost:9899/NotoSansKhojki-Regular.otf')
 }
@@ -105,6 +109,14 @@
 @font-face {
   font-family: 'Noto Sans Devanagari';
   src: url('http://localhost:9899/NotoSansDevanagari-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans GunjalaGondi';
+  src: url('http://localhost:9899/NotoSansGunjalaGondi-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans MasaramGondi';
+  src: url('http://localhost:9899/NotoSansMasaramGondi-Regular.otf')
 }
 @font-face {
   font-family: 'Noto Sans Tai Tham';
@@ -311,190 +323,203 @@
 }
 
 .soyombo {
-  font-family: 'Noto Sans Soyombo';
+  font-family: 'Noto Sans Soyombo' !important;
   font-size: 130%;
 }
 
 .russiancyrillic {
-  font-family: 'Noto Sans Regular';
+  font-family: 'Noto Sans Regular' !important;
 }
 
 .ariyaka {
-  font-family: 'Ariyaka';
+  font-family: 'Ariyaka' !important;
   line-height: 1.5em;
 }
 
 .tamilold {
-  font-family: "Mukta Malar Regular";
+  font-family: "Mukta Malar Regular" !important;
   font-feature-settings: "ss04", "kern";
 }
 .tamil {
-  font-family: "Noto Sans Tamil"
+  font-family: "Noto Sans Tamil" !important;
 }
 .tibetandbumed {
-  font-family: "Tibetan Dbu Med";
+  font-family: "Tibetan Dbu Med" !important;
   line-height: 2.3em;
 }
 .buhid {
-  font-family: "Noto Sans Buhid"
+  font-family: "Noto Sans Buhid" !important
 }
 .rejang {
-  font-family: "Noto Sans Rejang"
+  font-family: "Noto Sans Rejang" !important
 }
 .hanunoo {
-  font-family: "Noto Sans Hanunoo"
+  font-family: "Noto Sans Hanunoo" !important
 }
 .saurashtra {
-  font-family: "Noto Sans Saurashtra"
+  font-family: "Noto Sans Saurashtra" !important
 }
 .sorasompeng {
-  font-family: "Noto Sans SoraSompeng"
+  font-family: "Noto Sans SoraSompeng" !important
 }
 .warangciti {
-  font-family: "Noto Sans WarangCiti"
+  font-family: "Noto Sans WarangCiti" !important
 }
 .balinese {
-  font-family: "Noto Serif Bali"
+  font-family: "Noto Serif Bali" !important
 }
 .kannada {
-  font-family: "Noto Sans Kannada"
+  font-family: "Noto Sans Kannada" !important
 }
 .javanese {
-  font-family: "Noto Sans Javanese", "Javanese Text";
+  font-family: "Noto Sans Javanese", "Javanese Text" !important;
 }
 .avestan {
-  font-family: "Noto Sans Avestan";
+  font-family: "Noto Sans Avestan" !important;
   direction: rtl;
 }
 .buginese {
-  font-family: "Noto Sans Buginese"
+  font-family: "Noto Sans Buginese" !important
 }
 .sinhala {
-  font-family: "Noto Sans Sinhala"
+  font-family: "Noto Sans Sinhala" !important
 }
 .dogra {
-  font-family: "Noto Serif Dogra"
+  font-family: "Noto Serif Dogra" !important
 }
 .tagalog {
-  font-family: "Noto Sans Tagalog"
+  font-family: "Noto Sans Tagalog" !important
 }
 .tagbanwa {
-  font-family: "Noto Sans Tagbanwa";
+  font-family: "Noto Sans Tagbanwa" !important;
   writing-mode: bt-lr;
 
 }
 .sundanese {
-  font-family: "Noto Sans Sundanese"
+  font-family: "Noto Sans Sundanese" !important
 }
 .cham {
-  font-family: "Noto Sans Cham"
+  font-family: "Noto Sans Cham" !important
 }
+
+.gunjalagondi {
+  font-family: "Noto Sans GunjalaGondi" !important
+}
+
+.masaramgondi {
+  font-family: "Noto Sans MasaramGondi" !important
+}
+
 .malayalam {
-  font-family: "Noto Sans Malayalam"
+  font-family: "Noto Sans Malayalam" !important
 }
 .malayalamold {
-  font-family: "Meera";
+  font-family: "Meera" !important;
   font-size:130%;
   line-height:125%;
 
 }
 .chakma {
-  font-family: "Noto Sans Chakma"
+  font-family: "Noto Sans Chakma" !important
 }
 .lepcha {
-  font-family: "Noto Sans Lepcha"
+  font-family: "Noto Sans Lepcha" !important
 }
 .limbu {
-  font-family: "Noto Sans Limbu"
+  font-family: "Noto Sans Limbu" !important
 }
 .batakkaro {
-  font-family: "Noto Sans Batak"
+  font-family: "Noto Sans Batak" !important
 }
 .batakmanda {
-  font-family: "Noto Sans Batak"
+  font-family: "Noto Sans Batak" !important
 }
 .batakpakpak {
-  font-family: "Noto Sans Batak"
+  font-family: "Noto Sans Batak" !important
 }
 .bataksima {
-  font-family: "Noto Sans Batak"
+  font-family: "Noto Sans Batak" !important
 }
 .bataktoba {
-  font-family: "Noto Sans Batak"
+  font-family: "Noto Sans Batak" !important
 }
 .telugu {
-  font-family: "Noto Sans Telugu"
+  font-family: "Noto Sans Telugu" !important
 }
 .khmer {
-  font-family: "Noto Sans Khmer"
+  font-family: "Noto Sans Khmer" !important
 }
 .meeteimayek {
-  font-family: "Noto Sans Meetei Mayek"
+  font-family: "Noto Sans Meetei Mayek" !important
 }
 .tolongsiki {
-  font-family: "kellytolong"
+  font-family: "kellytolong" !important
 }
 .tamilbrahmi {
-  font-family: "Adinatha Tamil Brahmi"
+  font-family: "Adinatha Tamil Brahmi" !important
 }
 .phagspa {
-  font-family: "Microsoft PhagsPa", "Noto Sans PhagsPa";
+  font-family: "Microsoft PhagsPa", "Noto Sans PhagsPa" !important;
   writing-mode: vertical-lr;
   line-height: 1.8em;
 }
 .urdu {
-  font-family: "Noto Sans Nastaliq Urdu";
+  font-family: "Noto Sans Nastaliq Urdu" !important;
   direction: rtl;
 }
 .kaithi {
-  font-family: "Noto Sans Kaithi";
+  font-family: "Noto Sans Kaithi" !important;
 }
 .gujarati {
-  font-family: "Noto Serif Gujarati";
+  font-family: "Noto Serif Gujarati" !important;
 }
 .modi {
-  font-family: "Noto Sans Modi";
+  font-family: "Noto Sans Modi" !important;
 }
 .devanagari {
-  font-family: "Noto Sans Devanagari";
+  font-family: "Noto Sans Devanagari" !important;
 }
 .multani {
-  font-family: "Noto Sans Multani";
+  font-family: "Noto Sans Multani" !important;
+}
+.hanifirohingya {
+  font-family: "Noto Sans HanifiRohingya" !important;
+  direction: rtl;
 }
 .ahom {
-  font-family: "Noto Serif Ahom";
+  font-family: "Noto Serif Ahom" !important;
 }
 .tirhuta {
-  font-family: "MithilaUni";
+  font-family: "MithilaUni" !important;
 }
 .oldpersian {
-  font-family: "Noto Sans OldPersian";
+  font-family: "Noto Sans OldPersian" !important;
 }
 .takri {
-  font-family: "Noto Sans Takri";
+  font-family: "Noto Sans Takri" !important;
 }
 .taitham {
-  font-family: "PaliTilok";
+  font-family: "PaliTilok" !important;
   font-size: 150%;
 }
 .khomthai {
-  font-family: "Patimokkha";
+  font-family: "Patimokkha" !important;
   font-size: 130%;
 }
 .taithamlao {
-  font-family: "Lamphun";
+  font-family: "Lamphun" !important;
   font-size: 150%;
 }
 .sylotinagri {
-  font-family: "Noto Sans SylotiNagri"
+  font-family: "Noto Sans SylotiNagri" !important
 }
 .granthagrantamil {
-  font-family: "e-Grantamil";
+  font-family: "e-Grantamil" !important;
   font-size: 110%;
   line-height: 1.5em;
 }
 .tamilgrantha {
-  font-family: "e-Grantamil";
+  font-family: "e-Grantamil" !important;
   font-size: 110%;
   line-height: 1.5em;
 }
@@ -504,14 +529,14 @@
 }
 .siddham {
   font-size: 100%;
-  font-family: "Noto Sans Siddham"
+  font-family: "Noto Sans Siddham" !important
 }
 .grantha {
-  font-family: "Noto Sans Grantha2";
+  font-family: "Noto Sans Grantha2" !important;
   line-height: 2em;
 }
 .kharoshthi {
-   font-family: "Segoe UI Historic", "Noto Sans Kharoshthi";
+   font-family: "Segoe UI Historic", "Noto Sans Kharoshthi" !important;
   direction: rtl;
 }
 .thaana {
@@ -521,63 +546,63 @@
   font-size:150%;
 }
 .zanabazarsquare {
-  font-family: "BabelStoneZanabazar";
+  font-family: "BabelStoneZanabazar" !important;
   line-height: 3em;
 }
 .newa {
-  font-family: "Noto Sans Newa"
+  font-family: "Noto Sans Newa" !important
 }
 .sharada {
-  font-family: "Noto Sans Sharada"
+  font-family: "Noto Sans Sharada" !important
 }
 .mahajani {
-  font-family: "Noto Sans Mahajani"
+  font-family: "Noto Sans Mahajani" !important
 }
 .multani {
-  font-family: "Noto Sans Multani"
+  font-family: "Noto Sans Multani" !important
 }
 .bhaiksuki {
-  font-family: "Noto Sans Bhaiksuki"
+  font-family: "Noto Sans Bhaiksuki" !important
 }
 .khojki {
-  font-family: "Noto Sans Khojki"
+  font-family: "Noto Sans Khojki" !important
 }
 .khudawadi {
-  font-family: "Noto Sans Khudawadi"
+  font-family: "Noto Sans Khudawadi" !important
 }
 .granthapandya {
-  font-family: "e-Pandya"
+  font-family: "e-Pandya" !important
 }
 .vatteluttu {
-  font-family: "e-Vatteluttu"
+  font-family: "e-Vatteluttu" !important
 }
 .brahmi {
-  font-family: "Segoe UI Historic", "Noto Sans Brahmi"
+  font-family: "Segoe UI Historic", "Noto Sans Brahmi" !important
 }
 .siddhamap {
-  font-family: "ApDevaSiddham"
+  font-family: "ApDevaSiddham" !important
 }
 .limbudeva {
-  font-family: "AnnaPurna"
+  font-family: "AnnaPurna" !important
 }
 .laopali {
-  font-family: "Lao Pali"
+  font-family: "Lao Pali" !important
 }
 .nepaldevafont {
-  font-family: "Nepal2"
+  font-family: "Nepal2" !important
 }
 .santali {
-  font-family: "Noto Sans Ol Chiki"
+  font-family: "Noto Sans Ol Chiki" !important
 }
 .ranjana {
-  font-family: "RanjanaUnicode"
+  font-family: "RanjanaUnicode" !important
 }
 .ranjanalantsa {
-  font-family: "JMYZK--LZT Lantsa"
+  font-family: "JMYZK--LZT Lantsa" !important
 }
 .ranjanawartu {
-  font-family: "JMYZK--WDT Wartu"
+  font-family: "JMYZK--WDT Wartu" !important
 }
 .taikuen {
-  font-family: "A Tai Tham KH New"
+  font-family: "A Tai Tham KH New" !important
 }
