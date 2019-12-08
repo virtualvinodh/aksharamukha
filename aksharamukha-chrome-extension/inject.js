@@ -18,7 +18,7 @@ var scriptsLTR = ['Urdu', 'Thaana', 'HanifiRohingya']
 if (document.readyState == 'complete') {
   setTimeout(function() {
     performTransliteration()
-  }, 2000);
+  }, 2500);
 };
 
 function performTransliteration() {
