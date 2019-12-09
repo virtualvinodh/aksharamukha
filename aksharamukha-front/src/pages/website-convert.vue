@@ -27,7 +27,7 @@
 .url-bar {
 }
 .rajan {
-  font-family: Ariel;
+  font-family: Arial;
 }
 </style>
 
