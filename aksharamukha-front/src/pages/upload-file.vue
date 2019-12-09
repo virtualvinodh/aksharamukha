@@ -31,7 +31,7 @@
 
 <style scoped>
 .vinodh {
-  font-family: Ariel;
+  font-family: Arial;
 }
 </style>
 
