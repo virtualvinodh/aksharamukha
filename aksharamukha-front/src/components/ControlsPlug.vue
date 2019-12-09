@@ -82,6 +82,6 @@ export default {
 
 <style scoped>
 .demo {
-  font-family: Ariel;
+  font-family: Arial;
 }
 </style>
