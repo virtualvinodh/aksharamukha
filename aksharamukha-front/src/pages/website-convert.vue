@@ -1,5 +1,11 @@
 <template>
   <q-page>
+      <q-alert
+          color="grey-7"
+          icon="extension"
+          appear
+          class="q-ma-md"
+        > Consider using the following browser extensions for a better experience: <a href="https://chrome.google.com/webstore/detail/aksharamukha-script-conve/nahdihjmpjlifenlocchbokbnpoifpho">Chrome</a> / <a href="https://addons.mozilla.org/en-US/firefox/addon/aksharamukha-script-converter/">Firefox</a></q-alert>
     <q-slide-transition>
       <div class="print-hide" v-show="minimize">
         <controls-io v-model="options" :multiple="false"> </controls-io>
@@ -34,7 +40,7 @@
 <script>
 import Transliterate from '../components/Transliterate'
 import ControlsIo from '../components/ControlsIo'
-import {QPageSticky, QUploader, QField, QInput, QSlideTransition} from 'quasar'
+import {QPageSticky, QUploader, QField, QInput, QSlideTransition, QAlert} from 'quasar'
 import {ScriptMixin} from '../mixins/ScriptMixin'
 
 export default {
@@ -46,6 +52,7 @@ export default {
     Transliterate,
     QUploader,
     QField,
+    QAlert,
     QInput,
     QSlideTransition
   },
