@@ -145,7 +145,7 @@ function addBanner() {
       <div class="aksharamukha-logosec">
       <div class="logo-aksharamukha"/>
         <a href="http://aksharamukha.appspot.com" target="_blank">
-          <img src="https://raw.githubusercontent.com/virtualvinodh/aksharamukha/master/aksharamukha-front/src/statics/icons/favicon-32x32.png" width="20px" >
+          <img src="`+ chrome.runtime.getURL('48.png') + `" width="20px" >
         </a> Website Transliterated from <span id="akshsrctgt">` + source + ` to ` + target + `</span>
       </div>
       </div>
