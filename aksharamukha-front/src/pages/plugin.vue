@@ -7,7 +7,7 @@
     <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha.js"&gt;</pre>
 
     <div class="q-body-1">If you'd like to use HTTPS, load it over a CDN from Github directly. All calls within the plugin are already only in HTTPS.</div>
-    <pre>&lt;script src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-back/plugin/aksharamukha.js"&gt;</pre>
+    <pre>&lt;script src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/aksharamukha.js"&gt;</pre>
 
     <div class="q-body-1">Additionally, the plugin will also load the necessary font files for minority scripts. Hence, any script of your choice should be rendered propertly</div>
 
