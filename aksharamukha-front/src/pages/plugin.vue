@@ -4,24 +4,24 @@
     <div class="q-body-1">Akshramukha is also available as a web plugin. You can see a live demo <a href="http://www.virtualvinodh.com/wp/category/blog-tamil/">here</a> (Wordpress) and <a href="http://www.virtualvinodh.com/aksharamkh/demo.html">here</a> (Simple HTML). It basically attaches itself to the right hand corner of the menu.</div>
 
     <div class="q-body-1">It can be added to any site by adding the corresponding javascript file to the document head</div>
-    <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha.js"&gt;</pre>
+    <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha.js"&gt;&lt;/script&gt;</pre>
 
     <div class="q-body-1">If you'd like to use HTTPS, load it over a CDN from Github directly. All calls within the plugin are already only in HTTPS.</div>
-    <pre>&lt;script src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/aksharamukha.js"&gt;</pre>
+    <pre>&lt;script src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/aksharamukha.js"&gt;&lt;/script&gt;</pre>
 
     <div class="q-body-1">Additionally, the plugin will also load the necessary font files for minority scripts. Hence, any script of your choice should be rendered propertly</div>
 
     <h5> Additional Instructions </h5>
     <div class="q-body-1">In its simplistic form, you just need to attach the file as shown above. It will then autodetect the input script and proceed to convert the entire site. However, with mixed content (as it oftens occurs in websites), the autodetection can sometimes fail to detect the source script appropriately. It is suggested you provide the source script along with script file. </div>
 
-    <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha.js?source=scriptidentifier"&gt;</pre>
+    <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha.js?source=scriptidentifier"&gt;&lt;/script&gt;</pre>
 
     <div class="q-body-1">You can provide additional preoptions in case, the input needs to be processed differently. For instance, </div>
-    <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha.js?source=Tamil&preoptions=TamilTranscribe"&gt;</pre>
+    <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha.js?source=Tamil&preoptions=TamilTranscribe"&gt;&lt;/script&gt;</pre>
 
     <div class="q-body-1">If you want to restrict the conversion to only some content, you can pass the class name that needs to be converted. </div>
 
-    <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha.js?class=classname"&gt;</pre>
+    <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha.js?class=classname"&gt;&lt;/script&gt;</pre>
 
     <div class="q-body-1">You can also have different source scripts in your content. You just need to mark the text appropriately with the classname in the form <i>inputscript-scriptidentifier</i>. You also need to give it a classname marking it for conversion. For instance, </div> <br/>
 
@@ -32,7 +32,7 @@
     </pre>
 
     <div class="q-body-1">The corresponding script would be:</div>
-    <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha.js?class=verse"&gt;</pre>
+    <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha.js?class=verse"&gt;&lt;/script&gt;</pre>
 
     <br/><br/>
 
@@ -47,7 +47,7 @@
       <li><i>Enter the following</i> within Scripts in header</li>
 
       If you want Aksharamukha to autodetect scriptsL<br/>
-      <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha.js?class=site-content"&lt; &lt;/script&gt;</pre>
+      <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha.js?class=site-content"&gt; &lt;/script&gt;</pre>
       If you already know the input script, say, Devanagari:<br/>
       <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha.js?class=site-content&source=Devanagari"&gt; &lt;/script&gt;</pre>
       The script name needs to be capitalized.
