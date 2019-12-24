@@ -14,14 +14,14 @@
     <h5> Additional Instructions </h5>
     <div class="q-body-1">In its simplistic form, you just need to attach the file as shown above. It will then autodetect the input script and proceed to convert the entire site. However, with mixed content (as it oftens occurs in websites), the autodetection can sometimes fail to detect the source script appropriately. It is suggested you provide the source script along with script file. </div>
 
-    <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha.js&source=scriptidentifier"&gt;</pre>
+    <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha.js?source=scriptidentifier"&gt;</pre>
 
     <div class="q-body-1">You can provide additional preoptions in case, the input needs to be processed differently. For instance, </div>
-    <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha.js&source=Tamil&preoptions=TamilTranscribe"&gt;</pre>
+    <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha.js?source=Tamil&preoptions=TamilTranscribe"&gt;</pre>
 
     <div class="q-body-1">If you want to restrict the conversion to only some content, you can pass the class name that needs to be converted. </div>
 
-    <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha.js&class=classname"&gt;</pre>
+    <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha.js?class=classname"&gt;</pre>
 
     <div class="q-body-1">You can also have different source scripts in your content. You just need to mark the text appropriately with the classname in the form <i>inputscript-scriptidentifier</i>. You also need to give it a classname marking it for conversion. For instance, </div> <br/>
 
@@ -32,7 +32,7 @@
     </pre>
 
     <div class="q-body-1">The corresponding script would be:</div>
-    <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha.js&class=verse"&gt;</pre>
+    <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha.js?class=verse"&gt;</pre>
 
     <br/><br/>
 
