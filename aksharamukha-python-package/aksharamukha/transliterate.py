@@ -158,10 +158,20 @@ def auto_detect(text, plugin = False):
 def detect_preoptions(text, inputScript):
     preoptions = []
     if inputScript == 'Thai':
-        if 'ะ' in text or 'ั' in text:
+        textNew = text.replace('ห์', '')
+        if '์' in textNew and ('ะ' in text):
+            preoptions = ['ThaiSajjhayawithA']
+        elif '์' in textNew:
+            preoptions = ['ThaiSajjhayaOrthography']
+        elif 'ะ' in text or 'ั' in text:
             preoptions =  ['ThaiOrthography']
     elif inputScript == 'Lao' or inputScript == 'LaoPali':
-        if 'ະ' in text or 'ັ' in text:
+        textNew = text.replace('ຫ໌', '')
+        if '໌' in textNew and ('ະ' in text):
+            preoptions = ['LaoSajhayaOrthographywithA']
+        elif '໌' in textNew:
+            preoptions = ['LaoSajhayaOrthography']
+        elif 'ະ' in text or 'ັ' in text:
             preoptions = ['LaoTranscription']
     elif inputScript == 'Urdu':
             preoptions = ['UrduShortNotShown']

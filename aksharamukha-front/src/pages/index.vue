@@ -46,6 +46,7 @@
     <input-options :inputScript="inputScript" :outputScript="outputScript" :preOptionsInput="preOptions"
       :postOptions="postOptions" v-model="preOptions" @input="convert"></input-options>
     <div class="row">
+      <q-btn class="q-ma-sm btn2 print-hide col-xs-1 col-md-1" @click="copySource" :data-clipboard-text="textInput.replace(/<br\/>/g, '\n')"> <q-icon name="file_copy" /><q-tooltip>Copy source text</q-tooltip></q-btn>
       <q-btn class="q-ma-sm print-hide col-xs-1 col-md-1" @click="uploadImage" v-show="displayImageButton" v-if="!$q.platform.is.cordova"> <q-icon name="add photo alternate" /><q-tooltip>Upload image</q-tooltip></q-btn>
       <span v-show="showFileUpload" class="q-ma-sm">
             <q-uploader url="" clearable extensions=".jpg, .jpeg, .png, .bmp, .ico" @add="showConvertImage" @remove:cancel="hideConvertButton"
@@ -127,6 +128,11 @@ import OutputNotice from '../components/OutputNotice'
 import OutputButtons from '../components/OutputButtons'
 import scrollTo from 'vue-scrollto'
 import { ScriptMixin } from '../mixins/ScriptMixin'
+
+import ClipboardJS from 'clipboard'
+
+var clipboard = new ClipboardJS('.btn2')
+console.log(clipboard)
 
 import keys from '../keys.js'
 
@@ -407,6 +413,14 @@ export default {
       this.convert()
     },
     copy: function () {
+      this.$q.notify({
+        type: 'info',
+        message: 'Copied',
+        position: 'center',
+        timeout: 200
+      })
+    },
+    copySource: function () {
       this.$q.notify({
         type: 'info',
         message: 'Copied',

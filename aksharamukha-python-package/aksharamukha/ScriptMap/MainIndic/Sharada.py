@@ -56,7 +56,7 @@ SouthVowelSignMap = [
 
 ModernVowelSignMap =[
                     '\U000111BC\U000111CB\U000111CC',
-                    '\U000111B3\U000111CB'
+                    '\U000111CB\U000111B3'
                     ]
 
 SinhalaVowelSignMap = [

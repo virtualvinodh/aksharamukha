@@ -18,6 +18,15 @@ def default(Strng):
 
     return Strng
 
+def MarchenSanskritPalatals(Strng):
+    tsaSeries = ['\U00011C82', '\U00011C83', '\U00011C84']
+    jaSereis =  ['\U00011C76', '\U00011C77', '\U00011C78']
+
+    for x, y in zip(tsaSeries, jaSereis):
+        Strng = Strng.replace(x, y)
+
+    return Strng
+
 
 def SoyomboSanskritPalatals(Strng):
     tsaSeries = ['𑩵','𑩶','𑩷']
@@ -120,6 +129,72 @@ def oldtamilortho(Strng):
 def nepaldevafont(Strng):
     return Strng
 
+def granthaserif(Strng):
+    return Strng
+
+def ChakmaPali(Strng):
+    listC = '('+"|".join(sorted(GM.CrunchSymbols(GM.Consonants,"Chakma")+Chakma.VowelMap[:1],key=len,reverse=True))+')'
+    listV = '('+"|".join(sorted(GM.CrunchSymbols(GM.VowelSigns,"Chakma")+Chakma.ViramaMap+['\U00011133'],key=len,reverse=True))+')'
+
+    Strng = ChakmaGemination(Strng, reverse = True)
+
+    Strng = Strng.replace('𑄤', '\U00011147') # Replace Ya
+    Strng = Strng.replace('𑄡', '𑄠') # Replace vA
+
+    ## reverse A introduction
+
+    Strng = Strng.replace("\U00011127","\u02BE")
+    Strng = re.sub("("+listC+")"+"(?!"+listV+'|\u02BE'+")",r'\1''\U00011127',Strng)
+    Strng = Strng.replace("\u02BE","")
+
+    ## Replace A with Visarga as per Pali
+
+    Strng = Strng.replace('\U00011127', '\U00011102')
+
+    ## Replace subjoining with Explicit Virama
+
+    Strng = Strng.replace('\U00011133', '\U00011134')
+
+    return Strng
+
+def ThaiSajjhayawithA(Strng):
+    Strng = ThaiSajjhayaOrthography(Strng)
+    Strng = Strng.replace('ัง','ังฺ')
+    Strng = ThaiTranscription(Strng, anusvaraChange = False)
+
+    Strng = Strng.replace('ะํ', 'ํ')
+    Strng = Strng.replace('ะั', 'ั')
+    Strng = Strng.replace('ะ๎', '๎')
+
+    Strng = re.sub('([เโไ])(.๎)([ยรลวศษสหฬ])ะ', r'\1\2\3', Strng)
+
+    Strng = Strng.replace("\u0E32\u0E4D", "\u0E33").replace("\u0E34\u0E4D", "\u0E36") # reverse AM, iM
+
+    return Strng
+
+def LaoSajjhaya(Strng):
+    Strng = ThaiSajjhayaOrthography(Strng, Script = "LaoPali")
+
+    return Strng
+
+def LaoSajjhayawithA(Strng):
+    Strng = ThaiSajjhayaOrthography(Strng, Script = "LaoPali")
+    Strng = Strng.replace('ັງ', 'ັງ຺')
+    Strng = CF.LaoPaliTranscribe(Strng, anusvaraChange = False)
+
+    Strng = Strng.replace('ະໍ', 'ໍ')
+    Strng = Strng.replace('ະັ', 'ັ')
+    Strng = Strng.replace('ະ๎', '๎')
+
+    Strng = Strng.replace('ະ໌', '໌')
+    Strng = Strng.replace('ະົ', 'ົ')
+
+    Strng = re.sub('([ເໂໄ])(.๎)([ຍຣລວຨຩສຫຬ])ະ', r'\1\2\3', Strng)
+
+    Strng = Strng.replace('າໍ', 'ຳ')
+
+    return Strng
+
 def UseAlternateVSU(Strng):
     Strng = Strng.replace('𑖲', '𑗜')
 
@@ -178,7 +253,7 @@ def ChakmaEnableAllConjuncts(Strng):
 
 def ChakmaGemination(Strng, reverse = False):
     ListC = "(" + "|".join(GM.CrunchSymbols(GM.Consonants, 'Chakma')) + ")"
-    virs = "([\U00011134 \U00011133])"
+    virs = "([\U00011134\U00011133])"
     virExp = "\U00011134"
     virDep = "\U00011133"
     ListV = '('+"|".join(sorted(GM.CrunchSymbols(GM.VowelSignsNV,"Chakma"), key=len, reverse = True)) + ")"
@@ -341,10 +416,10 @@ def DevanagariPrishtamatra(Strng, reverse = False):
         Strng = Strng.replace('े','ॎ')
         Strng = Strng.replace('ै','ॎे')
         Strng = Strng.replace('ो','ॎा')
-        Strng = Strng.replace('ौ','ॎाे')
+        Strng = Strng.replace('ौ','ॎो')
     else:
         Strng = Strng.replace('ॎे', 'ै')
-        Strng = Strng.replace('ॎाे', 'ौ')
+        Strng = Strng.replace('ॎो', 'ौ')
         Strng = Strng.replace('ॎा', 'ो')
         Strng = Strng.replace('ॎ', 'े')
 
@@ -963,7 +1038,7 @@ def TibetanRemoveBa(Strng):
 
     return Strng
 
-def ThaiLaoTranscription(Strng,Script,shortA,shortAconj,reverse=False):
+def ThaiLaoTranscription(Strng,Script,shortA,shortAconj,reverse=False, anusvaraChange=True):
     ## For Native lao: aMDa give an'da as intermediate (N doesn't exist in Native Lao )
     ## Hence issues with nasal conversion
 
@@ -984,18 +1059,24 @@ def ThaiLaoTranscription(Strng,Script,shortA,shortAconj,reverse=False):
 
     vowA = GM.CrunchList('VowelMap',Script)[0]
 
-    Strng = AnusvaraToNasal(Strng,Script)
+    if anusvaraChange:
+        Strng = AnusvaraToNasal(Strng,Script)
 
     if not reverse:
-        if Script == Thai:
+        if Script == 'Thai':
             Strng = re.sub("(["+EAIO+"])"+"("+cons+")"+"("+vir+")",r'\2\3\1',Strng) #Reverse bre, bro etc
             Strng = Strng.replace("\u0E33","\u0E32\u0E4D").replace("\u0E36","\u0E34\u0E4D") # reverse AM, iM
+        if Script == 'LaoPali':
+            Strng = Strng.replace('ຳ', 'າໍ')
+
+        if anusvaraChange:
+            Strng = Strng.replace(Anu, ng + vir)
 
         Strng = re.sub("(?<!["+EAIO+"])"+"("+cons+")"+"(?!["+AIUVir+"])",r'\1'+shortA,Strng)
-        Strng = Strng.replace(Anu,ng)
-        Strng = Strng.replace(vir,"")
-        Strng = re.sub("("+shortA+")"+"(?=("+cons+")"+"("+cons+"|"+"["+EAIO+"]))",shortAconj,Strng)
-        Strng = re.sub("("+shortA+")"+"(?="+ng+")(?!["+AIUVir+"])",shortAconj,Strng)
+        Strng = re.sub("("+shortA+")"+"(?=("+cons+")"+"("+vir+"))",shortAconj,Strng)
+        Strng = Strng.replace(vir, '')
+
+        ## Fix Purevowels
 
     else:
         consOnly = "|".join(GM.CrunchSymbols(GM.Consonants, Script))
@@ -1029,15 +1110,16 @@ def ThaiVisargaSaraA(Strng):
 
     return Strng
 
-def ThaiSajjhayaOrthography(Strng):
+def ThaiSajjhayaOrthography(Strng, Script = "Thai"):
     ## reverse digraphs
     Strng = CF.ThaiReverseVowelSigns(Strng, True)
     Strng = CF.ThaiDigraphConjuncts(Strng, True)
     Strng = CF.ThaiReverseVowelSigns(Strng)
 
-    Script = "Thai"
-
-    Strng = Strng.replace('ฺ', '์')
+    if Script == "Thai":
+        Strng = Strng.replace('ฺ', '์')
+    if Script == "LaoPali":
+        Strng = Strng.replace('຺', '์')
 
     cons = "|".join(GM.CrunchSymbols(GM.Consonants, Script)+GM.CrunchList('VowelMap',Script)[0:1])
     EAIO = "".join(GM.CrunchList('VowelSignMap',Script)[9:12]+GM.CrunchList('SinhalaVowelSignMap',Script)[:])
@@ -1045,7 +1127,10 @@ def ThaiSajjhayaOrthography(Strng):
     # short a for conjuncts : t(a)ssa
     Strng = re.sub('(?<![' + EAIO + '])' + '(' + cons + ')' + '(' + cons + ')' + '(์)', r'\1' + 'ั' + r'\2\3', Strng)
 
-    cons_others  = '([ยรลวศษสหฬ])' # avarga
+    if Script == "Thai":
+        cons_others  = '([ยรลวศษสหฬ])' # avarga
+    if Script == "LaoPali":
+        cons_others = '([ຍຣລວຨຩສຫຬ])' # avarga
 
     Strng = re.sub('(?<![' + EAIO + '])' + '(' + cons + ')' + '(' + cons + ')' + '(์)', r'\1' + 'ั' + r'\2\3', Strng)
 
@@ -1060,21 +1145,27 @@ def ThaiSajjhayaOrthography(Strng):
     #reorder dve sme
     Strng = re.sub('(' + cons  + ')' + '(๎)' + '([' + EAIO + '])' + '(' + cons + ')', r'\3\1\2\4', Strng)
 
-    Strng = Strng.replace('ง์', 'ง')
+    if Script == "Thai":
+        Strng = Strng.replace('ง์', 'ง')
+
+    if Script == "LaoPali":
+        Strng = Strng.replace('ั', 'ັ')
+        Strng = Strng.replace("ງ์", "ງ")
+        Strng = Strng.replace("์", "໌")
 
     #Strng = re.sub('([ยรลวศษสหฬ])(์)', r'\1' + '๎', Strng)
 
     return Strng
 
 
-def ThaiTranscription(Strng):
+def ThaiTranscription(Strng, anusvaraChange = True):
 
     ## reverse digraphs
     Strng = CF.ThaiReverseVowelSigns(Strng, True)
     Strng = CF.ThaiDigraphConjuncts(Strng, True)
     Strng = CF.ThaiReverseVowelSigns(Strng)
 
-    Strng = ThaiLaoTranscription(Strng,"Thai", '\u0E30', '\u0E31')
+    Strng = ThaiLaoTranscription(Strng,"Thai", '\u0E30', '\u0E31', anusvaraChange = anusvaraChange)
 
     Strng = Strng.replace('ะ์','์')
 #    shortA = u'\u0E30'

@@ -15,6 +15,14 @@
   src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifDogra/NotoSerifDogra-Regular.otf')
 }
 @font-face {
+  font-family: 'Noto Sans Wancho';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansWancho/NotoSansWancho-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Mro';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansMro/NotoSansMro-Regular.otf')
+}
+@font-face {
   font-family: 'e-Grantamil';
   src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/e-Grantamil.ttf')
 }
@@ -61,6 +69,10 @@
 @font-face {
   font-family: 'Noto Sans Chakma';
   src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansChakma/NotoSansChakma-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans ChakmaPali';
+  src: url('../statics/chakmapali.otf')
 }
 @font-face {
   font-family: 'Noto Sans Telugu';
@@ -125,6 +137,10 @@
 @font-face {
   font-family: 'Noto Sans Grantha2';
   src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansGrantha/NotoSansGrantha-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Serif Grantha';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifGrantha/NotoSerifGrantha-Regular.otf')
 }
 @font-face {
   font-family: 'Muktamsiddham';
@@ -217,6 +233,10 @@
 @font-face {
   font-family: 'Noto Sans Modi';
   src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansModi/NotoSansModi-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Tibetan';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifTibetan/NotoSerifTibetan-Regular.otf')
 }
 @font-face {
   font-family: 'Noto Sans Multani';
@@ -322,6 +342,16 @@
   src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSoyombo/NotoSansSoyombo-Regular.otf')
 }
 
+@font-face {
+  font-family: 'Noto Sans Marchen';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansMarchen/NotoSansMarchen-Regular.otf')
+}
+
+@font-face {
+  font-family: 'Noto Sans MarchenB';
+  src: url('../statics/BabelStoneMarchen.ttf')
+}
+
 .soyombo {
   font-family: 'Noto Sans Soyombo' !important;
   font-size: 130%;
@@ -346,6 +376,10 @@
 .tibetandbumed {
   font-family: "Tibetan Dbu Med" !important;
   line-height: 2.3em;
+}
+.tibetan {
+  font-family: "Noto Sans Tibetan" !important;
+  font-size: 110%;
 }
 .buhid {
   font-family: "Noto Sans Buhid" !important
@@ -420,7 +454,7 @@
 
 }
 .chakma {
-  font-family: "Noto Sans Chakma" !important
+  font-family: "Noto Sans ChakmaPali" !important
 }
 .lepcha {
   font-family: "Noto Sans Lepcha" !important
@@ -535,15 +569,16 @@
   font-family: "Noto Sans Grantha2" !important;
   line-height: 2em;
 }
+.granthaserif {
+  font-family: "Noto Serif Grantha" !important;
+  line-height: 2em;
+}
 .kharoshthi {
    font-family: "Segoe UI Historic", "Noto Sans Kharoshthi" !important;
   direction: rtl;
 }
 .thaana {
   direction: rtl;
-}
-.tibetan {
-  font-size:150%;
 }
 .zanabazarsquare {
   font-family: "BabelStoneZanabazar" !important;
@@ -605,4 +640,15 @@
 }
 .taikuen {
   font-family: "A Tai Tham KH New" !important
+}
+.wancho {
+  font-family: "Noto Sans Wancho" !important
+}
+.mro {
+  font-family: "Noto Sans Mro" !important
+}
+.marchen {
+  font-family: "Noto Sans Marchen" !important;
+  font-size: 100%;
+  line-height: 2.5em;
 }

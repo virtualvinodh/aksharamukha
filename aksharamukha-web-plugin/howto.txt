@@ -1,0 +1,1 @@
+bundle-js aksharamukha-dev.js -o aksharamukha.js

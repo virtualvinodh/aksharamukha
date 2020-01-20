@@ -6,8 +6,27 @@ import string
 from . import PostProcess
 from . import ConvertFix as CF
 from aksharamukha.ScriptMap.EastIndic import PhagsPa
-from aksharamukha.ScriptMap.MainIndic import Tamil, Malayalam, Limbu
+from aksharamukha.ScriptMap.MainIndic import Tamil, Malayalam, Limbu, Chakma
 ### Use escape char in all functions
+
+
+def ChakmaPali(Strng):
+    Strng = Strng.replace('\U00011147', '𑄤') # Replace Ya
+    Strng = Strng.replace('𑄠', '𑄡') # Replace vA
+
+    listC = '('+"|".join(sorted(GM.CrunchSymbols(GM.Consonants,"Chakma")+Chakma.VowelMap[:1],key=len,reverse=True))+')'
+    listV = '('+"|".join(sorted(GM.CrunchSymbols(GM.VowelSigns,"Chakma")+Chakma.ViramaMap+['\U00011133'],key=len,reverse=True))+')'
+
+    Strng = Strng.replace("\u02BD","")
+
+    Strng = Strng.replace('\U00011102', '\U00011127')
+
+    # Introduce vowel Sign A ; Chakma - Inharant vowel is AA
+    Strng = re.sub("("+listC+")"+"(?!"+listV+")",r'\1''\u02BE',Strng)
+    Strng = Strng.replace("\U00011127","")
+    Strng = Strng.replace("\u02BE","\U00011127")
+
+    return Strng
 
 def UrduShortNotShown(Strng):
     Strng += "\u02BB\u02BB"
@@ -88,9 +107,33 @@ def ThaiSajjhayaOrthography(Strng):
     ## Reorder dve
     #Strng = re.sub('([' + EAIO + '])' + '(' + cons  + ')' + '(๎)' + '(' + cons + ')', r'\2\3\1\4', Strng)
 
+    Strng = Strng.replace('ัง', 'ังฺ')
     Strng = Strng.replace('์', 'ฺ')
     Strng = Strng.replace('๎', 'ฺ')
     Strng = Strng.replace('ั', '')
+
+    return Strng
+
+def ThaiSajjhayawithA(Strng):
+    Strng = Strng.replace('ะ', '')
+    Strng = ThaiSajjhayaOrthography(Strng)
+
+    return Strng
+
+def LaoSajhayaOrthography(Strng):
+    Strng = Strng.replace('ັງ', 'ັງ຺')
+
+    Strng = re.sub('([ເໂໄ])(.๎)([ຍຣລວຨຩສຫຬ])', r'\2\1\3', Strng)
+
+    Strng = Strng.replace('໌', '຺')
+    Strng = Strng.replace('๎', '຺')
+    Strng = Strng.replace('ັ', '')
+
+    return Strng
+
+def LaoSajhayaOrthographywithA(Strng):
+    Strng = Strng.replace('ະ', '')
+    Strng = LaoSajhayaOrthography(Strng)
 
     return Strng
 
