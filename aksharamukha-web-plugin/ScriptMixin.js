@@ -51,15 +51,17 @@ const ScriptMixin = {
         ],
         'Thai': [
           { label: 'Thai orthography text <br/><small><div>e.g. พุทธะ</div></small>', value: 'ThaiOrthography' },
-          { label: 'Sajjhaya orthography text <br/><small><div>e.g. พุท์ธ</div></small>', value: 'ThaiSajjhayaOrthography' }
-
+          { label: 'Sajjhaya orthography text <br/><small><div>e.g. พุท์ธ</div></small>', value: 'ThaiSajjhayaOrthography' },
+          { label: 'Sajjhaya orthography with ะ text <br/><small><div>e.g. พุท์ธะ</div></small>', value: 'ThaiSajjhayawithA' }
         ],
         'TaiTham': [
           { label: 'Tai Tham Lao', value: 'TaiThamLao' },
           { label: 'Tai Kuen', value: 'TaiKuen' }
         ],
         'LaoPali': [
-          { label: 'Lao orthography text<small><div class="laopali">e.g. ພຸທຘະ</div></small>', value: 'LaoTranscription' }
+          { label: 'Lao orthography text<small><div class="laopali">e.g. ພຸທຘະ</div></small>', value: 'LaoTranscription' },
+          { label: 'Sajjhaya orthography text <br/><small><div class="laopali">e.g. ພຸທ໌ຘ</div></small>', value: 'LaoSajhayaOrthography' },
+          { label: 'Sajjhaya orthography with ะ text <br/><small><div class="laopali">e.g. ພຸທ໌ຘະ</div></small>', value: 'LaoSajhayaOrthographywithA' }
         ],
         'Devanagari': [
           { label: 'Schwa deletion (Hindi) <small><div class="q-mt-sm">राम → rām, सबसे → sabse</div></small>', value: 'RemoveSchwaHindi' },
@@ -95,6 +97,12 @@ const ScriptMixin = {
         ],
         'Urdu': [
           { label: 'Short vowels not shown', value: 'UrduShortNotShown' }
+        ],
+        'Chakma': [
+          {
+            label: 'Pali orthography text<br/><small> e.g. <span class="chakma">𑄖𑄗𑄂𑄉𑄖</span></small>',
+            value: 'ChakmaPali'
+          }
         ]
       },
       preOptionsGroupSpecific: {
@@ -128,6 +136,10 @@ const ScriptMixin = {
           {
             label: 'Enable independent i, u and e<br/><small><span class="chakma">𑄃𑄨 𑄃𑄪 𑄃𑄬 → 𑄄 𑄅 𑄆</span></small>',
             value: 'ChakmaVowelsIndependent'
+          },
+          {
+            label: 'Pali Orthography<br/><small><span class="chakma">𑄖𑄧𑄗𑄉𑄧𑄖𑄧 → 𑄖𑄗𑄂𑄉𑄖</span></small>',
+            value: 'ChakmaPali'
           }
         ],
         'Newa': [
@@ -156,7 +168,7 @@ const ScriptMixin = {
         ],
         'Devanagari': [
           { label: 'Use ॲ instead of ऍ', value: 'DevanagariACandra' },
-          { label: 'Prishthamatra orthography<br/><small>के कै को कौ → कॎ कॎे कॎा कॎा</small>', value: 'DevanagariPrishtamatra' }
+          { label: 'Prishthamatra orthography<br/><small>के कै को कौ → कॎ कॎे कॎा कॎो</small>', value: 'DevanagariPrishtamatra' }
         ],
         'Gurmukhi': [
           { label: 'Use Yakaash<br/><small>ਕ੍ਯ → ਕੵ</small>', value: 'GurmukhiYakaash' },
@@ -166,11 +178,13 @@ const ScriptMixin = {
         'Thai': [
           { label: 'Thai Orthography<br/><small><div>พุทฺธ → พุทธะ</div></small>', value: 'ThaiTranscription' },
           { label: 'Sajjhaya Orthography<br/><small><div>พุทฺธ → พุท์ธ</div></small>', value: 'ThaiSajjhayaOrthography' },
+          { label: 'Sajjhaya Orthography with ะ<br/><small><div>พุทฺธ → พุท์ธะ</div></small>', value: 'ThaiSajjhayawithA' },
           { label: 'Sara a ะ as Visarga<br/><small><div>นมัห์ → นมะ</div></small>', value: 'ThaiVisargaSaraA' }
-
         ],
         'LaoPali': [
-          { label: 'Lao Orthography<br/><small><span class="laopali">ພຸທ຺ຘ → ພຸທຘະ</span></small>', value: 'LaoTranscription' }
+          { label: 'Lao Orthography<br/><small><span class="laopali">ພຸທ຺ຘ → ພຸທຘະ</span></small>', value: 'LaoTranscription' },
+          { label: 'Sajjhaya Orthography<br/><small><div class="laopali">ພຸທ຺ຘ → ພຸທ໌ຘ</div></small>', value: 'LaoSajjhaya' },
+          { label: 'Sajjhaya Orthography with ะ<br/><small><div  class="laopali">ພຸທ຺ຘ → ພຸທ໌ຘະ</div></small>', value: 'LaoSajjhayawithA' }
         ],
         'Lao': [
           { label: 'Lao Nativization<br/><small><span class="lao">ພຸທທັງ ຄັຈຈາມິ ສັພພັງ → ພຸດທັງ ຄັຈສາມິ ສັບພັງ</span></small>', value: 'LaoNative' }
@@ -184,6 +198,9 @@ const ScriptMixin = {
           { label: 'Use Mongolian finals<br/><small><span class="soyombo">ak ag ad → 𑩐𑪋 𑩐𑪊 𑩐𑪍</span></small>', value: 'SoyomboFinals' },
           { label: 'Use initial-form /ra/, /la/, /sa/<br/><small><span class="soyombo">𑩼𑪙𑩫 𑩽𑪙𑩫 𑪁𑪙𑩫 → 𑪆𑩫 𑪇𑩫 𑪉𑩫</span></small>', value: 'SoyomboInitials' },
           { label: 'Use Tsheg<br/><small><span class="soyombo">𑩯 𑩴𑩖 → 𑩯𑪚𑩴𑩖</span></small>', value: 'SoyomboSpaceTscheg' }
+        ],
+        'Marchen': [
+          { label: 'Use Sanskrit palatals<br/><small><span class="marchen">𑲂 𑲃 𑲄 𑲄𑲮 → 𑱶 𑱷 𑱸 𑱸𑲮</span></small>', value: 'MarchenSanskritPalatals' }
         ],
         'Tibetan': [
           { label: 'Use Sanskrit palatals<br/><small><span class="tibetan">ཙ ཚ ཛ ཛྷ → ཅ ཆ ཇ ཇྷ</span></small>', value: 'TibetanSanskritPalatals' },
@@ -213,6 +230,7 @@ const ScriptMixin = {
         'Grantha': [
           { label: 'Use Grantha old AU vowel sign <br/><small><div class="grantha">𑌕𑍗 → 𑌕𑍌</div></small>', value: 'GranthaOldau' },
           { label: 'Prakrit orthography <br/><small><div class="grantha">𑌬𑍁𑌦𑍍𑌧𑌂 → 𑌬𑍁𑌂𑌧𑌀</div></small>', value: 'GranthaPrakrit' },
+          { label: 'Use Noto Serif Grantha <br/><small><span class="grantha">𑌬𑍁𑌦𑍍𑌧𑌂</span> → <span class="granthaserif">𑌬𑍁𑌦𑍍𑌧𑌂</span></small>', value: 'granthaserif' },
           { label: 'Use e-Grantamil encoding', value: 'egrantamil' }
         ],
         'Urdu': [
@@ -950,6 +968,22 @@ const ScriptMixin = {
           region: ['North Indic', 'Indic']
         },
         {
+          label: 'Marchen',
+          value: 'Marchen',
+          sscode: 'Marc',
+          ssdesc: 'Marchen, also called the Greater Mar or the Greater Beautiful script, is one of a group of related scripts used in the Tibetan Bön religion. It is used for writing the Zhang-zhung language, now preserved only in Bön literature, and occasionally for writing Tibetan. This script is not to be confused with the Marchung script, a related but separate script about which little is known beyond that it has been used in some other Bön texts.',
+          omnicode: '',
+          wikicode: 'Zhang-Zhung_language#Scripts',
+          font: {
+            'name': 'Noto Sans Marchen',
+            'url': 'https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/unhinted/otf/NotoSansMarchen'
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Extinct', 'Extinct: Medieval'],
+          invented: ['Derived: Brahmi'],
+          region: ['Central Asian']
+        },
+        {
           label: 'Meetei Mayek (Manipuri)',
           value: 'MeeteiMayek',
           sscode: 'Mtei',
@@ -997,6 +1031,22 @@ const ScriptMixin = {
           status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Mainland', 'South East Asian']
+        },
+        {
+          label: 'Mro',
+          value: 'Mro',
+          sscode: 'Mroo',
+          omnicode: 'mro',
+          ssdesc: 'The Mro (also called Mru or Murong) script is used for writing the Mro language, spoken in the Chittagong Hill Tracts of Bangladesh. It is estimated that the literacy rate among the Mro in their own script is greater than 80%. Education in the script is available up to grade 3. Some textbooks claim that Menlay Murang based the script on Roman, Burmese and Chinese characters, although others state that any similarity to other scripts is purely coincidental. Sources agree, however, that the script bears no natural genetic relationship with any existing script.',
+          wikicode: 'Mru_language#Script',
+          font: {
+            'name': 'Noto Sans Mro',
+            'url': 'https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/unhinted/otf/NotoSansMro'
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Invented'],
+          region: ['East Indic', 'Indic']
         },
         {
           label: 'Multani',
@@ -1561,6 +1611,21 @@ const ScriptMixin = {
           wikidesc: 'The Vaṭṭeḻuttu, also spelled Vattezhutthu (literally "Round Script") was an abugida writing system in southern India and Sri Lanka in the latter half of the 1st millennium AD. Vatteluttu was the common script for writing various forms of Tamil language in Pandya-Chera region till the 9th century and after that time it came to be replaced by the present-day Tamil script everywhere except in Kerala'
         },
         {
+          label: 'Wancho',
+          value: 'Wancho',
+          sscode: 'Wcho',
+          ssdesc: 'The Wancho script is used to write the Wancho language spoken in India. It is a simple alphabetic script comprised of letters which represent both consonants and vowels. There are no conjunct characters. Diacritical marks are used on vowel letters to indicate tone. The Wancho script has its own set of digits. Punctuation marks such as comma, full stop and question mark, are commonly used. The Wancho script was developed between 2001 and 2012 by Mr Banwang Losu.',
+          wikicode: 'Wancho_script',
+          font: {
+            'name': 'Noto Sans Wancho',
+            'url': 'https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/unhinted/otf/NotoSansWancho'
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Invented'],
+          region: ['East Indic', 'Indic']
+        },
+        {
           label: 'Warang Citi',
           value: 'WarangCiti',
           sscode: 'Wara',
@@ -1889,6 +1954,8 @@ const ScriptMixin = {
         return 'limbudeva'
       } else if (postOptions.includes('egrantamil') && tgt === 'Grantha') {
         return 'granthagrantamil'
+      } else if (postOptions.includes('granthaserif') && tgt === 'Grantha') {
+        return 'granthaserif'
       } else if (postOptions.includes('nepaldevafont') && tgt === 'Newa') {
         return 'nepaldevafont'
       } else if (postOptions.includes('ranjanalantsa') && tgt === 'Ranjana') {

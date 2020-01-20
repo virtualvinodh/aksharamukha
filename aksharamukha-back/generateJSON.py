@@ -9,7 +9,7 @@ from aksharamukha.transliterate import convert, unique_everseen, removeA
 
 # Script Mapping JSON
 
-scripts = '["HanifiRohingya", "MasaramGondi", "GunjalaGondi", "Soyombo", "Dogra", "KhomThai", "Ariyaka", "Shan", "KhamtiShan", "Mon", "TaiLaing", "Ahom","Assamese","Avestan","Balinese","BatakKaro","BatakManda","BatakPakpak","BatakToba","BatakSima","Bengali","Brahmi","Bhaiksuki","Buginese","Buhid","Burmese","Chakma","Cham","Devanagari","Grantha","GranthaPandya","Gujarati","Hanunoo","Javanese","Kaithi","Kannada","Kharoshthi","Khmer","Khojki","Khudawadi","Lao","LaoPali","Lepcha","Limbu","Malayalam","Mahajani","MeeteiMayek","Modi","Multani","Newa","OldPersian","Oriya","PhagsPa","Gurmukhi","Ranjana","Rejang","Santali","Saurashtra","Siddham","Sharada","Sinhala","SoraSompeng","Sundanese","SylotiNagri","Tagbanwa","Tagalog","TaiTham","Takri","Tamil","TamilGrantha","TamilBrahmi","Telugu","Thaana","Thai","Tibetan","Tirhuta","Urdu","Vatteluttu","WarangCiti","ZanabazarSquare"]'
+scripts = '["Mro", "Wancho", "Marchen", "HanifiRohingya", "MasaramGondi", "GunjalaGondi", "Soyombo", "Dogra", "KhomThai", "Ariyaka", "Shan", "KhamtiShan", "Mon", "TaiLaing", "Ahom","Assamese","Avestan","Balinese","BatakKaro","BatakManda","BatakPakpak","BatakToba","BatakSima","Bengali","Brahmi","Bhaiksuki","Buginese","Buhid","Burmese","Chakma","Cham","Devanagari","Grantha","GranthaPandya","Gujarati","Hanunoo","Javanese","Kaithi","Kannada","Kharoshthi","Khmer","Khojki","Khudawadi","Lao","LaoPali","Lepcha","Limbu","Malayalam","Mahajani","MeeteiMayek","Modi","Multani","Newa","OldPersian","Oriya","PhagsPa","Gurmukhi","Ranjana","Rejang","Santali","Saurashtra","Siddham","Sharada","Sinhala","SoraSompeng","Sundanese","SylotiNagri","Tagbanwa","Tagalog","TaiTham","Takri","Tamil","TamilGrantha","TamilBrahmi","Telugu","Thaana","Thai","Tibetan","Tirhuta","Urdu","Vatteluttu","WarangCiti","ZanabazarSquare"]'
 scripts = json.loads(scripts)
 
 roman = ["IASTPali", "IAST", "IPA", "ISO", "RussianCyrillic", "Titus", "HK", "Itrans", "Velthuis"]
@@ -320,10 +320,10 @@ if __name__ == "__main__":
   generate_script_map()
   print('Generating Script Matrix')
   generate_script_matrix()
-  print('Generating Syllabary')
-  generate_syllables()
-  print('Generating Conjuncts')
-  generate_conjuncts()
+  #print('Generating Syllabary')
+  #generate_syllables()
+  #print('Generating Conjuncts')
+  #generate_conjuncts()
   #print('Generating Common Letters')
   #generate_common_letters()
 

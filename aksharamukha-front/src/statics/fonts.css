@@ -72,7 +72,7 @@
 }
 @font-face {
   font-family: 'Noto Sans ChakmaPali';
-  src: url('../statics/chakmapali.otf')
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/chakmapali.otf')
 }
 @font-face {
   font-family: 'Noto Sans Telugu';
@@ -349,7 +349,7 @@
 
 @font-face {
   font-family: 'Noto Sans MarchenB';
-  src: url('../statics/BabelStoneMarchen.ttf')
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/BabelStoneMarchen.ttf')
 }
 
 .soyombo {

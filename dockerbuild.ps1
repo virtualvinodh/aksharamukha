@@ -2,11 +2,11 @@
 
 (Get-Content .\aksharamukha-front\src\mixins\ScriptMixin.js).replace('https://aksharamukha.appspot.com/api/', 'http://localhost:8085/api') | Set-Content .\aksharamukha-front\src\mixins\ScriptMixin.js
 
-python .\dockerfonts.py
+# python .\dockerfonts.py
 
 cd .\aksharamukha-fonts
 
-docker build -t virtualvinodh/aksharamukha-fonts .
+docker build --no-cache -t virtualvinodh/aksharamukha-fonts .
 
 cd ..\aksharamukha-front
 
@@ -14,7 +14,7 @@ quasar build
 
 cd .\dist
 
-docker build -t virtualvinodh/aksharamukha-front .
+docker build --no-cache -t virtualvinodh/aksharamukha-front .
 
 cd ..\..\aksharamukha-back
 
