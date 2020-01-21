@@ -664,7 +664,7 @@ export const ScriptMixin = {
             'name': 'Noto Sans Masaram Gondi',
             'url': 'https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/unhinted/otf/NotoSansMasaramGondi'
           },
-          language: ['Others'],
+          language: ['Sanskrit & Pali', 'Pali', 'Others'],
           status: ['Living', 'Living: Minor'],
           invented: ['Invented'],
           region: ['North Indic', 'Indic']
@@ -990,7 +990,7 @@ export const ScriptMixin = {
             'name': 'Noto Sans Marchen',
             'url': 'https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/unhinted/otf/NotoSansMarchen'
           },
-          language: ['Sanskrit & Pali', 'Pali'],
+          language: ['Others'],
           status: ['Extinct', 'Extinct: Medieval'],
           invented: ['Derived: Brahmi'],
           region: ['Central Asian']
