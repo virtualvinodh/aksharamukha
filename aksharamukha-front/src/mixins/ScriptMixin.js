@@ -383,8 +383,8 @@ export const ScriptMixin = {
           omnicode: 'balinese',
           wikicode: 'Balinese_script',
           font: {
-            'name': 'Noto Serif Balinese',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifBalinese/NotoSerifBalinese-Regular.otf'
+            'name': 'Vimala',
+            'url': 'https://github.com/longnow/bali-fonts/blob/master/Vimala.ttf'
           },
           language: ['Sanskrit & Pali', 'Pali'],
           status: ['Living', 'Living: Minor'],

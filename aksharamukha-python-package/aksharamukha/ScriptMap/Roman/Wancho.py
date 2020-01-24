@@ -89,7 +89,7 @@ ConsonantMap =  [
 
                 '\U0001E2CF',
                 '\U0001E2CF\u02BD',
-                '\U0001E2CE\u02BD',
+                '\U0001E2CE',
                 '\U0001E2DA',
                 ]
 

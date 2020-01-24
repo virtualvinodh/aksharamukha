@@ -11,6 +11,10 @@
   src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifBalinese/NotoSerifBalinese-Regular.otf')
 }
 @font-face {
+  font-family: 'Vimala';
+  src: url('https://cdn.jsdelivr.net/gh/longnow/bali-fonts/Vimala.ttf')
+}
+@font-face {
   font-family: 'Noto Serif Dogra';
   src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifDogra/NotoSerifDogra-Regular.otf')
 }
@@ -400,7 +404,7 @@
   font-family: "Noto Sans WarangCiti" !important
 }
 .balinese {
-  font-family: "Noto Serif Bali" !important
+  font-family: "Vimala" !important;
 }
 .kannada {
   font-family: "Noto Sans Kannada" !important
