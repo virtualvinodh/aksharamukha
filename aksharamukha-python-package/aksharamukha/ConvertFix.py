@@ -2192,6 +2192,8 @@ def FixTelugu(Strng, reverse=False):
     if not reverse:
         Strng = PostProcess.RetainDandasIndic(Strng, 'Telugu', True)
         Strng = PostProcess.RetainIndicNumerals(Strng, 'Telugu', True)
+    else:
+        Strng = Strng.replace('ఁ', 'ఀ')
 
     return Strng
 

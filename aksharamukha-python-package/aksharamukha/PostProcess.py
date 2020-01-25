@@ -18,6 +18,11 @@ def default(Strng):
 
     return Strng
 
+def TeluguArasunnaChandrabindu(Strng):
+    Strng = Strng.replace('ఀ', 'ఁ')
+
+    return Strng
+
 def MarchenSanskritPalatals(Strng):
     tsaSeries = ['\U00011C82', '\U00011C83', '\U00011C84']
     jaSereis =  ['\U00011C76', '\U00011C77', '\U00011C78']

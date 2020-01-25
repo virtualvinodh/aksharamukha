@@ -26,6 +26,7 @@
      <div class="notice q-ma-sm" v-show="outputScript === 'Ranjana' &&
         postOptions.includes('ranjanawartu')">This uses Tibetan codepoints to encode the characters. Without the specific font, the characters will just appear as Tibetan.</div>
      <div class="notice q-ma-sm" v-show="outputScript === 'KhomThai'">This uses Thai codepoints to encode the characters. Without the specific font, the characters will just appear as Thai.</div>
+     <div class="notice q-ma-sm" v-show="inputScript === 'Telugu' && inputText.includes('ఁ')">The Arasunna (ఁ) in the input text is being transliterated as Chandrabindu in the output text.</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Tamil' &&
             String(convertText).includes('𑌃')    ">This only works with Google Noto Tamil fonts </div>
       <div class="notice q-ma-sm" v-show="String(convertText).includes('॒') || String(convertText).includes('᳚') ||
@@ -40,7 +41,7 @@ import {ScriptMixin} from '../mixins/ScriptMixin'
 export default {
   // name: 'ComponentName',
   mixins: [ScriptMixin],
-  props: ['inputScript', 'outputScript', 'postOptions', 'convertText'],
+  props: ['inputScript', 'outputScript', 'postOptions', 'convertText', 'inputText'],
   data () {
     return {}
   }
