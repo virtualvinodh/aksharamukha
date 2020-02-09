@@ -266,6 +266,7 @@ export const ScriptMixin = {
           { label: 'Anusvara to Nasal<br/><small>gaṁgā → gaṅgā</small>', value: 'NasaltoAnsvaraIASTISO' }
         ],
         'RomanReadable': [
+          { label: 'Use alternate long/short e/o <br/><small>e\' e o\' o → e ae o oa</small>', value: 'RomanReadableLongEO' },
           { label: 'Capitalize sentences', value: 'capitalizeSentence' }
         ],
         'Khojki': [

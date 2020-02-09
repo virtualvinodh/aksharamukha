@@ -18,6 +18,19 @@ def default(Strng):
 
     return Strng
 
+def RomanReadableLongEO(Strng):
+
+    Strng = Strng.replace('o', 'oa')
+    Strng = Strng.replace('oa\'', 'o')
+
+    Strng = Strng.replace('e', 'ae')
+    Strng = Strng.replace('ae\'', 'e')
+
+    Strng = Strng.replace('aeae', 'ee')
+    Strng = Strng.replace('oaoa', 'oo')
+
+    return Strng
+
 def TeluguArasunnaChandrabindu(Strng):
     Strng = Strng.replace('ఀ', 'ఁ')
 

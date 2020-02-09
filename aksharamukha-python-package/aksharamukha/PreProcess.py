@@ -507,6 +507,40 @@ def normalize(Strng,Source):
 
     #Strng = Strng.replace('', "ຣ\uE00A")
 
+    ## Normalization for Bengali, Tamil, Malayalam and Grantha
+
+    # Bengali o/au
+
+    Strng = Strng.replace('ো', 'ো')
+    Strng = Strng.replace('াে', 'ো')
+
+    Strng = Strng.replace('ৌ', 'ৌ')
+    Strng = Strng.replace('ৗে', 'ৌ')
+
+    # Tamil o, O, au
+
+    Strng = Strng.replace('ொ', 'ொ')
+    Strng = Strng.replace('ாெ', 'ொ')
+
+    Strng = Strng.replace('ோ', 'ோ')
+    Strng = Strng.replace('ாே', 'ோ')
+
+    Strng = Strng.replace('ௌ', 'ௌ')
+    Strng = Strng.replace('ௗெ', 'ௌ')
+
+    # Malayalam
+
+    Strng = Strng.replace('ൊ', 'ൊ')
+    Strng = Strng.replace('ാെ', 'ൊ')
+
+    Strng = Strng.replace('ോ', 'ോ')
+    Strng = Strng.replace('ാേ', 'ോ')
+
+    # Grantha
+
+    Strng = Strng.replace('𑍋', '𑍋')
+    Strng = Strng.replace('𑌾𑍇', '𑍋')
+
     return Strng
 
 # Remove ZWJ/ZWNJ characters
