@@ -45,6 +45,4 @@ The syllabary for each script can be found [here](https://github.com/virtualvino
 
 The list of all possible Sanskrit (and Pali) conjuncts for the scripts can be found [here](https://github.com/virtualvinodh/aksharamukha/tree/master/aksharamukha-back/resources/conjuncts1) and [here](https://github.com/virtualvinodh/aksharamukha/tree/master/aksharamukha-back/resources/conjuncts2). The conjuncts have been split based on the number of consonants in the conjuncts. (The folder had to be split due to Google App Engine limitations). The suffix indicates the appended vowel. For instance, << conjuncts_Gujarati_o.json >> indicated all the possible Gujarati conjuncts that occurs with the vowel /o/.
 
-The list of common letters between two scripts can be found [here](https://github.com/virtualvinodh/aksharamukha/tree/master/aksharamukha-back/resources/common_letters1), [here](https://github.com/virtualvinodh/aksharamukha/tree/master/aksharamukha-back/resources/common_letters2) and [here](https://github.com/virtualvinodh/aksharamukha/tree/master/aksharamukha-back/resources/common_letters3). (The folder had to be split due to Google App Engine limitations as above).
-
 The project is released under GNU AGPL 3.0 License
