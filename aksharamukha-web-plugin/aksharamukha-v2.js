@@ -1,6 +1,18 @@
-const ScriptMixin = {
+export const ScriptMixin = {
     data() {
         return {
+            apiCall: this.$axios.create({
+                baseURL: 'https://aksharamukha.appspot.com/api/',
+                timeout: 100000
+            }),
+            wikipediaCall: this.$axios.create({
+                baseURL: 'https://en.wikipedia.org/w',
+                timeout: 100000
+            }),
+            scriptSourceCall: this.$axios.create({
+                baseURL: 'http://scriptsource.org/cms/scripts/page.php?item_id=script_detail&key=Zanb',
+                timeout: 100000
+            }),
             vowels: ['a', 'A', 'i', 'I', 'u', 'U', 'R', 'E', 'e', 'ai', 'O', 'o', 'au'],
             consonants: ['k', 'kh', 'g', 'gh', 'G', 'c', 'ch', 'j', 'jh', 'J', 'T', 'Th', 'D', 'Dh', 'N', 't', 'th', 'd', 'dh', 'n', 'p', 'ph', 'b', 'bh', 'm', 'y', 'r', 'l', 'v', 'z', 'S', 's', 'h', 'L', 'Z', 'r2', 'n2'],
             consonantsIndic: ['k', 'kh', 'g', 'gh', 'G', 'c', 'ch', 'j', 'jh', 'J', 'T', 'Th', 'D', 'Dh', 'N', 't', 'th', 'd', 'dh', 'n', 'p', 'ph', 'b', 'bh', 'm', 'y', 'r', 'l', 'v', 'z', 'S', 's', 'h', 'L'],
@@ -38,10 +50,10 @@ const ScriptMixin = {
                     label: 'Thai orthography text <br/><small><div>e.g. พุทธะ</div></small>',
                     value: 'ThaiOrthography'
                 }, {
-                    label: 'Sajjhaya orthography text <br/><small><div>e.g. พุท์ธ</div></small>',
+                    label: 'Sajjhāya orthography text <br/><small><div>e.g. พุท์ธ</div></small>',
                     value: 'ThaiSajjhayaOrthography'
                 }, {
-                    label: 'Sajjhaya orthography with ะ text <br/><small><div>e.g. พุท์ธะ</div></small>',
+                    label: 'Sajjhāya orthography (Thai Nativized) <br/><small><div>e.g. พุท์ธะ</div></small>',
                     value: 'ThaiSajjhayawithA'
                 }],
                 'TaiTham': [{
@@ -55,10 +67,10 @@ const ScriptMixin = {
                     label: 'Lao orthography text<small><div class="laopali">e.g. ພຸທຘະ</div></small>',
                     value: 'LaoTranscription'
                 }, {
-                    label: 'Sajjhaya orthography text <br/><small><div class="laopali">e.g. ພຸທ໌ຘ</div></small>',
+                    label: 'Sajjhāya orthography text <br/><small><div class="laopali">e.g. ພຸທ໌ຘ</div></small>',
                     value: 'LaoSajhayaOrthography'
                 }, {
-                    label: 'Sajjhaya orthography with ะ text <br/><small><div class="laopali">e.g. ພຸທ໌ຘະ</div></small>',
+                    label: 'Sajjhāya orthography with ะ text <br/><small><div class="laopali">e.g. ພຸທ໌ຘະ</div></small>',
                     value: 'LaoSajhayaOrthographywithA'
                 }],
                 'Devanagari': [{
@@ -236,10 +248,10 @@ const ScriptMixin = {
                     label: 'Thai Orthography<br/><small><div>พุทฺธ → พุทธะ</div></small>',
                     value: 'ThaiTranscription'
                 }, {
-                    label: 'Sajjhaya Orthography<br/><small><div>พุทฺธ → พุท์ธ</div></small>',
+                    label: 'Sajjhāya Orthography<br/><small><div>พุทฺธ → พุท์ธ</div></small>',
                     value: 'ThaiSajjhayaOrthography'
                 }, {
-                    label: 'Sajjhaya Orthography with ะ<br/><small><div>พุทฺธ → พุท์ธะ</div></small>',
+                    label: 'Sajjhāya Orthography (Thai Nativized)<br/><small><div>พุทฺธ → พุท์ธะ</div></small>',
                     value: 'ThaiSajjhayawithA'
                 }, {
                     label: 'Sara a ะ as Visarga<br/><small><div>นมัห์ → นมะ</div></small>',
@@ -249,10 +261,10 @@ const ScriptMixin = {
                     label: 'Lao Orthography<br/><small><span class="laopali">ພຸທ຺ຘ → ພຸທຘະ</span></small>',
                     value: 'LaoTranscription'
                 }, {
-                    label: 'Sajjhaya Orthography<br/><small><div class="laopali">ພຸທ຺ຘ → ພຸທ໌ຘ</div></small>',
+                    label: 'Sajjhāya Orthography<br/><small><div class="laopali">ພຸທ຺ຘ → ພຸທ໌ຘ</div></small>',
                     value: 'LaoSajjhaya'
                 }, {
-                    label: 'Sajjhaya Orthography with ะ<br/><small><div  class="laopali">ພຸທ຺ຘ → ພຸທ໌ຘະ</div></small>',
+                    label: 'Sajjhāya Orthography with ะ<br/><small><div  class="laopali">ພຸທ຺ຘ → ພຸທ໌ຘະ</div></small>',
                     value: 'LaoSajjhayawithA'
                 }],
                 'Lao': [{
@@ -311,6 +323,9 @@ const ScriptMixin = {
                     value: 'ranjanawartu'
                 }],
                 'Telugu': [{
+                    label: 'Use Arasunna as Chandrabindu<br/><small><span class="telugu"> హూఀ → హూఁ</span></small>',
+                    value: 'TeluguArasunnaChandrabindu'
+                }, {
                     label: 'Dandas<br/><small><span class="telugu">. .. → । ॥</span></small>',
                     value: 'RetainTeluguDanda'
                 }, {
@@ -374,6 +389,9 @@ const ScriptMixin = {
                     value: 'NasaltoAnsvaraIASTISO'
                 }],
                 'RomanReadable': [{
+                    label: 'Use alternate long/short e/o <br/><small>e\' e o\' o → e ae o oa</small>',
+                    value: 'RomanReadableLongEO'
+                }, {
                     label: 'Capitalize sentences',
                     value: 'capitalizeSentence'
                 }],
@@ -513,8 +531,8 @@ const ScriptMixin = {
                     omnicode: 'balinese',
                     wikicode: 'Balinese_script',
                     font: {
-                        'name': 'Noto Serif Balinese',
-                        'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifBalinese/NotoSerifBalinese-Regular.otf'
+                        'name': 'Vimala',
+                        'url': 'https://github.com/longnow/bali-fonts/blob/master/Vimala.ttf'
                     },
                     language: ['Sanskrit & Pali', 'Pali'],
                     status: ['Living', 'Living: Minor'],
@@ -605,8 +623,8 @@ const ScriptMixin = {
                     value: 'Bengali',
                     sscode: 'Beng',
                     ssdesc: 'The Bengali (also called Bangla) script is used for writing the Bengali language, spoken by over 180,000,000 people mostly in Bangladesh and India. It is also used for a number of other Indian languages including Sylheti and, with one or two modifications, Assamese. It is a Brahmic script although its exact derivation is disputed.',
-                    omnicode: 'batak',
-                    wikicode: 'Batak_script',
+                    omnicode: 'bengali',
+                    wikicode: 'Bengali',
                     font: {
                         'name': '',
                         'url': ''
@@ -777,7 +795,7 @@ const ScriptMixin = {
                         'name': 'Noto Sans Masaram Gondi',
                         'url': 'https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/unhinted/otf/NotoSansMasaramGondi'
                     },
-                    language: ['Others'],
+                    language: ['Sanskrit & Pali', 'Pali', 'Others'],
                     status: ['Living', 'Living: Minor'],
                     invented: ['Invented'],
                     region: ['North Indic', 'Indic']
@@ -1083,7 +1101,7 @@ const ScriptMixin = {
                         'name': 'Noto Sans Marchen',
                         'url': 'https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/unhinted/otf/NotoSansMarchen'
                     },
-                    language: ['Sanskrit & Pali', 'Pali'],
+                    language: ['Others'],
                     status: ['Extinct', 'Extinct: Medieval'],
                     invented: ['Derived: Brahmi'],
                     region: ['Central Asian']
@@ -1535,16 +1553,16 @@ const ScriptMixin = {
                     region: ['South Indic', 'Indic']
                 }, {
                     label: 'Tamil (Extended)',
-                    value: 'TamilGrantha',
+                    value: 'TamilExtended',
                     sscode: '',
                     ssdesc: '',
                     miscsrc: '',
-                    miscdesc: 'Tamil (Extended) represents the attempts to use the full complimentary set of Grantha letters to fill the gaps in the Tamil script (as compared to the pan-Indic system). Modern Tamil only adopts /ja/, /śa/, /ṣa/, /ha/ and the compound /śrī/ from Grantha into its character reportoire. This was probably done instead of using superscript numerals to increase the readability of the text (and the possible wide-spread familiarity with Grantha script few decades ago).',
+                    miscdesc: 'Tamil (Extended) represents the attempt to use the full complimentary set of Grantha letters to fill in the gaps in the Tamil script (as compared to the pan-Indic system). Modern Tamil only adopts /ja/, /śa/, /ṣa/, /ha/ and the compound /śrī/ from Grantha into its character reportoire. This was probably done instead of using superscript numerals (as done in the modern Times) to increase the readability of the text (and the possible wide-spread familiarity with Grantha script several decades ago).',
                     omnicode: '',
                     wikicode: '',
                     font: {
-                        'name': 'e-Grantamil',
-                        'url': 'http://virtualvinodh.com/download/e-Grantamil.ttf'
+                        'name': 'Shankara Extended Tamil',
+                        'url': 'https://github.com/virtualvinodh/aksharamukha/blob/master/aksharamukha-front/src/statics/ShankaraExtendedTamil.otf'
                     },
                     language: ['Sanskrit & Pali', 'Pali'],
                     status: ['Living', 'Living: Minor'],
@@ -1715,8 +1733,8 @@ const ScriptMixin = {
                     wikicode: 'Horizontal_square_script',
                     omnicode: 'mhss',
                     font: {
-                        'name': 'Noto Sans ZanabazarSquare',
-                        'url': 'https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/unhinted/otf/NotoSansZanabazarSquare'
+                        'name': 'Babelstone Zanabazar',
+                        'url': 'https://www.babelstone.co.uk/Fonts/Zanabazar.html'
                     },
                     language: ['Sanskrit & Pali', 'Pali'],
                     status: ['Extinct', 'Extinct: Medieval'],
