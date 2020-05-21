@@ -607,6 +607,16 @@ def ShiftDiacritics(Strng,Target,reverse=False):
 
     return Strng
 
+
+def FixTamilExtended(Strng, reverse=False):
+    if not reverse:
+        Strng = Strng.replace('ക്‌ഷ', 'ക്ഷ')
+        Strng = Strng.replace('ശ്‌ര', 'ശ്‍ര')
+    else:
+        Strng = Strng.replace('\u0D4D', '\u0D4D\u200C')
+
+    return Strng
+
 # Move Vowel Signs
 def FixTamilGrantha(Strng,reverse=False):
     ListC = '|'.join(GM.CrunchSymbols(GM.Consonants, 'TamilGrantha'))
@@ -1974,8 +1984,26 @@ def FixChakma(Strng,reverse=False):
         Strng = re.sub("("+listC+")"+"(?!"+listV+")",r'\1''\u02BE',Strng)
         Strng = Strng.replace("\U00011127","")
         Strng = Strng.replace("\u02BE","\U00011127")
+
+        Strng = Strng.replace('𑄣𑄳𑄦', '𑅄')
+        Strng = Strng.replace('𑄣𑄴𑄦', '𑅄')
+
+        ## Ai => kai
+        Strng = re.sub("("+listC+")"+"(𑄃𑄨)", r'\1' + '\U0001112D', Strng)
+        ## ei' => kei
+        Strng = Strng.replace('\U0001112C𑄃𑄨ʼ', '\U00011146', )
+
+
     else:
         Strng = PostProcess.ChakmaGemination(Strng, reverse = True)
+
+        Strng = Strng.replace('𑅄', '𑄣𑄳𑄦')
+
+        Strng = Strng.replace('\U00011133\U00011103', '\U00011145')
+        Strng = Strng.replace('\U00011133\U00011104', '\U00011146')
+
+        Strng = Strng.replace('\U0001112D', '𑄃𑄨')
+        Strng = Strng.replace('\U00011146', '\U0001112C𑄃𑄨ʼ')
 
         Strng = Strng.replace("\U00011127","\u02BE")
         Strng = re.sub("("+listC+")"+"(?!"+listV+'|\u02BE'+")",r'\1''\U00011127',Strng)
@@ -2420,12 +2448,13 @@ def FixGrantha(Strng, reverse=False):
         Strng = Strng.replace('᳚', '॑')
         Strng = Strng.replace('ꣳ', '𑍞')
         Strng = Strng.replace('ꣴ', '𑍟')
+        Strng = Strng.replace('𑌼𑍍', '𑌼𑍍\u200C')
     else:
+        Strng = Strng.replace('𑌼𑍍\u200C', '𑌼𑍍')
         Strng = Strng.replace('॑', '᳚')
         Strng = Strng.replace('᳴', '॑')
         Strng = Strng.replace('𑍞', 'ꣳ')
         Strng = Strng.replace('𑍟', 'ꣴ')
-
 
     return Strng
 

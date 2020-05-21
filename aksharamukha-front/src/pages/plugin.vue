@@ -16,6 +16,10 @@
 
     <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha.js?source=scriptidentifier"&gt;&lt;/script&gt;</pre>
 
+    <div class="q-body-1">If you'd like to restrict the scripts appearing in the drop-down menu, you need to pass the <i>scriptlist</i> parameter. </div>
+
+    <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha.js?scriptlist=Grantha,Kannada"&gt;&lt;/script&gt;</pre>
+
     <div class="q-body-1">You can provide additional preoptions in case, the input needs to be processed differently. For instance, </div>
     <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha.js?source=Tamil&preoptions=TamilTranscribe"&gt;&lt;/script&gt;</pre>
 
@@ -46,7 +50,7 @@
       <li><i>Go to Settings -></i> Header and Footer Scripts</li>
       <li><i>Enter the following</i> within Scripts in header</li>
 
-      If you want Aksharamukha to autodetect scriptsL<br/>
+      If you want Aksharamukha to autodetect scripts:<br/>
       <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha.js?class=site-content"&gt; &lt;/script&gt;</pre>
       If you already know the input script, say, Devanagari:<br/>
       <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha.js?class=site-content&source=Devanagari"&gt; &lt;/script&gt;</pre>

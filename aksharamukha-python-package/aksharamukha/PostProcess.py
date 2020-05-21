@@ -178,7 +178,7 @@ def ChakmaPali(Strng):
 def ThaiSajjhayawithA(Strng):
     Strng = ThaiSajjhayaOrthography(Strng)
     Strng = Strng.replace('ัง','ังฺ')
-    Strng = ThaiTranscription(Strng, anusvaraChange = False)
+    Strng = ThaiTranscription(Strng, anusvaraChange = True)
 
     Strng = Strng.replace('ะํ', 'ํ')
     Strng = Strng.replace('ะั', 'ั')

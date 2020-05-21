@@ -89,8 +89,8 @@
             <q-item :to="'/input/Tamil'">
               <q-item-main label="Tamil"/>
             </q-item>
-            <q-item :to="'/input/TamilGrantha'">
-              <q-item-main label="Tamil (with full Grantha"/>
+            <q-item :to="'/input/TamilExtended'">
+              <q-item-main label="Tamil (Extended)"/>
             </q-item>
              <q-item :to="'/input/Tirhuta'">
               <q-item-main label="Tirhuta (Maithili)"/>

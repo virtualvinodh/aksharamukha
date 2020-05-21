@@ -2126,6 +2126,10 @@ scriptList.push('IPA')
 scriptList.push('Original')
 var myTags = document.getElementsByTagName("script");
 var src = myTags[myTags.length - 1].src;
+if (src.includes('scriptlist')) {
+    scriptList = unescape(src).split("scriptlist=")[1].split("&")[0].split(',');
+    scriptList.push('Original')
+}
 var sourceURL = 'autodetect'
 if (src.includes('source')) {
     sourceURL = unescape(src).split("source=")[1].split("&")[0];
@@ -2245,14 +2249,26 @@ function appendTool() {
     var selectEnd = '</select></span>' ///</datalist></span>'
     var selectMid = '' // '<datalist id="script-list">'
     selectMid += '<option value="Original"> Original script </option>'
-    selectMid += '<option value="IAST">IAST</option>'
-    selectMid += '<option value="IASTPali">IAST (Pali)</option>'
-    selectMid += '<option value="ISO">ISO</option>'
-    selectMid += '<option value="RomanReadable">Readable Roman</option>'
-    selectMid += '<option value="IPA">IPA</option>'
+    if (scriptList.includes("IAST")) {
+        selectMid += '<option value="IAST">IAST</option>'
+    }
+    if (scriptList.includes("IASTPali")) {
+        selectMid += '<option value="IASTPali">IAST (Pali)</option>'
+    }
+    if (scriptList.includes("ISO")) {
+        selectMid += '<option value="ISO">ISO</option>'
+    }
+    if (scriptList.includes("RomanReadable")) {
+        selectMid += '<option value="RomanReadable">Readable Roman</option>'
+    }
+    if (scriptList.includes("IPA")) {
+        selectMid += '<option value="IPA">IPA</option>'
+    }
     var preservebutton = '<input type="checkbox" name="preserve" id="aksharamukha-preserve"/> Preserve source </input>'
     scripts.forEach(function(script) {
-        selectMid += '<option value="' + script.value + '">' + script.label + "</option>";
+        if (scriptList.includes(script.value)) {
+            selectMid += '<option value="' + script.value + '">' + script.label + "</option>";
+        }
     });
     document.body.insertAdjacentHTML('afterbegin', `
       <div id="aksharamukha-navbar" class="sticky">

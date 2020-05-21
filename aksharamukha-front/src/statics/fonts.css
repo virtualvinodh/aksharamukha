@@ -12,7 +12,7 @@
 }
 @font-face {
   font-family: 'Vimala';
-  src: url('https://cdn.jsdelivr.net/gh/longnow/bali-fonts/Vimala.ttf')
+  src: url('https://cdn.jsdelivr.net/gh/longnow/bali-fonts/release/Vimala.ttf')
 }
 @font-face {
   font-family: 'Noto Serif Dogra';
@@ -164,7 +164,7 @@
 }
 @font-face {
   font-family: 'BabelStoneZanabazar';
-  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansZanabazarSquare/NotoSansZanabazarSquare-Regular.otf')
+  src: url('../statics/BabelStoneZanabazar.woff')
 }
 @font-face {
   font-family: 'Adinatha Tamil Brahmi';
@@ -334,8 +334,13 @@
 @font-face {
   font-family: 'RanjanaUnicode';
   src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/RanjanaUNICODE1.0.TTF')
-
 }
+
+@font-face {
+  font-family: 'Shankara Extended Tamil';
+  src: url('../statics/ShankaraExtendedTamil.otf')
+}
+
 @font-face {
   font-family: 'Noto Sans Brahmi';
   src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansBrahmi/NotoSansBrahmi-Regular.otf')
@@ -560,6 +565,10 @@
   font-family: "e-Grantamil" !important;
   font-size: 110%;
   line-height: 1.5em;
+}
+.tamilextended {
+  font-family: "Shankara Extended Tamil" !important;
+  line-height: 1.6em;
 }
 .siddhammukta {
   font-size: 120%;
