@@ -76,7 +76,7 @@
     </div>
     <h5> Notes </h5>
       <div class="q-body-1">
-        Sanskrit-specific romanization formats such as Velthuis, HK, IAST have been extended to support Vedic, South-Indic and Sinhala characters.
+        Sanskrit-specific romanization formats such as Velthuis, HK, IAST, SLP1 have been extended to support Vedic, South-Indic and Sinhala characters.
       </div>
   </q-page>
 </template>

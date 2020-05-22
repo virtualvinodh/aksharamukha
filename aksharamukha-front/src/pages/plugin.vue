@@ -12,7 +12,7 @@
     <div class="q-body-1">Additionally, the plugin will also load the necessary font files for minority scripts. Hence, any script of your choice should be rendered propertly</div>
 
     <h5> Additional Instructions </h5>
-    <div class="q-body-1">In its simplistic form, you just need to attach the file as shown above. It will then autodetect the input script and proceed to convert the entire site. However, with mixed content (as it oftens occurs in websites), the autodetection can sometimes fail to detect the source script appropriately. It is suggested you provide the source script along with script file. </div>
+    <div class="q-body-1">In its simplistic form, you just need to place the script tag as shown above in the head section of your HTML. It will then autodetect the input script and proceed to convert the entire site. However, with mixed content (as it oftens occurs in websites), the autodetection can sometimes fail to detect the source script appropriately. It is suggested you provide the source script along with script file. </div>
 
     <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha-v2.js?source=scriptidentifier"&gt;&lt;/script&gt;</pre>
 
@@ -53,7 +53,7 @@
       If you want Aksharamukha to autodetect scripts:<br/>
       <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha-v2.js?class=site-content"&gt; &lt;/script&gt;</pre>
       If you already know the input script, say, Devanagari:<br/>
-      <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha-v2.js?class=site-content&source=Devanagari"&gt; &lt;/script&gt;</pre>
+      <pre>&lt;script src="http://www.virtualvinodh.com/aksharamkh/aksharamukha-v2.js?class=site-content&source=Devanagari"&gt; &lt;/script&gt;</pre> (If your site's wrapper class is not named <i>site-content</i>, replace it with the relevant class name or remove the <i>class</i> parameter altogether)
       The script name needs to be capitalized.
       <li><i>Save Settings</i> at the bottom </li>
     </ol>

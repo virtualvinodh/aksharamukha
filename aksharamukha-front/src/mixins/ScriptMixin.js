@@ -1716,12 +1716,20 @@ export const ScriptMixin = {
           value: 'ISO'
         },
         {
+          label: 'Roman (SLP1)',
+          value: 'SLP1'
+        },
+        {
           label: 'Roman (Titus)',
           value: 'Titus'
         },
         {
           label: 'Roman (Velthuis)',
           value: 'Velthuis'
+        },
+        {
+          label: 'Roman (WX)',
+          value: 'WX'
         },
         {
           language: ['Others'],
@@ -1770,6 +1778,14 @@ export const ScriptMixin = {
         {
           label: 'Titus',
           value: 'Titus'
+        },
+        {
+          label: 'SLP1',
+          value: 'SLP1'
+        },
+        {
+          label: 'WX',
+          value: 'WX'
         },
         {
           label: 'Roman (Readable)',
