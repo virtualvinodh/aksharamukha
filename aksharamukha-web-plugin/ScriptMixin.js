@@ -1,18 +1,6 @@
-export const ScriptMixin = {
+const ScriptMixin = {
   data () {
     return {
-      apiCall: this.$axios.create({
-        baseURL: 'https://aksharamukha.appspot.com/api/',
-        timeout: 100000
-      }),
-      wikipediaCall: this.$axios.create({
-        baseURL: 'https://en.wikipedia.org/w',
-        timeout: 100000
-      }),
-      scriptSourceCall: this.$axios.create({
-        baseURL: 'http://scriptsource.org/cms/scripts/page.php?item_id=script_detail&key=Zanb',
-        timeout: 100000
-      }),
       vowels: ['a', 'A', 'i', 'I', 'u', 'U', 'R', 'E', 'e', 'ai', 'O', 'o', 'au'],
       consonants: ['k', 'kh', 'g', 'gh', 'G',
         'c', 'ch', 'j', 'jh', 'J',

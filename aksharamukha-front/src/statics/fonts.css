@@ -164,7 +164,7 @@
 }
 @font-face {
   font-family: 'BabelStoneZanabazar';
-  src: url('../statics/BabelStoneZanabazar.woff')
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/BabelStoneZanabazar.woff')
 }
 @font-face {
   font-family: 'Adinatha Tamil Brahmi';
@@ -338,7 +338,7 @@
 
 @font-face {
   font-family: 'Shankara Extended Tamil';
-  src: url('../statics/ShankaraExtendedTamil.otf')
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/ShankaraExtendedTamil.otf')
 }
 
 @font-face {
