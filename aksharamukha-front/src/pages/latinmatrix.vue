@@ -167,7 +167,8 @@ export default {
         .then(function (response) {
           for (var key in response.data['results']) {
             if (key === 'RomanReadable') {
-              dhis.results[key] = JSON.parse(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱').replace('"a,', '"a",'))
+              console.log(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱').replace('"a\\\\"', '"a"').replace('"a\\"', '"a"').replace('"a\\"', '"a","'))
+              dhis.results[key] = JSON.parse(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace('"a\\\\"', '"a"').replace('"a\\"', '"a"').replace('"a\\"', '"a"'))
             } else if (key !== 'Velthuis') {
               dhis.results[key] = JSON.parse(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱'))
             } else {

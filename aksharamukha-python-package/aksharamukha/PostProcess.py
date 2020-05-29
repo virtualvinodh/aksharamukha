@@ -1143,6 +1143,9 @@ def ThaiLaoTranscription(Strng,Script,shortA,shortAconj,reverse=False, anusvaraC
 
     cons = "|".join(GM.CrunchSymbols(GM.Consonants, Script)+GM.CrunchList('VowelMap',Script)[0:1])
 
+    if Script == 'Thai':
+        cons = "|".join(GM.CrunchSymbols(GM.Consonants, Script)+GM.CrunchList('VowelMap',Script)[0:1] + ['ฮ', 'บ', 'ฝ', 'ด'])
+
     if Script == 'Lao':
         cons = "|".join(GM.CrunchSymbols(GM.Consonants, Script) + GM.CrunchList('VowelMap',Script)[0:1] + ['ດ','ບ','ຟ'])
 

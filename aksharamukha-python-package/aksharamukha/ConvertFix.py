@@ -89,6 +89,16 @@ def VedicSvarsIndicLatin(Strng):
 
     return Strng
 
+def VedicSvarasOthers(Strng, Target):
+    Strng = Strng.replace('\\"','↑↑').replace("\\_", '↓').replace("\\\'",'↑')
+    anu = GM.CrunchList('AyogavahaMap', Target)[1]
+    Strng = Strng.replace('\\m++', 'ꣳ')
+    Strng = Strng.replace('\\m+', 'ꣴ')
+
+    Ayogavaha = GM.CrunchList('AyogavahaMap', Target)
+
+    return Strng
+
 def VedicSvarasDiacrtics(Strng, Target):
     Strng = Strng.replace('{\\m+}', '\\m+')
     Strng = Strng.replace('\\`', '\\_') ## Alternate form of Anudatta
@@ -187,11 +197,35 @@ def FixRomanOutput(Strng,Target):
 def PostFixRomanOutput(Strng,Source,Target):
     Strng = Strng.replace("\u02BD","")
 
+    vedicDiacRoman = ["IAST", "IASTPali", "ISO", "Titus"]
+    vedicnonDiacRoman = ["HK", "Itrans", "Velthuis", "SLP1", "WX"]
+
+    if Target in vedicDiacRoman:
+        Strng = VedicSvarasDiacrtics(Strng, Target)
+    elif Target  == "IPA":
+        Strng = Strng.replace('\\"','↑↑').replace("\\_", '↓').replace("\\\'",'↑')
+        Strng = Strng.replace('\\m++', 'gͫ̄')
+        Strng = Strng.replace('\\m+', 'gͫ')
+    elif Target == "RomanReadable":
+        Strng = Strng.replace('\\"','').replace("\\_", '').replace("\\\'",'')
+        Strng = Strng.replace('\\m++', 'ggum')
+        Strng = Strng.replace('\\m+', 'gum')
+    elif Target in vedicnonDiacRoman:
+        pass
+    elif Target == "RussianCyrillic":
+        Strng = Strng.replace('\\\'', '̍')
+        Strng = Strng.replace('\\"', '̎')
+        Strng = Strng.replace('\\_', '̱')
+        Strng = Strng.replace('\\м++', 'г\u0361м')
+        Strng = Strng.replace('\\м+', 'г\u035Cм')
+    else:
+        Strng = VedicSvarasOthers(Strng, Target)
+
     if Source == 'Sinhala' and Target == 'IPA':
         Strng = SinhalaIPAFix(Strng)
 
     if Target == "IPA":
-        Strng = Strng.replace('\\"','↑↑').replace("\\_", '↓').replace("\\\'",'↑')
+
         Strng = FixIPA(Strng)
 
     if Target == 'Santali':
@@ -213,22 +247,17 @@ def PostFixRomanOutput(Strng,Source,Target):
         Strng = FixMro(Strng)
 
     if Target == "RomanReadable":
-        Strng = Strng.replace('\\"','').replace("\\_", '').replace("\\\'",'').replace('\\', '')
         Strng = FixRomanReadable(Strng)
 
     if Target == "IAST" or Target == "IASTPali":
-        Strng = VedicSvarasDiacrtics(Strng, Target)
         Strng = Strng.replace("a_i", "aï")
         Strng = Strng.replace("a_u", "aü")
 
     if Target == "ISO":
         Strng = Strng.replace("\\’", "\\\'")
-        Strng = VedicSvarasDiacrtics(Strng, Target)
         Strng = Strng.replace("a_i", "a:i")
         Strng = Strng.replace("a_u", "a:u")
 
-    if Target == "Titus":
-        Strng = VedicSvarasDiacrtics(Strng, Target)
 
     if Target == "Velthuis" or Target == "Itrans":
         Strng = Strng.replace("\\.a", "\\\'")
@@ -1317,19 +1346,22 @@ def FixTibetan(Strng,reverse=False):
 def ReverseVowelSigns(Strng,Script,reverse=False):
     EAIO = "|".join(sorted(GM.CrunchSymbols(GM.VowelSignsNV,Script)[9:12]+GM.CrunchSymbols(GM.VowelSignsNV,Script)[17:],key=len,reverse=True))
     cons = "|".join(GM.CrunchSymbols(GM.Consonants,Script))
+    a = GM.CrunchSymbols(GM.Vowels,Script)[0].split()[0]
+    consa = "|".join(GM.CrunchSymbols(GM.Consonants,Script) + [a])
 
     if Script == "Thai":
         EAIO += "|ใ"
+        cons = "|".join(GM.CrunchSymbols(GM.Consonants,Script) + ['ฮ','บ', 'ฝ', 'ด', 'ฦ', 'ฤ'])
 
     if Script == "Lao":
-        cons = "|".join(GM.CrunchSymbols(GM.Consonants,Script) + ['ດ','ບ','ຟ'])
+        cons = "|".join(GM.CrunchSymbols(GM.Consonants,Script) + ['ດ','ບ','ຟ'] )
 
     a = GM.CrunchSymbols(GM.Vowels,Script)[0]
 
     if not reverse:
-        Strng = re.sub("("+cons+")("+EAIO+")(?!("+EAIO+")"+a+")",r"\2\1",Strng)
+        Strng = re.sub("("+consa+")("+EAIO+")",r"\2\1",Strng)
     else:
-        Strng = re.sub("("+EAIO+")"+"("+cons+")",r'\2\1',Strng)
+        Strng = re.sub("("+EAIO+")"+"("+consa+")",r'\2\1',Strng)
 
     return Strng
 

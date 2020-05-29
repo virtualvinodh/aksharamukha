@@ -13,24 +13,24 @@ VowelMap =  [
             '\u0EA3\u0EB9\u02BD',
             '\u0EA5\u0EB8\u02BD',
             '\u0EA5\u0EB9\u02BD',
-            '\u0EC0\u0EAD',
-            '\u0EC4\u0EAD',
-            '\u0EC2\u0EAD',
-            '\u0EC0\u0EAD\u0EBB\u0EB2',
+            '\u0EAD\u0EC0',
+            '\u0EAD\u0EC4',
+            '\u0EAD\u0EC2',
+            '\u0EAD\u0EC0\u0EBB\u0EB2',
             ]
 
 SouthVowelMap = [
-                '\u0EC0\u0EAD\u0EB0',
-                '\u0EC2\u0EAD\u0EB0',
+                '\u0EAD\u0EC0\u0EB0',
+                '\u0EAD\u0EC2\u0EB0',
                 ]
 
 ModernVowelMap = [
-                 '\u0EC1\u0EAD\u0EB0',
-                 '\u0EC0\u0EAD\u0EB2\u0EB0',
+                 '\u0EAD\u0EC1\u0EB0',
+                 '\u0EAD\u0EC0\u0EB2\u0EB0',
                  ]
 
 SinhalaVowelMap = [
-                  '\u0EC1\u0EAD'
+                  '\u0EAD\u0EC1'
                   ]
 
 VowelSignMap =  [
