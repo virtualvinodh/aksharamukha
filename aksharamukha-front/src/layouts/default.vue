@@ -68,35 +68,8 @@
           <q-item-main label="Convert Files (Batch)"/>
         </q-item>
         <q-collapsible icon="keyboard" label="Input (Beta)" >
-            <q-item :to="'/input/Devanagari'">
-              <q-item-main label="Devanagari"/>
-            </q-item>
-             <q-item :to="'/input/Grantha'">
-              <q-item-main label="Grantha"/>
-            </q-item>
-            <q-item :to="'/input/Kannada'">
-              <q-item-main label="Kannada"/>
-            </q-item>
-            <q-item :to="'/input/Ranjana'">
-              <q-item-main label="Ranjana"/>
-            </q-item>
-            <q-item :to="'/input/Siddham'">
-              <q-item-main label="Siddham"/>
-            </q-item>
-            <q-item :to="'/input/Sinhala'">
-              <q-item-main label="Sinhala"/>
-            </q-item>
-            <q-item :to="'/input/Tamil'">
-              <q-item-main label="Tamil"/>
-            </q-item>
-            <q-item :to="'/input/TamilExtended'">
-              <q-item-main label="Tamil (Extended)"/>
-            </q-item>
-             <q-item :to="'/input/Tirhuta'">
-              <q-item-main label="Tirhuta (Maithili)"/>
-            </q-item>
-             <q-item :to="'/input/Newa'">
-              <q-item-main :label="'Newa (Nepal Bhasa)'"/>
+            <q-item :to="'/input/' + script.value" v-for="script in scriptsIndic" :key="script.value">
+              <q-item-main :label="script.label"/>
             </q-item>
         </q-collapsible>
         <hr/>

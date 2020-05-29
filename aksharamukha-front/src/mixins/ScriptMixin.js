@@ -2,7 +2,7 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
-        baseURL: 'https://aksharamukha.appspot.com/api/',
+        baseURL: 'http://localhost:8085/api',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -44,6 +44,7 @@ export const ScriptMixin = {
       consontantsSpecial: ['L', 'Z', 'r2', 'n2'],
       consonantsSinhala: ['n*g', 'n*j', 'n*D', 'n*d', 'm*b'],
       ayogavahasAll: ['~', 'M', 'H'],
+      vedicScripts: ['Assamese', 'Bengali', 'Devanagari', 'Gujarati', 'Kannada', 'Malayalam', 'Oriya', 'Gurmukhi', 'Tamil', 'Telugu', 'TamilExtended', 'Grantha'],
       preOptionsGroup: {
         'Tamil': [
           { label: 'Transcribe Tamil <br/><small><span class="tamil">மதம், நகம்</span> → madam, nagam</small>', value: 'TamilTranscribe' },
@@ -110,6 +111,9 @@ export const ScriptMixin = {
         'Urdu': [
           { label: 'Short vowels not shown', value: 'UrduShortNotShown' }
         ],
+        'Takri': [
+          { label: 'Medieval Takri orthography text<br/><small>Convert <span class="takri">𑚋</span> as /kha/</small>', value: 'TakriArchaicKha' }
+        ],
         'Chakma': [
           {
             label: 'Pali orthography text<br/><small> e.g. <span class="chakma">𑄖𑄗𑄂𑄉𑄖</span></small>',
@@ -139,6 +143,9 @@ export const ScriptMixin = {
           { label: 'Remove diacritic numerals<br/><small><span class="tamil">க²க³க⁴ → ககக</span></small>', value: 'TamilRemoveNumbers' },
           { label: 'Tamil numerals<br/><small><span class="tamil">123 → ௧௨௩</span></small>', value: 'RetainTamilNumerals' },
           { label: 'Medieval e/o with Pulli<br/><small><span class="tamil">ஒ ஓ கொ கோ → ஒ் ஒ கெ்ா கொ</span></small>', value: 'MedievalTamilOrthography' }
+        ],
+        'TamilExtended': [
+          { label: 'Avoid Anusvara <br/><small><span class="tamilextended">സംഘം → സങ്‌ഘം</span></small>', value: 'TamilExtendedAnusvara' }
         ],
         'Chakma': [
           {
@@ -182,10 +189,12 @@ export const ScriptMixin = {
           { label: 'Use ॲ instead of ऍ', value: 'DevanagariACandra' },
           { label: 'Prishthamatra orthography<br/><small>के कै को कौ → कॎ कॎे कॎा कॎो</small>', value: 'DevanagariPrishtamatra' }
         ],
+        'Takri': [
+          { label: 'Use medieval Takri orthography <br/><small><span class="takri">𑚋</span> represents both /kha/ and /ṣa/</small>', value: 'TakriArchaicKha' }
+        ],
         'Gurmukhi': [
           { label: 'Use Yakaash<br/><small>ਕ੍ਯ → ਕੵ</small>', value: 'GurmukhiYakaash' },
           { label: 'Gurmukhi Numerals<br/><small>123 → ੧੨੩</small>', value: 'RetainGurmukhiNumerals' }
-
         ],
         'Thai': [
           { label: 'Thai Orthography<br/><small><div>พุทฺธ → พุทธะ</div></small>', value: 'ThaiTranscription' },
@@ -206,6 +215,7 @@ export const ScriptMixin = {
           { label: 'Tai Kuen<br/><small><span class="taitham">ᨻᩩᨴ᩠ᨵ</span> → <span class="taikuen">ᨻᩩᨴ᩠ᨵ</span></small>', value: 'TaiKuen' }
         ],
         'Soyombo': [
+          { label: 'Syllabize input<br/><small><span class="soyombo → ">𑩲𑩖𑩮𑩑𑪁𑩫𑪘𑪙𑩾 → 𑩲𑩖 𑩮𑩑 𑪁 𑩫𑪘𑪙𑩾</span></small>', value: 'SoyomboSyllabize' },
           { label: 'Use Sanskrit palatals<br/><small><span class="soyombo">𑩵 𑩶 𑩷 → 𑩡 𑩢 𑩣</span></small>', value: 'SoyomboSanskritPalatals' },
           { label: 'Use Mongolian finals<br/><small><span class="soyombo">ak ag ad → 𑩐𑪋 𑩐𑪊 𑩐𑪍</span></small>', value: 'SoyomboFinals' },
           { label: 'Use initial-form /ra/, /la/, /sa/<br/><small><span class="soyombo">𑩼𑪙𑩫 𑩽𑪙𑩫 𑪁𑪙𑩫 → 𑪆𑩫 𑪇𑩫 𑪉𑩫</span></small>', value: 'SoyomboInitials' },
@@ -214,7 +224,11 @@ export const ScriptMixin = {
         'Marchen': [
           { label: 'Use Sanskrit palatals<br/><small><span class="marchen">𑲂 𑲃 𑲄 𑲄𑲮 → 𑱶 𑱷 𑱸 𑱸𑲮</span></small>', value: 'MarchenSanskritPalatals' }
         ],
+        'Mongolian': [
+          { label: 'Syllabize Input<br/><small><span class="mongolian">ᠮᠠᢏᢈ → ᠮᠠ᠋ ᢏᢈ</span></small>', value: 'MongolianSyllabize' }
+        ],
         'Tibetan': [
+          { label: 'Syllabize input<br/><small><span class="tibetan → ">བོདྷིསཏྟྭ → བོ་དྷི་ས་ཏྟྭ</span></small>', value: 'TibetanSyllabize' },
           { label: 'Use Sanskrit palatals<br/><small><span class="tibetan">ཙ ཚ ཛ ཛྷ → ཅ ཆ ཇ ཇྷ</span></small>', value: 'TibetanSanskritPalatals' },
           { label: 'Use <i>Bindu with nada</i><br/><small><span class="tibetan">ཨྃ → ཨྂ</span></small>', value: 'TibetanNada' },
           { label: 'Use space<br/><small><span class="tibetan">ན་མོ → ན མོ</span></small>', value: 'TibetanTsheg' },
@@ -230,11 +244,16 @@ export const ScriptMixin = {
         ],
         'Telugu': [
           { label: 'Use Arasunna as Chandrabindu<br/><small><span class="telugu"> హూఀ → హూఁ</span></small>', value: 'TeluguArasunnaChandrabindu' },
+          { label: 'Use Telugu Repha <i>(Valapala Gilaka)</i> <br/><small><span class="telugu"> ధర్మ → ధర్‍మ</span></small>', value: 'TeluguReph' },
           { label: 'Dandas<br/><small><span class="telugu">. .. → । ॥</span></small>', value: 'RetainTeluguDanda' },
           { label: 'Telugu Numerals<br/><small><span class="telugu">123 → ౧౨౩</span></small>', value: 'RetainTeluguNumerals' }
         ],
         'Gujarati': [
           { label: 'Dandas<br/><small><span class="gujarati">. .. → । ॥</span></small>', value: 'RetainGujaratiDanda' }
+        ],
+        'PhagsPa': [
+          { label: 'Use Tibetan Style<br/><small><span class="phagspa">ꡳꡛ ᠂ ꡂꡜ</span> → <span class="phagspatib">ꡳꡛ ᠂ ꡂꡜ</span></small>', value: 'PhagsPaTib' },
+          { label: 'Use Seal Style   <br/><small><span class="phagspa">ꡳꡛ ᠂ ꡂꡜ</span> → <span class="phagspaseal">ꡳꡛ ᠂ ꡂꡜ</span></span></small>', value: 'PhagsPaSeal' }
         ],
         'Kannada': [
           { label: 'Dandas<br/><small><span class="kannada">. .. → । ॥</span></small>', value: 'RetainKannadaDanda' },
@@ -583,7 +602,7 @@ export const ScriptMixin = {
           wikicode: 'Chakma_alphabet',
           font: {
             'name': 'Noto Sans Chakma',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansChakma-Regular.ttf'
+            'url': 'https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/chakmapali.otf'
           },
           language: ['Only Pali', 'Pali'],
           status: ['Living', 'Living: Minor'],
@@ -681,7 +700,7 @@ export const ScriptMixin = {
           omnicode: 'grantha',
           font: {
             'name': 'Noto Sans Grantha',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansGrantha/NotoSansGrantha-Regular.otf'
+            'url': 'https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/NotoSansGrantha-RegularZach.otf'
           },
           language: ['Sanskrit & Pali', 'Pali'],
           status: ['Living', 'Living: Minor'],
@@ -1045,6 +1064,25 @@ export const ScriptMixin = {
           status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Mainland', 'South East Asian']
+        },
+        {
+          label: 'Mongolian (Ali Gali)',
+          value: 'Mongolian',
+          sscode: '',
+          ssdesc: '',
+          miscsrc: '(from <a href="https://en.wikipedia.org/wiki/Galik_alphabet">Wikipedia</a>)',
+          miscdesc: 'Mongolian (Ali Gali) is an extension to the traditional Mongolian script. It was created in 1587 by the translator and scholar Ayuush Güüsh, inspired by the third Dalai Lama, Sonam Gyatso. He added extra characters for transcribing Tibetan and Sanskrit terms when translating religious texts, and later also from Chinese. ',
+
+          omnicode: 'galik',
+          wikicode: 'Galik_alphabet',
+          font: {
+            'name': 'MQG8F02',
+            'url': 'https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/MQG8F02.ttf'
+          },
+          language: ['Sanskrit & Pali', 'Pali'],
+          status: ['Extinct', 'Extinct: Medieval'],
+          invented: ['Derived: Brahmi'],
+          region: ['Central Asian']
         },
         {
           label: 'Mro',
@@ -1481,8 +1519,8 @@ export const ScriptMixin = {
           omnicode: '',
           wikicode: '',
           font: {
-            'name': 'Shankara Extended Tamil',
-            'url': 'https://github.com/virtualvinodh/aksharamukha/blob/master/aksharamukha-front/src/statics/ShankaraExtendedTamil.otf'
+            'name': 'Agastya Extended Tamil',
+            'url': 'https://github.com/virtualvinodh/aksharamukha/blob/master/aksharamukha-front/src/statics/AgastyaExtendedTamil.otf'
           },
           language: ['Sanskrit & Pali', 'Pali'],
           status: ['Living', 'Living: Minor'],
@@ -1514,8 +1552,8 @@ export const ScriptMixin = {
           omnicode: 'telugu',
           wikicode: 'Telugu_script',
           font: {
-            'name': 'Lohit Telugu',
-            'url': 'https://pagure.io/lohit/tree/master'
+            'name': 'Noto Sans Telugu',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansTelugu/NotoSansTelugu-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Pali'],
           status: ['Living', 'Living: Major'],
@@ -1663,8 +1701,8 @@ export const ScriptMixin = {
           wikicode: 'Horizontal_square_script',
           omnicode: 'mhss',
           font: {
-            'name': 'Babelstone Zanabazar',
-            'url': 'https://www.babelstone.co.uk/Fonts/Zanabazar.html'
+            'name': 'Noto Sans Zanabazar Square',
+            'url': 'https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/NotoSansZanabazarSquare-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Pali'],
           status: ['Extinct', 'Extinct: Medieval'],
@@ -1973,7 +2011,7 @@ export const ScriptMixin = {
 
       return desc
     },
-    getOutputClass: function (tgt, postOptions = []) {
+    getOutputClass: function (tgt, postOptions = [], outputText = '') {
       if (postOptions.includes('siddhamap') && tgt === 'Siddham') {
         return 'siddhamap'
       } else if (postOptions.includes('tradOrtho') && tgt === 'Malayalam') {
@@ -2000,6 +2038,22 @@ export const ScriptMixin = {
         return 'taithamlao'
       } else if (postOptions.includes('TaiKuen') && tgt === 'TaiTham') {
         return 'taikuen'
+      } else if (postOptions.includes('PhagsPaTib') && tgt === 'PhagsPa') {
+        return 'phagspatib'
+      } else if (postOptions.includes('PhagsPaSeal') && tgt === 'PhagsPa') {
+        return 'phagspaseal'
+      } else if (tgt === 'Oriya' && (String(outputText).includes('॒') || String(outputText).includes('᳚') ||
+          String(outputText).includes('॑'))) {
+        return 'oriyavedic'
+      } else if (tgt === 'Bengali' && (String(outputText).includes('॒') || String(outputText).includes('᳚') ||
+          String(outputText).includes('॑'))) {
+        return 'bengalivedic'
+      } else if (tgt === 'Gujarati' && (String(outputText).includes('॒') || String(outputText).includes('᳚') ||
+          String(outputText).includes('॑'))) {
+        return 'gujarativedic'
+      } else if (tgt === 'Gurmukhi' && (String(outputText).includes('॒') || String(outputText).includes('᳚') ||
+          String(outputText).includes('॑'))) {
+        return 'gurmukhivedic'
       } else {
         return tgt.toLowerCase()
       }

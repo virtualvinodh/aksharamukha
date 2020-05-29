@@ -179,10 +179,16 @@ def detect_preoptions(text, inputScript):
     return preoptions
 
 def convert(src, tgt, txt, nativize, preoptions, postoptions):
+    tgtOld = ""
+
     if tgt == "" or tgt == "Ignore":
         return txt
     if preoptions == [] and postoptions == [] and nativize == False and src == tgt:
         return txt
+
+    if src == tgt:
+        tgtOld = tgt
+        tgt = "Devanagari"
 
     txt = PreProcess.PreProcess(txt,src,tgt)
 
@@ -216,6 +222,10 @@ def convert(src, tgt, txt, nativize, preoptions, postoptions):
         txt = ConvertFix.OriyaIPAFixPre(txt)
 
     transliteration = Convert.convertScript(txt, src, tgt)
+
+    if src == tgtOld:
+        tgt = tgtOld
+        transliteration = Convert.convertScript(transliteration, "Devanagari", tgt)
 
     if nativize:
       transliteration =  PostOptions.ApplyScriptDefaults(transliteration, src, tgt)

@@ -17,6 +17,21 @@ def OriyaIPAFixPre(Strng):
 
     return Strng
 
+def SinhalaIPAFix(Strng):
+    consonants = '(' + '|'.join(GM.CrunchSymbols(GM.Consonants, 'IPA')) + ')'
+
+    Strng = re.sub('^' + consonants + '(ə)', r'\1ʌ', Strng)
+    Strng = re.sub('(\s)' + consonants + '(ə)', r'\1\2ʌ', Strng)
+
+    Strng = re.sub('^' + consonants + consonants +'(ə)', r'\1ʌ', Strng)
+    Strng = re.sub('(\s)' + consonants + consonants +'(ə)', r'\1\2ʌ', Strng)
+
+    Strng = re.sub('^' + consonants + consonants + consonants +'(ə)', r'\1ʌ', Strng)
+    Strng = re.sub('(\s)' + consonants + consonants + consonants +'(ə)', r'\1\2ʌ', Strng)
+
+
+    return Strng
+
 def OriyaIPAFix(Strng):
     Strng = Strng.replace('ə', 'ɔ')
     Strng = Strng.replace('j', 'd͡ʒ')
@@ -172,8 +187,12 @@ def FixRomanOutput(Strng,Target):
 def PostFixRomanOutput(Strng,Source,Target):
     Strng = Strng.replace("\u02BD","")
 
+    if Source == 'Sinhala' and Target == 'IPA':
+        Strng = SinhalaIPAFix(Strng)
+
     if Target == "IPA":
         Strng = FixIPA(Strng)
+        Strng = Strng.replace('\\"','').replace("\\_", '').replace("\\\'",'')
 
     if Target == 'Santali':
         Strng = FixSantali(Strng)
@@ -194,6 +213,7 @@ def PostFixRomanOutput(Strng,Source,Target):
         Strng = FixMro(Strng)
 
     if Target == "RomanReadable":
+        Strng = Strng.replace('\\"','').replace("\\_", '').replace("\\\'",'')
         Strng = FixRomanReadable(Strng)
 
     if Target == "IAST":
@@ -219,6 +239,9 @@ def PostFixRomanOutput(Strng,Source,Target):
     if Target == "HanifiRohingya":
         Strng = FixHanifiRohingya(Strng)
 
+    if Target == "Mongolian":
+        Strng = FixMongolian(Strng)
+
     return Strng
 
 # Fixing the Indic Ouput for the standard corrections
@@ -238,6 +261,31 @@ def FixIndicOutput(Strng,Source,Target):
     # Shifting Vowel Signs and Diacritics
     # க²ா ->  கா²
     Strng = ShiftDiacritics(Strng,Target,reverse=False)
+
+    ## Make the Vedic Signs readable
+    vedicScripts = ['Assamese', 'Bengali', 'Devanagari', 'Gujarati', 'Kannada', 'Malayalam', 'Oriya', 'Gurmukhi', 'Tamil', 'Telugu', 'TamilExtended', 'Grantha']
+
+    if Target not in vedicScripts:
+        Strng = Strng.replace('॒','↓')
+        Strng = Strng.replace('᳚','↑↑')
+        Strng = Strng.replace('॑','↑')
+
+    return Strng
+
+def FixMongolian(Strng, reverse=False):
+    vowels = '(' + '|'.join(GM.CrunchSymbols(GM.Vowels, 'Mongolian')) + ')'
+    consonants = '(' + '|'.join(GM.CrunchSymbols(GM.Consonants, 'Mongolian')) + ')'
+
+    if not reverse:
+        #Strng = re.sub(consonants + '?' + vowels + '([\u1880\u1881])?', r'\1\2\3 ', Strng)
+        Strng = re.sub('(\u180B)' + consonants, r'\2', Strng)
+        Strng = re.sub('(\u180B)' + vowels, r'\2', Strng)
+
+        Strng = re.sub(consonants + consonants + consonants + vowels + '(\u1880)', r'\5\1\2\3\4', Strng)
+        Strng = re.sub(consonants + consonants + vowels + '(\u1880)', r'\4\1\2\3', Strng)
+        Strng = re.sub(consonants + '?' + vowels + '(\u1880)', r'\3\1\2', Strng)
+        Strng = Strng.replace(' \u02BC', '\u200B')
+        Strng = Strng.replace('\u02BC', '\u200B')
 
     return Strng
 
@@ -565,6 +613,9 @@ def FixGurmukhi(Strng,reverse=False):
         Strng = Strng.replace(ava+ava,avaA)
         Strng = PostProcess.InsertGeminationSign(Strng, 'Gurmukhi')
         Strng = PostProcess.RetainIndicNumerals(Strng, 'Gurmukhi', True)
+
+        if '॒' in Strng or '᳚' in Strng or '॑' in Strng:
+            Strng = PostProcess.ReverseGeminationSign(Strng, 'Gurmukhi')
 
     else:
         Strng = Strng.replace(avaA,ava+ava)

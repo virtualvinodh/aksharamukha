@@ -82,7 +82,7 @@
       ref="brahmiText"
       class="text-output col-xs-12 col-md-12 q-pa-md q-pr-lg bg-grey-1 "
       >
-       <span :class="getOutputClass(outputScript, postOptions)" :style="{'font-size': fontSize + '%'}"
+       <span :class="getOutputClass(outputScript, postOptions, convertText)" :style="{'font-size': fontSize + '%'}"
         v-html="sanitize(convertText)"></span>
       </div>
     <output-notice :inputScript="inputScript" :outputScript="outputScript" :postOptions="postOptions"

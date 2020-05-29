@@ -35,6 +35,10 @@
   src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansJavanese/NotoSansJavanese-Regular.otf')
 }
 @font-face {
+  font-family: 'Noto Sans Mongolian';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansMongolian/NotoSansMonglian-Regular.otf')
+}
+@font-face {
   font-family: 'Noto Sans HanifiRohingya';
   src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansHanifiRohingya/NotoSansHanifiRohingya-Regular.otf')
 }
@@ -80,7 +84,11 @@
 }
 @font-face {
   font-family: 'Noto Sans Telugu';
-  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/Lohit-Telugu.ttf')
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansTelugu/NotoSansTelugu-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Bengali';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansBengali/NotoSansBengali-Regular.otf')
 }
 @font-face {
   font-family: 'Noto Sans Batak';
@@ -140,11 +148,11 @@
 }
 @font-face {
   font-family: 'Noto Sans Grantha2';
-  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansGrantha/NotoSansGrantha-Regular.otf')
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/NotoSansGrantha-RegularZach.otf')
 }
 @font-face {
   font-family: 'Noto Serif Grantha';
-  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifGrantha/NotoSerifGrantha-Regular.otf')
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/NotoSerifGrantha-RegularZach.otf')
 }
 @font-face {
   font-family: 'Muktamsiddham';
@@ -162,14 +170,22 @@
   font-family: 'Nepal2';
   src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/Nepal-lipi2.woff')
 }
+
 @font-face {
   font-family: 'BabelStoneZanabazar';
   src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/BabelStoneZanabazar.woff')
 }
+
+@font-face {
+  font-family: 'Noto Sans Zanabazar Square';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/NotoSansZanabazarSquare-Regular.otf')
+}
+
 @font-face {
   font-family: 'Adinatha Tamil Brahmi';
   src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/AdinathaTamilBrahmi2.otf')
 }
+
 @font-face {
   font-family: 'Kharoshthi Ka';
   src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/ka-khar.otf')
@@ -337,8 +353,43 @@
 }
 
 @font-face {
-  font-family: 'Shankara Extended Tamil';
-  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/ShankaraExtendedTamil.otf')
+  font-family: 'BabelStone PhagsPa TibA';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/BabelStonePhagspaTibetanA_v2.ttf')
+}
+
+@font-face {
+  font-family: 'BabelStone PhagsPa Seal';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/BabelStonePhagspaSeal_v1.ttf')
+}
+
+@font-face {
+  font-family: 'BabelStone PhagsPa Book';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/BabelStonePhagspaBook_v2.ttf')
+}
+
+@font-face {
+  font-family: 'Lohit Oriya Vedic';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/Lohit-Oriya-Vedic.otf')
+}
+
+@font-face {
+  font-family: 'Noto Sans Bengali Vedic';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/NotoSansBengali-Vedic.otf')
+}
+
+@font-face {
+  font-family: 'Noto Sans Gujarati Vedic';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/NotoSansGujarati-Vedic.otf')
+}
+
+@font-face {
+  font-family: 'Noto Sans Gurmukhi Vedic';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/NotoSansGurmukhi-Vedic.otf')
+}
+
+@font-face {
+  font-family: 'Agastya Extended Tamil';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/AgastyaExtendedTamil.otf')
 }
 
 @font-face {
@@ -361,6 +412,32 @@
   src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/BabelStoneMarchen.ttf')
 }
 
+@font-face {
+  font-family: 'MQG8F02';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/MQG8F02.ttf')
+}
+
+@font-face{font-family:'Mongolian BT';src:url(http://trans.mglip.com/css/LD-MONG150702-BT.ttf); }
+
+.phagspatib {
+  font-family: 'BabelStone PhagsPa TibA' !important;
+  writing-mode: vertical-lr;
+  line-height: 1.8em;
+  font-size: 150%;
+}
+
+.phagspaseal {
+  font-family: 'BabelStone PhagsPa Seal' !important;
+  writing-mode: vertical-lr;
+  line-height: 1.8em;
+}
+
+.mongolian {
+  font-family: 'MQG8F02' !important;
+  writing-mode: vertical-lr;
+  line-height: 1.8em;
+}
+
 .soyombo {
   font-family: 'Noto Sans Soyombo' !important;
   font-size: 130%;
@@ -368,6 +445,22 @@
 
 .russiancyrillic {
   font-family: 'Noto Sans Regular' !important;
+}
+
+.oriyavedic {
+  font-family: 'Lohit Oriya Vedic' !important;
+}
+
+.bengalivedic {
+  font-family: 'Noto Sans Bengali Vedic' !important;
+}
+
+.gujarativedic {
+  font-family: 'Noto Sans Gujarati Vedic' !important;
+}
+
+.gurmukhivedic {
+  font-family: 'Noto Sans Gurmukhi Vedic' !important;
 }
 
 .ariyaka {
@@ -435,8 +528,6 @@
 }
 .tagbanwa {
   font-family: "Noto Sans Tagbanwa" !important;
-  writing-mode: bt-lr;
-
 }
 .sundanese {
   font-family: "Noto Sans Sundanese" !important
@@ -594,7 +685,8 @@
   direction: rtl;
 }
 .zanabazarsquare {
-  font-family: "BabelStoneZanabazar" !important;
+  font-family: "Noto Sans Zanabazar Square" !important;
+  font-feature-settings: "ss01";
   line-height: 3em;
 }
 .newa {

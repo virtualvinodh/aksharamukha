@@ -19,6 +19,8 @@ var postOptionsListOld = []
 
 var preservePrevious = false
 
+var changeURLParams = false
+
 var optionsHide = true
 
 var scripts = ScriptMixin.data().scriptsIndic;
@@ -41,12 +43,32 @@ scriptList.push('Original')
 var myTags = document.getElementsByTagName("script");
 var src = myTags[myTags.length-1].src;
 
+if (src.includes('changeurl')) {
+  changeURLParams = unescape(src).split("changeurl=")[1].split("&")[0] == '1';
+}
+
+if (src.includes('prelist')) {
+  var preList = unescape(src).split("prelist=")[1].split("&")[0];
+  console.log(preList)
+  if (preList === 'majorindic') {
+    scriptList = ['ISO', 'IAST', 'IPA', 'RomanReadable', 'Assamese', 'Bengali', 'Devanagari', 'Grantha', 'Gujarati', 'Gurmukhi', 'Kannada', 'Malayalam', 'Oriya', 'Sharada', 'Tamil', 'TamilExtended', 'Telugu', 'Urdu']
+  } else if (preList == 'majorall') {
+    scriptList = ['ISO', 'IAST', 'IPA', 'RomanReadable', 'Assamese', 'Bengali', 'Burmese', 'Devanagari', 'Grantha', 'Gujarati', 'Gurmukhi', 'Kannada', 'Khmer', 'Malayalam', 'Oriya', 'Sharada', 'Sinhala', 'Tamil', 'TamilExtended', 'Telugu', 'Thai', 'Tibetan', 'Urdu']
+  } else if (preList == 'sansktradall') {
+    scriptList = ['ISO', 'IAST', 'IPA', 'RomanReadable', 'Assamese', 'Balinese', 'Bengali', 'Brahmi', 'Bhaikshuki', 'Burmese', 'Devanagari', 'Dogra', 'Grantha', 'GranthaPandya', 'Gujarati', 'Gurmukhi', 'Javanese', 'Kannada', 'Kharoshthi', 'KhomThai', 'Khmer', 'Malayalam', 'Mongolian', 'Newa', 'Oriya', 'PhagsPa', 'Ranjana', 'Siddham', 'Sharada', 'Sinhala', 'Soyombo', 'TaiTham', 'Takri', 'Tamil', 'TamilExtended', 'Telugu', 'Thai', 'Tibetan', 'Tirhuta', 'Urdu', 'ZanabazarSquare']
+  } else if (preList == 'sanskall') {
+    scriptList = ['ISO', 'IAST', 'IPA', 'RomanReadable', 'Ariyaka', 'Assamese', 'Balinese', 'Bengali', 'Brahmi', 'Bhaikshuki', 'Burmese', 'Chakma', 'Devanagari', 'Dogra', 'GunjalaGondi', 'MasaramGondi', 'Grantha', 'GranthaPandya', 'Gujarati', 'Gurmukhi', 'Javanese', 'Kaithi', 'Kannada', 'Kharoshthi', 'KhomThai', 'Khmer', 'Khudawadi', 'LaoPali', 'Malayalam', 'Mongolian', 'Modi', 'Newa', 'Oriya', 'PhagsPa', 'Ranjana', 'Santali', 'Saurashtra', 'Siddham', 'Sharada', 'Sinhala', 'Soyombo', 'TaiTham', 'Takri', 'Tamil', 'TamilExtended', 'Telugu', 'Thai', 'Tibetan', 'Tirhuta', 'Urdu', 'ZanabazarSquare']
+  }
+  scriptList.push('Original')
+}
+
 if (src.includes('scriptlist')) {
   scriptList = unescape(src).split("scriptlist=")[1].split("&")[0].split(',');
   scriptList.push('Original')
 }
 
 var sourceURL = 'autodetect'
+
 if (src.includes('source')) {
   sourceURL = unescape(src).split("source=")[1].split("&")[0];
 }
@@ -63,8 +85,8 @@ if (src.includes('preoptions')) {
 
 async function translit( element, ind, source, targetOld, target){
 
-outputClassOld = ScriptMixin.methods.getOutputClass(targetOld, postOptionsListOld)
-outputClass = ScriptMixin.methods.getOutputClass(target, postOptionsList)
+outputClassOld = ScriptMixin.methods.getOutputClass(targetOld, postOptionsListOld, JSON.stringify(nodesListAll[ind]))
+outputClass = ScriptMixin.methods.getOutputClass(target, postOptionsList, JSON.stringify(nodesListAll[ind]))
 
 if (target != 'Original') {
   textsTran = await transliterateReq(source, target, !preservePrevious, JSON.stringify(nodesListAll[ind]), postOptionsList, preOptionsList)
@@ -319,10 +341,13 @@ scripts.forEach(function(script) {
   navbarOld = document.getElementById('aksharamukha-navbar').innerHTML
 
   // Restore values
-
   var sel = document.getElementById('aksharamukhaselect')
 
-  if (window.localStorage.getItem('target')) {
+  if(window.location.search.indexOf('akshrmkh') > -1) {
+    var targetUrl = window.location.search.split('=')[window.location.search.split('=').length - 1]
+    sel.value = targetUrl
+    transliterate()
+  } else if (window.localStorage.getItem('target')) {
     sel.value = window.localStorage.getItem('target')
   }
 
@@ -339,6 +364,26 @@ scripts.forEach(function(script) {
 async function transliterate() {
   var sel = document.getElementById('aksharamukhaselect')
   target = sel.value
+
+  if (changeURLParams) {
+    var url = window.location.href;
+    var refresh
+    if (url.indexOf('?') > -1) {
+      if (window.location.search.indexOf('akshrmkh') > -1) {
+        var oldPar = window.location.search.split('=')[window.location.search.split('=').length - 1]
+        console.log(window.location.search)
+        var newPath = window.location.search.replace('akshrmkh='+oldPar, 'akshrmkh='+target)
+        refresh = window.location.protocol + "//" + window.location.host + window.location.pathname +  newPath;
+      } else {
+        refresh = window.location.protocol + "//" + window.location.host + window.location.pathname +  window.location.search + '&akshrmkh=' + target;
+      }
+    }
+    else {
+      refresh = window.location.protocol + "//" + window.location.host + window.location.pathname + '?akshrmkh=' + target;
+    }
+
+    window.history.pushState({ path: refresh }, '', refresh);
+  }
 
   if (scriptList.includes(target)) {
     preservePrevious = document.getElementById('aksharamukha-preserve').checked

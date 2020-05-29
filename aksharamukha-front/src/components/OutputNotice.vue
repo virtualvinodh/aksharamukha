@@ -5,10 +5,10 @@
       <div class="notice q-ma-sm" v-show="String(convertText).includes('ഩ')">ഩ is a historic Malayalam letter that is equivalent to Tamil ன. Your font may not support this character.</div>
       <div class="notice q-ma-sm" v-show="String(convertText).includes('ఀ')">Your font may not support ఀ the Telugu Chandrabindu character.</div>
       <div class="notice q-ma-sm" v-show="String(convertText).includes('ഀ')">Your font may not support ഀ the Malayalam Anusvara above character. Try enabling traditional orthogrpahy to view the character properly.</div>
-      <div class="notice q-ma-sm" v-show="outputScript === 'TamilExtended'">This only works with <a href="https://github.com/virtualvinodh/aksharamukha/blob/master/aksharamukha-front/src/statics/ShankaraExtendedTamil.otf">Shankara Extended Tamil</a> and uses Malayalam to encode the characters. In the absense of this font, the characters will appear as Malayalam</div>
+      <div class="notice q-ma-sm" v-show="outputScript === 'TamilExtended'">This only works with <a href="https://github.com/virtualvinodh/aksharamukha/blob/master/aksharamukha-front/src/statics/AgastyaExtendedTamil.otf">Agastya Extended Tamil</a> and uses Malayalam to encode the characters. In the absense of this font, the characters will appear as Malayalam</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'GranthaPandya'">This only works with e-Pandya font and uses Malayalam codepoints to encode Grantha (Pandya) characters.</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Grantha' &&
-        !postOptions.includes('egrantamil')">This uses a Unicode Grantha font. It can be downloaded from <a href="https://github.com/googlei18n/noto-fonts/tree/master/phaseIII_only/unhinted/otf/NotoSansGrantha">here.</a></div>
+        !postOptions.includes('egrantamil')">This uses a Unicode Grantha font. It can be downloaded from <a href="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/NotoSansGrantha-RegularZach.otf">here.</a></div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Grantha' &&
         postOptions.includes('egrantamil')">This does not use the proper Unicode encoding. Please consider disabling the e-Grantamil option and use Grantha Unicode.</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Vatteluttu'">This only works with e-Vatteluttu OT font and uses Tamil codepoints to encode Vatteluttu characters.</div>
@@ -20,17 +20,20 @@
         postOptions.includes('nepaldevafont')">This uses Devanagari codepoints to encode the characters. Without the specific font, the characters will just appear as Devanagari. Please consider using an Unicode font that uses the appropriate Newa (Nepal Lipi) codepoints.</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Ranjana' &&
         !postOptions.includes('ranjanalantsa') &&
-        !postOptions.includes('ranjanawartu')">This uses Devanagari codepoints to encode the characters. Without the specific font, the characters will just appear as Devanagari.</div>
+        !postOptions.includes('ranjanawartu')">This uses Devanagari codepoints to encode the characters. Without the specific font, the characters will just appear as Devanagari. Some ligatures/conjuncts used in the font may not be correct.</div>
      <div class="notice q-ma-sm" v-show="outputScript === 'Ranjana' &&
-        postOptions.includes('ranjanalantsa')">This uses Tibetan codepoints to encode the characters. Without the specific font, the characters will just appear as Tibetan.</div>
+        postOptions.includes('ranjanalantsa')">This uses Tibetan codepoints to encode the characters. Without the specific font, the characters will just appear as Tibetan. Some ligatures/conjuncts used in the font may not be correct.</div>
      <div class="notice q-ma-sm" v-show="outputScript === 'Ranjana' &&
-        postOptions.includes('ranjanawartu')">This uses Tibetan codepoints to encode the characters. Without the specific font, the characters will just appear as Tibetan.</div>
+        postOptions.includes('ranjanawartu')">This uses Tibetan codepoints to encode the characters. Without the specific font, the characters will just appear as Tibetan. Some ligatures/conjuncts used in the font may not be correct.</div>
      <div class="notice q-ma-sm" v-show="outputScript === 'KhomThai'">This uses Thai codepoints to encode the characters. Without the specific font, the characters will just appear as Thai.</div>
      <div class="notice q-ma-sm" v-show="inputScript === 'Telugu' && inputText.includes('ఁ')">The Arasunna (ఁ) in the input text is being transliterated as Chandrabindu in the output text.</div>
+     <div class="notice q-ma-sm" v-show="outputScript === 'Mongolian'">The Mongolian mapping for Ali Gali is not yet verified. If you have any feedback on the mapping and the forms of the letters used, please send it to vinodh@virtualvinodh.com</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Tamil' &&
-            String(convertText).includes('𑌃')    ">This only works with Google Noto Tamil fonts </div>
-      <div class="notice q-ma-sm" v-show="String(convertText).includes('॒') || String(convertText).includes('᳚') ||
-            String(convertText).includes('॑')">This text uses Vedic notational marks. Without an appropriate font, the text would not be rendered properly. Look into the individual <router-link :to="'/describe/' + outputScript">script</router-link> page for a working font.</div>
+            String(convertText).includes('𑌃')    ">Grantha Visarga only works with Google's Noto Tamil fonts </div>
+      <div class="notice q-ma-sm" v-show="(String(convertText).includes('॒') || String(convertText).includes('᳚') ||
+            String(convertText).includes('॑')) && vedicScripts.includes(outputScript)">This text uses Vedic notational marks. Without an appropriate font, the text would not be rendered properly. Look into the individual <router-link :to="'/describe/' + outputScript">script</router-link> page for a working font.</div>
+      <div class="notice q-ma-sm" v-show="(String(inputText).includes('॒') || String(inputText).includes('᳚') ||
+            String(inputText).includes('॑')) && !vedicScripts.includes(outputScript)">The input text contains combining Vedic accent marks. These have been replaced with a readable notation.</div>
       <div class="notice q-ma-sm" v-show="inputScript === 'Tamil' && outputScript === 'IPA'">The results displayed have been obtained from <a href="http://anunaadam.appspot.com" target="_blank">Anunaadam</a>. Use the tool for further options.</div>
   </span>
 </template>

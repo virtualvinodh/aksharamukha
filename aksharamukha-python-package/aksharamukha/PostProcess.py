@@ -18,6 +18,83 @@ def default(Strng):
 
     return Strng
 
+def MongolianSyllabize(Strng):
+    vowels = '(' + '|'.join(GM.CrunchSymbols(GM.Vowels, 'Mongolian')+['\u1820']) + ')'
+    consonants = '(' + '|'.join(GM.CrunchSymbols(GM.Consonants, 'Mongolian')) + ')'
+
+    Strng = re.sub(consonants + '?' + vowels, r'\1\2' + ' ', Strng)
+    Strng = re.sub('(\u180E\u1820)' + consonants, r'\1 \2', Strng)
+    Strng = re.sub('\u1820 ', '\u1820\u180B ', Strng)
+    Strng = Strng.replace('ᠣᠸᠠ᠋', 'ᠣᠸᠠ')
+    Strng = Strng.replace('ᠣᠸᠸᠠ᠋', 'ᠣᠸᠸᠠ')
+    Strng = Strng.replace(' \u180E', '\u180E')
+    Strng = Strng.replace(' ' + '\u200B', '')
+
+    return Strng
+
+def TibetanSyllabize(Strng):
+    vowels = '(' + '|'.join(GM.CrunchSymbols(GM.Vowels, 'Tibetan')) + ')'
+    consonants = '(' + '|'.join(GM.CrunchSymbols(GM.Consonants, 'Tibetan')+['ཨ','ཅ','ཆ','ཇ','ཇྷ']) + ')'
+    vowelsigns = '(' + '|'.join(GM.CrunchSymbols(GM.VowelSigns, 'Tibetan')+['\u0F80']) + ')'
+    combiningSigns = '(' + '|'.join(GM.CrunchSymbols(GM.CombiningSigns, 'Tibetan')+['\u0F82']) + ')'
+    ListSubC = '(' + '|'.join([chr(x+80) for x in range(0x0F40,0x0F68)]) + ')' # Subjoined Consonants
+
+    Strng = re.sub(vowelsigns + combiningSigns + '?', r'\1\2་', Strng)
+    Strng = re.sub(consonants , r'\1་', Strng)
+    Strng = re.sub(ListSubC, r'\1་', Strng)
+    Strng = re.sub('་' + vowelsigns, r'\1', Strng)
+    Strng = re.sub('་' + ListSubC, r'\1', Strng)
+    Strng = re.sub('་' + combiningSigns, r'\1', Strng)
+    Strng = re.sub(combiningSigns, r'\1་', Strng)
+
+    Strng = Strng.replace('་་', '་')
+
+    return Strng
+
+def SoyomboSyllabize(Strng):
+    vowels = '(' + '|'.join(GM.CrunchSymbols(GM.Vowels, 'Soyombo')) + ')'
+    consonants = '(' + '|'.join(GM.CrunchSymbols(GM.Consonants, 'Soyombo')+['𑩐', '\U00011A83']) + ')'
+    vowelsigns = '(' + '|'.join(GM.CrunchSymbols(GM.VowelSigns, 'Soyombo')) + ')'
+    combiningSigns = '(' + '|'.join(GM.CrunchSymbols(GM.CombiningSigns, 'Soyombo')) + ')'
+
+    fin = '(' + '|'.join(['\U00011A8A','\U00011A8B','\U00011A8C','\U00011A8D','\U00011A8E','\U00011A8F','\U00011A90','\U00011A91','\U00011A92','\U00011A93','\U00011A94']) + ')'
+
+    Strng = re.sub(vowelsigns + combiningSigns + '?', r'\1\2 ', Strng)
+    Strng = re.sub(consonants , r'\1 ', Strng)
+    Strng = re.sub(' ' + vowelsigns, r'\1', Strng)
+    Strng = re.sub(' ' + combiningSigns, r'\1', Strng)
+    Strng = re.sub('\U00011A99' + ' ', '\U00011A99', Strng)
+    Strng = re.sub(combiningSigns, r'\1 ', Strng)
+    Strng = re.sub(' 𑪘', '\U00011A98', Strng)
+    Strng = re.sub(fin, r'\1 ', Strng)
+    Strng = re.sub('( )' + fin, r'\2 ', Strng)
+    #Strng = re.sub(combiningSigns, r'\1་', Strng)
+
+    return Strng
+
+
+def TakriArchaicKha(Strng):
+
+    return Strng.replace('𑚸', '𑚋')
+
+def TeluguReph(Strng):
+
+    return Strng.replace('ర్', 'ర్‍')
+
+def PhagsPaTib(Strng):
+
+    return Strng
+
+def PhagsPaSeal(Strng):
+
+    return Strng
+
+def TamilExtendedAnusvara(Strng):
+    Strng = AnusvaraToNasal(Strng, 'TamilExtended')
+    Strng = Strng.replace('\u0D02', 'മ്‌')
+
+    return Strng
+
 def RomanReadableLongEO(Strng):
 
     Strng = Strng.replace('o', 'oa')

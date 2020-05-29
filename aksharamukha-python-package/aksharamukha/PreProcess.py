@@ -28,6 +28,10 @@ def ChakmaPali(Strng):
 
     return Strng
 
+def TakriArchaicKha(Strng):
+
+    return Strng.replace('𑚋', '𑚸')
+
 def UrduShortNotShown(Strng):
     Strng += "\u02BB\u02BB"
 
