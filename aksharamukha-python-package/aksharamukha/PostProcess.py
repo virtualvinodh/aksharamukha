@@ -37,7 +37,7 @@ def TibetanSyllabize(Strng):
     consonants = '(' + '|'.join(GM.CrunchSymbols(GM.Consonants, 'Tibetan')+['ཨ','ཅ','ཆ','ཇ','ཇྷ']) + ')'
     vowelsigns = '(' + '|'.join(GM.CrunchSymbols(GM.VowelSigns, 'Tibetan')+['\u0F80']) + ')'
     combiningSigns = '(' + '|'.join(GM.CrunchSymbols(GM.CombiningSigns, 'Tibetan')+['\u0F82']) + ')'
-    ListSubC = '(' + '|'.join([chr(x+80) for x in range(0x0F40,0x0F68)]) + ')' # Subjoined Consonants
+    ListSubC = '(' + '|'.join([chr(x+80) for x in range(0x0F40,0x0F68)] + ['ྻ','ྺ','ྼ']) + ')' # Subjoined Consonants
 
     Strng = re.sub(vowelsigns + combiningSigns + '?', r'\1\2་', Strng)
     Strng = re.sub(consonants , r'\1་', Strng)
@@ -78,8 +78,10 @@ def TakriArchaicKha(Strng):
     return Strng.replace('𑚸', '𑚋')
 
 def TeluguReph(Strng):
+    Strng = Strng.replace('ర్', 'ర్‍')
+    Strng = Strng.replace('\u0C4Dర్‍', '\u0C4Dర్')
 
-    return Strng.replace('ర్', 'ర్‍')
+    return Strng
 
 def PhagsPaTib(Strng):
 

@@ -191,8 +191,8 @@ def PostFixRomanOutput(Strng,Source,Target):
         Strng = SinhalaIPAFix(Strng)
 
     if Target == "IPA":
+        Strng = Strng.replace('\\"','↑↑').replace("\\_", '↓').replace("\\\'",'↑')
         Strng = FixIPA(Strng)
-        Strng = Strng.replace('\\"','').replace("\\_", '').replace("\\\'",'')
 
     if Target == 'Santali':
         Strng = FixSantali(Strng)
@@ -213,10 +213,10 @@ def PostFixRomanOutput(Strng,Source,Target):
         Strng = FixMro(Strng)
 
     if Target == "RomanReadable":
-        Strng = Strng.replace('\\"','').replace("\\_", '').replace("\\\'",'')
+        Strng = Strng.replace('\\"','').replace("\\_", '').replace("\\\'",'').replace('\\', '')
         Strng = FixRomanReadable(Strng)
 
-    if Target == "IAST":
+    if Target == "IAST" or Target == "IASTPali":
         Strng = VedicSvarasDiacrtics(Strng, Target)
         Strng = Strng.replace("a_i", "aï")
         Strng = Strng.replace("a_u", "aü")
@@ -1742,7 +1742,6 @@ def FixRomanReadable(Strng, reverse = False):
         Strng = Strng.replace("njj", "nj")
 
         Strng = Strng.replace("jnj", "jny")
-
     else:
         pass
 

@@ -166,20 +166,16 @@ export default {
       this.apiCall.post('/latinmatrix', data)
         .then(function (response) {
           for (var key in response.data['results']) {
-            console.log(key)
-            if (key !== 'Velthuis') {
+            if (key === 'RomanReadable') {
+              dhis.results[key] = JSON.parse(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱').replace('"a,', '"a",'))
+            } else if (key !== 'Velthuis') {
               dhis.results[key] = JSON.parse(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱'))
             } else {
-              console.log(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱').replace(/""/g, '"\\"').replace(/\\"\\"/g, '\\""'))
               dhis.results[key] = JSON.parse(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱').replace(/""/g, '"\\"').replace(/\\"\\"/g, '\\""'))
             }
-            console.log('here3')
           }
-          console.log('here4')
-          console.log(response.data['guideChars'].replace(/\\/g, ''))
           dhis.guideChars = JSON.parse(response.data['guideChars'].replace(/\\/g, ''))
           dhis.loading = false
-          console.log(dhis.results)
         })
         .catch(function (error) {
           console.log(error)
