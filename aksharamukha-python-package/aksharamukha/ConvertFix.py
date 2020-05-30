@@ -218,6 +218,8 @@ def PostFixRomanOutput(Strng,Source,Target):
         Strng = Strng.replace('\\_', '̱')
         Strng = Strng.replace('\\м++', 'г\u0361м')
         Strng = Strng.replace('\\м+', 'г\u035Cм')
+        Strng = Strng.replace('\\m++', 'г\u0361м')
+        Strng = Strng.replace('\\m+', 'г\u035Cм')
     else:
         Strng = VedicSvarasOthers(Strng, Target)
 
