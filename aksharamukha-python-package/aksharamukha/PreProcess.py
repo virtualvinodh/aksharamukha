@@ -377,7 +377,12 @@ def PreProcess(Strng,Source,Target):
     if Source == "ISO" or Source == "IAST" or Source == "Titus" or "RussianCyrillic":
         Strng = CF.VedicSvarasNonDiacritic(Strng)
 
-    if '↓' in Strng or '↑' in Strng:
+    if ('↓' in Strng or '↑' in Strng) and Target in GM.IndicScripts :
+        Strng = Strng.replace('↓', '॒')
+        Strng = Strng.replace('↑↑', '᳚')
+        Strng = Strng.replace('↑', '॑')
+
+    if ('↓' in Strng or '↑' in Strng) and Target in GM.LatinScripts :
         Strng = Strng.replace('↓', '\\_')
         Strng = Strng.replace('↑↑', '\\"')
         Strng = Strng.replace('↑', '\\\'')
