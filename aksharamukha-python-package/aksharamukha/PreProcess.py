@@ -374,8 +374,13 @@ def PreProcess(Strng,Source,Target):
         Strng = Strng.replace('a:i', 'a_i')
         Strng = Strng.replace('a:u', 'a_u')
 
-    if Source == "ISO" or Source == "IAST" or Source == "Titus":
+    if Source == "ISO" or Source == "IAST" or Source == "Titus" or "RussianCyrillic":
         Strng = CF.VedicSvarasNonDiacritic(Strng)
+
+    if '↓' in Strng or '↑' in Strng:
+        Strng = Strng.replace('↓', '\\_')
+        Strng = Strng.replace('↑↑', '\\"')
+        Strng = Strng.replace('↑', '\\\'')
 
     if Source == "WarangCiti":
         Strng = Strng.replace('\u200D', '\u00D7')

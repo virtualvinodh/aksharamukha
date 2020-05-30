@@ -92,8 +92,8 @@ def VedicSvarsIndicLatin(Strng):
 def VedicSvarasOthers(Strng, Target):
     Strng = Strng.replace('\\"','↑↑').replace("\\_", '↓').replace("\\\'",'↑')
     anu = GM.CrunchList('AyogavahaMap', Target)[1]
-    Strng = Strng.replace('\\m++', 'ꣳ')
-    Strng = Strng.replace('\\m+', 'ꣴ')
+    Strng = Strng.replace('\\m++', 'ꣴ')
+    Strng = Strng.replace('\\m+', 'ꣳ')
 
     Ayogavaha = GM.CrunchList('AyogavahaMap', Target)
 
@@ -122,12 +122,35 @@ def VedicSvarasDiacrtics(Strng, Target):
 
     return Strng
 
+def VedicSvarasCyrillic(Strng, Target):
+    Strng = Strng.replace('\\\'', '̍')
+    Strng = Strng.replace('\\"', '̎')
+    Strng = Strng.replace('\\_', '̱')
+    Strng = Strng.replace('\\м++', 'г\u0361м')
+    Strng = Strng.replace('\\м+', 'г\u035Cм')
+    Strng = Strng.replace('\\m++', 'г\u0361м')
+    Strng = Strng.replace('\\m+', 'г\u035Cм')
+    Ayogavaha = GM.CrunchList('AyogavahaMap', Target)
+    Svaras = ['̍', '̎', '̱']
+
+    ## Svap the order of Svara + Ayogavaha -> Ayogaaha + Svara
+    ## Indic syllable boundaries
+    for x in Ayogavaha:
+        for y in Svaras:
+            Strng = Strng.replace(x + y, y + x)
+
+    return Strng
+
 def VedicSvarasNonDiacritic(Strng):
     Strng = Strng.replace('̍', '\\\'')
     Strng = Strng.replace('̎', '\\"')
     Strng = Strng.replace('̱', '\\_')
     Strng = Strng.replace('gͫ̄', '\\m++')
     Strng = Strng.replace('gͫ', '\\m+')
+
+    Strng = Strng.replace('г\u0361м', '\\m++')
+    Strng = Strng.replace('г\u035Cм', '\\m+')
+
 
     return Strng
 
@@ -213,13 +236,7 @@ def PostFixRomanOutput(Strng,Source,Target):
     elif Target in vedicnonDiacRoman:
         pass
     elif Target == "RussianCyrillic":
-        Strng = Strng.replace('\\\'', '̍')
-        Strng = Strng.replace('\\"', '̎')
-        Strng = Strng.replace('\\_', '̱')
-        Strng = Strng.replace('\\м++', 'г\u0361м')
-        Strng = Strng.replace('\\м+', 'г\u035Cм')
-        Strng = Strng.replace('\\m++', 'г\u0361м')
-        Strng = Strng.replace('\\m+', 'г\u035Cм')
+        Strng = VedicSvarasCyrillic(Strng, Target)
     else:
         Strng = VedicSvarasOthers(Strng, Target)
 
