@@ -25,12 +25,12 @@ SouthVowelMap = [
                 ]
 
 ModernVowelMap = [
-                 '\U0001130F\u02BC',
-                 '\U00011306\u02BC',
+                 '\U0001130F\u02BD',
+                 '\U00011306\u02BD',
                  ]
 
 SinhalaVowelMap = [
-                  '\U0001130F\u02C7'
+                  '\U0001130F\u02BD'
                   ]
 
 VowelSignMap =  [
@@ -55,11 +55,11 @@ SouthVowelSignMap = [
                     ]
 
 ModernVowelSignMap =[
-                    '\U00011347\u02BC',
-                    '\U0001133E\u02BC']
+                    '\U00011347\u02BD',
+                    '\U0001133E\u02BD']
 
 SinhalaVowelSignMap = [
-                      '\U00011347\u02C7'
+                      '\U00011347\u02BD'
                       ]
 
 AyogavahaMap = [
@@ -133,11 +133,11 @@ NuktaConsonantMap =  [
                      ]
 
 SinhalaConsonantMap =[
-                     '\U00011301\u02C6\U00011317',
-                     '\U00011301\u02C6\U0001131C',
-                     '\U00011301\u02C6\U00011321',
-                     '\U00011301\u02C6\U00011326',
-                     '\U00011301\u02C6\U0001132C',
+                     '\U00011301\u02BD\U00011317',
+                     '\U00011301\u02BD\U0001131C',
+                     '\U00011301\u02BD\U00011321',
+                     '\U00011301\u02BD\U00011326',
+                     '\U00011301\u02BD\U0001132C',
                       ]
 
 NuktaMap = [
@@ -154,7 +154,7 @@ SignMap =[
          '\u0965'
          ]
 
-Aytham =[AyogavahaMap[2]+'\u02BC']
+Aytham =[AyogavahaMap[2]+'\u02BD']
 
 NumeralMap = [
              '\u0BE6',

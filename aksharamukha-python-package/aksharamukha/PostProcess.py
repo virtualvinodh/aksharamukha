@@ -623,7 +623,7 @@ def TamilNaToNNa(Strng):
 
 # കൽന് കത്ല് ക്ഷേത്ര് കൻല് - Check this
 
-def MalayalamChillu(Strng, reverse=False):
+def MalayalamChillu(Strng, reverse=False, preserve=False):
 
     Chillus=['\u0D7A','\u0D7B','\u0D7C','\u0D7D','\u0D7E', 'ഩ‍്']
 
@@ -654,8 +654,14 @@ def MalayalamChillu(Strng, reverse=False):
             #print '(?<!'+'['+vir+''.join(Chillus)+']'+')'+'('+ConVir[i]+')'+'(?!['+''.join(CList[i])+'])'
             Strng = re.sub(ListC + '('+ConVir[i]+')'+'(?!['+''.join(CList[i])+'])',r'\1' + Chillus[i],Strng)
     else:
-        for x,y in zip(Chillus, ConVir):
-            Strng = Strng.replace(x, y +'ˍ') ## Fix the reversal of characters of this
+        print('called mal')
+        print(preserve)
+        if preserve:
+            for x,y in zip(Chillus, ConVir):
+                Strng = Strng.replace(x, y +'ˍ') ## Fix the reversal of characters of this
+        else:
+            for x,y in zip(Chillus, ConVir):
+                Strng = Strng.replace(x, y) ## Fix the reversal of characters of this
 
     return Strng
 

@@ -10,6 +10,11 @@ from aksharamukha.ScriptMap.MainIndic import Tamil, Malayalam, Limbu, Chakma
 ### Use escape char in all functions
 
 
+def ShowChillus(Strng):
+
+    return PostProcess.MalayalamChillu(Strng, True, True)
+
+
 def ChakmaPali(Strng):
     Strng = Strng.replace('\U00011147', '𑄤') # Replace Ya
     Strng = Strng.replace('𑄠', '𑄡') # Replace vA

@@ -79,8 +79,8 @@ Characters = Vowels + VowelSigns + CombiningSigns + Consonants
 CharactersNV = Vowels + VowelSignsNV + CombiningSigns + Consonants
 
 Diacritics = ['ʽ', '\u00B7', '\u00B9','\u00B2','\u00B3','\u2074','\u2081','\u2082','\u2083','\u2084']
-DiacriticsRemovable = ['ʼ', 'ˇ', 'ˍ', 'ˆ', '˘', '\u00B7']
-DiacriticsRemovableTamil = ['ˇ', 'ˍ', 'ˆ', '˘', '\u00B7']
+DiacriticsRemovable = ['ʼ', 'ˇ', 'ˆ', '˘', '\u00B7']
+DiacriticsRemovableTamil = ['ˇ', 'ˆ', '˘', '\u00B7']
 
 ScriptAll = ['Aytham', 'Signs', 'CombiningSigns', 'VowelSigns', 'Vowels', 'Consonants', 'Numerals']
 
