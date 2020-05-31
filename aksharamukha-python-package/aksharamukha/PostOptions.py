@@ -37,9 +37,6 @@ def ApplyScriptDefaults(Strng,Source,Target):
     elif Target == 'Oriya':
         Options += ['OriyaVa','YaToYYa']
 
-    elif Target == 'Sinhala':
-        Options += []
-
     elif Target == 'Chakma':
         Options += ['YaToYYa']
 
@@ -48,9 +45,6 @@ def ApplyScriptDefaults(Strng,Source,Target):
 
     elif Target == 'Saurashtra':
         Options += ['SaurashtraHaru']
-
-    elif Target == 'Thai':
-        Options += []
 
     elif Target == 'Tibetan':
         Options += ['TibetanRemoveVirama', 'TibetanRemoveBa']

@@ -29,6 +29,7 @@ def MongolianSyllabize(Strng):
     Strng = Strng.replace('ᠣᠸᠸᠠ᠋', 'ᠣᠸᠸᠠ')
     Strng = Strng.replace(' \u180E', '\u180E')
     Strng = Strng.replace(' ' + '\u200B', '')
+    Strng = Strng.replace(' ᢁ', 'ᢁ')
 
     return Strng
 

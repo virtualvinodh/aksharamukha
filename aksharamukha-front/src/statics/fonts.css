@@ -436,6 +436,7 @@
   font-family: 'MQG8F02' !important;
   writing-mode: vertical-lr;
   line-height: 1.8em;
+  font-size: 135%;
 }
 
 .soyombo {
@@ -638,7 +639,7 @@
 }
 .khomthai {
   font-family: "Patimokkha" !important;
-  font-size: 130%;
+  font-size: 150%;
 }
 .taithamlao {
   font-family: "Lamphun" !important;
@@ -666,7 +667,6 @@
   font-family: Muktamsiddham
 }
 .siddham {
-  font-size: 100%;
   font-family: "Noto Sans Siddham" !important
 }
 .grantha {
@@ -754,6 +754,5 @@
 }
 .marchen {
   font-family: "Noto Sans Marchen" !important;
-  font-size: 100%;
   line-height: 2.5em;
 }

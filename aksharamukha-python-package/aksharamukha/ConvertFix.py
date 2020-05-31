@@ -1385,7 +1385,25 @@ def ReverseVowelSigns(Strng,Script,reverse=False):
     return Strng
 
 def FixKhomThai(Strng, reverse=False):
-    Strng = ThaiReverseVowelSigns(Strng,reverse)
+
+    if not reverse:
+        Strng = Strng.replace('โ','เา')
+        Strng = ThaiReverseVowelSigns(Strng,reverse)
+        Strng = re.sub('(.\u0E3A)(.\u0E3A)(ใ)', r'\3\1\2', Strng) # reversed
+        Strng = re.sub('(.\u0E3A)(ใ)', r'\2\1', Strng) # reversed
+
+
+        Strng = re.sub('((.\u0E3A)+)(เ)', r'\3\1', Strng) # reversed
+        Strng = re.sub('(.\u0E3A)?(.)(ฺร)', r'\3\1\2', Strng) # reversed
+        Strng = Strng.replace('เอา', 'โอ')
+    else:
+        Strng = re.sub('(ใ)(.\u0E3A)(.\u0E3A)', r'\2\3\1', Strng)
+        Strng = re.sub('(ใ)(.\u0E3A)', r'\2\1', Strng)
+
+        Strng = re.sub('(ฺร)(.\u0E3A)?(.)', r'\2\3\1', Strng)
+        Strng = re.sub('(เ)((.\u0E3A)+)', r'\2\1', Strng)
+        Strng = ThaiReverseVowelSigns(Strng,reverse)
+        Strng = Strng.replace('เา', 'โ')
 
     return Strng
 
@@ -1398,7 +1416,6 @@ def FixThai(Strng,reverse=False):
         Strng = Strng.replace("\u02BB\u02BB", '')
 
         Strng = Strng.replace("หฺ์","ห์")
-
 
     return Strng
 

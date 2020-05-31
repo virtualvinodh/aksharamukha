@@ -109,9 +109,15 @@
 
   <q-tab-pane name="tab-3">
     <h5> Settings </h5>
+    <span v-if="typeof preserveSourceExampleOut[outputScript] !== 'undefined'">
 
     <q-toggle color="dark" v-model="sourcePreserve" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-sm print-hide" @input="convert" />
+    <small><div class="q-ml-xl" v-html="preserveSourceExampleOut[outputScript]"></div></small>
+
       <br/>
+
+    </span>
+
       <q-option-group
         color="dark"
         type="checkbox"

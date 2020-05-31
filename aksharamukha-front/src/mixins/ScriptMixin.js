@@ -45,6 +45,30 @@ export const ScriptMixin = {
       consonantsSinhala: ['n*g', 'n*j', 'n*D', 'n*d', 'm*b'],
       ayogavahasAll: ['~', 'M', 'H'],
       vedicScripts: ['Assamese', 'Bengali', 'Devanagari', 'Gujarati', 'Kannada', 'Malayalam', 'Oriya', 'Gurmukhi', 'Tamil', 'Telugu', 'TamilExtended', 'Grantha'],
+      preserveSourceExampleOut: {
+        'WarangCiti': 'akṣaramukha → <span class="warangciti">𑣁𑣌‍𑣝𑣜𑣖𑣃𑣌‍𑣙</span> not <span class="warangciti">𑣁𑣌𑣞𑣜𑣖𑣃𑣌</span>',
+        'Modi': 'ki kī ku kū → <span class="modi">𑘎𑘱 𑘎𑘲 𑘎𑘳 𑘎𑘴</span> not <span class="modi">𑘎𑘱 𑘎𑘲 𑘎𑘳 𑘎𑘴</span>',
+        'Multani': 'aśoka →<span class="multani">𑊀𑊥𑊂𑊄</span> not <span class="multani">𑊀𑊥𑊄</span>',
+        'Sundanese': 'ṛ ḷ  bha → <span class="sundanese">ᮻ ᮼ ᮽ</span> not <span class="sundanese">ᮛᮩ ᮜᮩ ᮘ</span>',
+        'Avestan': 'khyat  → <span class="avestan">𐬑𐬌𐬌𐬀𐬙</span> not <span class="avestan">𐬒𐬌𐬌𐬀𐬝</span>',
+        'Thaana': 'maṇi → <span class="thaana">މަޱި</span> not <span class="thaana">މަނި</span>',
+        'Tibetan': 'bhagavat → <span class="tibetan">བྷགཝཏ྄</span> not <span class="tibetan">བྷགབཏ</span>',
+        'Saurashtra': ' mha nha lha rha nha → <span class="saurashtra">ꢪ꣄ꢲ ꢥ꣄ꢲ ꢭ꣄ꢲ ꢬ꣄ꢲ</span> not <span class="saurashtra">ꢪꢴ ꢥꢴ ꢭꢴ ꢬꢴ</span>',
+        'Gurmukhi': 'anna aṃta → <span class="gurmukhi">ਅੱਨ ਅਂਤ</span> not <span class="gurmukhi">ਅੰਨ ਅੰਤ</span><br/> kṛpā → <span class="sinhala">ਕ੍ਰੁʼਪਾ</span> not <span class="sinhala">ਕ੍ਰੁਪਾ</span>',
+        'Chakma': 'yayāti → <span class="chakma">𑄡𑄧𑄡𑄖𑄨</span> not <span class="chakma">𑄡𑄧𑄠𑄖𑄨</span>',
+        'Gujarati': 'kŏllam → <span class="gujarati">કો˘લ્લમ્</span> not <span class="gujarati">કોલ્લમ્</span>',
+        'Oriya': 'bhagavan yayāti → <span class="oriya">ଭଗୱନ୍ ଯଯାତି</span> not <span class="oriya">ଭଗବନ୍ ଯୟାତି</span><br/>kŏllam kæṭ → <span class="oriya">କୋ˘ଲ୍ଲମ୍ କେʼଟ୍</span> not <span class="oriya">କୋଲ୍ଲମ୍ କେଟ୍</span>',
+        'Assamese': 'yayāti → <span class="assamese">যযাতি</span> not <span class="assamese">যয়াতি</span><br/>kŏllam kæṭ → <span class="assamese">কো˘ল্লম্ কেʼট্</span> not <span class="assamese">কোল্লম্ কেট্</span>',
+        'Bengali': 'bhagavan yayāti → <span class="bengali">ভগৱন্ যযাতি</span> not <span class="bengali">ভগবন্ যয়াতি</span><br/>kŏllam kæṭ → <span class="bengali">কো˘ল্লম্ কেʼট্</span> not <span class="bengali">কোল্লম্ কেট্</span>',
+        'Limbu': 'jha ña ṣa ṃ → <span class="limbu">ᤉ ᤊ ᤚ ᤲ</span> not <span class="limbu">ᤈ ᤏ ᤙ ᤱ</span>',
+        'MeeteiMayek': 'kūṭākṣara maṇḍala → <span class="meeteimayek">ꯀꫬꫤꯥꯛꫪꯔ ꯃꫨ꯭ꫦꯂ</span> not <span class="meeteimayek">ꯀꯨꯇꯥꯛꯁꯔ ꯃꯅ꯭ꯗꯂ</span>',
+        'Tamil': 'maṃgalāni → <span class="tamil">மம்ʼக³லாநி</span> not <span class="tamil">மங்க³லானி</span>',
+        'Malayalam': 'maṃkāram kaṉi → <span class="malayalam">മംകാരമ് കഩി</span> not <span class="malayalam">മങ്കാരം കനി</span> <br/> kæp kôl → <span class="malayalam">കെʼപ് കാʼൽ</span> not <span class="malayalam">കെപ് കാൽ</span></span>',
+        'Telugu': 'maṇḍalam → <span class="telugu">మణ్డలమ్</span> not <span class="telugu">మండలం</span> <br/> kæṭ kôṭ → <span class="telugu">కెʼట్ కాʼట్</span> not <span class="telugu">కెట్ కాట్</span>',
+        'Kannada': 'maṇḍalam → <span class="kannada">ಮಣ್ಡಲಮ್</span> not <span class="kannada">ಮಂಡಲಂ</span> <br/> kæṭ kôṭ → <span class="telugu">ಕೆʼಟ್ ಕಾʼಟ್</span> not <span class="telugu">ಕೆಟ್ ಕಾಟ್</span>',
+        'Devanagari': 'සඳහන් → <span class="devanagari">सँˆदहन्</span> not <span class="devanagari">सँदहन्</span>',
+        'Sinhala': 'kôṭ hām̐ → <span class="sinhala">කාʼට් හූංʼ</span> not <span class="sinhala">කාට් හූං</span>'
+      },
       preOptionsGroup: {
         'Tamil': [
           { label: 'Transcribe Tamil <br/><small><span class="tamil">மதம், நகம்</span> → madam, nagam</small>', value: 'TamilTranscribe' },
@@ -173,6 +197,9 @@ export const ScriptMixin = {
           { label: 'Use ୟ everywhere<br/><small>ଯୟାତି ଯଜ୍ଞ → ୟୟାତି ୟଜ୍ଞ</small>', value: 'OriyaYYA' }
         ],
         'Bengali': [
+          { label: 'Use য় everywhere<br/><small>যয়াতি যজ্ঞ → য়য়াতি য়জ্ঞ</small>', value: 'BengaliYYA' }
+        ],
+        'Assamese': [
           { label: 'Use য় everywhere<br/><small>যয়াতি যজ্ঞ → য়য়াতি য়জ্ঞ</small>', value: 'BengaliYYA' }
         ],
         'Siddham': [
@@ -304,7 +331,7 @@ export const ScriptMixin = {
           { label: 'SA-I for vowel length<small><br/><span class="limbu">ᤁ᤺ᤢᤰ → ᤁᤢᤁ᤻</span></small>', value: 'LimbuSpellingSaI' }
         ],
         'Sundanese': [
-          { label: 'Sundanese historical conjuncts<br/><small><span class="sundanese">ᮊ᮪ᮙ ᮊ᮪ᮝ ᮃᮊ᮪ ᮃᮙ᮪ → ᮊᮬ ᮊᮭ ᮃᮾ ᮃᮿ</span></small>', value: 'SundaneseHistoricConjuncts' }
+          { label: 'Sundanese archaic conjuncts<br/><small><span class="sundanese">ᮊ᮪ᮙ ᮊ᮪ᮝ ᮃᮊ᮪ ᮃᮙ᮪ → ᮊᮬ ᮊᮭ ᮃᮾ ᮃᮿ</span></small>', value: 'SundaneseHistoricConjuncts' }
         ],
         'Malayalam': [
           { label: 'Dot Reph<br/><small><span class="malayalam">ധർമ → ധൎമ</span></small>', value: 'dotReph' },

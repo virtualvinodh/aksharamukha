@@ -24,9 +24,12 @@
         class="col-xs-11 col-lg-3 q-ma-md"
         :options="scriptsOutput"
       />
-    <span class="col-lg-2 col-xs-5 q-ma-lg">
-    <q-toggle v-model="sourcePreserve" @input="update" color="faded"
-      label="Preserve source" left-label /><q-tooltip>Preserve the source as-is and don't change the text to improve readability</q-tooltip></span>
+
+      <span class="col-lg-2 col-xs-5 q-ma-lg">
+        <q-toggle v-model="sourcePreserve" @input="update" color="faded"
+        label="Preserve source" left-label /><q-tooltip>Preserve the source as-is and don't change the text to improve readability</q-tooltip>
+      </span>
+
     </div>
     <div class="row">
       <q-option-group

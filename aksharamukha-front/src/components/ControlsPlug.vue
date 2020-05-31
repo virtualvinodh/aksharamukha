@@ -12,9 +12,12 @@
         class="col-xs-6 col-md-6 q-ma-sm"
         :options="scriptsOutput"
       />
-    <q-toggle v-model="sourcePreserve" color="faded"
+    <span v-if="typeof preserveSourceExampleOut[outputScript] !== 'undefined'">
+      <q-toggle v-model="sourcePreserve" color="faded"
       @input="update"
       label="Preserve source" left-label class="q-ml-sm q-mb-sm q-mt-sm"/>
+      <small><div class="q-ml-xl" v-html="preserveSourceExampleOut[outputScript]"></div></small>
+    </span>
       <q-option-group
         color="dark"
         type="checkbox"
