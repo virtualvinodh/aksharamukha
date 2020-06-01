@@ -2157,6 +2157,13 @@ def FixIAST(Strng,reverse=False):
 
     return Strng
 
+def FixTamilExtended(Strng, reverse=False):
+    if not reverse:
+        Strng = Strng.replace('ൗ', 'ൌ')
+    else:
+        pass
+    return Strng
+
 def FixIPA(Strng,reverse=False):
     colon_tilde = "\u02D0\u0303"
     tilde_colon = "\u0303\u02D0"

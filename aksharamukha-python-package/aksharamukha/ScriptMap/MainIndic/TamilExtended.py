@@ -46,7 +46,7 @@ VowelSignMap =  [
                 '\u0D47',
                 '\u0D48',
                 '\u0D4B',
-                '\u0D4C',
+                '\u0D57',
                 ]
 
 SouthVowelSignMap = [

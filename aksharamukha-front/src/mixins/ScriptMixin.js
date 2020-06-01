@@ -2,7 +2,7 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
-        baseURL: 'http://localhost:8085/api',
+        baseURL: 'https://aksharamukha.appspot.com/api/',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -49,23 +49,23 @@ export const ScriptMixin = {
         'WarangCiti': 'akṣaramukha → <span class="warangciti">𑣁𑣌‍𑣝𑣜𑣖𑣃𑣌‍𑣙</span> not <span class="warangciti">𑣁𑣌𑣞𑣜𑣖𑣃𑣌</span>',
         'Modi': 'ki kī ku kū → <span class="modi">𑘎𑘱 𑘎𑘲 𑘎𑘳 𑘎𑘴</span> not <span class="modi">𑘎𑘱 𑘎𑘲 𑘎𑘳 𑘎𑘴</span>',
         'Multani': 'aśoka →<span class="multani">𑊀𑊥𑊂𑊄</span> not <span class="multani">𑊀𑊥𑊄</span>',
-        'Sundanese': 'ṛ ḷ  bha → <span class="sundanese">ᮻ ᮼ ᮽ</span> not <span class="sundanese">ᮛᮩ ᮜᮩ ᮘ</span>',
+        'Sundanese': 'ṛ ḷ bha → <span class="sundanese">ᮻ ᮼ ᮽ</span> not <span class="sundanese">ᮛᮩ ᮜᮩ ᮘ</span>',
         'Avestan': 'khyat  → <span class="avestan">𐬑𐬌𐬌𐬀𐬙</span> not <span class="avestan">𐬒𐬌𐬌𐬀𐬝</span>',
         'Thaana': 'maṇi → <span class="thaana">މަޱި</span> not <span class="thaana">މަނި</span>',
         'Tibetan': 'bhagavat → <span class="tibetan">བྷགཝཏ྄</span> not <span class="tibetan">བྷགབཏ</span>',
-        'Saurashtra': ' mha nha lha rha nha → <span class="saurashtra">ꢪ꣄ꢲ ꢥ꣄ꢲ ꢭ꣄ꢲ ꢬ꣄ꢲ</span> not <span class="saurashtra">ꢪꢴ ꢥꢴ ꢭꢴ ꢬꢴ</span>',
+        'Saurashtra': 'simha → <span class="saurashtra">ꢱꢶꢪ꣄ꢲ</span> not <span class="saurashtra">ꢱꢶꢪꢴ</span>',
         'Gurmukhi': 'anna aṃta → <span class="gurmukhi">ਅੱਨ ਅਂਤ</span> not <span class="gurmukhi">ਅੰਨ ਅੰਤ</span><br/> kṛpā → <span class="sinhala">ਕ੍ਰੁʼਪਾ</span> not <span class="sinhala">ਕ੍ਰੁਪਾ</span>',
         'Chakma': 'yayāti → <span class="chakma">𑄡𑄧𑄡𑄖𑄨</span> not <span class="chakma">𑄡𑄧𑄠𑄖𑄨</span>',
-        'Gujarati': 'kŏllam → <span class="gujarati">કો˘લ્લમ્</span> not <span class="gujarati">કોલ્લમ્</span>',
-        'Oriya': 'bhagavan yayāti → <span class="oriya">ଭଗୱନ୍ ଯଯାତି</span> not <span class="oriya">ଭଗବନ୍ ଯୟାତି</span><br/>kŏllam kæṭ → <span class="oriya">କୋ˘ଲ୍ଲମ୍ କେʼଟ୍</span> not <span class="oriya">କୋଲ୍ଲମ୍ କେଟ୍</span>',
-        'Assamese': 'yayāti → <span class="assamese">যযাতি</span> not <span class="assamese">যয়াতি</span><br/>kŏllam kæṭ → <span class="assamese">কো˘ল্লম্ কেʼট্</span> not <span class="assamese">কোল্লম্ কেট্</span>',
-        'Bengali': 'bhagavan yayāti → <span class="bengali">ভগৱন্ যযাতি</span> not <span class="bengali">ভগবন্ যয়াতি</span><br/>kŏllam kæṭ → <span class="bengali">কো˘ল্লম্ কেʼট্</span> not <span class="bengali">কোল্লম্ কেট্</span>',
+        'Gujarati': 'kŏl → <span class="gujarati">કો˘લ્</span> not <span class="gujarati">કોલ્</span>',
+        'Oriya': 'vināyaka → <span class="oriya">ୱିନାଯକ</span> not <span class="oriya">ବିନାୟକ</span><br/>kŏlæṭ → <span class="oriya">କୋ˘ଲେʼଟ୍</span> not <span class="oriya">କୋଲେଟ୍</span>',
+        'Assamese': 'vināyaka → <span class="assamese">ৱিনাযক</span> not <span class="assamese">ৱিনায়ক</span><br/>kŏlæṭ → <span class="assamese">কো˘লেʼট্</span> not <span class="assamese">কোলেট্</span>',
+        'Bengali': 'vināyaka → <span class="bengali">ৱিনাযক</span> not <span class="bengali">বিনায়ক</span><br/>kŏlæṭ → <span class="bengali">কো˘লেʼট্</span> not <span class="bengali">কোলেট্</span>',
         'Limbu': 'jha ña ṣa ṃ → <span class="limbu">ᤉ ᤊ ᤚ ᤲ</span> not <span class="limbu">ᤈ ᤏ ᤙ ᤱ</span>',
-        'MeeteiMayek': 'kūṭākṣara maṇḍala → <span class="meeteimayek">ꯀꫬꫤꯥꯛꫪꯔ ꯃꫨ꯭ꫦꯂ</span> not <span class="meeteimayek">ꯀꯨꯇꯥꯛꯁꯔ ꯃꯅ꯭ꯗꯂ</span>',
-        'Tamil': 'maṃgalāni → <span class="tamil">மம்ʼக³லாநி</span> not <span class="tamil">மங்க³லானி</span>',
-        'Malayalam': 'maṃkāram kaṉi → <span class="malayalam">മംകാരമ് കഩി</span> not <span class="malayalam">മങ്കാരം കനി</span> <br/> kæp kôl → <span class="malayalam">കെʼപ് കാʼൽ</span> not <span class="malayalam">കെപ് കാൽ</span></span>',
-        'Telugu': 'maṇḍalam → <span class="telugu">మణ్డలమ్</span> not <span class="telugu">మండలం</span> <br/> kæṭ kôṭ → <span class="telugu">కెʼట్ కాʼట్</span> not <span class="telugu">కెట్ కాట్</span>',
-        'Kannada': 'maṇḍalam → <span class="kannada">ಮಣ್ಡಲಮ್</span> not <span class="kannada">ಮಂಡಲಂ</span> <br/> kæṭ kôṭ → <span class="telugu">ಕೆʼಟ್ ಕಾʼಟ್</span> not <span class="telugu">ಕೆಟ್ ಕಾಟ್</span>',
+        'MeeteiMayek': 'kūṭākṣara → <span class="meeteimayek">ꯀꫬꫤꯥꯛꫪꯔ</span> not <span class="meeteimayek">ꯀꯨꯇꯥꯛꯁꯔ</span>',
+        'Tamil': 'maṃtana → <span class="tamil">மம்ʼதந</span> not <span class="tamil">மந்தன</span>',
+        'Malayalam': 'daṃtam kaṉi → <span class="malayalam">ദംതമ് കഩി</span> not <span class="malayalam">ദന്തം കനി</span> <br/> kæpôḍ → <span class="malayalam">കെʼപാʼഡ്</span> not <span class="malayalam">കെപാഡ്</span>',
+        'Telugu': 'khaṇḍam → <span class="telugu">ఖణ్డమ్</span> not <span class="telugu">ఖండం</span> <br/> kæpôḍ → <span class="telugu">కెʼపాʼడ్</span> not <span class="telugu">కెపాడ్</span>',
+        'Kannada': 'khaṇḍam → <span class="kannada">ಖಣ್ಡಮ್</span> not <span class="kannada">ಖಂಡಂ</span> <br/> kæpôḍ → <span class="kannada">ಕೆʼಪಾʼಡ್</span> not <span class="telugu">ಕೆಪಾಡ್</span>',
         'Devanagari': 'සඳහන් → <span class="devanagari">सँˆदहन्</span> not <span class="devanagari">सँदहन्</span>',
         'Sinhala': 'kôṭ hām̐ → <span class="sinhala">කාʼට් හූංʼ</span> not <span class="sinhala">කාට් හූං</span>'
       },
@@ -334,7 +334,7 @@ export const ScriptMixin = {
           { label: 'SA-I for vowel length<small><br/><span class="limbu">ᤁ᤺ᤢᤰ → ᤁᤢᤁ᤻</span></small>', value: 'LimbuSpellingSaI' }
         ],
         'Sundanese': [
-          { label: 'Sundanese archaic conjuncts<br/><small><span class="sundanese">ᮊ᮪ᮙ ᮊ᮪ᮝ ᮃᮊ᮪ ᮃᮙ᮪ → ᮊᮬ ᮊᮭ ᮃᮾ ᮃᮿ</span></small>', value: 'SundaneseHistoricConjuncts' }
+          { label: 'Archaic conjuncts<br/><small><span class="sundanese">ᮊ᮪ᮙ ᮊ᮪ᮝ ᮃᮊ᮪ ᮃᮙ᮪ → ᮊᮬ ᮊᮭ ᮃᮾ ᮃᮿ</span></small>', value: 'SundaneseHistoricConjuncts' }
         ],
         'Malayalam': [
           { label: 'Dot Reph<br/><small><span class="malayalam">ധർമ → ധൎമ</span></small>', value: 'dotReph' },

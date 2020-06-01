@@ -56,7 +56,7 @@ if (src.includes('prelist')) {
   } else if (preList == 'majorall') {
     scriptList = ['ISO', 'IAST', 'IPA', 'RomanReadable', 'RussianCyrillic', 'Assamese', 'Bengali', 'Burmese', 'Devanagari', 'Grantha', 'Gujarati', 'Gurmukhi', 'Kannada', 'Khmer', 'Malayalam', 'Oriya', 'Sharada', 'Sinhala', 'Tamil', 'TamilExtended', 'Telugu', 'Thai', 'Tibetan', 'Urdu']
   } else if (preList == 'sansktradall') {
-    scriptList = ['ISO', 'IAST', 'IPA', 'RomanReadable', 'RussianCyrillic', 'Assamese', 'Balinese', 'Bengali', 'Brahmi', 'Bhaikshuki', 'Burmese', 'Devanagari', 'Dogra', 'Grantha', 'GranthaPandya', 'Gujarati', 'Gurmukhi', 'Javanese', 'Kannada', 'Kharoshthi', 'KhomThai', 'Khmer', 'Malayalam', 'Mongolian', 'Newa', 'Oriya', 'PhagsPa', 'Ranjana', 'Siddham', 'Sharada', 'Sinhala', 'Soyombo', 'TaiTham', 'Takri', 'Tamil', 'TamilExtended', 'Telugu', 'Thai', 'Tibetan', 'Tirhuta', 'Urdu', 'ZanabazarSquare']
+    scriptList = ['ISO', 'IAST', 'IPA', 'RomanReadable', 'RussianCyrillic', 'Assamese', 'Balinese', 'Bengali', 'Brahmi', 'Bhaikshuki', 'Burmese', 'Devanagari', 'Dogra', 'Grantha', 'GranthaPandya', 'Gujarati', 'Gurmukhi', 'Javanese', 'Kannada', 'Kharoshthi', 'KhomThai', 'Khmer', 'Malayalam', 'Mongolian', 'Newa', 'Oriya', 'PhagsPa', 'Ranjana', 'Saurashtra', 'Siddham', 'Sharada', 'Sinhala', 'Soyombo', 'TaiTham', 'Takri', 'Tamil', 'TamilExtended', 'Telugu', 'Thai', 'Tibetan', 'Tirhuta', 'Urdu', 'ZanabazarSquare']
   } else if (preList == 'sanskall') {
     scriptList = ['ISO', 'IAST', 'IPA', 'RomanReadable', 'RussianCyrillic', 'Ariyaka', 'Assamese', 'Balinese', 'Bengali', 'Brahmi', 'Bhaikshuki', 'Burmese', 'Chakma', 'Devanagari', 'Dogra', 'GunjalaGondi', 'MasaramGondi', 'Grantha', 'GranthaPandya', 'Gujarati', 'Gurmukhi', 'Javanese', 'Kaithi', 'Kannada', 'Kharoshthi', 'KhomThai', 'Khmer', 'Khudawadi', 'LaoPali', 'Malayalam', 'Mongolian', 'Modi', 'Newa', 'Oriya', 'PhagsPa', 'Ranjana', 'Santali', 'Saurashtra', 'Siddham', 'Sharada', 'Sinhala', 'Soyombo', 'TaiTham', 'Takri', 'Tamil', 'TamilExtended', 'Telugu', 'Thai', 'Tibetan', 'Tirhuta', 'Urdu', 'ZanabazarSquare']
   }
@@ -165,16 +165,16 @@ function optionsOutput (outputScript) {
     var checkbox = ''
 
     if (optionsHide) {
-      checkbox = '<br/><span id="options" class="aksharamukha-hidedown">';
+      checkbox = '<div id="options" class="aksharamukha-hidedown">';
     } else {
-      checkbox = '<br/><span id="options" class="aksharamukha-showup">';
+      checkbox = '<div id="options" class="aksharamukha-showup">';
     }
 
     postOptions[outputScript].forEach(function(option) {
-      checkbox += '<input type="checkbox" name="aksharamukha-optionpost" value="' + option.value + '">' + option.label + '<br>';
+      checkbox += '<input type="checkbox" name="aksharamukha-optionpost" value="' + option.value + '"><small>' + option.label + '</small><br>';
     })
 
-    return checkbox + '</span>'
+    return checkbox + '</div>'
   } else {
     return ''
   }
@@ -228,7 +228,7 @@ if (scriptList.includes("RussianCyrillic")) {
   selectMid += '<option value="RussianCyrillic">Cyrillic (Russian)</option>'
 }
 
-var preservebutton = '<input type="checkbox" name="preserve" id="aksharamukha-preserve"/> Preserve source </input>'
+//var preservebutton = '<input type="checkbox" name="preserve" id="aksharamukha-preserve"/> Preserve source </input>'
 
 scripts.forEach(function(script) {
   if (scriptList.includes(script.value)) {
@@ -239,13 +239,9 @@ scripts.forEach(function(script) {
   document.body.insertAdjacentHTML('afterbegin', `
       <div id="aksharamukha-navbar" class="sticky">
       <div class="aksharamukha-logosec">
-      <div class="logo-aksharamukha"/>
-        <a href="http://aksharamukha.appspot.com">
-          <img src="https://raw.githubusercontent.com/virtualvinodh/aksharamukha/master/aksharamukha-front/src/statics/icons/favicon-32x32.png" width="20px" >
-        </a> <span class="aksharamukha-name">Aksharamukha</span>
+          <span class="aksharamukha-name"><small>Select display script</small></span>
       </div>
-      </div>
-` + selectInit + selectMid + selectEnd + preservebutton + `
+` + selectInit + selectMid + selectEnd + `
   `);
 
   var newStyle = document.createElement('style');
@@ -267,8 +263,8 @@ scripts.forEach(function(script) {
     }
 
     #aksharamukha-more {
-      margin-top:2px;
-      margin-bottom: 5px;
+      margin-top:6px;
+      margin-bottom: 0px;
     }
 
     .aksharamukha-hidedown {
@@ -297,13 +293,38 @@ scripts.forEach(function(script) {
       top: 20px;
       // border: 1px solid black;
       width: 150px;
-      padding: 5px 5px 5px 5px;
+      padding: 5px 5px 2px 5px;
       background: #CDCDCD;
       z-index: 1000;
     }
 
     #aksharamukha-navbar a {
      text-decoration: none;
+    }
+
+    #aksharamukha-loading {
+      margin-top:8px;
+      margin-bottom:5px;
+    }
+
+    a.aksharamukha-hyperlink:link {
+      text-decoration: none;
+      color:black;
+    }
+
+    a.aksharamukha-hyperlink:visited {
+      text-decoration: none;
+      color:black;
+    }
+
+    a.aksharamukha-hyperlink:hover {
+      text-decoration: underline;
+      color:black;
+    }
+
+    a.aksharamukha-hyperlink:active {
+      text-decoration: underline;
+      color:black;
     }
 
     #akshmukha-text {
@@ -322,7 +343,6 @@ scripts.forEach(function(script) {
   document.head.appendChild(link)
 
   document.getElementById('aksharamukhaselect').addEventListener('input', transliterate)
-  document.getElementById('aksharamukha-preserve').addEventListener('change', transliterate)
 
   // Storing original content
   var transContent = document.getElementsByClassName(classURL)
@@ -355,17 +375,20 @@ scripts.forEach(function(script) {
     sel.value = window.localStorage.getItem('target')
   }
 
-  if (window.localStorage.getItem('preservePrevious')) {
-    document.getElementById('aksharamukha-preserve').checked = JSON.parse(window.localStorage.getItem('preservePrevious'))
-  }
-
   if (window.localStorage.getItem('target')) {
     transliterate()
   }
 
 }
 
-async function transliterate() {
+async function transliterate(event) {
+  if (typeof event !== 'undefined' && event.target.id == 'aksharamukha-preserve') {
+    preservePrevious = event.target.checked
+    console.log(event.target.checked)
+    console.log(preservePrevious)
+    window.localStorage.setItem('preservePrevious', preservePrevious)
+  }
+
   var sel = document.getElementById('aksharamukhaselect')
   target = sel.value
 
@@ -390,10 +413,9 @@ async function transliterate() {
   }
 
   if (scriptList.includes(target)) {
-    preservePrevious = document.getElementById('aksharamukha-preserve').checked
-
     var postOptionsChecked = []
     var postOptions = document.getElementsByName('aksharamukha-optionpost')
+
     postOptionsList = []
 
     // console.log(targetOld)
@@ -425,18 +447,23 @@ async function transliterate() {
     var navbar = document.getElementById('aksharamukha-navbar')
     var moreButton = ''
 
-    if (optionsOutput(target) != '' ) {
+    if (optionsOutput(target) != '' || addPreserveSource(target) != '') {
       navbar.innerHTML = navbarOld
 
       if (optionsHide) {
-        moreButton = '<br/><button id="aksharamukha-more">Show options</button>'
+        moreButton = '<button id="aksharamukha-more"><small>More options</small></button>'
       } else {
-        moreButton = '<br/><button id="aksharamukha-more">Hide options</button>'
+        moreButton = '<button id="aksharamukha-more"><small>Hide options</small></button>'
       }
 
-      navbar.innerHTML = navbarOld + moreButton + optionsOutput(target, '')
+      navbar.innerHTML = navbarOld + moreButton + "" + addPreserveSource(target) + optionsOutput(target, '')
 
       document.getElementById('aksharamukha-more').addEventListener('click', optionsToggle)
+
+      if (addPreserveSource(target) !== '') {
+        document.getElementById('aksharamukha-preserve').checked = JSON.parse(window.localStorage.getItem('preservePrevious'))
+        document.getElementById('aksharamukha-preserve').addEventListener('change', transliterate)
+      }
 
       sel = document.getElementById('aksharamukhaselect')
       sel.value = target
@@ -445,10 +472,17 @@ async function transliterate() {
       navbar.innerHTML = navbarOld
     }
 
-    document.getElementById('aksharamukha-preserve').checked = preservePrevious
+    var newDivLoad = document.createElement("div")
+    newDivLoad.id = "aksharamukha-loading"
+    navbar.appendChild(newDivLoad)
+
+    var newDivLogo = document.createElement("div")
+    newDivLogo.id = "aksharamukha-branding"
+    navbar.appendChild(newDivLogo)
+
+    document.getElementById('aksharamukha-branding').innerHTML = '<a href="http://aksharamukha.appspot.com" class="aksharamukha-hyperlink" target="_blank"><img src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/icon.png" width="15px"/> ᴾᵒʷᵉʳᵉᵈ ᵇʸ ᴬᵏˢʰᵃʳᵃᵐᵘᵏʰᵃ</a>'
 
     document.getElementById('aksharamukhaselect').addEventListener('input', transliterate)
-    document.getElementById('aksharamukha-preserve').addEventListener('change', transliterate)
 
     postOptions.forEach(function (postOption, index) {
       postOption.checked = postOptionsChecked[index]
@@ -456,13 +490,16 @@ async function transliterate() {
     })
 
     window.localStorage.setItem('target', target)
-    window.localStorage.setItem('preservePrevious', preservePrevious)
     window.localStorage.setItem('postOptionsChecked'+target, postOptionsChecked)
     window.localStorage.setItem('postOptionsList'+target, postOptionsList)
 
     var transContent = document.getElementsByClassName(classURL)
 
     document.getElementById('aksharamukhaselect').value = target
+
+    if (window.localStorage.getItem('preservePrevious')) {
+      preservePrevious = JSON.parse(window.localStorage.getItem('preservePrevious'))
+    }
 
     for (var i=0; i<transContent.length; i++) {
       var source = ''
@@ -497,7 +534,11 @@ async function transliterate() {
 
       //transContent[i].classList.add(ScriptMixin.methods.getOutputClass(target, postOptionsList))
 
+      document.getElementById('aksharamukha-loading').innerHTML = '<img src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/loading.gif" width="100px" />'
+
       await translit(transContent[i], i, source, targetOld, target)
+
+      document.getElementById('aksharamukha-loading').innerHTML = ''
 
       //getResult(transContent[i], i, source, targetOld)
     }
@@ -508,20 +549,50 @@ async function transliterate() {
 
 function optionsToggle() {
   var el = document.getElementById('options')
+  var elpre = document.getElementById('aksharamukha-preservebut')
+
   var button = document.getElementById('aksharamukha-more')
   optionsHide = !optionsHide
 
-  if (button.innerHTML == 'Show options') {
-      el.classList = ['aksharamukha-showup']
-      button.innerHTML = 'Hide options'
+  if (button.innerHTML == '<small>More options</small>') {
+      if (el != null) {
+        el.classList = ['aksharamukha-showup']
+      }
+      if (elpre != null) {
+        elpre.classList = ['aksharamukha-showup']
+      }
+
+      button.innerHTML = '<small>Hide options</small>'
   } else {
-    el.classList = ['aksharamukha-hidedown']
-    button.innerHTML = 'Show options'
+    if (el != null) {
+      el.classList = ['aksharamukha-hidedown']
+    }
+    if (elpre != null) {
+      elpre.classList = ['aksharamukha-hidedown']
+    }
+
+    button.innerHTML = '<small>More options</small>'
+  }
+}
+
+function addPreserveSource(target) {
+  var explO = ScriptMixin.data().preserveSourceExampleOut[target]
+
+  if (typeof explO !== 'undefined' && target !== 'Original') {
+    var expl = '<small>' + explO + '</small>'
+
+    var cls = optionsHide ? '"aksharamukha-hidedown"' : '"aksharamukha-showup"'
+
+    var button = '<span id = "aksharamukha-preservebut" class=' + cls + '><br/><input type="checkbox" name="preserve" id="aksharamukha-preserve"/> <small>Preserve source</small><br/> ' + expl + '<hr/></span>'
+
+    return  button
+
+  } else {
+    return ''
   }
 }
 
 window.addEventListener('load', appendTool)
 
 console.log('Aksharamukha plugin is loaded')
-
 
