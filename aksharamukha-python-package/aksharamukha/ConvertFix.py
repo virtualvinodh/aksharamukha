@@ -711,6 +711,7 @@ def FixTamilExtended(Strng, reverse=False):
     if not reverse:
         Strng = Strng.replace('ക്‌ഷ', 'ക്ഷ')
         Strng = Strng.replace('ശ്‌ര', 'ശ്‍ര')
+        Strng = Strng.replace('ൗ', 'ൌ')
     else:
         Strng = Strng.replace('\u0D4D', '\u0D4D\u200C')
 
@@ -2155,13 +2156,6 @@ def FixIAST(Strng,reverse=False):
         Strng = Strng.replace("ṁ",IAST.AyogavahaMap[1])
         # ^ Some IAST publications use /ṁ/ instead of /m dot below/
 
-    return Strng
-
-def FixTamilExtended(Strng, reverse=False):
-    if not reverse:
-        Strng = Strng.replace('ൗ', 'ൌ')
-    else:
-        pass
     return Strng
 
 def FixIPA(Strng,reverse=False):
