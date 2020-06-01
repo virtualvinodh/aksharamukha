@@ -1,7 +1,7 @@
 // Aksharamukha Web Plugin
 // http://aksharamukha.appspot.com
 // vinodh@virtualvinodh.com
-// 23:50 01/06/2020
+// 11:55 01/06/2020
 
 const ScriptMixin = {
     data() {
@@ -2420,7 +2420,7 @@ function appendTool() {
     newDivLogo.id = "aksharamukha-branding1"
     var navbar = document.getElementById('aksharamukha-navbar')
     navbar.appendChild(newDivLogo)
-    document.getElementById('aksharamukha-branding1').innerHTML = '<a href="http://aksharamukha.appspot.com" class="aksharamukha-hyperlink" target="_blank"><img src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/icon.png" width="15px"/> ᴾᵒʷᵉʳᵉᵈ ᵇʸ ᴬᵏˢʰᵃʳᵃᵐᵘᵏʰᵃ</a>'
+    document.getElementById('aksharamukha-branding1').innerHTML = '<a href="http://aksharamukha.appspot.com" class="aksharamukha-hyperlink" target="_blank"><img src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/icon.png" width="15px"/> <small><sup>Powered by Aksharamukha</sup></small></a>'
     var newStyle = document.createElement('style');
     newStyle.appendChild(document.createTextNode(`
     .logo-aksharamukha {
@@ -2630,7 +2630,7 @@ async function transliterate(event) {
         newDivLogo.id = "aksharamukha-branding"
         var navbar = document.getElementById('aksharamukha-navbar')
         navbar.appendChild(newDivLogo)
-        document.getElementById('aksharamukha-branding').innerHTML = '<a href="http://aksharamukha.appspot.com" class="aksharamukha-hyperlink" target="_blank"><img src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/icon.png" width="15px"/> ᴾᵒʷᵉʳᵉᵈ ᵇʸ ᴬᵏˢʰᵃʳᵃᵐᵘᵏʰᵃ</a>'
+        document.getElementById('aksharamukha-branding').innerHTML = '<a href="http://aksharamukha.appspot.com" class="aksharamukha-hyperlink" target="_blank"><img src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/icon.png" width="15px"/> <small><sup>Powered by Aksharamukha </sup></small></a>'
         document.getElementById('aksharamukhaselect').addEventListener('input', transliterate)
         postOptions.forEach(function(postOption, index) {
             postOption.checked = postOptionsChecked[index]
