@@ -16,7 +16,7 @@
       <q-toggle v-model="sourcePreserve" color="faded"
       @input="update"
       label="Preserve source" left-label class="q-ml-sm q-mb-sm q-mt-sm"/>
-      <small><div class="q-ml-xl" v-html="preserveSourceExampleOut[outputScript]"></div></small>
+      <small><div class="q-ml-sm" v-html="preserveSourceExampleOut[outputScript]"></div></small>
     </span>
       <q-option-group
         color="dark"
