@@ -244,6 +244,13 @@ scripts.forEach(function(script) {
 ` + selectInit + selectMid + selectEnd + `
   `);
 
+    var newDivLogo = document.createElement("div")
+    newDivLogo.id = "aksharamukha-branding1"
+    var navbar = document.getElementById('aksharamukha-navbar')
+    navbar.appendChild(newDivLogo)
+
+    document.getElementById('aksharamukha-branding1').innerHTML = '<a href="http://aksharamukha.appspot.com" class="aksharamukha-hyperlink" target="_blank"><img src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/icon.png" width="15px"/> ᴾᵒʷᵉʳᵉᵈ ᵇʸ ᴬᵏˢʰᵃʳᵃᵐᵘᵏʰᵃ</a>'
+
   var newStyle = document.createElement('style');
   newStyle.appendChild(document.createTextNode(`
     .logo-aksharamukha {
@@ -325,6 +332,10 @@ scripts.forEach(function(script) {
     a.aksharamukha-hyperlink:active {
       text-decoration: underline;
       color:black;
+    }
+
+    #aksharamukha-branding1 {
+      margin-top: 8px
     }
 
     #akshmukha-text {
@@ -476,8 +487,13 @@ async function transliterate(event) {
     newDivLoad.id = "aksharamukha-loading"
     navbar.appendChild(newDivLoad)
 
+    document.getElementById('aksharamukha-branding1').innerHTML = ''
+    var branding1 = document.getElementById('aksharamukha-branding1')
+    branding1.id = 'aksharamukha-branding2'
+
     var newDivLogo = document.createElement("div")
     newDivLogo.id = "aksharamukha-branding"
+    var navbar = document.getElementById('aksharamukha-navbar')
     navbar.appendChild(newDivLogo)
 
     document.getElementById('aksharamukha-branding').innerHTML = '<a href="http://aksharamukha.appspot.com" class="aksharamukha-hyperlink" target="_blank"><img src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/icon.png" width="15px"/> ᴾᵒʷᵉʳᵉᵈ ᵇʸ ᴬᵏˢʰᵃʳᵃᵐᵘᵏʰᵃ</a>'

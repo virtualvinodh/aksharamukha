@@ -1,7 +1,7 @@
 // Aksharamukha Web Plugin
 // http://aksharamukha.appspot.com
 // vinodh@virtualvinodh.com
-// 14:00 01/06/2020
+// 23:50 01/06/2020
 
 const ScriptMixin = {
     data() {
@@ -2416,6 +2416,11 @@ function appendTool() {
       </div>
 ` + selectInit + selectMid + selectEnd + `
   `);
+    var newDivLogo = document.createElement("div")
+    newDivLogo.id = "aksharamukha-branding1"
+    var navbar = document.getElementById('aksharamukha-navbar')
+    navbar.appendChild(newDivLogo)
+    document.getElementById('aksharamukha-branding1').innerHTML = '<a href="http://aksharamukha.appspot.com" class="aksharamukha-hyperlink" target="_blank"><img src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/icon.png" width="15px"/> ᴾᵒʷᵉʳᵉᵈ ᵇʸ ᴬᵏˢʰᵃʳᵃᵐᵘᵏʰᵃ</a>'
     var newStyle = document.createElement('style');
     newStyle.appendChild(document.createTextNode(`
     .logo-aksharamukha {
@@ -2497,6 +2502,10 @@ function appendTool() {
     a.aksharamukha-hyperlink:active {
       text-decoration: underline;
       color:black;
+    }
+
+    #aksharamukha-branding1 {
+      margin-top: 8px
     }
 
     #akshmukha-text {
@@ -2614,8 +2623,12 @@ async function transliterate(event) {
         var newDivLoad = document.createElement("div")
         newDivLoad.id = "aksharamukha-loading"
         navbar.appendChild(newDivLoad)
+        document.getElementById('aksharamukha-branding1').innerHTML = ''
+        var branding1 = document.getElementById('aksharamukha-branding1')
+        branding1.id = 'aksharamukha-branding2'
         var newDivLogo = document.createElement("div")
         newDivLogo.id = "aksharamukha-branding"
+        var navbar = document.getElementById('aksharamukha-navbar')
         navbar.appendChild(newDivLogo)
         document.getElementById('aksharamukha-branding').innerHTML = '<a href="http://aksharamukha.appspot.com" class="aksharamukha-hyperlink" target="_blank"><img src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/icon.png" width="15px"/> ᴾᵒʷᵉʳᵉᵈ ᵇʸ ᴬᵏˢʰᵃʳᵃᵐᵘᵏʰᵃ</a>'
         document.getElementById('aksharamukhaselect').addEventListener('input', transliterate)
