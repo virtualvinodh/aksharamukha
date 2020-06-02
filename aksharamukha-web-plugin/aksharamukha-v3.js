@@ -1,7 +1,7 @@
 // Aksharamukha Web Plugin
 // http://aksharamukha.appspot.com
 // vinodh@virtualvinodh.com
-// 11:55 01/06/2020
+// 12:00 02/06/2020
 
 const ScriptMixin = {
     data() {
@@ -2505,7 +2505,12 @@ function appendTool() {
     }
 
     #aksharamukha-branding1 {
-      margin-top: 8px
+      margin-top: 8px;
+      font-size: 90%
+    }
+
+    #aksharamukha-branding {
+      font-size: 90%;
     }
 
     #akshmukha-text {

@@ -335,7 +335,12 @@ scripts.forEach(function(script) {
     }
 
     #aksharamukha-branding1 {
-      margin-top: 8px
+      margin-top: 8px;
+      font-size: 90%
+    }
+
+    #aksharamukha-branding {
+      font-size: 90%;
     }
 
     #akshmukha-text {
