@@ -615,7 +615,7 @@ function addPreserveSource(target) {
 
     var cls = optionsHide ? '"aksharamukha-hidedown"' : '"aksharamukha-showup"'
 
-    var button = '<span id = "aksharamukha-preservebut" class=' + cls + '><br/><input type="checkbox" name="preserve" id="aksharamukha-preserve"/> <small>Preserve source</small><br/> ' + expl + '<hr/></span>'
+    var button = '<span id = "aksharamukha-preservebut" class=' + cls + '><br/><input type="checkbox" name="preserve" id="aksharamukha-preserve"/> <small>Preserve source<br/> ' + expl + '</small><hr/></span>'
 
     return  button
 

@@ -1,7 +1,7 @@
 // Aksharamukha Web Plugin
 // http://aksharamukha.appspot.com
 // vinodh@virtualvinodh.com
-// 12:05 02/06/2020
+// 1:40 03/06/2020
 
 const ScriptMixin = {
     data() {
@@ -2724,7 +2724,7 @@ function addPreserveSource(target) {
     if (typeof explO !== 'undefined' && target !== 'Original') {
         var expl = '<small>' + explO + '</small>'
         var cls = optionsHide ? '"aksharamukha-hidedown"' : '"aksharamukha-showup"'
-        var button = '<span id = "aksharamukha-preservebut" class=' + cls + '><br/><input type="checkbox" name="preserve" id="aksharamukha-preserve"/> <small>Preserve source</small><br/> ' + expl + '<hr/></span>'
+        var button = '<span id = "aksharamukha-preservebut" class=' + cls + '><br/><input type="checkbox" name="preserve" id="aksharamukha-preserve"/> <small>Preserve source<br/> ' + expl + '</small><hr/></span>'
         return button
     } else {
         return ''

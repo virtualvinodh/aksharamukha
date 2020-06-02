@@ -100,10 +100,6 @@ def VedicSvarasOthers(Strng, Target):
     return Strng
 
 def VedicSvarasDiacrtics(Strng, Target):
-    Strng = Strng.replace('{\\m+}', '\\m+')
-    Strng = Strng.replace('\\`', '\\_') ## Alternate form of Anudatta
-    Strng = Strng.replace('\\\'\'', '\\"') ## Alternate form of Dirdha udatta
-
     Strng = Strng.replace('\\\'', '̍')
     Strng = Strng.replace('\\"', '̎')
     Strng = Strng.replace('\\_', '̱')
@@ -118,7 +114,6 @@ def VedicSvarasDiacrtics(Strng, Target):
     for x in Ayogavaha:
         for y in Svaras:
             Strng = Strng.replace(x + y, y + x)
-
 
     return Strng
 
@@ -216,12 +211,17 @@ def FixRomanOutput(Strng,Target):
 
     return Strng
 
-# PostFile ? why not fix !?
-def PostFixRomanOutput(Strng,Source,Target):
-    Strng = Strng.replace("\u02BD","")
+def FixVedic(Strng, Target):
+    # Alternate Vedic Forms
+    Strng = Strng.replace('{\\m+}', '\\m+')
+    Strng = Strng.replace('\\`', '\\_') ## Alternate form of Anudatta
+    Strng = Strng.replace('\\\'\'', '\\"') ## Alternate form of Dirdha udatta
 
-    vedicDiacRoman = ["IAST", "IASTPali", "ISO", "Titus"]
-    vedicnonDiacRoman = ["HK", "Itrans", "Velthuis", "SLP1", "WX"]
+    # Fix Malformed Input //m+, //++
+
+    Strng = Strng.replace('\\\\m', '\\m')
+    Strng = Strng.replace('\\\\\'', '\\\'')
+    Strng = Strng.replace('\\\\"', '\\"')
 
     if Target in vedicDiacRoman:
         Strng = VedicSvarasDiacrtics(Strng, Target)
@@ -239,6 +239,17 @@ def PostFixRomanOutput(Strng,Source,Target):
         Strng = VedicSvarasCyrillic(Strng, Target)
     else:
         Strng = VedicSvarasOthers(Strng, Target)
+
+    return Strng
+
+# PostFile ? why not fix !?
+def PostFixRomanOutput(Strng,Source,Target):
+    Strng = Strng.replace("\u02BD","")
+
+    vedicDiacRoman = ["IAST", "IASTPali", "ISO", "Titus"]
+    vedicnonDiacRoman = ["HK", "Itrans", "Velthuis", "SLP1", "WX"]
+
+    Strng = FixVedic(Strng, Target)
 
     if Source == 'Sinhala' and Target == 'IPA':
         Strng = SinhalaIPAFix(Strng)
