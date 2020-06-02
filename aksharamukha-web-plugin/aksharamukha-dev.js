@@ -237,7 +237,7 @@ scripts.forEach(function(script) {
 });
 
   document.body.insertAdjacentHTML('afterbegin', `
-      <div id="aksharamukha-navbar" class="sticky">
+      <div id="aksharamukha-navbar" class="sticky aksharamukha-printhide">
       <div class="aksharamukha-logosec">
           <span class="aksharamukha-name"><small>Select display script</small></span>
       </div>
@@ -303,6 +303,17 @@ scripts.forEach(function(script) {
       padding: 5px 5px 2px 5px;
       background: #CDCDCD;
       z-index: 1000;
+    }
+
+    @media print
+    {
+      .aksharamukha-printhide
+      {
+          display: none !important;
+      }
+    }
+    .aksharamukha-printhide {
+
     }
 
     #aksharamukha-navbar a {

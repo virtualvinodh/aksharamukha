@@ -1,7 +1,7 @@
 // Aksharamukha Web Plugin
 // http://aksharamukha.appspot.com
 // vinodh@virtualvinodh.com
-// 12:00 02/06/2020
+// 12:05 02/06/2020
 
 const ScriptMixin = {
     data() {
@@ -2410,7 +2410,7 @@ function appendTool() {
         }
     });
     document.body.insertAdjacentHTML('afterbegin', `
-      <div id="aksharamukha-navbar" class="sticky">
+      <div id="aksharamukha-navbar" class="sticky aksharamukha-printhide">
       <div class="aksharamukha-logosec">
           <span class="aksharamukha-name"><small>Select display script</small></span>
       </div>
@@ -2473,6 +2473,17 @@ function appendTool() {
       padding: 5px 5px 2px 5px;
       background: #CDCDCD;
       z-index: 1000;
+    }
+
+    @media print
+    {
+      .aksharamukha-printhide
+      {
+          display: none !important;
+      }
+    }
+    .aksharamukha-printhide {
+
     }
 
     #aksharamukha-navbar a {
