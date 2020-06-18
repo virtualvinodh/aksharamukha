@@ -1,3 +1,8 @@
+// Author: Vinodh Rajan vinodh@virtualvinodh.com
+// Website: http://www.virtualvinodh.com
+// Plugin: Web plugin for http://www.aksharamukha.appspot.com
+// 18 June 14:05
+
 const ScriptMixin = {
     data() {
         return {
@@ -2427,14 +2432,14 @@ function optionsOutput(outputScript) {
     if (typeof postOptions[outputScript] !== 'undefined') {
         var checkbox = ''
         if (optionsHide) {
-            checkbox = '<div id="options" class="aksharamukha-hidedown">';
+            checkbox = '<span id="aksharamukha-options"><div id="options" class="aksharamukha-hidedown">';
         } else {
-            checkbox = '<div id="options" class="aksharamukha-showup">';
+            checkbox = '<span id="aksharamukha-options"><div id="options" class="aksharamukha-showup">';
         }
         postOptions[outputScript].forEach(function(option) {
             checkbox += '<input type="checkbox" name="aksharamukha-optionpost" value="' + option.value + '"><small>' + option.label + '</small><br>';
         })
-        return checkbox + '</div>'
+        return checkbox + '</div></span>'
     } else {
         return ''
     }
@@ -2498,7 +2503,7 @@ function appendTool() {
     newDivLogo.id = "aksharamukha-branding1"
     var navbar = document.getElementById('aksharamukha-navbar')
     navbar.appendChild(newDivLogo)
-    document.getElementById('aksharamukha-branding1').innerHTML = '<a href="http://aksharamukha.appspot.com" class="aksharamukha-hyperlink" target="_blank"><img src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/icon.png" width="15px"/> <small><sup>Powered by Aksharamukha</sup></small></a>'
+    document.getElementById('aksharamukha-branding1').innerHTML = '<a href="http://aksharamukha.appspot.com" class="aksharamukha-hyperlink" target="_blank"><img src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/icon.png" width="15px"/> <small><sup>Aksharamukha</sup></small></a>'
     var newStyle = document.createElement('style');
     newStyle.appendChild(document.createTextNode(`
     .logo-aksharamukha {
@@ -2761,7 +2766,7 @@ async function transliterate(event) {
         newDivLogo.id = "aksharamukha-branding"
         var navbar = document.getElementById('aksharamukha-navbar')
         navbar.appendChild(newDivLogo)
-        document.getElementById('aksharamukha-branding').innerHTML = '<a href="http://aksharamukha.appspot.com" class="aksharamukha-hyperlink" target="_blank"><img src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/icon.png" width="15px"/> <small><sup>Powered by Aksharamukha </sup></small></a>'
+        document.getElementById('aksharamukha-branding').innerHTML = '<a href="http://aksharamukha.appspot.com" class="aksharamukha-hyperlink" target="_blank"><img src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/icon.png" width="15px"/> <small><sup>Aksharamukha </sup></small></a>'
         document.getElementById('aksharamukhaselect').addEventListener('input', transliterate)
         document.getElementById('aksharamukha-minlogobutton').addEventListener('click', showPlugin)
         document.getElementById('aksharamukha-pluginhidebutton').addEventListener('click', hidePlugin)
@@ -2824,6 +2829,9 @@ function hidePlugin() {
     if (document.getElementById('aksharamukha-branding1')) {
         document.getElementById('aksharamukha-branding1').style.display = 'none'
     }
+    if (document.getElementById('aksharamukha-options')) {
+        document.getElementById('aksharamukha-options').style.display = 'none'
+    }
     document.getElementById('aksharamukha-minlogo').style.display = 'block'
     document.getElementById('aksharamukha-navbar').style.width = '70px'
     window.localStorage.setItem('hidePlugin', 'true')
@@ -2840,6 +2848,9 @@ function showPlugin() {
     }
     if (document.getElementById('aksharamukha-branding1')) {
         document.getElementById('aksharamukha-branding1').style.display = 'block'
+    }
+    if (document.getElementById('aksharamukha-options')) {
+        document.getElementById('aksharamukha-options').style.display = 'block'
     }
     document.getElementById('aksharamukha-navbar').style.width = '150px'
     document.getElementById('aksharamukha-minlogo').style.display = 'none'

@@ -165,16 +165,16 @@ function optionsOutput (outputScript) {
     var checkbox = ''
 
     if (optionsHide) {
-      checkbox = '<div id="options" class="aksharamukha-hidedown">';
+      checkbox = '<span id="aksharamukha-options"><div id="options" class="aksharamukha-hidedown">';
     } else {
-      checkbox = '<div id="options" class="aksharamukha-showup">';
+      checkbox = '<span id="aksharamukha-options"><div id="options" class="aksharamukha-showup">';
     }
 
     postOptions[outputScript].forEach(function(option) {
       checkbox += '<input type="checkbox" name="aksharamukha-optionpost" value="' + option.value + '"><small>' + option.label + '</small><br>';
     })
 
-    return checkbox + '</div>'
+    return checkbox + '</div></span>'
   } else {
     return ''
   }
@@ -636,6 +636,9 @@ function hidePlugin() {
   if (document.getElementById('aksharamukha-branding1')) {
     document.getElementById('aksharamukha-branding1').style.display = 'none'
   }
+  if (document.getElementById('aksharamukha-options')) {
+    document.getElementById('aksharamukha-options').style.display = 'none'
+  }
   document.getElementById('aksharamukha-minlogo').style.display = 'block'
   document.getElementById('aksharamukha-navbar').style.width = '70px'
 
@@ -653,6 +656,9 @@ function showPlugin() {
   }
   if (document.getElementById('aksharamukha-branding1')) {
     document.getElementById('aksharamukha-branding1').style.display = 'block'
+  }
+  if (document.getElementById('aksharamukha-options')) {
+    document.getElementById('aksharamukha-options').style.display = 'block'
   }
   document.getElementById('aksharamukha-navbar').style.width = '150px'
   document.getElementById('aksharamukha-minlogo').style.display = 'none'

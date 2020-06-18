@@ -208,7 +208,7 @@
 }
 @font-face {
   font-family: 'Aazhvaar Telugu';
-  src: url('../statics/AazhvaarTelugu.otf')
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/AazhvaarTelugu.otf')
 }
 @font-face {
   font-family: 'MithilaUni';
