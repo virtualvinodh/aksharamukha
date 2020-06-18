@@ -236,6 +236,8 @@ scripts.forEach(function(script) {
   }
 });
 
+  var widthNavBar = '';
+
   document.body.insertAdjacentHTML('afterbegin', `
       <div id="aksharamukha-navbar" class="sticky aksharamukha-printhide">
       <div class="aksharamukha-logosec">
@@ -306,7 +308,6 @@ scripts.forEach(function(script) {
       position: sticky;
       top: 20px;
       // border: 1px solid black;
-      width: 150px;
       padding: 5px 5px 2px 5px;
       border-radius: 5px;
       background: #CDCDCD;
@@ -322,27 +323,6 @@ scripts.forEach(function(script) {
     }
 
     @media only screen and (max-device-width: 760px) {
-      .aksharamukha-name {
-        display: none;
-      }
-      .aksharamukha-selection {
-        display: none;
-      }
-      #aksharamukha-more {
-        display: none;
-      }
-      #aksharamukha-branding {
-        display: none;
-      }
-      #aksharamukha-branding1 {
-        display: none;
-      }
-      #aksharamukha-minlogo {
-        display: block;
-      }
-      #aksharamukha-navbar {
-        width: 70px;
-      }
     }
 
     .aksharamukha-printhide {
@@ -440,14 +420,18 @@ scripts.forEach(function(script) {
 
   if (window.localStorage.getItem('target')) {
     transliterate()
+    hidePlugin()
   }
 
   if (window.localStorage.getItem('hidePlugin') === 'true') {
     hidePlugin()
-  } else {
-    showPlugin()
   }
 
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    hidePlugin()
+  }
+
+  console.log('here once')
 }
 
 async function transliterate(event) {
@@ -639,28 +623,32 @@ function hidePlugin() {
   if (document.getElementById('aksharamukha-options')) {
     document.getElementById('aksharamukha-options').style.display = 'none'
   }
+  if (document.getElementById('aksharamukha-preservebut')) {
+    document.getElementById('aksharamukha-preservebut').style.display = 'none'
+  }
   document.getElementById('aksharamukha-minlogo').style.display = 'block'
-  document.getElementById('aksharamukha-navbar').style.width = '70px'
 
   window.localStorage.setItem('hidePlugin', 'true')
 }
 
 function showPlugin() {
-  document.getElementsByClassName('aksharamukha-name')[0].style.display = 'block'
-  document.getElementsByClassName('aksharamukha-selection')[0].style.display = 'block'
+  document.getElementsByClassName('aksharamukha-name')[0].style.display = ''
+  document.getElementsByClassName('aksharamukha-selection')[0].style.display = ''
   if (document.getElementById('aksharamukha-more')) {
-    document.getElementById('aksharamukha-more').style.display = 'block'
+    document.getElementById('aksharamukha-more').style.display = ''
   }
   if (document.getElementById('aksharamukha-branding')) {
-    document.getElementById('aksharamukha-branding').style.display = 'block'
+    document.getElementById('aksharamukha-branding').style.display = ''
   }
   if (document.getElementById('aksharamukha-branding1')) {
-    document.getElementById('aksharamukha-branding1').style.display = 'block'
+    document.getElementById('aksharamukha-branding1').style.display = ''
   }
   if (document.getElementById('aksharamukha-options')) {
-    document.getElementById('aksharamukha-options').style.display = 'block'
+    document.getElementById('aksharamukha-options').style.display = ''
   }
-  document.getElementById('aksharamukha-navbar').style.width = '150px'
+  if (document.getElementById('aksharamukha-preservebut')) {
+    document.getElementById('aksharamukha-preservebut').style.display = ''
+  }
   document.getElementById('aksharamukha-minlogo').style.display = 'none'
 
   window.localStorage.setItem('hidePlugin', 'false')
@@ -702,7 +690,7 @@ function addPreserveSource(target) {
 
     var cls = optionsHide ? '"aksharamukha-hidedown"' : '"aksharamukha-showup"'
 
-    var button = '<span id = "aksharamukha-preservebut" class=' + cls + '><br/><input type="checkbox" name="preserve" id="aksharamukha-preserve"/> <small>Preserve source<br/> ' + expl + '</small><hr/></span>'
+    var button = '<span id = "aksharamukha-preservebut" class=' + cls + '><div><input type="checkbox" name="preserve" id="aksharamukha-preserve"/> <small>Preserve source<br/> ' + expl + '</small><hr/></div></span>'
 
     return  button
 
