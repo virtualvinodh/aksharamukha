@@ -239,7 +239,10 @@ scripts.forEach(function(script) {
   document.body.insertAdjacentHTML('afterbegin', `
       <div id="aksharamukha-navbar" class="sticky aksharamukha-printhide">
       <div class="aksharamukha-logosec">
-          <span class="aksharamukha-name"><small>Select display script</small></span>
+          <span class="aksharamukha-name"><small>Select script</small>&nbsp;&nbsp;&nbsp;<button id="aksharamukha-pluginhidebutton"><small>Hide</small></button>
+      </div>
+      <div id="aksharamukha-minlogo">
+      <small><a href="http://aksharamukha.appspot.com" class="aksharamukha-hyperlink" target="_blank"><img src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/icon.png" width="20px"/></a>&nbsp;<sup><button id="aksharamukha-minlogobutton"><small>Show</small></button></sup>
       </div>
 ` + selectInit + selectMid + selectEnd + `
   `);
@@ -249,12 +252,16 @@ scripts.forEach(function(script) {
     var navbar = document.getElementById('aksharamukha-navbar')
     navbar.appendChild(newDivLogo)
 
-    document.getElementById('aksharamukha-branding1').innerHTML = '<a href="http://aksharamukha.appspot.com" class="aksharamukha-hyperlink" target="_blank"><img src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/icon.png" width="15px"/> <small><sup>Powered by Aksharamukha</sup></small></a>'
+    document.getElementById('aksharamukha-branding1').innerHTML = '<a href="http://aksharamukha.appspot.com" class="aksharamukha-hyperlink" target="_blank"><img src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/icon.png" width="15px"/> <small><sup>Aksharamukha</sup></small></a>'
 
   var newStyle = document.createElement('style');
   newStyle.appendChild(document.createTextNode(`
     .logo-aksharamukha {
       padding-right:5px;
+    }
+
+    #aksharamukha-minlogo {
+      display: none;
     }
 
     .aksharamukha-logosec {
@@ -301,6 +308,7 @@ scripts.forEach(function(script) {
       // border: 1px solid black;
       width: 150px;
       padding: 5px 5px 2px 5px;
+      border-radius: 5px;
       background: #CDCDCD;
       z-index: 1000;
     }
@@ -312,6 +320,31 @@ scripts.forEach(function(script) {
           display: none !important;
       }
     }
+
+    @media only screen and (max-device-width: 760px) {
+      .aksharamukha-name {
+        display: none;
+      }
+      .aksharamukha-selection {
+        display: none;
+      }
+      #aksharamukha-more {
+        display: none;
+      }
+      #aksharamukha-branding {
+        display: none;
+      }
+      #aksharamukha-branding1 {
+        display: none;
+      }
+      #aksharamukha-minlogo {
+        display: block;
+      }
+      #aksharamukha-navbar {
+        width: 70px;
+      }
+    }
+
     .aksharamukha-printhide {
 
     }
@@ -370,6 +403,9 @@ scripts.forEach(function(script) {
   document.head.appendChild(link)
 
   document.getElementById('aksharamukhaselect').addEventListener('input', transliterate)
+  document.getElementById('aksharamukha-minlogobutton').addEventListener('click', showPlugin)
+  document.getElementById('aksharamukha-pluginhidebutton').addEventListener('click', hidePlugin)
+
 
   // Storing original content
   var transContent = document.getElementsByClassName(classURL)
@@ -404,6 +440,12 @@ scripts.forEach(function(script) {
 
   if (window.localStorage.getItem('target')) {
     transliterate()
+  }
+
+  if (window.localStorage.getItem('hidePlugin') === 'true') {
+    hidePlugin()
+  } else {
+    showPlugin()
   }
 
 }
@@ -487,6 +529,7 @@ async function transliterate(event) {
 
       document.getElementById('aksharamukha-more').addEventListener('click', optionsToggle)
 
+
       if (addPreserveSource(target) !== '') {
         document.getElementById('aksharamukha-preserve').checked = JSON.parse(window.localStorage.getItem('preservePrevious'))
         document.getElementById('aksharamukha-preserve').addEventListener('change', transliterate)
@@ -512,9 +555,11 @@ async function transliterate(event) {
     var navbar = document.getElementById('aksharamukha-navbar')
     navbar.appendChild(newDivLogo)
 
-    document.getElementById('aksharamukha-branding').innerHTML = '<a href="http://aksharamukha.appspot.com" class="aksharamukha-hyperlink" target="_blank"><img src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/icon.png" width="15px"/> <small><sup>Powered by Aksharamukha </sup></small></a>'
+    document.getElementById('aksharamukha-branding').innerHTML = '<a href="http://aksharamukha.appspot.com" class="aksharamukha-hyperlink" target="_blank"><img src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/icon.png" width="15px"/> <small><sup>Aksharamukha </sup></small></a>'
 
     document.getElementById('aksharamukhaselect').addEventListener('input', transliterate)
+    document.getElementById('aksharamukha-minlogobutton').addEventListener('click', showPlugin)
+    document.getElementById('aksharamukha-pluginhidebutton').addEventListener('click', hidePlugin)
 
     postOptions.forEach(function (postOption, index) {
       postOption.checked = postOptionsChecked[index]
@@ -566,7 +611,7 @@ async function transliterate(event) {
 
       //transContent[i].classList.add(ScriptMixin.methods.getOutputClass(target, postOptionsList))
 
-      document.getElementById('aksharamukha-loading').innerHTML = '<img src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/loading.gif" width="100px" />'
+      document.getElementById('aksharamukha-loading').innerHTML = '<img src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/loading.gif" width="70px" />'
 
       await translit(transContent[i], i, source, targetOld, target)
 
@@ -577,6 +622,42 @@ async function transliterate(event) {
     targetOld = target
     postOptionsListOld = postOptionsList
   }
+}
+
+function hidePlugin() {
+  document.getElementsByClassName('aksharamukha-name')[0].style.display = 'none'
+  document.getElementsByClassName('aksharamukha-selection')[0].style.display = 'none'
+  if (document.getElementById('aksharamukha-more')) {
+    document.getElementById('aksharamukha-more').style.display = 'none'
+  }
+  if (document.getElementById('aksharamukha-branding')) {
+    document.getElementById('aksharamukha-branding').style.display = 'none'
+  }
+  if (document.getElementById('aksharamukha-branding1')) {
+    document.getElementById('aksharamukha-branding1').style.display = 'none'
+  }
+  document.getElementById('aksharamukha-minlogo').style.display = 'block'
+  document.getElementById('aksharamukha-navbar').style.width = '70px'
+
+  window.localStorage.setItem('hidePlugin', 'true')
+}
+
+function showPlugin() {
+  document.getElementsByClassName('aksharamukha-name')[0].style.display = 'block'
+  document.getElementsByClassName('aksharamukha-selection')[0].style.display = 'block'
+  if (document.getElementById('aksharamukha-more')) {
+    document.getElementById('aksharamukha-more').style.display = 'block'
+  }
+  if (document.getElementById('aksharamukha-branding')) {
+    document.getElementById('aksharamukha-branding').style.display = 'block'
+  }
+  if (document.getElementById('aksharamukha-branding1')) {
+    document.getElementById('aksharamukha-branding1').style.display = 'block'
+  }
+  document.getElementById('aksharamukha-navbar').style.width = '150px'
+  document.getElementById('aksharamukha-minlogo').style.display = 'none'
+
+  window.localStorage.setItem('hidePlugin', 'false')
 }
 
 function optionsToggle() {

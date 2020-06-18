@@ -46,6 +46,9 @@ def ApplyScriptDefaults(Strng,Source,Target):
     elif Target == 'Saurashtra':
         Options += ['SaurashtraHaru']
 
+    elif Target == 'Ahom':
+        Options +=['AhomClosed']
+
     elif Target == 'Tibetan':
         Options += ['TibetanRemoveVirama', 'TibetanRemoveBa']
 

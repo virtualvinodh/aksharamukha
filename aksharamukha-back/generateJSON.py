@@ -60,8 +60,8 @@ def generate_script_map():
     characters['others'] = others
     characters['numerals'] = getattr(ModScript, 'NumeralMap')
 
-    if Script not in ['TolongSiki', 'Vatteluttu', 'SiddhamDevanagari', 'Ranjana', 'GranthaPandya', 'GranthaGrantamil']:
-      overallMap[Script.lower()] = characters
+    #if Script not in ['TolongSiki', 'Vatteluttu', 'SiddhamDevanagari', 'Ranjana', 'GranthaPandya', 'GranthaGrantamil']:
+    overallMap[Script.lower()] = characters
 
   f = io.open("resources/script_mapping/script_mapping.json", mode="w", encoding="utf-8")
   f.write(json.dumps(overallMap, ensure_ascii = False, sort_keys=True, indent=4))
@@ -320,12 +320,12 @@ def generate_common_letters():
 if __name__ == "__main__":
   print('Generating Script Mapping as Json')
   generate_script_map()
-  print('Generating Script Matrix')
-  generate_script_matrix()
-  print('Generating Syllabary')
-  generate_syllables()
-  print('Generating Conjuncts')
-  generate_conjuncts()
+  #print('Generating Script Matrix')
+  #generate_script_matrix()
+  #print('Generating Syllabary')
+  #generate_syllables()
+  #print('Generating Conjuncts')
+  #generate_conjuncts()
   #print('Generating Common Letters')
   #generate_common_letters()
 

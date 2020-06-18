@@ -1,9 +1,4 @@
-// Aksharamukha Web Plugin
-// http://aksharamukha.appspot.com
-// vinodh@virtualvinodh.com
-// 14:00 01/06/2020
-
-ScriptMixin = {
+const ScriptMixin = {
     data() {
         return {
             vowels: ['a', 'A', 'i', 'I', 'u', 'U', 'R', 'E', 'e', 'ai', 'O', 'o', 'au'],
@@ -2410,12 +2405,17 @@ function appendTool() {
         }
     });
     document.body.insertAdjacentHTML('afterbegin', `
-      <div id="aksharamukha-navbar" class="sticky">
+      <div id="aksharamukha-navbar" class="sticky aksharamukha-printhide">
       <div class="aksharamukha-logosec">
-          <span class="aksharamukha-name"><small>Select display script</small></span>
+          <span class="aksharamukha-name"><small>Select display script</small>   [<a href="">Hide</a>]</span>
       </div>
 ` + selectInit + selectMid + selectEnd + `
   `);
+    var newDivLogo = document.createElement("div")
+    newDivLogo.id = "aksharamukha-branding1"
+    var navbar = document.getElementById('aksharamukha-navbar')
+    navbar.appendChild(newDivLogo)
+    document.getElementById('aksharamukha-branding1').innerHTML = '<a href="http://aksharamukha.appspot.com" class="aksharamukha-hyperlink" target="_blank"><img src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/icon.png" width="15px"/> <small><sup>Powered by Aksharamukha</sup></small></a>'
     var newStyle = document.createElement('style');
     newStyle.appendChild(document.createTextNode(`
     .logo-aksharamukha {
@@ -2470,6 +2470,17 @@ function appendTool() {
       z-index: 1000;
     }
 
+    @media print
+    {
+      .aksharamukha-printhide
+      {
+          display: none !important;
+      }
+    }
+    .aksharamukha-printhide {
+
+    }
+
     #aksharamukha-navbar a {
      text-decoration: none;
     }
@@ -2497,6 +2508,15 @@ function appendTool() {
     a.aksharamukha-hyperlink:active {
       text-decoration: underline;
       color:black;
+    }
+
+    #aksharamukha-branding1 {
+      margin-top: 8px;
+      font-size: 90%
+    }
+
+    #aksharamukha-branding {
+      font-size: 90%;
     }
 
     #akshmukha-text {
@@ -2614,10 +2634,14 @@ async function transliterate(event) {
         var newDivLoad = document.createElement("div")
         newDivLoad.id = "aksharamukha-loading"
         navbar.appendChild(newDivLoad)
+        document.getElementById('aksharamukha-branding1').innerHTML = ''
+        var branding1 = document.getElementById('aksharamukha-branding1')
+        branding1.id = 'aksharamukha-branding2'
         var newDivLogo = document.createElement("div")
         newDivLogo.id = "aksharamukha-branding"
+        var navbar = document.getElementById('aksharamukha-navbar')
         navbar.appendChild(newDivLogo)
-        document.getElementById('aksharamukha-branding').innerHTML = '<a href="http://aksharamukha.appspot.com" class="aksharamukha-hyperlink" target="_blank"><img src="icon.png" width="15px"/> ᴾᵒʷᵉʳᵉᵈ ᵇʸ ᴬᵏˢʰᵃʳᵃᵐᵘᵏʰᵃ</a>'
+        document.getElementById('aksharamukha-branding').innerHTML = '<a href="http://aksharamukha.appspot.com" class="aksharamukha-hyperlink" target="_blank"><img src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/icon.png" width="15px"/> <small><sup>Powered by Aksharamukha </sup></small></a>'
         document.getElementById('aksharamukhaselect').addEventListener('input', transliterate)
         postOptions.forEach(function(postOption, index) {
             postOption.checked = postOptionsChecked[index]
@@ -2656,7 +2680,7 @@ async function transliterate(event) {
                 //transContent[i].classList.remove(ScriptMixin.methods.getOutputClass(targetOld, postOptionsListOld))
             }
             //transContent[i].classList.add(ScriptMixin.methods.getOutputClass(target, postOptionsList))
-            document.getElementById('aksharamukha-loading').innerHTML = '<img src="loading.gif" width="100px" />'
+            document.getElementById('aksharamukha-loading').innerHTML = '<img src="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-web-plugin/loading.gif" width="100px" />'
             await translit(transContent[i], i, source, targetOld, target)
             document.getElementById('aksharamukha-loading').innerHTML = ''
             //getResult(transContent[i], i, source, targetOld)
@@ -2695,7 +2719,7 @@ function addPreserveSource(target) {
     if (typeof explO !== 'undefined' && target !== 'Original') {
         var expl = '<small>' + explO + '</small>'
         var cls = optionsHide ? '"aksharamukha-hidedown"' : '"aksharamukha-showup"'
-        var button = '<span id = "aksharamukha-preservebut" class=' + cls + '><br/><input type="checkbox" name="preserve" id="aksharamukha-preserve"/> <small>Preserve source</small><br/> ' + expl + '<hr/></span>'
+        var button = '<span id = "aksharamukha-preservebut" class=' + cls + '><br/><input type="checkbox" name="preserve" id="aksharamukha-preserve"/> <small>Preserve source<br/> ' + expl + '</small><hr/></span>'
         return button
     } else {
         return ''

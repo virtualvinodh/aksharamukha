@@ -199,6 +199,18 @@
   src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/Lanexang_Mon4.otf')
 }
 @font-face {
+  font-family: 'Khamti Regular';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/Khamti-Regular.otf')
+}
+@font-face {
+  font-family: 'Kaccayana Thai';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/KaccayanaThai.otf')
+}
+@font-face {
+  font-family: 'Aazhvaar Telugu';
+  src: url('../statics/AazhvaarTelugu.otf')
+}
+@font-face {
   font-family: 'MithilaUni';
   src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/MithilaUni.ttf')
 }
@@ -363,6 +375,11 @@
 }
 
 @font-face {
+  font-family: 'Dejavu Sans';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/DejaVuSans.ttf');
+}
+
+@font-face {
   font-family: 'BabelStone PhagsPa Book';
   src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/BabelStonePhagspaBook_v2.ttf')
 }
@@ -499,6 +516,9 @@
 .sorasompeng {
   font-family: "Noto Sans SoraSompeng" !important
 }
+.khamtishan {
+  font-family: "Khamti Regular" !important
+}
 .warangciti {
   font-family: "Noto Sans WarangCiti" !important
 }
@@ -535,6 +555,11 @@
 }
 .cham {
   font-family: "Noto Sans Cham" !important
+}
+
+.ipa {
+  font-family: "Dejavu Sans" !important;
+  line-height: 1.5em;
 }
 
 .gunjalagondi {
@@ -580,6 +605,9 @@
 }
 .telugu {
   font-family: "Noto Sans Telugu" !important
+}
+.teluguzha {
+  font-family: "Aazhvaar Telugu" !important
 }
 .khmer {
   font-family: "Noto Sans Khmer" !important
@@ -672,13 +700,25 @@
 .grantha {
   font-family: "Noto Sans Grantha2" !important;
   line-height: 2em;
+  font-feature-settings: "ss04", "ss06";
 }
 .granthaserif {
   font-family: "Noto Serif Grantha" !important;
+  font-feature-settings: "ss04", "ss06";
+  line-height: 2em;
+}
+.granthalig {
+  font-family: "Noto Sans Grantha" !important;
+  font-feature-settings: "ss04", "ss06", "ss03";
+  line-height: 2em;
+}
+.granthaseriflig {
+  font-family: "Noto Serif Grantha" !important;
+  font-feature-settings: "ss04", "ss06", "ss03";
   line-height: 2em;
 }
 .kharoshthi {
-   font-family: "Segoe UI Historic", "Noto Sans Kharoshthi" !important;
+  font-family: "Segoe UI Historic", "Noto Sans Kharoshthi" !important;
   direction: rtl;
 }
 .thaana {
@@ -694,6 +734,9 @@
 }
 .sharada {
   font-family: "Noto Sans Sharada" !important
+}
+.thainative {
+  font-family: "Kaccayana Thai" !important
 }
 .mahajani {
   font-family: "Noto Sans Mahajani" !important

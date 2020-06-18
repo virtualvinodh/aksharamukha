@@ -1,8 +1,10 @@
 <template>
-  <span>
+  <span class="print-hide">
       <div class="notice q-ma-sm" v-show="String(convertText).includes('ஶ')">ஶ is pronounced like a 'soft' ஷ </div>
-      <div class="notice q-ma-sm" v-show="String(convertText).includes('ఴ')">ఴ is a historic Telugu letter that is equivalent to Tamil ழ/Malayalam ഴ. Your font may not support this character.</div>
-      <div class="notice q-ma-sm" v-show="String(convertText).includes('ഩ')">ഩ is a historic Malayalam letter that is equivalent to Tamil ன. Your font may not support this character.</div>
+      <div class="notice q-ma-sm" v-show="String(convertText).includes('ఴ') && !postOptions.includes('TeluguTamilZha')">ఴ is a historic Telugu letter that is equivalent to Tamil ழ/Malayalam ഴ. Your font may not support this character.</div>
+      <div class="notice q-ma-sm" v-show="postOptions.includes('TeluguTamilZha') || postOptions.includes('TeluguTamilRra')">You need to use <a href="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/AazhvaarTelugu.otf">Aazvhvaar Telugu</a> font to display the Tamil-style letters properly. Without the font, the letters will appear as <span class="telugu">ఴ</span> & <span class="telugu">ౘ</span>.</div>
+      <div class="notice q-ma-sm" v-show="postOptions.includes('ThaiNativeConsonants')">You need to use <a href="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/KaccayanaThai.otf">Kaccayana Thai</a> font to display <span class="thainative">ก̥</span> & <span class="thainative">จ̥</span>properly. Without the font, the letters will appear as <span class="thai">ก̥</span> & <span class="thai">จ̥</span>.</div>
+      <div class="notice q-ma-sm" v-show="String(convertText).includes('ഩ') && outputScript === 'Malayalam'">ഩ is a historic Malayalam letter that is equivalent to Tamil ன. Your font may not support this character.</div>
       <div class="notice q-ma-sm" v-show="String(convertText).includes('ఀ')">Your font may not support ఀ the Telugu Chandrabindu character.</div>
       <div class="notice q-ma-sm" v-show="String(convertText).includes('ഀ')">Your font may not support ഀ the Malayalam Anusvara above character. Try enabling traditional orthogrpahy to view the character properly.</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'TamilExtended'">This only works with <a href="https://github.com/virtualvinodh/aksharamukha/blob/master/aksharamukha-front/src/statics/AgastyaExtendedTamil.otf">Agastya Extended Tamil</a> and uses Malayalam to encode the characters. In the absense of this font, the characters will appear as Malayalam</div>
@@ -30,6 +32,8 @@
      <div class="notice q-ma-sm" v-show="outputScript === 'Mongolian'">The Mongolian mapping for Ali Gali is not yet verified. If you have any feedback on the mapping and the forms of the letters used, please send it to vinodh@virtualvinodh.com</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Tamil' &&
             String(convertText).includes('𑌃')    ">Grantha Visarga only works with Google's Noto Tamil fonts </div>
+      <div class="notice q-ma-sm" v-show="outputScript === 'Tamil' &&
+            postOptions.includes('oldtamilortho') ">You can use the <a href="https://www.fontsc.com/font/lohit-tamil-classical">Lohit Tamil Classical</a> font to represent the old orthography for Tamil</div>
       <div class="notice q-ma-sm" v-show="(String(convertText).includes('॒') || String(convertText).includes('᳚') ||
             String(convertText).includes('॑')) && vedicScripts.includes(outputScript)">This text uses Vedic notational marks. Without an appropriate font, the text would not be rendered properly. Look into the individual <router-link :to="'/describe/' + outputScript">script</router-link> page for a working font.</div>
       <div class="notice q-ma-sm" v-show="(String(inputText).includes('॒') || String(inputText).includes('᳚') ||

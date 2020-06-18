@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from . import GeneralMap as GM
 from aksharamukha.ScriptMap.Roman import Avestan, IAST
-from aksharamukha.ScriptMap.MainIndic import Tamil,TamilGrantha, Limbu, MeeteiMayek, Urdu, Lepcha, Chakma, Kannada, Gurmukhi, Newa
+from aksharamukha.ScriptMap.MainIndic import Ahom, Tamil,TamilGrantha, Limbu, MeeteiMayek, Urdu, Lepcha, Chakma, Kannada, Gurmukhi, Newa
 from aksharamukha.ScriptMap.EastIndic import Lao, TaiTham,Tibetan,Burmese,Khmer,Balinese,Javanese,Thai, Sundanese, PhagsPa, Cham, Thaana, Rejang, ZanabazarSquare
 from . import PostProcess
 import re
@@ -219,9 +219,14 @@ def FixVedic(Strng, Target):
 
     # Fix Malformed Input //m+, //++
 
+    Strng = Strng.replace('\\\\м', '\\м')
     Strng = Strng.replace('\\\\m', '\\m')
     Strng = Strng.replace('\\\\\'', '\\\'')
     Strng = Strng.replace('\\\\"', '\\"')
+    Strng = Strng.replace('\\\\_', '\\_')
+
+    vedicDiacRoman = ["IAST", "IASTPali", "ISO", "Titus"]
+    vedicnonDiacRoman = ["HK", "Itrans", "Velthuis", "SLP1", "WX"]
 
     if Target in vedicDiacRoman:
         Strng = VedicSvarasDiacrtics(Strng, Target)
@@ -245,9 +250,6 @@ def FixVedic(Strng, Target):
 # PostFile ? why not fix !?
 def PostFixRomanOutput(Strng,Source,Target):
     Strng = Strng.replace("\u02BD","")
-
-    vedicDiacRoman = ["IAST", "IASTPali", "ISO", "Titus"]
-    vedicnonDiacRoman = ["HK", "Itrans", "Velthuis", "SLP1", "WX"]
 
     Strng = FixVedic(Strng, Target)
 
@@ -641,6 +643,7 @@ def FixTamil(Strng,reverse=False):
 
     else:
         Strng = Strng.replace(avaA,ava+ava)
+        Strng = Strng.replace('ஷ²', 'ஶ')
 
         Strng = Strng.replace('𑌃', '꞉')
 
@@ -673,8 +676,9 @@ def FixGurmukhi(Strng,reverse=False):
         Strng = PostProcess.InsertGeminationSign(Strng, 'Gurmukhi')
         Strng = PostProcess.RetainIndicNumerals(Strng, 'Gurmukhi', True)
 
-        if '॒' in Strng or '᳚' in Strng or '॑' in Strng:
-            Strng = PostProcess.ReverseGeminationSign(Strng, 'Gurmukhi')
+        Vedicomp = '([' + ''.join(GM.VedicSvarasList) + '])'
+
+        Strng = re.sub(Vedicomp + '\u0A71' + '(.)', r'\1' + r'\2' + Gurmukhi.ViramaMap[0] + r'\2' , Strng)
 
     else:
         Strng = Strng.replace(avaA,ava+ava)
@@ -782,7 +786,7 @@ def FixKhmer(Strng,reverse=False):
 
 def FixKhamtiShan(Strng, reverse=False):
     if not reverse:
-        Strng = Strng.replace('်ꩳ', 'ြ')
+        Strng = Strng.replace('်ရ', 'ြ')
         Strng = Strng.replace('်ယ', 'ျ')
         Strng = Strng.replace('်ဝ', 'ွ')
 
@@ -791,11 +795,13 @@ def FixKhamtiShan(Strng, reverse=False):
         Strng = Strng.replace("\u103D\u103B", "\u103B\u103D")
         Strng = Strng.replace("ႂ\u103C", "\u103Cွ")
     else:
+        Strng = Strng.replace('ꩳ', 'ရ')
         Strng = Strng.replace("\u103B\u103C", "\u103C\u103B")
         Strng = Strng.replace("\u103B\u103D", "\u103D\u103B")
         Strng = Strng.replace("\u103Cႂ", "ႂ\u103C")
 
         Strng = Strng.replace('ြ', '်ꩳ')
+        Strng = Strng.replace('ꩳ', 'ရ')
         Strng = Strng.replace('ျ', '်ယ')
         Strng = Strng.replace('ွ', '်ဝ')
 
@@ -2612,6 +2618,18 @@ def FixAhom(Strng, reverse = False):
     else:
         Strng = Strng.replace('\U0001171E', '\U0001172B\U0001170D')
         Strng = Strng.replace('\U0001171D', '\U0001172B\U0001170E')
+
+        vir = Ahom.ViramaMap[0]
+        anu = Ahom.AyogavahaMap[1]
+
+        #reverse closed syllable e
+        Strng = Strng.replace(anu + '\U00011727', '\U00011726\U00011727\U0001172A')
+        Strng = re.sub('(\U00011726)(.)('+vir+')', '\U00011726\U00011727'+r'\2\3', Strng)
+
+        #rever closed syllable o
+        Strng = re.sub('(\U00011728)(.)('+vir+')', '\U00011726\U00011721'+r'\2\3', Strng)
+
+        Strng = Strng.replace(anu + '\U00011728', '\U00011726\U00011721\U0001172A')
 
         Strng = re.sub(Anu + ListVS, r'\2\1', Strng)
 

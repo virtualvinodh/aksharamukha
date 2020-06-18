@@ -44,6 +44,9 @@ def EscapeChar(Strng):
 
 # Collection of Symbols
 
+VedicSvaras = '('+ '|'.join(['᳚', '॑', '॒']) + ')?'
+VedicSvarasList = ['᳚', '॑', '॒']
+
 Vowels = ['VowelMap','SouthVowelMap','ModernVowelMap','SinhalaVowelMap']
 VowelSignsNV = ['VowelSignMap','SouthVowelSignMap','ModernVowelSignMap','SinhalaVowelSignMap']
 VowelSigns = ['ViramaMap','VowelSignMap','SouthVowelSignMap','ModernVowelSignMap','SinhalaVowelSignMap']

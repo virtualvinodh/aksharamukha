@@ -5,7 +5,7 @@
   <!-- Tabs - notice slot="title" -->
   <q-tab default slot="title" name="tab-1" icon="translate" label="Type" class="print-hide"/>
   <q-tab slot="title" name="tab-2" icon="keyboard" label="Mapping" class="print-hide"/>
-  <q-tab slot="title" name="tab-3" icon="settings" label="Settings" class="print-hide"/>
+  <q-tab slot="title" name="tab-3" icon="settings" label="Settings" class="print-hide" v-if="typeof postOptionsGroup[outputScript] !== 'undefined' || typeof preserveSourceExampleOut[outputScript] !== 'undefined'"/>
   <q-tab slot="title" name="tab-4" icon="font_download" class="print-hide" label="Font" v-if="getScriptObject(outputScript).font.name !== ''"/>
   <q-tab slot="title" name="tab-5" icon="help" label="Help" class="print-hide"/>
     <h5 class="title print-hide"> {{getScriptObject(outputScript).label}} Text Composer : <span :class="getOutputClass(outputScript, postOptions)"> <transliterate text="akSaramukha" src="HK" :tgt="outputScript" sourcePreserve="false">
@@ -165,6 +165,18 @@
     <div v-if="outputScript === 'Newa'">
       <div class="q-body-1">Text composer allows you to switch between repha and eye-lash forms of /r/. <br/> <ul> <li> Repha is formed using r[]. kar[]ma : <span class="newa">𑐎𑐬‍𑑂𑐩</span>.</li> <li> The eye-lash form is formed as usual. karma : <span class="newa">𑐎𑐬𑑂𑐩</span>.</li> </ul> The above assumes that the 'Disable Repha' option is selected. If it is not selected, Repha will be formed in all cases overriding all of the above. It will also not work with the Devanagari-based Newa font.</div>
     </div>
+    <div v-if="outputScript === 'Saurashtra' && inputScript === 'Tamil'">
+      <div class="q-body-1">
+      <span class="tamil">நீ: </span>  <span class="saurashtra">ꢥꢴꢷ</span> <br/>
+      <span class="tamil">ஸௌராஷ்ட்ர </span>  <span class="saurashtra">ꢱꣃꢬꢵꢰ꣄ꢜ꣄ꢬ</span> <br/>
+      <span class="tamil">பு3த்3த4 </span>  <span class="saurashtra">ꢨꢸꢣ꣄ꢤ</span>  </div>
+    </div>
+    <div v-if="outputScript === 'Saurashtra' && inputScript !== 'Tamil'">
+      <div class="q-body-1">
+        <b> Aspirated letters with Haaru </b><br/>
+        <span class="">nha mha rha lha - </span>  <span class="saurashtra">ꢥꢴ ꢪꢴ ꢬꢴ ꢭꢴ</span> <br/>
+      </div>
+    </div>
     <br/>
   </q-tab-pane>
 </q-tabs>
@@ -233,6 +245,13 @@ export default {
         {label: 'Velthuis', value: 'Velthuis'},
         {label: 'Devanagari', value: 'Devanagari'}
       ],
+      inputOptionsT: [
+        {label: 'Aksharaa', value: 'Aksharaa'},
+        {label: 'HK', value: 'HK'},
+        {label: 'Itrans', value: 'Itrans'},
+        {label: 'Velthuis', value: 'Velthuis'},
+        {label: 'Tamil', value: 'Tamil'}
+      ],
       screenshot: false,
       symbolsIndic: ['a\\\'', 'a\\"', 'a\\_', '\\m+', '\\m++', '\'', 'oM', '.', '..'],
       symbols: ['\'', 'oM', '.', '..'],
@@ -290,13 +309,15 @@ export default {
     }
   },
   mounted () {
+    // Also change in Watch ::
     if (['Grantha', 'Newa', 'Ranjana', 'Tirhuta', 'Siddham'].includes(this.outputScript)) {
       this.inputOptions = this.inputOptionsD
+    } else if (['Saurashtra'].includes(this.outputScript)) {
+      this.inputOptions = this.inputOptionsT
     } else {
       this.inputOptions = this.inputOptionsN
     }
 
-    this.compoundsGen()
     if (localStorage.postOptionsIMEIndex) {
       this.postOptionsIME = JSON.parse(localStorage.postOptionsIMEIndex)
 
@@ -314,6 +335,8 @@ export default {
     if (localStorage.spacetrigger) {
       this.spacetrigger = JSON.parse(localStorage.spacetrigger)
     }
+
+    this.compoundsGen()
   },
   updated: function () {
     // console.log('The dom is updated ' + this.screenshot)
@@ -335,11 +358,10 @@ export default {
       this.textInput = ''
       if (['Grantha', 'Newa', 'Ranjana', 'Tirhuta', 'Siddham'].includes(this.outputScript)) {
         this.inputOptions = this.inputOptionsD
+      } else if (['Saurashtra'].includes(this.outputScript)) {
+        this.inputOptions = this.inputOptionsT
       } else {
         this.inputOptions = this.inputOptionsN
-      }
-      if (typeof this.postOptionsIME[this.outputScript] === 'undefined') {
-        this.postOptionsIME[this.outputScript] = []
       }
       // console.log(this.postOptionsIME)
       this.$set(this, 'postOptions', this.postOptionsIME[this.outputScript])
@@ -437,6 +459,9 @@ export default {
       }
       this.loading = true
 
+      console.log(this.inputScript)
+      console.log(this.outputScript)
+
       // var textDiff = this.textInput.replace(this.textInputOld, '')
 
       var textInputZ = this.textInput.replace(new RegExp('\u200C', 'g'), '{}')
@@ -460,6 +485,13 @@ export default {
         .then(function (response) {
           dhis.convertText0 = response.data
           dhis.convertText0 = dhis.convertText0.replace(new RegExp('<br/>', 'g'), '\n')
+
+          if (dhis.inputScript === 'Tamil') {
+            dhis.preOptions = ['TamilNumeralSub', 'SaurastraHaaruColonTamil']
+          } else {
+            dhis.preOptions = []
+          }
+
           var data = {
             source: dhis.inputScript,
             target: dhis.outputScript,
@@ -473,6 +505,11 @@ export default {
             .then(function (response) {
               dhis.convertText = response.data
               dhis.convertText = dhis.convertText.replace(new RegExp('<br/>', 'g'), '\n')
+
+              if (dhis.inputScript === 'Tamil') {
+                dhis.preOptions = ['TamilNumeralSub', 'SaurastraHaaruColonTamil']
+              }
+
               dhis.textInput = dhis.convertText
               dhis.loading = false
             })

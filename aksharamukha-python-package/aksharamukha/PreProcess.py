@@ -14,6 +14,33 @@ def ShowChillus(Strng):
 
     return PostProcess.MalayalamChillu(Strng, True, True)
 
+def ThaiPhonetic(Strng):
+    Strng = Strng.replace('ด', 'ท')
+    Strng = Strng.replace('บ', 'พ')
+    Strng = Strng.replace('ก\u0325', 'ค')
+    Strng = Strng.replace('จ\u0325', 'ช')
+    Strng = Strng.replace('งํ', 'ง')
+
+    Strng = Strng.replace('\u035C', '')
+
+    Strng = Strng.replace('\u0E47', '')
+
+    Strng += "\u02BB\u02BB"
+
+    return Strng
+
+def SaurastraHaaruColonTamil(Strng):
+    Strng = Strng.replace('ன', 'ந')
+
+    ListVS = '|'.join(GM.CrunchSymbols(GM.VowelSigns, 'Tamil'))
+
+    Strng = re.sub('(' + ListVS + ')' + '(:)' , r'\2\1', Strng)
+
+    chars = '([நமரல])'
+
+    Strng = re.sub(chars + ':', r'\1' + '\uA8B4', Strng)
+
+    return Strng
 
 def ChakmaPali(Strng):
     Strng = Strng.replace('\U00011147', '𑄤') # Replace Ya

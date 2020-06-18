@@ -159,7 +159,9 @@ def detect_preoptions(text, inputScript):
     preoptions = []
     if inputScript == 'Thai':
         textNew = text.replace('ห์', '')
-        if '์' in textNew and ('ะ' in text):
+        if '\u035C' in text or '\u0325' in text or 'งํ' in text or '\u0E47' in text:
+            preoptions = ['ThaiPhonetic']
+        elif '์' in textNew and ('ะ' in text):
             preoptions = ['ThaiSajjhayawithA']
         elif '์' in textNew:
             preoptions = ['ThaiSajjhayaOrthography']

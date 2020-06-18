@@ -253,6 +253,12 @@ export default {
       this.textInput = this.$route.query.text
       this.convert()
     }
+
+    if (window.innerWidth > document.body.clientWidth) {
+      this.scrollExists = true
+    } else {
+      this.scrollExists = false
+    }
   },
   updated: function () {
     if (window.innerWidth > document.body.clientWidth) {

@@ -3,8 +3,8 @@
 from . import GeneralMap as GM
 from . import ScriptMap
 from aksharamukha.ScriptMap.Roman import Avestan
-from aksharamukha.ScriptMap.MainIndic import Tamil,Malayalam,Gurmukhi,Oriya,Saurashtra,Sinhala,Urdu,Devanagari, Chakma, Limbu
-from aksharamukha.ScriptMap.EastIndic import Tibetan, Thai, PhagsPa, ZanabazarSquare
+from aksharamukha.ScriptMap.MainIndic import Ahom, Tamil,Malayalam,Gurmukhi,Oriya,Saurashtra,Sinhala,Urdu,Devanagari, Chakma, Limbu, Takri, TamilExtended
+from aksharamukha.ScriptMap.EastIndic import Tibetan, Thai, PhagsPa, ZanabazarSquare, Burmese, KhamtiShan
 from . import ConvertFix as CF
 import re
 import functools
@@ -14,7 +14,149 @@ import functools
 
 ### Consider Adding Options to ignore Nukta etc for Gujarati bengali by default
 
+##
+
 def default(Strng):
+
+    return Strng
+
+def ContextualLLa(Strng):
+    ListVS = '|'.join(GM.CrunchSymbols(GM.VowelSigns, 'Tamil'))
+
+    Strng = re.sub('(ஆவ)'+ 'ல', r'\1' +  'ள', Strng)
+    Strng = re.sub('(்ரவா)'+ 'ல', r'\1' +  'ள', Strng)
+    Strng = re.sub('(்ர)'+ 'ல', r'\1' +  'ள', Strng)
+    Strng = re.sub('(ாவ)'+ 'ல', r'\1' +  'ள', Strng)
+    Strng = re.sub('(யா)'+ 'ல', r'\1' +  'ள', Strng)
+    Strng = re.sub('([கத])' + '(' + ListVS + ')?' + '([³⁴])'+ 'ல', r'\1\2\3' +  'ள', Strng)
+    Strng = re.sub('(ஜு)'+ 'ல', r'\1' +  'ள', Strng)
+    Strng = re.sub('(தா|து)'+ 'ல', r'\1' +  'ள', Strng)
+    Strng = re.sub('(ரிம)'+ 'ல', r'\1' +  'ள', Strng)
+    Strng = Strng.replace('ள்ய', 'ல்ய')
+
+    return Strng
+
+def AhomClosed(Strng):
+    vir = Ahom.ViramaMap[0]
+    anu = Ahom.AyogavahaMap[1]
+
+    #closed i
+    Strng = Strng.replace('\U00011722', '\U00011723')
+    Strng = re.sub('(\U00011723)(.)('+vir+')', '\U00011722'+r'\2\3', Strng)
+    Strng = Strng.replace(anu + '\U00011723', anu + '\U00011722')
+
+    #closed u
+    Strng = Strng.replace('\U00011724', '\U00011725')
+    Strng = re.sub('(\U00011725)(.)('+vir+')', '\U00011724'+r'\2\3', Strng)
+    Strng = Strng.replace(anu + '\U00011725', anu + '\U00011724')
+
+    #closed e
+    Strng = re.sub('(\U00011726\U00011727)(.)('+vir+')', '\U00011726'+r'\2\3', Strng)
+    Strng = Strng.replace('\U00011726\U0001172A\U00011727', anu + '\U00011727')
+
+    #closed o
+    Strng = re.sub('(\U00011726\U00011721)(.)('+vir+')', '\U00011728'+r'\2\3', Strng)
+    Strng = Strng.replace('\U00011726\U0001172A\U00011721', anu + '\U00011728')
+
+    return Strng
+
+def TeluguTamilZha(Strng):
+
+    return Strng
+
+def TeluguTamilRra(Strng):
+    Strng = Strng.replace('ఱ్ఱ', 'ౘ్ౘ')
+    Strng = Strng.replace('ఱ', 'ౘ')
+
+    return Strng
+
+def ThaiNativeConsonants(Strng):
+    Strng = Strng.replace('ท', 'ด')
+    Strng = Strng.replace('พ', 'บ')
+    Strng = Strng.replace("\u0E36","\u0E34\u0E4D")
+    Strng = Strng.replace('ํ', 'งฺ')
+
+    Strng = re.sub('(\u0E3A)([ยรลวห])', '\u035C'+ r'\2', Strng)
+    Strng = Strng.replace('ห\u0E3A', 'ห\u035C')
+
+    Strng = re.sub('([ยรลวห])' + '\u035C' + r'\1', r'\1' + '\u0E3A' + r'\1', Strng)
+
+    Strng = re.sub('(า)(.)(ฺ)', '็' + r'\1\2\3', Strng)
+    Strng = re.sub('([เโ])(.)(.)(ฺ)',  r'\1\2' + '็' +  r'\3\4', Strng)
+
+    Strng = ThaiTranscription(Strng, False)
+
+    Strng = Strng.replace('ะ͜', '\u035C')
+    Strng = Strng.replace('ะ็', '็')
+    Strng = re.sub('([เโไ])(.)(\u035C)(.)([ะ\u0E31])', r'\1\2\3\4', Strng)
+
+    Strng = Strng.replace('ค', 'ก\u0325')
+    Strng = Strng.replace('ช', 'จ\u0325')
+
+    Strng = Strng.replace('ง', 'งํ')
+
+    Strng = re.sub('([เโไ])(งํ)([าัะ])', r'\1' + 'ง' + r'\2', Strng)
+    Strng = re.sub('([เโไ])(งํ)', r'\1' + 'ง', Strng)
+    Strng = re.sub('(งํ)([าัะ])', 'ง' + r'\2', Strng)
+
+    return Strng
+
+def KhamiShanMyanmarNumerals(Strng):
+    for x, y in zip(KhamtiShan.NumeralMap, Burmese.NumeralMap):
+        Strng = Strng.replace(x, y)
+
+    return Strng
+
+def KhamtiShanRa(Strng):
+
+    Strng = Strng.replace('ရ', 'ꩳ')
+
+    return Strng
+
+def granthafinal(Strng):
+
+    return Strng
+
+def Dot2Dandas(Strng):
+    Strng = Strng.replace('..', '॥')
+    Strng = Strng.replace('.', '।')
+
+    return Strng
+
+def SaurastraHaaruColon(Strng):
+    vir = Tamil.ViramaMap[0]
+    ha = Tamil.ConsonantMap[-1]
+
+    Strng = Strng.replace(vir + ha, ':')
+
+    ListVS = '|'.join(GM.CrunchSymbols(GM.VowelSigns, 'Tamil'))
+
+    Strng = re.sub('(:)' + '(' + ListVS + ')', r'\2\1', Strng)
+
+    Strng = re.sub('(\s)(ன)', r'\1' + 'ந', Strng)
+    Strng = re.sub('^ன', 'ந', Strng)
+
+    return Strng
+
+def TamilExtendedNNA(Strng):
+
+    na = TamilExtended.ConsonantMap[19]
+    nna = TamilExtended.SouthConsonantMap[3]
+    vir = TamilExtended.ViramaMap[0]
+    ta = TamilExtended.ConsonantMap[15]
+
+    ListV = '|'.join(GM.CrunchSymbols(GM.Vowels+GM.VowelSigns+GM.Consonants,'TamilExtended')+[TamilExtended.SignMap[0]])
+
+    Strng = re.sub('('+ListV+')'+ GM.VedicSvaras + '('+na+')' + '(?!' + vir + ')',r'\1\2'+nna,Strng)
+    Strng = re.sub('('+ListV+')'+ GM.VedicSvaras + '('+na+')' + '(?!' + vir + ')',r'\1\2'+nna,Strng)
+
+    Strng = re.sub('(ന്‌)(?![തഥദധ])', 'ഩ്‌', Strng)
+
+    return Strng
+
+def TakriRemoveGemination(Strng):
+
+    Strng = re.sub('(.)' + Takri.ViramaMap[0] + r'\1', r'\1', Strng)
 
     return Strng
 
@@ -278,7 +420,7 @@ def LaoSajjhaya(Strng):
 def LaoSajjhayawithA(Strng):
     Strng = ThaiSajjhayaOrthography(Strng, Script = "LaoPali")
     Strng = Strng.replace('ັງ', 'ັງ຺')
-    Strng = CF.LaoPaliTranscribe(Strng, anusvaraChange = False)
+    Strng = CF.LaoPaliTranscribe(Strng, anusvaraChange = True)
 
     Strng = Strng.replace('ະໍ', 'ໍ')
     Strng = Strng.replace('ະັ', 'ັ')
@@ -615,9 +757,18 @@ def TamilNaToNNa(Strng):
 
     ListV = '|'.join(GM.CrunchSymbols(GM.Vowels+GM.VowelSigns+GM.Consonants,'Tamil')+[Tamil.SignMap[0].replace('(','\(').replace(')','\)')])
 
-    Strng = re.sub('('+ListV+')'+'('+na+')',r'\1'+nna,Strng)
+    Strng = re.sub('('+ListV+')'+ GM.VedicSvaras + '('+na+')' + '(?!' + vir + ')',r'\1\2'+nna,Strng)
+    Strng = re.sub('('+ListV+')'+ GM.VedicSvaras + '('+na+')' + '(?!' + vir + ')',r'\1\2'+nna,Strng)
+
+    Strng = re.sub('(ந்)(?!த)', 'ன்', Strng)
+
     Strng = re.sub('(²|³|⁴)'+'('+na+')',r'\1'+nna,Strng)
-    Strng = Strng.replace(nna+vir+ta,na+vir+ta)
+    #Strng = Strng.replace(nna+vir+ta,na+vir+ta)
+
+    Strng = re.sub('(\s)(ன)', r'\1' + 'ந', Strng)
+    Strng = re.sub('^ன', 'ந', Strng)
+
+    Strng = re.sub("(?<=ஶ்ரீ)(ன)(?!" + vir + ")", "ந", Strng)
 
     return Strng
 
@@ -652,7 +803,7 @@ def MalayalamChillu(Strng, reverse=False, preserve=False):
     if not reverse:
         for i in range(len(Chillus)):
             #print '(?<!'+'['+vir+''.join(Chillus)+']'+')'+'('+ConVir[i]+')'+'(?!['+''.join(CList[i])+'])'
-            Strng = re.sub(ListC + '('+ConVir[i]+')'+'(?!['+''.join(CList[i])+'])',r'\1' + Chillus[i],Strng)
+            Strng = re.sub(ListC + GM.VedicSvaras + '('+ConVir[i]+')'+'(?!['+''.join(CList[i])+'])',r'\1\2' + Chillus[i],Strng)
     else:
         print('called mal')
         print(preserve)
@@ -773,8 +924,11 @@ def NasalToAnusvara(Strng,Target):
 
     for i in range(len(ListN)):
         #print '('+ListN[i]+')'+'('+vir+')'+'('+ListC[i]+')'
-        Strng = re.sub(ListCAll + '(?<!' + vir + ')' + '('+ListN[i]+')'+'('+vir+')'+'('+ListC[i]+')',r'\1'+Anu+r'\4',Strng)
-        Strng = re.sub(ListCAll + '(?<!' + vir + ')' + '('+ListN[i]+')'+'('+vir+')'+'('+ListC[i]+')',r'\1'+Anu+r'\4',Strng)
+        Strng = re.sub(ListCAll + GM.VedicSvaras + '(?<!' + vir + ')' + '('+ListN[i]+')' +'('+vir+')'+'('+ListC[i]+')',r'\1\2'+Anu+r'\5',Strng)
+        Strng = re.sub(ListCAll + GM.VedicSvaras + '(?<!' + vir + ')' + '('+ListN[i]+')' +'('+vir+')'+'('+ListC[i]+')',r'\1\2'+Anu+r'\5',Strng)
+
+    for svara in GM.VedicSvarasList:
+        Strng = Strng.replace(svara + Anu, Anu + svara)
 
     return Strng
 
@@ -792,7 +946,10 @@ def AnusvaraToNasal(Strng,Target):
     Anu = GM.CrunchSymbols(GM.CombiningSigns,Target)[1]
 
     for i in range(len(ListN)):
-        Strng = re.sub('('+Anu+')'+'('+ListC[i]+')',ListN[i]+vir+r'\2',Strng)
+        Strng = re.sub('('+Anu+')'+ GM.VedicSvaras + '('+ListC[i]+')',ListN[i]+vir+r'\2\3',Strng)
+
+        if Target == "Tamil":
+            Strng = re.sub('(ம்)'+ GM.VedicSvaras + '(ʼ)' + '('+ListC[i]+')',ListN[i]+vir+r'\2\4',Strng)
 
     return Strng
 
@@ -838,7 +995,10 @@ def MToAnusvara(Strng,Target):
 
     ListCAll = '(' + '|'.join(GM.CrunchSymbols(GM.Characters, Target)) + ')'
 
-    Strng = re.sub(ListCAll + '(?<!' + vir + ')'+'('+M+')'+'(?!'+ListC+')',r'\1'+Anusvara,Strng)
+    Strng = re.sub(ListCAll + GM.VedicSvaras + '(?<!' + vir + ')'+'('+M+')'+'(?!'+ListC+')',r'\1\2'+Anusvara,Strng)
+
+    for svara in GM.VedicSvarasList:
+        Strng = Strng.replace(svara + Anusvara, Anusvara + svara)
 
     #Strng = Strng.replace(M,Anusvara)
 
@@ -871,7 +1031,7 @@ def YaToYYa(Strng,Target):
     ListVarga = '|'.join(GM.CrunchList('ConsonantMap',Target)[0:25])
 
     if Target in ['Assamese','Bengali', 'Oriya', "Chakma"]:
-        Strng = re.sub('('+ListC+')'+Ya,r'\1'+YYa,Strng)
+        Strng = re.sub('('+ListC+')'+ GM.VedicSvaras + Ya,r'\1\2'+YYa,Strng)
 
         if Target in ['Assamese', 'Bengali']:
             Strng = Strng.replace(vir+YYa,vir+Ya)
@@ -1275,6 +1435,9 @@ def ThaiTranscription(Strng, anusvaraChange = True):
     Strng = ThaiLaoTranscription(Strng,"Thai", '\u0E30', '\u0E31', anusvaraChange = anusvaraChange)
 
     Strng = Strng.replace('ะ์','์')
+
+    Strng = Strng.replace('ะงัง', '\u0E31งํ')
+
 #    shortA = u'\u0E30'
 #    shortAconj = u'\u0E31'
 #    cons = "|".join(GM.CrunchSymbols(GM.Consonants, "Thai")+Thai.VowelMap[0:1])
@@ -1475,7 +1638,7 @@ def NewaSpecialTa(Strng):
     return Strng
 
 def TamilDisableSHA(Strng):
-    Strng = Strng.replace('ஶ', 'ஸ²')
+    Strng = Strng.replace('ஶ', 'ஷ²')
     Strng = CF.ShiftDiacritics(Strng,'Tamil')
 
     return Strng
