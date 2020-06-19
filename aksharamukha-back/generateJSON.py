@@ -106,7 +106,7 @@ def generate_script_matrix():
 ## Generate Syllables
 def generate_syllables():
     results = {}
-    scripts_syllabary = ['TamilExtended', 'Shan', 'KhamtiShan', 'Ahom', 'HanifiRohingya']
+    scripts_syllabary = ['TamilExtended', 'Ahom', 'Telugu']
 
     k = 0
     for script1 in scripts_syllabary:
@@ -324,8 +324,8 @@ if __name__ == "__main__":
   generate_script_matrix()
   print('Generating Syllabary')
   generate_syllables()
-  print('Generating Conjuncts')
-  generate_conjuncts()
+  #print('Generating Conjuncts')
+  #generate_conjuncts()
   #print('Generating Common Letters')
   #generate_common_letters()
 
