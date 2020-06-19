@@ -95,6 +95,8 @@ def ThaiNativeConsonants(Strng):
 
     Strng = Strng.replace('ง', 'งํ')
 
+    Strng = Strng.replace('ะงํ\u035C', '\u0E31งํ')
+
     Strng = re.sub('([เโไ])(งํ)([าัะ])', r'\1' + 'ง' + r'\2', Strng)
     Strng = re.sub('([เโไ])(งํ)', r'\1' + 'ง', Strng)
     Strng = re.sub('(งํ)([าัะ])', 'ง' + r'\2', Strng)
@@ -221,7 +223,8 @@ def TakriArchaicKha(Strng):
     return Strng.replace('𑚸', '𑚋')
 
 def TeluguReph(Strng):
-    Strng = Strng.replace('ర్', 'ర్‍')
+    consonants = '(' + '|'.join(GM.CrunchSymbols(GM.Consonants, 'Telugu')) + ')'
+    Strng = re.sub('ర్' + consonants, 'ర్‍' + r'\1', Strng)
     Strng = Strng.replace('\u0C4Dర్‍', '\u0C4Dర్')
 
     return Strng

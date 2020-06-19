@@ -166,15 +166,25 @@ export default {
       this.apiCall.post('/latinmatrix', data)
         .then(function (response) {
           for (var key in response.data['results']) {
+            console.log(key)
+            console.log(response.data['results'][key])
             if (key === 'RomanReadable') {
               console.log(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱').replace('"a\\\\"', '"a"').replace('"a\\"', '"a"').replace('"a\\"', '"a","'))
               dhis.results[key] = JSON.parse(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace('"a\\\\"', '"a"').replace('"a\\"', '"a"').replace('"a\\"', '"a"'))
             } else if (key !== 'Velthuis') {
-              dhis.results[key] = JSON.parse(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱'))
+              if (key !== 'Itrans' && key !== 'SLP1' && key !== 'WX') {
+                dhis.results[key] = JSON.parse(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱').replace(/\\̎/, '̎'))
+              } else if (key === 'Itrans' || key === 'SLP1') {
+                dhis.results[key] = JSON.parse(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱').replace(/\\̎/, '̎').replace(/\\\\""/, '\\\\\\""').replace(/\\_/, '\\\\_').replace(/\\m/g, '\\\\m').replace(/a\\'/, 'a\\\\\''))
+              } else if (key === 'WX') {
+                dhis.results[key] = JSON.parse(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱').replace(/\\̎/, '̎').replace(/\\\\""/, '\\\\\\""').replace(/\\_/, '\\\\_').replace(/\\m/g, '\\\\m').replace(/a\\'/, 'a\\\\\''))
+              }
             } else {
-              dhis.results[key] = JSON.parse(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱').replace(/""/g, '"\\"').replace(/\\"\\"/g, '\\""'))
+              console.log('here333')
+              dhis.results[key] = JSON.parse(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱').replace(/""/g, '"\\"').replace(/\\"\\"/g, '\\""').replace(/\\_/, '\\\\_').replace(/\\m/g, '\\\\m').replace(/\\\\""/, '\\\\\\""'))
             }
           }
+          console.log(key)
           dhis.guideChars = JSON.parse(response.data['guideChars'].replace(/\\/g, ''))
           dhis.loading = false
         })

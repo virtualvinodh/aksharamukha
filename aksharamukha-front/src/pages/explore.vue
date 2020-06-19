@@ -448,7 +448,17 @@ export default {
       tagsD = tagsD.length === 0 ? scriptsList : tagsD
       tagsL = tagsL.length === 0 ? scriptsList : tagsL
 
-      return _.intersection(tagsU, tagsR, tagsD, tagsL)
+      var sortedArray = _.intersection(tagsU, tagsR, tagsD, tagsL).sort(function (a, b) {
+        if (a.label > b.label) {
+          return 1
+        }
+        if (a.label < b.label) {
+          return -1
+        }
+        return 0
+      })
+
+      return sortedArray
     },
     alphabetic: function () {
       this.scriptsCategorized = this.alphabeticScripts()

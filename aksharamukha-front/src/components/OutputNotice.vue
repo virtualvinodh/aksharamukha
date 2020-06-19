@@ -29,6 +29,7 @@
         postOptions.includes('ranjanawartu')">This uses Tibetan codepoints to encode the characters. Without the specific font, the characters will just appear as Tibetan. Some ligatures/conjuncts used in the font may not be correct.</div>
      <div class="notice q-ma-sm" v-show="outputScript === 'KhomThai'">This uses Thai codepoints to encode the characters. Without the specific font, the characters will just appear as Thai.</div>
      <div class="notice q-ma-sm" v-show="inputScript === 'Telugu' && inputText.includes('ఁ')">The Arasunna (ఁ) in the input text is being transliterated as Chandrabindu in the output text.</div>
+     <div class="notice q-ma-sm" v-show="outputScript === 'Telugu' && postOptions.includes('TeluguReph')">The Reph sign is only currently supported in <a href="https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansTelugu/NotoSansTelugu-Regular.otf">Noto Sans Telugu</a></div>
      <div class="notice q-ma-sm" v-show="outputScript === 'Mongolian'">The Mongolian mapping for Ali Gali is not yet verified. If you have any feedback on the mapping and the forms of the letters used, please send it to vinodh@virtualvinodh.com</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Tamil' &&
             String(convertText).includes('𑌃')    ">Grantha Visarga only works with Google's Noto Tamil fonts </div>

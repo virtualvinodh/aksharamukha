@@ -20,10 +20,13 @@
       <span class="text-blue-4"> Y</span> : Equivalent with diacritic <br/>
       </div>
       <div>
-      <q-collapsible label="<i>Script Properties</i>" icon="category" :opened="!$q.platform.is.mobile">
-        <filter-tags v-model="tagsActive" :key="key"></filter-tags>
+      <q-toggle color="dark" v-model="filterProperty" label="Property filter" class="q-ma-md" @input="filterList = false; tagsActive = []"></q-toggle>
+      <q-toggle color="dark" v-model="filterList" label="List filter" class="q-ma-md" @input="filterProperty = false;"></q-toggle>
+      <div class="q-ml-md q-ma-sm q-mb-md"><i>Script count</i>: {{filterScripts.length}}</div>
+      <q-collapsible label="<i>Script Properties</i>" icon="category" :opened="!$q.platform.is.mobile" v-if="filterProperty">
+        <filter-tags v-model="tagsActive" :key="key" @input="tagsActiveClicked = true"></filter-tags>
       </q-collapsible> <br/>
-      <q-collapsible :label="'<i>Script List (' + filterScripts.length + ')</i>'" icon="category" :opened="false">
+      <q-collapsible :label="'<i>Script List</i>'" icon="category" :opened="true" v-if="filterList">
         <q-btn class="q-ma-sm" @click="allScripts" dense>
         <small>Select All</small>
       </q-btn> <q-btn class="q-ma-sm" @click="noScripts" dense>
@@ -193,7 +196,7 @@ import ListCharAll from '../components/ListCharAll'
 import Transliterate from '../components/Transliterate'
 import FilterTags from '../components/FilterTags'
 import {ScriptMixin} from '../mixins/ScriptMixin'
-import {QPageSticky, QSelect, QChip, QSpinnerComment, QTabs, QTab, QTabPane, QRouteTab, QCollapsible} from 'quasar'
+import {QPageSticky, QToggle, QSelect, QChip, QSpinnerComment, QTabs, QTab, QTabPane, QRouteTab, QCollapsible} from 'quasar'
 
 var _ = require('underscore')
 
@@ -209,6 +212,7 @@ export default {
     QSpinnerComment,
     ListCharAll,
     QCollapsible,
+    QToggle,
     QTabs,
     QTab,
     QChip,
@@ -241,15 +245,23 @@ export default {
       guideChars: [],
       tagsActive: [],
       key: true,
-      scriptsManual: []
+      scriptsManual: [],
+      tagsActiveClicked: false,
+      filterProperty: false,
+      filterList: false
     }
   },
   watch: {
     '$route' (to, from) {
       this.script1 = to.params.script
+    },
+    tagsActive () {
+      this.tagsActiveClicked = true
     }
+
   },
   mounted: function () {
+    this.tagsActiveClicked = true
     this.compoundsGen()
   },
   computed: {
@@ -282,7 +294,7 @@ export default {
       tagsD = tagsD.length === 0 ? this.scriptsIndic.map(x => x.value) : tagsD
       tagsL = tagsL.length === 0 ? this.scriptsIndic.map(x => x.value) : tagsL
 
-      if (this.scriptsManual.length === 0) {
+      if (this.tagsActiveClicked) {
         return _.intersection(tagsU, tagsR, tagsD, tagsL)
       } else {
         return this.scriptsManual
@@ -292,17 +304,20 @@ export default {
   methods: {
     allScripts: function () {
       this.scriptsManual = this.scriptsIndic.map(x => x.value)
+      this.tagsActiveClicked = false
+      this.filterProperty = false
     },
     noScripts: function () {
-      console.log('here')
-      this.tagsActive = []
       this.key = !this.key
-      this.scriptsManual = ['vinod']
+      this.scriptsManual = []
+      this.tagsActiveClicked = false
+      this.filterProperty = false
     },
     scriptTagClick: function (script) {
       this.scriptsManual = Array.from(this.filterScripts)
-      this.tagsActive = []
       this.key = !this.key
+      this.tagsActiveClicked = false
+      this.filterProperty = false
 
       if (!this.scriptsManual.includes(script)) {
         this.scriptsManual.push(script)

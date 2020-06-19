@@ -106,6 +106,11 @@ def VedicSvarasDiacrtics(Strng, Target):
     Strng = Strng.replace('\\m++', 'gͫ̄')
     Strng = Strng.replace('\\m+', 'gͫ')
 
+    if (Target == 'ISO'):
+        Strng = Strng.replace('\\’’', '̎')
+        Strng = Strng.replace('\\’', '̍')
+
+
     Ayogavaha = GM.CrunchList('AyogavahaMap', Target)
     Svaras = ['̍', '̎', '̱']
 
@@ -2184,7 +2189,9 @@ def FixIPA(Strng,reverse=False):
         Strng = Strng.replace(colon_tilde,tilde_colon)
         # Add Visarga echo - kuH/kUH -> kuhŭ/kuːhŭ
         Strng = re.sub("(.)(\u02D0?)(\u0068)",r'\1\2\3\1'+'\u0306',Strng)
+        Strng = Strng.replace('ə̸ə̸', 'ɑ̷ː')
     else:
+        Strng = Strng.replace('ɑ̷ː', 'ə̸ə̸')
         # ɑː̃ <- ɑ̃ː
         Strng = Strng.replace(tilde_colon,colon_tilde)
         # Reverse Visarga echo - kuH/kUH <- kuhŭ/kuːhŭ
@@ -2623,7 +2630,7 @@ def FixAhom(Strng, reverse = False):
         anu = Ahom.AyogavahaMap[1]
 
         #reverse closed syllable e
-        Strng = Strng.replace(anu + '\U00011727', '\U00011726\U00011727\U0001172A')
+        Strng = re.sub(anu + '\U00011727' + '(?!\U00011728)', '\U00011726\U00011727\U0001172A', Strng)
         Strng = re.sub('(\U00011726)(.)('+vir+')', '\U00011726\U00011727'+r'\2\3', Strng)
 
         #rever closed syllable o
