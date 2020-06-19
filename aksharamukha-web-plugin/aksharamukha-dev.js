@@ -5,7 +5,7 @@
 // Plugin: Web plugin for http://www.aksharamukha.appspot.com
 
 // Global Data
-var apiURL = "https://aksharamukha.appspot.com/api/plugin"
+var apiURL = "https://aksharamukha-plugin.appspot.com/api/plugin"
 
 var navbarOld = ''
 var origText = [];

@@ -3,7 +3,7 @@
 // Author: Vinodh Rajan vinodh@virtualvinodh.com
 // Website: http://www.virtualvinodh.com
 // Plugin: Web plugin for http://www.aksharamukha.appspot.com
-// 18th June 18:18
+// 19th June 2018 5:55 PM
 
 const ScriptMixin = {
     data() {
@@ -181,7 +181,7 @@ const ScriptMixin = {
             },
             postOptionsGroup: {
                 'Tamil': [{
-                        label: 'Disable ஶ<br/><small><span class="tamil">ஶ → ஷ²</span></small>',
+                        label: 'Disable <span class="tamil">ஶ</span><br/><small><span class="tamil">ஶ → ஷ²</span></small>',
                         value: 'TamilDisableSHA'
                     }, {
                         label: 'Subscript numerals<br/><small><span class="tamil">க²க³க⁴ → க₂க₃க₄</span></small>',
@@ -207,7 +207,7 @@ const ScriptMixin = {
                         label: 'Tamil numerals<br/><small><span class="tamil">123 → ௧௨௩</span></small>',
                         value: 'RetainTamilNumerals'
                     }, {
-                        label: 'Contextual ள (Experimental)<br/><small><span class="tamil">ப்ரலயம் → ப்ரளயம்</span></small>',
+                        label: 'Contextual <span class="tamil">ள</><br/><small>(Experimental)</small><br/><small><span class="tamil">ப்ரலயம் → ப்ரளயம்</span></small>',
                         value: 'ContextualLLa'
                     }
                     // { label: 'Medieval e/o with Pulli<br/><small><span class="tamil">ஒ ஓ கொ கோ → ஒ் ஒ கெ்ா கொ</span></small>', value: 'MedievalTamilOrthography' }
@@ -408,7 +408,7 @@ const ScriptMixin = {
                     label: 'Arasunna as Chandrabindu<br/><small><span class="telugu"> హూఀ → హూఁ</span></small>',
                     value: 'TeluguArasunnaChandrabindu'
                 }, {
-                    label: 'Telugu Repha <i>(Valapala Gilaka)</i> <br/><small><span class="telugu">ధర్మ → ధర్‍మ</span></small>',
+                    label: 'Telugu Repha <br/><small><i>(Valapala Gilaka)</i></small> <br/><small><span class="telugu">ధర్మ → ధర్‍మ</span></small>',
                     value: 'TeluguReph'
                 }, {
                     label: 'Tamil-Style Zha <br/><small><span class="telugu">ఆఴ్వార్</span> → <span class="teluguzha">ఆఴ్వార్</span></span></small>',
@@ -1986,16 +1986,19 @@ const ScriptMixin = {
     },
     computed: {
         tagsUsage: function() {
-            return this.tagsUsageM + this.tagsUsageS
+            return this.tagsUsageM.concat(this.tagsUsageS)
         },
         tagsRegion: function() {
-            return this.tagsRegionM1 + this.tagsRegionS1 + this.tagsRegionM2 + this.tagsRegionS2
+            return this.tagsRegionM1.concat(this.tagsRegionS1, this.tagsRegionM2, this.tagsRegionS2)
         },
         tagsLanguage: function() {
             return this.tagsLanguageM
         },
         tagsDerivation: function() {
             return this.tagsDerivationM
+        },
+        tagsAll: function() {
+            return this.tagsUsage.concat(this.tagsRegion, this.tagsLanguage, this.tagsDerivation)
         },
         scriptsOutput: function() {
             return this.scripts.filter(function(el) {
@@ -2298,7 +2301,7 @@ const ScriptMixin = {
 // Website: http://www.virtualvinodh.com
 // Plugin: Web plugin for http://www.aksharamukha.appspot.com
 // Global Data
-var apiURL = "https://aksharamukha.appspot.com/api/plugin"
+var apiURL = "https://aksharamukha-plugin.appspot.com/api/plugin"
 var navbarOld = ''
 var origText = [];
 var nodesListAll = []
