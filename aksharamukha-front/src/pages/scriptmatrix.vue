@@ -23,7 +23,7 @@
       <q-toggle color="dark" v-model="filterProperty" label="Property filter" class="q-ma-md" @input="filterList = false; tagsActive = []"></q-toggle>
       <q-toggle color="dark" v-model="filterList" label="List filter" class="q-ma-md" @input="filterProperty = false;"></q-toggle>
       <div class="q-ml-md q-ma-sm q-mb-md"><i>Script count</i>: {{filterScripts.length}}</div>
-      <q-collapsible label="<i>Script Properties</i>" icon="category" :opened="!$q.platform.is.mobile" v-if="filterProperty">
+      <q-collapsible label="<i>Script Properties</i>" icon="category" :opened="true" v-if="filterProperty">
         <filter-tags v-model="tagsActive" :key="key" @input="tagsActiveClicked = true"></filter-tags>
       </q-collapsible> <br/>
       <q-collapsible :label="'<i>Script List</i>'" icon="category" :opened="true" v-if="filterList">
@@ -39,7 +39,7 @@
       </q-btn>
       </q-collapsible>
       </div>
-      <div class="q-ma-md q-body-1" v-if="$q.platform.is.mobile">The page might take several minutes to load completely in a mobile browser and could be unresponsive while doing so. Please have some patience. Alternatively, you can also view the page in a desktop browser.</div>
+      <div class="q-ma-md q-body-1" v-if="$q.platform.is.mobile"><small>The page might take a few minutes to load completely in a mobile browser and could become unresponsive. Please have some patience. </small></div>
       <q-tabs color="tertiary" inverted two-lines position="top">
         <!-- Tabs - notice slot="title" -->
         <q-tab default slot="title" name="tab-1" label="Vow" class="print-hide"/>
