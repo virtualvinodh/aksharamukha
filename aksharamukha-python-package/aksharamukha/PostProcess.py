@@ -20,6 +20,19 @@ def default(Strng):
 
     return Strng
 
+def TamilStyleUUCore(Strng):
+    Strng = re.sub('([ഖഗഘഛഝഠഡഢഥദധഫബഭ])' + '([ുൂ])', r'\1' + '\u200D' + r'\2', Strng)
+
+    return Strng
+
+def TamilStyleUUOther(Strng):
+    Strng = re.sub('([ജശഷസഹ])' + '([ുൂ])', r'\1' + '\u200D' + r'\2', Strng)
+    Strng = re.sub('(ശ്ര)' + '([ുൂ])', r'\1' + '\u200D' + r'\2', Strng)
+    Strng = re.sub('(ശ്‍ര)' + '([ുൂ])', r'\1' + '\u200D' + r'\2', Strng)
+
+
+    return Strng
+
 def ContextualLLa(Strng):
     ListVS = '|'.join(GM.CrunchSymbols(GM.VowelSigns, 'Tamil'))
 

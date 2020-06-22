@@ -2,7 +2,7 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
-        baseURL: 'https://aksharamukha.appspot.com/api/',
+        baseURL: 'http://localhost:8085/api',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -184,7 +184,10 @@ export const ScriptMixin = {
         'TamilExtended': [
           { label: 'Dandas <br/><small><span class="tamilextended">. .. → । ॥</span></small>', value: 'Dot2Dandas' },
           { label: 'Avoid Anusvara <br/><small><span class="tamilextended">സംഘം → സങ്‌ഘമ്</span></small>', value: 'TamilExtendedAnusvara' },
-          { label: 'Contextual <span class="tamil">ன</span> <br/><small><span class="tamilextended">ഗജാനനന്‌ → ഗജാഩഩഩ്‌</span></small>', value: 'TamilExtendedNNA' }
+          { label: 'Contextual <span class="tamil">ன</span> <br/><small><span class="tamilextended">ഗജാനനന്‌ → ഗജാഩഩഩ്‌</span></small>', value: 'TamilExtendedNNA' },
+          { label: 'Tamil Style -u -ū <br/><small>(Core Grantha)</small><br/><small><span class="tamilextended">ഗുബൂഫുഭൂ → ഗ‍ുബ‍ൂഫ‍ുഭ‍ൂ</span></small>', value: 'TamilStyleUUCore' },
+          { label: 'Tamil Style -u -ū <br/><small>(Tamilized Grantha)</small><br/><small><span class="tamilextended">ജൂസുഷുഹൂ → ജ‍ൂസ‍ുഷ‍ുഹ‍ൂ</span></small>', value: 'TamilStyleUUOther' }
+
         ],
         'Chakma': [
           {
@@ -1079,7 +1082,7 @@ export const ScriptMixin = {
             'name': 'Noto Sans Meetei Mayek',
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansMeeteiMayek-Regular.ttf'
           },
-          language: ['Only Pali'],
+          language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi'],
           region: ['East Indic', 'Indic']
@@ -1572,7 +1575,7 @@ export const ScriptMixin = {
           wikicode: '',
           font: {
             'name': 'Agastya Extended Tamil',
-            'url': 'https://github.com/virtualvinodh/aksharamukha/blob/master/aksharamukha-front/src/statics/AgastyaExtendedTamil.otf'
+            'url': '../statics/AgastyaExtendedTamil.otf'
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Living', 'Living: Minor'],
@@ -1968,9 +1971,9 @@ export const ScriptMixin = {
       }
     },
     downloadHTML: function (content) {
-      var warning = '<span class="printhide">Proper display of the some of the text below may depend on webfonts, which in turn require being connected to the internet<br/> </span> <br/>'
+      var warning = '<span class="printhide"><small>Proper display of the text below may depend on webfonts, which in turn require being connected to the internet</small><br/> </span> <br/>'
 
-      var doc = '<html><head><meta charset="utf-8"/><link rel="stylesheet" type="text/css" href="http://www.virtualvinodh.com/aksharamkh/fonts.css"></head><body>' + warning + content + '</span></body></html>'
+      var doc = '<html><head><meta charset="utf-8"/><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/fonts.css"></head><body>' + warning + content + '</span></body></html>'
 
       var blob = ''
       const e = document.createEvent('MouseEvents')

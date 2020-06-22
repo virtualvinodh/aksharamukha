@@ -148,7 +148,7 @@ NuktaMap = [
            ]
 
 OmMap = [
-        '\u0E42\u0E2D\u0E4D'
+        '\u0E2D\u0E42\u0E4D'
         ]
 
 SignMap =[

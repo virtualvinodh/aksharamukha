@@ -1415,10 +1415,12 @@ def FixKhomThai(Strng, reverse=False):
         Strng = re.sub('(.\u0E3A)(.\u0E3A)(ใ)', r'\3\1\2', Strng) # reversed
         Strng = re.sub('(.\u0E3A)(ใ)', r'\2\1', Strng) # reversed
 
-
         Strng = re.sub('((.\u0E3A)+)(เ)', r'\3\1', Strng) # reversed
         Strng = re.sub('(.\u0E3A)?(.)(ฺร)', r'\3\1\2', Strng) # reversed
         Strng = Strng.replace('เอา', 'โอ')
+
+        Strng = Strng.replace("เอำ", 'เาอํ')
+        Strng = Strng.replace('เาอํ', 'โอํ')
     else:
         Strng = re.sub('(ใ)(.\u0E3A)(.\u0E3A)', r'\2\3\1', Strng)
         Strng = re.sub('(ใ)(.\u0E3A)', r'\2\1', Strng)
