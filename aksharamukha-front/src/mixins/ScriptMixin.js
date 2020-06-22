@@ -1575,7 +1575,7 @@ export const ScriptMixin = {
           wikicode: '',
           font: {
             'name': 'Agastya Extended Tamil',
-            'url': '../statics/AgastyaExtendedTamil.otf'
+            'url': 'https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/AgastyaExtendedTamil.otf'
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Living', 'Living: Minor'],
