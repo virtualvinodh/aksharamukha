@@ -9,10 +9,13 @@ from aksharamukha.ScriptMap.EastIndic import PhagsPa
 from aksharamukha.ScriptMap.MainIndic import Tamil, Malayalam, Limbu, Chakma
 ### Use escape char in all functions
 
-
 def ShowChillus(Strng):
 
     return PostProcess.MalayalamChillu(Strng, True, True)
+
+def SanskritLexicaizeHK(Strng):
+
+    return Strng
 
 def ThaiPhonetic(Strng):
     Strng = Strng.replace('ด', 'ท')

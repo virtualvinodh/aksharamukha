@@ -35,6 +35,7 @@ def TamilStyleUUOther(Strng):
 
 def ContextualLLa(Strng):
     ListVS = '|'.join(GM.CrunchSymbols(GM.VowelSigns, 'Tamil'))
+    ListC = '|'.join(GM.CrunchSymbols(GM.Consonants, 'Tamil'))
 
     Strng = re.sub('(ஆவ)'+ 'ல', r'\1' +  'ள', Strng)
     Strng = re.sub('(்ரவா)'+ 'ல', r'\1' +  'ள', Strng)
@@ -46,6 +47,16 @@ def ContextualLLa(Strng):
     Strng = re.sub('(தா|து)'+ 'ல', r'\1' +  'ள', Strng)
     Strng = re.sub('(ரிம)'+ 'ல', r'\1' +  'ள', Strng)
     Strng = Strng.replace('ள்ய', 'ல்ய')
+
+    Strng = re.sub('ந்' + '([\.।॥,!-])', 'ன்' + r'\1', Strng)
+    Strng = re.sub('ந்' + '(\s)', 'ன்' + r'\1', Strng)
+    Strng = re.sub('ந்$', 'ன்', Strng)
+
+    Strng = Strng.replace('ம்ʼக', 'ங்க')
+    Strng = Strng.replace('ம்ʼச', 'ஞ்ச')
+    Strng = Strng.replace('ம்ʼஜ', 'ஞ்ஜ')
+    Strng = Strng.replace('ம்ʼட', 'ண்ட')
+    Strng = Strng.replace('ம்ʼத', 'ந்த')
 
     return Strng
 
@@ -776,10 +787,10 @@ def TamilNaToNNa(Strng):
     Strng = re.sub('('+ListV+')'+ GM.VedicSvaras + '('+na+')' + '(?!' + vir + ')',r'\1\2'+nna,Strng)
     Strng = re.sub('('+ListV+')'+ GM.VedicSvaras + '('+na+')' + '(?!' + vir + ')',r'\1\2'+nna,Strng)
 
-    Strng = re.sub('(ந்)(?!த)', 'ன்', Strng)
+    #Strng = re.sub('(ந்)(?!த)', 'ன்', Strng)
 
     Strng = re.sub('(²|³|⁴)'+'('+na+')',r'\1'+nna,Strng)
-    #Strng = Strng.replace(nna+vir+ta,na+vir+ta)
+    Strng = Strng.replace(nna+vir+ta,na+vir+ta)
 
     Strng = re.sub('(\s)(ன)', r'\1' + 'ந', Strng)
     Strng = re.sub('^ன', 'ந', Strng)
