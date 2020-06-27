@@ -784,16 +784,17 @@ def TamilNaToNNa(Strng):
 
     ListV = '|'.join(GM.CrunchSymbols(GM.Vowels+GM.VowelSigns+GM.Consonants,'Tamil')+[Tamil.SignMap[0].replace('(','\(').replace(')','\)')])
 
-    Strng = re.sub('('+ListV+')'+ GM.VedicSvaras + '('+na+')' + '(?!' + vir + ')',r'\1\2'+nna,Strng)
-    Strng = re.sub('('+ListV+')'+ GM.VedicSvaras + '('+na+')' + '(?!' + vir + ')',r'\1\2'+nna,Strng)
+    Strng = re.sub('('+ListV+')'+ GM.VedicSvaras + '('+na+')' + '(?!' + vir + ta + ')',r'\1\2'+nna,Strng)
+    Strng = re.sub('('+ListV+')'+ GM.VedicSvaras + '('+na+')' + '(?!' + vir + ta + ')',r'\1\2'+nna,Strng)
 
-    #Strng = re.sub('(ந்)(?!த)', 'ன்', Strng)
+    Strng = re.sub('(²|³|⁴)'+ GM.VedicSvaras + '('+na+')' + '(?!' + vir + ta + ')',r'\1\2'+nna,Strng)
+    Strng = re.sub('(²|³|⁴)'+ GM.VedicSvaras + '('+na+')' + '(?!' + vir + ta + ')',r'\1\2'+nna,Strng)
 
-    Strng = re.sub('(²|³|⁴)'+'('+na+')',r'\1'+nna,Strng)
-    Strng = Strng.replace(nna+vir+ta,na+vir+ta)
+    #Strng = re.sub('(²|³|⁴)'+'('+na+')',r'\1'+nna,Strng)
 
-    Strng = re.sub('(\s)(ன)', r'\1' + 'ந', Strng)
-    Strng = re.sub('^ன', 'ந', Strng)
+    #Strng = re.sub('(\s)(ன)', r'\1' + 'ந', Strng)
+    #Strng = re.sub('(\.)(ன)', r'\1' + 'ந', Strng)
+    #Strng = re.sub('^ன', 'ந', Strng)
 
     Strng = re.sub("(?<=ஶ்ரீ)(ன)(?!" + vir + ")", "ந", Strng)
 
