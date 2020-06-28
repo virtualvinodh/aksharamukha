@@ -37,26 +37,210 @@ def ContextualLLa(Strng):
     ListVS = '|'.join(GM.CrunchSymbols(GM.VowelSigns, 'Tamil'))
     ListC = '|'.join(GM.CrunchSymbols(GM.Consonants, 'Tamil'))
 
-    Strng = re.sub('(ஆவ)'+ 'ல', r'\1' +  'ள', Strng)
-    Strng = re.sub('(்ரவா)'+ 'ல', r'\1' +  'ள', Strng)
-    Strng = re.sub('(்ர)'+ 'ல', r'\1' +  'ள', Strng)
-    Strng = re.sub('(ாவ)'+ 'ல', r'\1' +  'ள', Strng)
-    Strng = re.sub('(யா)'+ 'ல', r'\1' +  'ள', Strng)
+    Strng = re.sub('(ஆவ|ாவ)'+ 'ல', r'\1' +  'ள', Strng)
+    Strng = re.sub('(்ரவா|்ரவ|ர|பவ|வி|ரா|ஷ்க|த⁴வ)'+ 'ல', r'\1' +  'ள', Strng)
+    Strng = re.sub('(யா|யாம|கோம)'+ 'ல', r'\1' +  'ள', Strng)
+    Strng = re.sub('(ந|மௌ)'+ 'ல', r'\1' +  'ள', Strng)
+    Strng = Strng.replace('கலத்ர', 'களத்ர')
+    Strng = Strng.replace('ஶீதல', 'ஶீதள')
+    Strng = Strng.replace('ஸுதல', 'ஸுதள')
+    Strng = Strng.replace('காலி', 'காளி')
+    Strng = Strng.replace('காலீ', 'காளீ')
+    Strng = Strng.replace('கலேவர', 'களேவர')
+    Strng = Strng.replace('கலேவர', 'களேவர')
+    Strng = Strng.replace('ப³ஹுல', 'ப³ஹுள')
+    Strng = Strng.replace('கஶ்மல', 'கஶ்மள')
+
     Strng = re.sub('([கத])' + '(' + ListVS + ')?' + '([³⁴])'+ 'ல', r'\1\2\3' +  'ள', Strng)
     Strng = re.sub('(ஜு)'+ 'ல', r'\1' +  'ள', Strng)
     Strng = re.sub('(தா|து)'+ 'ல', r'\1' +  'ள', Strng)
     Strng = re.sub('(ரிம)'+ 'ல', r'\1' +  'ள', Strng)
+
     Strng = Strng.replace('ள்ய', 'ல்ய')
+
+    return Strng
+
+def FinalNNa(Strng):
+    Strng = re.sub('ன', 'ந', Strng)
 
     Strng = re.sub('ந்' + '([\.।॥,!-])', 'ன்' + r'\1', Strng)
     Strng = re.sub('ந்' + '(\s)', 'ன்' + r'\1', Strng)
     Strng = re.sub('ந்$', 'ன்', Strng)
 
-    Strng = Strng.replace('ம்ʼக', 'ங்க')
-    Strng = Strng.replace('ம்ʼச', 'ஞ்ச')
-    Strng = Strng.replace('ம்ʼஜ', 'ஞ்ஜ')
-    Strng = Strng.replace('ம்ʼட', 'ண்ட')
-    Strng = Strng.replace('ம்ʼத', 'ந்த')
+    return Strng
+
+def TamilpredictDentaNa(Strng):
+    listDentalNa = '''னக²
+னக³ர
+னகுல
+னக்³ன
+னக்ஷத்ர
+னடராஜ
+னடீ
+னதீ³
+னந்த³ன
+னபும்ʼஸக
+னப⁴**
+னம**
+னமஶ்
+னமஸ்
+னமாம
+னமாமி
+னமாமோ
+னமுசி
+னமோ
+னமோநம
+னமோநமோ
+னமோஸ்து
+னமோஸ்துதே
+னம꞉
+னயன
+னர**
+னரக
+னர்தக
+னர்தன
+னர்மத³
+னல**
+னலின
+னவ**
+னவீன
+னவ்ய
+னஶ்**
+னஷ்ட
+னாராயண
+னாக³
+னாடக
+னாடீ³
+னாட்ய
+னாட்³ய
+னாத²
+னாத³
+னாரத
+னானா***
+னான்ய**
+னான்ருʼத
+னாப⁴
+னாம
+னாயக
+னாயிகா
+னாரத³
+னாரஸிம்ʼஹ
+னாரி
+னாரீ
+னாவ***
+னாஶ
+னாஸிக
+னிக³ம
+னிகட
+னிகர
+னிகாம
+னிகாய
+னிகி²ல
+னிகுஞ்ஜ
+னிகூ⁴ன
+னிகேத
+னிக்³ரஹ
+னிக்³ருʼஹ
+னிக்ருʼந்த
+னிக்³ரந்த
+னிக்ஷிப
+னிக்ஷேப
+னிக்⁴ன
+னிஜ
+னித³ர்ஶ
+னிதம்ப³
+னிதர
+னிதா³க⁴
+னிதா³ன
+னிதாந்த
+னிதா⁴ன
+னிதா⁴ய
+னித⁴
+னிதே⁴ஹி
+னித்³ர
+னித்ய
+னிந்தா³
+னிப³த்³த⁴
+னிப³த்⁴
+னிப³ந்த⁴ன
+னிபட
+னிபதித
+னிபத்ய
+னிபபாத
+னிபாதித
+னிபாத்ய
+னிபுண
+னிபோ³த⁴
+னிப்⁴ருʼத
+னிமக்³ன
+னிமித்த
+னிமிஷ
+னியத
+னியந்த
+னியந்த்ர
+னியம
+னியுக்த
+னியுஜ்ய
+னியோ
+னிர
+னிர்
+னிலய
+னிவர்
+னிவஸ
+னிவார
+னிவாஸ
+னிவிஷ்ட
+னிவேத³
+னிவேஶ
+னிவ்ருʼ
+னிஶ
+னிஶ்
+னிஷ
+னிஷ்
+னிஸ
+னிஸ்
+னிஹித
+னி꞉ஶ
+னி꞉ஷ
+னி꞉ஸ
+னீச
+னீதி
+னீர
+னீல
+னூதன
+னூபுர
+னேத்ர
+னேய**
+னைமித்த
+னைமிஷ
+னைராஶ்ய
+னைர்ருʼத
+னைவேத்³ய
+னைஷ்
+ன்யாய
+ன்யாஸ
+ன்யூன
+ன்ருʼ'''.split('\n')
+
+    vir = Tamil.ViramaMap[0]
+
+    for wordNna in listDentalNa:
+        wordNa = re.sub('^ன', 'ந', wordNna)
+        if '²' in wordNna[-1] or '³' in wordNna[-1] or '⁴' in wordNna[-1]:
+            number = wordNna[-1]
+
+            wordNnaN = wordNna[:-1]
+            wordNaN = wordNa[:-1]
+            for vow in GM.CrunchSymbols(GM.VowelSigns, 'Tamil'):
+                Strng = Strng.replace(wordNnaN + vow + number, wordNaN + vow + number)
+
+        Strng = Strng.replace(wordNna, wordNa)
+
+        for wordNna in ['னாம','னர']:
+            wordNa = re.sub('^ன', 'ந', wordNna)
+            Strng = Strng.replace(wordNa + vir, wordNna + vir)
+
+        Strng = Strng.replace('ன்ந', 'ந்ந')
 
     return Strng
 

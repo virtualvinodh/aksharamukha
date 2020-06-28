@@ -20,7 +20,7 @@ def ApplyScriptDefaults(Strng,Source,Target):
         Options += ['MalayalamAnusvaraNasal', 'MToAnusvara', 'MalayalamremoveHistorical']
 
     elif Target == 'Tamil':
-        Options += ['TamilNaToNNa','AnusvaraToNasal']
+        Options += ['TamilNaToNNa','AnusvaraToNasal', 'TamilpredictDentaNa']
 
     elif Target == 'Bengali':
         Options += ['VaToBa','YaToYYa','KhandaTa']

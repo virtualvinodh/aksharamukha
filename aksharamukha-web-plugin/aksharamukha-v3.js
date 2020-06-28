@@ -1,8 +1,3 @@
-// Author: Vinodh Rajan vinodh@virtualvinodh.com
-// Website: http://www.virtualvinodh.com
-// Plugin: Web plugin for http://www.aksharamukha.appspot.com
-// June 21 18:53
-
 const ScriptMixin = {
     data() {
         return {
@@ -190,9 +185,6 @@ const ScriptMixin = {
                     }, {
                         label: 'Grantha Visarga<br/><small><span class="tamil">நம꞉ → நம𑌃</span></small>',
                         value: 'TamilGranthaVisarga'
-                    }, {
-                        label: 'Dandas<br/><small><span class="tamil">. .. → । ॥</span></small>',
-                        value: 'RetainTamilDanda'
                     },
                     // { label: 'Disable ௐ<br/><small><span class="tamil">ௐ → ஓம்</span></small>', value: 'TamilOmDisable' },
                     {
@@ -202,11 +194,17 @@ const ScriptMixin = {
                         label: 'Remove diacritic numerals<br/><small><span class="tamil">க²க³க⁴ → ககக</span></small>',
                         value: 'TamilRemoveNumbers'
                     }, {
+                        label: 'Contextual <span class="tamil">ள</><br/><small>(Experimental)</small><br/><small><span class="tamil">ப்ரலய → ப்ரளய</span></small>',
+                        value: 'ContextualLLa'
+                    }, {
+                        label: 'Only word-final <span class="tamil">ன</><br/><small><span class="tamil">ஆனனன் → ஆநநன்</span></small>',
+                        value: 'FinalNNa'
+                    }, {
+                        label: 'Dandas<br/><small><span class="tamil">. .. → । ॥</span></small>',
+                        value: 'RetainTamilDanda'
+                    }, {
                         label: 'Tamil numerals<br/><small><span class="tamil">123 → ௧௨௩</span></small>',
                         value: 'RetainTamilNumerals'
-                    }, {
-                        label: 'Contextual <span class="tamil">ள</><br/><small>(Experimental)</small><br/><small><span class="tamil">ப்ரலயம் → ப்ரளயம்</span></small>',
-                        value: 'ContextualLLa'
                     }
                     // { label: 'Medieval e/o with Pulli<br/><small><span class="tamil">ஒ ஓ கொ கோ → ஒ் ஒ கெ்ா கொ</span></small>', value: 'MedievalTamilOrthography' }
                 ],
