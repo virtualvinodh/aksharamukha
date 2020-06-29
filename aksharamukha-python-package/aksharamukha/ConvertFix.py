@@ -732,7 +732,13 @@ def FixTamilExtended(Strng, reverse=False):
         Strng = Strng.replace('ക്‌ഷ', 'ക്ഷ')
         Strng = Strng.replace('ശ്‌ര', 'ശ്‍ര')
         Strng = Strng.replace('ൗ', 'ൌ')
+
+        for svara in GM.VedicSvarasList:
+            Strng = Strng.replace('\u200C' + svara, svara + '\u200C')
     else:
+        for svara in GM.VedicSvarasList:
+            Strng = Strng.replace(svara + '\u200C', '\u200C' + svara)
+
         Strng = Strng.replace('\u0D4D', '\u0D4D\u200C')
 
     return Strng

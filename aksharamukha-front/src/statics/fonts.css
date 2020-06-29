@@ -410,6 +410,11 @@
 }
 
 @font-face {
+  font-family: 'Agastya Serif';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/AgastyaSerif.otf')
+}
+
+@font-face {
   font-family: 'Noto Sans Brahmi';
   src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansBrahmi/NotoSansBrahmi-Regular.otf')
 }
@@ -688,6 +693,10 @@
 }
 .tamilextended {
   font-family: "Agastya Extended Tamil" !important;
+  line-height: 1.6em;
+}
+.tamilextendedserif {
+  font-family: "Agastya Serif" !important;
   line-height: 1.6em;
 }
 .siddhammukta {

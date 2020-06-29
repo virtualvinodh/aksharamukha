@@ -2,7 +2,7 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
-        baseURL: 'https://aksharamukha.appspot.com/api/',
+        baseURL: 'http://localhost:8085/api',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -1574,7 +1574,7 @@ export const ScriptMixin = {
           omnicode: '',
           wikicode: '',
           font: {
-            'name': 'Agastya Extended Tamil',
+            'name': 'Agastya Sans',
             'url': 'https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/AgastyaExtendedTamil.otf'
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
