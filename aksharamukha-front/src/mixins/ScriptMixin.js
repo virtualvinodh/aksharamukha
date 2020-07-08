@@ -95,10 +95,6 @@ export const ScriptMixin = {
           { label: 'Nativized Sajjhāya text <br/><small><div>e.g. พุท์ธะ</div></small>', value: 'ThaiSajjhayawithA' },
           { label: 'Thai Phonetic text<br/><small><div>e.g. ตะต͜ระ ราจ̥ะ</div></small>', value: 'ThaiPhonetic' }
         ],
-        'TaiTham': [
-          { label: 'Tai Tham Lao', value: 'TaiThamLao' },
-          { label: 'Tai Kuen', value: 'TaiKuen' }
-        ],
         'LaoPali': [
           { label: 'Lao orthography text<small><div class="laopali">e.g. ພຸທຘະ</div></small>', value: 'LaoTranscription' },
           { label: 'Sajjhāya orthography text <br/><small><div class="laopali">e.g. ພຸທ໌ຘ</div></small>', value: 'LaoSajhayaOrthography' },
@@ -199,13 +195,13 @@ export const ScriptMixin = {
             value: 'ChakmaVowelsIndependent'
           },
           {
-            label: 'Pali Orthography<br/><small><span class="chakma">𑄖𑄧𑄗𑄉𑄧𑄖𑄧 → 𑄖𑄗𑄂𑄉𑄖</span></small>',
+            label: 'Pali orthography<br/><small><span class="chakma">𑄖𑄧𑄗𑄉𑄧𑄖𑄧 → 𑄖𑄗𑄂𑄉𑄖</span></small>',
             value: 'ChakmaPali'
           }
         ],
         'Newa': [
           { label: 'Enable murmured consonants', value: 'NewaMurmurConsonants' },
-          { label: 'Disable Repha<br/><small><span class="newa">𑐢𑐬𑑂𑐩 → 𑐢𑐬𑑂‍𑐩</span></small>', value: 'NewaDisableRepha' },
+          { label: 'Disable repha<br/><small><span class="newa">𑐢𑐬𑑂𑐩 → 𑐢𑐬𑑂‍𑐩</span></small>', value: 'NewaDisableRepha' },
           { label: 'Special /ta/ conjunct<br/><small><span class="newa">𑐟𑑂𑐥𑐟𑑂𑐩𑐟𑑂𑐰 → 𑐟𑑂‍𑐥𑐟𑑂‍𑐩𑐟𑑂‍𑐰</span></small>', value: 'NewaSpecialTa' },
           { label: 'Devanagari-based Newa font<br/><small><span class="newa">𑐧𑐸𑐡𑑂𑐢𑑅</span> →<span class="nepaldevafont">बुद्धः</span></small>', value: 'nepaldevafont' }
 
@@ -245,26 +241,43 @@ export const ScriptMixin = {
         ],
         'Gurmukhi': [
           { label: 'Yakaash<br/><small>ਕ੍ਯ → ਕੵ</small>', value: 'GurmukhiYakaash' },
-          { label: 'Gurmukhi Numerals<br/><small>123 → ੧੨੩</small>', value: 'RetainGurmukhiNumerals' }
+          { label: 'Gurmukhi numerals<br/><small>123 → ੧੨੩</small>', value: 'RetainGurmukhiNumerals' }
         ],
         'Thai': [
-          { label: 'Thai Orthography<br/><small><div>พุทฺธ → พุทธะ</div></small>', value: 'ThaiTranscription' },
-          { label: 'Sajjhāya Orthography<br/><small><div>พุทฺธ → พุท์ธ</div></small>', value: 'ThaiSajjhayaOrthography' },
-          { label: 'Nativized Sajjhaya<br/><small><div>พุทฺธํ → พุท์ธัง</div></small>', value: 'ThaiSajjhayawithA' },
-          { label: 'Thai Phonetic<br/><small><div>พุทฺธตฺว → <span class="thainative">บุดธะต͜วะ</span></div></small>', value: 'ThaiNativeConsonants' },
+          { label: 'Thai orthography<br/><small><div>พุทฺธ → พุทธะ</div></small>', value: 'ThaiTranscription' },
+          { label: 'Sajjhāya orthography<br/><small><div>พุทฺธ → พุท์ธ</div></small>', value: 'ThaiSajjhayaOrthography' },
+          { label: 'Nativized sajjhaya<br/><small><div>พุทฺธํ → พุท์ธัง</div></small>', value: 'ThaiSajjhayawithA' },
+          { label: 'Thai phonetic<br/><small><div>พุทฺธตฺว → <span class="thainative">บุดธะต͜วะ</span></div></small>', value: 'ThaiNativeConsonants' },
           { label: 'Sara a ะ as Visarga<br/><small><div>นมัห์ → นมะ</div></small>', value: 'ThaiVisargaSaraA' }
         ],
         'LaoPali': [
-          { label: 'Lao Orthography<br/><small><span class="laopali">ພຸທ຺ຘ → ພຸທຘະ</span></small>', value: 'LaoTranscription' },
-          { label: 'Sajjhāya Orthography<br/><small><div class="laopali">ພຸທ຺ຘ → ພຸທ໌ຘ</div></small>', value: 'LaoSajjhaya' },
-          { label: 'Nativized Sajjhāya<br/><small><div  class="laopali">ພຸທ຺ຘໍ → ພຸທ໌ຘັງ</div></small>', value: 'LaoSajjhayawithA' }
+          { label: 'Lao orthography<br/><small><span class="laopali">ພຸທ຺ຘ → ພຸທຘະ</span></small>', value: 'LaoTranscription' },
+          { label: 'Sajjhāya orthography<br/><small><div class="laopali">ພຸທ຺ຘ → ພຸທ໌ຘ</div></small>', value: 'LaoSajjhaya' },
+          { label: 'Nativized sajjhāya<br/><small><div  class="laopali">ພຸທ຺ຘໍ → ພຸທ໌ຘັງ</div></small>', value: 'LaoSajjhayawithA' },
+          { label: 'Lao phonetic<br/><small><div  class="laopali">ພຸທ຺ຘ → ບຸດ຺ຘ</div></small>', value: 'LaoPhonetic' }
         ],
         'Lao': [
           { label: 'Lao Nativization<br/><small><span class="lao">ພຸທທັງ ຄັຈຈາມິ ສັພພັງ → ພຸດທັງ ຄັຈສາມິ ສັບພັງ</span></small>', value: 'LaoNative' }
         ],
         'TaiTham': [
-          { label: 'Tai Tham Lao<br/><small><span class="taitham">ᨻᩩᨴ᩠ᨵ</span> → <span class="taithamlao">ᨻᩩᨴ᩠ᨵ</span></small>', value: 'TaiThamLao' },
-          { label: 'Tai Kuen<br/><small><span class="taitham">ᨻᩩᨴ᩠ᨵ</span> → <span class="taikuen">ᨻᩩᨴ᩠ᨵ</span></small>', value: 'TaiKuen' }
+          { label: 'Shift Mai Kang Lai<br/><small><span class="taitham">ᩈᩘᨥ</span> → <span class="taitham">ᩈᨥᩘ</span></small>', value: 'ThamShiftMaiKangLai' },
+          { label: 'Tall -ā with ca/ba/ra/bha<br/><small><span class="taitham">ᨣᨧ᩠ᨨᩣᨾᩥ</span> → <span class="taitham">ᨣᨧ᩠ᨨᩤᨾᩥ</span></small>', value: 'ThamTallAOthers' },
+          { label: 'Disable explicit Tall -ā <br/><small>Font chooses the right form</small>', value: 'ThamTallADisable' }
+        ],
+        'LueTham': [
+          { label: 'Shift Mai Kang Lai<br/><small><span class="luetham">ᩈᩘᨥ</span> → <span class="luetham">ᩈᨥᩘ</span></small>', value: 'ThamShiftMaiKangLai' },
+          { label: 'Tall -ā with ca/ba/ra/bha<br/><small><span class="luetham">ᨣᨧ᩠ᨨᩣᨾᩥ</span> → <span class="luetham">ᨣᨧ᩠ᨨᩤᨾᩥ</span></small>', value: 'ThamTallAOthers' },
+          { label: 'Disable explicit Tall -ā <br/><small>Font chooses the right form</small>', value: 'ThamTallADisable' }
+        ],
+        'LaoTham': [
+          { label: 'Shift Mai Kang Lai<br/><small><span class="laotham">ᩈᩘᨥ</span> → <span class="laotham">ᩈᨥᩘ</span></small>', value: 'ThamShiftMaiKangLai' },
+          { label: 'Tall -ā with ca/ba/ra/bha<br/><small><span class="laotham">ᨣᨧ᩠ᨨᩣᨾᩥ</span> → <span class="laotham">ᨣᨧ᩠ᨨᩤᨾᩥ</span></small>', value: 'ThamTallAOthers' },
+          { label: 'Disable explicit Tall -ā <br/><small>Font chooses the right form</small>', value: 'ThamTallADisable' }
+        ],
+        'KhuenTham': [
+          { label: 'Shift Mai Kang Lai<br/><small><span class="khuentham">ᩈᩘᨥ</span> → <span class="khuentham">ᩈᨥᩘ</span></small>', value: 'ThamShiftMaiKangLai' },
+          { label: 'Tall -ā with ca/ba/ra/bha<br/><small><span class="khuentham">ᨣᨧ᩠ᨨᩣᨾᩥ</span> → <span class="khuentham">ᨣᨧ᩠ᨨᩤᨾᩥ</span></small>', value: 'ThamTallAOthers' },
+          { label: 'Disable explicit Tall -ā <br/><small>Font chooses the right form</small>', value: 'ThamTallADisable' }
         ],
         'Soyombo': [
           { label: 'Syllabize input<br/><small><span class="soyombo → ">𑩲𑩖𑩮𑩑𑪁𑩫𑪘𑪙𑩾 → 𑩲𑩖 𑩮𑩑 𑪁 𑩫𑪘𑪙𑩾</span></small>', value: 'SoyomboSyllabize' },
@@ -277,7 +290,7 @@ export const ScriptMixin = {
           { label: 'Sanskrit palatals<br/><small><span class="marchen">𑲂 𑲃 𑲄 𑲄𑲮 → 𑱶 𑱷 𑱸 𑱸𑲮</span></small>', value: 'MarchenSanskritPalatals' }
         ],
         'Mongolian': [
-          { label: 'Syllabize Input<br/><small><span class="mongolian">ᠮᠠᢏᢈ → ᠮᠠ᠋ ᢏᢈ</span></small>', value: 'MongolianSyllabize' }
+          { label: 'Syllabize input<br/><small><span class="mongolian">ᠮᠠᢏᢈ → ᠮᠠ᠋ ᢏᢈ</span></small>', value: 'MongolianSyllabize' }
         ],
         'Tibetan': [
           { label: 'Syllabize input<br/><small><span class="tibetan → ">བོདྷིསཏྟྭ → བོ་དྷི་ས་ཏྟྭ</span></small>', value: 'TibetanSyllabize' },
@@ -296,7 +309,7 @@ export const ScriptMixin = {
         ],
         'Telugu': [
           { label: 'Arasunna as Chandrabindu<br/><small><span class="telugu"> హూఀ → హూఁ</span></small>', value: 'TeluguArasunnaChandrabindu' },
-          { label: 'Telugu Repha <br/><small><i>(Valapala Gilaka)</i></small> <br/><small><span class="telugu">ధర్మ → ధర్‍మ</span></small>', value: 'TeluguReph' },
+          { label: 'Telugu repha <br/><small><i>(Valapala Gilaka)</i></small> <br/><small><span class="telugu">ధర్మ → ధర్‍మ</span></small>', value: 'TeluguReph' },
           { label: 'Tamil-Style Zha <br/><small><span class="telugu">ఆఴ్వార్</span> → <span class="teluguzha">ఆఴ్వార్</span></span></small>', value: 'TeluguTamilZha' },
           { label: 'Tamil-Style Rra <br/><small><span class="telugu">ఆఱు</span> → <span class="teluguzha">ఆౘు</span></small>', value: 'TeluguTamilRra' },
           { label: 'Dandas<br/><small><span class="telugu">. .. → । ॥</span></small>', value: 'RetainTeluguDanda' },
@@ -306,8 +319,8 @@ export const ScriptMixin = {
           { label: 'Dandas<br/><small><span class="gujarati">. .. → । ॥</span></small>', value: 'RetainGujaratiDanda' }
         ],
         'PhagsPa': [
-          { label: 'Tibetan Style<br/><small><span class="phagspa">ꡳꡛ ᠂ ꡂꡜ</span> → <span class="phagspatib">ꡳꡛ ᠂ ꡂꡜ</span></small>', value: 'PhagsPaTib' },
-          { label: 'Seal Style   <br/><small><span class="phagspa">ꡳꡛ ᠂ ꡂꡜ</span> → <span class="phagspaseal">ꡳꡛ ᠂ ꡂꡜ</span></span></small>', value: 'PhagsPaSeal' }
+          { label: 'Tibetan style<br/><small><span class="phagspa">ꡳꡛ ᠂ ꡂꡜ</span> → <span class="phagspatib">ꡳꡛ ᠂ ꡂꡜ</span></small>', value: 'PhagsPaTib' },
+          { label: 'Seal style   <br/><small><span class="phagspa">ꡳꡛ ᠂ ꡂꡜ</span> → <span class="phagspaseal">ꡳꡛ ᠂ ꡂꡜ</span></span></small>', value: 'PhagsPaSeal' }
         ],
         'Kannada': [
           { label: 'Dandas<br/><small><span class="kannada">. .. → । ॥</span></small>', value: 'RetainKannadaDanda' },
@@ -325,7 +338,7 @@ export const ScriptMixin = {
         ],
         'IAST': [
           { label: 'Capitalize sentences', value: 'capitalizeSentence' },
-          { label: 'Anusvara to Nasal<br/><small>gaṃgā → gaṅgā</small>', value: 'NasaltoAnsvaraIASTISO' }
+          { label: 'Anusvara to nasal<br/><small>gaṃgā → gaṅgā</small>', value: 'NasaltoAnsvaraIASTISO' }
         ],
         'IASTPali': [
           { label: 'Capitalize sentences', value: 'capitalizeSentence' }
@@ -333,11 +346,11 @@ export const ScriptMixin = {
         'RussianCyrillic': [
           { label: 'Pali Text', value: 'CyrillicPali' },
           { label: 'Capitalize sentences', value: 'capitalizeSentence' },
-          { label: 'Remove Diacritics<br/><small><span class="russiancyrillic">сам̣кр̣там̣ → самкртам</span></small>', value: 'removeDiacritics' }
+          { label: 'Remove diacritics<br/><small><span class="russiancyrillic">сам̣кр̣там̣ → самкртам</span></small>', value: 'removeDiacritics' }
         ],
         'ISO': [
           { label: 'Capitalize sentences', value: 'capitalizeSentence' },
-          { label: 'Anusvara to Nasal<br/><small>gaṁgā → gaṅgā</small>', value: 'NasaltoAnsvaraIASTISO' }
+          { label: 'Anusvara to nasal<br/><small>gaṁgā → gaṅgā</small>', value: 'NasaltoAnsvaraIASTISO' }
         ],
         'RomanReadable': [
           { label: 'Alternate long/short e/o <br/><small>e\' e o\' o → e ae o oa</small>', value: 'RomanReadableLongEO' },
@@ -362,12 +375,12 @@ export const ScriptMixin = {
           { label: 'Archaic conjuncts<br/><small><span class="sundanese">ᮊ᮪ᮙ ᮊ᮪ᮝ ᮃᮊ᮪ ᮃᮙ᮪ → ᮊᮬ ᮊᮭ ᮃᮾ ᮃᮿ</span></small>', value: 'SundaneseHistoricConjuncts' }
         ],
         'Malayalam': [
-          { label: 'Dot Reph<br/><small><span class="malayalam">ധർമ → ധൎമ</span></small>', value: 'dotReph' },
+          { label: 'Dot reph<br/><small><span class="malayalam">ധർമ → ധൎമ</span></small>', value: 'dotReph' },
           { label: 'Archaic II & AU<br/><small><span class="malayalam">ഈ കൗ → ൟ കൌ</span></small>', value: 'archaicAIAU' },
           { label: 'Traditional orthography<br/><small><span class="malayalam">തു തൂ</span> → <span class="malayalamold">തു തൂ</span></small>', value: 'tradOrtho' },
           { label: 'Prakrit orthography<br/><small><span class="malayalam">ബുദ്ധ → ബുംധ</span></small>', value: 'MalayalamPrakrit' },
           { label: 'Dandas<br/><small><span class="malayalam">. .. → । ॥</span></small>', value: 'RetainMalayalamDanda' },
-          { label: 'Malayalam Numerals<br/><small><span class="malayalam">123 → ൧൨൩</span></small>', value: 'RetainMalayalamNumerals' }
+          { label: 'Malayalam numerals<br/><small><span class="malayalam">123 → ൧൨൩</span></small>', value: 'RetainMalayalamNumerals' }
         ],
         'ZanabazarSquare': [
           { label: 'Sanskrit palatals<br/><small><span class="zanabazarsquare">𑨣 𑨤 𑨥 → 𑨐 𑨑 𑨒</span></small>', value: 'ZanabazarSanskritPalatals' },
@@ -1516,23 +1529,6 @@ export const ScriptMixin = {
           region: ['South East Asian: Mainland', 'South East Asian']
         },
         {
-          label: 'Tai Tham (Lanna)',
-          sublabel: 'Beta',
-          value: 'TaiTham',
-          sscode: 'Lana',
-          ssdesc: 'The Lanna script is also known as the Tai Tham, Dham, Yuan, or Northern Thai script. It has been used for writing the Northern Thai, Lü and Khün languages. Northern Thai is the biggest language group which uses the script, with 6 million speakers, but literacy is low. The script has religious significance and is used in Buddhist monasteries.',
-          omnicode: 'lanna',
-          wikicode: 'Tai_Tham_script',
-          font: {
-            'name': 'Pali Tilok',
-            'url': 'https://github.com/virtualvinodh/aksharamukha/blob/master/aksharamukha-front/src/statics/Pali_Tilok.ttf'
-          },
-          language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
-          status: ['Living', 'Living: Minor'],
-          invented: ['Derived: Brahmi', 'Derived: Pallava'],
-          region: ['South East Asian: Mainland', 'South East Asian']
-        },
-        {
           label: 'Takri',
           value: 'Takri',
           sscode: 'Takr',
@@ -1649,6 +1645,80 @@ export const ScriptMixin = {
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Living', 'Living: Major'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Mainland', 'South East Asian']
+        },
+        {
+          label: 'Tham (Lanna)',
+          sublabel: 'Beta',
+          value: 'TaiTham',
+          sscode: 'Lana',
+          ssdesc: 'The Lanna script is also known as the Tai Tham, Dham, Yuan, or Northern Thai script. It has been used for writing the Northern Thai, Lü and Khün languages. Northern Thai is the biggest language group which uses the script, with 6 million speakers, but literacy is low. The script has religious significance and is used in Buddhist monasteries.',
+          omnicode: 'lanna',
+          wikicode: 'Tai_Tham_script',
+          font: {
+            'name': 'Pali Tilok',
+            'url': 'https://github.com/virtualvinodh/aksharamukha/blob/master/aksharamukha-front/src/statics/Pali_Tilok.ttf'
+          },
+          language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Mainland', 'South East Asian']
+        },
+        {
+          label: 'Tham (Lao)',
+          sublabel: 'Beta',
+          value: 'LaoTham',
+          sscode: '',
+          ssdesc: '',
+          miscsrc: '',
+          miscdesc: 'This is the variant of Tai Tham script used in Laos.',
+          omnicode: '',
+          wikicode: '',
+          font: {
+            'name': 'Pali Khottabun',
+            'url': 'https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/Pali_Khottabun.ttf'
+          },
+          language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Mainland', 'South East Asian']
+        },
+        {
+          label: 'Tham (Tai Khuen)',
+          sublabel: 'Beta',
+          value: 'KhuenTham',
+          sscode: '',
+          ssdesc: '',
+          miscsrc: '',
+          miscdesc: 'This is the variant of Tai Tham script used to write the Tai Khuen language.',
+          omnicode: '',
+          wikicode: '',
+          font: {
+            'name': 'A Tai Tham KH New',
+            'url': 'https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/A-Tai-Tham-KH-New-V2.ttf'
+          },
+          language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Mainland', 'South East Asian']
+        },
+        {
+          label: 'Tham (Tai Lue)',
+          sublabel: 'Beta',
+          value: 'LueTham',
+          sscode: '',
+          ssdesc: '',
+          miscsrc: '',
+          miscdesc: 'This is the variant of Tai Tham script used to write the Tai Lue language.',
+          omnicode: '',
+          wikicode: '',
+          font: {
+            'name': 'Pali TaiLue',
+            'url': '../statics/Pali_TaiLue.ttf'
+          },
+          language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Mainland', 'South East Asian']
         },
@@ -1907,7 +1977,7 @@ export const ScriptMixin = {
       RegionExpand: ['Iran', 'India', 'Sri Lanka', 'Burmese', 'Philippines', 'Indonesia', 'Japan'],
       Status: ['Living', 'Extinct'],
       StatusExpand: ['Extinct', 'Living: Major', 'Living: Minor'],
-      indicSubset: ['PhagsPa', 'TaiLaing', 'Mon', 'Ahom', 'KhamtiShan', 'Shan', 'Khmer', 'Burmese', 'Lao', 'Thai', 'Balinese', 'Javanese', 'Tibetan', 'LaoPali', 'TaiTham', 'Cham', 'Lepcha', 'Ahom', 'ZanabazarSquare'],
+      indicSubset: ['LaoTham', 'LueTham', 'KhuenTham', 'PhagsPa', 'TaiLaing', 'Mon', 'Ahom', 'KhamtiShan', 'Shan', 'Khmer', 'Burmese', 'Lao', 'Thai', 'Balinese', 'Javanese', 'Tibetan', 'LaoPali', 'TaiTham', 'Cham', 'Lepcha', 'Ahom', 'ZanabazarSquare'],
       tagsUsageM: ['Living', 'Extinct'],
       tagsUsageS: ['Living: Minor', 'Living: Major', 'Extinct: Ancient', 'Extinct: Medieval', 'Extinct: Pre-Modern'],
       tagsLanguageM: ['Sanskrit', 'Pali', 'Others'],

@@ -435,6 +435,11 @@
 }
 
 @font-face {
+  font-family: 'Pali TaiLue';
+  src: url('../statics/Pali_TaiLue.ttf')
+}
+
+@font-face {
   font-family: 'MQG8F02';
   src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/MQG8F02.ttf')
 }
@@ -678,6 +683,10 @@
   font-family: "Lamphun" !important;
   font-size: 150%;
 }
+.laotham {
+  font-family: "Lamphun" !important;
+  font-size: 150%;
+}
 .sylotinagri {
   font-family: "Noto Sans SylotiNagri" !important
 }
@@ -797,6 +806,12 @@
 }
 .taikuen {
   font-family: "A Tai Tham KH New" !important
+}
+.khuentham {
+  font-family: "A Tai Tham KH New" !important
+}
+.luetham {
+  font-family: "Pali TaiLue" !important
 }
 .wancho {
   font-family: "Noto Sans Wancho" !important

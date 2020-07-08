@@ -2483,12 +2483,6 @@ def FixTaiTham(Strng,reverse=False):
     Cons = [vir+x for x in [TaiTham.ConsonantMap[x] for x in [26,27]]] # /ra/ and /la/
     Sub =['\u1A55','\u1A56'] # Subjoined Forms of /ra/ and /la/
 
-    ListC ='|'.join(GM.CrunchSymbols(GM.Consonants,'TaiTham'))
-    E = "ᩮ"
-
-    TallACons = '|'.join(['ᩅ']) ## Just va
-    AA = 'ᩣ'
-
     # Ra/La + vira -> Subjoined
     for x,y in zip(Cons,Sub):
         if not reverse:
@@ -2515,22 +2509,17 @@ def FixTaiTham(Strng,reverse=False):
         # Great Sa
         Strng = Strng.replace('ᩈ᩠ᩈ','ᩔ')
 
-        # Introduce Tall A: ka + AA -> ka + Tall A
-        Strng = re.sub('(?<!᩠)('+TallACons+')'+'('+E+'?)'+AA,r'\1\2'+'ᩤ',Strng)
-        ## buddho --> Tall A
-        Strng = re.sub('('+TallACons+')(᩠)('+ListC +')'+'('+E+'?)'+AA,r'\1\2\3\4'+'ᩤ',Strng)
-        Strng = re.sub('('+TallACons+')(᩠)('+ListC +')'+'(᩠)('+ListC +')'+'('+E+'?)'+AA,r'\1\2\3\4\5\6'+'ᩤ',Strng)
+        # Fix Tall A
+        TallACons = '|'.join(['ᩅ', 'ᨴ', 'ᨵ', 'ᨣ']) ## va da dha ga
 
-        ### Subjoined
-        Strng = re.sub('('+TallACons+')' + "(" + "|".join(Sub) + ")" + '('+E+'?)'+AA, r'\1\2\3' + 'ᩤ', Strng)
-
-        Strng = Strng.replace('ᩅ᩠ᨿᩤ','ᩅ᩠ᨿᩣ') ## vyA (Tall) to vyA (normal)
+        Strng = PostProcess.FixTallA(Strng, TallACons)
 
         Strng = Strng.replace('\u1A55\u1A60\u1A3F', '\u1A60\u1A3F\u1A55') # Fix krya
 
         Strng = Strng.replace('\u1A60\u1A47', vir + '\u1A47') ## Fonts don't support SSA conjunct
 
     else:
+        AA = 'ᩣ'
         Strng = Strng.replace('ᩔ', 'ᩈ᩠ᩈ') ## Reverse great sa
         Strng = re.sub('('+ListC+')'+'\u1A58',r'\1' + ng,Strng) # Reverse: Kai mang Lai -> ng + virama
         Strng = Strng.replace('\u1A60',vir) # Regular Virama for Transliteration
@@ -2538,6 +2527,41 @@ def FixTaiTham(Strng,reverse=False):
 
         Strng = Strng.replace('\u1A60\u1A3F\u1A55', '\u1A55\u1A60\u1A3F') # Rever krya
 
+
+    return Strng
+
+def FixLaoTham(Strng, reverse=False):
+    Strng = FixTaiTham(Strng, reverse)
+
+    return Strng
+
+def FixLueTham(Strng, reverse=False):
+    Strng = FixTaiTham(Strng, reverse)
+
+    ListC ='|'.join(GM.CrunchSymbols(GM.Consonants,'TaiTham'))
+    if not reverse:
+        E = "ᩮ"
+        AA = 'ᩣ'
+        TallACons = '|'.join(['ᩅ', 'ᨴ', 'ᨵ', 'ᨣ']) ## va da dha ga
+        Strng = re.sub('('+TallACons+')(᩠)('+ListC +')'+'('+E+'?)'+AA,r'\1\2\3\4'+'ᩤ',Strng)
+        Strng = re.sub('('+TallACons+')(᩠)('+ListC +')'+'(᩠)('+ListC +')'+'('+E+'?)'+AA,r'\1\2\3\4\5\6'+'ᩤ',Strng)
+    else:
+        pass
+
+    return Strng
+
+def FixKhuenTham(Strng, reverse=False):
+    Strng = FixTaiTham(Strng, reverse)
+
+    ListC ='|'.join(GM.CrunchSymbols(GM.Consonants,'TaiTham'))
+    if not reverse:
+        E = "ᩮ"
+        AA = 'ᩣ'
+        TallACons = '|'.join(['ᩅ', 'ᨴ', 'ᨵ', 'ᨣ']) ## va da dha ga
+        Strng = re.sub('('+TallACons+')(᩠)('+ListC +')'+'('+E+'?)'+AA,r'\1\2\3\4'+'ᩤ',Strng)
+        Strng = re.sub('('+TallACons+')(᩠)('+ListC +')'+'(᩠)('+ListC +')'+'('+E+'?)'+AA,r'\1\2\3\4\5\6'+'ᩤ',Strng)
+    else:
+        pass
 
     return Strng
 

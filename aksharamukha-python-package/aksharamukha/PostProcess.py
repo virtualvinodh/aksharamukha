@@ -40,7 +40,8 @@ def ContextualLLa(Strng):
     Strng = re.sub('(ஆவ|ாவ)'+ 'ல', r'\1' +  'ள', Strng)
     Strng = re.sub('(்ரவா|்ரவ|ர|பவ|வி|ரா|ஷ்க|த⁴வ)'+ 'ல', r'\1' +  'ள', Strng)
     Strng = re.sub('(யா|யாம|கோம)'+ 'ல', r'\1' +  'ள', Strng)
-    Strng = re.sub('(ந|மௌ)'+ 'ல', r'\1' +  'ள', Strng)
+    Strng = re.sub('(மௌ)'+ 'ல', r'\1' +  'ள', Strng)
+    Strng = re.sub('([\s^])(ந)'+ 'ல', r'\1' +  'ள', Strng)
     Strng = Strng.replace('கலத்ர', 'களத்ர')
     Strng = Strng.replace('ஶீதல', 'ஶீதள')
     Strng = Strng.replace('ஸுதல', 'ஸுதள')
@@ -53,7 +54,7 @@ def ContextualLLa(Strng):
 
     Strng = re.sub('([கத])' + '(' + ListVS + ')?' + '([³⁴])'+ 'ல', r'\1\2\3' +  'ள', Strng)
     Strng = re.sub('(ஜு)'+ 'ல', r'\1' +  'ள', Strng)
-    Strng = re.sub('(தா|து)'+ 'ல', r'\1' +  'ள', Strng)
+    Strng = re.sub('(து)'+ 'லசி', r'\1' +  'ளசி', Strng)
     Strng = re.sub('(ரிம)'+ 'ல', r'\1' +  'ள', Strng)
 
     Strng = Strng.replace('ள்ய', 'ல்ய')
@@ -66,6 +67,181 @@ def FinalNNa(Strng):
     Strng = re.sub('ந்' + '([\.।॥,!-])', 'ன்' + r'\1', Strng)
     Strng = re.sub('ந்' + '(\s)', 'ன்' + r'\1', Strng)
     Strng = re.sub('ந்$', 'ன்', Strng)
+
+    return Strng
+
+def TamilpredictDentaNaExtended(Strng):
+    listDentalNa = '''ഩഖ
+ഩഗര
+ഩകുല
+ഩഗ്‌ഩ
+ഩക്ഷത്‌ര
+ഩടരാജ
+ഩടീ
+ഩദീ
+ഩന്‌ദഩ
+ഩപുംസക
+ഩഭ**
+ഩമ**
+ഩമശ്‌
+ഩമസ്‌
+ഩമാമ
+ഩമാമി
+ഩമാമോ
+ഩമുചി
+ഩമോ
+ഩമോനമ
+ഩമോനമോ
+ഩമോസ്‌തു
+ഩമോസ്‌തുതേ
+ഩമഃ
+ഩയഩ
+ഩര**
+ഩരക
+ഩര്‌തക
+ഩര്‌തഩ
+ഩര്‌മദ
+ഩല**
+ഩലിഩ
+ഩവ**
+ഩവീഩ
+ഩവ്‌യ
+ഩശ്‌**
+ഩഷ്‌ട
+ഩാരായണ
+ഩാഗ
+ഩാടക
+ഩാഡീ
+ഩാട്‌യ
+ഩാഡ്‌യ
+ഩാഥ
+ഩാദ
+ഩാരത
+ഩാഩാ***
+ഩാഩ്‌യ**
+ഩാഩൃത
+ഩാഭ
+ഩാമ
+ഩായക
+ഩായികാ
+ഩാരദ
+ഩാരസിംഹ
+ഩാരി
+ഩാരീ
+ഩാവ***
+ഩാശ
+ഩാസിക
+ഩിഗമ
+ഩികട
+ഩികര
+ഩികാമ
+ഩികായ
+ഩിഖില
+ഩികുഞ്‌ജ
+ഩിഘൂഩ
+ഩികേത
+ഩിഗ്‌രഹ
+ഩിഗൃഹ
+ഩികൃന്‌ത
+ഩിഗ്‌രന്‌ത
+ഩിക്ഷിപ
+ഩിക്ഷേപ
+ഩിഘ്‌ഩ
+ഩിജ
+ഩിദര്‌ശ
+ഩിതമ്‌ബ
+ഩിതര
+ഩിദാഘ
+ഩിദാഩ
+ഩിതാന്‌ത
+ഩിധാഩ
+ഩിധായ
+ഩിധ
+ഩിധേഹി
+ഩിദ്‌ര
+ഩിത്‌യ
+ഩിന്‌ദാ
+ഩിബദ്‌ധ
+ഩിബധ്‌
+ഩിബന്‌ധഩ
+ഩിപട
+ഩിപതിത
+ഩിപത്‌യ
+ഩിപപാത
+ഩിപാതിത
+ഩിപാത്‌യ
+ഩിപുണ
+ഩിബോധ
+ഩിഭൃത
+ഩിമഗ്‌ഩ
+ഩിമിത്‌ത
+ഩിമിഷ
+ഩിയത
+ഩിയന്‌ത
+ഩിയന്‌ത്‌ര
+ഩിയമ
+ഩിയുക്‌ത
+ഩിയുജ്‌യ
+ഩിയോ
+ഩിര
+ഩിര്‌
+ഩിലയ
+ഩിവര്‌
+ഩിവസ
+ഩിവാര
+ഩിവാസ
+ഩിവിഷ്‌ട
+ഩിവേദ
+ഩിവേശ
+ഩിവൃ
+ഩിശ
+ഩിശ്‌
+ഩിഷ
+ഩിഷ്‌
+ഩിസ
+ഩിസ്‌
+ഩിഹിത
+ഩിഃശ
+ഩിഃഷ
+ഩിഃസ
+ഩീച
+ഩീതി
+ഩീര
+ഩീല
+ഩൂതഩ
+ഩൂപുര
+ഩേത്‌ര
+ഩേയ**
+ഩൈമിത്‌ത
+ഩൈമിഷ
+ഩൈരാശ്‌യ
+ഩൈരൃത
+ഩൈവേദ്‌യ
+ഩൈഷ്‌
+ഩ്‌യായ
+ഩ്‌യാസ
+ഩ്‌യൂഩ
+ഩൃ'''.split('\n')
+
+    vir = Tamil.ViramaMap[0]
+
+    for wordNna in listDentalNa:
+        wordNa = re.sub('^ഩ', 'ന', wordNna)
+        if '²' in wordNna[-1] or '³' in wordNna[-1] or '⁴' in wordNna[-1]:
+            number = wordNna[-1]
+
+            wordNnaN = wordNna[:-1]
+            wordNaN = wordNa[:-1]
+            for vow in GM.CrunchSymbols(GM.VowelSigns, 'Tamil'):
+                Strng = Strng.replace(wordNnaN + vow + number, wordNaN + vow + number)
+
+        Strng = Strng.replace(wordNna, wordNa)
+
+        for wordNna in ['ഩാമ','ഩര']:
+            wordNa = re.sub('^ഩ', 'ന', wordNna)
+            Strng = Strng.replace(wordNa + vir, wordNna + vir)
+
+        Strng = Strng.replace('ഩ്‌ന', 'ന്‌ന')
 
     return Strng
 
@@ -349,7 +525,6 @@ def SaurastraHaaruColon(Strng):
     return Strng
 
 def TamilExtendedNNA(Strng):
-
     na = TamilExtended.ConsonantMap[19]
     nna = TamilExtended.SouthConsonantMap[3]
     vir = TamilExtended.ViramaMap[0]
@@ -361,6 +536,11 @@ def TamilExtendedNNA(Strng):
     Strng = re.sub('('+ListV+')'+ GM.VedicSvaras + '('+na+')' + '(?!' + vir + ')',r'\1\2'+nna,Strng)
 
     Strng = re.sub('(ന്‌)(?![തഥദധ])', 'ഩ്‌', Strng)
+
+    Strng = re.sub('(\s)ഩ്', r'\1' + 'ന്‌', Strng)
+    Strng = re.sub('^ഩ്', r'' + 'ന്‌', Strng)
+
+    Strng = TamilpredictDentaNaExtended(Strng)
 
     return Strng
 
@@ -1589,6 +1769,62 @@ def ThaiVisargaSaraA(Strng):
 
     return Strng
 
+def ThamTallADisable(Strng):
+    Strng = Strng.replace('\u1A64', '\u1A63')
+
+    return Strng
+
+def ThamTallAOthers(Strng):
+    TallACons = '|'.join(['ᨧ', 'ᨻ', 'ᩁ', 'ᨽ']) ## ca ba ra bha
+
+    Strng = FixTallA(Strng, TallACons)
+
+    return Strng
+
+def LaoPhonetic(Strng):
+    Strng = Strng.replace('ຄ', 'ກ')
+    Strng = Strng.replace('ຊ', 'ຈ')
+    Strng = Strng.replace('ທ', 'ດ')
+    Strng = Strng.replace('ພ', 'ບ')
+    Strng = Strng.replace('\u0ECD', 'ງໍ')
+
+    return Strng
+
+def ThamShiftMaiKangLai(Strng):
+    Strng = re.sub('(\u1A58)(.)', r'\2\1', Strng)
+    ListV = '(' + '|'.join(GM.CrunchSymbols(GM.VowelSigns,'TaiTham') + ['ᩤ']) + ')'
+
+    Strng = re.sub('(\u1A58)([\u1A55\u1A56])', r'\2\1', Strng)
+    Strng = re.sub('(\u1A58)(\u1A60.)', r'\2\1', Strng)
+    Strng = re.sub('(\u1A58)' + ListV, r'\2\1', Strng)
+    Strng = re.sub('(\u1A58)' + ListV, r'\2\1', Strng)
+
+    return Strng
+
+def FixTallA(Strng, TallACons):
+    ListC ='|'.join(GM.CrunchSymbols(GM.Consonants,'TaiTham'))
+    Sub =['\u1A55','\u1A56'] # Subjoined Forms of /ra/ and /la/
+
+    E = "ᩮ"
+    AA = 'ᩣ'
+
+    # Introduce Tall A: ka + AA -> ka + Tall A
+    Strng = re.sub('(?<!᩠)('+TallACons+')'+'('+E+'?)'+AA,r'\1\2'+'ᩤ',Strng)
+
+    ## buddho --> Tall A
+    Strng = re.sub('('+TallACons+')(᩠)('+ListC +')'+'('+E+'?)'+AA,r'\1\2\3\4'+'ᩤ',Strng)
+    Strng = re.sub('('+TallACons+')(᩠)('+ListC +')'+'(᩠)('+ListC +')'+'('+E+'?)'+AA,r'\1\2\3\4\5\6'+'ᩤ',Strng)
+
+    ### Subjoined
+    Strng = re.sub('('+TallACons+')' + "(" + "|".join(Sub) + ")" + '('+E+'?)'+AA, r'\1\2\3' + 'ᩤ', Strng)
+
+    ### reverse Tall-A for those with protruding subCons forms
+    reverseSub = '([' + ''.join(['ᨥ', 'ᨫ', 'ᨬ', 'ᨰ', 'ᨸ', 'ᩈ', 'ᨿ', 'ᩇ', 'ᨹ']) + '])'
+    Strng = re.sub('(\u1A60)'+ reverseSub + '(\u1A6E\u1A64)', r'\1\2' + '\u1A6E\u1A63', Strng) ## vyo (Tall) to vyo (normal)
+    Strng = re.sub('(\u1A60)'+ reverseSub + '(\u1A64)', r'\1\2' + '\u1A63', Strng) ## vyA (Tall) to vyA (normal)
+
+    return Strng
+
 def ThaiSajjhayaOrthography(Strng, Script = "Thai"):
     ## reverse digraphs
     Strng = CF.ThaiReverseVowelSigns(Strng, True)
@@ -1626,11 +1862,13 @@ def ThaiSajjhayaOrthography(Strng, Script = "Thai"):
 
     if Script == "Thai":
         Strng = Strng.replace('ง์', 'ง')
+        Strng = re.sub('(\u0E31)(.)(\u0E4E)', r'\2\3', Strng)
 
     if Script == "LaoPali":
         Strng = Strng.replace('ั', 'ັ')
         Strng = Strng.replace("ງ์", "ງ")
         Strng = Strng.replace("์", "໌")
+        Strng = re.sub('(\u0EB1)(.)(\u0E4E)', r'\2\3', Strng)
 
     #Strng = re.sub('([ยรลวศษสหฬ])(์)', r'\1' + '๎', Strng)
 

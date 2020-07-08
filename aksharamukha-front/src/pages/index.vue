@@ -47,13 +47,13 @@
       :postOptions="postOptions" v-model="preOptions" @input="convert"></input-options>
     <div class="row">
       <q-btn class="q-ma-sm btn2 print-hide col-xs-1 col-md-1" @click="copySource" :data-clipboard-text="textInput.replace(/<br\/>/g, '\n')"> <q-icon name="file_copy" /><q-tooltip>Copy source text</q-tooltip></q-btn>
-      <q-btn class="q-ma-sm print-hide col-xs-1 col-md-1" @click="uploadImage" v-show="displayImageButton" v-if="!$q.platform.is.cordova"> <q-icon name="add photo alternate" /><q-tooltip>Upload image</q-tooltip></q-btn>
+      <!--<q-btn class="q-ma-sm print-hide col-xs-1 col-md-1" @click="uploadImage" v-show="displayImageButton" v-if="!$q.platform.is.cordova"> <q-icon name="add photo alternate" /><q-tooltip>Upload image</q-tooltip></q-btn>
       <span v-show="showFileUpload" class="q-ma-sm">
             <q-uploader url="" clearable extensions=".jpg, .jpeg, .png, .bmp, .ico" @add="showConvertImage" @remove:cancel="hideConvertButton"
                auto-expand hide-upload-button ref="uploadF" :style="{width:'200px'}"/>
             <q-btn class="q-mt-sm" v-show="displayButton" @click="performOCR"> <small> Convert </small> </q-btn>
             <q-spinner-comment color="dark" :size="30" v-show="loadingOCR" class="q-ma-sm"/>
-      </span>
+      </span>-->
     </div>
     </div>
     <div class="q-ma-md print-hide">
