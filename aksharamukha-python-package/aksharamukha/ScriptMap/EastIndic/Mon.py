@@ -145,7 +145,7 @@ NuktaMap = [
            ]
 
 OmMap = [
-        '\u1029\u1036'
+        'ဥုံ'
         ]
 
 SignMap =[

@@ -410,6 +410,11 @@
 }
 
 @font-face {
+  font-family: 'Agastya Serif';
+  src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/AgastyaSerif.otf')
+}
+
+@font-face {
   font-family: 'Noto Sans Brahmi';
   src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansBrahmi/NotoSansBrahmi-Regular.otf')
 }
@@ -427,6 +432,11 @@
 @font-face {
   font-family: 'Noto Sans MarchenB';
   src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/BabelStoneMarchen.ttf')
+}
+
+@font-face {
+  font-family: 'Pali TaiLue';
+  src: url('../statics/Pali_TaiLue.ttf')
 }
 
 @font-face {
@@ -673,6 +683,10 @@
   font-family: "Lamphun" !important;
   font-size: 150%;
 }
+.laotham {
+  font-family: "Lamphun" !important;
+  font-size: 150%;
+}
 .sylotinagri {
   font-family: "Noto Sans SylotiNagri" !important
 }
@@ -688,6 +702,10 @@
 }
 .tamilextended {
   font-family: "Agastya Extended Tamil" !important;
+  line-height: 1.6em;
+}
+.tamilextendedserif {
+  font-family: "Agastya Serif" !important;
   line-height: 1.6em;
 }
 .siddhammukta {
@@ -788,6 +806,12 @@
 }
 .taikuen {
   font-family: "A Tai Tham KH New" !important
+}
+.khuentham {
+  font-family: "A Tai Tham KH New" !important
+}
+.luetham {
+  font-family: "Pali TaiLue" !important
 }
 .wancho {
   font-family: "Noto Sans Wancho" !important
