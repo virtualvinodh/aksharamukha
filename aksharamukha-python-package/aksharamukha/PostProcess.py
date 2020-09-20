@@ -400,6 +400,8 @@ def TamilpredictDentaNa(Strng):
 
     vir = Tamil.ViramaMap[0]
 
+    Tamillist = '²³⁴ஃஅஆஇஈஉஊஎஏஐஒஓஔகஙசஜஞடணதநனபமயரறலளழவஷஸஹாிீுூெேைொோௌ்ௗ'
+
     for wordNna in listDentalNa:
         wordNa = re.sub('^ன', 'ந', wordNna)
         if '²' in wordNna[-1] or '³' in wordNna[-1] or '⁴' in wordNna[-1]:
@@ -414,9 +416,11 @@ def TamilpredictDentaNa(Strng):
 
         for wordNna in ['னாம','னர']:
             wordNa = re.sub('^ன', 'ந', wordNna)
-            Strng = Strng.replace(wordNa + vir, wordNna + vir)
+            Strng = re.sub('([' + Tamillist +'])('+wordNa + vir +')', r'\1' + wordNna + vir, Strng)
 
         Strng = Strng.replace('ன்ந', 'ந்ந')
+
+        Strng = Strng.replace('னாம்ன', 'நாம்ன')
 
     return Strng
 
@@ -1197,8 +1201,6 @@ def MalayalamChillu(Strng, reverse=False, preserve=False):
             #print '(?<!'+'['+vir+''.join(Chillus)+']'+')'+'('+ConVir[i]+')'+'(?!['+''.join(CList[i])+'])'
             Strng = re.sub(ListC + GM.VedicSvaras + '('+ConVir[i]+')'+'(?!['+''.join(CList[i])+'])',r'\1\2' + Chillus[i],Strng)
     else:
-        print('called mal')
-        print(preserve)
         if preserve:
             for x,y in zip(Chillus, ConVir):
                 Strng = Strng.replace(x, y +'ˍ') ## Fix the reversal of characters of this
@@ -1597,7 +1599,6 @@ def TamilAddFirstVarga(Strng):
 def SaurashtraHaru(Strng):
 
     ListC = '|'.join([Saurashtra.ConsonantMap[x] for x in [19,24,26,27]])
-    print(ListC)
     vir = Saurashtra.ViramaMap[0]
     ha = Saurashtra.ConsonantMap[32]
 
@@ -2073,10 +2074,7 @@ def TamilRemoveApostrophe(Strng):
 def TamilRemoveNumbers(Strng):
     numerals = ['²', '³', '⁴', '₂', '₃', '₄']
 
-    print('here')
-
     for num in numerals:
-        print(num)
         Strng = Strng.replace(num, '')
 
     return Strng
