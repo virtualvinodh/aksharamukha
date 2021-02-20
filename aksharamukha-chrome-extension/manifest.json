@@ -2,7 +2,7 @@
   "name": "Aksharamukha: Script Converter",
   "short_name": "Aksharamukha",
   "description": "Aksharamukha aims to provide script conversion between various scripts within the Indic/Asian cultural sphere.",
-  "version": "0.0.0.5",
+  "version": "0.0.0.6",
   "manifest_version": 2,
   "permissions": ["contextMenus", "storage", "tabs", "activeTab", "http://*/", "https://*/"],
   "background": {
