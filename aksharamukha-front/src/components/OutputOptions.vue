@@ -3,6 +3,16 @@
     <div class="col-xs-12 col-md-12 print-hide">
       <q-option-group
         color="dark"
+        type="radio"
+        inline
+        class="q-ml-sm q-mb-sm q-mt-sm print-hide"
+        v-model="postOptions"
+        @input="convert"
+        :options="typeof postOptionsRadio[outputScript] !== 'undefined' ? postOptionsRadio[outputScript] : []"
+        v-show="typeof postOptionsRadio[outputScript] !== 'undefined'"
+      />
+      <q-option-group
+        color="dark"
         type="checkbox"
         inline
         class="q-ml-sm q-mb-sm q-mt-sm print-hide"

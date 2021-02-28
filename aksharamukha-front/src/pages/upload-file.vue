@@ -9,8 +9,8 @@
         label-width="1"
         class="q-ma-md col-md-5"
       >
-        <q-uploader url=""  hide-upload-button clearable extensions=".txt, .html, .htm, .xml, .json, .itx, .docx"
-           stack-label="+ icon to add. You can add multiple files. <br/> .txt, .xml, .html, .itx, .docx, .json" auto-expand hide-upload-progress multiple ref="uploadF" :style="{width:'250px'}"/>
+        <q-uploader url=""  hide-upload-button clearable extensions=".txt, .html, .htm, .xml, .json, .itx, .docx, .brh"
+           stack-label="+ icon to add. You can add multiple files. <br/> .txt, .xml, .html, .itx, .docx, .json, .brh" auto-expand hide-upload-progress multiple ref="uploadF" :style="{width:'272px'}"/>
     </q-field>
     <q-btn class="q-ma-md" color="dark" @click="convertDownload"> Convert & Download </q-btn>
     <q-btn class="q-ma-md" color="dark" @click="convertView"> Convert & View </q-btn>
@@ -159,8 +159,13 @@ export default {
             // content = content.replace(new RegExp('e-Grantamil', 'g'), 'Noto Sans Tamil')
 
             var blob = ''
-            var downloadName = this.options.inputScript + '_' + outputScript + '_' + file.name
-            if (file.name.includes('.txt')) {
+            var downloadName = ''
+            if (file.name.includes('.brh')) {
+              downloadName = this.options.inputScript + '_' + outputScript + '_' + file.name + '.txt'
+            } else {
+              downloadName = this.options.inputScript + '_' + outputScript + '_' + file.name
+            }
+            if (file.name.includes('.txt') || file.name.includes('.brh')) {
               blob = new Blob([content], {type: 'text/plain;charset=utf-8'})
               saveAs(blob, downloadName)
             } else if (file.name.includes('.xml')) {

@@ -20,6 +20,16 @@ def default(Strng):
 
     return Strng
 
+def mDotAboveToBelow(Strng):
+    Strng = Strng.replace('ṃ', 'ṁ')
+
+    return Strng
+
+def noLongEO(Strng):
+    Strng = Strng.replace('ē', 'e').replace('ō', 'o')
+
+    return Strng
+
 def TamilStyleUUCore(Strng):
     Strng = re.sub('([ഖഗഘഛഝഠഡഢഥദധഫബഭ])' + '([ുൂ])', r'\1' + '\u200D' + r'\2', Strng)
 
@@ -1188,10 +1198,10 @@ def MalayalamChillu(Strng, reverse=False, preserve=False):
 
     ## may be include ha ?
     CList = [
-            Malayalam.ConsonantMap[10:15]+Malayalam.ConsonantMap[25:27]+Malayalam.ConsonantMap[28:29],
+            Malayalam.ConsonantMap[10:15]+Malayalam.ConsonantMap[24:26]+Malayalam.ConsonantMap[28:29],
             Malayalam.ConsonantMap[15:20]+Malayalam.ConsonantMap[24:27]+Malayalam.ConsonantMap[28:29],
             Malayalam.ConsonantMap[25:27],
-            Malayalam.ConsonantMap[25:28],
+            Malayalam.ConsonantMap[20:21] + Malayalam.ConsonantMap[24:26] + Malayalam.ConsonantMap[27:29],
             Malayalam.SouthConsonantMap[0:1]+Malayalam.ConsonantMap[25:27],
             Malayalam.ConsonantMap[15:20]+Malayalam.ConsonantMap[24:27]+Malayalam.ConsonantMap[28:29]
             ]
@@ -1200,6 +1210,9 @@ def MalayalamChillu(Strng, reverse=False, preserve=False):
         for i in range(len(Chillus)):
             #print '(?<!'+'['+vir+''.join(Chillus)+']'+')'+'('+ConVir[i]+')'+'(?!['+''.join(CList[i])+'])'
             Strng = re.sub(ListC + GM.VedicSvaras + '('+ConVir[i]+')'+'(?!['+''.join(CList[i])+'])',r'\1\2' + Chillus[i],Strng)
+            Strng = re.sub(ListC + GM.VedicSvaras + '('+ConVir[i]+')'+'(?=(['+''.join(CList[i])+'])' + vir + r'\4' + ')',r'\1\2' + Chillus[i],Strng)
+
+
     else:
         if preserve:
             for x,y in zip(Chillus, ConVir):

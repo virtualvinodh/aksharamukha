@@ -8,6 +8,7 @@ import itertools
 from collections import Counter
 import unicodedata
 import io
+import collections
 
 def removeA(a):
     if a.count('a') == 1:
@@ -183,6 +184,12 @@ def detect_preoptions(text, inputScript):
 def convert(src, tgt, txt, nativize, preoptions, postoptions):
     tgtOld = ""
 
+    if src == "Itrans" and '##' in txt:
+        textNew = [[i,word] for i, word in enumerate(txt.split("##")) if (i%2 == 0)]
+        textRest = [(i,word) for i, word in enumerate(txt.split("##")) if (i%2 == 1)]
+
+        txt = json.dumps(textNew).replace("\\n", "\n")
+
     if tgt == "" or tgt == "Ignore":
         return txt
     if preoptions == [] and postoptions == [] and nativize == False and src == tgt:
@@ -223,7 +230,16 @@ def convert(src, tgt, txt, nativize, preoptions, postoptions):
     if src == "Oriya" and tgt == "IPA":
         txt = ConvertFix.OriyaIPAFixPre(txt)
 
-    transliteration = Convert.convertScript(txt, src, tgt)
+    if src == "Itrans" and '##' in txt:
+        print('I am here tyring to do things')
+        transliteration = ''
+        for i, word in enumerate(txt.split("##")):
+            if (i%2 == 0):
+                transliteration += Convert.convertScript(word, src, tgt)
+            else:
+                transliteration += word
+    else:
+        transliteration = Convert.convertScript(txt, src, tgt)
 
     if src == tgtOld:
         tgt = tgtOld
@@ -250,6 +266,11 @@ def convert(src, tgt, txt, nativize, preoptions, postoptions):
 
     if src == "Oriya" and tgt == "IPA":
         transliteration = ConvertFix.OriyaIPAFix(transliteration)
+
+    if src == "Itrans" and '##' in txt:
+        textConv = {**dict(list(json.loads(transliteration.replace("\n", "\\n")))), ** dict(textRest)}
+        textConv = collections.OrderedDict(sorted(textConv.items()))
+        transliteration = "".join(textConv.values())
 
     return transliteration
 

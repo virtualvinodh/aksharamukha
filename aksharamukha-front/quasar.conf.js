@@ -61,7 +61,8 @@ module.exports = function (ctx) {
         'QAjaxBar'
       ],
       directives: [
-        'Ripple'
+        'Ripple',
+        'BackToTop'
       ],
       // Quasar plugins
       plugins: [

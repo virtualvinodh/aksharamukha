@@ -7,6 +7,7 @@
         autofocus-filter
         filter-placeholder="search"
         placeholder="Input Script"
+        float-label="Guide Script"
         v-model="script2"
         class="q-ma-sm col-md-3"
         :options="scriptsOutput"

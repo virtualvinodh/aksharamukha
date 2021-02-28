@@ -35,7 +35,7 @@ export default {
   mixins: [ScriptMixin],
   created: function () {
     this.compoundsGen()
-    console.log(this.filterscripts)
+    // console.log(this.filterscripts)
   },
   data () {
     return {

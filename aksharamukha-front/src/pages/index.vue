@@ -1,5 +1,6 @@
 <template>
   <!-- Fix Urdu ai and au -->
+
   <q-page class="q-pa-md" id="scrollstart">
           <q-alert
           color="red-4"
@@ -9,7 +10,7 @@
           class="q-mb-sm q-mr-xl"
           v-if="!checkifOnline && $q.platform.is.cordova"
         > You're not currently connected. Please activate your mobile data or Wi-Fi to use the app.  </q-alert>
-    <div class="row">
+  <div class="row">
       <div class="row col-xs-12 col-md-11 col-xl-5 q-ma-md float-div print-hide">
        <div class="row">
        <q-select
@@ -45,15 +46,33 @@
        :postOptions="postOptions" :OCRPerformed="OCRPerformed"></input-notice>
     <input-options :inputScript="inputScript" :outputScript="outputScript" :preOptionsInput="preOptions"
       :postOptions="postOptions" v-model="preOptions" @input="convert"></input-options>
-    <div class="row">
+    <div class="">
       <q-btn class="q-ma-sm btn2 print-hide col-xs-1 col-md-1" @click="copySource" :data-clipboard-text="textInput.replace(/<br\/>/g, '\n')"> <q-icon name="file_copy" /><q-tooltip>Copy source text</q-tooltip></q-btn>
-      <!--<q-btn class="q-ma-sm print-hide col-xs-1 col-md-1" @click="uploadImage" v-show="displayImageButton" v-if="!$q.platform.is.cordova"> <q-icon name="add photo alternate" /><q-tooltip>Upload image</q-tooltip></q-btn>
+      <q-btn class="q-ma-sm print-hide col-xs-3 col-md-3" @click="uploadImage" label="Image/PDF" v-show="displayImageButton" v-if="!$q.platform.is.cordova" icon="add photo alternate"> <q-tooltip>Upload image/PDF</q-tooltip></q-btn>
       <span v-show="showFileUpload" class="q-ma-sm">
-            <q-uploader url="" clearable extensions=".jpg, .jpeg, .png, .bmp, .ico" @add="showConvertImage" @remove:cancel="hideConvertButton"
+            <q-uploader url="" clearable extensions=".jpg, .jpeg, .png, .bmp, .ico, .pdf" @add="showConvertImage" @remove:cancel="hideConvertButton"
                auto-expand hide-upload-button ref="uploadF" :style="{width:'200px'}"/>
+      <q-select
+        filter
+        autofocus-filter
+        filter-placeholder="search"
+        v-model="ocrLang"
+        placeholder="Language"
+        class="col-xs-3 col-md-3 q-ma-sm print-hide"
+        :options="ocrLangOptions"
+      />
             <q-btn class="q-mt-sm" v-show="displayButton" @click="performOCR"> <small> Convert </small> </q-btn>
-            <q-spinner-comment color="dark" :size="30" v-show="loadingOCR" class="q-ma-sm"/>
-      </span>-->
+            <!-- <q-spinner-comment color="dark" :size="30" v-show="loadingOCR" class="q-ma-sm"/> -->
+          <span v-show="loadingOCR">
+          <q-progress
+            :percentage="ocrProgress"
+            color="tertiary"
+            animate
+            height="25px"
+            class="q-ma-sm"
+          />   <span class="q-ma-sm">{{ocrStatus}}: {{Math.round(ocrProgress)}} </span>
+          </span>
+      </span>
     </div>
     </div>
     <div class="q-ma-md print-hide">
@@ -110,8 +129,9 @@
   <a :href="brahmiImg" ref="imgDownload" :style="{'display': 'none'}" download="text.png"><button>Download</button></a>
 <q-page-sticky position="top-right" :offset="[18, 18]" v-show="scrollExists">
     <span><q-btn round color="dark" @click="scrolldown" icon="arrow_downward" v-show="!scrolled"/><q-tooltip>Scroll down</q-tooltip> </span>
-    <span><q-btn round color="dark" @click="scrollup" icon="arrow_upward" v-show="scrolled"/>
-    <q-tooltip>Scroll up</q-tooltip> </span>
+  </q-page-sticky>
+  <q-page-sticky position="bottom-right" :offset="[18, 18]" v-back-to-top>
+    <span><q-btn round color="dark" @click="scrollup" icon="arrow_upward"/><q-tooltip>Scroll Up</q-tooltip> </span>
   </q-page-sticky>
   </q-page>
 </template>
@@ -120,7 +140,7 @@
 </style>
 
 <script>
-import {QTooltip, QEditor, QRadio, QBtn, QField, QBtnToggle, QToggle, QInput, QSelect, QOptionGroup, QAlert, QSpinnerComment, QPageSticky, QUploader} from 'quasar'
+import {QProgress, QTab, QTabs, QTooltip, QEditor, QRadio, QBtn, QField, QBtnToggle, QToggle, QInput, QSelect, QOptionGroup, QAlert, QSpinnerComment, QPageSticky, QUploader} from 'quasar'
 import sanitizeHtml from 'sanitize-html'
 import html2canvas from 'html2canvas'
 import Transliterate from '../components/Transliterate'
@@ -131,13 +151,12 @@ import OutputNotice from '../components/OutputNotice'
 import OutputButtons from '../components/OutputButtons'
 import scrollTo from 'vue-scrollto'
 import { ScriptMixin } from '../mixins/ScriptMixin'
+import { createWorker } from 'tesseract.js'
 
 import ClipboardJS from 'clipboard'
 
 var clipboard = new ClipboardJS('.btn2')
 console.log(clipboard)
-
-import keys from '../keys.js'
 
 var _ = require('underscore')
 const isOnline = require('is-online')
@@ -158,6 +177,9 @@ export default {
     }
   },
   components: {
+    QTab,
+    QProgress,
+    QTabs,
     QAlert,
     QEditor,
     QRadio,
@@ -208,13 +230,67 @@ export default {
       throttled: _.debounce(this.convert, 300),
       postOptionsScript: {},
       preOptionsScript: {},
-      scrollExists: false
+      scrollExists: false,
+      worker: '',
+      ocrProgress: 0,
+      ocrStatus: '',
+      ocrLang: '',
+      ocrLangOptions: [
+        {
+          label: 'Autodetect',
+          value: 'osd'
+        },
+        {
+          label: 'English',
+          value: 'emg'
+        },
+        {
+          label: 'Assamese',
+          value: 'asm'
+        },
+        {
+          label: 'Bengali',
+          value: 'ben'
+        },
+        {
+          label: 'Tamil',
+          value: 'tam'
+        },
+        {
+          label: 'Tibetan',
+          value: 'bod'
+        },
+        {
+          label: 'Gujarati',
+          value: 'guj'
+        },
+        {
+          label: 'Hindi',
+          value: 'hin'
+        },
+        {
+          label: 'Sanskrit',
+          value: 'san'
+        },
+        {
+          label: 'Tibetan',
+          value: 'bod'
+        }
+      ]
     }
   },
   mounted () {
     this.checkOnline()
 
     // this.runCode()
+
+    this.worker = createWorker({
+      logger: function (m) {
+        this.ocrProgress = m.progress * 100
+        this.ocrStatus = m.status
+        console.log(m)
+      }.bind(this)
+    })
 
     if (localStorage.sourcePreserve) {
       this.sourcePreserve = JSON.parse(localStorage.sourcePreserve)
@@ -361,10 +437,19 @@ export default {
       // console.log(data)
 
       // console.log('Sending Results')
-      var result = await this.getResultPost('https://vision.googleapis.com/v1/images:annotate?key=' + keys.api_key, data)
+      // var result = await this.getResultPost('https://vision.googleapis.com/v1/images:annotate?key=' + keys.api_key, data)
       // console.log('Got the results back')
-      this.textInput = result.data.responses[0].fullTextAnnotation.text
+      await this.worker.load()
+      await this.worker.loadLanguage(this.ocrLang)
+      await this.worker.initialize(this.ocrLang)
+      const { data: { text } } = await this.worker.recognize(base64)
+      console.log(text)
+      console.log(data)
+      // await this.worker.terminate()
+      this.textInput = text
       this.convert()
+      this.ocrStatus = ''
+      this.ocrProgress = 0
       this.$refs.uploadF.reset()
 
       this.displayButton = false

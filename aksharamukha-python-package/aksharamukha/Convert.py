@@ -6,6 +6,7 @@ import aksharamukha.ScriptMap.EastIndic.SiddhamRanjana as SR
 import string
 import re
 from functools import cmp_to_key
+import json
 
 
 ### Mapping : https://viss.wordpress.com/2015/05/17/how-to-transcribe-pa%E1%B8%B7i-in-lanna-and-burmese/ ###
@@ -48,9 +49,14 @@ def convertScript(Strng,Source,Target):
     #print(Target)
     #print(Target in GM.IndicScripts)
 
+    #print("I am here")
+
     charPairs=[];
     Schwa = '\uF000'
     DepV = '\u1E7F'
+
+
+    ## Itrans Comments ##
 
     if Source in GM.LatinScripts and Target in GM.IndicScripts:
         try:

@@ -12,19 +12,14 @@
         </div>
               <div class=""> — The young Buddha to his teacher (Lalitavistara Sutra) </div>
         </div>
-        <div class="q-body-1">Aksharamukha aims to provide script conversion between various scripts within the Indic cultural sphere. These include historic scripts, contemporary Brahmi-derived/inspired scripts, scripts invented for minority Indian languages, scripts that have co-existed with Indic scripts (like Avestan) or linguistically related scripts like Old Persian. It also specifically provides lossless transliteration between the main Indian scripts (along with Sinhala).</div> <br/>
+        <div class="q-body-1">Aksharamukha aims to provide script conversion between various scripts within the Indic cultural sphere. These include historic scripts, contemporary Brahmi-derived/inspired scripts, scripts invented for minority Indian languages, scripts that have co-existed with Indic scripts (like Avestan) or linguistically related scripts like Old Persian. It also specifically provides lossless transliteration between the main Indian scripts (along with Sinhala).
+        Apart from the simple mapping of characters, Aksharamukha also attempts to implement various script/language-specific orthographic conventions (where known) such as vowel lengths, gemination and nasalization. It also provides several customization options to fine-tune and get the desired orthography.</div> <br/>
 
-        <div class="q-body-1">Apart from the simple mapping of characters, Aksharamukha also attempts to implement various script/language-specific orthographic conventions (where known) such as vowel lengths, gemination and nasalization. It also provides several customization options to fine-tune and get the desired orthography.</div> <br/>
-
-        <div class="q-body-1"><i>Aksharamukha as of now supports <router-link to="/script-matrix">{{scriptsIndic.length + 2}} scripts</router-link> and <router-link to="/roman">{{scriptsLatin.length - 2}} romanization</router-link> methods.</i></div> <br/>
-
-        <div class="q-body-1">The scripts supported are:</div> <br/>
+        <div class="q-body-1"><i>Aksharamukha as of now supports <router-link to="/script-matrix">{{scriptsIndic.length + 2}} scripts</router-link> and <router-link to="/roman">{{scriptsLatin.length - 2}} romanization</router-link> methods.</i> The scripts supported are:</div> <br/>
 
         <div class="q-body-1"><i><span v-for="script in scriptsIndic.concat([{label: 'Cyrillic (Russian)', value: 'RussianCyrillic'}, {label: 'IPA', value: 'IPA'}])" :key="script.value"> <router-link :to="'/describe/' + script.value">{{script.label}}</router-link>, </span></i></div> <br/>
 
-        <div class="q-body-1">The Romanization Formats supported are:</div> <br/>
-
-        <div class="q-body-1"><i><span v-for="script in scriptsRomanization" :key="script.value">{{script.label}}, </span></i></div> <br/>
+        <div class="q-body-1">The Romanization Formats supported are: <i><span v-for="script in scriptsRomanization" :key="script.value">{{script.label}}, </span></i></div> <br/>
 
         <div class="q-body-1">Aksharamukha is also available as a <a href="https://pypi.org/project/aksharamukha/">Python package</a>. You can read the usage instructions <a href="http://aksharamukha.appspot.com/#/python">here</a>. Additionally, there is a <a href="http://aksharamukha.appspot.com/#/web-api">REST API</a> for reasonable public consumption.
         </div><br/>

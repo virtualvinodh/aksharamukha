@@ -8,6 +8,7 @@
         autofocus-filter
         filter-placeholder="search"
         placeholder="Input Script"
+        float-label="Guide Script"
         v-model="script2"
         @input="compoundsGen"
         class="q-ma-sm col-md-3"

@@ -10,7 +10,7 @@
 
     <hr/>
 
-    <span class="code">transliterate(src, tgt, txt, nativize = True, pre_options = [], post_options = [])</span><br/><br/>
+    <span class="code">transliterate.process(src, tgt, txt, nativize = True, pre_options = [], post_options = [])</span><br/><br/>
     <table class="q-body-1">
       <tr>
         <td><b>Parameter</b></td>

@@ -91,8 +91,8 @@
   src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/otf/NotoSansBengali/NotoSansBengali-Regular.otf')
 }
 @font-face {
-  font-family: 'Noto Sans Batak';
-  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/otf/NotoSansBatak/NotoSansBatak-Regular.otf')
+  font-family: 'Pangururan';
+  src: url('../statics/Pangururan.ttf')
 }
 @font-face {
   font-family: 'Noto Sans Lepcha';
@@ -599,19 +599,19 @@
   font-family: "Noto Sans Limbu" !important
 }
 .batakkaro {
-  font-family: "Noto Sans Batak" !important
+  font-family: "Pangururan" !important
 }
 .batakmanda {
-  font-family: "Noto Sans Batak" !important
+  font-family: "Pangururan" !important
 }
 .batakpakpak {
-  font-family: "Noto Sans Batak" !important
+  font-family: "Pangururan" !important
 }
 .bataksima {
-  font-family: "Noto Sans Batak" !important
+  font-family: "Pangururan" !important
 }
 .bataktoba {
-  font-family: "Noto Sans Batak" !important
+  font-family: "Pangururan" !important
 }
 .telugu {
   font-family: "Noto Sans Telugu" !important

@@ -13,6 +13,11 @@ def ShowChillus(Strng):
 
     return PostProcess.MalayalamChillu(Strng, True, True)
 
+def longEOISO(Strng):
+    Strng = Strng.replace('e', 'ē').replace('o', 'ō')
+
+    return Strng
+
 def SanskritLexicaizeHK(Strng):
 
     return Strng
@@ -401,6 +406,31 @@ def PreProcess(Strng,Source,Target):
 
         Strng = Strng.replace('OM', 'oM')
 
+    if Source == 'BarahaNorth' or Source == 'BarahaSouth':
+        Strng = Strng.replace('A', 'aa')
+        Strng = Strng.replace('I', 'ee')
+        Strng = Strng.replace('U', 'oo')
+
+        Strng = Strng.replace('ou', 'au')
+        Strng = Strng.replace('K', 'kh')
+        Strng = Strng.replace('G','gh')
+        Strng = Strng.replace('ch', 'c')
+        Strng = Strng.replace('Ch', 'C')
+        Strng = Strng.replace('J','jh')
+        Strng = Strng.replace('w', 'v')
+        Strng = Strng.replace('sh', 'S')
+        Strng = Strng.replace('~h', '_h')
+        Strng = Strng.replace('^', '()')
+        Strng = Strng.replace('^^', '{}')
+
+        Strng = Strng.replace('tx', 'rx')
+        Strng = Strng.replace('zh', 'Lx')
+
+        Strng = Strng.replace('q', '\_')
+        Strng = Strng.replace('#', "\\'")
+        Strng = Strng.replace('$', '\\"')
+
+
     if Source == 'IAST':
         Strng = Strng.replace("aï", "a_i")
         Strng = Strng.replace("aü", "a_u")
@@ -408,6 +438,9 @@ def PreProcess(Strng,Source,Target):
     if Source == "ISO":
         Strng = Strng.replace('a:i', 'a_i')
         Strng = Strng.replace('a:u', 'a_u')
+
+    if Source == "Titus":
+        Strng = Strng
 
     if Source == "ISO" or Source == "IAST" or Source == "Titus" or "RussianCyrillic":
         Strng = CF.VedicSvarasNonDiacritic(Strng)

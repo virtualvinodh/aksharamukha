@@ -8,6 +8,7 @@
         @input="updateScript"
         filter-placeholder="search"
         v-model="outputScript"
+        float-label="Guide Script"
         placeholder="Output Script"
         class="col-xs-6 col-md-6 q-ma-sm"
         :options="scriptsOutput"

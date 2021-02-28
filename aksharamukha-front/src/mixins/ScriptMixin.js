@@ -47,7 +47,7 @@ export const ScriptMixin = {
       vedicScripts: ['Assamese', 'Bengali', 'Devanagari', 'Gujarati', 'Kannada', 'Malayalam', 'Oriya', 'Gurmukhi', 'Tamil', 'Telugu', 'TamilExtended', 'Grantha'],
       preserveSourceExampleOut: {
         'WarangCiti': 'akṣaramukha → <span class="warangciti">𑣁𑣌‍𑣝𑣜𑣖𑣃𑣌‍𑣙</span> not <span class="warangciti">𑣁𑣌𑣞𑣜𑣖𑣃𑣌</span>',
-        'Modi': 'ki kī ku kū → <span class="modi">𑘎𑘱 𑘎𑘲 𑘎𑘳 𑘎𑘴</span> not <span class="modi">𑘎𑘱 𑘎𑘲 𑘎𑘳 𑘎𑘴</span>',
+        'Modi': 'ki kī ku kū → <span class="modi">𑘎𑘱 𑘎𑘲 𑘎𑘳 𑘎𑘴</span> not <span class="modi">𑘎𑘲 𑘎𑘲 𑘎𑘳 𑘎𑘳</span>',
         'Multani': 'aśoka →<span class="multani">𑊀𑊥𑊂𑊄</span> not <span class="multani">𑊀𑊥𑊄</span>',
         'Ahom': 'ahoṃ →<span class="ahom">𑜒𑜑𑜦𑜪𑜡</span> not <span class="ahom">𑜒𑜑𑜪𑜨</span>',
         'Sundanese': 'ṛ ḷ bha → <ahoṃ class="sundanese">ᮻ ᮼ ᮽ</span> not <span class="sundanese">ᮛᮩ ᮜᮩ ᮘ</span>',
@@ -79,6 +79,9 @@ export const ScriptMixin = {
         ],
         'Itrans': [
           { label: 'E/O for long, e/o for short', value: 'swapEeItrans' }
+        ],
+        'ISO': [
+          { label: 'Treat e/o as long', value: 'longEOISO' }
         ],
         'HK': [
           { label: 'E/O for long, e/o for short', value: 'swapEe' }
@@ -160,6 +163,12 @@ export const ScriptMixin = {
         ],
         'TamilSaurashtra': [
           { label: 'Convert Saurashtra Haaru as :<small><br/><span class="saurashtra">ꢥꢴꢷ</span> → <span class="tamil">நீ:</span></small>', value: 'SaurastraHaaruColon' }
+        ]
+      },
+      postOptionsRadio: {
+        'Ranjana': [
+          { label: 'Lantsa style (Tibetan)<br/><small><span class="ranjana">बुद्धः</span> → <span class="ranjanalantsa">བུདྡྷཿ</span></small>', value: 'ranjanalantsa' },
+          { label: 'Wartu style (Tibetan)<br/><small><span class="ranjana">बुद्धः</span> → <span class="ranjanawartu">བུདྡྷཿ</span></small>', value: 'ranjanawartu' }
         ]
       },
       postOptionsGroup: {
@@ -303,10 +312,6 @@ export const ScriptMixin = {
           { label: 'Sanskrit/Pali Orthography<br/><small><span class="sinhala">නමෝ භගවතේ → නමො භගවතෙ</span></small>', value: 'SinhalaPali' },
           { label: 'Enable all conjuncts<span><br/><small><span class="sinhala">බුද්ධස්ස → බුද්‍ධස‍්ස</span></small>', value: 'SinhalaConjuncts' }
         ],
-        'Ranjana': [
-          { label: 'Lantsa style (Tibetan)<br/><small><span class="ranjana">बुद्धः</span> → <span class="ranjanalantsa">བུདྡྷཿ</span></small>', value: 'ranjanalantsa' },
-          { label: 'Wartu style (Tibetan)<br/><small><span class="ranjana">बुद्धः</span> → <span class="ranjanawartu">བུདྡྷཿ</span></small>', value: 'ranjanawartu' }
-        ],
         'Telugu': [
           { label: 'Arasunna as Chandrabindu<br/><small><span class="telugu"> హూఀ → హూఁ</span></small>', value: 'TeluguArasunnaChandrabindu' },
           { label: 'Telugu repha <br/><small><i>(Valapala Gilaka)</i></small> <br/><small><span class="telugu">ధర్మ → ధర్‍మ</span></small>', value: 'TeluguReph' },
@@ -338,10 +343,13 @@ export const ScriptMixin = {
         ],
         'IAST': [
           { label: 'Capitalize sentences', value: 'capitalizeSentence' },
-          { label: 'Anusvara to nasal<br/><small>gaṃgā → gaṅgā</small>', value: 'NasaltoAnsvaraIASTISO' }
+          { label: 'Anusvara to nasal<br/><small>gaṃgā → gaṅgā</small>', value: 'NasaltoAnsvaraIASTISO' },
+          { label: 'ṃ → ṁ', value: 'mDotAboveToBelow' }
         ],
         'IASTPali': [
-          { label: 'Capitalize sentences', value: 'capitalizeSentence' }
+          { label: 'Capitalize sentences', value: 'capitalizeSentence' },
+          { label: 'Anusvara to nasal<br/><small>gaṃgā → gaṅgā</small>', value: 'NasaltoAnsvaraIASTISO' },
+          { label: 'ṃ → ṁ', value: 'mDotAboveToBelow' }
         ],
         'RussianCyrillic': [
           { label: 'Pali Text', value: 'CyrillicPali' },
@@ -350,7 +358,8 @@ export const ScriptMixin = {
         ],
         'ISO': [
           { label: 'Capitalize sentences', value: 'capitalizeSentence' },
-          { label: 'Anusvara to nasal<br/><small>gaṁgā → gaṅgā</small>', value: 'NasaltoAnsvaraIASTISO' }
+          { label: 'Anusvara to nasal<br/><small>gaṁgā → gaṅgā</small>', value: 'NasaltoAnsvaraIASTISO' },
+          { label: 'ē/ō → e/o', value: 'noLongEO' }
         ],
         'RomanReadable': [
           { label: 'Alternate long/short e/o <br/><small>e\' e o\' o → e ae o oa</small>', value: 'RomanReadableLongEO' },
@@ -489,8 +498,8 @@ export const ScriptMixin = {
           omnicode: '',
           wikicode: '',
           font: {
-            'name': 'Noto Sans Batak',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansBatak-Regular.ttf'
+            'name': 'Pangururan',
+            'url': 'https://evertype.com/fonts/batak/'
           },
           language: ['Others'],
           status: ['Living', 'Living: Minor'],
@@ -506,8 +515,8 @@ export const ScriptMixin = {
           omnicode: 'batak',
           wikicode: 'Batak_script',
           font: {
-            'name': 'Noto Sans Batak',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansBatak-Regular.ttf'
+            'name': 'Pangururan',
+            'url': 'https://evertype.com/fonts/batak/'
           },
           language: ['Others'],
           status: ['Living', 'Living: Minor'],
@@ -523,8 +532,8 @@ export const ScriptMixin = {
           omnicode: 'batak',
           wikicode: 'Batak_script',
           font: {
-            'name': 'Noto Sans Batak',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansBatak-Regular.ttf'
+            'name': 'Pangururan',
+            'url': 'https://evertype.com/fonts/batak/'
           },
           language: ['Others'],
           status: ['Living', 'Living: Minor'],
@@ -540,8 +549,8 @@ export const ScriptMixin = {
           omnicode: 'batak',
           wikicode: 'Batak_script',
           font: {
-            'name': 'Noto Sans Batak',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansBatak-Regular.ttf'
+            'name': 'Pangururan',
+            'url': 'https://evertype.com/fonts/batak/'
           },
           language: ['Others'],
           status: ['Living', 'Living: Minor'],
@@ -557,8 +566,8 @@ export const ScriptMixin = {
           omnicode: 'batak',
           wikicode: 'Batak_script',
           font: {
-            'name': 'Noto Sans Batak',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/NotoSansBatak-Regular.ttf'
+            'name': 'Pangururan',
+            'url': 'https://evertype.com/fonts/batak/'
           },
           language: ['Others'],
           status: ['Living', 'Living: Minor'],
@@ -1893,6 +1902,14 @@ export const ScriptMixin = {
         {
           label: 'Roman (WX)',
           value: 'WX'
+        },
+        {
+          label: 'Roman (Baraha North)',
+          value: 'BarahaNorth'
+        },
+        {
+          label: 'Roman (Baraha South)',
+          value: 'BarahaSouth'
         },
         {
           language: ['Others'],

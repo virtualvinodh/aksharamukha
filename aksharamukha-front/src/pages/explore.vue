@@ -21,11 +21,13 @@
       </q-btn>
     </div>
     <div class="q-ma-sm">
-    <q-collapsible label="<i>Script Properties</i>" icon="category" :opened="!$q.platform.is.mobile">
+    <q-collapsible label="Click here for additional filters" icon="category" :opened="false">
       <filter-tags v-model="tagsActive"></filter-tags>
     </q-collapsible>
-
     </div>
+    <q-btn-toggle v-model="type" :options="typeoptions"  toggle-color="dark" class="col-md-2 q-ma-md"
+       @input="getLetters"></q-btn-toggle>
+
       <div class="row" v-if="type === 'explorecard'">
       <q-select
         filter
@@ -35,7 +37,7 @@
         placeholder="Letter"
         v-model="charsC"
         float-label="Consonant"
-        class="q-ma-sm col-md-2"
+        class="q-ma-sm q-ml-md"
         :options="letteroptionsC"
         @input="getLetters"
       />
@@ -47,7 +49,7 @@
         placeholder="Letter"
         v-model="charsV"
         float-label="Vowel"
-        class="q-ma-sm col-md-2"
+        class="q-ma-sm q-ml-md"
         :options="letteroptionsV"
         @input="getLetters"
       />
@@ -60,7 +62,7 @@
         filter-placeholder="search"
         placeholder="Input Script"
         v-model="script2"
-        class="q-ma-sm col-md-2"
+        class="q-ma-sm col-md-2 q-ml-md"
         :options="scriptsOutput"
       />
       <q-input
@@ -68,7 +70,7 @@
         placeholder="Text"
         v-model="mobiledisp"
         float-label="Text"
-        class="q-ma-sm col-md-8"
+        class="q-ma-sm col-md-8 q-ml-md"
         v-if="$q.platform.is.mobile"
       />
       <q-input
@@ -81,17 +83,15 @@
       />
       <q-btn class="q-ma-md" color="dark" @click="getLetters"> Convert </q-btn>
     </div>
-    <q-btn-toggle v-model="type" :options="typeoptions"  toggle-color="dark" class="col-md-2 q-ma-md"
-       @input="getLetters"></q-btn-toggle>
     <q-toggle class="q-ma-md col-md-2" v-model="showapprox" label="Show approx. equivalents" v-if="type == 'explorecard'"> </q-toggle>
     <q-toggle class="q-ma-md col-md-2" v-model="highapprox" label="Highlight approx. equivalents" v-if="type == 'explorecardsent'"> </q-toggle>
-    <span v-if="type == 'explorecardsent'"><q-toggle color="dark" v-model="sourcePreserve" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-sm" @input="getLetters"/><q-tooltip>Preserve the source as-is and don't change the text to improve readability. May use archaic characters and/or diacritics.</q-tooltip></span>
+    <span v-if="type == 'explorecardsent'"><q-toggle color="dark" v-model="sourcePreserve" label="Preserve source" class="q-ml-md q-mb-sm q-mt-sm" @input="getLetters"/><q-tooltip>Preserve the source as-is and don't change the text to improve readability. May use archaic characters and/or diacritics.</q-tooltip></span>
 
-    <div v-show="loading" class="q-ma-xs"><q-spinner-comment color="dark" :size="30" v-show="loading"/> </div>
+        <div v-show="loading" class="q-ma-xs"><q-spinner-comment color="dark" :size="30" v-show="loading"/> </div>
       <!-- <div style="text-align: right" class="q-ma-md">
         <span class="text-red-4"> X</span> : Approximate equivalent <br/>
       </div><br/> -->
-  <div class="q-body-1 q-mb-md" v-if="$q.platform.is.mobile"> Tap on the text to view more information about the script. </div><br/><br/>
+  <div class="q-body-1 q-mt-md" v-if="$q.platform.is.mobile"> Tap on the text to view more information about the script. </div><br/>
   <transition-group
    enter-active-class="animated fadeIn"
    leave-active-class="animated fadeOut"
@@ -116,22 +116,7 @@
 
   <q-modal v-model="opened"
      :content-css="!$q.platform.is.mobile ? {maxWidth: '60vw', maxHeight: '50vh', padding: '20px'} : {minWidth: '90vw', minHeight: '90vh', padding: '20px'}">
-    <div class="q-mb-md">
-
-    <q-btn
-      class="q-mr-sm"
-      color="dark"
-      @click="openlink('describe/' + scriptcurrent.value)"
-      icon='info'
-      label="More"
-    />
-
-    <!-- <q-btn
-      class="q-mr-sm"
-      color="dark"
-      @click="opened = false"
-      label="Learn"
-    /> -->
+    <div class="q-mb-md" style="text-align:right">
 
     <q-btn
       class="q-mr-sm"
@@ -140,13 +125,25 @@
       icon='close'
     />
 
-  </div>
+    </div>
     <h5 class="q-mb-lg q-mt-sm">{{scriptcurrent.label}}</h5>
     <div class="q-ma-md"><span class="quotetext"><big><transliterate :text="$q.platform.is.mobile ? mobiletext : maintext"
       :src="script2" :tgt="scriptcurrent.value"> </transliterate></big></span></div>
     <q-chip class="q-ma-xs" color="dark" v-for="tag in tags"
       :key="tag" tag dense> {{tag}} </q-chip>
     <div class="q-body-1 q-mt-md q-mb-md" v-html="getDescription(scriptcurrent, false)"> </div>
+
+    <div class="q-mb-md">
+
+    <q-btn
+      class="q-mr-sm"
+      color="dark"
+      @click="openlink('describe/' + scriptcurrent.value)"
+      icon='info'
+      label="Full Description"
+    />
+
+  </div>
   </q-modal>
 
   </q-page>
@@ -195,8 +192,8 @@ export default {
       sourcePreserve: false,
       type: 'explorecard',
       typeoptions: [
-        {label: 'Letter', value: 'explorecard'},
-        {label: 'Text', value: 'explorecardsent'}
+        {label: 'Sample Letter', value: 'explorecard'},
+        {label: 'Sample Phrase', value: 'explorecardsent'}
       ],
       scriptsCategorized: {},
       trees: {
@@ -242,7 +239,7 @@ export default {
       scriptDescription: {},
       alphabet: 'abcdefghijklmnopqrstuvwxyz'.toUpperCase().split(''),
       languages: ['Sanskrit & Pali', 'Only Pali', 'Others'],
-      status: ['Extinct', 'Living: Minor', 'Living: Major'],
+      status: ['Living: Major', 'Living: Minor', 'Extinct'],
       derivation: ['Invented', 'Derived: Aramaic', 'Derived: Perso-Arabic', 'Derived: Cuneiform', 'Derived: Brahmi'],
       regions: ['Pan-Indic', 'East Indic', 'West Indic', 'North Indic', 'South Indic', 'South East Asian: Mainland', 'South East Asian: Insular', 'Central Asian', 'East Asian', 'South Asian: Other', 'West Asian'],
       tagsActive: [],
@@ -250,8 +247,8 @@ export default {
     }
   },
   mounted: function () {
-    var vowels = ['a', 'A', 'i', 'I', 'u', 'U', 'R', 'RR', 'lR', 'lRR', 'e', 'ai', 'o', 'au', 'E', 'O', 'aE', 'AE', 'aO', 'aM', 'aH', 'a~', 'oM', '']
-    var vowelsIAST = ['a', 'ā', 'i', 'ī', 'u', 'ū', 'ṛ', 'ṝ', 'ḷ', 'ḹ', 'e', 'ai', 'o', 'au', 'ĕ', 'ŏ', 'æ', 'ǣ', 'ô', 'aṃ', 'aḥ', 'am̐', 'oṃ', '']
+    var vowels = ['', 'a', 'A', 'i', 'I', 'u', 'U', 'R', 'RR', 'lR', 'lRR', 'e', 'ai', 'o', 'au', 'E', 'O', 'aE', 'AE', 'aO', 'aM', 'aH', 'a~', 'oM']
+    var vowelsIAST = ['', 'a', 'ā', 'i', 'ī', 'u', 'ū', 'ṛ', 'ṝ', 'ḷ', 'ḹ', 'e', 'ai', 'o', 'au', 'ĕ', 'ŏ', 'æ', 'ǣ', 'ô', 'aṃ', 'aḥ', 'am̐', 'oṃ']
 
     var cons = ['', 'ka', 'kha', 'ga', 'gha', 'Ga', 'ca', 'cha', 'ja', 'jha', 'Ja', 'Ta', 'Tha', 'Da', 'Dha', 'Na', 'ta', 'tha', 'da', 'dha', 'na', 'pa', 'pha', 'ba', 'bha', 'ma', 'ya', 'ra', 'la', 'va', 'za', 'Sa', 'sa', 'ha', 'La', 'Za', 'r2a', 'n2a', 'qa', 'qha', 'g2a', 'z2a', 'r3a', 'r3ha', 'fa', 'Ya'].map(x => x.replace('a', ''))
 
@@ -265,12 +262,15 @@ export default {
       this.letteroptionsC.push({label: consIAST[index], value: consIAST[index]})
     }.bind(this))
 
-    this.getLetters()
+    this.chars1 = {'Ahom': '𑜒', 'Ariyaka': 'a', 'Assamese': 'অ', 'Avestan': '𐬀', 'Balinese': 'ᬅ', 'BatakKaro': 'ᯀ', 'BatakManda': 'ᯀ', 'BatakPakpak': 'ᯀ', 'BatakSima': 'ᯁ', 'BatakToba': 'ᯀ', 'Bengali': 'অ', 'Bhaiksuki': '𑰀', 'Brahmi': '𑀅', 'Buginese': 'ᨕ', 'Buhid': 'ᝀ', 'Burmese': 'အ', 'Chakma': '𑄃𑄧', 'Cham': 'ꨀ', 'Devanagari': 'अ', 'Dogra': '𑠀', 'Grantha': '𑌅', 'GranthaPandya': 'അ', 'Gujarati': 'અ', 'GunjalaGondi': '𑵠', 'Gurmukhi': 'ਅ', 'HanifiRohingya': '𐴀𐴝', 'Hanunoo': 'ᜠ', 'Javanese': 'ꦄ', 'Kaithi': '𑂃', 'Kannada': 'ಅ', 'KhamtiShan': 'ဢ', 'Kharoshthi': '𐨀', 'Khmer': 'អ', 'Khojki': '𑈀', 'KhomThai': 'อ', 'Khudawadi': '𑊰', 'KhuenTham': 'ᩋ', 'Lao': 'ອະ', 'LaoPali': 'ອ', 'LaoTham': 'ᩋ', 'Lepcha': 'ᰣ', 'Limbu': 'ᤀ', 'LueTham': 'ᩋ', 'Mahajani': '𑅐', 'Malayalam': 'അ', 'Marchen': '𑲏', 'MasaramGondi': '𑴀', 'MeeteiMayek': 'ꯑ', 'Modi': '𑘀', 'Mon': 'အ', 'Mongolian': 'ᠠ᠋', 'Mro': '𖩒', 'Multani': '𑊀', 'Newa': '𑐀', 'OldPersian': '𐎠', 'Oriya': 'ଅ', 'PhagsPa': 'ꡝ', 'Ranjana': 'अ', 'Rejang': 'ꥆ', 'Santali': 'ᱚ', 'Saurashtra': 'ꢂ', 'Shan': 'ဢ', 'Sharada': '𑆃', 'Siddham': '𑖀', 'Sinhala': 'අ', 'SoraSompeng': '𑃦𑃨', 'Soyombo': '𑩐', 'Sundanese': 'ᮃ', 'SylotiNagri': 'ꠅ', 'Tagalog': 'ᜀ', 'Tagbanwa': 'ᝠ', 'TaiLaing': 'အ', 'TaiTham': 'ᩋ', 'Takri': '𑚀', 'Tamil': 'அ', 'TamilBrahmi': '𑀅', 'TamilExtended': 'അ', 'Telugu': 'అ', 'Thaana': 'އަ', 'Thai': 'อ', 'Tibetan': 'ཨ', 'Tirhuta': '𑒁', 'Urdu': 'اَ', 'Vatteluttu': 'அ', 'Wancho': '𞋁', 'WarangCiti': '𑣁', 'ZanabazarSquare': '𑨀'}
+    this.charsIr = {'Ahom': 'a', 'Ariyaka': 'a', 'Assamese': 'a', 'Avestan': 'a', 'Balinese': 'a', 'BatakKaro': 'a', 'BatakManda': 'a', 'BatakPakpak': 'a', 'BatakSima': 'a', 'BatakToba': 'a', 'Bengali': 'a', 'Bhaiksuki': 'a', 'Brahmi': 'a', 'Buginese': 'a', 'Buhid': 'a', 'Burmese': 'a', 'Chakma': 'a', 'Cham': 'a', 'Devanagari': 'a', 'Dogra': 'a', 'Grantha': 'a', 'GranthaPandya': 'a', 'Gujarati': 'a', 'GunjalaGondi': 'a', 'Gurmukhi': 'a', 'HanifiRohingya': 'a', 'Hanunoo': 'a', 'Javanese': 'a', 'Kaithi': 'a', 'Kannada': 'a', 'KhamtiShan': 'a', 'Kharoshthi': 'a', 'Khmer': 'a', 'Khojki': 'a', 'KhomThai': 'a', 'Khudawadi': 'a', 'KhuenTham': 'a', 'Lao': 'a', 'LaoPali': 'a', 'LaoTham': 'a', 'Lepcha': 'a', 'Limbu': 'a', 'LueTham': 'a', 'Mahajani': 'a', 'Malayalam': 'a', 'Marchen': 'a', 'MasaramGondi': 'a', 'MeeteiMayek': 'a', 'Modi': 'a', 'Mon': 'a', 'Mongolian': 'a', 'Mro': 'a', 'Multani': 'a', 'Newa': 'a', 'OldPersian': 'a', 'Oriya': 'a', 'PhagsPa': 'a', 'Ranjana': 'a', 'Rejang': 'a', 'Santali': 'a', 'Saurashtra': 'a', 'Shan': 'a', 'Sharada': 'a', 'Siddham': 'a', 'Sinhala': 'a', 'SoraSompeng': 'a', 'Soyombo': 'a', 'Sundanese': 'a', 'SylotiNagri': 'a', 'Tagalog': 'a', 'Tagbanwa': 'a', 'TaiLaing': 'a', 'TaiTham': 'a', 'Takri': 'a', 'Tamil': 'a', 'TamilBrahmi': 'a', 'TamilExtended': 'a', 'Telugu': 'a', 'Thaana': 'a', 'Thai': 'a', 'Tibetan': 'a', 'Tirhuta': 'a', 'Urdu': 'a', 'Vatteluttu': 'a', 'Wancho': 'a', 'WarangCiti': 'a', 'ZanabazarSquare': 'a'}
+    // this.getLetters()
 
-    console.log(this.letteroptionsC)
-    console.log(this.letteroptionsV)
+    // console.log(this.letteroptionsC)
+    // console.log(this.letteroptionsV)
 
     this.scriptsCategorized = {'All': this.scriptsIndic}
+    this.current()
   },
   updated: function () {
   },
@@ -524,6 +524,9 @@ export default {
       for (script in charsIr) {
         this.$set(this.charsIr, script, charsIr[script])
       }
+
+      // console.log(JSON.stringify(this.chars1))
+      // console.log(JSON.stringify(this.charsIr))
 
       this.updatedList = !this.updatedList
 

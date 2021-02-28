@@ -24,6 +24,7 @@
     "moo": "^0.5.0",
     "request-promise": "^4.2.2",
     "sanitize-html": "^1.19.0",
+    "tesseract.js": "^2.0.0",
     "tokenizr": "^1.5.4",
     "underscore": "^1.9.1",
     "unicode-properties": "^1.1.0",

@@ -32,7 +32,6 @@
           <span><transliterate text="akSaramukha" src="HK" :tgt="randomScript.value" sourcePreserve="false">
             </transliterate>             <q-tooltip>{{randomScript.label}}</q-tooltip> </span>
         </q-toolbar-title>
-
       </q-toolbar>
     </q-layout-header>
 
@@ -48,9 +47,8 @@
         no-border
         link
         inset-delimiter
-      > <!-- link to other tools -->
-        <!-- Options to create pseudo epigraphs -->
-        <!-- Icon -->
+      >
+
         <q-item to="/converter">
           <q-item-side icon="translate"/>
           <q-item-main label="Converter"/>
@@ -73,11 +71,7 @@
             </q-item>
         </q-collapsible>
         <hr/>
-        <q-collapsible icon="book" label="Sample Texts"  >
-            <q-item :to="'/texts/' + text.path" v-for="text in texts" :key="text.path">
-              <q-item-main :label="text.name"/>
-            </q-item>
-        </q-collapsible>
+
         <q-collapsible icon="edit" label="Scripts" >
             <q-item to="/roman">
               <q-item-main label="Roman Transliteration Schemes"/>
@@ -94,12 +88,17 @@
         </q-collapsible>
         <q-item to="/explore">
           <q-item-side icon="navigation" />
-            <q-item-main label="Explore"/>
+            <q-item-main label="Script Explorer"/>
           </q-item>
         <q-item to="/script-matrix">
           <q-item-side icon="table chart" />
             <q-item-main label="Script Matrix"/>
           </q-item>
+        <q-collapsible icon="book" label="Sample Texts"  >
+            <q-item :to="'/texts/' + text.path" v-for="text in texts" :key="text.path">
+              <q-item-main :label="text.name"/>
+            </q-item>
+        </q-collapsible>
         <hr/>
         <q-collapsible icon="build" label="Technical" >
           <q-item to="/web-api">
@@ -139,6 +138,7 @@
         </q-collapsible>
       </q-list>
       <br/>
+<!--
 <social-sharing url="http://aksharamukha.appspot.com"
                       title="Aksharamukha"
                       description="Indic Script Converter"
@@ -156,7 +156,7 @@
         <img src="../statics/twitter.svg" width="20px">
       </network>
   </div>
-</social-sharing>
+</social-sharing> -->
     </q-layout-drawer>
     <q-page-container class="page">
       <span v-if="!$q.platform.is.cordova">
@@ -206,7 +206,7 @@
 </template>
 
 <script>
-import { openURL, QLayoutFooter, QTooltip, QWindowResizeObservable, QCollapsible, QAlert } from 'quasar'
+import { openURL, QLayoutFooter, QTooltip, QWindowResizeObservable, QCollapsible, QAlert, QTab, QTabs } from 'quasar'
 import Transliterate from '../components/Transliterate'
 import SocialSharing from 'vue-social-sharing'
 import {ScriptMixin} from '../mixins/ScriptMixin'
@@ -221,7 +221,9 @@ export default {
     Transliterate,
     QWindowResizeObservable,
     QCollapsible,
-    SocialSharing
+    SocialSharing,
+    QTab,
+    QTabs
   },
   data () {
     return {
