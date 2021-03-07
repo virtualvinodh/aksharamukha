@@ -231,7 +231,7 @@ def convert(src, tgt, txt, nativize, preoptions, postoptions):
         txt = ConvertFix.OriyaIPAFixPre(txt)
 
     if src == "Itrans" and '##' in txt:
-        print('I am here tyring to do things')
+        #print('I am here tyring to do things')
         transliteration = ''
         for i, word in enumerate(txt.split("##")):
             if (i%2 == 0):

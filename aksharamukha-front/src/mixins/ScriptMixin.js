@@ -166,10 +166,13 @@ export const ScriptMixin = {
         ]
       },
       postOptionsRadio: {
-        'Ranjana': [
-          { label: 'Lantsa style (Tibetan)<br/><small><span class="ranjana">बुद्धः</span> → <span class="ranjanalantsa">བུདྡྷཿ</span></small>', value: 'ranjanalantsa' },
-          { label: 'Wartu style (Tibetan)<br/><small><span class="ranjana">बुद्धः</span> → <span class="ranjanawartu">བུདྡྷཿ</span></small>', value: 'ranjanawartu' }
-        ]
+        'Ranjana': {
+          'Display': [
+            { label: 'Default<br/><small><span class="ranjana">बुद्धः</span></small>', value: 'default' },
+            { label: 'Lantsa<br/><small><span class="ranjanalantsa">བུདྡྷཿ</span></small>', value: 'ranjanalantsa' },
+            { label: 'Wartu<br/><small><span class="ranjanawartu">བུདྡྷཿ</span></small>', value: 'ranjanawartu' }
+          ]
+        }
       },
       postOptionsGroup: {
         'Tamil': [
@@ -2002,7 +2005,105 @@ export const ScriptMixin = {
       tagsRegionS1: ['Pan-Indic', 'East Indic', 'West Indic', 'North Indic', 'South Indic'],
       tagsRegionM2: ['East Asian', 'West Asian', 'Central Asian', 'South Asian: Other', 'South East Asian'],
       tagsRegionS2: ['South East Asian: Mainland', 'South East Asian: Insular'],
-      tagsDerivationM: ['Derived: Brahmi', 'Derived: Pallava', 'Derived: Aramaic', 'Derived: Perso-Arabic', 'Derived: Cuneiform', 'Invented']
+      tagsDerivationM: ['Derived: Brahmi', 'Derived: Pallava', 'Derived: Aramaic', 'Derived: Perso-Arabic', 'Derived: Cuneiform', 'Invented'],
+      ocrLangOptions: [
+        {
+          label: 'Autodetect',
+          value: 'osd'
+        },
+        {
+          label: 'Assamese',
+          value: 'asm'
+        },
+        {
+          label: 'Bengali',
+          value: 'ben'
+        },
+        {
+          label: 'Burmese',
+          value: 'mya'
+        },
+        {
+          label: 'Devanagari (Hindi)',
+          value: 'hin'
+        },
+        {
+          label: 'Devanagari (Nepali)',
+          value: 'nep'
+        },
+        {
+          label: 'Devanagari (Sanskrit)',
+          value: 'san'
+        },
+        {
+          label: 'Latin',
+          value: 'lat'
+        },
+        {
+          label: 'Gujarati',
+          value: 'guj'
+        },
+        {
+          label: 'Javanese',
+          value: 'jav'
+        },
+        {
+          label: 'Kannada',
+          value: 'kan'
+        },
+        {
+          label: 'Khmer',
+          value: 'khm'
+        },
+        {
+          label: 'Lao',
+          value: 'lao'
+        },
+        {
+          label: 'Malayalam',
+          value: 'mal'
+        },
+        {
+          label: 'Marathi',
+          value: 'mar'
+        },
+        {
+          label: 'Oriya',
+          value: 'ori'
+        },
+        {
+          label: 'Punjabi',
+          value: 'pan'
+        },
+        {
+          label: 'Sinhala',
+          value: 'sin'
+        },
+        {
+          label: 'Tamil',
+          value: 'tam'
+        },
+        {
+          label: 'Telugu',
+          value: 'tel'
+        },
+        {
+          label: 'Thai',
+          value: 'tha'
+        },
+        {
+          label: 'Tibetan',
+          value: 'bod'
+        },
+        {
+          label: 'Tibetan',
+          value: 'bod'
+        },
+        {
+          label: 'Urdu',
+          value: 'urd'
+        }
+      ]
     }
   },
   computed: {
@@ -2097,6 +2198,16 @@ export const ScriptMixin = {
         reader.readAsDataURL(url)
       })
     },
+    readFilePDF: function (url) {
+      return new Promise(resolve => {
+        var reader = new FileReader()
+        reader.onload = function () {
+          var typedarray = new Uint8Array(this.result)
+          resolve(typedarray)
+        }
+        reader.readAsArrayBuffer(url)
+      })
+    },
     compareObjects: function (a, b) {
       if (a.label < b.label) {
         return -1
@@ -2120,6 +2231,17 @@ export const ScriptMixin = {
       for (const s of this.scripts) {
         if (s.label === label) {
           return s
+        }
+      }
+      if (name === 'autodetect') {
+        return this.autodetect[0]
+      }
+      return { label: '', value: '' }
+    },
+    getOCRScriptId: function (label) {
+      for (const s of this.ocrLangOptions) {
+        if (s.label === label) {
+          return s.value
         }
       }
       if (name === 'autodetect') {

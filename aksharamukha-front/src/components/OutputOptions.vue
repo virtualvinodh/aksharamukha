@@ -7,7 +7,7 @@
         inline
         class="q-ml-sm q-mb-sm q-mt-sm print-hide"
         v-model="postOptions"
-        @input="convert"
+        @input="convertRadio"
         :options="typeof postOptionsRadio[outputScript] !== 'undefined' ? postOptionsRadio[outputScript] : []"
         v-show="typeof postOptionsRadio[outputScript] !== 'undefined'"
       />
@@ -71,6 +71,9 @@ export default {
   methods: {
     convert: function () {
       this.$emit('input', this.postOptions)
+    },
+    convertRadio: function () {
+      this.$emit('input', [this.postOptions])
     }
   }
 }

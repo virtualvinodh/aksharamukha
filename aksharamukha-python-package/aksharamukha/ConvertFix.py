@@ -1519,7 +1519,7 @@ def FixAvestan(Strng, reverse=False):
 
         Strng = Strng.replace(ii, ya).replace(uu, va)
 
-        print('I am here')
+        #print('I am here')
 
         Strng = Strng.replace('\U00010B1D', Avestan.ConsonantMap[15]  + '\u02BF')
         Strng = Strng.replace('𐬣', Avestan.ConsonantMap[4])

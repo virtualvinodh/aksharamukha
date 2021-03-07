@@ -8,7 +8,7 @@ def ApplyPreProcessing(Strng,Source,Target):
     else:
         Options = []
 
-    print('Getting preprocesssing ')
+    #print('Getting preprocesssing ')
 
     for Option in Options:
         if Option.find(Target) != -1:

@@ -55,13 +55,14 @@
       <q-select
         filter
         autofocus-filter
+        float-label="Document Language"
         filter-placeholder="search"
         v-model="ocrLang"
         placeholder="Language"
         class="col-xs-3 col-md-3 q-ma-sm print-hide"
         :options="ocrLangOptions"
       />
-            <q-btn class="q-mt-sm" v-show="displayButton" @click="performOCR"> <small> Convert </small> </q-btn>
+            <q-btn class="q-mt-sm" v-show="displayButton" @click="performOCR"> <small> Detect Text & Convert </small> </q-btn>
             <!-- <q-spinner-comment color="dark" :size="30" v-show="loadingOCR" class="q-ma-sm"/> -->
           <span v-show="loadingOCR">
           <q-progress
@@ -69,8 +70,8 @@
             color="tertiary"
             animate
             height="25px"
-            class="q-ma-sm"
-          />   <span class="q-ma-sm">{{ocrStatus}}: {{Math.round(ocrProgress)}} </span>
+            class="q-mt-md q-ma-sm"
+          />   <span class="q-ma-sm"> {{pdfProgress}} : {{ocrStatus}}: {{Math.round(ocrProgress)}} %</span>
           </span>
       </span>
     </div>
@@ -153,6 +154,8 @@ import scrollTo from 'vue-scrollto'
 import { ScriptMixin } from '../mixins/ScriptMixin'
 import { createWorker } from 'tesseract.js'
 
+var pdfjs = require('pdfjs-dist')
+
 import ClipboardJS from 'clipboard'
 
 var clipboard = new ClipboardJS('.btn2')
@@ -233,50 +236,9 @@ export default {
       scrollExists: false,
       worker: '',
       ocrProgress: 0,
+      pdfProgress: '',
       ocrStatus: '',
-      ocrLang: '',
-      ocrLangOptions: [
-        {
-          label: 'Autodetect',
-          value: 'osd'
-        },
-        {
-          label: 'English',
-          value: 'emg'
-        },
-        {
-          label: 'Assamese',
-          value: 'asm'
-        },
-        {
-          label: 'Bengali',
-          value: 'ben'
-        },
-        {
-          label: 'Tamil',
-          value: 'tam'
-        },
-        {
-          label: 'Tibetan',
-          value: 'bod'
-        },
-        {
-          label: 'Gujarati',
-          value: 'guj'
-        },
-        {
-          label: 'Hindi',
-          value: 'hin'
-        },
-        {
-          label: 'Sanskrit',
-          value: 'san'
-        },
-        {
-          label: 'Tibetan',
-          value: 'bod'
-        }
-      ]
+      ocrLang: 'osd'
     }
   },
   mounted () {
@@ -416,6 +378,16 @@ export default {
       this.checkifOnline = await isOnline()
     },
     performOCR: async function () {
+      if (this.ocrLang === '') {
+        this.$q.notify({
+          type: 'info',
+          message: 'Please select the language of the document',
+          position: 'center',
+          timeout: 1000
+        })
+        return
+      }
+
       this.loadingOCR = true
 
       var base64 = await this.readFile(this.imageFile)
@@ -433,20 +405,94 @@ export default {
           }
         ]
       }
+      console.log(data)
 
-      // console.log(data)
+      await this.worker.load()
+      await this.worker.loadLanguage(this.ocrLang)
+      await this.worker.initialize(this.ocrLang)
 
       // console.log('Sending Results')
       // var result = await this.getResultPost('https://vision.googleapis.com/v1/images:annotate?key=' + keys.api_key, data)
       // console.log('Got the results back')
-      await this.worker.load()
-      await this.worker.loadLanguage(this.ocrLang)
-      await this.worker.initialize(this.ocrLang)
-      const { data: { text } } = await this.worker.recognize(base64)
-      console.log(text)
-      console.log(data)
+      pdfjs.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.worker.min.js'
+
+      if (this.imageFile.type === 'application/pdf') {
+        var pdf = await pdfjs.getDocument(await this.readFilePDF(this.imageFile)).promise
+        var textOCR = ''
+
+        for (var i = 1; i <= pdf.numPages; i++) {
+          var page = await pdf.getPage(i)
+          console.log('Scaning page ' + i)
+
+          var viewport = page.getViewport({scale: 6})
+
+          var canvas = document.createElement('canvas')
+          var context = canvas.getContext('2d')
+          canvas.height = viewport.height
+          canvas.width = viewport.width
+
+          await page.render({canvasContext: context, viewport: viewport}).promise
+
+          base64 = canvas.toDataURL()
+
+          this.pdfProgress = 'Page ' + i + '/' + pdf.numPages
+
+          if (i === 1 && this.ocrLang === 'osd') {
+            try {
+              var detectionpdf = await this.worker.detect(base64)
+            } catch (e) {
+              console.log(e)
+              this.$q.notify({
+                type: 'info',
+                message: 'Cannot detect script. Please select document language manually',
+                position: 'center',
+                timeout: 1500
+              })
+            }
+            if (detectionpdf.data.script === 'Devanagari') {
+              this.ocrLang = 'san'
+            } else {
+              this.ocrLang = this.getOCRScriptId(detectionpdf.data.script)
+            }
+            await this.worker.loadLanguage(this.ocrLang)
+            await this.worker.initialize(this.ocrLang)
+          }
+
+          const { data: { text } } = await this.worker.recognize(base64)
+          textOCR = textOCR + text + '\n\n'
+        }
+      } else {
+        if (this.ocrLang === 'osd') {
+          try {
+            var detection = await this.worker.detect(base64)
+          } catch (e) {
+            console.log(e)
+            this.$q.notify({
+              type: 'info',
+              message: 'Cannot detect script. Please select document language manually',
+              position: 'center',
+              timeout: 1500
+            })
+          }
+          if (detection.data.script === 'Devanagari') {
+            this.ocrLang = 'san'
+          } else {
+            this.ocrLang = this.getOCRScriptId(detection.data.script)
+          }
+          await this.worker.loadLanguage(this.ocrLang)
+          await this.worker.initialize(this.ocrLang)
+        }
+        const { data: { text } } = await this.worker.recognize(base64)
+        textOCR = text
+      }
       // await this.worker.terminate()
-      this.textInput = text
+      this.textInput = textOCR
+      this.$q.notify({
+        type: 'info',
+        message: 'Text recognition is complete. Please proof-read the recognized text in the input area for possible errors.',
+        position: 'center',
+        timeout: 1500
+      })
       this.convert()
       this.ocrStatus = ''
       this.ocrProgress = 0
