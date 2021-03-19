@@ -338,6 +338,167 @@ def FixIndicOutput(Strng,Source,Target):
 
     return Strng
 
+def FixHebrew(Strng, reverse = False):
+    vowelsigns = '(' + '|'.join(GM.CrunchSymbols(GM.VowelSigns, 'Hebrew')) + ')'
+    consonants = '(' + '|'.join(GM.CrunchSymbols(GM.Consonants, 'Hebrew')) + ')'
+
+    vowelsignsA = '(' + '|'.join(GM.CrunchSymbols(GM.VowelSigns, 'Hebrew') + ['ַ']) + ')'
+    vowelsignsAD = '(' + '|'.join(GM.CrunchSymbols(GM.VowelSigns, 'Hebrew') + ['ַ', 'ּ']) + ')'
+
+    vowelsignsADShin = '(' + '|'.join(GM.CrunchSymbols(GM.VowelSigns, 'Hebrew') + ['ַ', 'ּ', 'ׁ']) + ')'
+    vowelsignsADShinG = '(' + '|'.join(GM.CrunchSymbols(GM.VowelSigns, 'Hebrew') + ['ַ', 'ּ', 'ׁ', '׳']) + ')'
+
+
+    finalCons = ['כ', 'מ', 'נ', 'פ', 'צ', 'פּ', 'כּ']
+    finals = ['ך', 'ם', 'ן', 'ף', 'ץ', 'ףּ', 'ךּ']
+
+    otherCons = 'ב,ח,ע,צ,ש,ת'.split(',')
+    consonantsAll = '(' + '|'.join(GM.CrunchSymbols(GM.Consonants, 'Hebrew') + finals  + otherCons + ['׳']) + ')'
+
+    if not reverse:
+        Strng = Strng.replace('\u02BD', '')
+
+        # Fix Anusvara
+
+        # mK, mG, mp, mC, md, mt
+        Strng = re.sub('מְ' + '\u02BC' + '([גדזטכצקת])', 'נְ' + r'\1', Strng)
+        Strng = re.sub('מְ' + '\u02BC', 'מְ', Strng)
+
+        # insert a_sign
+        Strng = re.sub(consonants + '(?!' + vowelsigns + ')', r'\1' + '\u05B7' + r'\2', Strng)
+
+        # fix double a to single a
+        Strng = Strng.replace('\u05b7\u05b7', '\u05B7')
+
+        # Fix a appear with Dagesh and Shva.. k -> kaph + patau + dagesh + shva -> kaph + dagesh + shva
+        Strng = Strng.replace('\u05b7\u05bc\u05B0', '\u05bc\u05B0')
+
+        # fix order of vowel signs and vowels sign with ch/j
+        Strng = re.sub('(׳)' + vowelsigns, r'\2\1', Strng)
+        Strng = re.sub('(וֹ)(׳)', r'\2\1', Strng)
+        Strng = re.sub('(וּ)(׳)', r'\2\1', Strng)
+        Strng = re.sub('(׳)(\u05b7)', r'\2\1', Strng)
+        Strng = re.sub('(׳)(\u05b7)', r'\1', Strng)
+
+        # Fix Pateh appearing with vowel signs
+        Strng = re.sub('(\u05b7)' + vowelsigns, r'\2', Strng)
+        Strng = re.sub('(\u05b7)' + '(\u05BC)' + vowelsigns, r'\2\3', Strng)
+
+        # Fix Finals
+
+        shortVowels = '(' + '|'.join(['\u05B7', '\u05B8', '\u05B4', '\u05BB', '\u05B5', '\u05B6', '\u05B9', '\u05B0']) + ')'
+
+        vowelsAll = '(' + '|'.join(['\u05B7', '\u05B8', '\u05B4', '\u05BB', '\u05B5', '\u05B6', '\u05B9', '\u05B0', 'י', 'וֹ', 'וּ'] + ['׳']) + ')'
+
+        for c, f in zip(finalCons, finals):
+            Strng = re.sub(vowelsAll + '(' + c + ')' + shortVowels + '(׳?)' + '(?!' + consonantsAll + ')', r'\1' + f +  r'\3' + r'\4', Strng)
+
+        # Fix Va + O
+        Strng = Strng.replace('װ' + '\u05B9', '\u05D5\u05BA')
+
+        Strng = Strng.replace('װ' , '\u05D5')
+        Strng = Strng.replace('ײ' , 'י')
+
+        Strng = Strng.replace('\u02BC', '')
+
+        #Do gemination
+        ## consonant doubling with Dagesh
+        Strng = re.sub('([' + 'ושרקסנמליזט' + '])(ְ)' + r'\1', r'\1' + 'ּ', Strng)
+        Strng = re.sub('(שׁ)(ְ)' + r'\1', r'\1' + 'ּ', Strng)
+
+
+    else:
+        vowels = ['ְ','ֱ','ֲ','ֳ','ִ','ֵ','ֶ','ַ','ָ','ֹ','ֺ','ֻ','ׇ']
+        vowelsR = '(' + '|'.join(vowels) + ')'
+
+        for f,c in zip(finals, finalCons):
+            Strng = Strng.replace(f, c)
+
+        # Swap the order of diacritics
+        Strng = re.sub(vowelsR + '([ּׁׂ])', r'\2\1', Strng)
+
+        ## gimme, teh and other consonants  with Dagesh just replace themselves
+        Strng = re.sub('([גדתצ])(ּ)', r'\1', Strng)
+
+        ## approx vowels
+
+        # Short vowels with Schwa
+        Strng = Strng.replace('אֲ', 'אַ')
+        Strng = Strng.replace('עֲ', 'אַ')
+
+        Strng = Strng.replace('\u05B1', '\u05B6').replace('\u05B3', '\u05B9').replace('\u05B2','')
+
+        # replace malei forms
+        Strng = re.sub('(?<=[ֵֶַָֹ])([א])'+'(?!' + vowelsignsA + ')', '', Strng)
+        Strng = re.sub('(?<=[ִֵֶַָֹֻ])([ה])'+'(?!' + vowelsignsAD + ')', '', Strng)
+
+        Strng = re.sub('(?<=[ֵֶ])([י])'+'(?!' + vowelsR + vowelsigns + ')', '', Strng)
+
+        # ha + dagesh to normal ha
+        Strng = Strng.replace('הּ', 'ה')
+
+        ## consonant doubling with Dagesh
+        Strng = re.sub('([' + 'שרקסנמליזט' + '])(ּ)', r'\1' + 'ְ' + 'ְ' + r'\1', Strng) ## twice to mark it specifically
+
+        ## approx Cons
+        Strng = Strng.replace('ת', 'ט').replace('ח', 'כ').replace('ע', 'א').replace('שׂ', 'ס')
+        Strng = re.sub('ש(?![ׂׄ])', 'שׁ', Strng)
+
+        Strng = Strng.replace('ׁׁ','ׁ')
+
+        ## replace vet with double vav if not followed by dagesh
+        Strng = re.sub('ב(?!ּ)', 'װ', Strng)
+
+        # swap garesh and short vowels
+        Strng = re.sub(vowelsR + "(׳)", r'\2\1', Strng)
+
+        # tsa when not followed by gatresh with t+sa (including vowel signs)
+        Strng = re.sub('צ' + '(?!׳)', 'טְְס', Strng)
+
+        ## reinsert uo2dbc of vau based vowels
+        Strng = re.sub('(\s|^|\.|,|א)' + '(וֹ|וּ)', r'\1\2' + '\u02BC', Strng)
+        Strng = re.sub('(וּ)' + vowelsignsA, 'װְװ' + r'\2', Strng)
+
+        ## vav, yod to double vav/yod if followed by short vowels or long vowels
+        Strng = re.sub('י' + '(?=' + vowelsigns + '|ַ)', 'ײ', Strng)
+        Strng = re.sub('ו' + '(?=' + '[ְִֵֶַָׇֺֻ]' +  '|ַ)', 'װ', Strng)
+
+        ## replace vay ad yod in other cases when no preceded or succeeded by the vowels
+        Strng  = re.sub('(?<!ִ)(י)', 'ײ' , Strng)
+        Strng = re.sub('(ו)(?![ֹֺּ])', 'װ', Strng)
+
+        ## Intrdouce Schva nach
+
+        # Replva holem for vav with holem
+        Strng = Strng.replace('ֺ','ֹ')
+
+        # remove stray alephs
+        Strng = re.sub('[א](?!' + vowelsR + ')', '', Strng)
+
+        ## remove schwa at the end of vwords
+        Strng = re.sub(consonantsAll + "(?!" + vowelsignsADShinG + ')', r'\1' + 'ְ' + r'\2', Strng)
+
+        ## Aleph + Svha = a
+        Strng = Strng.replace('אְ','')
+
+        ## Schva nach
+        # https://judaism.stackexchange.com/questions/92599/what-are-the-rules-for-shva-na
+        # http://www.shailamorah.com/kriah-roundtable/teaching-shva-rules
+        Strng = re.sub('(\s|\.|,|^)' + consonantsAll + '(ְ)', r'\1\2' + 'ֶ', Strng)
+        Strng = re.sub('(ּ)' + '(ְ)', r'\1' + 'ֶ' , Strng)
+        Strng = re.sub(consonantsAll + '(' 'ְ' + 'ְ' + ')' + '(' + r'\1' + ')(' + 'ְ' + ')', r'\1\2\3' +  'ֶ', Strng)
+        Strng = re.sub(consonantsAll + '(ְ)' + '(' + r'\1' + ')'+ '(?!(\s|\.|\n|,|$))', r'\1' + 'ֶ' + r'\3', Strng)
+        Strng = re.sub(consonantsAll + '(ְ)' + consonantsAll + '(ְ)' + '(?!(\s|\.|\n|,|$))', r'\1\2' + r'\3' + 'ֶ' , Strng)
+
+        Strng = Strng.replace('ְ' + 'ְ','ְ') #two schva to one
+        Strng = Strng.replace('ֶ' + 'ְ','ְ') #two schva to one
+
+        ## remove patesh
+        Strng = re.sub('(?<![אע])\u05B7', '', Strng)
+
+    return Strng
+
+
 def FixMongolian(Strng, reverse=False):
     vowels = '(' + '|'.join(GM.CrunchSymbols(GM.Vowels, 'Mongolian')) + ')'
     consonants = '(' + '|'.join(GM.CrunchSymbols(GM.Consonants, 'Mongolian')) + ')'

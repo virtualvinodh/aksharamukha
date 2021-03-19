@@ -9,6 +9,8 @@ from collections import Counter
 import unicodedata
 import io
 import collections
+from aksharamukha.ScriptMap.NonIndic import kana2roman
+import pykakasi
 
 def removeA(a):
     if a.count('a') == 1:
@@ -198,6 +200,62 @@ def convert(src, tgt, txt, nativize, preoptions, postoptions):
     if src == tgt:
         tgtOld = tgt
         tgt = "Devanagari"
+
+    if src == 'Hiragana' or src == 'Katakana':
+        src = 'ISO'
+        # preserve roman words
+        kks = pykakasi.kakasi()
+        cv = kks.convert(txt)
+        txt = ''
+        for item in cv:
+            txt = txt + ' ' + item['hepburn']
+
+        txt = txt.replace('aa', 'ā').replace('ii', 'ī').replace('ee', 'ē').replace('oo', 'ō').replace('uu','ū')
+        txt = txt.replace('a-', 'ā').replace('i-', 'ī').replace('e-', 'ē').replace('o-', 'ō').replace('u-','ū')
+        txt = txt.replace("n'", 'n_').replace('ch', 'c').replace('sh', 'ṣ').replace('sṣ', 'ṣṣ').replace('ai', 'a_i').replace('au', 'a_u')
+        txt = txt.replace('w', 'v')
+        txt = txt.replace('ou', 'ō').replace('ei', 'ē')
+        txt = txt.replace('、', ',').replace('。', '.')
+
+        # Nasalization of n
+
+        txt= txt.replace('ng', 'ṅg').replace('nk', 'ṅk').replace('nk', 'ṅk').replace('np', 'mp').replace('nb', 'mb').replace('nm', 'mm')
+
+    if tgt == 'Hiragana':
+        txt = PostOptions.ApplyScriptDefaults(Convert.convertScript(txt, src, "Telugu"), src, "Telugu")
+
+        # replace virama with o except for kyo, cyo myo
+        txt = Convert.convertScript(txt, "Telugu", "RomanKana")
+
+        txt = txt.replace("nn'", 'nnn').replace('c', 'ch').replace('chch', 'cch').replace('shsh', 'ssh').replace("mm", "nm")
+        txt = txt.replace('v', 'w').replace('l', 'r')
+        txt = txt.replace(',', ',').replace('.', '。')
+        txt = txt.replace('yi', 'i').replace('ye', 'e').replace('wi', 'i').replace('we', 'e')
+
+        txt = kana2roman.to_hiragana(txt)
+        txt = re.sub('(k|g|ch|j|t|d|p|b|m|y|r|v|sh|s|h)' + '(' + r'\1' + ')', r'\1' + 'u', txt)
+        txt = re.sub('(k|g|ch|j|t|d|p|b|m|y|r|v|sh|s|h)', r'\1' + 'u', txt)
+        txt = kana2roman.to_hiragana(txt)
+
+    if tgt == 'Katakana':
+        txt = PostOptions.ApplyScriptDefaults(Convert.convertScript(txt, src, "Telugu"), src, "Telugu")
+
+        # replace virama with o except for kyo, cyo myo
+        txt = Convert.convertScript(txt, "Telugu", "RomanKana")
+
+        txt = txt.replace('aa', 'a-').replace('ii', 'i-').replace('ee', 'e-').replace('oo', 'o-').replace('uu','u-')
+        txt = txt.replace("nn'", 'nnn').replace('c', 'ch').replace('chch', 'cch').replace('shsh', 'ssh').replace("mm", "nm")
+        txt = txt.replace('v', 'w').replace('l', 'r')
+        txt = txt.replace(',', ',').replace('.', '。')
+        txt = txt.replace('yi', 'i').replace('ye', 'e').replace('wi', 'i').replace('we', 'e')
+
+        txt = kana2roman.to_katakana(txt)
+
+        txt = re.sub('(k|g|ch|j|t|d|p|b|m|y|r|v|sh|s|h)' + '(' + r'\1' + ')', r'\1' + 'u', txt)
+        txt = re.sub('(k|g|ch|j|t|d|p|b|m|y|r|v|sh|s|h)', r'\1' + 'u', txt)
+
+        txt = kana2roman.to_katakana(txt)
+
 
     txt = PreProcess.PreProcess(txt,src,tgt)
 

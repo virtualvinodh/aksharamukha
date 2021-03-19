@@ -68,7 +68,9 @@ export const ScriptMixin = {
         'Telugu': 'khaṇḍam → <span class="telugu">ఖణ్డమ్</span> not <span class="telugu">ఖండం</span> <br/> kæpôḍ → <span class="telugu">కెʼపాʼడ్</span> not <span class="telugu">కెపాడ్</span>',
         'Kannada': 'khaṇḍam → <span class="kannada">ಖಣ್ಡಮ್</span> not <span class="kannada">ಖಂಡಂ</span> <br/> kæpôḍ → <span class="kannada">ಕೆʼಪಾʼಡ್</span> not <span class="telugu">ಕೆಪಾಡ್</span>',
         'Devanagari': 'සඳහන් → <span class="devanagari">सँˆदहन्</span> not <span class="devanagari">सँदहन्</span>',
-        'Sinhala': 'kôṭ hām̐ → <span class="sinhala">කාʼට් හූංʼ</span> not <span class="sinhala">කාට් හූං</span>'
+        'Sinhala': 'kôṭ hām̐ → <span class="sinhala">කාʼට් හූංʼ</span> not <span class="sinhala">කාට් හූං</span>',
+        'Hebrew': 'kôṭ hām̐ → <span class="sinhala">කාʼට් හූංʼ</span> not <span class="sinhala">කාට් හූං</span>'
+
       },
       preserveSourceExampleIn: {
       },
@@ -180,14 +182,14 @@ export const ScriptMixin = {
           { label: 'Subscript numerals<br/><small><span class="tamil">க²க³க⁴ → க₂க₃க₄</span></small>', value: 'TamilSubScript' },
           { label: 'Old orthography<br/><small><span class="tamil">லை னா</span> → <span class="tamilold">லை னா</span></small>', value: 'oldtamilortho' },
           { label: 'Grantha Visarga<br/><small><span class="tamil">நம꞉ → நம𑌃</span></small>', value: 'TamilGranthaVisarga' },
-          // { label: 'Disable ௐ<br/><small><span class="tamil">ௐ → ஓம்</span></small>', value: 'TamilOmDisable' },
+          { label: 'Disable ௐ<br/><small><span class="tamil">ௐ → ஓம்</span></small>', value: 'TamilOmDisable' },
           { label: 'Remove apostrophe<br/><small><span class="tamil">ருʼம்ʼ → ரும்</span></small>', value: 'TamilRemoveApostrophe' },
           { label: 'Remove diacritic numerals<br/><small><span class="tamil">க²க³க⁴ → ககக</span></small>', value: 'TamilRemoveNumbers' },
           { label: 'Contextual <span class="tamil">ள</><br/><small>(Experimental)</small><br/><small><span class="tamil">ப்ரலய → ப்ரளய</span></small>', value: 'ContextualLLa' },
           { label: 'Only word-final <span class="tamil">ன</><br/><small><span class="tamil">ஆனனன் → ஆநநன்</span></small>', value: 'FinalNNa' },
           { label: 'Dandas<br/><small><span class="tamil">. .. → । ॥</span></small>', value: 'RetainTamilDanda' },
-          { label: 'Tamil numerals<br/><small><span class="tamil">123 → ௧௨௩</span></small>', value: 'RetainTamilNumerals' }
-          // { label: 'Medieval e/o with Pulli<br/><small><span class="tamil">ஒ ஓ கொ கோ → ஒ் ஒ கெ்ா கொ</span></small>', value: 'MedievalTamilOrthography' }
+          { label: 'Tamil numerals<br/><small><span class="tamil">123 → ௧௨௩</span></small>', value: 'RetainTamilNumerals' },
+          { label: 'Medieval e/o with Pulli<br/><small><span class="tamil">ஒ ஓ கொ கோ → ஒ் ஒ கெ்ா கொ</span></small>', value: 'MedievalTamilOrthography' }
         ],
         'TamilExtended': [
           { label: 'Dandas <br/><small><span class="tamilextended">. .. → । ॥</span></small>', value: 'Dot2Dandas' },
@@ -216,6 +218,12 @@ export const ScriptMixin = {
           { label: 'Disable repha<br/><small><span class="newa">𑐢𑐬𑑂𑐩 → 𑐢𑐬𑑂‍𑐩</span></small>', value: 'NewaDisableRepha' },
           { label: 'Special /ta/ conjunct<br/><small><span class="newa">𑐟𑑂𑐥𑐟𑑂𑐩𑐟𑑂𑐰 → 𑐟𑑂‍𑐥𑐟𑑂‍𑐩𑐟𑑂‍𑐰</span></small>', value: 'NewaSpecialTa' },
           { label: 'Devanagari-based Newa font<br/><small><span class="newa">𑐧𑐸𑐡𑑂𑐢𑑅</span> →<span class="nepaldevafont">बुद्धः</span></small>', value: 'nepaldevafont' }
+
+        ],
+        'Hebrew': [
+          { label: 'Use Qof<br/>כּ ← ק', value: 'HeberewQoph' },
+          { label: 'Use Kamats Katan for Short /o/<br/>לֹ ← לׇ', value: 'HebewShortO' },
+          { label: 'Use Ktvil Male orthography<br/>לֹ ← לׇ', value: 'HebrewKatevMalei' }
 
         ],
         'Oriya': [
@@ -832,6 +840,70 @@ export const ScriptMixin = {
             'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansHanunoo/NotoSansHanunoo-Regular.otf'
           },
           language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Insular', 'South East Asian']
+        },
+        {
+          label: 'Hebrew',
+          value: 'Hebrew',
+          sscode: 'Hebr',
+          ssdesc: 'The Hebrew script is primarily used for writing the Hebrew, Samaritan and Yiddish languages. It is also used for writing some varieties of Arabic spoken in North Africa, Iraq and Yemen; the languages of the Jewish communities in Italy and Corfu, Morocco (Berber), Spain and the Caucasus mountains; and the modern Jewish Aramaic languages. Prior to 500 BC the Hebrew language was written in the Paleo-Hebrew script, which was abandoned after the Jewish exile in the 5th century BC in favour of the Aramaic script, from which the current Hebrew script descended. It is commonly called the Hebrew alphabet, after its first two letters aleph and bet, although it is actually an abjad.',
+          omnicode: 'hebrew',
+          wikicode: 'Hebrew_alphabet',
+          font: {
+            'name': 'Noto Serif Hebrew',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansHanunoo/NotoSansHanunoo-Regular.otf'
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Aramaic'],
+          region: ['West Asian']
+        },
+        {
+          label: 'Japanese (Hiragana)',
+          value: 'Hiragana',
+          sscode: 'Java',
+          ssdesc: 'Javanese is Indonesia\'s oldest literary language, its literary history being traceable to the C4th. The present Javanese script is a modern variant of Old Kawi, an ancient Brahmic script from which many scripts in the Indonesian archipelago are derived. It is the pre-colonial script of the Javanese language spoken on the Indonesian islands of Java and Bali and is used to write the Tengger and Osing languages, also spoken in Java and Bali. The Javanese script is closely related to the Balinese script, although Javanese contains 4 consonant letters which are absent in the Balinese.',
+          omnicode: 'javanese',
+          wikicode: 'Javanese_script',
+          font: {
+            'name': 'Noto Sans Javanese',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansJavanese/NotoSansJavanese-Regular.otf'
+          },
+          language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Insular', 'South East Asian']
+        },
+        {
+          label: 'Japanese (Katakana)',
+          value: 'Katakana',
+          sscode: 'Java',
+          ssdesc: 'Javanese is Indonesia\'s oldest literary language, its literary history being traceable to the C4th. The present Javanese script is a modern variant of Old Kawi, an ancient Brahmic script from which many scripts in the Indonesian archipelago are derived. It is the pre-colonial script of the Javanese language spoken on the Indonesian islands of Java and Bali and is used to write the Tengger and Osing languages, also spoken in Java and Bali. The Javanese script is closely related to the Balinese script, although Javanese contains 4 consonant letters which are absent in the Balinese.',
+          omnicode: 'javanese',
+          wikicode: 'Javanese_script',
+          font: {
+            'name': 'Noto Sans Javanese',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansJavanese/NotoSansJavanese-Regular.otf'
+          },
+          language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Insular', 'South East Asian']
+        },
+        {
+          label: 'Japanese (Mixed)',
+          value: 'Japanese',
+          sscode: 'Java',
+          ssdesc: 'Javanese is Indonesia\'s oldest literary language, its literary history being traceable to the C4th. The present Javanese script is a modern variant of Old Kawi, an ancient Brahmic script from which many scripts in the Indonesian archipelago are derived. It is the pre-colonial script of the Javanese language spoken on the Indonesian islands of Java and Bali and is used to write the Tengger and Osing languages, also spoken in Java and Bali. The Javanese script is closely related to the Balinese script, although Javanese contains 4 consonant letters which are absent in the Balinese.',
+          omnicode: 'javanese',
+          wikicode: 'Javanese_script',
+          font: {
+            'name': 'Noto Sans Javanese',
+            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansJavanese/NotoSansJavanese-Regular.otf'
+          },
+          language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
           region: ['South East Asian: Insular', 'South East Asian']

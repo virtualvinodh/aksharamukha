@@ -442,6 +442,17 @@
 @font-face {
   font-family: 'MQG8F02';
   src: url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/MQG8F02.ttf')
+
+}
+
+@font-face {
+  font-family: 'GreatHorKham_Taunggyi';
+  src: url('../statics/GreatHorKham_Taunggyi.ttf')
+}
+
+@font-face {
+  font-family: 'Noto Serif Hebrew';
+  src: url('../statics/NotoSerifHebrew-Regular.ttf')
 }
 
 @font-face{font-family:'Mongolian BT';src:url(http://trans.mglip.com/css/LD-MONG150702-BT.ttf); }
@@ -596,6 +607,13 @@
 }
 .limbu {
   font-family: "Noto Sans Limbu" !important
+}
+.shan {
+  font-family: "GreatHorKham_Taunggyi" !important
+}
+.hebrew {
+  font-family: "Noto Serif Hebrew" !important;
+  direction: rtl;
 }
 .batakkaro {
   font-family: "Pangururan" !important

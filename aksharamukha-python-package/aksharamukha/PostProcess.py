@@ -14,11 +14,98 @@ import functools
 
 ### Consider Adding Options to ignore Nukta etc for Gujarati bengali by default
 
-##
+## Todo
+## Fix Font links and names in description
 
 def default(Strng):
 
     return Strng
+
+def HebrewVetVav(Strng):
+    shortVowels = '(' + '|'.join(['\u05B7', '\u05B8', '\u05B4', '\u05BB', '\u05B5', '\u05B6', '\u05B9', '\u05B0']) + ')'
+
+    Strng = re.sub(shortVowels + '(' + 'ו' + ')' + '(?!\u05BC)', r'\1' + 'ב', Strng)
+
+    # Bet with Holam for Vav with beth with holam
+
+    Strng = Strng.replace('בֺ', 'בֹ')
+
+    return Strng
+
+def HiraganaaunotDipthong(Strng):
+
+    return Strng
+
+def IASTISONasalTilde(Strng):
+
+    return Strng
+
+def HeberewQoph(Strng):
+    Strng = Strng.replace('כּ', 'ק').replace('ךּ', 'ק')
+
+    return Strng
+
+def HebewShortO(Strng):
+    Strng = re.sub('(?<!ו)\u05B9', '\u05C7', Strng)
+
+    return Strng
+
+def HebrewKatevMalei(Strng):
+    Strng = Strng.replace('ָ', 'א') # long aa
+    Strng = Strng.replace('ַ', 'א') # short a
+
+    return Strng
+
+def HebrewAllShvNah(Strng):
+    ### Todo
+
+    return Strng
+
+def HebrewnonFinalShort(Strng):
+    finals = ['ך', 'ם', 'ן', 'ף', 'ץ', 'ףּ', 'ךּ']
+    finalCons = ['כ', 'מ', 'נ', 'פ', 'צ', 'פּ', 'כּ']
+
+    otherCons = 'ב,ח,ע,צ,ש,ת'.split(',')
+    consonantsAll = '(' + '|'.join(GM.CrunchSymbols(GM.Consonants, 'Hebrew') + finals  + ['׳', 'י', 'ו'] + otherCons) + ')'
+
+    shortVowels = ['\u05B7', '\u05B8', '\u05B4', '\u05BB', '\u05B5', '\u05B6', '\u05B9', '\u05C7']
+    shortVowelsR = '(' + '|'.join(['\u05B7', '\u05B8', '\u05B4', '\u05BB', '\u05B5', '\u05B6', '\u05B9', '\u05C7'] + ['׳']) + ')'
+
+    for s in shortVowels:
+        Strng = re.sub('(' + s + ')' + '(׳?)' + '(?!' + consonantsAll + ')', r'\1\2' + 'ה' + '\u02BE', Strng )
+
+    for f, c in zip(finals, finalCons):
+        Strng = re.sub('(' + f + ')' + shortVowelsR + '(׳?)' + 'ה' + '\u02BE', c + r'\2\3' + 'ה', Strng)
+
+    for f in finals:
+        Strng = Strng.replace(f + '\u05B0', f)
+
+    Strng = Strng.replace('\u05B0' + '׳' + 'ה' + '\u02BE', '\u05B0' + '׳' )
+    Strng = Strng.replace('וֹה' + '\u02BE', 'וֹ' )
+
+    Strng = Strng.replace('\u02BE', '')
+
+    uVowels = ['וֹ', 'וּ']
+
+    for s in uVowels:
+        Strng = re.sub('(' + s + ')' + '(׳?)' + '(?!' + consonantsAll + ')', r'\1\2' + 'א', Strng )
+
+    return Strng
+
+def DevanagariAnusvara(Strng):
+
+    return
+
+def GurmukhiCandrabindu(Strng):
+
+    return
+
+def UrduremoveA(Strng):
+    ## Replace ayin with something say a'
+    ## remove all non initial 'a'
+    ## only for latin letters
+
+    return
 
 def mDotAboveToBelow(Strng):
     Strng = Strng.replace('ṃ', 'ṁ')
