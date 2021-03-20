@@ -74,6 +74,8 @@ export default {
     update: function () {
       var options = {}
 
+      this.postOptions = this.filterRadio(this.postOptions, this.outputScript)
+
       options['script'] = this.outputScript
       options['sourcePreserve'] = this.sourcePreserve
       options['postOptions'] = this.postOptions

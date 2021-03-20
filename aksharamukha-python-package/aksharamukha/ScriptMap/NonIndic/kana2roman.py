@@ -403,8 +403,6 @@ for kun, hep in zip(KUNREI, HEPBURN):
 
 TO_HEPBURN.update( {'ti': 'chi' })
 
-
-
 # Use Hiragana
 
 KANROM_H = {}

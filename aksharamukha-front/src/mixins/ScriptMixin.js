@@ -167,16 +167,16 @@ export const ScriptMixin = {
           { label: 'Convert Saurashtra Haaru as :<small><br/><span class="saurashtra">ꢥꢴꢷ</span> → <span class="tamil">நீ:</span></small>', value: 'SaurastraHaaruColon' }
         ]
       },
-      postOptionsRadio: {
-        'Ranjana': {
-          'Display': [
-            { label: 'Default<br/><small><span class="ranjana">बुद्धः</span></small>', value: 'default' },
-            { label: 'Lantsa<br/><small><span class="ranjanalantsa">བུདྡྷཿ</span></small>', value: 'ranjanalantsa' },
-            { label: 'Wartu<br/><small><span class="ranjanawartu">བུདྡྷཿ</span></small>', value: 'ranjanawartu' }
-          ]
-        }
+      postOptionsRadioGroup: {
+        'Ranjana': [['ranjanalantsa', 'ranjanawartu']],
+        'Siddham': [['UseAlternateI1', 'UseAlternateI2'], ['siddhammukta', 'siddhamap']],
+        'PhagsPa': [['PhagsPaTib', 'PhagsPaSeal']]
       },
       postOptionsGroup: {
+        'Ranjana': [
+          { label: 'Lantsa Style (Tibetan)<br/><small><span class="ranjana">बुद्धः</span> → <span class="ranjanalantsa">བུདྡྷཿ</span></small>', value: 'ranjanalantsa' },
+          { label: 'Wartu Style (Tibetan)<br/><small><span class="ranjana">बुद्धः</span> → <span class="ranjanawartu">བུདྡྷཿ</span></small>', value: 'ranjanawartu' }
+        ],
         'Tamil': [
           { label: 'Disable <span class="tamil">ஶ</span><br/><small><span class="tamil">ஶ → ஷ²</span></small>', value: 'TamilDisableSHA' },
           { label: 'Subscript numerals<br/><small><span class="tamil">க²க³க⁴ → க₂க₃க₄</span></small>', value: 'TamilSubScript' },
@@ -197,7 +197,6 @@ export const ScriptMixin = {
           { label: 'Contextual <span class="tamil">ன</span> <br/><small><span class="tamilextended">ഗജാനനന്‌ → ഗജാഩഩഩ്‌</span></small>', value: 'TamilExtendedNNA' },
           { label: 'Tamil Style -u -ū <br/><small>(Core Grantha)</small><br/><small><span class="tamilextended">ഗുബൂഫുഭൂ → ഗ‍ുബ‍ൂഫ‍ുഭ‍ൂ</span></small>', value: 'TamilStyleUUCore' },
           { label: 'Tamil Style -u -ū <br/><small>(Tamilized Grantha)</small><br/><small><span class="tamilextended">ജൂസുഷുഹൂ → ജ‍ൂസ‍ുഷ‍ുഹ‍ൂ</span></small>', value: 'TamilStyleUUOther' }
-
         ],
         'Chakma': [
           {
@@ -243,7 +242,7 @@ export const ScriptMixin = {
         ],
         'Siddham': [
           { label: 'Variant vowel sign U <span class="siddham">𑗜</span><br/><small> <span class="siddham">𑖎𑖲𑖚𑖲𑖦𑖲 → 𑖎𑗜𑖚𑗜𑖦𑗜</span></small>', value: 'UseAlternateVSU' },
-          { label: 'Variant vowel sign UU <span class="siddham">𑗝</span><br/><small> <span class="siddham">𑖎𑖳𑖚𑖳𑖦𑖳 → 𑖎𑖳𑖚𑖳𑖦𑖳</span></small>', value: 'UseAlternateVSUU' },
+          { label: 'Variant vowel sign UU <span class="siddham">𑗝</span><br/><small> <span class="siddham">𑖎𑖳𑖚𑖳𑖦𑖳 → 𑖎𑗝𑖚𑗝𑖦𑗝</span></small>', value: 'UseAlternateVSUU' },
           { label: 'Variant I 1 <br/><small><span class="siddham">𑖂 → 𑗘</span></small>', value: 'UseAlternateI1' },
           { label: 'Variant I 2 <br/><small><span class="siddham">𑖂 → 𑗙</span></small>', value: 'UseAlternateI2' },
           { label: 'Variant II <br/><small><span class="siddham">𑖃 → 𑗚</span></small>', value: 'UseAlternateII' },
@@ -252,6 +251,9 @@ export const ScriptMixin = {
           { label: 'ApDevSiddham font', value: 'siddhamap' }
         ],
         'Devanagari': [
+          { label: 'Nepali Style<br/><small>के कै को कौ → कॎ कॎे कॎा कॎो</small>', value: 'DevanagariPrishtamatra' },
+          { label: 'Marathi Style<br/><small>के कै को कौ → कॎ कॎे कॎा कॎो</small>', value: 'DevanagariPrishtamatra' },
+          { label: 'Jain Style<br/><small>के कै को कौ → कॎ कॎे कॎा कॎो</small>', value: 'DevanagariPrishtamatra' },
           { label: 'ऍ → ॲ', value: 'DevanagariACandra' },
           { label: 'Prishthamatra orthography<br/><small>के कै को कौ → कॎ कॎे कॎा कॎो</small>', value: 'DevanagariPrishtamatra' }
         ],
@@ -879,22 +881,6 @@ export const ScriptMixin = {
         {
           label: 'Japanese (Katakana)',
           value: 'Katakana',
-          sscode: 'Java',
-          ssdesc: 'Javanese is Indonesia\'s oldest literary language, its literary history being traceable to the C4th. The present Javanese script is a modern variant of Old Kawi, an ancient Brahmic script from which many scripts in the Indonesian archipelago are derived. It is the pre-colonial script of the Javanese language spoken on the Indonesian islands of Java and Bali and is used to write the Tengger and Osing languages, also spoken in Java and Bali. The Javanese script is closely related to the Balinese script, although Javanese contains 4 consonant letters which are absent in the Balinese.',
-          omnicode: 'javanese',
-          wikicode: 'Javanese_script',
-          font: {
-            'name': 'Noto Sans Javanese',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansJavanese/NotoSansJavanese-Regular.otf'
-          },
-          language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
-          status: ['Living', 'Living: Minor'],
-          invented: ['Derived: Brahmi', 'Derived: Pallava'],
-          region: ['South East Asian: Insular', 'South East Asian']
-        },
-        {
-          label: 'Japanese (Mixed)',
-          value: 'Japanese',
           sscode: 'Java',
           ssdesc: 'Javanese is Indonesia\'s oldest literary language, its literary history being traceable to the C4th. The present Javanese script is a modern variant of Old Kawi, an ancient Brahmic script from which many scripts in the Indonesian archipelago are derived. It is the pre-colonial script of the Javanese language spoken on the Indonesian islands of Java and Bali and is used to write the Tengger and Osing languages, also spoken in Java and Bali. The Javanese script is closely related to the Balinese script, although Javanese contains 4 consonant letters which are absent in the Balinese.',
           omnicode: 'javanese',
@@ -2223,6 +2209,28 @@ export const ScriptMixin = {
     }
   },
   methods: {
+    filterRadio: function (postOptions, outputScript) {
+      var latest = postOptions.pop()
+
+      if (typeof this.postOptionsRadioGroup[outputScript] !== 'undefined') {
+        this.postOptionsRadioGroup[outputScript].forEach(function (options) {
+          // console.log(options)
+          if (options.includes(latest)) {
+            var toCheck = options.filter(x => x !== latest)
+            // console.log('To Check')
+            toCheck.forEach(function (option) {
+              // console.log('removing ' + option)
+              postOptions = postOptions.filter(x => x !== option)
+            })
+          }
+        })
+      }
+
+      if (typeof latest === 'string') {
+        postOptions = postOptions.concat(latest)
+      }
+      return postOptions
+    },
     tagsGet: function (script) {
       if (script !== '') {
         return script.language.concat(script.invented, script.status, script.region)

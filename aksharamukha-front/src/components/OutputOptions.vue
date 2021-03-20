@@ -3,16 +3,6 @@
     <div class="col-xs-12 col-md-12 print-hide">
       <q-option-group
         color="dark"
-        type="radio"
-        inline
-        class="q-ml-sm q-mb-sm q-mt-sm print-hide"
-        v-model="postOptions"
-        @input="convertRadio"
-        :options="typeof postOptionsRadio[outputScript] !== 'undefined' ? postOptionsRadio[outputScript] : []"
-        v-show="typeof postOptionsRadio[outputScript] !== 'undefined'"
-      />
-      <q-option-group
-        color="dark"
         type="checkbox"
         inline
         class="q-ml-sm q-mb-sm q-mt-sm print-hide"
@@ -70,10 +60,10 @@ export default {
   },
   methods: {
     convert: function () {
+      this.postOptions = this.filterRadio(this.postOptions, this.outputScript)
+
+      // console.log(this.postOptions)
       this.$emit('input', this.postOptions)
-    },
-    convertRadio: function () {
-      this.$emit('input', [this.postOptions])
     }
   }
 }
