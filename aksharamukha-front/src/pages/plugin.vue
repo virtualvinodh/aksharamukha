@@ -105,18 +105,6 @@ export default {
   margin-top: -30px;
   display:inline-block;
 }
-@font-face {
-  font-family: Adinatha Tamil Brahmi;
-  src: url('../statics/AdinathaTamilBrahmi2.otf');
-}
-@font-face {
-  font-family: e-Brahmi T;
-  src: url('../statics/e-Brahmi-T.ttf');
-}
-@font-face {
-  font-family: e-Velvi;
-  src: url('../statics/e-Velvi.ttf');
-}
 .quote {
   text-align: left;
   margin-right: 140px;

@@ -433,7 +433,8 @@ export const ScriptMixin = {
           language: ['Others'],
           status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi'],
-          region: ['East Indic', 'Indic']
+          region: ['East Indic', 'Indic'],
+          pdfFont: ''
         },
         {
           label: 'Ariyaka',

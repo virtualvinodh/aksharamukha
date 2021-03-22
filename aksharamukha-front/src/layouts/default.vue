@@ -1,7 +1,6 @@
 <template>
   <q-layout view="hHr Lpr fFf">
     <q-window-resize-observable @resize="onResize" />
-
     <q-layout-header class="print-hide">
       <q-toolbar
         color="dark"
