@@ -21,6 +21,11 @@ def default(Strng):
 
     return Strng
 
+def urduRemoveInherent(Strng):
+    Strng = re.sub('\Ba', '', Strng)
+
+    return Strng
+
 def HebrewVetVav(Strng):
     shortVowels = '(' + '|'.join(['\u05B7', '\u05B8', '\u05B4', '\u05BB', '\u05B5', '\u05B6', '\u05B9', '\u05B0']) + ')'
 
@@ -29,6 +34,22 @@ def HebrewVetVav(Strng):
     # Bet with Holam for Vav with beth with holam
 
     Strng = Strng.replace('בֺ', 'בֹ')
+
+    return Strng
+
+def devanagariuttara(Strng):
+
+    return Strng
+
+def devanagarinepali(Strng):
+
+    return Strng
+
+def devanagaribalbodh(Strng):
+
+    return Strng
+
+def devanagarijain(Strng):
 
     return Strng
 
@@ -53,11 +74,6 @@ def HebewShortO(Strng):
 def HebrewKatevMalei(Strng):
     Strng = Strng.replace('ָ', 'א') # long aa
     Strng = Strng.replace('ַ', 'א') # short a
-
-    return Strng
-
-def HebrewAllShvNah(Strng):
-    ### Todo
 
     return Strng
 
@@ -94,18 +110,17 @@ def HebrewnonFinalShort(Strng):
 
 def DevanagariAnusvara(Strng):
 
-    return
+    return NasalToAnusvara(Strng, 'Devanagari')
+
+def jainomDevangari(Strng):
+    Strng = Strng.replace('ॐ', 'ꣽ')
+
+    return Strng
 
 def GurmukhiCandrabindu(Strng):
+    Strng = Strng.replace('ਁ', 'ਂ')
 
-    return
-
-def UrduremoveA(Strng):
-    ## Replace ayin with something say a'
-    ## remove all non initial 'a'
-    ## only for latin letters
-
-    return
+    return Strng
 
 def mDotAboveToBelow(Strng):
     Strng = Strng.replace('ṃ', 'ṁ')

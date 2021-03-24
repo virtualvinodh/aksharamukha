@@ -123,8 +123,8 @@ SouthConsonantMap = [
 
 NuktaConsonantMap =  [
                      'ק',
-                      'כ',
-                     'ג\u02BD',
+                     'כ',
+                     'גּ',
                      'ז',
                      'ד\u02BD',
                      'ד\u02BD',
@@ -133,11 +133,11 @@ NuktaConsonantMap =  [
                      ]
 
 SinhalaConsonantMap =[
-                     '\u006E\u002A\u02BD',
-                     '\u006E\u002A\u02BD',
-                     '\u006E\u002A\u02BD',
-                     '\u006E\u002A\u02BD',
-                     '\u006D\u002A\u02BD',
+                     'נְגַ\u02BD',
+                     'נְגַ׳\u02BD',
+                     'נְדַ\u02BD',
+                     'נְדַ\u02BD',
+                     'מְבַּ\u02BD',
                       ]
 
 NuktaMap = [
@@ -145,7 +145,7 @@ NuktaMap = [
            ]
 
 OmMap = [
-        'אוֹמְ'  + '\u02BD'
+        'וֹמְ'  + '\u02BD'
         ]
 
 SignMap =[

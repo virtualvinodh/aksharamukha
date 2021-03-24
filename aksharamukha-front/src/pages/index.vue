@@ -388,6 +388,13 @@ export default {
         return
       }
 
+      this.$q.notify({
+        type: 'info',
+        message: 'This may take a while. Please have some patience.',
+        position: 'center',
+        timeout: 1000
+      })
+
       this.loadingOCR = true
 
       var base64 = await this.readFile(this.imageFile)

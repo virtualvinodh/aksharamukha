@@ -55,7 +55,7 @@ export const ScriptMixin = {
         'Thaana': 'maṇi → <span class="thaana">މަޱި</span> not <span class="thaana">މަނި</span>',
         'Tibetan': 'bhagavat → <span class="tibetan">བྷགཝཏ྄</span> not <span class="tibetan">བྷགབཏ</span>',
         'Saurashtra': 'simha → <span class="saurashtra">ꢱꢶꢪ꣄ꢲ</span> not <span class="saurashtra">ꢱꢶꢪꢴ</span>',
-        'Gurmukhi': 'anna aṃta → <span class="gurmukhi">ਅੱਨ ਅਂਤ</span> not <span class="gurmukhi">ਅੰਨ ਅੰਤ</span><br/> kṛpā → <span class="sinhala">ਕ੍ਰੁʼਪਾ</span> not <span class="sinhala">ਕ੍ਰੁਪਾ</span>',
+        'Gurmukhi': 'anna aṃta hām̐ → <span class="gurmukhi">ਅੱਨ ਅਂਤ ਹਾਂ</span> not <span class="gurmukhi">ਅੰਨ ਅੰਤ ਹਾਁ</span><br/> kṛpā → <span class="sinhala">ਕ੍ਰੁʼਪਾ</span> not <span class="sinhala">ਕ੍ਰੁਪਾ</span>',
         'Chakma': 'yayāti → <span class="chakma">𑄡𑄧𑄡𑄖𑄨</span> not <span class="chakma">𑄡𑄧𑄠𑄖𑄨</span>',
         'Gujarati': 'kŏl → <span class="gujarati">કો˘લ્</span> not <span class="gujarati">કોલ્</span>',
         'Oriya': 'vināyaka → <span class="oriya">ୱିନାଯକ</span> not <span class="oriya">ବିନାୟକ</span><br/>kŏlæṭ → <span class="oriya">କୋ˘ଲେʼଟ୍</span> not <span class="oriya">କୋଲେଟ୍</span>',
@@ -67,9 +67,9 @@ export const ScriptMixin = {
         'Malayalam': 'daṃtam kaṉi → <span class="malayalam">ദംതമ് കഩി</span> not <span class="malayalam">ദന്തം കനി</span> <br/> kæpôḍ → <span class="malayalam">കെʼപാʼഡ്</span> not <span class="malayalam">കെപാഡ്</span>',
         'Telugu': 'khaṇḍam → <span class="telugu">ఖణ్డమ్</span> not <span class="telugu">ఖండం</span> <br/> kæpôḍ → <span class="telugu">కెʼపాʼడ్</span> not <span class="telugu">కెపాడ్</span>',
         'Kannada': 'khaṇḍam → <span class="kannada">ಖಣ್ಡಮ್</span> not <span class="kannada">ಖಂಡಂ</span> <br/> kæpôḍ → <span class="kannada">ಕೆʼಪಾʼಡ್</span> not <span class="telugu">ಕೆಪಾಡ್</span>',
-        'Devanagari': 'සඳහන් → <span class="devanagari">सँˆदहन्</span> not <span class="devanagari">सँदहन्</span>',
+        'Devanagari': 'san̆dahan → <span class="devanagari">सँˆदहन्</span> not <span class="devanagari">सँदहन्</span>',
         'Sinhala': 'kôṭ hām̐ → <span class="sinhala">කාʼට් හූංʼ</span> not <span class="sinhala">කාට් හූං</span>',
-        'Hebrew': 'kôṭ hām̐ → <span class="sinhala">කාʼට් හූංʼ</span> not <span class="sinhala">කාට් හූං</span>'
+        'Hebrew': 'svāhā → <span class="sinhala">סְוָהָ</span> not <span class="sinhala">סְבָהָה</span>'
 
       },
       preserveSourceExampleIn: {
@@ -149,6 +149,20 @@ export const ScriptMixin = {
             label: 'Pali orthography text<br/><small> e.g. <span class="chakma">𑄖𑄗𑄂𑄉𑄖</span></small>',
             value: 'ChakmaPali'
           }
+        ],
+        'Hebrew': [
+          {
+            label: 'Vowels are not marked<br/><small>',
+            value: 'novowelshebrew'
+          },
+          {
+            label: 'Treat all shvas as <i>shva nakh</i>',
+            value: 'shvanakhall'
+          },
+          {
+            label: '<i>Holam</i> denotes long /o/',
+            value: 'holamlong'
+          }
         ]
       },
       preOptionsGroupSpecific: {
@@ -165,12 +179,20 @@ export const ScriptMixin = {
         ],
         'TamilSaurashtra': [
           { label: 'Convert Saurashtra Haaru as :<small><br/><span class="saurashtra">ꢥꢴꢷ</span> → <span class="tamil">நீ:</span></small>', value: 'SaurastraHaaruColon' }
+        ],
+        'IASTUrdu': [
+          { label: 'Remove all inherent /a/ <small><br/><span class="urdu">ہندوستان</span> → /hndvstān/ not /hanadavasatāna/', value: 'urduRemoveInherent' }
+        ],
+        'ISOUrdu': [
+          { label: 'Remove all inherent /a/ <small><br/><span class="urdu">ہندوستان</span> → /hndvstān/ not /hanadavasatāna/', value: 'urduRemoveInherent' }
         ]
       },
       postOptionsRadioGroup: {
         'Ranjana': [['ranjanalantsa', 'ranjanawartu']],
         'Siddham': [['UseAlternateI1', 'UseAlternateI2'], ['siddhammukta', 'siddhamap']],
-        'PhagsPa': [['PhagsPaTib', 'PhagsPaSeal']]
+        'PhagsPa': [['PhagsPaTib', 'PhagsPaSeal']],
+        'Devanagari': [['devanagariuttara', 'devanagarijain', 'devanagarinepali', 'devanagaribalbodh']]
+
       },
       postOptionsGroup: {
         'Ranjana': [
@@ -221,9 +243,7 @@ export const ScriptMixin = {
         ],
         'Hebrew': [
           { label: 'Use Qof<br/>כּ ← ק', value: 'HeberewQoph' },
-          { label: 'Use Kamats Katan for Short /o/<br/>לֹ ← לׇ', value: 'HebewShortO' },
-          { label: 'Use Ktvil Male orthography<br/>לֹ ← לׇ', value: 'HebrewKatevMalei' }
-
+          { label: 'Use Kamats Katan for Short /o/<br/>לֹ ← לׇ', value: 'HebewShortO' }
         ],
         'Oriya': [
           { label: 'ଵ instead of ୱ<br/><small>ଭୱତି → ଭଵତି</small>', value: 'OriyaVaAlt' },
@@ -251,10 +271,13 @@ export const ScriptMixin = {
           { label: 'ApDevSiddham font', value: 'siddhamap' }
         ],
         'Devanagari': [
-          { label: 'Nepali Style<br/><small>के कै को कौ → कॎ कॎे कॎा कॎो</small>', value: 'DevanagariPrishtamatra' },
-          { label: 'Marathi Style<br/><small>के कै को कौ → कॎ कॎे कॎा कॎो</small>', value: 'DevanagariPrishtamatra' },
-          { label: 'Jain Style<br/><small>के कै को कौ → कॎ कॎे कॎा कॎो</small>', value: 'DevanagariPrishtamatra' },
+          { label: 'Uttara Style<br/><small><span class="devanagariuttara">अऋणझक्ष</span></small>', value: 'devanagariuttara' },
+          { label: 'Balbodh Style<br/><small><span class="devanagaribalbodh">अऋणझक्ष</span></small>', value: 'devanagaribalbodh' },
+          { label: 'Nepali Style<br/><small><span class="devanagarinepali">अऋणझक्ष</span></small>', value: 'devanagarinepali' },
+          { label: 'Jain Style<br/><small><span class="devanagarijain">णमो सिद्धाणं</span></small>', value: 'devanagarijain' },
+          { label: 'Use Jain OM<br/><small>ॐ → ꣽ</small>', value: 'jainomDevangari' },
           { label: 'ऍ → ॲ', value: 'DevanagariACandra' },
+          { label: 'Use Anusvara to nasalize<br/><small>पञ्चगङ्गा → पंचगंगा</small>', value: 'DevanagariAnusvara' },
           { label: 'Prishthamatra orthography<br/><small>के कै को कौ → कॎ कॎे कॎा कॎो</small>', value: 'DevanagariPrishtamatra' }
         ],
         'Takri': [
@@ -2425,6 +2448,14 @@ export const ScriptMixin = {
         return 'teluguzha'
       } else if (postOptions.includes('TeluguTamilRra') && tgt === 'Telugu') {
         return 'teluguzha'
+      } else if (postOptions.includes('devanagaribalbodh') && tgt === 'Devanagari') {
+        return 'devanagaribalbodh'
+      } else if (postOptions.includes('devanagariuttara') && tgt === 'Devanagari') {
+        return 'devanagariuttara'
+      } else if (postOptions.includes('devanagarinepali') && tgt === 'Devanagari') {
+        return 'devanagarinepali'
+      } else if (postOptions.includes('devanagarijain') && tgt === 'Devanagari') {
+        return 'devanagarijain'
       } else if (postOptions.includes('ThaiNativeConsonants') && tgt === 'Thai') {
         return 'thainative'
       } else if (tgt === 'Oriya' && (String(outputText).includes('॒') || String(outputText).includes('᳚') ||

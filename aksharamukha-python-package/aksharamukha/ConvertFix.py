@@ -384,6 +384,11 @@ def FixHebrew(Strng, reverse = False):
         Strng = re.sub('(\u05b7)' + vowelsigns, r'\2', Strng)
         Strng = re.sub('(\u05b7)' + '(\u05BC)' + vowelsigns, r'\2\3', Strng)
 
+        #Do gemination
+        ## consonant doubling with Dagesh
+        Strng = re.sub('([' + 'ושרקסנמליזטײ' + '])(ְ)' + r'\1', r'\1' + 'ּ', Strng)
+        Strng = re.sub('(שׁ)(ְ)' + r'\1', r'\1' + 'ּ', Strng)
+
         # Fix Finals
 
         shortVowels = '(' + '|'.join(['\u05B7', '\u05B8', '\u05B4', '\u05BB', '\u05B5', '\u05B6', '\u05B9', '\u05B0']) + ')'
@@ -401,11 +406,6 @@ def FixHebrew(Strng, reverse = False):
 
         Strng = Strng.replace('\u02BC', '')
 
-        #Do gemination
-        ## consonant doubling with Dagesh
-        Strng = re.sub('([' + 'ושרקסנמליזט' + '])(ְ)' + r'\1', r'\1' + 'ּ', Strng)
-        Strng = re.sub('(שׁ)(ְ)' + r'\1', r'\1' + 'ּ', Strng)
-
 
     else:
         vowels = ['ְ','ֱ','ֲ','ֳ','ִ','ֵ','ֶ','ַ','ָ','ֹ','ֺ','ֻ','ׇ']
@@ -418,7 +418,7 @@ def FixHebrew(Strng, reverse = False):
         Strng = re.sub(vowelsR + '([ּׁׂ])', r'\2\1', Strng)
 
         ## gimme, teh and other consonants  with Dagesh just replace themselves
-        Strng = re.sub('([גדתצ])(ּ)', r'\1', Strng)
+        Strng = re.sub('([דתצ])(ּ)', r'\1', Strng)
 
         ## approx vowels
 
@@ -481,17 +481,24 @@ def FixHebrew(Strng, reverse = False):
         ## Aleph + Svha = a
         Strng = Strng.replace('אְ','')
 
-        ## Schva nach
-        # https://judaism.stackexchange.com/questions/92599/what-are-the-rules-for-shva-na
-        # http://www.shailamorah.com/kriah-roundtable/teaching-shva-rules
-        Strng = re.sub('(\s|\.|,|^)' + consonantsAll + '(ְ)', r'\1\2' + 'ֶ', Strng)
-        Strng = re.sub('(ּ)' + '(ְ)', r'\1' + 'ֶ' , Strng)
-        Strng = re.sub(consonantsAll + '(' 'ְ' + 'ְ' + ')' + '(' + r'\1' + ')(' + 'ְ' + ')', r'\1\2\3' +  'ֶ', Strng)
-        Strng = re.sub(consonantsAll + '(ְ)' + '(' + r'\1' + ')'+ '(?!(\s|\.|\n|,|$))', r'\1' + 'ֶ' + r'\3', Strng)
-        Strng = re.sub(consonantsAll + '(ְ)' + consonantsAll + '(ְ)' + '(?!(\s|\.|\n|,|$))', r'\1\2' + r'\3' + 'ֶ' , Strng)
 
-        Strng = Strng.replace('ְ' + 'ְ','ְ') #two schva to one
-        Strng = Strng.replace('ֶ' + 'ְ','ְ') #two schva to one
+        ## Hard Svha nakh
+        if '௞' in Strng:
+            # added in preoptions
+            Strng = Strng.replace('௞', '')
+            Strng = Strng.replace('ְ' + 'ְ','ְ')
+        else:
+            ## Schva nach
+            # https://judaism.stackexchange.com/questions/92599/what-are-the-rules-for-shva-na
+            # http://www.shailamorah.com/kriah-roundtable/teaching-shva-rules
+            Strng = re.sub('(\s|\.|,|^)' + consonantsAll + '(ְ)', r'\1\2' + 'ֶ', Strng)
+            Strng = re.sub('(ּ)' + '(ְ)', r'\1' + 'ֶ' , Strng)
+            Strng = re.sub(consonantsAll + '(' 'ְ' + 'ְ' + ')' + '(' + r'\1' + ')(' + 'ְ' + ')', r'\1\2\3' +  'ֶ', Strng)
+            Strng = re.sub(consonantsAll + '(ְ)' + '(' + r'\1' + ')'+ '(?!(\s|\.|\n|,|$))', r'\1' + 'ֶ' + r'\3', Strng)
+            Strng = re.sub(consonantsAll + '(ְ)' + consonantsAll + '(ְ)' + '(?!(\s|\.|\n|,|$))', r'\1\2' + r'\3' + 'ֶ' , Strng)
+
+            Strng = Strng.replace('ְ' + 'ְ','ְ') #two schva to one
+            Strng = Strng.replace('ֶ' + 'ְ','ְ') #two schva to one
 
         ## remove patesh
         Strng = re.sub('(?<![אע])\u05B7', '', Strng)

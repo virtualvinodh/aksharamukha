@@ -44,7 +44,7 @@ def ApplyScriptDefaults(Strng,Source,Target):
         Options += ['YaToYYa']
 
     elif Target == 'Gurmukhi':
-        Options += ['GurmukhiTippiBindu','GurmukhiTippiGemination']
+        Options += ['GurmukhiCandrabindu', 'GurmukhiTippiBindu','GurmukhiTippiGemination']
 
     elif Target == 'Saurashtra':
         Options += ['SaurashtraHaru']

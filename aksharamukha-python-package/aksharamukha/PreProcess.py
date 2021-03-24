@@ -13,6 +13,28 @@ def ShowChillus(Strng):
 
     return PostProcess.MalayalamChillu(Strng, True, True)
 
+
+def holamlong(Strng):
+    Strng = Strng.replace('ֹּ','ֹּ')
+    Strng = re.sub('(?<!ו)ֹ', 'וֹ', Strng)
+
+    return Strng
+
+def novowelshebrew(Strng):
+    finals = ['ך', 'ם', 'ן', 'ף', 'ץ', 'ףּ', 'ךּ']
+    otherCons = 'ב,ח,ע,צ,ש,ת'.split(',')
+    consonantsAll = '(' + '|'.join(GM.CrunchSymbols(GM.Consonants, 'Hebrew') + finals  + otherCons + ['׳', 'י', 'ו' ,'א']) + ')'
+    vowelsignsADShinG = '(' + '|'.join(GM.CrunchSymbols(GM.VowelSigns, 'Hebrew') + ['ַ', 'ּ', 'ׁ', '׳']) + ')'
+
+    Strng = re.sub(consonantsAll + "(?!" + vowelsignsADShinG + ')', r'\1' + 'ַ' + r'\2', Strng)
+
+    return Strng
+
+def shvanakhall(Strng):
+    Strng = Strng + ' \u0BDE'
+
+    return Strng
+
 def longEOISO(Strng):
     Strng = Strng.replace('e', 'ē').replace('o', 'ō')
 

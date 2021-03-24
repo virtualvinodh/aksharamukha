@@ -20,6 +20,24 @@
   font-size: 135%;
 }
 
+.devanagaribalbodh {
+  font-family: 'chandas' !important;
+}
+
+.devanagariuttara {
+  font-family: 'uttara' !important;
+}
+
+.devanagarinepali {
+  font-family: 'siddhanta-nepali' !important;
+}
+
+.devanagarijain {
+  font-family: 'JainiPurva-Regular' !important;
+  font-feature-settings: "ss02", "ss03";
+
+}
+
 .soyombo {
   font-family: 'Noto Sans Soyombo' !important;
   font-size: 130%;
