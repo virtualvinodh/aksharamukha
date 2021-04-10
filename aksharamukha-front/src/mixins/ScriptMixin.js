@@ -46,6 +46,8 @@ export const ScriptMixin = {
       ayogavahasAll: ['~', 'M', 'H'],
       vedicScripts: ['Assamese', 'Bengali', 'Devanagari', 'Gujarati', 'Kannada', 'Malayalam', 'Oriya', 'Gurmukhi', 'Tamil', 'Telugu', 'TamilExtended', 'Grantha'],
       preserveSourceExampleOut: {
+        'Hiragana': 'dilati → でぃら゚てぃ not  じらち',
+        'Katakana': 'dilati → ディラ゚ティ not  ジラチ',
         'WarangCiti': 'akṣaramukha → <span class="warangciti">𑣁𑣌‍𑣝𑣜𑣖𑣃𑣌‍𑣙</span> not <span class="warangciti">𑣁𑣌𑣞𑣜𑣖𑣃𑣌</span>',
         'Modi': 'ki kī ku kū → <span class="modi">𑘎𑘱 𑘎𑘲 𑘎𑘳 𑘎𑘴</span> not <span class="modi">𑘎𑘲 𑘎𑘲 𑘎𑘳 𑘎𑘳</span>',
         'Multani': 'aśoka →<span class="multani">𑊀𑊥𑊂𑊄</span> not <span class="multani">𑊀𑊥𑊄</span>',
@@ -84,6 +86,15 @@ export const ScriptMixin = {
         ],
         'ISO': [
           { label: 'Treat e/o as long', value: 'longEOISO' }
+        ],
+        'Hiragana': [
+          { label: '/ou/ and /ei/ dipthongs not /ē/ and /ō/', value: 'eiaudipthongs' },
+          { label: '/w/ as /v̈/', value: 'wasvnukta' }
+
+        ],
+        'Katakana': [
+          { label: '/ou/ and /ei/ dipthongs not /ē/ and /ō/', value: 'eiaudipthongs' },
+          { label: '/w/ as /v̈/', value: 'wasvnukta' }
         ],
         'HK': [
           { label: 'E/O for long, e/o for short', value: 'swapEe' }
@@ -179,13 +190,13 @@ export const ScriptMixin = {
         ],
         'TamilSaurashtra': [
           { label: 'Convert Saurashtra Haaru as :<small><br/><span class="saurashtra">ꢥꢴꢷ</span> → <span class="tamil">நீ:</span></small>', value: 'SaurastraHaaruColon' }
-        ],
+        ]/* ,
         'IASTUrdu': [
           { label: 'Remove all inherent /a/ <small><br/><span class="urdu">ہندوستان</span> → /hndvstān/ not /hanadavasatāna/', value: 'urduRemoveInherent' }
         ],
         'ISOUrdu': [
           { label: 'Remove all inherent /a/ <small><br/><span class="urdu">ہندوستان</span> → /hndvstān/ not /hanadavasatāna/', value: 'urduRemoveInherent' }
-        ]
+        ] */
       },
       postOptionsRadioGroup: {
         'Ranjana': [['ranjanalantsa', 'ranjanawartu']],
@@ -195,6 +206,14 @@ export const ScriptMixin = {
 
       },
       postOptionsGroup: {
+        'Hiragana': [
+          { label: 'Vertical text', value: 'verticalKana' },
+          { label: '/v/ → /b/ <br/<small>うぃの → びの</small>', value: 'vtobJapanese' }
+        ],
+        'Katakana': [
+          { label: 'Vertical text', value: 'verticalKana' },
+          { label: '/v/ → /b/ <br/<small>ウィノ → ビノ</small>', value: 'vtobJapanese' }
+        ],
         'Ranjana': [
           { label: 'Lantsa Style (Tibetan)<br/><small><span class="ranjana">बुद्धः</span> → <span class="ranjanalantsa">བུདྡྷཿ</span></small>', value: 'ranjanalantsa' },
           { label: 'Wartu Style (Tibetan)<br/><small><span class="ranjana">बुद्धः</span> → <span class="ranjanawartu">བུདྡྷཿ</span></small>', value: 'ranjanawartu' }
@@ -267,8 +286,8 @@ export const ScriptMixin = {
           { label: 'Variant I 2 <br/><small><span class="siddham">𑖂 → 𑗙</span></small>', value: 'UseAlternateI2' },
           { label: 'Variant II <br/><small><span class="siddham">𑖃 → 𑗚</span></small>', value: 'UseAlternateII' },
           { label: 'Variant U <br/><small><span class="siddham">𑖄 → 𑗛</span></small>', value: 'UseAlternateU' },
-          { label: 'MuktamSiddham font', value: 'siddhammukta' },
-          { label: 'ApDevSiddham font', value: 'siddhamap' }
+          // { label: 'Vertical text', value: 'verticalSiddham' },
+          { label: 'MuktamSiddham font', value: 'siddhammukta' }
         ],
         'Devanagari': [
           { label: 'Uttara Style<br/><small><span class="devanagariuttara">अऋणझक्ष</span></small>', value: 'devanagariuttara' },
@@ -889,34 +908,34 @@ export const ScriptMixin = {
         {
           label: 'Japanese (Hiragana)',
           value: 'Hiragana',
-          sscode: 'Java',
-          ssdesc: 'Javanese is Indonesia\'s oldest literary language, its literary history being traceable to the C4th. The present Javanese script is a modern variant of Old Kawi, an ancient Brahmic script from which many scripts in the Indonesian archipelago are derived. It is the pre-colonial script of the Javanese language spoken on the Indonesian islands of Java and Bali and is used to write the Tengger and Osing languages, also spoken in Java and Bali. The Javanese script is closely related to the Balinese script, although Javanese contains 4 consonant letters which are absent in the Balinese.',
-          omnicode: 'javanese',
-          wikicode: 'Javanese_script',
+          sscode: 'Hiraga',
+          ssdesc: 'The Hiragana script (sometimes called Kiragana) is one of the two Japanese syllabaries, along with Katakana. The script was derived from the cursive forms of Chinese characters around the 8th century; prior to this, Japanese was written entirely in Chinese (kanji letters. Hiragana was originally known as onnade \'women\'s hand\' as it was primarily used by women until the 10th century when it came to be widely used by both genders. The script can be written either horizontally or vertically.',
+          omnicode: 'japanese_hiragana',
+          wikicode: 'Hiragana',
           font: {
-            'name': 'Noto Sans Javanese',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansJavanese/NotoSansJavanese-Regular.otf'
+            'name': '',
+            'url': ''
           },
-          language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
-          status: ['Living', 'Living: Minor'],
-          invented: ['Derived: Brahmi', 'Derived: Pallava'],
-          region: ['South East Asian: Insular', 'South East Asian']
+          language: ['Other'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Han'],
+          region: ['East Asian']
         },
         {
           label: 'Japanese (Katakana)',
           value: 'Katakana',
-          sscode: 'Java',
-          ssdesc: 'Javanese is Indonesia\'s oldest literary language, its literary history being traceable to the C4th. The present Javanese script is a modern variant of Old Kawi, an ancient Brahmic script from which many scripts in the Indonesian archipelago are derived. It is the pre-colonial script of the Javanese language spoken on the Indonesian islands of Java and Bali and is used to write the Tengger and Osing languages, also spoken in Java and Bali. The Javanese script is closely related to the Balinese script, although Javanese contains 4 consonant letters which are absent in the Balinese.',
-          omnicode: 'javanese',
-          wikicode: 'Javanese_script',
+          sscode: 'Kana',
+          ssdesc: 'Katakana is one of two syllabaries, called kana, used for writing Japanese, along with Hiragana. Until the 8th century, Japanese was written using Chinese characters, called kanji, on which the shapes of the katakana symbols are based. Modern Japanese texts are commonly written in a mixture of kanji, hiragana and katakana. Katakana is typically used for writing loanwords, onomatopoeic and mimetic words, exclamations, and some specialized scientific terminology. It can also be used to imply a conversational tone, to give emphasis to particular words, or to signal irony or a euphemism. Both hiragana and katakana can be written in small type alongside or above kanji words to indicate the pronunciation or meaning of the kanji ',
+          omnicode: 'japanese_katakana',
+          wikicode: 'Katakana',
           font: {
-            'name': 'Noto Sans Javanese',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansJavanese/NotoSansJavanese-Regular.otf'
+            'name': '',
+            'url': ''
           },
-          language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
-          status: ['Living', 'Living: Minor'],
-          invented: ['Derived: Brahmi', 'Derived: Pallava'],
-          region: ['South East Asian: Insular', 'South East Asian']
+          language: ['Other'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Han'],
+          region: ['East Asian']
         },
         {
           label: 'Javanese',
@@ -2087,7 +2106,7 @@ export const ScriptMixin = {
       tagsRegionS1: ['Pan-Indic', 'East Indic', 'West Indic', 'North Indic', 'South Indic'],
       tagsRegionM2: ['East Asian', 'West Asian', 'Central Asian', 'South Asian: Other', 'South East Asian'],
       tagsRegionS2: ['South East Asian: Mainland', 'South East Asian: Insular'],
-      tagsDerivationM: ['Derived: Brahmi', 'Derived: Pallava', 'Derived: Aramaic', 'Derived: Perso-Arabic', 'Derived: Cuneiform', 'Invented'],
+      tagsDerivationM: ['Derived: Brahmi', 'Derived: Pallava', 'Derived: Aramaic', 'Derived: Perso-Arabic', 'Derived: Cuneiform', 'Invented', 'Derived: Han'],
       ocrLangOptions: [
         {
           label: 'Autodetect',
@@ -2410,12 +2429,8 @@ export const ScriptMixin = {
       return desc
     },
     getOutputClass: function (tgt, postOptions = [], outputText = '') {
-      if (postOptions.includes('siddhamap') && tgt === 'Siddham') {
-        return 'siddhamap'
-      } else if (postOptions.includes('tradOrtho') && tgt === 'Malayalam') {
+      if (postOptions.includes('tradOrtho') && tgt === 'Malayalam') {
         return 'malayalamold'
-      } else if (postOptions.includes('siddhammukta') && tgt === 'Siddham') {
-        return 'siddhammukta'
       } else if (postOptions.includes('LimbuDevanagariConvention') && tgt === 'Devanagari') {
         return 'limbudeva'
       } else if (postOptions.includes('egrantamil') && tgt === 'Grantha') {
@@ -2458,6 +2473,18 @@ export const ScriptMixin = {
         return 'devanagarijain'
       } else if (postOptions.includes('ThaiNativeConsonants') && tgt === 'Thai') {
         return 'thainative'
+      } else if (postOptions.includes('verticalKana') && (tgt === 'Hiragana' || tgt === 'Katakana')) {
+        return 'verticalKana'
+      } else if (postOptions.includes('verticalSiddham') && postOptions.includes('siddhamap') && tgt === 'Siddham') {
+        return 'verticalSiddhamap'
+      } else if (postOptions.includes('verticalSiddham') && postOptions.includes('siddhammukta') && tgt === 'Siddham') {
+        return 'verticalSiddhammukta'
+      } else if (postOptions.includes('verticalSiddham') && tgt === 'Siddham') {
+        return 'verticalSiddham'
+      } else if (postOptions.includes('siddhamap') && tgt === 'Siddham') {
+        return 'siddhamap'
+      } else if (postOptions.includes('siddhammukta') && tgt === 'Siddham') {
+        return 'siddhammukta'
       } else if (tgt === 'Oriya' && (String(outputText).includes('॒') || String(outputText).includes('᳚') ||
           String(outputText).includes('॑'))) {
         return 'oriyavedic'

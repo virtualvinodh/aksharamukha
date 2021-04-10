@@ -1,5 +1,10 @@
 @import url('https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha-fonts/aksharamukha-fonts.css');
 
+.verticalKana {
+  writing-mode: vertical-rl;
+}
+
+
 .phagspatib {
   font-family: 'BabelStone PhagsPa TibA' !important;
   writing-mode: vertical-lr;
@@ -288,11 +293,32 @@
 }
 .siddhammukta {
   font-size: 120%;
-  font-family: Muktamsiddham
+  font-family: "Muktamsiddham" !important;
 }
+.verticalSiddhammukta {
+  writing-mode: vertical-rl;
+  font-family: "Muktamsiddham" !important;
+  text-orientation: upright;
+}
+
+.siddhamap {
+  font-family: "ApDevaSiddham" !important
+}
+.verticalSiddhamap {
+  writing-mode: vertical-rl;
+  font-family: "ApDevaSiddham" !important;
+  text-orientation: upright;
+}
+
 .siddham {
   font-family: "Noto Sans Siddham" !important
 }
+.verticalSiddham {
+  writing-mode: vertical-rl;
+  font-family: "Noto Sans Siddham" !important;
+  text-orientation: upright;
+}
+
 .grantha {
   font-family: "Noto Sans Grantha2" !important;
   line-height: 2em;
@@ -358,9 +384,7 @@
 .brahmi {
   font-family: "Segoe UI Historic", "Noto Sans Brahmi" !important
 }
-.siddhamap {
-  font-family: "ApDevaSiddham" !important
-}
+
 .limbudeva {
   font-family: "AnnaPurna" !important
 }
