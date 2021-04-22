@@ -4,7 +4,6 @@
   writing-mode: vertical-rl;
 }
 
-
 .phagspatib {
   font-family: 'BabelStone PhagsPa TibA' !important;
   writing-mode: vertical-lr;
@@ -141,6 +140,18 @@
 }
 .cham {
   font-family: "Noto Sans Cham" !important
+}
+.pallava {
+  font-family: "Purnawarman" !important
+}
+.sundapura {
+  font-family: "Sundapura" !important
+}
+.kawitan {
+  font-family: "Kawitan" !important
+}
+.kawi {
+  font-family: "Tantular Kawi" !important
 }
 
 .ipa {
@@ -355,7 +366,9 @@
   font-family: "Noto Sans Newa" !important
 }
 .sharada {
-  font-family: "Noto Sans Sharada" !important
+  font-family: "Satisar Sharada" !important;
+  font-size: 125%;
+  line-height: 2em;
 }
 .thainative {
   font-family: "Kaccayana Thai" !important
@@ -389,7 +402,10 @@
   font-family: "AnnaPurna" !important
 }
 .laopali {
-  font-family: "Lao Pali" !important
+  font-family: "Lao Pali New" !important
+}
+.laophonetic {
+  font-family: "Lao Pali Sajjhaya New" !important
 }
 .nepaldevafont {
   font-family: "Nepal2" !important

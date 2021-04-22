@@ -2,6 +2,7 @@
   <span>
       <div class="notice q-ma-sm" v-show="indicSubset.includes(inputScript)">Currently, only the cognate 'Indic' subset of the script is supported for conversion</div>
       <div class="notice q-ma-sm" v-show="inputScript === 'Urdu'">Urdu is an abjad. Please read the script <router-link to="/describe/Urdu">notes</router-link> to read about Urdu reading conventions.</div>
+      <div class="notice q-ma-sm" v-show="inputScript === 'RussianCyrillic'">Only the subset of characters used to transliterate Indic scripts is supported for conversion</div>
       <div class="notice q-ma-sm" v-show="outputScript === 'Tamil' || outputScript === 'TamilExtended'">You can force the use of <span class="tamil">ந</span> in the output by preprending {}. e.g. padma{}netra.</div>
       <div class="notice q-ma-sm" v-show="inputScript === 'Grantha' &&
         preOptions.includes('egrantamil')">This does not use the proper Unicode encoding. Please consider converting the text into Grantha Unicode.</div>

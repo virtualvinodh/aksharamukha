@@ -202,10 +202,16 @@ export const ScriptMixin = {
         'Ranjana': [['ranjanalantsa', 'ranjanawartu']],
         'Siddham': [['UseAlternateI1', 'UseAlternateI2'], ['siddhammukta', 'siddhamap']],
         'PhagsPa': [['PhagsPaTib', 'PhagsPaSeal']],
-        'Devanagari': [['devanagariuttara', 'devanagarijain', 'devanagarinepali', 'devanagaribalbodh']]
-
+        'Devanagari': [['devanagariuttara', 'devanagarijain', 'devanagarinepali', 'devanagaribalbodh']],
+        'IAST': [['mDotAboveToBelow', 'NasalTilde']],
+        'Pallava': [['sundapura', 'kawitan']]
       },
       postOptionsGroup: {
+        'Pallava': [
+          { label: 'Sundapura font<br/><span class="sundapura">ꦥꦭ꧀ꦭꦮ ꦒ꧀ꦫꦤ꧀', value: 'sundapura' },
+          { label: 'Kawitan font<br/><span class="kawitan">ꦥꦭ꧀ꦭꦮ ꦒ꧀ꦫꦤ꧀ꦡ', value: 'kawitan' }
+
+        ],
         'Hiragana': [
           { label: 'Vertical text', value: 'verticalKana' },
           { label: '/v/ → /b/ <br/<small>うぃの → びの</small>', value: 'vtobJapanese' }
@@ -318,7 +324,7 @@ export const ScriptMixin = {
           { label: 'Lao orthography<br/><small><span class="laopali">ພຸທ຺ຘ → ພຸທຘະ</span></small>', value: 'LaoTranscription' },
           { label: 'Sajjhāya orthography<br/><small><div class="laopali">ພຸທ຺ຘ → ພຸທ໌ຘ</div></small>', value: 'LaoSajjhaya' },
           { label: 'Nativized sajjhāya<br/><small><div  class="laopali">ພຸທ຺ຘໍ → ພຸທ໌ຘັງ</div></small>', value: 'LaoSajjhayawithA' },
-          { label: 'Lao phonetic<br/><small><div  class="laopali">ພຸທ຺ຘ → ບຸດ຺ຘ</div></small>', value: 'LaoPhonetic' }
+          { label: 'Lao phonetic<br/><small><div  class="laopali">ພຸທ຺ຘ → ບຸດຘະ</div></small>', value: 'LaoPhonetic' }
         ],
         'Lao': [
           { label: 'Lao Nativization<br/><small><span class="lao">ພຸທທັງ ຄັຈຈາມິ ສັພພັງ → ພຸດທັງ ຄັຈສາມິ ສັບພັງ</span></small>', value: 'LaoNative' }
@@ -371,7 +377,7 @@ export const ScriptMixin = {
           { label: 'Arasunna as Chandrabindu<br/><small><span class="telugu"> హూఀ → హూఁ</span></small>', value: 'TeluguArasunnaChandrabindu' },
           { label: 'Telugu repha <br/><small><i>(Valapala Gilaka)</i></small> <br/><small><span class="telugu">ధర్మ → ధర్‍మ</span></small>', value: 'TeluguReph' },
           { label: 'Tamil-Style Zha <br/><small><span class="telugu">ఆఴ్వార్</span> → <span class="teluguzha">ఆఴ్వార్</span></span></small>', value: 'TeluguTamilZha' },
-          { label: 'Tamil-Style Rra <br/><small><span class="telugu">ఆఱు</span> → <span class="teluguzha">ఆౘు</span></small>', value: 'TeluguTamilRra' },
+          { label: 'Tamil-Style Rra <br/><small><span class="telugu">ఆఱ్ఱు</span> → <span class="teluguzha">ఆౘ్ౘు</span></small>', value: 'TeluguTamilRra' },
           { label: 'Dandas<br/><small><span class="telugu">. .. → । ॥</span></small>', value: 'RetainTeluguDanda' },
           { label: 'Telugu Numerals<br/><small><span class="telugu">123 → ౧౨౩</span></small>', value: 'RetainTeluguNumerals' }
         ],
@@ -399,6 +405,7 @@ export const ScriptMixin = {
         'IAST': [
           { label: 'Capitalize sentences', value: 'capitalizeSentence' },
           { label: 'Anusvara to nasal<br/><small>gaṃgā → gaṅgā</small>', value: 'NasaltoAnsvaraIASTISO' },
+          { label: 'Use tilde for nasalization<br/><small>kāṃ kām̐ → gaṅgā</smal', value: 'NasalTilde' },
           { label: 'ṃ → ṁ', value: 'mDotAboveToBelow' }
         ],
         'IASTPali': [
@@ -414,6 +421,7 @@ export const ScriptMixin = {
         'ISO': [
           { label: 'Capitalize sentences', value: 'capitalizeSentence' },
           { label: 'Anusvara to nasal<br/><small>gaṁgā → gaṅgā</small>', value: 'NasaltoAnsvaraIASTISO' },
+          { label: 'Use tilde for nasalization<br/><small>kāṃ kām̐ → gaṅgā</smal', value: 'NasalTilde' },
           { label: 'ē/ō → e/o', value: 'noLongEO' }
         ],
         'RomanReadable': [
@@ -986,6 +994,22 @@ export const ScriptMixin = {
           region: ['South Indic', 'Indic']
         },
         {
+          label: 'Kawi',
+          value: 'Kawi',
+          sscode: 'Qa39',
+          ssdesc: 'The Kawi script descended from the Grantha script around the 8th century BC and was used across the islands of Borneo, Java, Bali, and Sumatra. The script originated in Java, and as a result is also sometimes called Old Javanese. The Kawi alphabet developed around the 16th century AD into the current Javanese script. This transition was more stylistic than structural; the visual composition of the script changed but the way it worked stayed the same.',
+          omnicode: 'kawi',
+          wikicode: 'Kawi_script',
+          font: {
+            'name': 'Tantular Kawi',
+            'url': 'https://www.fontzip.com/tantular-kawi'
+          },
+          language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
+          status: ['Extinct', 'Extinct: Ancient'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Insular', 'South East Asian']
+        },
+        {
           label: 'Khamti Shan',
           value: 'KhamtiShan',
           sscode: '',
@@ -1346,6 +1370,22 @@ export const ScriptMixin = {
           region: ['East Indic', 'Indic']
         },
         {
+          label: 'Pallava',
+          value: 'Pallava',
+          miscsrc: '(From Wikipedia)',
+          miscdesc: 'The Pallava script or Pallava Grantha, is a Brahmic script, named after the Pallava dynasty of South India, attested since the 4th century AD. In India, Pallava script evolved into the Grantha script. Pallava spread to Southeast Asia and evolved into local scripts such as Balinese, Baybayin, Burmese, Javanese, Kawi, Khmer, Lanna, Lao, Mon, New Tai Lue alphabet, Sundanese, and the Thai',
+          omnicode: 'pallava',
+          wikicode: 'Pallava_sript',
+          font: {
+            'name': 'Purnawarman',
+            'url': 'https://aksaradinusantara.com/fonta/aksara/pallawa'
+          },
+          language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
+          status: ['Extinct', 'Extinct: Ancient'],
+          invented: ['Derived: Brahmi', 'Derived Pallava'],
+          region: ['South Indic']
+        },
+        {
           label: 'PhagsPa',
           value: 'PhagsPa',
           sscode: 'Phag',
@@ -1499,8 +1539,8 @@ export const ScriptMixin = {
           omnicode: 'sharda',
           wikicode: 'Sharada_script',
           font: {
-            'name': 'Noto Sans Sharada',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSharada/NotoSansSharada-Regular.otf'
+            'name': 'Satisar Sharada',
+            'url': 'https://github.com/virtualvinodh/satisarsharada/raw/main/Sharada.ttf'
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Living', 'Living: Minor'],
@@ -2449,6 +2489,8 @@ export const ScriptMixin = {
         return 'taithamlao'
       } else if (postOptions.includes('TaiKuen') && tgt === 'TaiTham') {
         return 'taikuen'
+      } else if (postOptions.includes('LaoPhonetic') && tgt === 'LaoPali') {
+        return 'laophonetic'
       } else if (postOptions.includes('granthafinal') && postOptions.includes('granthaserif') && tgt === 'Grantha') {
         return 'granthaseriflig'
       } else if (postOptions.includes('granthaserif') && tgt === 'Grantha') {
@@ -2485,6 +2527,10 @@ export const ScriptMixin = {
         return 'siddhamap'
       } else if (postOptions.includes('siddhammukta') && tgt === 'Siddham') {
         return 'siddhammukta'
+      } else if (postOptions.includes('sundapura') && tgt === 'Pallava') {
+        return 'sundapura'
+      } else if (postOptions.includes('kawitan') && tgt === 'Pallava') {
+        return 'kawitan'
       } else if (tgt === 'Oriya' && (String(outputText).includes('॒') || String(outputText).includes('᳚') ||
           String(outputText).includes('॑'))) {
         return 'oriyavedic'

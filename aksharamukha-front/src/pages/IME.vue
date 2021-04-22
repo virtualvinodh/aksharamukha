@@ -310,6 +310,11 @@ export default {
   },
   mounted () {
     // Also change in Watch ::
+
+    if (this.outputScript === 'Sharada') {
+      window.location.replace('https://satisarsharada.appspot.com')
+    }
+
     if (['Grantha', 'Newa', 'Ranjana', 'Tirhuta', 'Siddham'].includes(this.outputScript)) {
       this.inputOptions = this.inputOptionsD
     } else if (['Saurashtra'].includes(this.outputScript)) {
@@ -356,6 +361,11 @@ export default {
     '$route' (to, from) {
       this.outputScript = to.params.script
       this.textInput = ''
+
+      if (this.outputScript === 'Sharada') {
+        window.location.replace('https://satisarsharada.appspot.com')
+      }
+
       if (['Grantha', 'Newa', 'Ranjana', 'Tirhuta', 'Siddham'].includes(this.outputScript)) {
         this.inputOptions = this.inputOptionsD
       } else if (['Saurashtra'].includes(this.outputScript)) {
