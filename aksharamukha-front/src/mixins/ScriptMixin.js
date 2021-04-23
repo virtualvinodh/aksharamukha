@@ -114,7 +114,8 @@ export const ScriptMixin = {
         'LaoPali': [
           { label: 'Lao orthography text<small><div class="laopali">e.g. ພຸທຘະ</div></small>', value: 'LaoTranscription' },
           { label: 'Sajjhāya orthography text <br/><small><div class="laopali">e.g. ພຸທ໌ຘ</div></small>', value: 'LaoSajhayaOrthography' },
-          { label: 'Nativized Sajjhāya text <br/><small><div class="laopali">e.g. ພຸທ໌ຘະ</div></small>', value: 'LaoSajhayaOrthographywithA' }
+          { label: 'Nativized Sajjhāya text <br/><small><div class="laopali">e.g. ພຸທ໌ຘະ</div></small>', value: 'LaoSajhayaOrthographywithA' },
+          { label: 'Lao Phonetic text<br/><small><div class="laopali">e.g. ບຸດຘະຕ͜ວະ</div></small>', value: 'LaoPhonetic' }
         ],
         'Devanagari': [
           { label: 'Schwa deletion (Hindi) <small><div class="q-mt-sm">राम → rām, सबसे → sabse</div></small>', value: 'RemoveSchwaHindi' },
@@ -305,6 +306,9 @@ export const ScriptMixin = {
           { label: 'Use Anusvara to nasalize<br/><small>पञ्चगङ्गा → पंचगंगा</small>', value: 'DevanagariAnusvara' },
           { label: 'Prishthamatra orthography<br/><small>के कै को कौ → कॎ कॎे कॎा कॎो</small>', value: 'DevanagariPrishtamatra' }
         ],
+        'Dogra': [
+          { label: '<span class="dogra">𑠨</span> → <span class="dogra">𑠋</span>', value: 'DograShaKha' }
+        ],
         'Takri': [
           { label: 'Medieval Takri orthography <br/><small><span class="takri">𑚋</span> represents both /kha/ and /ṣa/</small>', value: 'TakriArchaicKha' },
           { label: 'Avoid duplicated consonants<br/><small>Convert <span class="takri">𑚄𑚙𑚶𑚙𑚤</span> → <span class="takri">𑚄𑚙𑚤</span></small>', value: 'TakriRemoveGemination' }
@@ -448,6 +452,7 @@ export const ScriptMixin = {
         ],
         'Malayalam': [
           { label: 'Dot reph<br/><small><span class="malayalam">ധർമ → ധൎമ</span></small>', value: 'dotReph' },
+          { label: 'Double consonants after reph<br/><small><span class="malayalam">ധർമ → ധർമ്മ</span></small>', value: 'RephaDoubleMalayalam' },
           { label: 'Archaic II & AU<br/><small><span class="malayalam">ഈ കൗ → ൟ കൌ</span></small>', value: 'archaicAIAU' },
           { label: 'Traditional orthography<br/><small><span class="malayalam">തു തൂ</span> → <span class="malayalamold">തു തൂ</span></small>', value: 'tradOrtho' },
           { label: 'Prakrit orthography<br/><small><span class="malayalam">ബുദ്ധ → ബുംധ</span></small>', value: 'MalayalamPrakrit' },

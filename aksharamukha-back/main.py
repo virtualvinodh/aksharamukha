@@ -208,22 +208,38 @@ def syllabary_list():
 
     f = open ('resources/syllabary/syllabary_' + script1 + '.json', 'r', encoding='utf-8')
     syllabary = f.read()
-    syllabary = syllabary.replace('،', ',').replace(" ", "")
+    syllabary = syllabary.replace('،', ',').replace(" ", "").replace('、', ',')
     f.close()
 
-    if script2 != 'Velthuis':
-        syllabary_guide = convert(script1, script2, syllabary, False,[],[])
-        syllabary_guide = json.loads(syllabary_guide.replace('،', ','))
-    else:
+    if script2 == 'Velthuis':
         syllabary_guide = convert(script1, script2, syllabary, False,[],[]).replace('""', '"\\"').replace('&"', '&\\"')
         syllabary_guide = json.loads(syllabary_guide)
+    elif script2 == 'Hiragana' or script2 == 'Katakana':
+        syllabary_guide = convert(script1, script2, syllabary, False,['eiaudipthongs'],[])
+        syllabary_guide = json.loads(syllabary_guide.replace('،', ',').replace('、', ','))
+    elif script2 == 'Hebrew':
+        syllabary_guide = convert(script1, script2, syllabary, False,['shvanakhall'],[])
+        print(syllabary_guide)
+        syllabary_guide = json.loads(syllabary_guide.replace('،', ',').replace('、', ','))
+    else:
+        syllabary_guide = convert(script1, script2, syllabary, False,[],[])
+        syllabary_guide = json.loads(syllabary_guide.replace('،', ',').replace('、', ','))
 
     syllabary = json.loads(syllabary)
 
     results = {}
 
     results['vowelsScript1'] = syllabary['vowels']
-    results['vowelsScript2'] = syllabary_guide['vowels']
+
+    #print(syllabary_guide)
+
+    if 'vowels' in syllabary_guide.keys():
+        results['vowelsScript2'] = syllabary_guide['vowels']
+    else:
+        for key in syllabary_guide.keys():
+            if "vo" in key and "els" in key:
+                results['vowelsScript2'] = syllabary_guide[key]
+
     results['consonantsScript1'] = syllabary['consonants']
     results['consonantsScript2'] = syllabary_guide['consonants']
     results['compoundsScript1'] = syllabary['compounds']
@@ -239,8 +255,8 @@ def conjuncts_list():
 
     postoptions = request.json['postoptions']
 
-    print('The post options are :: ')
-    print(postoptions)
+    #print('The post options are :: ')
+    #print(postoptions)
 
     if script1[0:3] < 'Mod':
         index = '1'
@@ -272,13 +288,13 @@ def conjuncts_list():
 
     f = open (file, 'r', encoding='utf-8')
     conjuncts = f.read()
-    conjuncts = conjuncts.replace('،', ',').replace(" ", "")
+    conjuncts = conjuncts.replace('،', ',').replace(" ", "").replace('、', ',')
     f.close()
 
     if script2 != 'Velthuis':
         conjuncts_guide = convert(script1, script2, conjuncts, False,[],[])
         conjuncts_guide = PostProcess.RetainIndicNumerals(conjuncts_guide, script2, True)
-        conjuncts_guide = json.loads(conjuncts_guide.replace('،', ','))
+        conjuncts_guide = json.loads(conjuncts_guide.replace('،', ',').replace('、', ','))
     else:
         conjuncts_guide = convert(script1, script2, conjuncts, False,[],[]).replace('""', '"\\"').replace('&"', '&\\"')
         conjuncts_guide = json.loads(PostProcess.RetainIndicNumerals(conjuncts_guide, script2, True))
@@ -287,17 +303,36 @@ def conjuncts_list():
 
     results = {}
 
+    #print(conjuncts_guide)
+
+
     results['conjuncts1S1'] = conjuncts['conjuncts1S1']
     results['conjuncts2S1'] = conjuncts['conjuncts2S1']
     results['conjuncts3S1'] = conjuncts['conjuncts3S1']
     results['conjuncts4S1'] = conjuncts['conjuncts4S1']
     results['conjuncts5S1'] = conjuncts['conjuncts5S1']
 
-    results['conjuncts1S2'] = conjuncts_guide['conjuncts1S1']
-    results['conjuncts2S2'] = conjuncts_guide['conjuncts2S1']
-    results['conjuncts3S2'] = conjuncts_guide['conjuncts3S1']
-    results['conjuncts4S2'] = conjuncts_guide['conjuncts4S1']
-    results['conjuncts5S2'] = conjuncts_guide['conjuncts5S1']
+    try:
+        results['conjuncts1S2'] = conjuncts_guide['conjuncts1S1']
+    except KeyError:
+        results['conjuncts1S2'] = conjuncts_guide['conjuncts1s1']
+    try:
+        results['conjuncts2S2'] = conjuncts_guide['conjuncts2S1']
+    except KeyError:
+        results['conjuncts2S2'] = conjuncts_guide['conjuncts2s1']
+    try:
+        results['conjuncts3S2'] = conjuncts_guide['conjuncts3S1']
+    except KeyError:
+        results['conjuncts3S2'] = conjuncts_guide['conjuncts3s1']
+    try:
+        results['conjuncts4S2'] = conjuncts_guide['conjuncts4S1']
+    except KeyError:
+        results['conjuncts4S2'] = conjuncts_guide['conjuncts4s1']
+    try:
+        results['conjuncts5S2'] = conjuncts_guide['conjuncts5S1']
+    except KeyError:
+        results['conjuncts5S2'] = conjuncts_guide['conjuncts5s1']
+
 
     return jsonify(results)
 
