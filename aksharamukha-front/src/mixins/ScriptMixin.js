@@ -46,8 +46,8 @@ export const ScriptMixin = {
       ayogavahasAll: ['~', 'M', 'H'],
       vedicScripts: ['Assamese', 'Bengali', 'Devanagari', 'Gujarati', 'Kannada', 'Malayalam', 'Oriya', 'Gurmukhi', 'Tamil', 'Telugu', 'TamilExtended', 'Grantha'],
       preserveSourceExampleOut: {
-        'Hiragana': 'dilati → でぃら゚てぃ not  じらち',
-        'Katakana': 'dilati → ディラ゚ティ not  ジラチ',
+        'Hiragana': 'hulasi → ほぅら゚すぃ not  ふらし',
+        'Katakana': 'hulasi → ホゥラ゚スィ not  フラシ',
         'WarangCiti': 'akṣaramukha → <span class="warangciti">𑣁𑣌‍𑣝𑣜𑣖𑣃𑣌‍𑣙</span> not <span class="warangciti">𑣁𑣌𑣞𑣜𑣖𑣃𑣌</span>',
         'Modi': 'ki kī ku kū → <span class="modi">𑘎𑘱 𑘎𑘲 𑘎𑘳 𑘎𑘴</span> not <span class="modi">𑘎𑘲 𑘎𑘲 𑘎𑘳 𑘎𑘳</span>',
         'Multani': 'aśoka →<span class="multani">𑊀𑊥𑊂𑊄</span> not <span class="multani">𑊀𑊥𑊄</span>',
@@ -205,7 +205,9 @@ export const ScriptMixin = {
         'PhagsPa': [['PhagsPaTib', 'PhagsPaSeal']],
         'Devanagari': [['devanagariuttara', 'devanagarijain', 'devanagarinepali', 'devanagaribalbodh']],
         'IAST': [['mDotAboveToBelow', 'NasalTilde']],
-        'Pallava': [['sundapura', 'kawitan']]
+        'Pallava': [['sundapura', 'kawitan']],
+        'Thai': [['ThaiTranscription', 'ThaiSajjhayaOrthography', 'ThaiSajjhayawithA', 'ThaiNativeConsonants']],
+        'LaoPali': [['LaoTranscription', 'LaoSajjhaya', 'LaoSajjhayawithA', 'LaoPhonetic']]
       },
       postOptionsGroup: {
         'Pallava': [
@@ -483,7 +485,7 @@ export const ScriptMixin = {
           wikicode: 'Ahom_alphabet',
           font: {
             'name': 'Noto Sans Ahom',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifAhom/NotoSerifAhom-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSerifAhom/NotoSerifAhom-Regular.otf'
           },
           language: ['Others'],
           status: ['Living', 'Living: Minor'],
@@ -684,7 +686,7 @@ export const ScriptMixin = {
           wikicode: 'Bhaiksuki_alphabet',
           font: {
             'name': 'Noto Sans Bhaiksuki',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansBhaiksuki/NotoSansBhaiksuki-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansBhaiksuki/NotoSansBhaiksuki-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Extinct', 'Extinct: Ancient'],
@@ -716,7 +718,7 @@ export const ScriptMixin = {
           wikicode: 'Buhid_alphabet',
           font: {
             'name': 'Nnoto Sans Buhid',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansBuhid/NotoSansBuhid-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansBuhid/NotoSansBuhid-Regular.otf'
           },
           language: ['Others'],
           status: ['Living', 'Living: Minor'],
@@ -781,7 +783,7 @@ export const ScriptMixin = {
           wikicode: 'Devanagari',
           font: {
             'name': 'Noto Sans Devanagari',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansDevanagari/NotoSansDevanagari-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansDevanagari/NotoSansDevanagari-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Living', 'Living: Major'],
@@ -879,7 +881,7 @@ export const ScriptMixin = {
           wikicode: 'Gujarati_alphabet',
           font: {
             'name': 'Noto Serif Gujarati',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifGujarati/NotoSerifGujarati-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSerifGujarati/NotoSerifGujarati-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Living', 'Living: Major'],
@@ -895,7 +897,7 @@ export const ScriptMixin = {
           wikicode: 'Hanunó%27o_alphabet',
           font: {
             'name': 'Noto Sans Hanunoo',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansHanunoo/NotoSansHanunoo-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansHanunoo/NotoSansHanunoo-Regular.otf'
           },
           language: ['Others'],
           status: ['Living', 'Living: Minor'],
@@ -911,7 +913,7 @@ export const ScriptMixin = {
           wikicode: 'Hebrew_alphabet',
           font: {
             'name': 'Noto Serif Hebrew',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansHanunoo/NotoSansHanunoo-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/hinted/ttf/NotoSerifHebrew/NotoSerifHebrew-Regular.ttf'
           },
           language: ['Others'],
           status: ['Living', 'Living: Major'],
@@ -959,7 +961,7 @@ export const ScriptMixin = {
           wikicode: 'Javanese_script',
           font: {
             'name': 'Noto Sans Javanese',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansJavanese/NotoSansJavanese-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansJavanese/NotoSansJavanese-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Living', 'Living: Minor'],
@@ -975,7 +977,7 @@ export const ScriptMixin = {
           wikicode: 'Kaithi',
           font: {
             'name': 'Noto Sans Kaithi',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansKaithi/NotoSansKaithi-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansKaithi/NotoSansKaithi-Regular.otf'
           },
           language: ['Only Pali', 'Pali'],
           status: ['Extinct', 'Extinct: Pre-Modern'],
@@ -991,7 +993,7 @@ export const ScriptMixin = {
           wikicode: 'Kannada_alphabet',
           font: {
             'name': 'Noto Sans Kannada',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansKannada/NotoSansKannada-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansKannada/NotoSansKannada-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Living', 'Living: Major'],
@@ -1056,8 +1058,8 @@ export const ScriptMixin = {
           omnicode: 'khmer',
           wikicode: 'Khmer_alphabet',
           font: {
-            'name': 'Noto Sans Khmer',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSerifKhmer/NotoSerifKhmer-Regular.otf'
+            'name': 'Noto Serif Khmer',
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSerifKhmer/NotoSerifKhmer-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Living', 'Living: Major'],
@@ -1073,7 +1075,7 @@ export const ScriptMixin = {
           wikicode: 'Khojki_script',
           font: {
             'name': 'Noto Sans Khojki',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansKhojki/NotoSansKhojki-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansKhojki/NotoSansKhojki-Regular.otf'
           },
           language: ['Others'],
           status: ['Living', 'Living: Minor'],
@@ -1107,7 +1109,7 @@ export const ScriptMixin = {
           wikicode: 'Khudabadi_script',
           font: {
             'name': 'Nodo Sans Khudawadi',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansKhudawadi/NotoSansKhudawadi-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansKhudawadi/NotoSansKhudawadi-Regular.otf'
           },
           language: ['Only Pali', 'Pali'],
           status: ['Extinct', 'Extinct: Pre-Modern'],
@@ -1187,7 +1189,7 @@ export const ScriptMixin = {
           wikicode: 'Malayalam_script',
           font: {
             'name': 'Noto Sans Malayalam',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansMalayalam/NotoSansMalayalam-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansMalayalam/NotoSansMalayalam-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Living', 'Living: Major'],
@@ -1203,7 +1205,7 @@ export const ScriptMixin = {
           wikicode: 'Mahajani',
           font: {
             'name': 'Noto Sans Mahajani',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansMahajani/NotoSansMahajani-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansMahajani/NotoSansMahajani-Regular.otf'
           },
           language: ['Others'],
           status: ['Extinct', 'Extinct: Pre-Modern'],
@@ -1251,7 +1253,7 @@ export const ScriptMixin = {
           wikicode: 'Modi_script',
           font: {
             'name': 'Modi',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansModi/NotoSansModi-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansModi/NotoSansModi-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Extinct', 'Extinct: Pre-Modern'],
@@ -1319,7 +1321,7 @@ export const ScriptMixin = {
           wikicode: 'Multani_alphabet',
           font: {
             'name': 'Multani',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansMultani/NotoSansMultani-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansMultani/NotoSansMultani-Regular.otf'
           },
           language: ['Others'],
           status: ['Extinct', 'Extinct: Pre-Modern'],
@@ -1335,7 +1337,7 @@ export const ScriptMixin = {
           wikicode: 'Prachalit_Nepal_alphabet',
           font: {
             'name': 'Noto Sans Newa',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansNewa/NotoSansNewa-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansNewa/NotoSansNewa-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Living', 'Living: Minor'],
@@ -1351,7 +1353,7 @@ export const ScriptMixin = {
           wikicode: 'Old_Persian_cuneiform',
           font: {
             'name': 'Noto Sans Old Persian',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansOldPersian/NotoSansOldPersian-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansOldPersian/NotoSansOldPersian-Regular.otf'
           },
           language: ['Others'],
           status: ['Extinct', 'Extinct: Ancient'],
@@ -1447,7 +1449,7 @@ export const ScriptMixin = {
           wikicode: 'Rejang_script',
           font: {
             'name': 'Noto Sans Rejang',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansRejang/NotoSansRejang-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansRejang/NotoSansRejang-Regular.otf'
           },
           language: ['Others'],
           status: ['Living', 'Living: Minor'],
@@ -1463,7 +1465,7 @@ export const ScriptMixin = {
           wikicode: 'Hanifi_Rohingya_script',
           font: {
             'name': 'Noto Sans HanifiRohingya',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansHanifiRohingya/NotoSansHanifiRohingya-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansHanifiRohingya/NotoSansHanifiRohingya-Regular.otf'
           },
           language: ['Others'],
           status: ['Living', 'Living: Minor'],
@@ -1479,7 +1481,7 @@ export const ScriptMixin = {
           wikicode: 'Ol_Chiki_script',
           font: {
             'name': 'Noto Sans Old Chiki',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansOlChiki/NotoSansOlChiki-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansOlChiki/NotoSansOlChiki-Regular.otf'
           },
           language: ['Only Pali', 'Pali'],
           status: ['Living', 'Living: Minor'],
@@ -1495,7 +1497,7 @@ export const ScriptMixin = {
           wikicode: 'Saurashtra_alphabet',
           font: {
             'name': 'Noto Sans Saurashtra',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSaurashtra/NotoSansSaurashtra-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansSaurashtra/NotoSansSaurashtra-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Living', 'Living: Minor'],
@@ -1511,7 +1513,7 @@ export const ScriptMixin = {
           wikicode: 'Siddhaṃ_script',
           font: {
             'name': 'Noto Sans Siddham',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSiddham/NotoSansSiddham-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansSiddham/NotoSansSiddham-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Living', 'Living: Minor'],
@@ -1565,7 +1567,7 @@ export const ScriptMixin = {
           wikicode: 'Sinhalese_script',
           font: {
             'name': 'Noto Sans Sinhala',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSinhala/NotoSansSinhala-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansSinhala/NotoSansSinhala-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Living', 'Living: Major'],
@@ -1581,7 +1583,7 @@ export const ScriptMixin = {
           wikicode: 'Sorang_Sompeng_alphabet',
           font: {
             'name': 'Noto Sans SoraSompeng',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSoraSompeng/NotoSansSoraSompeng-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansSoraSompeng/NotoSansSoraSompeng-Regular.otf'
           },
           language: ['Others'],
           status: ['Living', 'Living: Minor'],
@@ -1597,7 +1599,7 @@ export const ScriptMixin = {
           wikicode: 'Soyombo_script',
           font: {
             'name': 'Noto Sans Soyombo',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSoyombo/NotoSansSoyombo-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansSoyombo/NotoSansSoyombo-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Extinct', 'Extinct: Medieval'],
@@ -1629,7 +1631,7 @@ export const ScriptMixin = {
           wikicode: 'Sylheti_Nagari',
           font: {
             'name': 'Noto Sans SylotiNagri',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansSylotiNagri/NotoSansSylotiNagri-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansSylotiNagri/NotoSansSylotiNagri-Regular.otf'
           },
           language: ['Others'],
           status: ['Living', 'Living: Minor'],
@@ -1695,7 +1697,7 @@ export const ScriptMixin = {
           wikicode: 'Takri_alphabet',
           font: {
             'name': 'Noto Sans Takri',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansTakri/NotoSansTakri-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansTakri/NotoSansTakri-Regular.otf'
           },
           language: ['Only Pali', 'Pali'],
           status: ['Extinct', 'Extinct: Pre-Modern'],
@@ -1711,7 +1713,7 @@ export const ScriptMixin = {
           wikicode: 'Tamil_script',
           font: {
             'name': 'Noto Sans Tamil',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansTamil/NotoSansTamil-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansTamil/NotoSansTamil-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Living', 'Living: Major'],
@@ -1762,7 +1764,7 @@ export const ScriptMixin = {
           wikicode: 'Telugu_script',
           font: {
             'name': 'Noto Sans Telugu',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansTelugu/NotoSansTelugu-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansTelugu/NotoSansTelugu-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Living', 'Living: Major'],
@@ -1922,7 +1924,7 @@ export const ScriptMixin = {
           omnicode: 'urdu',
           font: {
             'name': 'Noto Sans Nastaliq Urdu',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoNastaliqUrdu/NotoNastaliqUrdu-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoNastaliqUrdu/NotoNastaliqUrdu-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Living', 'Living: Major'],
@@ -1969,7 +1971,7 @@ export const ScriptMixin = {
           wikicode: 'Warang_Citi',
           font: {
             'name': 'Noto Sans WarangCiti',
-            'url': 'https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/phaseIII_only/unhinted/otf/NotoSansWarangCiti/NotoSansWarangCiti-Regular.otf'
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoSansWarangCiti/NotoSansWarangCiti-Regular.otf'
           },
           language: ['Others'],
           status: ['Living', 'Living: Minor'],
