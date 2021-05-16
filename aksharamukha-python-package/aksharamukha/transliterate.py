@@ -1,5 +1,5 @@
 import re
-from . import Convert,PostOptions,PostProcess,PreProcess
+from . import Convert,PostOptions,PostProcess,PreProcess, GeneralMap
 from . import ConvertFix
 import json
 import requests
@@ -8,6 +8,9 @@ import itertools
 from collections import Counter
 import unicodedata
 import io
+
+
+
 
 def removeA(a):
     if a.count('a') == 1:
@@ -70,16 +73,16 @@ def auto_detect(text, plugin = False):
 
     laoPali = ['ຆ', 'ຉ', 'ຌ', 'ຎ', 'ຏ', 'ຐ', 'ຑ', 'ຒ', 'ຓ', 'ຘ', 'ຠ', 'ຨ', 'ຩ', 'ຬ', '຺']
 
-    if inputScript == 'Bengali':
+    if inputScript == GeneralMap.BENGALI:
         if 'ৰ' in text or 'ৱ' in text:
-            inputScript = 'Assamese'
-    elif inputScript == 'Lao':
+            inputScript = GeneralMap.ASSAMESE
+    elif inputScript == GeneralMap.LAO:
         if any(char in text for char in laoPali):
-            inputScript = 'LaoPali'
-    elif inputScript == 'Batak':
-        inputScript = 'BatakKaro'
-    elif inputScript == 'Myanmar':
-        inputScript = 'Burmese'
+            inputScript = GeneralMap.LAO_PALI
+    elif inputScript == GeneralMap.BATAK:
+        inputScript = GeneralMap.BATAK_KARO
+    elif inputScript == GeneralMap.MYANMAR:
+        inputScript = GeneralMap.BURMESE
 
         mon = ['ၚ', 'ၛ', '္ည', 'ၞ', 'ၟ', 'ၠ', 'ဳ', 'ဨ']
         if any([char in text for char in mon]):
@@ -113,43 +116,43 @@ def auto_detect(text, plugin = False):
             #inputScript = 'Shan'
 
     elif inputScript == 'Meetei':
-        inputScript = 'MeeteiMayek'
+        inputScript = GeneralMap.MEETEI_MAYEK
     elif inputScript == 'Old':
-        inputScript = 'OldPersian'
+        inputScript = GeneralMap.OLD_PERSIAN
     elif inputScript == 'Phags-pa':
-        inputScript = 'PhagsPa'
+        inputScript = PHAGS_PA
     elif inputScript == 'Ol':
-        inputScript = 'Santali'
+        inputScript = GeneralMap.SANTALI
     elif inputScript == 'Sora':
-        inputScript = 'SoraSompeng'
+        inputScript = GeneralMap.SORA_SOMPENG
     elif inputScript == 'Syloti':
-        inputScript = 'SylotiNagri'
+        inputScript = GeneralMap.SYLOTI_NAGRI
     elif inputScript == 'Tai':
-        inputScript = 'TaiTham'
+        inputScript = GeneralMap.TAI_THAM
     elif inputScript == 'Warang':
-        inputScript = 'WarangCiti'
+        inputScript = GeneralMap.WARANG_CITI
     elif inputScript == 'Siddham':
-        preOptions = 'siddhamUnicode'
+        preOptions = GeneralMap.SIDDHAM_UNICODE
     elif inputScript == 'Cyrillic':
-        inputScript = 'RussianCyrillic'
+        inputScript = GeneralMap.RUSSIAN_CYRILLIC
     elif inputScript == 'Zanabazar':
-        inputScript = 'ZanabazarSquare'
+        inputScript = GeneralMap.ZANABAZAR_SQUARE
     elif inputScript == 'Arabic':
-        inputScript = 'Urdu'
+        inputScript = GeneralMap.URDU
     elif inputScript == 'Latin':
         diacritics = ['ā', 'ī', 'ū', 'ṃ', 'ḥ', 'ś', 'ṣ', 'ṇ', 'ṛ', 'ṝ', 'ḷ', 'ḹ', 'ḻ', 'ṉ', 'ṟ', 'ṭ', 'ḍ', 'ṅ', 'ñ']
         Itrans = ['R^i', 'R^I', 'L^i', 'L^I', '.N', '~N', '~n', 'Ch', 'sh', 'Sh']
         if 'ʰ' in text:
-            inputScript = 'Titus'
+            inputScript = GeneralMap.TITUS
         elif any(char in text for char in diacritics):
             if 'ē' in text or 'ō' in text or 'r̥' in text:
-                inputScript = 'ISO'
+                inputScript = GeneralMap.ISO
             else:
-                inputScript = 'IAST'
+                inputScript = GeneralMap.IAST
         elif any(char in text for char in Itrans):
-            inputScript = 'Itrans'
+            inputScript = GeneralMap.ITRANS
         else:
-            inputScript = 'HK'
+            inputScript = GeneralMap.HK
 
     return inputScript
 
@@ -190,7 +193,7 @@ def convert(src, tgt, txt, nativize, preoptions, postoptions):
 
     if src == tgt:
         tgtOld = tgt
-        tgt = "Devanagari"
+        tgt = GeneralMap.DEVANAGARI
 
     txt = PreProcess.PreProcess(txt,src,tgt)
 
@@ -227,7 +230,7 @@ def convert(src, tgt, txt, nativize, preoptions, postoptions):
 
     if src == tgtOld:
         tgt = tgtOld
-        transliteration = Convert.convertScript(transliteration, "Devanagari", tgt)
+        transliteration = Convert.convertScript(transliteration, GeneralMap.DEVANAGARI, tgt)
 
     if nativize:
       transliteration =  PostOptions.ApplyScriptDefaults(transliteration, src, tgt)

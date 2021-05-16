@@ -6,6 +6,62 @@ import importlib, string
 import re
 from functools import reduce
 
+GURMUKHI = 'Gurmukhi'
+
+SINHALA = 'Sinhala'
+
+ASSAMESE = 'Assamese'
+
+DEVANAGARI = "Devanagari"
+
+HK = 'HK'
+
+ITRANS = 'Itrans'
+
+IAST = 'IAST'
+
+ISO = 'ISO'
+
+TITUS = 'Titus'
+
+URDU = 'Urdu'
+
+ZANABAZAR_SQUARE = 'ZanabazarSquare'
+
+RUSSIAN_CYRILLIC = 'RussianCyrillic'
+
+SIDDHAM_UNICODE = 'siddhamUnicode'
+
+WARANG_CITI = 'WarangCiti'
+
+TAI_THAM = 'TaiTham'
+
+SYLOTI_NAGRI = 'SylotiNagri'
+
+SORA_SOMPENG = 'SoraSompeng'
+
+SANTALI = 'Santali'
+
+PHAGS_PA = 'PhagsPa'
+
+OLD_PERSIAN = 'OldPersian'
+
+MEETEI_MAYEK = 'MeeteiMayek'
+
+BURMESE = 'Burmese'
+
+MYANMAR = 'Myanmar'
+
+BATAK_KARO = 'BatakKaro'
+
+BATAK = 'Batak'
+
+LAO_PALI = 'LaoPali'
+
+LAO = 'Lao'
+
+BENGALI = 'Bengali'
+
 # Crunch Symbols
 
 def ScriptPath(Script):
@@ -59,22 +115,25 @@ Aytham =['Aytham']
 om = ['OmMap']
 virama = ['ViramaMap']
 
-MainIndic = ['TamilExtended','MasaramGondi','GunjalaGondi','Dogra', 'Ranjana', 'Khojki','GranthaGrantamil', 'Multani', 'Ahom', 'Mahajani','SiddhamDevanagari', 'Vatteluttu', 'GranthaPandya', 'Khudawadi', 'Bhaiksuki', 'Sharada', 'Newa', 'SylotiNagri', 'Takri', 'Tirhuta', 'Modi', 'Kaithi', 'Kharoshthi','Lepcha','Chakma','Brahmi','MeeteiMayek','Limbu','Assamese','Bengali','Devanagari','Grantha','Gujarati','Gurmukhi','Kannada','Malayalam','Oriya','Saurashtra','Sinhala','Tamil','TamilBrahmi','TamilGrantha','Telugu','Urdu']
-EastIndic =['LaoTham', 'LueTham', 'KhuenTham', 'Marchen', 'Soyombo', 'KhomThai', 'KhamtiShan', 'TaiLaing', 'Mon', 'Shan', 'ZanabazarSquare','Rejang', 'Lao2','Buhid', 'Hanunoo', 'Siddham', 'Tibetan','Lao','TaiTham','Cham','BatakKaro','BatakPakpak','BatakSima','BatakToba','BatakManda','LaoPali','PhagsPa','Buginese','Tagbanwa','Tagalog','Sundanese','Balinese','Burmese','Javanese','Khmer','Siddham','Ranjana','Thaana','Thai']
-NonIndic = ['OldPersian']
-Roman =['Mongolian', 'SLP1', 'Wancho', 'Mro', 'IASTPali', 'HanifiRohingya', 'Ariyaka', 'RomanReadable', 'Aksharaa', 'WarangCiti', 'SoraSompeng',"WX-kok",'Avestan','HK','IAST','ISO','Itrans','Titus','Titus','Velthuis','WX','Inter','IPA','TolongSiki','Santali','RussianCyrillic']
-RomanDiacritic = ['IAST','Titus','ISO','IPA']
+MainIndic = ['TamilExtended','MasaramGondi','GunjalaGondi','Dogra', 'Ranjana', 'Khojki','GranthaGrantamil', 'Multani', 'Ahom', 'Mahajani','SiddhamDevanagari', 'Vatteluttu', 'GranthaPandya', 'Khudawadi', 'Bhaiksuki', 'Sharada', 'Newa', SYLOTI_NAGRI, 'Takri', 'Tirhuta', 'Modi', 'Kaithi', 'Kharoshthi','Lepcha','Chakma','Brahmi', MEETEI_MAYEK,'Limbu',
+             ASSAMESE, BENGALI, DEVANAGARI, 'Grantha', 'Gujarati', GURMUKHI, 'Kannada', 'Malayalam', 'Oriya', 'Saurashtra',
+             SINHALA, 'Tamil', 'TamilBrahmi', 'TamilGrantha', 'Telugu', URDU]
+EastIndic =['LaoTham', 'LueTham', 'KhuenTham', 'Marchen', 'Soyombo', 'KhomThai', 'KhamtiShan', 'TaiLaing', 'Mon', 'Shan', ZANABAZAR_SQUARE,'Rejang', 'Lao2','Buhid', 'Hanunoo', 'Siddham', 'Tibetan',LAO,TAI_THAM,'Cham',BATAK_KARO,'BatakPakpak','BatakSima','BatakToba','BatakManda',LAO_PALI,PHAGS_PA,'Buginese','Tagbanwa','Tagalog','Sundanese','Balinese',BURMESE,'Javanese','Khmer','Siddham','Ranjana','Thaana','Thai']
+NonIndic = [OLD_PERSIAN]
+Roman =['Mongolian', 'SLP1', 'Wancho', 'Mro', 'IASTPali', 'HanifiRohingya', 'Ariyaka', 'RomanReadable', 'Aksharaa', WARANG_CITI, SORA_SOMPENG,"WX-kok",'Avestan',HK,IAST,ISO,ITRANS,TITUS,TITUS,'Velthuis','WX','Inter','IPA','TolongSiki',SANTALI,RUSSIAN_CYRILLIC]
+RomanDiacritic = [IAST,TITUS,ISO,'IPA']
 
 ScriptCategory = {}
 
-ScriptCategory['IndianMain'] = ['GranthaGrantamil','Assamese','Bengali','Devanagari','Gujarati','Gurmukhi','Kannada','Malayalam','Oriya','Sinhala','Tamil','Telugu','Urdu']
-ScriptCategory['IndianMinority'] = ['Brahmi','Chakma','Grantha','Lepcha','Limbu','MeeteiMayek','Saurashtra','TamilBrahmi','TamilGrantha', 'Kaithi']
-ScriptCategory['EastAsianPaliSans'] = ['Balinese','Burmese','Cham','Javanese','Khmer','LaoPali','Lao','PhagsPa','TaiTham','Thaana','Thai','Tibetan']
-ScriptCategory['EastAsianIndFili'] = ['BatakKaro','BatakManda','BatakPakpak','BatakSima','BatakToba','Buginese','Sundanese','Tagalog','Tagbanwa']
-ScriptCategory['IndianAlpha'] = ['Santali','TolongSiki']
-ScriptCategory['RomanDiacritic'] = ['IAST','IPA','ISO','Titus']
-ScriptCategory['RomanNonDiacritic'] = ['HK','Itrans','RussianCyrillic','Velthuis','WX']
-ScriptCategory['NonIndic'] = ['Avestan','OldPersian']
+ScriptCategory['IndianMain'] = ['GranthaGrantamil', ASSAMESE, BENGALI, DEVANAGARI, 'Gujarati', GURMUKHI, 'Kannada', 'Malayalam', 'Oriya',
+                                SINHALA, 'Tamil', 'Telugu', URDU]
+ScriptCategory['IndianMinority'] = ['Brahmi','Chakma','Grantha','Lepcha','Limbu',MEETEI_MAYEK,'Saurashtra','TamilBrahmi','TamilGrantha', 'Kaithi']
+ScriptCategory['EastAsianPaliSans'] = ['Balinese',BURMESE,'Cham','Javanese','Khmer',LAO_PALI,'Lao',PHAGS_PA,'TaiTham','Thaana','Thai','Tibetan']
+ScriptCategory['EastAsianIndFili'] = [BATAK_KARO,'BatakManda','BatakPakpak','BatakSima','BatakToba','Buginese','Sundanese','Tagalog','Tagbanwa']
+ScriptCategory['IndianAlpha'] = [SANTALI,'TolongSiki']
+ScriptCategory['RomanDiacritic'] = [IAST,'IPA',ISO,TITUS]
+ScriptCategory['RomanNonDiacritic'] = [HK,ITRANS,RUSSIAN_CYRILLIC,'Velthuis','WX']
+ScriptCategory['NonIndic'] = ['Avestan',OLD_PERSIAN]
 
 Inter = "Inter"
 
@@ -104,10 +163,10 @@ IndicScripts = [
                'Khojki',
                'Shan',
                'Ranjana',
-               'ZanabazarSquare',
+               ZANABAZAR_SQUARE,
                'Rejang',
                'GranthaGrantamil',
-               'Devanagari',
+               DEVANAGARI,
                'Multani',
                'Ahom',
                'Mahajani',
@@ -123,7 +182,7 @@ IndicScripts = [
                'Sharada',
                'Newa',
                'Takri',
-               'SylotiNagri',
+               SYLOTI_NAGRI,
                'Tirhuta',
                'Modi',
                'Kaithi',
@@ -132,25 +191,25 @@ IndicScripts = [
                'Kannada',
                'Malayalam',
                'Gujarati',
-               'Bengali',
+               BENGALI,
                'Oriya',
-               'Gurmukhi',
+    GURMUKHI,
                'Tamil',
-               'Assamese',
+    ASSAMESE,
                'Saurashtra',
                'TamilBrahmi',
                'Grantha',
                'TamilGrantha',
-               'Sinhala',
+    SINHALA,
                'Khmer',
-               'Burmese',
-               'Urdu',
+               BURMESE,
+               URDU,
                'Balinese',
                'Javanese',
                'Thaana',
                'Tibetan',
                'Thai',
-               'OldPersian',
+               OLD_PERSIAN,
                'Limbu',
                'Lepcha',
                'Sundanese',
@@ -158,10 +217,10 @@ IndicScripts = [
                'Tagbanwa',
                'Buginese',
                'Chakma',
-               'PhagsPa',
-               'MeeteiMayek',
-               'LaoPali',
-               'BatakKaro','BatakPakpak','BatakSima','BatakToba','BatakManda',
+               PHAGS_PA,
+               MEETEI_MAYEK,
+               LAO_PALI,
+               BATAK_KARO,'BatakPakpak','BatakSima','BatakToba','BatakManda',
                'Cham',
                'TaiTham',
                'Lao',
@@ -170,17 +229,17 @@ IndicScripts = [
 
 SiddhamRanjana = ['Ranjana']
 
-LatinScripts = ['Mongolian', 'SLP1', 'Wancho', 'Mro', 'IASTPali', 'HanifiRohingya','Ariyaka', 'RomanReadable', 'Aksharaa', 'WarangCiti', 'SoraSompeng','WX-kok','Avestan','ISO','IAST','HK','Titus','Itrans','Velthuis','WX','Inter','IPA','TolongSiki','Santali','RussianCyrillic']
+LatinScripts = ['Mongolian', 'SLP1', 'Wancho', 'Mro', 'IASTPali', 'HanifiRohingya','Ariyaka', 'RomanReadable', 'Aksharaa', WARANG_CITI, SORA_SOMPENG,'WX-kok','Avestan',ISO,IAST,HK,TITUS,ITRANS,'Velthuis','WX','Inter','IPA','TolongSiki',SANTALI,RUSSIAN_CYRILLIC]
 
 Gemination =  {
-               'Gurmukhi' : '\u0A71',
+               GURMUKHI: '\u0A71',
                'Thaana' : '\u0787\u07B0',
-               'Urdu': '\u0651',
+               URDU: '\u0651',
                'Grantha': '𑌂',
                'Malayalam': 'ം',
                'Khojki': '\U00011237'
               }
 
-Transliteration = ['IASTPali', 'RomanReadable', 'Aksharaa', 'ISO', 'IAST', 'HK','Titus','Itrans','Velthuis','WX', 'IPA', 'RussianCyrillic']
+Transliteration = ['IASTPali', 'RomanReadable', 'Aksharaa', ISO, IAST, HK,TITUS,ITRANS,'Velthuis','WX', 'IPA', RUSSIAN_CYRILLIC]
 
 
