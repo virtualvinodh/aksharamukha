@@ -9,10 +9,10 @@ VowelMap =  [
             'ee',
             '\u0075',
             'oo',
-            'ri',
-            'ree',
-            'li',
-            'lee',
+            'ri\'',
+            'ree\'',
+            'li\'',
+            'lee\'',
             'e',
             'ai',
             'o',
@@ -20,12 +20,12 @@ VowelMap =  [
             ]
 
 SouthVowelMap = [
-                'e',
-                'o',
+                'e\'',
+                'o\'',
                 ]
 
 ModernVowelMap = [
-                 'e',
+                 'a',
                  'o',
                  ]
 
@@ -42,9 +42,9 @@ ModernVowelSignMap = ModernVowelMap[:]
 SinhalaVowelSignMap = SinhalaVowelMap[:]
 
 AyogavahaMap = [
-               'm',
+               'm\'',
                '\u004D',
-               'h'
+               'h\''
                ]
 
 ViramaMap =  [
@@ -68,7 +68,7 @@ ConsonantMap =  [
                 't\'h',
                 'd\'',
                 'd\'h',
-                '\u006E',
+                'n',
 
                 't',
                 'th',
@@ -94,9 +94,9 @@ ConsonantMap =  [
                 ]
 
 SouthConsonantMap = [
-                    'l',
+                    'l\'',
                     'zh',
-                    'r',
+                    'r\'',
                     'n'
                     ]
 
@@ -128,12 +128,12 @@ OmMap = [
         ]
 
 SignMap =[
-         '\u0027',
+         '\'',
          '\u002E',
          '\u002E\u002E'
          ]
 
-Aytham =['k']
+Aytham =['g']
 
 NumeralMap = [
              '\u0030',

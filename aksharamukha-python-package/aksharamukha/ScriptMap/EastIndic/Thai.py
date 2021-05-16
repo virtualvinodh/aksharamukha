@@ -15,26 +15,26 @@ VowelMap =  [
             '\u0E24\u0E45',
             '\u0E26',
             '\u0E26\u0E45',
-            '\u0E40\u0E2D',
-            '\u0E44\u0E2D',
-            '\u0E42\u0E2D',
-            '\u0E40\u0E2D\u0E32',
+            '\u0E2D\u0E40',
+            '\u0E2D\u0E44',
+            '\u0E2D\u0E42',
+            '\u0E2D\u0E40\u0E32',
             ]
 
 SouthVowelMap = [
-                '\u0E40\u0E2D\u0E30',
-                '\u0E42\u0E2D\u0E30',
+                '\u0E2D\u0E40\u0E30',
+                '\u0E2D\u0E42\u0E30',
                 ]
 
 ModernVowelMap = [
-                 '\u0E41\u0E2D\u0E30',
-                 '\u0E40\u0E2D\u0E32\u0E30',
+                 '\u0E2D\u0E41\u0E30',
+                 '\u0E2D\u0E40\u0E32\u0E30',
                  ]
 
 SinhalaVowelMap = [
-                  '\u0E41\u0E2D'
+                  '\u0E2D\u0E41'
                   ]
-    
+
 VowelSignMap =  [
                  '\u0E32',
                  '\u0E34',
@@ -53,7 +53,7 @@ VowelSignMap =  [
 
 SouthVowelSignMap = [
                      '\u0E40\u0E30',
-                     '\u0E42\u0E30',                    
+                     '\u0E42\u0E30',
                     ]
 
 ModernVowelSignMap =[
@@ -70,7 +70,7 @@ AyogavahaMap = [
                '\u0E4D',
                '\u0E2B\u0E4C'
                ]
-    
+
 ViramaMap =  [
              '\u0E3A'
              ]
@@ -81,36 +81,36 @@ ConsonantMap =  [
                 '\u0E04',
                 '\u0E06',
                 '\u0E07',
-                
+
                 '\u0E08',
                 '\u0E09',
                 '\u0E0A',
                 '\u0E0C',
                 '\u0E0D',
-                
+
                 '\u0E0F',
                 '\u0E10',
                 '\u0E11',
                 '\u0E12',
                 '\u0E13',
-                
+
                 '\u0E15',
                 '\u0E16',
                 '\u0E17',
                 '\u0E18',
                 '\u0E19',
-                
+
                 '\u0E1B',
                 '\u0E1C',
                 '\u0E1E',
                 '\u0E20',
                 '\u0E21',
-                
+
                 '\u0E22',
                 '\u0E23',
                 '\u0E25',
                 '\u0E27',
-                
+
                 '\u0E28',
                 '\u0E29',
                 '\u0E2A',
@@ -126,8 +126,8 @@ SouthConsonantMap = [
 
 NuktaConsonantMap =  [
                      '\u0E01\u02BD',
-                     '\u0E02\u02BD',
-                     '\u0E04\u02BD',
+                     'ฃ',
+                     'ฅ',
                      '\u0E0B',
                      '\u0E23\u02BD',
                      '\u0E23\u0E3A\u0E2B\u02BD',
@@ -146,7 +146,7 @@ SinhalaConsonantMap =[
 NuktaMap = [
            '\u02BD'
            ]
-    
+
 OmMap = [
         '\u0E42\u0E2D\u0E4D'
         ]

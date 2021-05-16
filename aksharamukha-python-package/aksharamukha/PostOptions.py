@@ -20,7 +20,7 @@ def ApplyScriptDefaults(Strng,Source,Target):
         Options += ['MalayalamAnusvaraNasal', 'MToAnusvara', 'MalayalamremoveHistorical']
 
     elif Target == 'Tamil':
-        Options += ['TamilNaToNNa','AnusvaraToNasal']
+        Options += ['TamilNaToNNa','AnusvaraToNasal', 'TamilpredictDentaNa']
 
     elif Target == 'Bengali':
         Options += ['VaToBa','YaToYYa','KhandaTa']
@@ -37,9 +37,6 @@ def ApplyScriptDefaults(Strng,Source,Target):
     elif Target == 'Oriya':
         Options += ['OriyaVa','YaToYYa']
 
-    elif Target == 'Sinhala':
-        Options += []
-
     elif Target == 'Chakma':
         Options += ['YaToYYa']
 
@@ -49,8 +46,8 @@ def ApplyScriptDefaults(Strng,Source,Target):
     elif Target == 'Saurashtra':
         Options += ['SaurashtraHaru']
 
-    elif Target == 'Thai':
-        Options += []
+    elif Target == 'Ahom':
+        Options +=['AhomClosed']
 
     elif Target == 'Tibetan':
         Options += ['TibetanRemoveVirama', 'TibetanRemoveBa']

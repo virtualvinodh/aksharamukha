@@ -158,10 +158,22 @@ def auto_detect(text, plugin = False):
 def detect_preoptions(text, inputScript):
     preoptions = []
     if inputScript == 'Thai':
-        if 'ะ' in text or 'ั' in text:
+        textNew = text.replace('ห์', '')
+        if '\u035C' in text or '\u0325' in text or 'งํ' in text or '\u0E47' in text:
+            preoptions = ['ThaiPhonetic']
+        elif '์' in textNew and ('ะ' in text):
+            preoptions = ['ThaiSajjhayawithA']
+        elif '์' in textNew:
+            preoptions = ['ThaiSajjhayaOrthography']
+        elif 'ะ' in text or 'ั' in text:
             preoptions =  ['ThaiOrthography']
     elif inputScript == 'Lao' or inputScript == 'LaoPali':
-        if 'ະ' in text or 'ັ' in text:
+        textNew = text.replace('ຫ໌', '')
+        if '໌' in textNew and ('ະ' in text):
+            preoptions = ['LaoSajhayaOrthographywithA']
+        elif '໌' in textNew:
+            preoptions = ['LaoSajhayaOrthography']
+        elif 'ະ' in text or 'ັ' in text:
             preoptions = ['LaoTranscription']
     elif inputScript == 'Urdu':
             preoptions = ['UrduShortNotShown']
@@ -169,10 +181,16 @@ def detect_preoptions(text, inputScript):
     return preoptions
 
 def convert(src, tgt, txt, nativize, preoptions, postoptions):
+    tgtOld = ""
+
     if tgt == "" or tgt == "Ignore":
         return txt
     if preoptions == [] and postoptions == [] and nativize == False and src == tgt:
         return txt
+
+    if src == tgt:
+        tgtOld = tgt
+        tgt = "Devanagari"
 
     txt = PreProcess.PreProcess(txt,src,tgt)
 
@@ -206,6 +224,10 @@ def convert(src, tgt, txt, nativize, preoptions, postoptions):
         txt = ConvertFix.OriyaIPAFixPre(txt)
 
     transliteration = Convert.convertScript(txt, src, tgt)
+
+    if src == tgtOld:
+        tgt = tgtOld
+        transliteration = Convert.convertScript(transliteration, "Devanagari", tgt)
 
     if nativize:
       transliteration =  PostOptions.ApplyScriptDefaults(transliteration, src, tgt)

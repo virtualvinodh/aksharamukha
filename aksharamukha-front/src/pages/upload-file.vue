@@ -152,53 +152,33 @@ export default {
           var outputScript = this.options.outputScript[j]
           for (var i = 0; i < this.files.length; i++) {
             var file = this.files[i]
-            var data = {
-              source: this.options.inputScript,
-              target: outputScript,
-              text: file.content,
-              nativize: !this.options.sourcePreserve,
-              postOptions: this.options.postOptions[outputScript],
-              preOptions: this.options.preOptions
+            var content = await this.convertAsync(this.options.inputScript, outputScript, file.content, this.options.sourcePreserve, this.options.postOptions[outputScript], this.options.preOptions)
+
+            content = content.replace(new RegExp('<br/>', 'g'), '\n')
+            // content = content.replace(new RegExp('e-Grantamil 7', 'g'), 'Noto Sans Tamil')
+            // content = content.replace(new RegExp('e-Grantamil', 'g'), 'Noto Sans Tamil')
+
+            var blob = ''
+            var downloadName = this.options.inputScript + '_' + outputScript + '_' + file.name
+            if (file.name.includes('.txt')) {
+              blob = new Blob([content], {type: 'text/plain;charset=utf-8'})
+              saveAs(blob, downloadName)
+            } else if (file.name.includes('.xml')) {
+              blob = new Blob([content], {type: 'text/xml;charset=utf-8'})
+              saveAs(blob, downloadName)
+            } else if (file.name.includes('.docx')) {
+              file.zip.file('word/document.xml', content)
+              file.zip.generateAsync({type: 'blob'})
+                .then(function (blob) {
+                  saveAs(blob, downloadName)
+                })
+            } else {
+              blob = new Blob([content], {type: 'plain/html;charset=utf-8'})
+              saveAs(blob, downloadName)
             }
-            console.log(data)
-            var dhis = this
-            this.apiCall.post('/convert', data)
-              .then(function (response) {
-                dhis.loading = false
-
-                var content = response.data
-                var scriptLabel = JSON.parse(response.config.data)
-
-                scriptLabel = scriptLabel.target
-
-                content = content.replace(new RegExp('<br/>', 'g'), '\n')
-                // content = content.replace(new RegExp('e-Grantamil 7', 'g'), 'Noto Sans Tamil')
-                // content = content.replace(new RegExp('e-Grantamil', 'g'), 'Noto Sans Tamil')
-
-                var blob = ''
-                var downloadName = dhis.options.inputScript + '_' + scriptLabel + '_' + file.name
-                if (file.name.includes('.txt')) {
-                  blob = new Blob([content], {type: 'text/plain;charset=utf-8'})
-                  saveAs(blob, downloadName)
-                } else if (file.name.includes('.xml')) {
-                  blob = new Blob([content], {type: 'text/xml;charset=utf-8'})
-                  saveAs(blob, downloadName)
-                } else if (file.name.includes('.docx')) {
-                  file.zip.file('word/document.xml', content)
-                  file.zip.generateAsync({type: 'blob'})
-                    .then(function (blob) {
-                      saveAs(blob, downloadName)
-                    })
-                } else {
-                  blob = new Blob([content], {type: 'plain/html;charset=utf-8'})
-                  saveAs(blob, downloadName)
-                }
-              })
-              .catch(function (error) {
-                console.log(error)
-              })
           }
         }
+        this.loading = false
       }
     },
     convert: function () {

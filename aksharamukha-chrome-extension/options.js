@@ -5,6 +5,7 @@
 var scripts = ScriptMixin.data().scriptsIndic;
 var postOptions = ScriptMixin.data().postOptionsGroup;
 var preOptions = ScriptMixin.data().preOptionsGroup;
+var preserveSourceDetails = ScriptMixin.data().preserveSourceExampleOut
 
 var scriptsLTR = ['Urdu', 'Thaana', 'HanifiRohingya']
 
@@ -43,10 +44,10 @@ scripts.forEach(function(script) {
 
 document.body.innerHTML += selectInit + selectMid1 + selectMid + selectEnd + '<br/>' + moreButton1
 
-var preservebutton = '<input type="checkbox" name="preservesrc" id="aksharamukha-preserve"/> Preserve source </input>'
+var preservebutton = '<span id="aksharamukha-preserve-block"><input type="checkbox" name="preservesrc" id="aksharamukha-preserve"/> Preserve source </input></span><div id="aksharamukha-preserve-ex">Options:</div>'
 
 var selectInit2 = '<br/><span class="aksharamukha-selection2">Output script: <select name="scriptoutput" id="aksharamukhaselect2" placeholder="Select output script"/>'
-var moreButton2 = '<br/> <div id="options2"</div>'
+var moreButton2 = '<div id="options2"></div>'
 
 document.body.innerHTML += selectInit2 + selectMid2 + selectMid + selectEnd + '<br/><br/>' + preservebutton + '<br/>' + moreButton2
 
@@ -212,6 +213,17 @@ window.close()
 function addOptionsOut () {
   var script = document.getElementById('aksharamukhaselect2').value
   document.getElementById('options2').innerHTML = optionsOutput(script)
+
+  if(typeof preserveSourceDetails[script] === 'undefined') {
+    document.getElementById('aksharamukha-preserve-block').style.display = 'none'
+    document.getElementById('aksharamukha-preserve-ex').style.display = 'none'
+
+  } else {
+    document.getElementById('aksharamukha-preserve-block').style.display = 'block'
+    document.getElementById('aksharamukha-preserve-ex').style.display = 'block'
+    document.getElementById('aksharamukha-preserve-ex').innerHTML = '<small>' + preserveSourceDetails[script] + '</small>'
+  }
+
 }
 
 function optionsOutput (inputScript) {

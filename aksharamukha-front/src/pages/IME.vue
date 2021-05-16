@@ -5,7 +5,7 @@
   <!-- Tabs - notice slot="title" -->
   <q-tab default slot="title" name="tab-1" icon="translate" label="Type" class="print-hide"/>
   <q-tab slot="title" name="tab-2" icon="keyboard" label="Mapping" class="print-hide"/>
-  <q-tab slot="title" name="tab-3" icon="settings" label="Settings" class="print-hide"/>
+  <q-tab slot="title" name="tab-3" icon="settings" label="Settings" class="print-hide" v-if="typeof postOptionsGroup[outputScript] !== 'undefined' || typeof preserveSourceExampleOut[outputScript] !== 'undefined'"/>
   <q-tab slot="title" name="tab-4" icon="font_download" class="print-hide" label="Font" v-if="getScriptObject(outputScript).font.name !== ''"/>
   <q-tab slot="title" name="tab-5" icon="help" label="Help" class="print-hide"/>
     <h5 class="title print-hide"> {{getScriptObject(outputScript).label}} Text Composer : <span :class="getOutputClass(outputScript, postOptions)"> <transliterate text="akSaramukha" src="HK" :tgt="outputScript" sourcePreserve="false">
@@ -26,7 +26,7 @@
 <span class="q-ml-lg"> Use space to trigger conversion <q-toggle class="q-ma-md" v-model="spacetrigger" color="dark"></q-toggle > </span>
   <q-collapsible icon="functions" label="Insert special characters" :opened="false" class="print-hide">
     <div class="print-hide">
-<q-btn v-for="letter in letters[outputScript]" :key="letter" class="q-ma-xs" @click.native="insertChar(letter)"> <span :class="getOutputClass(outputScript, postOptions)"> {{letter}} </span> </q-btn>
+<q-btn v-for="letter in letters[outputScript]" :key="letter" class="q-ma-xs" @click.native="insertChar(letter)"> <span :class="getOutputClass(outputScript, postOptions, letter)"> {{letter}} </span> </q-btn>
     </div>
   </q-collapsible>
     <q-input
@@ -36,7 +36,7 @@
       type="textarea"
       float-label="Input text"
       class="text-input col-xs-12 col-md-12 q-ma-sm"
-      :class="getOutputClass(outputScript, postOptions)"
+      :class="getOutputClass(outputScript, postOptions, textInput)"
       :style="{'font-size': fontSize + '%'}"
       v-on="!spacetrigger ? {input: throttled} : {keyup: convertEnter}"
       clearable
@@ -45,38 +45,9 @@
       :max-height="1500"
       :loading="loading"
       ></q-input>
-      <div class="notice q-ma-sm" v-show="inputScript === 'Urdu'">Urdu is an abjad. Please read the script <router-link to="/describe/Urdu">notes</router-link> to read about Urdu reading conventions.</div>
-      <div class="notice q-ma-sm" v-show="inputScript === 'Grantha' &&
-        preOptions.includes('egrantamil')">This does not use the proper Unicode encoding. Please consider converting the text into Grantha Unicode.</div>
     <div class="col-xs-12 col-md-12 q-ma-sm print-hide">
-      <div class="notice q-ma-sm" v-show="String(convertText).includes('ஶ')">ஶ is pronounced like a 'soft' ஷ </div>
-      <div class="notice q-ma-sm" v-show="String(convertText).includes('ఴ')">ఴ is a historic Telugu letter that is equivalent to Tamil ழ/Malayalam ഴ. Your font may not support this character.</div>
-      <div class="notice q-ma-sm" v-show="String(convertText).includes('ഩ')">ഩ is a historic Malayalam letter that is equivalent to Tamil ன. Your font may not support this character.</div>
-      <div class="notice q-ma-sm" v-show="String(convertText).includes('ఀ')">Your font may not support ఀ the Telugu Chandrabindu character.</div>
-      <div class="notice q-ma-sm" v-show="String(convertText).includes('ഀ')">Your font may not support ഀ the Malayalam Anusvara above character. Try enabling traditional orthogrpahy to view the character properly.</div>
-      <div class="notice q-ma-sm" v-show="outputScript === 'TamilGrantha'">This only works with <a href="http://virtualvinodh.com/download/e-Grantamil.ttf">e-Grantamil Font</a> and uses a mixture of Tamil & Bengali codepoints to encode the characters. </div>
-      <div class="notice q-ma-sm" v-show="outputScript === 'GranthaPandya'">This only works with e-Pandya font and uses Malayalam codepoints to encode Grantha (Pandya) characters.</div>
-      <div class="notice q-ma-sm" v-show="outputScript === 'Grantha' &&
-        !postOptions.includes('egrantamil')">This uses a Unicode Grantha font. It can be downloaded from <a href="https://github.com/googlei18n/noto-fonts/tree/master/phaseIII_only/unhinted/otf/NotoSansGrantha">here.</a></div>
-      <div class="notice q-ma-sm" v-show="outputScript === 'Grantha' &&
-        postOptions.includes('egrantamil')">This does not use the proper Unicode encoding. Please consider disabling the e-Grantamil option and use Grantha Unicode.</div>
-      <div class="notice q-ma-sm" v-show="outputScript === 'Vatteluttu'">This only works with e-Vatteluttu OT font and uses Tamil codepoints to encode Vatteluttu characters.</div>
-      <div class="notice q-ma-sm" v-show="outputScript === 'Siddham' &&
-        postOptions.includes('siddhammukta')">This only works with MuktamSiddham font and uses Devanagari codepoints to encode Siddham characters.</div>
-      <div class="notice q-ma-sm" v-show="outputScript === 'Siddham' &&
-        postOptions.includes('siddhamap')">This only works with ApSiddhamDeva font and uses Devanagari codepoints to encode Siddham characters.</div>
-      <div class="notice q-ma-sm" v-show="outputScript === 'Newa' &&
-        postOptions.includes('nepaldevafont')">This uses Devanagari codepoints to encode the characters. Without the specific font, the characters will just appear as Devanagari. Please consider using an Unicode font that uses the appropriate Newa (Nepal Lipi) codepoints.</div>
-      <div class="notice q-ma-sm" v-show="outputScript === 'Ranjana' &&
-        !postOptions.includes('ranjanalantsa') &&
-        !postOptions.includes('ranjanawartu')">This uses Devanagari codepoints to encode the characters. Without the specific font, the characters will just appear as Devanagari.</div>
-     <div class="notice q-ma-sm" v-show="outputScript === 'Ranjana' &&
-        postOptions.includes('ranjanalantsa')">This uses Tibetan codepoints to encode the characters. Without the specific font, the characters will just appear as Tibetan.</div>
-     <div class="notice q-ma-sm" v-show="outputScript === 'Ranjana' &&
-        postOptions.includes('ranjanawartu')">This uses Tibetan codepoints to encode the characters. Without the specific font, the characters will just appear as Tibetan.</div>
-      <div class="notice q-ma-sm" v-show="outputScript === 'Tamil' &&
-            String(convertText).includes('𑌃')    ">This only works with Google Noto Tamil fonts </div>
-
+    <output-notice :inputScript="inputScript" :outputScript="outputScript" :postOptions="postOptions"
+     :convertText="convertText" :inputText="textInput"></output-notice>
       <q-btn class="q-ma-sm btn print-hide" :data-clipboard-text="convertText.replace(/<br\/>/g, '\n')" @click="copy"> <q-icon name="file copy" /><q-tooltip>Copy text</q-tooltip></q-btn>
       <q-btn class="q-ma-sm print-hide" @click="imageConvert">
         <q-icon name="photo camera" /><q-tooltip>Text screenshot</q-tooltip></q-btn>
@@ -138,9 +109,15 @@
 
   <q-tab-pane name="tab-3">
     <h5> Settings </h5>
+    <span v-if="typeof preserveSourceExampleOut[outputScript] !== 'undefined'">
 
     <q-toggle color="dark" v-model="sourcePreserve" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-sm print-hide" @input="convert" />
+    <small><div class="q-ml-xl" v-html="preserveSourceExampleOut[outputScript]"></div></small>
+
       <br/>
+
+    </span>
+
       <q-option-group
         color="dark"
         type="checkbox"
@@ -177,7 +154,7 @@
       <div class="q-body-1">Text composer allows you to form several type of variations of vottus. <br/> <ul> <li> kaar()ya : <span class="Kannada">ಕಾರ್‍ಯ</span> as opposed to kaarya : <span class="Kannada">ಕಾರ್ಯ</span></li> <li> kar()ma : <span class="Kannada">ಕರ್‍ಮ</span> as opposed to karma : <span class="Kannada">ಕರ್ಮ</span></li></ul> </div>
     </div>
     <div v-if="outputScript === 'Grantha'">
-      <div class="q-body-1">Text composer allows you to form several type of variations of conjuncts. <br/> <ul> <li> san[]ti : <span class="grantha">𑌸𑌨‍𑍍𑌤𑌿</span> as opposed to santi : <span class="grantha">𑌸𑌨𑍍𑌤𑌿</span></li> <li> kar[]ma : <span class="grantha">𑌕𑌰‍𑍍𑌮</span> as opposed to karma : <span class="grantha">𑌕𑌰𑍍𑌮</span></li><li> vish[]va : <span class="grantha">𑌵𑌿𑌶‍𑍍𑌵</span> as opposed to vishva : <span class="grantha">𑌵𑌿𑌶𑍍𑌵</span></li> <li> tat{}param : <span class="grantha">𑌤𑌤𑍍‌𑌪𑌰𑌮𑍍</span> as opposed to tatparam <span class="grantha">𑌤𑌤𑍍𑌪𑌰𑌮𑍍</span></li><li>yyam; : <span class="grantha">𑌯𑍍𑌯𑌁</span></li></ul> </div>
+      <div class="q-body-1">Text composer allows you to form several type of variations of conjuncts. <br/> <ul> <li> san[]ti : <span class="grantha">𑌸𑌨‍𑍍𑌤𑌿</span> as opposed to santi : <span class="grantha">𑌸𑌨𑍍𑌤𑌿</span></li> <li> kar[]ma : <span class="grantha">𑌕𑌰‍𑍍𑌮</span> as opposed to karma : <span class="grantha">𑌕𑌰𑍍𑌮</span></li><li> tat{}param : <span class="grantha">𑌤𑌤𑍍‌𑌪𑌰𑌮𑍍</span> as opposed to tatparam <span class="grantha">𑌤𑌤𑍍𑌪𑌰𑌮𑍍</span></li><li>yyam; : <span class="grantha">𑌯𑍍𑌯𑌁</span></li></ul> </div>
     </div>
     <div v-if="outputScript === 'Devanagari'">
       <div class="q-body-1">Text composer allows you to form several type of variations of conjuncts seamlessly. <br/> <ul> <li> lakshh{}mii : <span class="Devanagari">लक्‌ष्मी</span></li> <li>lakshh()mii : <span class="Devanagari">लक्‍ष्मी</span></li> <li> n() : <span class="Devanagari">न्‍</span> </li> <li> kar()ma : <span class="Devanagari">कर्‍म</span></li> </ul> </div>
@@ -188,10 +165,22 @@
     <div v-if="outputScript === 'Newa'">
       <div class="q-body-1">Text composer allows you to switch between repha and eye-lash forms of /r/. <br/> <ul> <li> Repha is formed using r[]. kar[]ma : <span class="newa">𑐎𑐬‍𑑂𑐩</span>.</li> <li> The eye-lash form is formed as usual. karma : <span class="newa">𑐎𑐬𑑂𑐩</span>.</li> </ul> The above assumes that the 'Disable Repha' option is selected. If it is not selected, Repha will be formed in all cases overriding all of the above. It will also not work with the Devanagari-based Newa font.</div>
     </div>
+    <div v-if="outputScript === 'Saurashtra' && inputScript === 'Tamil'">
+      <div class="q-body-1">
+      <span class="tamil">நீ: </span>  <span class="saurashtra">ꢥꢴꢷ</span> <br/>
+      <span class="tamil">ஸௌராஷ்ட்ர </span>  <span class="saurashtra">ꢱꣃꢬꢵꢰ꣄ꢜ꣄ꢬ</span> <br/>
+      <span class="tamil">பு3த்3த4 </span>  <span class="saurashtra">ꢨꢸꢣ꣄ꢤ</span>  </div>
+    </div>
+    <div v-if="outputScript === 'Saurashtra' && inputScript !== 'Tamil'">
+      <div class="q-body-1">
+        <b> Aspirated letters with Haaru </b><br/>
+        <span class="">nha mha rha lha - </span>  <span class="saurashtra">ꢥꢴ ꢪꢴ ꢬꢴ ꢭꢴ</span> <br/>
+      </div>
+    </div>
     <br/>
   </q-tab-pane>
 </q-tabs>
-  <div  class="q-pa-lg" :class="getOutputClass(outputScript, postOptions)" ref="outputTextImg" v-show="screenshot" v-html="sanitize(textInputHTML)"></div>
+  <div  class="q-pa-lg" :class="getOutputClass(outputScript, postOptions, textInput)" ref="outputTextImg" v-show="screenshot" v-html="sanitize(textInputHTML)"></div>
   <a :href="brahmiImg" ref="imgDownload" :style="{'display': 'none'}" download="text.png" @click="screenshot=false"><button>Download</button></a>
   </q-page>
 </template>
@@ -204,7 +193,9 @@ import {QTooltip, QEditor, QRadio, QBtn, QField, QBtnToggle, QToggle, QInput, QS
 import sanitizeHtml from 'sanitize-html'
 import html2canvas from 'html2canvas'
 import Transliterate from '../components/Transliterate'
+import OutputNotice from '../components/OutputNotice'
 import { ScriptMixin } from '../mixins/ScriptMixin'
+import ScriptMap from '../mixins/script_mapping.json'
 import ClipboardJS from 'clipboard'
 
 var _ = require('underscore')
@@ -217,6 +208,7 @@ export default {
   mixins: [ScriptMixin],
   components: {
     QAlert,
+    OutputNotice,
     Transliterate,
     QEditor,
     QRadio,
@@ -253,6 +245,13 @@ export default {
         {label: 'Velthuis', value: 'Velthuis'},
         {label: 'Devanagari', value: 'Devanagari'}
       ],
+      inputOptionsT: [
+        {label: 'Aksharaa', value: 'Aksharaa'},
+        {label: 'HK', value: 'HK'},
+        {label: 'Itrans', value: 'Itrans'},
+        {label: 'Velthuis', value: 'Velthuis'},
+        {label: 'Tamil', value: 'Tamil'}
+      ],
       screenshot: false,
       symbolsIndic: ['a\\\'', 'a\\"', 'a\\_', '\\m+', '\\m++', '\'', 'oM', '.', '..'],
       symbols: ['\'', 'oM', '.', '..'],
@@ -268,7 +267,8 @@ export default {
         Siddham: '𑗘 𑗙 𑗚 𑗛 𑗜 𑗝 𑗁 𑗄 𑗅 𑗆 𑗇 𑗈 𑗉 𑗊 𑗋 𑗌 𑗍 𑗎 𑗏 𑗐 𑗑 𑗒 𑗓 𑗔 𑗕 𑗗'.split(' '),
         Tirhuta: '𑒀 𑓅 𑓆'.split(' '),
         Kannada: 'ಆ್ಯ ೱ ೲ ಀ'.split(' '),
-        Sharada: '𑇂 𑇃 𑇇 𑇉 𑇍 𑇚 𑇛 𑇜 𑇝 𑇞 𑇟'.split(' ')
+        Sharada: '𑇂 𑇃 𑇇 𑇉 𑇍 𑇚 𑇛 𑇜 𑇝 𑇞 𑇟'.split(' '),
+        Ahom: '𑜺 𑜻 𑜾 𑜿'.split(' ')
       },
       desc: {
         Grantha: '𑌗𑍍𑌰𑌨𑍍𑌥 𑌲𑌿𑌪𑌿'
@@ -309,13 +309,15 @@ export default {
     }
   },
   mounted () {
+    // Also change in Watch ::
     if (['Grantha', 'Newa', 'Ranjana', 'Tirhuta', 'Siddham'].includes(this.outputScript)) {
       this.inputOptions = this.inputOptionsD
+    } else if (['Saurashtra'].includes(this.outputScript)) {
+      this.inputOptions = this.inputOptionsT
     } else {
       this.inputOptions = this.inputOptionsN
     }
 
-    this.compoundsGen()
     if (localStorage.postOptionsIMEIndex) {
       this.postOptionsIME = JSON.parse(localStorage.postOptionsIMEIndex)
 
@@ -333,6 +335,8 @@ export default {
     if (localStorage.spacetrigger) {
       this.spacetrigger = JSON.parse(localStorage.spacetrigger)
     }
+
+    this.compoundsGen()
   },
   updated: function () {
     // console.log('The dom is updated ' + this.screenshot)
@@ -354,11 +358,10 @@ export default {
       this.textInput = ''
       if (['Grantha', 'Newa', 'Ranjana', 'Tirhuta', 'Siddham'].includes(this.outputScript)) {
         this.inputOptions = this.inputOptionsD
+      } else if (['Saurashtra'].includes(this.outputScript)) {
+        this.inputOptions = this.inputOptionsT
       } else {
         this.inputOptions = this.inputOptionsN
-      }
-      if (typeof this.postOptionsIME[this.outputScript] === 'undefined') {
-        this.postOptionsIME[this.outputScript] = []
       }
       // console.log(this.postOptionsIME)
       this.$set(this, 'postOptions', this.postOptionsIME[this.outputScript])
@@ -388,7 +391,7 @@ export default {
   },
   methods: {
     downloadHTML2: function () {
-      this.downloadHTML('<div class="' + this.getOutputClass(this.outputScript, this.postOptions) + '">' + this.textInput.replace(/\n/g, '<br/>') + '</div>')
+      this.downloadHTML('<div class="' + this.getOutputClass(this.outputScript, this.postOptions, this.textInput) + '">' + this.textInput.replace(/\n/g, '<br/>') + '</div>')
     },
     convertEnter: function (event) {
       if (event.key === ' ' || event.key === 'Enter') {
@@ -456,26 +459,63 @@ export default {
       }
       this.loading = true
 
+      console.log(this.inputScript)
+      console.log(this.outputScript)
+
       // var textDiff = this.textInput.replace(this.textInputOld, '')
 
-      var data = {
-        source: this.inputScript,
-        target: this.outputScript,
-        text: this.textInput,
-        nativize: !this.sourcePreserve,
-        postOptions: this.postOptions,
-        preOptions: this.preOptions
+      var textInputZ = this.textInput.replace(new RegExp('\u200C', 'g'), '{}')
+      var virama = ScriptMap[this.outputScript.toLowerCase()].vowelsigns.virama
+      textInputZ = textInputZ.replace(new RegExp('\u200D' + virama, 'g'), virama + '[]')
+      textInputZ = textInputZ.replace(new RegExp('\u200D', 'g'), '()')
+
+      var data0 = {
+        source: this.outputScript,
+        target: this.inputScript,
+        text: textInputZ,
+        nativize: false,
+        postOptions: [],
+        preOptions: []
       }
+
       var dhis = this
       // console.log('Calling with this options')
       // console.log(this.postOptions)
-      this.apiCall.post('/convert', data)
+      this.apiCall.post('/convert', data0)
         .then(function (response) {
-          dhis.convertText = response.data
-          dhis.textInput = response.data
-          dhis.textInput = dhis.textInput.replace(new RegExp('<br/>', 'g'), '\n')
-          dhis.textInputOld = dhis.textInput
-          dhis.loading = false
+          dhis.convertText0 = response.data
+          dhis.convertText0 = dhis.convertText0.replace(new RegExp('<br/>', 'g'), '\n')
+
+          if (dhis.inputScript === 'Tamil') {
+            dhis.preOptions = ['TamilNumeralSub', 'SaurastraHaaruColonTamil']
+          } else {
+            dhis.preOptions = []
+          }
+
+          var data = {
+            source: dhis.inputScript,
+            target: dhis.outputScript,
+            text: dhis.convertText0,
+            nativize: !dhis.sourcePreserve,
+            postOptions: dhis.postOptions,
+            preOptions: dhis.preOptions
+          }
+
+          dhis.apiCall.post('/convert', data)
+            .then(function (response) {
+              dhis.convertText = response.data
+              dhis.convertText = dhis.convertText.replace(new RegExp('<br/>', 'g'), '\n')
+
+              if (dhis.inputScript === 'Tamil') {
+                dhis.preOptions = ['TamilNumeralSub', 'SaurastraHaaruColonTamil']
+              }
+
+              dhis.textInput = dhis.convertText
+              dhis.loading = false
+            })
+            .catch(function (error) {
+              console.log(error)
+            })
         })
         .catch(function (error) {
           console.log(error)

@@ -31,7 +31,7 @@ setup(
   long_description_content_type='text/markdown',
 
   # The project's main homepage.
-  url='https://github.com/virtualvinodh/aksharamukha',
+  url='https://github.com/@@@/aksharamukha',
 
   # Author details
   author='Vinodh Rajan',

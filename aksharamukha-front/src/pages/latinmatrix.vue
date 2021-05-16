@@ -76,7 +76,7 @@
     </div>
     <h5> Notes </h5>
       <div class="q-body-1">
-        Sanskrit-specific romanization formats such as Velthuis, HK, IAST have been extended to support Vedic, South-Indic and Sinhala characters.
+        Sanskrit-specific romanization formats such as Velthuis, HK, IAST, SLP1 have been extended to support Vedic, South-Indic and Sinhala characters.
       </div>
   </q-page>
 </template>
@@ -167,19 +167,26 @@ export default {
         .then(function (response) {
           for (var key in response.data['results']) {
             console.log(key)
-            if (key !== 'Velthuis') {
-              dhis.results[key] = JSON.parse(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱'))
+            console.log(response.data['results'][key])
+            if (key === 'RomanReadable') {
+              console.log(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱').replace('"a\\\\"', '"a"').replace('"a\\"', '"a"').replace('"a\\"', '"a","'))
+              dhis.results[key] = JSON.parse(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace('"a\\\\"', '"a"').replace('"a\\"', '"a"').replace('"a\\"', '"a"'))
+            } else if (key !== 'Velthuis') {
+              if (key !== 'Itrans' && key !== 'SLP1' && key !== 'WX') {
+                dhis.results[key] = JSON.parse(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱').replace(/\\̎/, '̎'))
+              } else if (key === 'Itrans' || key === 'SLP1') {
+                dhis.results[key] = JSON.parse(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱').replace(/\\̎/, '̎').replace(/\\\\""/, '\\\\\\""').replace(/\\_/, '\\\\_').replace(/\\m/g, '\\\\m').replace(/a\\'/, 'a\\\\\''))
+              } else if (key === 'WX') {
+                dhis.results[key] = JSON.parse(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱').replace(/\\̎/, '̎').replace(/\\\\""/, '\\\\\\""').replace(/\\_/, '\\\\_').replace(/\\m/g, '\\\\m').replace(/a\\'/, 'a\\\\\''))
+              }
             } else {
-              console.log(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱').replace(/""/g, '"\\"').replace(/\\"\\"/g, '\\""'))
-              dhis.results[key] = JSON.parse(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱').replace(/""/g, '"\\"').replace(/\\"\\"/g, '\\""'))
+              console.log('here333')
+              dhis.results[key] = JSON.parse(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱').replace(/""/g, '"\\"').replace(/\\"\\"/g, '\\""').replace(/\\_/, '\\\\_').replace(/\\m/g, '\\\\m').replace(/\\\\""/, '\\\\\\""'))
             }
-            console.log('here3')
           }
-          console.log('here4')
-          console.log(response.data['guideChars'].replace(/\\/g, ''))
+          console.log(key)
           dhis.guideChars = JSON.parse(response.data['guideChars'].replace(/\\/g, ''))
           dhis.loading = false
-          console.log(dhis.results)
         })
         .catch(function (error) {
           console.log(error)

@@ -136,7 +136,8 @@ In case of multiple outputs for the primary, the text is split into lines by def
       </div>
 
       <div class="q-mt-sm"><output-buttons @fontsizeinc="fontSize += 20" @fontsizedec="fontSize -= 20"
-       @printdoc="printDocument" @screenshot="imageConvert" @copytext="copy" :convertText="convertText" :content="downHTML"></output-buttons></div>
+       @printdoc="printDocument" @screenshot="imageConvert(downloadImage.bind(this))" @copytext="copy" :convertText="convertText" :content="downHTML"></output-buttons></div>
+      <q-btn icon="share" label="text" class="q-ma-sm" @click="shareCordovaText" v-if="$q.platform.is.cordova"/> <q-btn icon="share" label="image" class="q-ma-sm" @click="imageConvert(shareCordovaImage.bind(this))" v-if="$q.platform.is.cordova" /> <br/>
       <span><q-toggle color="dark" v-model="sourcePreserveComposer" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-md print-hide" @input="convert" /><q-tooltip>Preserve the source as-is and don't change the text to improve readability</q-tooltip></span> <br/> <br/>
 
     <br/><br/>
@@ -345,6 +346,75 @@ export default {
     }
   },
   methods: {
+    downloadImage: function () {
+      var dhis = this
+      if (dhis.$q.platform.is.cordova) {
+        var params = {data: dhis.brahmiImg, prefix: 'aksharamukha_', format: 'PNG', quality: 100, mediaScanner: true}
+        window.imageSaver.saveBase64Image(params,
+          function (filePath) {
+            console.log('File saved on ' + filePath)
+            dhis.$q.notify({
+              type: 'info',
+              message: 'The image has been saved in your gallery. Please check there.',
+              position: 'center',
+              timeout: 5000
+            })
+          },
+          function (msg) {
+            console.error(msg)
+          }
+        )
+      } else {
+        dhis.$refs.imgDownload.click()
+      }
+    },
+    shareCordovaImage: function () {
+      var dhis = this
+
+      var params = {data: dhis.brahmiImg, prefix: 'aksharamukha_', format: 'PNG', quality: 100, mediaScanner: true}
+      window.imageSaver.saveBase64Image(params,
+        function (filePath) {
+          var options = {
+            message: '',
+            subject: '', // fi. for email
+            files: [filePath], // an array of filenames either locally or remotely
+            chooserTitle: 'Pick an app' // Android only, you can override the default share sheet title
+          }
+
+          var onSuccess = function (result) {
+            console.log('Share completed? ' + result.completed)
+            console.log('Shared to app: ' + result.app)
+          }
+
+          var onError = function (msg) {
+            console.log('Sharing failed with message: ' + msg)
+          }
+
+          window.plugins.socialsharing.shareWithOptions(options, onSuccess, onError)
+        },
+        function (msg) {
+          console.error(msg)
+        }
+      )
+    },
+    shareCordovaText: function () {
+      var options = {
+        message: this.convertText,
+        subject: this.convertText, // fi. for email
+        chooserTitle: 'Pick an app' // Android only, you can override the default share sheet title
+      }
+
+      var onSuccess = function (result) {
+        console.log('Share completed? ' + result.completed)
+        console.log('Shared to app: ' + result.app)
+      }
+
+      var onError = function (msg) {
+        console.log('Sharing failed with message: ' + msg)
+      }
+
+      window.plugins.socialsharing.shareWithOptions(options, onSuccess, onError)
+    },
     downHTML: function (strng) {
       this.downloadHTML(this.$refs.brahmiText.innerHTML)
     },
@@ -564,7 +634,7 @@ export default {
 
       console.log(JSON.stringify(this.tokensNew))
     },
-    imageConvert: function () {
+    imageConvert: function (func) {
       var node = this.$refs.brahmiText
       console.log(node)
       var dhis = this
@@ -587,9 +657,7 @@ export default {
           image2.src = cropped
           dhis.brahmiImg = cropped
 
-          image2.onload = function () {
-            dhis.$refs.imgDownload.click()
-          }
+          image2.onload = func
         }
       })
     },

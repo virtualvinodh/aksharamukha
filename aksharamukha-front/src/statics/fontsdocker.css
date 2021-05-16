@@ -11,8 +11,20 @@
   src: url('http://localhost:9899/NotoSerifBalinese-Regular.otf')
 }
 @font-face {
+  font-family: 'Vimala';
+  src: url('http://localhost:9899/Vimala.ttf')
+}
+@font-face {
   font-family: 'Noto Serif Dogra';
   src: url('http://localhost:9899/NotoSerifDogra-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Wancho';
+  src: url('http://localhost:9899/NotoSansWancho-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Mro';
+  src: url('http://localhost:9899/NotoSansMro-Regular.otf')
 }
 @font-face {
   font-family: 'e-Grantamil';
@@ -21,6 +33,10 @@
 @font-face {
   font-family: 'Noto Sans Javanese';
   src: url('http://localhost:9899/NotoSansJavanese-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Mongolian';
+  src: url('http://localhost:9899/NotoSansMonglian-Regular.otf')
 }
 @font-face {
   font-family: 'Noto Sans HanifiRohingya';
@@ -63,8 +79,16 @@
   src: url('http://localhost:9899/NotoSansChakma-Regular.otf')
 }
 @font-face {
+  font-family: 'Noto Sans ChakmaPali';
+  src: url('http://localhost:9899/chakmapali.otf')
+}
+@font-face {
   font-family: 'Noto Sans Telugu';
-  src: url('http://localhost:9899/Lohit-Telugu.ttf')
+  src: url('http://localhost:9899/NotoSansTelugu-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Bengali';
+  src: url('http://localhost:9899/NotoSansBengali-Regular.otf')
 }
 @font-face {
   font-family: 'Noto Sans Batak';
@@ -124,7 +148,11 @@
 }
 @font-face {
   font-family: 'Noto Sans Grantha2';
-  src: url('http://localhost:9899/NotoSansGrantha-Regular.otf')
+  src: url('http://localhost:9899/NotoSansGrantha-RegularZach.otf')
+}
+@font-face {
+  font-family: 'Noto Serif Grantha';
+  src: url('http://localhost:9899/NotoSerifGrantha-RegularZach.otf')
 }
 @font-face {
   font-family: 'Muktamsiddham';
@@ -142,14 +170,22 @@
   font-family: 'Nepal2';
   src: url('http://localhost:9899/Nepal-lipi2.woff')
 }
+
 @font-face {
   font-family: 'BabelStoneZanabazar';
+  src: url('http://localhost:9899/BabelStoneZanabazar.woff')
+}
+
+@font-face {
+  font-family: 'Noto Sans Zanabazar Square';
   src: url('http://localhost:9899/NotoSansZanabazarSquare-Regular.otf')
 }
+
 @font-face {
   font-family: 'Adinatha Tamil Brahmi';
   src: url('http://localhost:9899/AdinathaTamilBrahmi2.otf')
 }
+
 @font-face {
   font-family: 'Kharoshthi Ka';
   src: url('http://localhost:9899/ka-khar.otf')
@@ -161,6 +197,18 @@
 @font-face {
   font-family: 'Lao Pali';
   src: url('http://localhost:9899/Lanexang_Mon4.otf')
+}
+@font-face {
+  font-family: 'Khamti Regular';
+  src: url('http://localhost:9899/Khamti-Regular.otf')
+}
+@font-face {
+  font-family: 'Kaccayana Thai';
+  src: url('http://localhost:9899/KaccayanaThai.otf')
+}
+@font-face {
+  font-family: 'Aazhvaar Telugu';
+  src: url('http://localhost:9899/AazhvaarTelugu.otf')
 }
 @font-face {
   font-family: 'MithilaUni';
@@ -217,6 +265,10 @@
 @font-face {
   font-family: 'Noto Sans Modi';
   src: url('http://localhost:9899/NotoSansModi-Regular.otf')
+}
+@font-face {
+  font-family: 'Noto Sans Tibetan';
+  src: url('http://localhost:9899/NotoSerifTibetan-Regular.otf')
 }
 @font-face {
   font-family: 'Noto Sans Multani';
@@ -310,8 +362,53 @@
 @font-face {
   font-family: 'RanjanaUnicode';
   src: url('http://localhost:9899/RanjanaUNICODE1.0.TTF')
-
 }
+
+@font-face {
+  font-family: 'BabelStone PhagsPa TibA';
+  src: url('http://localhost:9899/BabelStonePhagspaTibetanA_v2.ttf')
+}
+
+@font-face {
+  font-family: 'BabelStone PhagsPa Seal';
+  src: url('http://localhost:9899/BabelStonePhagspaSeal_v1.ttf')
+}
+
+@font-face {
+  font-family: 'Dejavu Sans';
+  src: url('http://localhost:9899/DejaVuSans.ttf');
+}
+
+@font-face {
+  font-family: 'BabelStone PhagsPa Book';
+  src: url('http://localhost:9899/BabelStonePhagspaBook_v2.ttf')
+}
+
+@font-face {
+  font-family: 'Lohit Oriya Vedic';
+  src: url('http://localhost:9899/Lohit-Oriya-Vedic.otf')
+}
+
+@font-face {
+  font-family: 'Noto Sans Bengali Vedic';
+  src: url('http://localhost:9899/NotoSansBengali-Vedic.otf')
+}
+
+@font-face {
+  font-family: 'Noto Sans Gujarati Vedic';
+  src: url('http://localhost:9899/NotoSansGujarati-Vedic.otf')
+}
+
+@font-face {
+  font-family: 'Noto Sans Gurmukhi Vedic';
+  src: url('http://localhost:9899/NotoSansGurmukhi-Vedic.otf')
+}
+
+@font-face {
+  font-family: 'Agastya Extended Tamil';
+  src: url('http://localhost:9899/AgastyaExtendedTamil.otf')
+}
+
 @font-face {
   font-family: 'Noto Sans Brahmi';
   src: url('http://localhost:9899/NotoSansBrahmi-Regular.otf')
@@ -322,6 +419,43 @@
   src: url('http://localhost:9899/NotoSansSoyombo-Regular.otf')
 }
 
+@font-face {
+  font-family: 'Noto Sans Marchen';
+  src: url('http://localhost:9899/NotoSansMarchen-Regular.otf')
+}
+
+@font-face {
+  font-family: 'Noto Sans MarchenB';
+  src: url('http://localhost:9899/BabelStoneMarchen.ttf')
+}
+
+@font-face {
+  font-family: 'MQG8F02';
+  src: url('http://localhost:9899/MQG8F02.ttf')
+}
+
+@font-face{font-family:'Mongolian BT';src:url(http://localhost:9899/LD-MONG150702-BT.ttf); }
+
+.phagspatib {
+  font-family: 'BabelStone PhagsPa TibA' !important;
+  writing-mode: vertical-lr;
+  line-height: 1.8em;
+  font-size: 150%;
+}
+
+.phagspaseal {
+  font-family: 'BabelStone PhagsPa Seal' !important;
+  writing-mode: vertical-lr;
+  line-height: 1.8em;
+}
+
+.mongolian {
+  font-family: 'MQG8F02' !important;
+  writing-mode: vertical-lr;
+  line-height: 1.8em;
+  font-size: 135%;
+}
+
 .soyombo {
   font-family: 'Noto Sans Soyombo' !important;
   font-size: 130%;
@@ -329,6 +463,22 @@
 
 .russiancyrillic {
   font-family: 'Noto Sans Regular' !important;
+}
+
+.oriyavedic {
+  font-family: 'Lohit Oriya Vedic' !important;
+}
+
+.bengalivedic {
+  font-family: 'Noto Sans Bengali Vedic' !important;
+}
+
+.gujarativedic {
+  font-family: 'Noto Sans Gujarati Vedic' !important;
+}
+
+.gurmukhivedic {
+  font-family: 'Noto Sans Gurmukhi Vedic' !important;
 }
 
 .ariyaka {
@@ -347,6 +497,10 @@
   font-family: "Tibetan Dbu Med" !important;
   line-height: 2.3em;
 }
+.tibetan {
+  font-family: "Noto Sans Tibetan" !important;
+  font-size: 110%;
+}
 .buhid {
   font-family: "Noto Sans Buhid" !important
 }
@@ -362,11 +516,14 @@
 .sorasompeng {
   font-family: "Noto Sans SoraSompeng" !important
 }
+.khamtishan {
+  font-family: "Khamti Regular" !important
+}
 .warangciti {
   font-family: "Noto Sans WarangCiti" !important
 }
 .balinese {
-  font-family: "Noto Serif Bali" !important
+  font-family: "Vimala" !important;
 }
 .kannada {
   font-family: "Noto Sans Kannada" !important
@@ -392,14 +549,17 @@
 }
 .tagbanwa {
   font-family: "Noto Sans Tagbanwa" !important;
-  writing-mode: bt-lr;
-
 }
 .sundanese {
   font-family: "Noto Sans Sundanese" !important
 }
 .cham {
   font-family: "Noto Sans Cham" !important
+}
+
+.ipa {
+  font-family: "Dejavu Sans" !important;
+  line-height: 1.5em;
 }
 
 .gunjalagondi {
@@ -420,7 +580,7 @@
 
 }
 .chakma {
-  font-family: "Noto Sans Chakma" !important
+  font-family: "Noto Sans ChakmaPali" !important
 }
 .lepcha {
   font-family: "Noto Sans Lepcha" !important
@@ -445,6 +605,9 @@
 }
 .telugu {
   font-family: "Noto Sans Telugu" !important
+}
+.teluguzha {
+  font-family: "Aazhvaar Telugu" !important
 }
 .khmer {
   font-family: "Noto Sans Khmer" !important
@@ -504,7 +667,7 @@
 }
 .khomthai {
   font-family: "Patimokkha" !important;
-  font-size: 130%;
+  font-size: 150%;
 }
 .taithamlao {
   font-family: "Lamphun" !important;
@@ -523,30 +686,47 @@
   font-size: 110%;
   line-height: 1.5em;
 }
+.tamilextended {
+  font-family: "Agastya Extended Tamil" !important;
+  line-height: 1.6em;
+}
 .siddhammukta {
   font-size: 120%;
   font-family: Muktamsiddham
 }
 .siddham {
-  font-size: 100%;
   font-family: "Noto Sans Siddham" !important
 }
 .grantha {
   font-family: "Noto Sans Grantha2" !important;
   line-height: 2em;
+  font-feature-settings: "ss04", "ss06";
+}
+.granthaserif {
+  font-family: "Noto Serif Grantha" !important;
+  font-feature-settings: "ss04", "ss06";
+  line-height: 2em;
+}
+.granthalig {
+  font-family: "Noto Sans Grantha2" !important;
+  font-feature-settings: "ss04", "ss06", "ss03";
+  line-height: 2em;
+}
+.granthaseriflig {
+  font-family: "Noto Serif Grantha" !important;
+  font-feature-settings: "ss04", "ss06", "ss03";
+  line-height: 2em;
 }
 .kharoshthi {
-   font-family: "Segoe UI Historic", "Noto Sans Kharoshthi" !important;
+  font-family: "Segoe UI Historic", "Noto Sans Kharoshthi" !important;
   direction: rtl;
 }
 .thaana {
   direction: rtl;
 }
-.tibetan {
-  font-size:150%;
-}
 .zanabazarsquare {
-  font-family: "BabelStoneZanabazar" !important;
+  font-family: "Noto Sans Zanabazar Square" !important;
+  font-feature-settings: "ss01";
   line-height: 3em;
 }
 .newa {
@@ -554,6 +734,9 @@
 }
 .sharada {
   font-family: "Noto Sans Sharada" !important
+}
+.thainative {
+  font-family: "Kaccayana Thai" !important
 }
 .mahajani {
   font-family: "Noto Sans Mahajani" !important
@@ -605,4 +788,14 @@
 }
 .taikuen {
   font-family: "A Tai Tham KH New" !important
+}
+.wancho {
+  font-family: "Noto Sans Wancho" !important
+}
+.mro {
+  font-family: "Noto Sans Mro" !important
+}
+.marchen {
+  font-family: "Noto Sans Marchen" !important;
+  line-height: 2.5em;
 }

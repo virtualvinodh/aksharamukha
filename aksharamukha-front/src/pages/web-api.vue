@@ -4,19 +4,19 @@
     <h5> How to Use </h5> <br/>
     <p class="q-body-1">In its simplest form, a (GET) request in the following form would work. </p>
 
-    <a href="http://aksharamukha.appspot.com/api/public?source=HK&target=Telugu&text=buddhaH">http://aksharamukha.appspot.com/api/public?source=HK&target=Telugu&text=buddhaH</a> <br/><br/>
+    <a href="http://aksharamukha-plugin.appspot.com/api/public?source=HK&target=Telugu&text=buddhaH">http://aksharamukha-plugin.appspot.com/api/public?source=HK&target=Telugu&text=buddhaH</a> <br/><br/>
 
     <p class="q-body-1">At the minimum, the request needs two parameters: target and text. If the source script is not given, the system will try to auto-detect the script of the text.</p>
 
-    <a href="http://aksharamukha.appspot.com/api/public?target=IAST&text=ꯃꯤꯇꯩ_ꯃꯌꯦꯛ">http://aksharamukha.appspot.com/api/public?target=IAST&text=ꯃꯤꯇꯩ_ꯃꯌꯦꯛ</a> <br/><br/>
+    <a href="http://aksharamukha-plugin.appspot.com/api/public?target=IAST&text=ꯃꯤꯇꯩ_ꯃꯌꯦꯛ">http://aksharamukha-plugin.appspot.com/api/public?target=IAST&text=ꯃꯤꯇꯩ_ꯃꯌꯦꯛ</a> <br/><br/>
 
    <p class="q-body-1">More elaborate transliterations can be performed by passing extra flags as pre-options and post-options</p>
 
-      <a href="http://aksharamukha.appspot.com/api/public?source=HK&target=Tamil&text=maMgaLa&nativize=false">http://aksharamukha.appspot.com/api/public?source=HK&target=Tamil&text=maMgaLa&nativize=false</a> <br/><br/>
+      <a href="http://aksharamukha-plugin.appspot.com/api/public?source=HK&target=Tamil&text=maMgaLa&nativize=false">http://aksharamukha-plugin.appspot.com/api/public?source=HK&target=Tamil&text=maMgaLa&nativize=false</a> <br/><br/>
 
-      <a href="http://aksharamukha.appspot.com/api/public?source=HK&target=Tamil&text=bRhaspati_gaMgA&nativize=false&postoptions=TamilSubScript,TamilRemoveApostrophe">http://aksharamukha.appspot.com/api/public?source=HK&target=Tamil&text=bRhaspati_gaMgA&nativize=false&postoptions=TamilSubScript,TamilRemoveApostrophe</a> <br/><br/>
+      <a href="http://aksharamukha-plugin.appspot.com/api/public?source=HK&target=Tamil&text=bRhaspati_gaMgA&nativize=false&postoptions=TamilSubScript,TamilRemoveApostrophe">http://aksharamukha-plugin.appspot.com/api/public?source=HK&target=Tamil&text=bRhaspati_gaMgA&nativize=false&postoptions=TamilSubScript,TamilRemoveApostrophe</a> <br/><br/>
 
-      <a href="http://aksharamukha.appspot.com/api/public?source=Thai&target=Devanagari&text=พุทธัง%20สะระณัง%20คัจฉามิ&nativize=false&preoptions=ThaiOrthography">http://aksharamukha.appspot.com/api/public?source=Thai&target=Devanagari&text=พุทธัง%20สะระณัง%20คัจฉามิ&nativize=false&preoptions=ThaiOrthography</a> <br/><br/>
+      <a href="http://aksharamukha-plugin.appspot.com/api/public?source=Thai&target=Devanagari&text=พุทธัง%20สะระณัง%20คัจฉามิ&nativize=false&preoptions=ThaiOrthography">http://aksharamukha-plugin.appspot.com/api/public?source=Thai&target=Devanagari&text=พุทธัง%20สะระณัง%20คัจฉามิ&nativize=false&preoptions=ThaiOrthography</a> <br/><br/>
 
     <p class="q-body-1">Of course, the API supports both GET and POST requests.</p>
 

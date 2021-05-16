@@ -1,5 +1,5 @@
 <template>
-  <span :class="getOutputClass(tgt, postOptions)" v-html="convertText">
+  <span :class="getOutputClass(tgt, postOptions, convertText)" v-html="convertText">
   </span>
 </template>
 

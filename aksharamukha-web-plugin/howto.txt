@@ -1,0 +1,6 @@
+bundle-js aksharamukha-dev.js -o aksharamukha.js
+
+Note:
+
+Edit ScriptMixing.js:
+remove axios calss in line 4 and export keyword

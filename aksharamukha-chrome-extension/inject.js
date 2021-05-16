@@ -98,7 +98,7 @@ function transliterateReq(text) {
 
   return new Promise(function (resolve, reject) {
 
-  xhttp.open("POST", "https://aksharamukha.appspot.com/api/plugin", true)
+  xhttp.open("POST", "https://aksharamukha-plugin.appspot.com/api/plugin", true)
   xhttp.setRequestHeader("Content-type", "application/json")
 
   var data = JSON.stringify({"source": source, "target": target, "nativize": nativize, 'postOptions': postOptionsList, 'preOptions': preOptionsList,'text': text});
@@ -145,8 +145,8 @@ function addBanner() {
       <div class="aksharamukha-logosec">
       <div class="logo-aksharamukha"/>
         <a href="http://aksharamukha.appspot.com" target="_blank">
-          <img src="https://raw.githubusercontent.com/virtualvinodh/aksharamukha/master/aksharamukha-front/src/statics/icons/favicon-32x32.png" width="20px" >
-        </a> Website Transliterated from <span id="akshsrctgt">` + source + ` to ` + target + `</span>
+          <img src="`+ chrome.runtime.getURL('48.png') + `" width="20px" >
+        </a> Website is being transliterated from <span id="akshsrctgt">` + source + ` to ` + target + `</span>. This may take a few seconds.
       </div>
       </div>
   `);

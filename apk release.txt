@@ -1,0 +1,6 @@
+run cordova build poweer shell script
+And then: cordova build --release android
+
+##  plugins
+cordova plugin add cordova-plugin-x-socialsharing
+cordova plugin add cordova-plugin-splashscreen

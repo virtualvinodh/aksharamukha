@@ -46,13 +46,14 @@
     <input-options :inputScript="inputScript" :outputScript="outputScript" :preOptionsInput="preOptions"
       :postOptions="postOptions" v-model="preOptions" @input="convert"></input-options>
     <div class="row">
-      <q-btn class="q-ma-sm print-hide col-xs-1 col-md-1" @click="uploadImage" v-show="displayImageButton" v-if="!$q.platform.is.cordova"> <q-icon name="add photo alternate" /><q-tooltip>Upload image</q-tooltip></q-btn>
+      <q-btn class="q-ma-sm btn2 print-hide col-xs-1 col-md-1" @click="copySource" :data-clipboard-text="textInput.replace(/<br\/>/g, '\n')"> <q-icon name="file_copy" /><q-tooltip>Copy source text</q-tooltip></q-btn>
+      <!--<q-btn class="q-ma-sm print-hide col-xs-1 col-md-1" @click="uploadImage" v-show="displayImageButton" v-if="!$q.platform.is.cordova"> <q-icon name="add photo alternate" /><q-tooltip>Upload image</q-tooltip></q-btn>
       <span v-show="showFileUpload" class="q-ma-sm">
             <q-uploader url="" clearable extensions=".jpg, .jpeg, .png, .bmp, .ico" @add="showConvertImage" @remove:cancel="hideConvertButton"
                auto-expand hide-upload-button ref="uploadF" :style="{width:'200px'}"/>
             <q-btn class="q-mt-sm" v-show="displayButton" @click="performOCR"> <small> Convert </small> </q-btn>
             <q-spinner-comment color="dark" :size="30" v-show="loadingOCR" class="q-ma-sm"/>
-      </span>
+      </span>-->
     </div>
     </div>
     <div class="q-ma-md print-hide">
@@ -81,15 +82,18 @@
       ref="brahmiText"
       class="text-output col-xs-12 col-md-12 q-pa-md q-pr-lg bg-grey-1 "
       >
-       <span :class="getOutputClass(outputScript, postOptions)" :style="{'font-size': fontSize + '%'}"
+       <span :class="getOutputClass(outputScript, postOptions, convertText)" :style="{'font-size': fontSize + '%'}"
         v-html="sanitize(convertText)"></span>
       </div>
     <output-notice :inputScript="inputScript" :outputScript="outputScript" :postOptions="postOptions"
-     :convertText="convertText"></output-notice>
+     :convertText="convertText" :inputText="textInput"></output-notice>
       <div class="q-mt-sm"><output-buttons @fontsizeinc="fontSize += 20" @fontsizedec="fontSize -= 20"
        @printdoc="printDocument" @screenshot="imageConvert(downloadImage.bind(this))" @copytext="copy" :convertText="convertText" :content="downHTML"></output-buttons></div>
       <q-btn icon="share" label="text" class="q-ma-sm" @click="shareCordovaText" v-if="$q.platform.is.cordova"/> <q-btn icon="share" label="image" class="q-ma-sm" @click="imageConvert(shareCordovaImage.bind(this))" v-if="$q.platform.is.cordova" /> <br/>
-      <span><q-toggle color="dark" v-model="sourcePreserve" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-md print-hide" @input="convert" /><q-tooltip>Preserve the source as-is and don't change the text to improve readability. May use archaic characters and/or diacritics.</q-tooltip></span>
+      <span v-if="typeof preserveSourceExampleOut[outputScript] !== 'undefined'">
+        <span><q-toggle color="dark" v-model="sourcePreserve" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-md print-hide" @input="convert" /><q-tooltip>Preserve the source as-is and don't change the text to improve readability. May use archaic characters and/or diacritics.</q-tooltip></span>
+        <small><div class="q-ml-xl" v-html="preserveSourceExampleOut[outputScript]"></div></small>
+      </span>
     <output-options :inputScript="inputScript" :outputScript="outputScript" :postOptionsInput="postOptions"
        :convertText="convertText"
         v-model="postOptions" @input="convert"></output-options>    </div>
@@ -127,6 +131,11 @@ import OutputNotice from '../components/OutputNotice'
 import OutputButtons from '../components/OutputButtons'
 import scrollTo from 'vue-scrollto'
 import { ScriptMixin } from '../mixins/ScriptMixin'
+
+import ClipboardJS from 'clipboard'
+
+var clipboard = new ClipboardJS('.btn2')
+console.log(clipboard)
 
 import keys from '../keys.js'
 
@@ -243,6 +252,12 @@ export default {
     if (typeof this.$route.query.text !== 'undefined') {
       this.textInput = this.$route.query.text
       this.convert()
+    }
+
+    if (window.innerWidth > document.body.clientWidth) {
+      this.scrollExists = true
+    } else {
+      this.scrollExists = false
     }
   },
   updated: function () {
@@ -407,6 +422,14 @@ export default {
       this.convert()
     },
     copy: function () {
+      this.$q.notify({
+        type: 'info',
+        message: 'Copied',
+        position: 'center',
+        timeout: 200
+      })
+    },
+    copySource: function () {
       this.$q.notify({
         type: 'info',
         message: 'Copied',

@@ -15,12 +15,6 @@ from aksharamukha.transliterate import convert, unique_everseen, removeA, auto_d
 app = Flask(__name__)
 CORS(app)
 
-try:
-  import googleclouddebugger
-  googleclouddebugger.enable()
-except ImportError:
-  pass
-
 @app.route('/demo', methods=['POST', 'GET'])
 def main_site():
     return redirect("http://aksharamukha-api.appspot.com/spa-mat")

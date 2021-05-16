@@ -7,27 +7,24 @@
       <q-btn class="q-ma-sm" @click="alphabetic" :color="activeButton === 'alphabetic' ? 'dark' : ''">
         Alphabetic
       </q-btn>
-      <q-btn class="q-ma-sm" @click="geographical" :color="activeButton === 'geographical' ? 'dark' : ''">
-        Region
-      </q-btn>
       <q-btn class="q-ma-sm" @click="current" :color="activeButton === 'current' ? 'dark' : ''">
         Usage
       </q-btn>
-      <q-btn class="q-ma-sm" @click="linguistic" :color="activeButton === 'linguistic' ? 'dark' : ''">
-        Language Capability
+      <q-btn class="q-ma-sm" @click="geographical" :color="activeButton === 'geographical' ? 'dark' : ''">
+        Region
       </q-btn>
       <q-btn class="q-ma-sm" @click="derivatic" :color="activeButton === 'derivatic' ? 'dark' : ''">
         Derivation
       </q-btn>
+      <q-btn class="q-ma-sm" @click="linguistic" :color="activeButton === 'linguistic' ? 'dark' : ''">
+        Language Capability
+      </q-btn>
     </div>
     <div class="q-ma-sm">
-    <q-collapsible label="<i>Further filters</i>" icon="category" :opened="!$q.platform.is.mobile">
-      <q-btn rounded flat dense v-for="tag in tagsAll" :key="tag + 'v'" @click="tagClick(tag)">
-        <q-chip :color="tagsActive.includes(tag) ? 'green-3' : 'red-3'" dense tag>
-          {{tag}}
-        </q-chip>
-      </q-btn>
+    <q-collapsible label="<i>Script Properties</i>" icon="category" :opened="!$q.platform.is.mobile">
+      <filter-tags v-model="tagsActive"></filter-tags>
     </q-collapsible>
+
     </div>
       <div class="row" v-if="type === 'explorecard'">
       <q-select
@@ -161,7 +158,10 @@ import { QSelect, QTooltip, QChip, QBtnToggle, QBtn, QModal, CloseOverlay, QColl
 import Explorecard from '../components/Explorecard'
 import Explorecardsent from '../components/Explorecardsent'
 import Transliterate from '../components/Transliterate'
+import FilterTags from '../components/FilterTags'
 import { ScriptMixin } from '../mixins/ScriptMixin'
+
+var _ = require('underscore')
 
 export default {
   // name: 'PageName',
@@ -170,6 +170,7 @@ export default {
   components: {
     tree,
     QBtn,
+    FilterTags,
     QToggle,
     QTooltip,
     QBtnToggle,
@@ -229,7 +230,7 @@ export default {
           'name': '',
           'url': ''
         },
-        language: ['Sanskrit & Pali'],
+        language: ['Sanskrit', 'Pali', 'Others'],
         status: ['Living', 'Majority'],
         invented: ['Derived: Brahmi']
       },
@@ -273,6 +274,23 @@ export default {
   },
   updated: function () {
   },
+  watch: {
+    tagsActive: function () {
+      if (this.activeButton === 'all') {
+        this.displayAll()
+      } else if (this.activeButton === 'alphabetic') {
+        this.alphabetic()
+      } else if (this.activeButton === 'derivatic') {
+        this.derivatic()
+      } else if (this.activeButton === 'linguistic') {
+        this.linguistic()
+      } else if (this.activeButton === 'current') {
+        this.current()
+      } else if (this.activeButton === 'geographical') {
+        this.geographical()
+      }
+    }
+  },
   computed: {
     chars: function () {
       if (this.type === 'explorecard') {
@@ -294,20 +312,20 @@ export default {
       keys.forEach(function (key) {
         scripts[key] = []
 
-        dhis.scriptsCategorized[key].forEach(function (script) {
-          if (dhis.tagsActive.every(elem => dhis.tagsGet(script).indexOf(elem) > -1)) {
-            if (dhis.charsIr[script.value] === dhis.chars) {
-              script['approx'] = false
+        var scriptsListCategory = dhis.filterScripts(dhis.scriptsCategorized[key], key)
+
+        scriptsListCategory.forEach(function (script) {
+          if (dhis.charsIr[script.value] === dhis.chars) {
+            script['approx'] = false
+            scripts[key].push(script)
+          } else {
+            if (dhis.showapprox) {
+              script['approx'] = true
               scripts[key].push(script)
             } else {
-              if (dhis.showapprox) {
+              if (dhis.type === 'explorecardsent') {
                 script['approx'] = true
                 scripts[key].push(script)
-              } else {
-                if (dhis.type === 'explorecardsent') {
-                  script['approx'] = true
-                  scripts[key].push(script)
-                }
               }
             }
           }
@@ -326,14 +344,16 @@ export default {
       } else {
         return []
       }
-    },
+    }
+  },
+  methods: {
     regionalScripts: function () {
       var scriptsCategorized = {}
+      var filteredScriptsIndicAll = this.filterScripts(this.scriptsIndic)
 
-      var dhis = this
       this.regions.forEach(function (region) {
         scriptsCategorized[region] = []
-        dhis.scriptsIndic.forEach(function (script) {
+        filteredScriptsIndicAll.forEach(function (script) {
           if (script.region.includes(region)) {
             scriptsCategorized[region].push(script)
           }
@@ -344,11 +364,11 @@ export default {
     },
     linguisticScripts: function () {
       var scriptsCategorized = {}
+      var filteredScriptsIndicAll = this.filterScripts(this.scriptsIndic)
 
-      var dhis = this
       this.languages.forEach(function (language) {
         scriptsCategorized[language] = []
-        dhis.scriptsIndic.forEach(function (script) {
+        filteredScriptsIndicAll.forEach(function (script) {
           if (script.language.includes(language)) {
             scriptsCategorized[language].push(script)
           }
@@ -359,11 +379,11 @@ export default {
     },
     alphabeticScripts: function () {
       var scriptsCategorized = {}
+      var filteredScriptsIndicAll = this.filterScripts(this.scriptsIndic)
 
-      var dhis = this
       this.alphabet.forEach(function (letter) {
         scriptsCategorized[letter] = []
-        dhis.scriptsIndic.forEach(function (script) {
+        filteredScriptsIndicAll.forEach(function (script) {
           if (script.label[0] === letter) {
             scriptsCategorized[letter].push(script)
           }
@@ -373,11 +393,11 @@ export default {
     },
     statusScripts: function () {
       var scriptsCategorized = {}
+      var filteredScriptsIndicAll = this.filterScripts(this.scriptsIndic)
 
-      var dhis = this
       this.status.forEach(function (state) {
         scriptsCategorized[state] = []
-        dhis.scriptsIndic.forEach(function (script) {
+        filteredScriptsIndicAll.forEach(function (script) {
           if (script.status.includes(state)) {
             scriptsCategorized[state].push(script)
           }
@@ -387,59 +407,82 @@ export default {
     },
     derivedScripts: function () {
       var scriptsCategorized = {}
+      var filteredScriptsIndicAll = this.filterScripts(this.scriptsIndic)
 
-      var dhis = this
       this.derivation.forEach(function (state) {
         scriptsCategorized[state] = []
-        dhis.scriptsIndic.forEach(function (script) {
+        filteredScriptsIndicAll.forEach(function (script) {
           if (script.invented.includes(state)) {
             scriptsCategorized[state].push(script)
           }
         })
       })
       return scriptsCategorized
-    }
-  },
-  methods: {
+    },
+    filterScripts: function (scriptsList, key) {
+      var dhis = this
+      var tagsU = []
+      var tagsR = []
+      var tagsD = []
+      var tagsL = []
+
+      this.tagsActive.forEach(function (tag) {
+        if (dhis.tagsUsage.includes(tag)) {
+          tagsU.push(tag)
+        } else if (dhis.tagsRegion.includes(tag)) {
+          tagsR.push(tag)
+        } else if (dhis.tagsDerivation.includes(tag)) {
+          tagsD.push(tag)
+        } else if (dhis.tagsLanguage.includes(tag)) {
+          tagsL.push(tag)
+        }
+      })
+
+      tagsU = _.unique(tagsU.map(tag => scriptsList.filter(script => script.status.includes(tag))).flat())
+      tagsR = _.unique(tagsR.map(tag => scriptsList.filter(script => script.region.includes(tag))).flat())
+      tagsD = _.unique(tagsD.map(tag => scriptsList.filter(script => script.invented.includes(tag))).flat())
+      tagsL = _.unique(tagsL.map(tag => scriptsList.filter(script => script.language.includes(tag))).flat())
+
+      tagsU = tagsU.length === 0 ? scriptsList : tagsU
+      tagsR = tagsR.length === 0 ? scriptsList : tagsR
+      tagsD = tagsD.length === 0 ? scriptsList : tagsD
+      tagsL = tagsL.length === 0 ? scriptsList : tagsL
+
+      var sortedArray = _.intersection(tagsU, tagsR, tagsD, tagsL).sort(function (a, b) {
+        if (a.label > b.label) {
+          return 1
+        }
+        if (a.label < b.label) {
+          return -1
+        }
+        return 0
+      })
+
+      return sortedArray
+    },
     alphabetic: function () {
-      this.scriptsCategorized = this.alphabeticScripts
+      this.scriptsCategorized = this.alphabeticScripts()
       this.activeButton = 'alphabetic'
     },
     derivatic: function () {
-      this.scriptsCategorized = this.derivedScripts
+      this.scriptsCategorized = this.derivedScripts()
       this.activeButton = 'derivatic'
     },
     linguistic: function () {
-      this.scriptsCategorized = this.linguisticScripts
+      this.scriptsCategorized = this.linguisticScripts()
       this.activeButton = 'linguistic'
     },
     current: function () {
-      this.scriptsCategorized = this.statusScripts
+      this.scriptsCategorized = this.statusScripts()
       this.activeButton = 'current'
     },
     geographical: function () {
-      this.scriptsCategorized = this.regionalScripts
+      this.scriptsCategorized = this.regionalScripts()
       this.activeButton = 'geographical'
     },
     displayAll: function () {
       this.scriptsCategorized = {'All': this.scriptsIndic}
       this.activeButton = 'all'
-    },
-    tagsGet: function (script) {
-      if (script !== '') {
-        return script.language.concat(script.invented, script.status, script.region)
-      } else {
-        return []
-      }
-    },
-    tagClick: function (tag) {
-      if (!this.tagsActive.includes(tag)) {
-        this.tagsActive.push(tag)
-      } else {
-        this.tagsActive = this.tagsActive.filter(function (value, index, arr) { return value !== tag })
-      }
-
-      console.log(this.tagsActive)
     },
     openlink: function (link) {
       let routeData = this.$router.resolve({path: link})

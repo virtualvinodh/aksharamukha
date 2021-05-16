@@ -25,14 +25,14 @@ SouthVowelMap = [
                 ]
 
 ModernVowelMap = [
-                 '\uA88C\u02BC',
-                 '\uA883\u02BC',
+                 '\uA88C\u02BD',
+                 '\uA883\u02BD',
                  ]
 
 SinhalaVowelMap = [
-                  '\uA88C\u02C7'
+                  '\uA88C\u02BD'
                   ]
-    
+
 VowelSignMap =  [
                 '\uA8B5',
                 '\uA8B6',
@@ -55,11 +55,11 @@ SouthVowelSignMap = [
                     ]
 
 ModernVowelSignMap =[
-                    '\uA8BE\u02BC',
-                    '\uA8B5\u02BC']
+                    '\uA8BE\u02BD',
+                    '\uA8B5\u02BD']
 
 SinhalaVowelSignMap = [
-                      '\uA8BF\u02C7'
+                      '\uA8BF\u02BD'
                       ]
 
 AyogavahaMap = [
@@ -67,7 +67,7 @@ AyogavahaMap = [
                '\uA880',
                '\uA881'
                ]
-    
+
 ViramaMap =  [
              '\uA8C4'
              ]
@@ -78,36 +78,36 @@ ConsonantMap =  [
                 '\uA894',
                 '\uA895',
                 '\uA896',
-                
+
                 '\uA897',
                 '\uA898',
                 '\uA899',
                 '\uA89A',
                 '\uA89B',
-                
+
                 '\uA89C',
                 '\uA89D',
                 '\uA89E',
                 '\uA89F',
                 '\uA8A0',
-                
+
                 '\uA8A1',
                 '\uA8A2',
                 '\uA8A3',
                 '\uA8A4',
                 '\uA8A5',
-                
+
                 '\uA8A6',
                 '\uA8A7',
                 '\uA8A8',
                 '\uA8A9',
                 '\uA8AA',
-                
+
                 '\uA8AB',
                 '\uA8AC',
                 '\uA8AD',
                 '\uA8AE',
-                
+
                 '\uA8AF',
                 '\uA8B0',
                 '\uA8B1',
@@ -116,34 +116,34 @@ ConsonantMap =  [
 
 SouthConsonantMap = [
                     '\uA8B3',
-                    '\uA8B3\u00B7',
-                    '\uA8AC\u00B7',
-                    '\uA8A5\u00B7'
+                    '\uA8B3\u02BD',
+                    '\uA8AC\u02BD',
+                    '\uA8A5\u02BD'
                     ]
 
 NuktaConsonantMap =  [
-                     '\uA892\u00B7',
-                     '\uA893\u00B7',
-                     '\uA894\u00B7',
-                     '\uA899\u00B7',
-                     '\uA89E\u00B7',
-                     '\uA89F\u00B7',
-                     '\uA8A7\u00B7',
-                     '\uA8AB\u00B7'
+                     '\uA892\u02BD',
+                     '\uA893\u02BD',
+                     '\uA894\u02BD',
+                     '\uA899\u02BD',
+                     '\uA89E\u02BD',
+                     '\uA89F\u02BD',
+                     '\uA8A7\u02BD',
+                     '\uA8AB\u02BD'
                      ]
 
 SinhalaConsonantMap =[
-                     '\uA880\u02C6\uA894',
-                     '\uA880\u02C6\uA899',
-                     '\uA880\u02C6\uA89E',
-                     '\uA880\u02C6\uA8A3',
-                     '\uA880\u02C6\uA8A8',
+                     '\uA880\u02BD\uA894',
+                     '\uA880\u02BD\uA899',
+                     '\uA880\u02BD\uA89E',
+                     '\uA880\u02BD\uA8A3',
+                     '\uA880\u02BD\uA8A8',
                       ]
 
 NuktaMap = [
-           '\u00B7'
+           '\u02BD'
            ]
-    
+
 OmMap = [
         '\uA890\uA880'
         ]

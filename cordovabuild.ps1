@@ -9,3 +9,5 @@ quasar build -m cordova -T android
 cd src-cordova
 
 cordova run android
+
+# cordova build android --release

@@ -6,8 +6,66 @@ import string
 from . import PostProcess
 from . import ConvertFix as CF
 from aksharamukha.ScriptMap.EastIndic import PhagsPa
-from aksharamukha.ScriptMap.MainIndic import Tamil, Malayalam, Limbu
+from aksharamukha.ScriptMap.MainIndic import Tamil, Malayalam, Limbu, Chakma
 ### Use escape char in all functions
+
+def ShowChillus(Strng):
+
+    return PostProcess.MalayalamChillu(Strng, True, True)
+
+def SanskritLexicaizeHK(Strng):
+
+    return Strng
+
+def ThaiPhonetic(Strng):
+    Strng = Strng.replace('ด', 'ท')
+    Strng = Strng.replace('บ', 'พ')
+    Strng = Strng.replace('ก\u0325', 'ค')
+    Strng = Strng.replace('จ\u0325', 'ช')
+    Strng = Strng.replace('งํ', 'ง')
+
+    Strng = Strng.replace('\u035C', '')
+
+    Strng = Strng.replace('\u0E47', '')
+
+    Strng += "\u02BB\u02BB"
+
+    return Strng
+
+def SaurastraHaaruColonTamil(Strng):
+    Strng = Strng.replace('ன', 'ந')
+
+    ListVS = '|'.join(GM.CrunchSymbols(GM.VowelSigns, 'Tamil'))
+
+    Strng = re.sub('(' + ListVS + ')' + '(:)' , r'\2\1', Strng)
+
+    chars = '([நமரல])'
+
+    Strng = re.sub(chars + ':', r'\1' + '\uA8B4', Strng)
+
+    return Strng
+
+def ChakmaPali(Strng):
+    Strng = Strng.replace('\U00011147', '𑄤') # Replace Ya
+    Strng = Strng.replace('𑄠', '𑄡') # Replace vA
+
+    listC = '('+"|".join(sorted(GM.CrunchSymbols(GM.Consonants,"Chakma")+Chakma.VowelMap[:1],key=len,reverse=True))+')'
+    listV = '('+"|".join(sorted(GM.CrunchSymbols(GM.VowelSigns,"Chakma")+Chakma.ViramaMap+['\U00011133'],key=len,reverse=True))+')'
+
+    Strng = Strng.replace("\u02BD","")
+
+    Strng = Strng.replace('\U00011102', '\U00011127')
+
+    # Introduce vowel Sign A ; Chakma - Inharant vowel is AA
+    Strng = re.sub("("+listC+")"+"(?!"+listV+")",r'\1''\u02BE',Strng)
+    Strng = Strng.replace("\U00011127","")
+    Strng = Strng.replace("\u02BE","\U00011127")
+
+    return Strng
+
+def TakriArchaicKha(Strng):
+
+    return Strng.replace('𑚋', '𑚸')
 
 def UrduShortNotShown(Strng):
     Strng += "\u02BB\u02BB"
@@ -88,9 +146,33 @@ def ThaiSajjhayaOrthography(Strng):
     ## Reorder dve
     #Strng = re.sub('([' + EAIO + '])' + '(' + cons  + ')' + '(๎)' + '(' + cons + ')', r'\2\3\1\4', Strng)
 
+    Strng = Strng.replace('ัง', 'ังฺ')
     Strng = Strng.replace('์', 'ฺ')
     Strng = Strng.replace('๎', 'ฺ')
     Strng = Strng.replace('ั', '')
+
+    return Strng
+
+def ThaiSajjhayawithA(Strng):
+    Strng = Strng.replace('ะ', '')
+    Strng = ThaiSajjhayaOrthography(Strng)
+
+    return Strng
+
+def LaoSajhayaOrthography(Strng):
+    Strng = Strng.replace('ັງ', 'ັງ຺')
+
+    Strng = re.sub('([ເໂໄ])(.๎)([ຍຣລວຨຩສຫຬ])', r'\2\1\3', Strng)
+
+    Strng = Strng.replace('໌', '຺')
+    Strng = Strng.replace('๎', '຺')
+    Strng = Strng.replace('ັ', '')
+
+    return Strng
+
+def LaoSajhayaOrthographywithA(Strng):
+    Strng = Strng.replace('ະ', '')
+    Strng = LaoSajhayaOrthography(Strng)
 
     return Strng
 
@@ -327,8 +409,18 @@ def PreProcess(Strng,Source,Target):
         Strng = Strng.replace('a:i', 'a_i')
         Strng = Strng.replace('a:u', 'a_u')
 
-    if Source == "ISO" or Source == "IAST" or Source == "Titus":
+    if Source == "ISO" or Source == "IAST" or Source == "Titus" or "RussianCyrillic":
         Strng = CF.VedicSvarasNonDiacritic(Strng)
+
+    if ('↓' in Strng or '↑' in Strng) and Target in GM.IndicScripts :
+        Strng = Strng.replace('↓', '॒')
+        Strng = Strng.replace('↑↑', '᳚')
+        Strng = Strng.replace('↑', '॑')
+
+    if ('↓' in Strng or '↑' in Strng) and Target in GM.LatinScripts :
+        Strng = Strng.replace('↓', '\\_')
+        Strng = Strng.replace('↑↑', '\\"')
+        Strng = Strng.replace('↑', '\\\'')
 
     if Source == "WarangCiti":
         Strng = Strng.replace('\u200D', '\u00D7')
@@ -463,6 +555,40 @@ def normalize(Strng,Source):
     Strng = Strng.replace('ॲ', 'ऍ')
 
     #Strng = Strng.replace('', "ຣ\uE00A")
+
+    ## Normalization for Bengali, Tamil, Malayalam and Grantha
+
+    # Bengali o/au
+
+    Strng = Strng.replace('ো', 'ো')
+    Strng = Strng.replace('াে', 'ো')
+
+    Strng = Strng.replace('ৌ', 'ৌ')
+    Strng = Strng.replace('ৗে', 'ৌ')
+
+    # Tamil o, O, au
+
+    Strng = Strng.replace('ொ', 'ொ')
+    Strng = Strng.replace('ாெ', 'ொ')
+
+    Strng = Strng.replace('ோ', 'ோ')
+    Strng = Strng.replace('ாே', 'ோ')
+
+    Strng = Strng.replace('ௌ', 'ௌ')
+    Strng = Strng.replace('ௗெ', 'ௌ')
+
+    # Malayalam
+
+    Strng = Strng.replace('ൊ', 'ൊ')
+    Strng = Strng.replace('ാെ', 'ൊ')
+
+    Strng = Strng.replace('ോ', 'ോ')
+    Strng = Strng.replace('ാേ', 'ോ')
+
+    # Grantha
+
+    Strng = Strng.replace('𑍋', '𑍋')
+    Strng = Strng.replace('𑌾𑍇', '𑍋')
 
     return Strng
 

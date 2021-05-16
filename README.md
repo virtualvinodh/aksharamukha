@@ -4,7 +4,13 @@ Aksharamukha aims to provide transliteration a.k.a script conversion between var
 
 It is a total rewrite of the PHP-based version available [here](https://launchpad.net/aksharamukha) and [here](https://github.com/nareshv/aksharamukha).
 
-Aksharamukha as of now supports 79 scripts and 7 romanization methods.
+Aksharamukha as of now supports 85 scripts and 8 romanization methods.
+
+Ahom, Ariyaka, Assamese, Avestan, Balinese, Batak Karo, Batak Mandailing, Batak Pakpak, Batak Toba, Batak Simalungun, Bengali, Brahmi, Bhaiksuki, Buginese (Lontara), Buhid, Burmese (Myanmar), Chakma, Cham, Devanagari, Dogra, Gondi (Gunjala), Gondi (Masaram), Grantha, Grantha (Pandya), Gujarati, Hanunoo, Javanese, Kaithi, Kannada, Khamti Shan, Kharoshthi, Khmer (Cambodian), Khojki, Khom Thai, Khudawadi, Lao, Lao (Pali), Lepcha, Limbu, Malayalam, Mahajani, Marchen, Meetei Mayek (Manipuri), Modi, Mon, Mro, Multani, Newa (Nepal Bhasa), Old Persian, Oriya, PhagsPa, Punjabi (Gurmukhi), Ranjana (Lantsa), Rejang, Rohingya (Hanifi), Santali (Ol Chiki), Saurashtra, Siddham, Shan, Sharada, Sinhala, Sora Sompeng, Soyombo, Sundanese, Syloti Nagari, Tagbanwa, Tagalog, Tai Laing, Tai Tham (Lanna), Takri, Tamil, Tamil (Extended), Tamil Brahmi, Telugu, Thaana (Dhivehi), Thai, Tibetan, Tirhuta (Maithili), Urdu, Vatteluttu, Wancho, Warang Citi, Zanabazar Square, Cyrillic (Russian), IPA,
+
+The Romanization Formats supported are:
+
+Harvard-Kyoto, ITRANS, Velthuis, IAST, IAST (Pāḷi), ISO, Titus, Roman (Readable)
 
 ## Docker
 You can use the docker-compose.yaml file to orchestrate the containers. It will start the necessary containers for the frontend/backend and, also, bind the webapp to localhost:12345. This would be easiest way to run the app locally.
@@ -38,7 +44,5 @@ The Script Matrix data is available [here](https://github.com/virtualvinodh/aksh
 The syllabary for each script can be found [here](https://github.com/virtualvinodh/aksharamukha/tree/master/aksharamukha-back/resources/syllabary). The file includes the list of vowels, consonants and the complete consonant-vowel compounds for each script.
 
 The list of all possible Sanskrit (and Pali) conjuncts for the scripts can be found [here](https://github.com/virtualvinodh/aksharamukha/tree/master/aksharamukha-back/resources/conjuncts1) and [here](https://github.com/virtualvinodh/aksharamukha/tree/master/aksharamukha-back/resources/conjuncts2). The conjuncts have been split based on the number of consonants in the conjuncts. (The folder had to be split due to Google App Engine limitations). The suffix indicates the appended vowel. For instance, << conjuncts_Gujarati_o.json >> indicated all the possible Gujarati conjuncts that occurs with the vowel /o/.
-
-The list of common letters between two scripts can be found [here](https://github.com/virtualvinodh/aksharamukha/tree/master/aksharamukha-back/resources/common_letters1), [here](https://github.com/virtualvinodh/aksharamukha/tree/master/aksharamukha-back/resources/common_letters2) and [here](https://github.com/virtualvinodh/aksharamukha/tree/master/aksharamukha-back/resources/common_letters3). (The folder had to be split due to Google App Engine limitations as above).
 
 The project is released under GNU AGPL 3.0 License

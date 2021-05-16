@@ -10,4 +10,10 @@ cd ..\aksharamukha-back
 
 gcloud app deploy --project=aksharamukha --quiet
 
+cd ..\aksharamukha-web-plugin-api
+
+gcloud app deploy --project=aksharamukha-plugin --quiet
+
 cd ..
+
+

@@ -15,24 +15,24 @@ VowelMap =  [
             'รู\u02BD',
             'ลุ\u02BD',
             'ลู\u02BD',
-            '\u0E40\u0E2D',
+            '\u0E2D\u0E40',
             'อยฺ\u02BD',
-            '\u0E42\u0E2D',
+            '\u0E2D\u0E42',
             'อวฺ\u02BD',
             ]
 
 SouthVowelMap = [
-                '\u0E40\u0E2D\u02BD',
-                '\u0E42\u0E2D\u02BD',
+                '\u0E2D\u0E40\u02BD',
+                '\u0E2D\u0E42\u02BD',
                 ]
 
 ModernVowelMap = [
-                 '\u0E41\u0E2D\u02BD',
+                 '\u0E2D\u0E41\u02BD',
                  '\u0E2D\u0E32\u02BD',
                  ]
 
 SinhalaVowelMap = [
-                  '\u0E41\u0E2D'
+                  '\u0E2D\u0E41'
                   ]
 
 VowelSignMap =  [
@@ -148,7 +148,7 @@ NuktaMap = [
            ]
 
 OmMap = [
-        '\u0E42\u0E2D\u0E4D'
+        '\u0E2D\u0E42\u0E4D'
         ]
 
 SignMap =[
