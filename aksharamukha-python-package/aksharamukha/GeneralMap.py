@@ -6,6 +6,24 @@ import importlib, string
 import re
 from functools import reduce
 
+SHARADA = 'Sharada'
+
+TAMIL_EXTENDED = 'TamilExtended'
+
+TELUGU = 'Telugu'
+
+TAMIL = 'Tamil'
+
+KANNADA = 'Kannada'
+
+MALAYALAM = 'Malayalam'
+
+GRANTHA = 'Grantha'
+
+GUJARATI = 'Gujarati'
+
+ORIYA = 'Oriya'
+
 GURMUKHI = 'Gurmukhi'
 
 SINHALA = 'Sinhala'
@@ -115,9 +133,10 @@ Aytham =['Aytham']
 om = ['OmMap']
 virama = ['ViramaMap']
 
-MainIndic = ['TamilExtended','MasaramGondi','GunjalaGondi','Dogra', 'Ranjana', 'Khojki','GranthaGrantamil', 'Multani', 'Ahom', 'Mahajani','SiddhamDevanagari', 'Vatteluttu', 'GranthaPandya', 'Khudawadi', 'Bhaiksuki', 'Sharada', 'Newa', SYLOTI_NAGRI, 'Takri', 'Tirhuta', 'Modi', 'Kaithi', 'Kharoshthi','Lepcha','Chakma','Brahmi', MEETEI_MAYEK,'Limbu',
-             ASSAMESE, BENGALI, DEVANAGARI, 'Grantha', 'Gujarati', GURMUKHI, 'Kannada', 'Malayalam', 'Oriya', 'Saurashtra',
-             SINHALA, 'Tamil', 'TamilBrahmi', 'TamilGrantha', 'Telugu', URDU]
+MainIndic = [TAMIL_EXTENDED, 'MasaramGondi', 'GunjalaGondi', 'Dogra', 'Ranjana', 'Khojki', 'GranthaGrantamil', 'Multani', 'Ahom', 'Mahajani', 'SiddhamDevanagari', 'Vatteluttu', 'GranthaPandya', 'Khudawadi', 'Bhaiksuki',
+             SHARADA, 'Newa', SYLOTI_NAGRI, 'Takri', 'Tirhuta', 'Modi', 'Kaithi', 'Kharoshthi', 'Lepcha', 'Chakma', 'Brahmi', MEETEI_MAYEK, 'Limbu',
+             ASSAMESE, BENGALI, DEVANAGARI, GRANTHA, GUJARATI, GURMUKHI, KANNADA, MALAYALAM, ORIYA, 'Saurashtra',
+             SINHALA, TAMIL, 'TamilBrahmi', 'TamilGrantha', TELUGU, URDU]
 EastIndic =['LaoTham', 'LueTham', 'KhuenTham', 'Marchen', 'Soyombo', 'KhomThai', 'KhamtiShan', 'TaiLaing', 'Mon', 'Shan', ZANABAZAR_SQUARE,'Rejang', 'Lao2','Buhid', 'Hanunoo', 'Siddham', 'Tibetan',LAO,TAI_THAM,'Cham',BATAK_KARO,'BatakPakpak','BatakSima','BatakToba','BatakManda',LAO_PALI,PHAGS_PA,'Buginese','Tagbanwa','Tagalog','Sundanese','Balinese',BURMESE,'Javanese','Khmer','Siddham','Ranjana','Thaana','Thai']
 NonIndic = [OLD_PERSIAN]
 Roman =['Mongolian', 'SLP1', 'Wancho', 'Mro', 'IASTPali', 'HanifiRohingya', 'Ariyaka', 'RomanReadable', 'Aksharaa', WARANG_CITI, SORA_SOMPENG,"WX-kok",'Avestan',HK,IAST,ISO,ITRANS,TITUS,TITUS,'Velthuis','WX','Inter','IPA','TolongSiki',SANTALI,RUSSIAN_CYRILLIC]
@@ -125,9 +144,10 @@ RomanDiacritic = [IAST,TITUS,ISO,'IPA']
 
 ScriptCategory = {}
 
-ScriptCategory['IndianMain'] = ['GranthaGrantamil', ASSAMESE, BENGALI, DEVANAGARI, 'Gujarati', GURMUKHI, 'Kannada', 'Malayalam', 'Oriya',
-                                SINHALA, 'Tamil', 'Telugu', URDU]
-ScriptCategory['IndianMinority'] = ['Brahmi','Chakma','Grantha','Lepcha','Limbu',MEETEI_MAYEK,'Saurashtra','TamilBrahmi','TamilGrantha', 'Kaithi']
+ScriptCategory['IndianMain'] = ['GranthaGrantamil', ASSAMESE, BENGALI, DEVANAGARI, GUJARATI, GURMUKHI, KANNADA, MALAYALAM,
+                                ORIYA,
+                                SINHALA, TAMIL, TELUGU, URDU]
+ScriptCategory['IndianMinority'] = ['Brahmi','Chakma', GRANTHA, 'Lepcha', 'Limbu', MEETEI_MAYEK, 'Saurashtra', 'TamilBrahmi', 'TamilGrantha', 'Kaithi']
 ScriptCategory['EastAsianPaliSans'] = ['Balinese',BURMESE,'Cham','Javanese','Khmer',LAO_PALI,'Lao',PHAGS_PA,'TaiTham','Thaana','Thai','Tibetan']
 ScriptCategory['EastAsianIndFili'] = [BATAK_KARO,'BatakManda','BatakPakpak','BatakSima','BatakToba','Buginese','Sundanese','Tagalog','Tagbanwa']
 ScriptCategory['IndianAlpha'] = [SANTALI,'TolongSiki']
@@ -150,7 +170,7 @@ IndicScripts = [
                'LaoTham',
                'LueTham',
                'KhuenTham',
-               'TamilExtended',
+    TAMIL_EXTENDED,
                'Marchen',
                'MasaramGondi',
                'GunjalaGondi',
@@ -179,7 +199,7 @@ IndicScripts = [
                'Vatteluttu',
                'Khudawadi',
                'Bhaiksuki',
-               'Sharada',
+    SHARADA,
                'Newa',
                'Takri',
                SYLOTI_NAGRI,
@@ -187,18 +207,18 @@ IndicScripts = [
                'Modi',
                'Kaithi',
                'Kharoshthi',
-               'Telugu',
-               'Kannada',
-               'Malayalam',
-               'Gujarati',
+    TELUGU,
+    KANNADA,
+    MALAYALAM,
+    GUJARATI,
                BENGALI,
-               'Oriya',
+    ORIYA,
     GURMUKHI,
-               'Tamil',
+    TAMIL,
     ASSAMESE,
                'Saurashtra',
                'TamilBrahmi',
-               'Grantha',
+    GRANTHA,
                'TamilGrantha',
     SINHALA,
                'Khmer',
@@ -235,8 +255,8 @@ Gemination =  {
                GURMUKHI: '\u0A71',
                'Thaana' : '\u0787\u07B0',
                URDU: '\u0651',
-               'Grantha': '𑌂',
-               'Malayalam': 'ം',
+               GRANTHA: '𑌂',
+               MALAYALAM: 'ം',
                'Khojki': '\U00011237'
               }
 
