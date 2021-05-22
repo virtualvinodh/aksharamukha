@@ -15,7 +15,7 @@ Harvard-Kyoto, ITRANS, Velthuis, IAST, IAST (Pāḷi), ISO, Titus, Roman (Readab
 ## Docker
 You can use the docker-compose.yaml file to orchestrate the containers. It will start the necessary containers for the frontend/backend and, also, bind the webapp to localhost:12345. This would be easiest way to run the app locally.
 1. Install [Docker Desktop](https://docs.docker.com/get-docker/)
-2. To build and start all docker containers, run `docker compose up` inside this project's root folder. This will use the configuration given in `docker-compose.xml`
+2. To build and start all docker containers, run `docker compose up` inside this project's root folder. This will use the configuration given in `docker-compose.yaml`
 3. To load the frontend, point your browser at the port displayed in Docker desktop. (`http://localhost:12345`)
 
 ## Front End
