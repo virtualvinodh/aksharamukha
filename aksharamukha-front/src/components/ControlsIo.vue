@@ -10,7 +10,7 @@
         v-model="inputScript"
         placeholder="Input Script"
         class="col-xs-11 col-lg-3 q-ma-md"
-        :options="scripts"
+        :options="inputindic ? scriptsIndic: scripts"
       />
     <q-select
         filter
@@ -94,7 +94,7 @@ import {ScriptMixin} from '../mixins/ScriptMixin'
 export default {
   // name: 'ComponentName',
   mixins: [ScriptMixin],
-  props: ['multiple'],
+  props: ['multiple', 'inputindic'],
   components: {
     QRadio,
     QField,

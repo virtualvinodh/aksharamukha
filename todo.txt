@@ -1,0 +1,22 @@
+Stabilize all builds
+
+(i) Web App
+----------> Retain old css and web-plugin to avoid things from breaking.
+----------> Rename current css as new
+----------> Change web link to new plugin idea
+----------> Update Docker Image
+(ii) Web Plugin
+-----> Javascript
+-----> aksharamukha-plugin.appspot.com
+(iii) Chrome Plugin
+(iv) Android build
+(v) Noto fonts mirror
+(vi) Python Package
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-----> Automate all builds
+-----> Everything must be triggered
+-----> Run noto fonts mirror update every couple of months
+
+

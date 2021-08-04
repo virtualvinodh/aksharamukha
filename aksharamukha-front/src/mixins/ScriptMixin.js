@@ -2,6 +2,7 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
+        // baseURL: 'https://aksharamukha.appspot.com/api',
         baseURL: 'http://localhost:8085/api',
         timeout: 100000
       }),
@@ -217,11 +218,11 @@ export const ScriptMixin = {
         ],
         'Hiragana': [
           { label: 'Vertical text', value: 'verticalKana' },
-          { label: '/v/ → /b/ <br/<small>うぃの → びの</small>', value: 'vtobJapanese' }
+          { label: '/v/ → /b/ <br/<small>ゔぃのお → びの</small>', value: 'vtobJapanese' }
         ],
         'Katakana': [
           { label: 'Vertical text', value: 'verticalKana' },
-          { label: '/v/ → /b/ <br/<small>ウィノ → ビノ</small>', value: 'vtobJapanese' }
+          { label: '/v/ → /b/ <br/<small>ヴィノー → ビノ</small>', value: 'vtobJapanese' }
         ],
         'Ranjana': [
           { label: 'Lantsa Style (Tibetan)<br/><small><span class="ranjana">बुद्धः</span> → <span class="ranjanalantsa">བུདྡྷཿ</span></small>', value: 'ranjanalantsa' },
@@ -238,8 +239,8 @@ export const ScriptMixin = {
           { label: 'Contextual <span class="tamil">ள</><br/><small>(Experimental)</small><br/><small><span class="tamil">ப்ரலய → ப்ரளய</span></small>', value: 'ContextualLLa' },
           { label: 'Only word-final <span class="tamil">ன</><br/><small><span class="tamil">ஆனனன் → ஆநநன்</span></small>', value: 'FinalNNa' },
           { label: 'Dandas<br/><small><span class="tamil">. .. → । ॥</span></small>', value: 'RetainTamilDanda' },
-          { label: 'Tamil numerals<br/><small><span class="tamil">123 → ௧௨௩</span></small>', value: 'RetainTamilNumerals' },
-          { label: 'Medieval e/o with Pulli<br/><small><span class="tamil">ஒ ஓ கொ கோ → ஒ் ஒ கெ்ா கொ</span></small>', value: 'MedievalTamilOrthography' }
+          { label: 'Tamil numerals<br/><small><span class="tamil">123 → ௧௨௩</span></small>', value: 'RetainTamilNumerals' }
+          // { label: 'Medieval e/o with Pulli<br/><small><span class="tamil">ஒ ஓ கொ கோ → ஒ் ஒ கெ்ா கொ</span></small>', value: 'MedievalTamilOrthography' }
         ],
         'TamilExtended': [
           { label: 'Dandas <br/><small><span class="tamilextended">. .. → । ॥</span></small>', value: 'Dot2Dandas' },
@@ -278,15 +279,17 @@ export const ScriptMixin = {
           { label: 'ୟ everywhere<br/><small>ଯୟାତି ଯଜ୍ଞ → ୟୟାତି ୟଜ୍ଞ</small>', value: 'OriyaYYA' }
         ],
         'Bengali': [
-          { label: 'য় everywhere<br/><small>যয়াতি যজ্ঞ → য়য়াতি য়জ্ঞ</small>', value: 'BengaliYYA' }
+          { label: 'য় everywhere<br/><small>যয়াতি যজ্ঞ → য়য়াতি য়জ্ঞ</small>', value: 'BengaliYYA' },
+          { label: 'ৎব → ত্ৱ', value: 'khandatabatova' }
+        ],
+        'Assamese': [
+          { label: 'য় everywhere<br/><small>যয়াতি যজ্ঞ → য়য়াতি য়জ্ঞ</small>', value: 'BengaliYYA' },
+          { label: 'ৎব → ত্ৱ', value: 'khandatabatova' }
         ],
         'KhamtiShan': [
           { label: 'Myanmar numerals<br/><small><span class="khamtishan">႑႒႓</span> → <span class="khamtishan">၁၂၃</span></small>', value: 'KhamiShanMyanmarNumerals' },
           { label: 'Use ꩳ<br/><small><span class="khamtishan">ရ</span> → <span class="khamtishan">ꩳ</span></small>', value: 'KhamtiShanRa' }
 
-        ],
-        'Assamese': [
-          { label: 'য় everywhere<br/><small>যয়াতি যজ্ঞ → য়য়াতি য়জ্ঞ</small>', value: 'BengaliYYA' }
         ],
         'Siddham': [
           { label: 'Variant vowel sign U <span class="siddham">𑗜</span><br/><small> <span class="siddham">𑖎𑖲𑖚𑖲𑖦𑖲 → 𑖎𑗜𑖚𑗜𑖦𑗜</span></small>', value: 'UseAlternateVSU' },
@@ -410,13 +413,13 @@ export const ScriptMixin = {
         ],
         'IAST': [
           { label: 'Capitalize sentences', value: 'capitalizeSentence' },
-          { label: 'Anusvara to nasal<br/><small>gaṃgā → gaṅgā</small>', value: 'NasaltoAnsvaraIASTISO' },
-          { label: 'Use tilde for nasalization<br/><small>kāṃ kām̐ → gaṅgā</smal', value: 'NasalTilde' },
+          { label: 'Anusvara to nasal<br/><small>gaṃgā → gaṅgā</small>', value: 'AnusvaratoNasalASTISO' },
+          { label: 'Use tilde for nasalization<br/><small>kāṃ gām̐ → kā̃ gā̃</smal', value: 'NasalTilde' },
           { label: 'ṃ → ṁ', value: 'mDotAboveToBelow' }
         ],
         'IASTPali': [
           { label: 'Capitalize sentences', value: 'capitalizeSentence' },
-          { label: 'Anusvara to nasal<br/><small>gaṃgā → gaṅgā</small>', value: 'NasaltoAnsvaraIASTISO' },
+          { label: 'Anusvara to nasal<br/><small>gaṃgā → gaṅgā</small>', value: 'AnusvaratoNasalASTISO' },
           { label: 'ṃ → ṁ', value: 'mDotAboveToBelow' }
         ],
         'RussianCyrillic': [
@@ -426,8 +429,8 @@ export const ScriptMixin = {
         ],
         'ISO': [
           { label: 'Capitalize sentences', value: 'capitalizeSentence' },
-          { label: 'Anusvara to nasal<br/><small>gaṁgā → gaṅgā</small>', value: 'NasaltoAnsvaraIASTISO' },
-          { label: 'Use tilde for nasalization<br/><small>kāṃ kām̐ → gaṅgā</smal', value: 'NasalTilde' },
+          { label: 'Anusvara to nasal<br/><small>gaṁgā → gaṅgā</small>', value: 'AnusvaratoNasalASTISO' },
+          { label: 'Use tilde for nasalization<br/><small>kāṃ gām̐ → kā̃ gā̃</smal', value: 'NasalTilde' },
           { label: 'ē/ō → e/o', value: 'noLongEO' }
         ],
         'RomanReadable': [
@@ -646,7 +649,7 @@ export const ScriptMixin = {
           region: ['South East Asian: Insular', 'South East Asian']
         },
         {
-          label: 'Bengali',
+          label: 'Bengali (Bangla)',
           value: 'Bengali',
           sscode: 'Beng',
           ssdesc: 'The Bengali (also called Bangla) script is used for writing the Bengali language, spoken by over 180,000,000 people mostly in Bangladesh and India. It is also used for a number of other Indian languages including Sylheti and, with one or two modifications, Assamese. It is a Brahmic script although its exact derivation is disputed.',
@@ -1361,7 +1364,7 @@ export const ScriptMixin = {
           region: ['West Asian']
         },
         {
-          label: 'Oriya',
+          label: 'Oriya (Odia)',
           value: 'Oriya',
           sscode: 'Orya',
           ssdesc: 'The Odia (formerly Oriya) script is used for writing the Odia language, the official language of the Indian state of Orissa, as well as a number of Dravidian and Munda Living: Minor languages spoken in that region. It is also used in Orissa for transcribing Sanskrit texts. The earliest inscriptions in the Odia language have been dated to 1051 AD, written in the Kalinga script from which modern Odia writing is derived.',
@@ -2283,6 +2286,9 @@ export const ScriptMixin = {
       var scriptAll = this.scriptsIndic.slice().concat(this.scriptsLatin.slice())
       scriptAll.sort(this.compareObjects)
       return scriptAll
+    },
+    scriptIndicList: function () {
+      return this.scriptsIndic.map(x => x.value)
     },
     compounds: function () {
       var compounds = []

@@ -546,6 +546,10 @@ export default {
         this.$set(this, 'preOptions', ['UrduShortNotShown'])
       }
 
+      if (this.inputScript === 'Oriya' && this.outputScript === 'Bengali') {
+        this.$set(this, 'postOptions', ['khandatabatova'])
+      }
+
       this.convert()
     },
     updateHistOut: function () {
@@ -557,6 +561,11 @@ export default {
         this.postOptionsScript[this.outputScript] = []
       }
       this.$set(this, 'postOptions', this.postOptionsScript[this.outputScript])
+
+      if (this.inputScript === 'Oriya' && this.outputScript === 'Bengali') {
+        this.$set(this, 'postOptions', ['khandatabatova'])
+      }
+
       this.convert()
     },
     copy: function () {

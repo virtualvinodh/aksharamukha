@@ -78,6 +78,12 @@ export default {
           position: 'center',
           timeout: 1000
         })
+      } else if (this.docxWarning && !this.scriptIndicList.includes(this.optionsRet.inputScript)) {
+        this.$q.notify({
+          message: 'You cannot convert from Roman scripts with DocX files',
+          position: 'center',
+          timeout: 2000
+        })
       } else {
         this.readFiles()
         this.downloadWarning = false
