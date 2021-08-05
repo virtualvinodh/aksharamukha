@@ -192,13 +192,13 @@ export const ScriptMixin = {
         ],
         'TamilSaurashtra': [
           { label: 'Convert Saurashtra Haaru as :<small><br/><span class="saurashtra">ꢥꢴꢷ</span> → <span class="tamil">நீ:</span></small>', value: 'SaurastraHaaruColon' }
-        ]/* ,
+        ],
         'IASTUrdu': [
           { label: 'Remove all inherent /a/ <small><br/><span class="urdu">ہندوستان</span> → /hndvstān/ not /hanadavasatāna/', value: 'urduRemoveInherent' }
         ],
         'ISOUrdu': [
           { label: 'Remove all inherent /a/ <small><br/><span class="urdu">ہندوستان</span> → /hndvstān/ not /hanadavasatāna/', value: 'urduRemoveInherent' }
-        ] */
+        ]
       },
       postOptionsRadioGroup: {
         'Ranjana': [['ranjanalantsa', 'ranjanawartu']],
@@ -2008,6 +2008,10 @@ export const ScriptMixin = {
           value: 'RomanReadable'
         },
         {
+          label: 'Roman (Colloquial)',
+          value: 'RomanColloquial'
+        },
+        {
           label: 'Roman (ITRANS)',
           value: 'Itrans'
         },
@@ -2040,6 +2044,10 @@ export const ScriptMixin = {
         {
           label: 'Roman (ISO 15919)',
           value: 'ISO'
+        },
+        {
+          label: 'Roman (ISO 15919: Pāḷi)',
+          value: 'ISOPali'
         },
         {
           label: 'Roman (SLP1)',
@@ -2110,6 +2118,10 @@ export const ScriptMixin = {
           value: 'ISO'
         },
         {
+          label: 'ISO (Pāḷi)',
+          value: 'ISOPali'
+        },
+        {
           label: 'Titus',
           value: 'Titus'
         },
@@ -2124,6 +2136,10 @@ export const ScriptMixin = {
         {
           label: 'Roman (Readable)',
           value: 'RomanReadable'
+        },
+        {
+          label: 'Roman (Colloquial)',
+          value: 'RomanColloquial'
         }
       ],
       scriptsIME: [

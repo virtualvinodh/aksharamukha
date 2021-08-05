@@ -734,6 +734,10 @@ export default {
         }
       }
 
+      if (this.inputScript !== 'Urdu') {
+        this.postOptions = this.postOptions.filter(x => x !== 'urduRemoveInherent')
+      }
+
       var data = {
         source: this.inputScript,
         target: this.outputScript,
