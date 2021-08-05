@@ -72,23 +72,27 @@ export default {
       return sanitizeHtml(html)
     },
     convertView: async function () {
+      console.log(this.optionsRet.inputScript)
+
       if (typeof this.optionsRet.inputScript === 'undefined' || typeof this.optionsRet.outputScript === 'undefined' || this.optionsRet.inputScript === '' || this.optionsRet.outputScript === '') {
         this.$q.notify({
           message: 'Please select input/ouput scripts before proceeding to conversion',
           position: 'center',
           timeout: 1000
         })
-      } else if (this.docxWarning && !this.scriptIndicList.includes(this.optionsRet.inputScript)) {
-        this.$q.notify({
-          message: 'You cannot convert from Roman scripts with DocX files',
-          position: 'center',
-          timeout: 2000
-        })
       } else {
         this.readFiles()
-        this.downloadWarning = false
-        this.options = this.optionsRet
-        this.showContent = true
+        if (this.docxWarning && !this.scriptIndicList.includes(this.optionsRet.inputScript)) {
+          this.$q.notify({
+            message: 'You cannot convert from Roman scripts with DocX files',
+            position: 'center',
+            timeout: 2000
+          })
+        } else {
+          this.downloadWarning = false
+          this.options = this.optionsRet
+          this.showContent = true
+        }
       }
     },
     readFiles: async function () {
@@ -142,6 +146,7 @@ export default {
       })
     },
     convertDownload: async function () {
+      console.log(this.optionsRet.inputScript)
       if (typeof this.optionsRet.inputScript === 'undefined' || typeof this.optionsRet.outputScript === 'undefined' || this.optionsRet.inputScript === '' || this.optionsRet.outputScript === '') {
         this.$q.notify({
           message: 'Please select input/ouput scripts before proceeding to conversion',
@@ -154,38 +159,47 @@ export default {
         this.showContent = false
         this.options = this.optionsRet
         await this.readFiles()
-        for (var j = 0; j < this.options.outputScript.length; j++) {
-          var outputScript = this.options.outputScript[j]
-          for (var i = 0; i < this.files.length; i++) {
-            var file = this.files[i]
-            var content = await this.convertAsync(this.options.inputScript, outputScript, file.content, this.options.sourcePreserve, this.options.postOptions[outputScript], this.options.preOptions)
 
-            content = content.replace(new RegExp('<br/>', 'g'), '\n')
-            // content = content.replace(new RegExp('e-Grantamil 7', 'g'), 'Noto Sans Tamil')
-            // content = content.replace(new RegExp('e-Grantamil', 'g'), 'Noto Sans Tamil')
+        if (this.docxWarning && !this.scriptIndicList.includes(this.optionsRet.inputScript)) {
+          this.$q.notify({
+            message: 'You cannot convert from Roman scripts with DocX files',
+            position: 'center',
+            timeout: 2000
+          })
+        } else {
+          for (var j = 0; j < this.options.outputScript.length; j++) {
+            var outputScript = this.options.outputScript[j]
+            for (var i = 0; i < this.files.length; i++) {
+              var file = this.files[i]
+              var content = await this.convertAsync(this.options.inputScript, outputScript, file.content, this.options.sourcePreserve, this.options.postOptions[outputScript], this.options.preOptions)
 
-            var blob = ''
-            var downloadName = ''
-            if (file.name.includes('.brh')) {
-              downloadName = this.options.inputScript + '_' + outputScript + '_' + file.name + '.txt'
-            } else {
-              downloadName = this.options.inputScript + '_' + outputScript + '_' + file.name
-            }
-            if (file.name.includes('.txt') || file.name.includes('.brh')) {
-              blob = new Blob([content], {type: 'text/plain;charset=utf-8'})
-              saveAs(blob, downloadName)
-            } else if (file.name.includes('.xml')) {
-              blob = new Blob([content], {type: 'text/xml;charset=utf-8'})
-              saveAs(blob, downloadName)
-            } else if (file.name.includes('.docx')) {
-              file.zip.file('word/document.xml', content)
-              file.zip.generateAsync({type: 'blob'})
-                .then(function (blob) {
-                  saveAs(blob, downloadName)
-                })
-            } else {
-              blob = new Blob([content], {type: 'plain/html;charset=utf-8'})
-              saveAs(blob, downloadName)
+              content = content.replace(new RegExp('<br/>', 'g'), '\n')
+              // content = content.replace(new RegExp('e-Grantamil 7', 'g'), 'Noto Sans Tamil')
+              // content = content.replace(new RegExp('e-Grantamil', 'g'), 'Noto Sans Tamil')
+
+              var blob = ''
+              var downloadName = ''
+              if (file.name.includes('.brh')) {
+                downloadName = this.options.inputScript + '_' + outputScript + '_' + file.name + '.txt'
+              } else {
+                downloadName = this.options.inputScript + '_' + outputScript + '_' + file.name
+              }
+              if (file.name.includes('.txt') || file.name.includes('.brh')) {
+                blob = new Blob([content], {type: 'text/plain;charset=utf-8'})
+                saveAs(blob, downloadName)
+              } else if (file.name.includes('.xml')) {
+                blob = new Blob([content], {type: 'text/xml;charset=utf-8'})
+                saveAs(blob, downloadName)
+              } else if (file.name.includes('.docx')) {
+                file.zip.file('word/document.xml', content)
+                file.zip.generateAsync({type: 'blob'})
+                  .then(function (blob) {
+                    saveAs(blob, downloadName)
+                  })
+              } else {
+                blob = new Blob([content], {type: 'plain/html;charset=utf-8'})
+                saveAs(blob, downloadName)
+              }
             }
           }
         }
