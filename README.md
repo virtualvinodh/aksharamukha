@@ -25,8 +25,13 @@ The back end is written in Python 3 with Flask. After installing all the necessa
 Aksharamukha is also available as a [Python package](https://pypi.org/project/aksharamukha/). There is a separate repository for it [https://github.com/virtualvinodh/aksharamukha-python](https://github.com/virtualvinodh/aksharamukha-python).
 
 ## Rest API
-
 There is a REST API for reasonable public consumption. You can read about it [here](http://aksharamukha.appspot.com/#/web-api)
+
+## Chrome Extension
+The source code for [Aksharamukha Chrome Extension](https://chrome.google.com/webstore/detail/aksharamukha-script-conve/nahdihjmpjlifenlocchbokbnpoifpho?hl=en) can be found [here](https://github.com/virtualvinodh/aksharamukha-extension).
+
+## Web Plugin
+The source code for the Web Plugin can be found [here](https://github.com/virtualvinodh/aksharamukha-extension). Please, do not use the files linked here. They are for legacy purposes, so that any sites that load the old plugins from here do not break.
 
 ## JSON Resources
 Frequently used script resources have been made available as JSON files under aksharamukha-back/resources.
