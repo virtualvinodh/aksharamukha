@@ -28,7 +28,7 @@
     "pdfkit": "^0.11.0",
     "pdfmake": "^0.1.70",
     "request-promise": "^4.2.2",
-    "sanitize-html": "^1.19.0",
+    "sanitize-html": "^2.3.2",
     "tesseract.js": "^2.0.0",
     "tokenizr": "^1.5.4",
     "underscore": "^1.9.1",
