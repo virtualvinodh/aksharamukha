@@ -15,8 +15,25 @@ Harvard-Kyoto, ITRANS, Velthuis, IAST, IAST (Pāḷi), ISO, Titus, Roman (Readab
 ## Docker
 You can use the docker-compose.yaml file to orchestrate the containers. It will start the necessary containers for the frontend/backend and, also, bind the webapp to localhost:12345. This would be easiest way to run the app locally. However, be aware some of the scripts require webfonts to be loaded. Hence, without internet you may see only boxes for these scripts.
 
+1. Install [Docker Desktop](https://docs.docker.com/get-docker/)
+2. To build and start all docker containers, run `docker compose up` inside this project's root folder. This will use the configuration given in `docker-compose.yaml`
+3. To load the frontend, point your browser at the port displayed in Docker desktop. (`http://localhost:12345`)
+
 ## Front End
 The front end is written using Quasar and Vue. Use _npm install_ to install all the dependencies and then use _quasar dev_ to start the front end. Also, please point the api to localhost at mixins/ScriptMixin.js.
+
+1. Install a node.js version supported by quasar. As of May 2021, we recommend the current LTS v14. For example, on OSX you can use [homebrew](https://brew.sh/) and run `brew install node@14`
+2. Install [Quasar-cli](https://quasar.dev/quasar-cli/installation) e.g. by `npm install -g @quasar/cli`
+3. Comment out line 9 in `quasar.conf.js` to disable importing the analytics plugin which will casue the build to fail
+4. Comment out `import keys from '../keys.js'` in `src/pages/index.vue`. Add below that line:
+
+```
+// sets empty API key for Google's OCR API to build the project without using that service
+var keys = {}
+keys['api_key'] = ''
+```
+
+5. Run `quasar dev` and point your browser at the address specied in the output of the `quasar dev` command.
 
 ## Back End
 The back end is written in Python 3 with Flask. After installing all the necessary libraries, use _python3 main.py_ to intialize the backend server.
