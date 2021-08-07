@@ -13,7 +13,7 @@ The Romanization Formats supported are:
 Harvard-Kyoto, ITRANS, Velthuis, IAST, IAST (Pāḷi), ISO, Titus, Roman (Readable)
 
 ## Docker
-You can use the docker-compose.yaml file to orchestrate the containers. It will start the necessary containers for the frontend/backend and, also, bind the webapp to localhost:12345. This would be easiest way to run the app locally. However, be aware some of the scripts require webfonts to be loaded. Hence, without internet you may see only boxes for these scripts.
+You can use the docker-compose.yaml file to orchestrate the containers. It will start the necessary containers for the frontend/backend and, also, bind the webapp to localhost:12345. This would be easiest way to run the app locally. It also pulls a third container that serves the fonts locally. Without this, you would need an internet connection to load the web fonts.
 
 1. Install [Docker Desktop](https://docs.docker.com/get-docker/)
 2. To build and start all docker containers, run `docker compose up` inside this project's root folder. This will use the configuration given in `docker-compose.yaml`
