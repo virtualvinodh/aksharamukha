@@ -2,7 +2,7 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
-        // Always use https://aksharamukha.appspot.com/api/ (with a leading slash)
+        // Always use https://localhost:80855/api/ (with a leading slash)
         // https://aksharamukha.appspot.com/api/
         baseURL: 'https://aksharamukha.appspot.com/api/',
         timeout: 100000
@@ -1735,7 +1735,7 @@ export const ScriptMixin = {
           wikicode: '',
           font: {
             'name': 'Agastya Sans',
-            'url': 'https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/AgastyaExtendedTamil.otf'
+            'url': 'https://github.com/virtualvinodh/agastya-tamil-extended'
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Living', 'Living: Minor'],
