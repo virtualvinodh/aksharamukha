@@ -17,7 +17,7 @@
       </ul>
       <h5> Running Aksharamukha </h5>
        <ul>
-        <li> Download the <a href="http://virtualvinodh.com/aksharamkh/aksharamukha-offline.zip">zip file</a> and extract it somewhere convenient. Do not separate the files. They should be in the same folder. </li>
+        <li> Download the <a href="https://github.com/virtualvinodh/aksharamukha/blob/master/aksharamukha-offline.zip?raw=true">zip file</a> and extract it somewhere convenient. Do not separate the files. They should be in the same folder. </li>
         <li> Please make sure the whale icon in the status bar stays steady before proceeding (This ensures docker is up and running).
         <li> Windows might prevent you from running the below files. If that occurs, please select <i>More info</i> and click on <i>Run anyway</i>. </li>
         <li> Open  <i> install aksharamukha</i> to install. It will attempt to download the necessary files and setup everything. This initial setup may last a while depending on your connection speed. Eventually, the screen will close after the installation.</li>
