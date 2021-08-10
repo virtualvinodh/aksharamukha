@@ -70,7 +70,7 @@
         <h5> {{getScriptObject(script1).label}} Text </h5>
         <div v-html="textNative[script1]" :class="script1.toLowerCase()"></div><br/>
         <transliterate :text="textNative[script1]" :src="script1" :tgt="script2" :sourcePreserve="false" :postOptions="[]"
-        :preOptions="script1 === 'Urdu'? ['UrduShortNotShown'] : []">
+        :preOptions="script1 === 'Urdu' || script1 == 'Shahmukhi'? ['UrduShortNotShown'] : []">
         </transliterate>
       </div>
       <h5> Sanskrit Text </h5>
@@ -271,6 +271,7 @@ export default {
         'Kawi': ['https://www.unicode.org/L2/L2020/20284r-kawi.pdf']
       },
       notes: {
+        'Shahmukhi': 'This is basically the Urdu alphabet with two additional letters for retroflex /n/ and retroflex /l/ : <span class="shahmukhi">ݨ لؕ</span>. Additionally, do chashmee he is also to orthographically aspirate the nasals /n/ and /m/ and the liquids /y/, /r/, /l/ and /v/ : <span class="shahmukhi">نھ مھ یھ رھ لھ وھ</span>. Shahmukhi is an abjad and the short vowels are not very often expressed using diacritics. Please see the <a href="/describe/Urdu">Urdu</a> page to learn about the reading conventions.',
         'Pallava': 'Pallava is not yet encoded in Unicode. Purnawarman uses the Javanese encoding to represent Pallava. If this particular font it not used, your text will appear as plain Javanese text. You can select between Purnawarman, Sundapura or Kawitan fonts to display Pallava. None of the fonts are perfect. Some complex ligatures supported by some fonts rather than the default one. Please choose the font that displays your text the best.',
         'Kawi': 'Kawi is not yet encoded in Unicode. Tantular Kawi uses the Javanese encoding to represent Kawi. If this particular font it not used, your text will appear as plain Javanese text.',
         'Katakana': `
@@ -420,6 +421,7 @@ export default {
 
       },
       textNative: {
+        'Shahmukhi': 'کاؤبدھ مت اک مذہب تے فلسفہ اے جو مختلف روایات، عقائد تے طرز عمل كو محیط كيا ہويا اے، جس د‏‏ی زیادہ تر تعلیمات د‏‏ی بنیاد سدھارتھ گوتم د‏‏ی طرف منسوب نيں، عام طور اُتے بدھ (سنسکرت "ايک جاگت") دے ناں تو‏ں وی جانیا جاندا ا‏‏ے۔ دنیا دے وڈے مذاہب وچو‏ں اک مذہب بدھ مت وی ا‏‏ے۔ بدھا کچھ چوتھ‏ی تو‏ں پنجويں صدی ق م دے درمیان وچ شمال مشرقی بر صغیر وچ رہندے سن تے تعليمات ديتے سن ۔ انہيں بدھ مت لوک "اک جاگت" یا "روشن خیال ٹیچر" دے ناں تو‏ں مندے نيں۔ انھاں نے حیات احساسی نو‏‏ں مشکلات تو‏ں نجات حاصل كرنا،نروان كو حاصل كرنا تے تکلیف تے دوسرے جنماں كی مشكلات تو‏ں بچنا سكھايا۔ بدھ مت دنیا دے وڈے مزہباں چوں اک اے۔ اے ۲۵ صدیاں پہلاں ھندستان توں ٹریا۔ ایدے منن آلیاں دی گنتی ۵۰ کروڑتے ۲۳ کروڑ دے وشکار اے ۔ مہا تما بدھ اینوں ٹورن آلا سی بدھ مت اونھاں دیاں ای سوچاں دی مورت اے۔  بدھ مت دا خیال اے جے دنیا دکھاں دا کعر اے ۔ دکھ تے بیماریاں بہت زیادہ خواہشات تے لالچ ہون نال ہوندیاں نیں ۔ وشکارلے رستے تے چل کے دکھاں تے قابو پایا جا سکدا اے۔',
         Balinese: `ᬲᬫᬶᬫᬦᬸᬲᬦᬾᬲᬦᬾᬜ᭄ᬭᬸᬯᬤᬶᬯᬦ᭄ᬢᬄᬫᬭ᭄ᬤᬾᬓᬢᬸᬃᬫᬤᬸᬯᬾᬓᬳᬸᬢ᭄ᬢᬫᬳᬦ᭄ᬮᬦ᭄ᬳᬓ᭄ᬳᬓ᭄ᬲᬦᬾᬧᬢᭂᬄ᭟ᬲᬫᬶᬓᬮᬸᬕ᭄ᬭᬵᬳᬶᬦ᭄ᬧᬧᬶᬦᭂᬄᬮᬦ᭄ᬳᬶᬤᭂᬧ᭄ᬢᬸᬃᬫᬗ᭄ᬤᬦᬾᬧᬟᬫᬲᬯᬶᬢ᭄ᬭᬫᭂᬮᬭᬧᬦ᭄ᬲᭂᬫᬗᬢ᭄ᬧᬓᬸᬮᬯᬭ᭄ᬕᬳᬦ᭄᭞
 
         ᬲᬂᬰᬹᬭᬵᬫ᭄ᬭᬶᬳᬬᬚ᭄ᬜᬭᬶᬂᬲᬫᬭᬫᬳ᭄ᬬᬸᬦᬶᬳᬶᬮᬗᬦᬶᬓᬂᬧᬭᬵᬂᬫᬸᬓ᭞

@@ -4,7 +4,7 @@ export const ScriptMixin = {
       apiCall: this.$axios.create({
         // Always use https://localhost:80855/api/ (with a leading slash)
         // https://aksharamukha.appspot.com/api/
-        baseURL: 'https://aksharamukha.appspot.com/api/',
+        baseURL: 'http://localhost:8085/api/',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -155,6 +155,9 @@ export const ScriptMixin = {
         'Urdu': [
           { label: 'Short vowels not shown', value: 'UrduShortNotShown' }
         ],
+        'Shahmukhi': [
+          { label: 'Short vowels not shown', value: 'UrduShortNotShown' }
+        ],
         'Takri': [
           { label: 'Medieval Takri orthography text<br/><small>Convert <span class="takri">𑚋</span> as /kha/</small>', value: 'TakriArchaicKha' }
         ],
@@ -198,6 +201,12 @@ export const ScriptMixin = {
           { label: 'Remove all inherent /a/ <small><br/><span class="urdu">ہندوستان</span> → /hndvstān/ not /hanadavasatāna/', value: 'urduRemoveInherent' }
         ],
         'ISOUrdu': [
+          { label: 'Remove all inherent /a/ <small><br/><span class="urdu">ہندوستان</span> → /hndvstān/ not /hanadavasatāna/', value: 'urduRemoveInherent' }
+        ],
+        'IASTShahmukhi': [
+          { label: 'Remove all inherent /a/ <small><br/><span class="urdu">ہندوستان</span> → /hndvstān/ not /hanadavasatāna/', value: 'urduRemoveInherent' }
+        ],
+        'ISOShahmukhi': [
           { label: 'Remove all inherent /a/ <small><br/><span class="urdu">ہندوستان</span> → /hndvstān/ not /hanadavasatāna/', value: 'urduRemoveInherent' }
         ]
       },
@@ -410,6 +419,9 @@ export const ScriptMixin = {
           { label: 'E-Grantamil encoding', value: 'egrantamil' }
         ],
         'Urdu': [
+          { label: 'Remove short vowels<br/><small><span class="urdu">ہِنْدُوسْتانْ ← ہندوستان</span></small>', value: 'UrduRemoveShortVowels' }
+        ],
+        'Shahmukhi': [
           { label: 'Remove short vowels<br/><small><span class="urdu">ہِنْدُوسْتانْ ← ہندوستان</span></small>', value: 'UrduRemoveShortVowels' }
         ],
         'IAST': [
@@ -1523,6 +1535,23 @@ export const ScriptMixin = {
           status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi'],
           region: ['East Asian']
+        },
+        {
+          label: 'Shahmukhi',
+          value: 'Shahmukhi',
+          sscode: '',
+          ssdesc: '',
+          wikicode: 'Shahmukhi_alphabet',
+          wikidesc: 'Shahmukhi (lit.\'from the mouth of the Shah\') is a modified Perso-Arabic alphabet used by Punjabi Muslims (primarily in Punjab, Pakistan) to write the Punjabi language.It is generally written in the Nastaʿlīq calligraphic hand, which is also used for Urdu. Perso-Arabic is one of two scripts used for Punjabi, the other being Gurmukhi, used by Sikhs and Hindus in Punjab, India. It is also used as the main alphabet to write Pahari–Pothwari in Azad Kashmir and Jammu and Kashmir',
+          omnicode: 'punjabi',
+          font: {
+            'name': 'Noto Sans Nastaliq Urdu',
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoNastaliqUrdu/NotoNastaliqUrdu-Regular.otf'
+          },
+          language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Perso-Arabic'],
+          region: ['North Indic', 'Indic']
         },
         {
           label: 'Shan',

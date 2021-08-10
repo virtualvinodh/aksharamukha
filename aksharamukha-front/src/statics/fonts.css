@@ -234,6 +234,10 @@
   font-family: "Noto Nastaliq Urdu" !important;
   direction: rtl;
 }
+.shahmukhi {
+  font-family: "Noto Nastaliq Urdu" !important;
+  direction: rtl;
+}
 .kaithi {
   font-family: "Noto Sans Kaithi" !important;
 }

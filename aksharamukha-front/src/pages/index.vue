@@ -542,7 +542,7 @@ export default {
       }
       this.$set(this, 'preOptions', this.preOptionsScript[this.inputScript])
 
-      if (this.inputScript === 'Urdu') {
+      if (this.inputScript === 'Urdu' || this.inputScript === 'Shahmukhi') {
         this.$set(this, 'preOptions', ['UrduShortNotShown'])
       }
 
@@ -734,7 +734,7 @@ export default {
         }
       }
 
-      if (this.inputScript !== 'Urdu') {
+      if (this.inputScript !== 'Urdu' && this.inputScript !== 'Shahmukhi') {
         this.postOptions = this.postOptions.filter(x => x !== 'urduRemoveInherent')
       }
 
