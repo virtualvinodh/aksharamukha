@@ -2,7 +2,7 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
-        // Always use https://localhost:80855/api/ (with a leading slash)
+        // Always use http://localhost:8085/api/ (with a leading slash)
         // https://aksharamukha.appspot.com/api/
         baseURL: 'http://localhost:8085/api/',
         timeout: 100000
@@ -283,6 +283,9 @@ export const ScriptMixin = {
         'Hebrew': [
           { label: 'Use Qof<br/>כּ ← ק', value: 'HeberewQoph' },
           { label: 'Use Kamats Katan for Short /o/<br/>לֹ ← לׇ', value: 'HebewShortO' }
+        ],
+        'Nandinagari': [
+          { label: 'Use Prishtamatra orthography<br/><small><span class="nandinagari"> 𑦮𑧚 𑦮𑧜 𑦮𑧛 𑦮𑧝 → </span></small>', value: 'NandinagariPrishtamatra' }
         ],
         'Oriya': [
           { label: 'ଵ instead of ୱ<br/><small>ଭୱତି → ଭଵତି</small>', value: 'OriyaVaAlt' },
@@ -1197,6 +1200,22 @@ export const ScriptMixin = {
           region: ['North Indic', 'Indic']
         },
         {
+          label: 'Makasar',
+          value: 'Makasar',
+          sscode: 'Maka',
+          ssdesc: 'Makasar (also called Old Makassarese) is a left-to-right, ultimately Brahmi-derived abugida that was used to represent the Makassarese language spoken in South Sulawesi through the 17th century. It is often described as the "bird script", potentially based on local legends that depict birds as the carriers of communication or based on graphical resemblances of some of the characters to various bird postures.',
+          omnicode: '',
+          wikicode: 'Makasar_script',
+          font: {
+            'name': 'Salapa Jangang',
+            'url': 'https://aksaradinusantara.com/fonta/font/Salapa%20Jangang?key=aa166f01886b8b5271fd984ac79a2f5a'
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South East Asian: Insular', 'South East Asian']
+        },
+        {
           label: 'Malayalam',
           value: 'Malayalam',
           sscode: 'Mlym',
@@ -1343,6 +1362,22 @@ export const ScriptMixin = {
           status: ['Extinct', 'Extinct: Pre-Modern'],
           invented: ['Derived: Brahmi'],
           region: ['West Indic', 'Indic']
+        },
+        {
+          label: 'Nandinagari',
+          value: 'Nandinagari',
+          sscode: 'Nand',
+          ssdesc: 'The Nandinagari script was used in South India between the 8th and 19th centuries for writing manuscripts and inscriptions relating to philosophy, science and the arts in the Sanskrit language. The script is an abugida, closely related to the  Devanagari script. The character repertoires of both scripts are identical, and the shapes of many characters are similar. However, the script is distinctive in its lack of a connecting headline and in the shapes of most conjuncts and some individual characters',
+          omnicode: 'nandinagari',
+          wikicode: 'Nandinagari',
+          font: {
+            'name': 'Nandinagari Uni',
+            'url': 'https://www.mediafire.com/file/33dz5wnx2uig28o/nandinagariuni.zip/file'
+          },
+          language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
+          status: ['Extinct', 'Extinct: Pre-Modern'],
+          invented: ['Derived: Brahmi'],
+          region: ['South Indic', 'Indic']
         },
         {
           label: 'Newa (Nepal Bhasa)',

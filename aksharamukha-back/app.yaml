@@ -1,5 +1,8 @@
 runtime: python37
 
+automatic_scaling:
+  max_instances: 5
+
 handlers:
 - url: /
   static_files: spa-mat/index.html

@@ -441,7 +441,17 @@
 .mro {
   font-family: "Noto Sans Mro" !important
 }
+
+.nandinagari {
+  font-family: "Nandinagari Uni" !important;
+  font-size: 125%;
+}
 .marchen {
   font-family: "Noto Sans Marchen" !important;
   line-height: 2.5em;
+}
+
+.makasar {
+  font-family: "Adn Salapa Jangang" !important;
+  font-size: 150%;
 }

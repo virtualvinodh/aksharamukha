@@ -20,9 +20,9 @@ cd ..\..\aksharamukha-back
 
 docker build --no-cache -t virtualvinodh/aksharamukha-back .
 
-#docker push virtualvinodh/aksharamukha-fonts
-#docker push virtualvinodh/aksharamukha-front
-#docker push virtualvinodh/aksharamukha-back
+docker push virtualvinodh/aksharamukha-fonts
+docker push virtualvinodh/aksharamukha-front
+docker push virtualvinodh/aksharamukha-back
 
 (Get-Content ..\aksharamukha-front\src\statics\fonts.css).replace('http://localhost:9899/aksharamukha-fonts.css', 'https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha-fonts/aksharamukha-fonts.css') | Set-Content ..\aksharamukha-front\src\statics\fonts.css
 

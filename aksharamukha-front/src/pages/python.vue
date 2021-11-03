@@ -66,7 +66,17 @@
 
     <span class="code">transliterate.process('Devanagari', 'IAST', 'धर्म भारत की श्रमण परम्परा से निकला धर्म और दर्शन है', pre_options=['RemoveSchwaHindi'])</span> <br/><br/>
 
-    <p class="q-body-1">Please note that all identifiers and parameters are case-sensitive. Hence, only <i>Telugu</i> would work and <i>telugu</i> wouldn't.</p>
+    <p class="q-body-1">Instead of using Aksharamukha's identifiers, you can also the respective ISO codes (<a href="https://en.wikipedia.org/wiki/ISO_15924">ISO 15924</a> for scripts and <a href="https://en.wikipedia.org/wiki/ISO_639-1">ISO 639-1</a> or <a href="https://en.wikipedia.org/wiki/ISO_639-2">ISO 639-1</a> for languages). </p>
+
+    <span class="code"> transliterate.process('deva', 'taml', 'धर्म भारत की ', param="script_code") </span><br/><br/>
+    <span class="code"> transliterate.process('te', 'ur', 'ధర్మ భారత', param="lang_code")</span> <br/><br/>
+    <span class="code"> transliterate.process('odia', 'ho', 'ଧର୍ମ ଭାରତ', param="lang_name")</span> <br/><br/>
+
+    <p class="q-body-1"> You would need to use the format <i>lang_code-script_code</i> to use scripts that have multiple orthographies (e.g. Arabic script for Urdu and Punjabi) or languages that can be written in multiple scripts (e.g. Punjabi written in Gurmukhi and Shahmukhi). For romanization, you can use the language code <i>la-romanization_format</i> or the script code <i>latn-romanization_format</i> as input. </p>
+
+    <span class="code">transliterate.process('autodetect', 'latn-iast', 'धर्म भारत की ', param="script_code")</span> <br/><br/>
+    <span class="code">transliterate.process('autodetect', 'pa-arab', 'धर्म भारत की ', param="script_code")</span> <br/><br/>
+    <span class="code">transliterate.process('la-HK', 'pa-guru', 'namo buddhAya', param="lang_code")</span> <br/><br/>
 
     <p class="q-body-1">All script identifiers and the various flags for Pre- and Post-Options are listed in detail <router-link to='/documentation'>here</router-link> along with their description.</p>
   </q-page>

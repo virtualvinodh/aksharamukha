@@ -1,5 +1,8 @@
 Flask==1.0.2
 Flask-CORS==3.0.6
-Requests==2.20.1
-pykakasi==2.0.6
+Requests>=2.20.1
+pykakasi>=2.0.6
+pyyaml>=5.4.1
+langcodes>=3.1.0
+language_data
 google-python-cloud-debugger
