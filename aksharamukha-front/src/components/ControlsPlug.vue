@@ -43,7 +43,7 @@ import {ScriptMixin} from '../mixins/ScriptMixin'
 export default {
   // name: 'ComponentName',
   mixins: [ScriptMixin],
-  props: ['minimizeO'],
+  props: ['minimizeO', 'value'],
   components: {
     QRadio,
     QField,
@@ -59,11 +59,13 @@ export default {
       postOptions: [],
       minimize: this.minimizeO,
       advanced: 'false',
-      outputScript: 'IAST',
+      outputScript: '',
       sourcePreserve: false
     }
   },
   mounted: function () {
+    console.log(this.value)
+    this.outputScript = this.value.script
     this.update()
   },
   methods: {

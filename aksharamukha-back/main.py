@@ -1,3 +1,4 @@
+from aksharamukha import transliterate
 from flask import Flask, jsonify, request, redirect
 from flask_cors import CORS
 import re
@@ -10,7 +11,7 @@ from collections import Counter
 import unicodedata
 import io
 
-from aksharamukha.transliterate import convert, unique_everseen, removeA, auto_detect, detect_preoptions
+from aksharamukha.transliterate import convert, unique_everseen, removeA, auto_detect, detect_preoptions, get_semitic_json
 
 app = Flask(__name__)
 CORS(app)
@@ -371,6 +372,56 @@ def describe_list():
     results['script1'] = convert('HK', request.json['script1'], json.dumps(request.json['text']).replace(' ',''), False,[],[])
     results['script2'] = convert('HK', request.json['script2'], json.dumps(request.json['text']).replace(' ',''), False,[],[])
     results['script1hk'] = convert(request.json['script1'], 'HK', results['script1'], False,[],[])
+    return jsonify(results)
+
+@app.route('/api/semiticmatrix', methods=['POST', 'GET'])
+def character_matrix_semitic():
+    semitic_json = get_semitic_json()
+
+    charlist = 'ʾ, b, g, d, h, w, z, ḥ, ṭ, y, k, l, m, n, s, ʿ, p, ṣ, q, r, š, t, ḍ, f, ġ, ḏ, ḵ, ḫ, j, v, č, ṯ, ẓ, ž, p̣, i, u'.replace(' ', '')
+    script2 = request.json['script2']
+
+    results = {}
+    results['Latn'] = charlist.split(',')
+    results['script2'] =  transliterate.process('Latn', script2, charlist).split(',')
+    results['script2R'] =  transliterate.process(script2, 'Latn', transliterate.process('Latn', script2, charlist)).split(',')
+
+    results['script2G'] =  transliterate.process('Brahmi', script2, transliterate.process('Latn', 'Brah', charlist)).split(',')
+    results['script2GR'] =  transliterate.process('Brah', 'Latn', transliterate.process('Latn', 'Brah', charlist)).split(',')
+
+    for script in GeneralMap.SemiticScripts:
+        if script != 'Latn':
+            #print(script)
+            results[script] = transliterate.process('Latn', script, charlist).split(',')
+            results[script + 'R'] = transliterate.process(script, 'Latn', transliterate.process('Latn', script, charlist)).split(',')
+
+    return jsonify(results)
+
+@app.route('/api/describesemitic', methods=['POST', 'GET'])
+def describe_list_semitic():
+    semitic_json = get_semitic_json()
+
+    script1 = request.json['script1']
+    script2 = request.json['script2']
+
+    charsScript1 = []
+    charsScript2 = []
+    charsScript2R = []
+    charsLatn = []
+
+    results = {}
+    for lat, char in semitic_json['ssub']['Latn'][script1].items():
+        charsScript1.append(char)
+        ### add 1R as well
+        charsScript2.append(transliterate.process('Latn', script2, lat))
+        charsScript2R.append(transliterate.process(script2, script1, transliterate.process(script1, script2, char)))
+        charsLatn.append(lat)
+
+    results['script1'] =  charsScript1
+    results['script2'] =  charsScript2
+    results['script2R'] =  charsScript2R
+    results['scriptLatn'] = charsLatn
+
     return jsonify(results)
 
 @app.route('/api/website', methods=['POST', 'GET'])

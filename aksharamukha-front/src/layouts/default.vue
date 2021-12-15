@@ -52,6 +52,7 @@
           <q-item-side icon="translate"/>
           <q-item-main label="Converter"/>
         </q-item>
+        <!--
         <q-item to="/composer">
           <q-item-side icon="language" />
           <q-item-main label="Composer (Multiple scripts)"/>
@@ -63,7 +64,7 @@
         <q-item to="/upload/" v-if="!$q.platform.is.cordova">
           <q-item-side icon="cloud upload" />
           <q-item-main label="Convert Files (Batch)"/>
-        </q-item>
+        </q-item> -->
         <q-collapsible icon="keyboard" label="Input (Beta)" >
             <q-item :to="'/input/' + script.value" v-for="script in scriptsIndic" :key="script.value">
               <q-item-main :label="script.label"/>
@@ -75,14 +76,10 @@
             <q-item to="/roman">
               <q-item-main label="Roman Transliteration Schemes"/>
             </q-item>
-            <q-item :to="'/describe/' + script.value" v-for="script in scriptsIndic" :key="script.value">
+          <hr/>
+            <q-item :to="!scriptSemiticList.includes(script.value) ? '/describe/' + script.value : '/describesemitic/' + script.value"
+            v-for="script in scriptAboutList" :key="script.value">
               <q-item-main :label="script.label"/>
-            </q-item>
-            <q-item :to="'/describe/RussianCyrillic'">
-              <q-item-main :label="'Cyrillic (Russian)'"/>
-            </q-item>
-            <q-item :to="'/describe/IPA'">
-              <q-item-main :label="'IPA'"/>
             </q-item>
         </q-collapsible>
         <q-item to="/explore">
@@ -92,6 +89,10 @@
         <q-item to="/script-matrix">
           <q-item-side icon="table chart" />
             <q-item-main label="Script Matrix"/>
+          </q-item>
+        <q-item to="/semitic-matrix">
+          <q-item-side icon="table chart" />
+            <q-item-main label="Semitic Matrix"/>
           </q-item>
         <q-collapsible icon="book" label="Sample Texts"  >
             <q-item :to="'/texts/' + text.path" v-for="text in texts" :key="text.path">
@@ -271,6 +272,10 @@ export default {
         {
           name: 'Ushnisha Vijaya Dharani',
           path: 'ushnisha'
+        },
+        {
+          name: 'UDHR (Neo-Aramaic)',
+          path: 'udhr'
         }
       ]
     }

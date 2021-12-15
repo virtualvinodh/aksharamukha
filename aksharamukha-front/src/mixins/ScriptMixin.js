@@ -2,7 +2,7 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
-        // Always use http://localhost:8085/api/ (with a leading slash)
+        // Always use https://aksharamukha.appspot.com/api/ (with a leading slash)
         // https://aksharamukha.appspot.com/api/
         baseURL: 'http://localhost:8085/api/',
         timeout: 100000
@@ -155,6 +155,9 @@ export const ScriptMixin = {
         'Urdu': [
           { label: 'Short vowels not shown', value: 'UrduShortNotShown' }
         ],
+        'Arab': [
+          { label: 'Transliterate /ج/ as /j/', value: 'ArabicGimelJa' }
+        ],
         'Shahmukhi': [
           { label: 'Short vowels not shown', value: 'UrduShortNotShown' }
         ],
@@ -214,6 +217,7 @@ export const ScriptMixin = {
         'Ranjana': [['ranjanalantsa', 'ranjanawartu']],
         'Siddham': [['UseAlternateI1', 'UseAlternateI2'], ['siddhammukta', 'siddhamap']],
         'PhagsPa': [['PhagsPaTib', 'PhagsPaSeal']],
+        'Syrc': [['estrangelasyriac', 'easternsyriac', 'westernsyriac']],
         'Devanagari': [['devanagariuttara', 'devanagarijain', 'devanagarinepali', 'devanagaribalbodh']],
         'IAST': [['mDotAboveToBelow', 'NasalTilde']],
         'Pallava': [['sundapura', 'kawitan']],
@@ -224,8 +228,12 @@ export const ScriptMixin = {
         'Pallava': [
           { label: 'Sundapura font<br/><span class="sundapura">ꦥꦭ꧀ꦭꦮ ꦒ꧀ꦫꦤ꧀', value: 'sundapura' },
           { label: 'Kawitan font<br/><span class="kawitan">ꦥꦭ꧀ꦭꦮ ꦒ꧀ꦫꦤ꧀ꦡ', value: 'kawitan' }
-
         ],
+        /* 'Syrc': [
+          { label: 'Estrangela<br/><span class="estrangelasyriac"></span>', value: 'estrangelasyriac' },
+          { label: 'Eastern<br/><span class="easternsyriac">', value: 'easternsyriac' },
+          { label: 'Western<br/><span class="westernsyriac">', value: 'westernsyriac' }
+        ], */
         'Hiragana': [
           { label: 'Vertical text', value: 'verticalKana' },
           { label: '/v/ → /b/ <br/<small>ゔぃのお → びの</small>', value: 'vtobJapanese' }
@@ -285,7 +293,7 @@ export const ScriptMixin = {
           { label: 'Use Kamats Katan for Short /o/<br/>לֹ ← לׇ', value: 'HebewShortO' }
         ],
         'Nandinagari': [
-          { label: 'Use Prishtamatra orthography<br/><small><span class="nandinagari"> 𑦮𑧚 𑦮𑧜 𑦮𑧛 𑦮𑧝 → </span></small>', value: 'NandinagariPrishtamatra' }
+          { label: 'Use Prishtamatra orthography<br/><small><span class="nandinagari"> 𑦮𑧚 𑦮𑧜 𑦮𑧛 𑦮𑧝 → 𑦮𑧤 𑦮𑧤𑧑 𑦮𑧤𑧚 𑦮𑧤𑧜</span></small>', value: 'NandinagariPrishtamatra' }
         ],
         'Oriya': [
           { label: 'ଵ instead of ୱ<br/><small>ଭୱତି → ଭଵତି</small>', value: 'OriyaVaAlt' },
@@ -693,7 +701,7 @@ export const ScriptMixin = {
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Extinct', 'Extinct: Ancient'],
-          invented: ['Derived: Brahmi'],
+          invented: ['Derived: Aramaic'],
           region: ['Pan-Indic', 'Indic']
         },
         {
@@ -950,7 +958,7 @@ export const ScriptMixin = {
             'name': '',
             'url': ''
           },
-          language: ['Other'],
+          language: ['Others'],
           status: ['Living', 'Living: Major'],
           invented: ['Derived: Han'],
           region: ['East Asian']
@@ -966,7 +974,7 @@ export const ScriptMixin = {
             'name': '',
             'url': ''
           },
-          language: ['Other'],
+          language: ['Others'],
           status: ['Living', 'Living: Major'],
           invented: ['Derived: Han'],
           region: ['East Asian']
@@ -2063,6 +2071,360 @@ export const ScriptMixin = {
           region: ['Central Asian']
         }
       ],
+      scriptsSemitic: [
+        {
+          label: 'Ugaritic',
+          value: 'Ugar',
+          sscode: 'Ugar',
+          ssdesc: 'The Ugaritic script was used from about 1500-1300 BC to write the Ugaritic language, spoken in modern-day Syria. It was also occasionally used for writing documents in the Hurrian language. Visually, the script resembled Cuneiform, with each letter written as one of a combination of short, linear wedges. However, the forms of the letters appear to have been freely invented; derivational relationships with other cuneiform letters have not been established. The script remained relatively stable in form throughout its use, with no significant changes.',
+          wikicode: 'Ugaritic_alphabet',
+          omnicode: 'ugaritic',
+          font: {
+            'name': 'Noto Sans Ugaritic',
+            'url': 'https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/NotoSansUgaritic-Regular.otf'
+          },
+          language: ['Others'],
+          status: ['Extinct', 'Extict: Ancient'],
+          invented: ['Derived: Cuneiform'],
+          region: ['West Asian']
+        },
+        {
+          label: 'Syriac',
+          value: 'Syrc',
+          sscode: 'Syrc',
+          ssdesc: 'The Syriac script is attested as early as the year 6 AD. It was primarily used for writing the Syriac language, now extinct outside of the Syrian church. The Assyrian Neo-Aramaic, Chaldean Neo-Aramaic and Turoyo/Surayt languages are descended from Syriac, and are still written in the Syriac script. It can also be used for writing Arabic, known as Garshani writing. There are three ancient variations of the script: the classical liturgical script called Estrangelo, the Western variant, and the Eastern variant.',
+          wikicode: 'Syriac_alphabet',
+          omnicode: 'syriac',
+          font: {
+            'name': 'Noto Sans Syriac',
+            'url': 'https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics//NotoSansSyriac-Regular.otf'
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Aramaic'],
+          region: ['West Asian']
+        },
+        {
+          label: 'Old Sogdian',
+          value: 'Sogo',
+          sscode: 'Sogo',
+          ssdesc: 'The Old Sogdian script encompasses a group of related scripts used to represent Sogdian, an ancient Eastern Iranian language. Old Sogdian unifies the scripts used in short inscriptions on coins and vessels, the Ancient Letters and the Kultobe and Upper Indus inscriptions.',
+          wikicode: '',
+          omnicode: '',
+          font: {
+            'name': 'Noto Sans OldSogdian',
+            'url': 'https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics//NotoSansOldSogdian-Regular.otf'
+          },
+          language: ['Others'],
+          status: ['Extinct', 'Extinct: Ancient'],
+          invented: ['Derived: Aramaic'],
+          region: ['West Asian']
+        },
+        {
+          label: 'Sogdian',
+          value: 'Sogd',
+          sscode: 'Sogd',
+          ssdesc: 'The Sogdian script was one of three scripts used for writing the Sogdian language, a middle Iranian language spoken in Sogdiana, a region in the Achaemenid Persian empire comprising parts of modern-day Uzbekistan, Tajikistan, Pakistan and China. This language was also written in the Manichaean and Syriac scripts. Sogdian writing derives from the Aramaic script and was used from approximately the 1st to the 13th centuries AD, during which time three main varieties emerged, the Ancient Letters, the Sutra style and the Uyghur style.',
+          wikicode: 'Sogdian_alphabet',
+          omnicode: 'sogdian',
+          font: {
+            'name': 'Noto Sans Sogdian',
+            'url': 'https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics//NotoSansSogdian-Regular.otf'
+          },
+          language: ['Others'],
+          status: ['Extinct', 'Extinct: Ancient'],
+          invented: ['Derived: Aramaic'],
+          region: ['West Asian']
+        },
+        {
+          label: 'Old South Arabian',
+          value: 'Sarb',
+          sscode: 'Sarb',
+          ssdesc: 'The Old South Arabian script (also called Musnad, Epigraphic South Arabian, or Sayhadic) was used for writing a group of closely related Semitic languages, all of which are now extinct. The script was used throughout the Arabian peninsula, particularly in modern-day Yemen, between the 6th and the 8th centuries AD, after which it was replaced by Arabic writing. It is the forerunner of the modern-day Ethiopic script.',
+          wikicode: 'Ancient_South_Arabian_script',
+          omnicode: 'southarabian',
+          font: {
+            'name': 'Noto Sans OldSouthArabian',
+            'url': 'https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/NotoSansOldSouthArabian-Regular.otf'
+          },
+          language: ['Others'],
+          status: ['Extinct', 'Extinct: Ancient'],
+          invented: ['Derived: Proto-Sinaitic'],
+          region: ['West Asian']
+        },
+        {
+          label: 'Samaritan',
+          value: 'Samr',
+          sscode: 'Samr',
+          ssdesc: 'The Samaritan script is of Phoenician descent, via the Paleo-Hebrew script. Samaritan writing began to noticeably diverge from Paleo-Hebrew writing around the 3rd century and has been used since that time for the Samaritan dialects of Hebrew, Aramaic and Arabic. These languages are no longer in everyday spoken use but are still used for writing liturgical and scholarly works. Samaritan is also the script for the bi-weekly newspaper A.B., published in Israel.',
+          wikicode: 'Samaritan_script',
+          omnicode: 'samaritan',
+          font: {
+            'name': 'Noto Sans Samaritan',
+            'url': 'https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/NotoSansSamaritan-Regular.otf'
+          },
+          language: ['Others'],
+          status: ['Extinct', 'Extinct: Ancient'],
+          invented: ['Derived: Phoenician'],
+          region: ['West Asian']
+        },
+        {
+          label: 'Inscriptional Parthian',
+          value: 'Prti',
+          sscode: 'Prti',
+          ssdesc: 'Inscriptional Parthian is one of three related ancient scripts, along with Inscriptional Pahlavi and Psalter Pahlavi, used for writing a number of Iranian and Indo-European languages. All three scripts developed from the Imperial Aramaic script.',
+          wikicode: 'Inscriptional_Parthian',
+          omnicode: 'parthian',
+          font: {
+            'name': 'Noto Sans',
+            'url': 'https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/-Regular.otf'
+          },
+          language: ['Others'],
+          status: ['Extinct', 'Extinct: Ancient'],
+          invented: ['Derived: Aramaic'],
+          region: ['West Asian']
+        },
+        {
+          label: 'Phoenician',
+          value: 'Phnx',
+          sscode: 'Phnx',
+          ssdesc: 'The Phoenician script was the first widespread script whose symbols exclusively represented sounds rather than concepts. Phoenician writing ultimately derived from Egyptian hieroglyphics; the rebus principle (the use of a pictographic symbol for its phonetic value independent of its original meaning) is generally believed to have been the means for evolution from pictographic to phonetic writing. The Phoenician script was originally used for writing the Phoenician language, but due to the Phoenicians\' lucrative trading relationships with most of the Mediterranean states, it became known throughout the Mediterranean and North Africa. It is believed to be the precursor of such diverse scripts as Greek, Aramaic and Brahmi, and by extension of most of the writing systems used for representing Indo-Aryan languages.',
+          wikicode: 'Phoenician_alphabet',
+          omnicode: 'phoenician',
+          font: {
+            'name': 'Noto Sans Phoenician',
+            'url': 'https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/NotoSansPhoenician-Regular.otf'
+          },
+          language: ['Others'],
+          status: ['Extinct', 'Extinct: Ancient'],
+          invented: ['Derived: Proto-Sinaitic'],
+          region: ['Mediterranean']
+        },
+        {
+          label: 'Psalter Pahlavi',
+          value: 'Phlp',
+          sscode: 'Phlp',
+          ssdesc: 'Psalter Pahlavi was one of three forms of the ancient Pahlavi script, used for writing the Middle Iranian languages. Psalter Pahlavi has so far only been attested in two sources, a 7th century manuscript of the Psalms of David (hence its name) and an inscription on a bronze cross found at Herat (in present-day Afghanistan). The lack of surviving material in this form of the script has left a number of gaps in modern-day scholars\' understanding of Psalter Pahlavi writing.',
+          wikicode: 'Psalter_Pahlavi',
+          omnicode: 'psalter',
+          font: {
+            'name': 'Noto Sans PsalterPahlavi',
+            'url': 'https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/NotoSansPsalterPahlavi-Regular.otf'
+          },
+          language: ['Others'],
+          status: ['Extinct', 'Extinct: Ancient'],
+          invented: ['Derived: Aramaic'],
+          region: ['West Asian']
+        },
+        {
+          label: 'Inscriptional Pahlavi',
+          value: 'Phli',
+          sscode: 'Phli',
+          ssdesc: 'Inscriptional Pahlavi is the earliest of the three forms of the Pahlavi script, used regularly as a monumental script from the 2nd century BC until the 5th century AD. Later forms of the script were called Psalter Pahlavi and Book Pahlavi. Psalter Pahlavi is so far attested in only two sources, so the bulk of our knowledge is related to the other two forms. The names of these, Inscriptional and Book Pahlavi are somewhat misleading; the Inscriptional form was used on monuments, coins, seals and amulets, as would be expected, but the Book form was used in manuscript texts as well as on stone monuments. The distinction then refers to whether the letters were connected (Book Pahlavi) or unconnected (Inscriptional Pahlavi) rather than to distinct uses of either form.',
+          wikicode: 'Inscriptional_Pahlavi',
+          omnicode: 'mpersian',
+          font: {
+            'name': 'Noto Sans InscriptionalPahlavi',
+            'url': 'https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/NotoSansInscriptionalPahlavi-Regular.otf'
+          },
+          language: ['Others'],
+          status: ['Extinct', 'Extinct: Ancient'],
+          invented: ['Derived: Aramaic'],
+          region: ['West Asian']
+        },
+        {
+          label: 'Palmyrene',
+          value: 'Palm',
+          sscode: 'Palm',
+          ssdesc: 'The Palmyrene script was derived from cursive versions of Aramaic writing around the 1st century BC. It was initially used in the area between the city of Damascus and the Euphrates river, for writing the Palmyrene (also called Palmyrenean) dialect of West Aramaic. The latest extant documents written in the script are from the year 273 AD, the year that the Palmyrene empire was sacked by the Roman Emperor Aurelian.',
+          wikicode: 'Palmyrene_alphabet',
+          omnicode: '',
+          font: {
+            'name': 'Noto Sans Palmyrene',
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/hinted/ttf/NotoSansPalmyrene-Regular.otf'
+          },
+          language: ['Others'],
+          status: ['Extinct', 'Extinct: Ancient'],
+          invented: ['Derived: Aramaic'],
+          region: ['West Asian']
+        },
+        {
+          label: 'Nabataean',
+          value: 'Nbat',
+          sscode: 'Nbat',
+          ssdesc: 'The Nabataean script was used from the 2nd century BC until the 4th or 5th century AD for writing the Nabataean language, a Northwest Semitic language closely related to Arabic. The script was developed from Aramaic writing, and was the immediate precursor of Arabic writing.',
+          wikicode: 'Nabataean_Aramaic',
+          omnicode: 'nabataean',
+          font: {
+            'name': 'Noto Sans Nabataean',
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/hinted/ttf/Nabataean-Regular.otf'
+          },
+          language: ['Others'],
+          status: ['Extinct', 'Extinct: Ancient'],
+          invented: ['Derived: Aramaic'],
+          region: ['West Asian']
+        },
+        {
+          label: 'Old North Arabian',
+          value: 'Narb',
+          sscode: 'Narb',
+          ssdesc: 'Old North Arabian (also called Ancient North Arabian) is a collective term for a group of scripts found in rock inscriptions written in pre-Islamic dialects in the western two-thirds of the Arabian peninsula. The inscriptions have been dated to between the 8th century BC and the 4th century AD. Many are formal inscriptions, but most are graffiti, written in an informal style.',
+          wikicode: 'Ancient_North_Arabian',
+          omnicode: '',
+          font: {
+            'name': 'Noto Sans OldNorthAriabian',
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/hinted/ttf/OldNorthAriabian-Regular.otf'
+          },
+          language: ['Others'],
+          status: ['Extinct', 'Extinct: Ancient'],
+          invented: ['Derived: Proto-Sinaitic'],
+          region: ['West Asian']
+        },
+        {
+          label: 'Manichaean',
+          value: 'Mani',
+          sscode: 'Mani',
+          ssdesc: 'The Manichaean script was derived from the Estrangelo variant of the Syriac script. It was the vehicle employed for the spread of Manichaeanism, an Iranian Gnostic religion created by the Mesopotamian prophet Mani, between the 3rd and 14th centuries. It was Mani\'s desire that his teachings could be made available to speakers of every known language, so the script was used for writing the Middle and Early Modern Persian, Parthian, Sogdian, Bactrian, Ughur and Tocharian languages. ',
+          wikicode: 'Manichaean_script',
+          omnicode: 'manichaean',
+          font: {
+            'name': 'Noto Sans Manichaean',
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/hinted/ttf/NotoSansManichean-Regular.otf'
+          },
+          language: ['Others'],
+          status: ['Extinct', 'Extinct: Ancient'],
+          invented: ['Derived: Aramaic'],
+          region: ['West Asian']
+        },
+        {
+          label: 'Hatran',
+          value: 'Hatr',
+          sscode: 'Hatr',
+          ssdesc: 'Hatran writing was discovered in 1912 in present-day al-Hadr, an ancient city in the al-Jazira region of Iraq which used to be called Hatra. Over 100 stone inscriptions were uncovered by archaeologists working for Iraqi Department of Antiquities; since then approximately 500 more texts have been discovered. Most of these were short, and as a result it has been difficult to deduce a great deal about the Aramaic dialect, called Aramaic of Hatra, which the script represented.',
+          wikicode: 'Hatran_Aramaic',
+          omnicode: '',
+          font: {
+            'name': 'Noto Sans Hatran',
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/hinted/ttf/NotoSansHatran-Regular.otf'
+          },
+          language: ['Others'],
+          status: ['Extinct', 'Extinct: Ancient'],
+          invented: ['Derived: Aramaic'],
+          region: ['West Asian']
+        }, /*
+        {
+          label: 'Greek (Semitic)',
+          value: 'Grek',
+          sscode: 'Grek',
+          ssdesc: '',
+          wikicode: '',
+          omnicode: '',
+          font: {
+            'name': 'Noto Sans',
+            'url': 'https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/-Regular.otf'
+          },
+          language: ['Others'],
+          status: ['Extinct', 'Extinct: Ancient'],
+          invented: ['Derived: Aramaic'],
+          region: ['Mediterranean']
+        }, */
+        {
+          label: 'Elymaic',
+          value: 'Elym',
+          sscode: 'Elym',
+          ssdesc: 'The Elymaic script was an abjad used between approximately 250 BC - 500 AD in the state of Elymais, an ancient state located in the region southeast of the Tigris River in present-day Iran. The Elymaic script was descended from Aramaic, and was either the parent or a sibling script for Mandaic. It is poorly attested on coins and rock inscriptions from the second and third centuries.',
+          wikicode: 'Elymaic',
+          omnicode: '',
+          font: {
+            'name': 'Noto Sans Elymaic',
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/hinted/ttf/NotoSansElymaic-Regular.otf'
+          },
+          language: ['Others'],
+          status: ['Extinct', 'Extinct: Ancient'],
+          invented: ['Derived: Aramaic'],
+          region: ['West Asian']
+        },
+        /* {
+          label: 'Egyptian hieroglyphs (Semitic)',
+          value: 'Egyp',
+          sscode: 'Egyp',
+          ssdesc: '',
+          wikicode: '',
+          omnicode: '',
+          font: {
+            'name': 'Noto Sans',
+            'url': 'https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/-Regular.otf'
+          },
+          language: ['Others'],
+          status: ['Extinct', 'Extinct: Ancient'],
+          invented: ['Derived: Pictograms'],
+          region: ['North African']
+        }, */
+        {
+          label: 'Imperial Aramaic',
+          value: 'Armi',
+          sscode: 'Armi',
+          ssdesc: 'The Aramaic script was used for writing the Aramaic language, which was the trade language of the Middle East from about 1000 BC to about 1000 AD. Aramaic writing is derived from the Phoenician script. Because the evolution from one to the other was a continuous process over about 2000 years it is difficult to divide it neatly into \'uniquely Phoenician\' and \'uniquely Aramaic\' blocks; however, it is generally agreed that a divergence into two distinct scripts was evident by about the 8th century BC. Both the Phoenician and Aramaic scripts were the antecedents of a large and geographically diverse family of writing systems.',
+          wikicode: 'Imperial_Aramaic',
+          omnicode: '',
+          font: {
+            'name': 'Noto Sans ImperialAramaic',
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/hinted/ttf/NotoSansImperialAramaic-Regular.otf'
+          },
+          language: ['Others'],
+          status: ['Extinct', 'Extinct: Ancient'],
+          invented: ['Derived: Phoenician'],
+          region: ['West Asian']
+        },
+        {
+          label: 'Ethiopic (Abjad)',
+          value: 'Ethi',
+          sscode: 'Ethi',
+          ssdesc: 'The Ethiopic (Ge\'ez) script was developed as the writing system of the Ge\'ez language, a Semitic language spoken in Ethiopia and Eritrea until the 10th to the 12th centuries. Although the language ceased to be used in vernacular speech (it now serves a liturgical function only), the script is still widely used for writing the Ethiopian and Eritrean Semitic languages such as Tigré, Amharic and Tigrinya. In some languages, the script is called fidäl (ፊደል), which means \'alphabet\', and individual letters are referred to as fidel.',
+          wikicode: '/Geʽez_script',
+          omnicode: 'ethiopic',
+          font: {
+            'name': '',
+            'url': ''
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Proto-Sinaitic'],
+          region: ['North African']
+        },
+        {
+          label: 'Arabic',
+          value: 'Arab',
+          sscode: 'Arab',
+          ssdesc: 'Arabic writing is the second most broadly-used script in the world, after the Latin alphabet. It descended from the Nabataean abjad, itself a descendant of the Phoenician script, and has been used since the 4th century for writing the Arabic language. Since the words of the Prophet Muhammed can only be written in Arabic, the Arabic script has traveled far and wide with the spread of Islam and came to be used for a number of languages throughout Asia, Africa and the Middle East.',
+          wikicode: 'Arabic_script',
+          omnicode: 'arabic',
+          font: {
+            'name': '',
+            'url': ''
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Aramaic'],
+          region: ['West Asian']
+        }
+        /* {
+          label: '',
+          value: '',
+          sscode: '',
+          ssdesc: '',
+          wikicode: '',
+          omnicode: '',
+          font: {
+            'name': 'Noto Sans',
+            'url': 'https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics/-Regular.otf'
+          },
+          language: ['', '', ''],
+          status: ['', ''],
+          invented: [''],
+          region: ['']
+        } */
+      ],
       scriptsLatin: [
         {
           label: 'Roman (Harvard-Kyoto)',
@@ -2093,7 +2455,7 @@ export const ScriptMixin = {
           status: ['Living', 'Living: Minor'],
           invented: ['Derived: Latin'],
           region: ['Eurasia'],
-          label: 'Roman (IPA)',
+          label: 'Roman (IPA Indic)',
           value: 'IPA',
           sscode: '',
           ssdesc: '',
@@ -2137,6 +2499,10 @@ export const ScriptMixin = {
         {
           label: 'Roman (Baraha South)',
           value: 'BarahaSouth'
+        },
+        {
+          label: 'Roman (Semitic)',
+          value: 'Latn'
         },
         {
           language: ['Others'],
@@ -2235,9 +2601,9 @@ export const ScriptMixin = {
       tagsLanguageM: ['Sanskrit', 'Pali', 'Others'],
       tagsRegionM1: ['Indic'],
       tagsRegionS1: ['Pan-Indic', 'East Indic', 'West Indic', 'North Indic', 'South Indic'],
-      tagsRegionM2: ['East Asian', 'West Asian', 'Central Asian', 'South Asian: Other', 'South East Asian'],
+      tagsRegionM2: ['East Asian', 'West Asian', 'Central Asian', 'South Asian: Other', 'South East Asian', 'Mediterranean', 'North African'],
       tagsRegionS2: ['South East Asian: Mainland', 'South East Asian: Insular'],
-      tagsDerivationM: ['Derived: Brahmi', 'Derived: Pallava', 'Derived: Aramaic', 'Derived: Perso-Arabic', 'Derived: Cuneiform', 'Invented', 'Derived: Han'],
+      tagsDerivationM: ['Derived: Brahmi', 'Derived: Pallava', 'Derived: Aramaic', 'Derived: Perso-Arabic', 'Derived: Cuneiform', 'Invented', 'Derived: Han', 'Derived: Proto-Sinaitic', 'Derived: Egyptian Hieroglyphics', 'Derived: Phoenician'],
       ocrLangOptions: [
         {
           label: 'Autodetect',
@@ -2364,12 +2730,40 @@ export const ScriptMixin = {
       return this.autodetect.slice().concat(this.scripts)
     },
     scripts: function () {
-      var scriptAll = this.scriptsIndic.slice().concat(this.scriptsLatin.slice())
+      var scriptAll = this.scriptsIndic.slice().concat(this.scriptsLatin.slice()).concat(this.scriptsSemitic.slice())
       scriptAll.sort(this.compareObjects)
       return scriptAll
     },
+    scriptSemiticSorted: function () {
+      var scriptSemiticSort = this.scriptsSemitic.slice()
+      scriptSemiticSort.sort(this.compareObjects)
+      // console.log(scriptSemiticSort)
+      return scriptSemiticSort
+    },
+    scriptSemiticSortedHebr: function () {
+      var scriptSemiticSort = this.scriptsSemitic.slice()
+      scriptSemiticSort.push({
+        value: 'Hebr',
+        label: 'Hebrew'
+      })
+      scriptSemiticSort.sort(this.compareObjects)
+      // console.log(scriptSemiticSort)
+      return scriptSemiticSort
+    },
+    scriptAboutList: function () {
+      // console.log(scriptSemiticSort)
+      var scriptList = this.scriptsIndic.concat([{label: 'Cyrillic (Russian)', value: 'RussianCyrillic'}, {label: 'IPA Indic', value: 'IPA'}]).concat(this.scriptsSemitic)
+      scriptList.sort(this.compareObjects)
+      return scriptList.filter(x => x.value !== 'Latn')
+    },
     scriptIndicList: function () {
       return this.scriptsIndic.map(x => x.value)
+    },
+    scriptLatinList: function () {
+      return this.scriptsLatin.map(x => x.value)
+    },
+    scriptSemiticList: function () {
+      return this.scriptsSemitic.map(x => x.value)
     },
     compounds: function () {
       var compounds = []
@@ -2509,7 +2903,8 @@ export const ScriptMixin = {
     getDescription: function (script, link = true) {
       var desc
       var omniext
-
+      console.log('description')
+      console.log(script)
       if (script.value === 'Sundanese' || script.value === 'Ariyaka') {
         omniext = '.php'
       } else {
@@ -2625,6 +3020,12 @@ export const ScriptMixin = {
         return 'sundapura'
       } else if (postOptions.includes('kawitan') && tgt === 'Pallava') {
         return 'kawitan'
+      } else if (postOptions.includes('estrangelasyriac') && tgt === 'Syrc') {
+        return 'estrangelasyriac'
+      } else if (postOptions.includes('easternsyriac') && tgt === 'Syrc') {
+        return 'easternsyriac'
+      } else if (postOptions.includes('westernsyriac') && tgt === 'Syrc') {
+        return 'westernsyriac'
       } else if (tgt === 'Oriya' && (String(outputText).includes('॒') || String(outputText).includes('᳚') ||
           String(outputText).includes('॑'))) {
         return 'oriyavedic'
@@ -2670,7 +3071,7 @@ export const ScriptMixin = {
       return Math.floor(Math.random() * (max - min + 1)) + min
     },
     scriptRandom: function () {
-      return this.scriptsIndic[this.getRandomInt(0, this.scriptsIndic.length - 1)]
+      return this.scriptAboutList[this.getRandomInt(0, this.scriptAboutList.length - 1)]
     },
     checkDiacritics: function (Strng) {
       var diac = false

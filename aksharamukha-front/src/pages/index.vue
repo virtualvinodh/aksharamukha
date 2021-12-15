@@ -1,6 +1,5 @@
 <template>
   <!-- Fix Urdu ai and au -->
-
   <q-page class="q-pa-md" id="scrollstart">
           <q-alert
           color="red-4"
@@ -10,6 +9,7 @@
           class="q-mb-sm q-mr-xl"
           v-if="!checkifOnline && $q.platform.is.cordova"
         > You're not currently connected. Please activate your mobile data or Wi-Fi to use the app.  </q-alert>
+    <converter-menu highlight="texts"></converter-menu>
   <div class="row">
       <div class="row col-xs-12 col-md-11 col-xl-5 q-ma-md float-div print-hide">
        <div class="row">
@@ -102,8 +102,8 @@
       ref="brahmiText"
       class="text-output col-xs-12 col-md-12 q-pa-md q-pr-lg bg-grey-1 "
       >
-       <span :class="getOutputClass(outputScript, postOptions, convertText)" :style="{'font-size': fontSize + '%'}"
-        v-html="sanitize(convertText)"></span>
+       <div :class="getOutputClass(outputScript, postOptions, convertText)" :style="{'font-size': fontSize + '%'}"
+        v-html="sanitize(convertText)"></div>
       </div>
     <output-notice :inputScript="inputScript" :outputScript="outputScript" :postOptions="postOptions"
      :convertText="convertText" :inputText="textInput"></output-notice>
@@ -150,6 +150,8 @@ import OutputOptions from '../components/OutputOptions'
 import InputNotice from '../components/InputNotice'
 import OutputNotice from '../components/OutputNotice'
 import OutputButtons from '../components/OutputButtons'
+import ConverterMenu from '../components/ConverterMenu'
+
 import scrollTo from 'vue-scrollto'
 import { ScriptMixin } from '../mixins/ScriptMixin'
 import { createWorker } from 'tesseract.js'
@@ -202,7 +204,8 @@ export default {
     OutputNotice,
     OutputButtons,
     QPageSticky,
-    QUploader
+    QUploader,
+    ConverterMenu
   },
   data () {
     return {

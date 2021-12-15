@@ -455,3 +455,106 @@
   font-family: "Adn Salapa Jangang" !important;
   font-size: 150%;
 }
+
+.egyp {
+  font-size: 150%;
+}
+
+.ugar {
+  font-family: "Noto Sans Ugaritic" !important;
+}
+
+.syrc {
+  font-family: "Noto Sans Syriac" !important;
+  direction: rtl;
+}
+.estrangelasyriac {
+  font-family: "Noto Sans Syriac" !important;
+  font-language-override: "SYRE";
+  direction: rtl;
+}
+.easternsyriac {
+  font-family: "Noto Sans Syriac" !important;
+  font-language-override: "SYRN";
+  direction: rtl;
+}
+.westernsyriac {
+  font-family: "Noto Sans Syriac" !important;
+  font-language-override: "SYRJ";
+  direction: rtl;
+}
+.sogo {
+  font-family: "Noto Sans OldSogdian" !important;
+  direction: rtl;
+}
+.sogd {
+  font-family: "Noto Sans Sogdian" !important;
+  direction: rtl;
+}
+.sarb {
+  font-family: "Noto Sans OldSouthArabian" !important;
+  direction: rtl;
+}
+.samr {
+  font-family: "Noto Sans Samaritan" !important;
+  direction: rtl;
+}
+.prti {
+  font-family: "Noto Sans InscriptionalParthian" !important;
+  direction: rtl;
+}
+.phnx {
+  font-family: "Noto Sans Phoenician" !important;
+  direction: rtl;
+}
+.phlp {
+  font-family: "Noto Sans PsalterPahlavi" !important;
+  direction: rtl;
+}
+.phli {
+  font-family: "Noto Sans Inscriptional Pahlavi" !important;
+  direction: rtl;
+}
+.palm {
+  font-family: "Noto Sans Palmyrene" !important;
+  direction: rtl;
+}
+.nbat {
+  font-family: "Noto Sans Nabataean" !important;
+  direction: rtl;
+}
+.narb {
+  font-family: "Noto Sans OldNorthArabian" !important;
+  direction: rtl;
+}
+.mani {
+  font-family: "Noto Sans Manichaean" !important;
+  direction: rtl;
+}
+
+.hatr {
+  font-family: "Noto Sans Hatran" !important;
+  direction: rtl;
+}
+
+.elym{
+  font-family: "Noto Sans Elymaic" !important;
+  direction: rtl;
+}
+
+.egyp {
+  font-family: "Noto Sans EgyptianHieroglyphs" !important;
+  direction: rtl;
+}
+
+.armi {
+  font-family: "Noto Sans ImperialAramaic" !important;
+  direction: rtl;
+}
+
+.arab {
+  direction: rtl;
+}
+
+
+

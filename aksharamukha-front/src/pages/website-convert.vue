@@ -1,5 +1,6 @@
 <template>
-  <q-page>
+  <q-page class="q-pa-md" >
+    <converter-menu highlight="websites"></converter-menu>
       <q-alert
           color="grey-7"
           icon="extension"
@@ -40,6 +41,8 @@
 <script>
 import Transliterate from '../components/Transliterate'
 import ControlsIo from '../components/ControlsIo'
+import ConverterMenu from '../components/ConverterMenu'
+
 import {QPageSticky, QUploader, QField, QInput, QSlideTransition, QAlert} from 'quasar'
 import {ScriptMixin} from '../mixins/ScriptMixin'
 
@@ -54,7 +57,8 @@ export default {
     QField,
     QAlert,
     QInput,
-    QSlideTransition
+    QSlideTransition,
+    ConverterMenu
   },
   data () {
     return {
@@ -99,7 +103,7 @@ export default {
           this.url = 'http://' + this.url
         }
         this.minimize = false
-        this.urlT = 'http://aksharamukha.appspot.com/api/website?url=' + this.url + '&source=' + this.options.inputScript +
+        this.urlT = 'https://aksharamukha.appspot.com/api/website?url=' + this.url + '&source=' + this.options.inputScript +
           '&target=' + this.options.outputScript + '&preOptions=' + JSON.stringify(this.options.preOptions) +
           '&postOptions=' + JSON.stringify(this.options.postOptions) + '&nativize=' + JSON.stringify(!this.options.sourcePreserve)
         console.log(this.urlT)

@@ -40,6 +40,7 @@
         class="q-ma-sm q-ml-md"
         :options="letteroptionsC"
         @input="getLetters"
+        v-if="typeCategory == 'Indic'"
       />
       <q-select
         filter
@@ -52,7 +53,22 @@
         class="q-ma-sm q-ml-md"
         :options="letteroptionsV"
         @input="getLetters"
+        v-if="typeCategory == 'Indic'"
       />
+      <q-select
+        filter
+        inset
+        autofocus-filter
+        filter-placeholder="search"
+        placeholder="Letter"
+        v-model="charsC"
+        float-label="Consonant"
+        class="q-ma-sm q-ml-md"
+        :options="letteroptionsCSemitic"
+        @input="getLetters"
+        v-if="typeCategory == 'Semitic'"
+      />
+    <q-btn-toggle v-model="typeCategory" :options="typeoptionsCategory"  toggle-color="dark" class="q-ma-md"></q-btn-toggle>
     </div>
       <div class="row" v-if="type === 'explorecardsent'">
       <q-select
@@ -127,8 +143,8 @@
 
     </div>
     <h5 class="q-mb-lg q-mt-sm">{{scriptcurrent.label}}</h5>
-    <div class="q-ma-md"><span class="quotetext"><big><transliterate :text="$q.platform.is.mobile ? mobiletext : maintext"
-      :src="script2" :tgt="scriptcurrent.value"> </transliterate></big></span></div>
+    <div class="q-ma-md"><span class="quotetext"><big><div :class="scriptcurrent.value.toLowerCase()"><transliterate :text="$q.platform.is.mobile ? mobiletext : maintext"
+      :src="script2" :tgt="scriptcurrent.value"> </transliterate></div></big></span></div>
     <q-chip class="q-ma-xs" color="dark" v-for="tag in tags"
       :key="tag" tag dense> {{tag}} </q-chip>
     <div class="q-body-1 q-mt-md q-mb-md" v-html="getDescription(scriptcurrent, false)"> </div>
@@ -138,7 +154,7 @@
     <q-btn
       class="q-mr-sm"
       color="dark"
-      @click="openlink('describe/' + scriptcurrent.value)"
+      @click="openlink(getDescribelink(scriptcurrent.value))"
       icon='info'
       label="Full Description"
     />
@@ -191,9 +207,14 @@ export default {
       highapprox: false,
       sourcePreserve: false,
       type: 'explorecard',
+      typeCategory: 'Indic',
       typeoptions: [
         {label: 'Sample Letter', value: 'explorecard'},
         {label: 'Sample Phrase', value: 'explorecardsent'}
+      ],
+      typeoptionsCategory: [
+        {label: 'Indic', value: 'Indic'},
+        {label: 'Semitic', value: 'Semitic'}
       ],
       scriptsCategorized: {},
       trees: {
@@ -215,6 +236,7 @@ export default {
       maindisp: 'āryāvalokiteśvarabodhisattvo gambhīrāyāṃ prajñāpāramitāyāṃ caryāṃ caramāṇo vyavalokayati sma .',
       mobiledisp: 'iha śāriputra rūpaṃ śūnyatā, śūnyataiva rūpam.',
       letteroptionsC: [],
+      letteroptionsCSemitic: [],
       letteroptionsV: [],
       scriptcurrent: {
         label: 'Burmese (Myanmar)',
@@ -240,33 +262,36 @@ export default {
       alphabet: 'abcdefghijklmnopqrstuvwxyz'.toUpperCase().split(''),
       languages: ['Sanskrit & Pali', 'Only Pali', 'Others'],
       status: ['Living: Major', 'Living: Minor', 'Extinct'],
-      derivation: ['Invented', 'Derived: Aramaic', 'Derived: Perso-Arabic', 'Derived: Cuneiform', 'Derived: Brahmi'],
-      regions: ['Pan-Indic', 'East Indic', 'West Indic', 'North Indic', 'South Indic', 'South East Asian: Mainland', 'South East Asian: Insular', 'Central Asian', 'East Asian', 'South Asian: Other', 'West Asian'],
+      derivation: ['Invented', 'Derived: Aramaic', 'Derived: Perso-Arabic', 'Derived: Cuneiform', 'Derived: Brahmi', 'Derived: Proto-Sinaitic', 'Derived: Phoenician'],
+      regions: ['Pan-Indic', 'East Indic', 'West Indic', 'North Indic', 'South Indic', 'South East Asian: Mainland', 'South East Asian: Insular', 'Central Asian', 'East Asian', 'South Asian: Other', 'West Asian', 'Mediterranean', 'North African'],
       tagsActive: [],
-      activeButton: 'all'
+      activeButton: 'all',
+      consIAST: ['', 'ka', 'kha', 'ga', 'gha', 'ṅa', 'ca', 'cha', 'ja', 'jha', 'ña', 'ṭa', 'ṭha', 'ḍa', 'ḍha', 'ṇa', 'ta', 'tha', 'da', 'dha', 'na', 'pa', 'pha', 'ba', 'bha', 'ma', 'ya', 'ra', 'la', 'va', 'śa', 'ṣa', 'sa', 'ha', 'l̤a', 'ḻa', 'ṟa', 'ṉa', 'qa', 'k͟ha', 'ġa', 'za', 'r̤a', 'r̤ha', 'fa', 'ẏa'].map(x => x.replace('a', '')),
+      consSemitic: ['ʾ', 'b', 'g', 'd', 'h', 'w', 'z', 'ḥ', 'ṭ', 'y', 'k', 'l', 'm', 'n', 's', 'ʿ', 'p', 'ṣ', 'q', 'r', 'š', 't'],
+      cons: ['', 'ka', 'kha', 'ga', 'gha', 'Ga', 'ca', 'cha', 'ja', 'jha', 'Ja', 'Ta', 'Tha', 'Da', 'Dha', 'Na', 'ta', 'tha', 'da', 'dha', 'na', 'pa', 'pha', 'ba', 'bha', 'ma', 'ya', 'ra', 'la', 'va', 'za', 'Sa', 'sa', 'ha', 'La', 'Za', 'r2a', 'n2a', 'qa', 'qha', 'g2a', 'z2a', 'r3a', 'r3ha', 'fa', 'Ya'].map(x => x.replace('a', ''))
+
     }
   },
   mounted: function () {
     var vowels = ['', 'a', 'A', 'i', 'I', 'u', 'U', 'R', 'RR', 'lR', 'lRR', 'e', 'ai', 'o', 'au', 'E', 'O', 'aE', 'AE', 'aO', 'aM', 'aH', 'a~', 'oM']
     var vowelsIAST = ['', 'a', 'ā', 'i', 'ī', 'u', 'ū', 'ṛ', 'ṝ', 'ḷ', 'ḹ', 'e', 'ai', 'o', 'au', 'ĕ', 'ŏ', 'æ', 'ǣ', 'ô', 'aṃ', 'aḥ', 'am̐', 'oṃ']
 
-    var cons = ['', 'ka', 'kha', 'ga', 'gha', 'Ga', 'ca', 'cha', 'ja', 'jha', 'Ja', 'Ta', 'Tha', 'Da', 'Dha', 'Na', 'ta', 'tha', 'da', 'dha', 'na', 'pa', 'pha', 'ba', 'bha', 'ma', 'ya', 'ra', 'la', 'va', 'za', 'Sa', 'sa', 'ha', 'La', 'Za', 'r2a', 'n2a', 'qa', 'qha', 'g2a', 'z2a', 'r3a', 'r3ha', 'fa', 'Ya'].map(x => x.replace('a', ''))
-
-    var consIAST = ['', 'ka', 'kha', 'ga', 'gha', 'ṅa', 'ca', 'cha', 'ja', 'jha', 'ña', 'ṭa', 'ṭha', 'ḍa', 'ḍha', 'ṇa', 'ta', 'tha', 'da', 'dha', 'na', 'pa', 'pha', 'ba', 'bha', 'ma', 'ya', 'ra', 'la', 'va', 'śa', 'ṣa', 'sa', 'ha', 'l̤a', 'ḻa', 'ṟa', 'ṉa', 'qa', 'k͟ha', 'ġa', 'za', 'r̤a', 'r̤ha', 'fa', 'ẏa'].map(x => x.replace('a', ''))
-
     vowels.forEach(function (vowel, index) {
       this.letteroptionsV.push({label: vowelsIAST[index], value: vowelsIAST[index]})
     }.bind(this))
 
-    cons.forEach(function (con, index) {
-      this.letteroptionsC.push({label: consIAST[index], value: consIAST[index]})
+    this.cons.forEach(function (con, index) {
+      this.letteroptionsC.push({label: this.consIAST[index], value: this.consIAST[index]})
+    }.bind(this))
+
+    this.consSemitic.forEach(function (con, index) {
+      this.letteroptionsCSemitic.push({label: this.consSemitic[index], value: this.consSemitic[index]})
     }.bind(this))
 
     //  Update this with each script
-    this.chars1 = {'Ahom': '𑜒', 'Ariyaka': 'a', 'Assamese': 'অ', 'Avestan': '𐬀', 'Balinese': 'ᬅ', 'BatakKaro': 'ᯀ', 'BatakManda': 'ᯀ', 'BatakPakpak': 'ᯀ', 'BatakSima': 'ᯁ', 'BatakToba': 'ᯀ', 'Bengali': 'অ', 'Bhaiksuki': '𑰀', 'Brahmi': '𑀅', 'Buginese': 'ᨕ', 'Buhid': 'ᝀ', 'Burmese': 'အ', 'Chakma': '𑄃𑄧', 'Cham': 'ꨀ', 'Devanagari': 'अ', 'Dogra': '𑠀', 'Grantha': '𑌅', 'GranthaPandya': 'അ', 'Gujarati': 'અ', 'GunjalaGondi': '𑵠', 'Gurmukhi': 'ਅ', 'HanifiRohingya': '𐴀𐴝', 'Hanunoo': 'ᜠ', 'Javanese': 'ꦄ', 'Kaithi': '𑂃', 'Kannada': 'ಅ', 'KhamtiShan': 'ဢ', 'Kharoshthi': '𐨀', 'Khmer': 'អ', 'Khojki': '𑈀', 'KhomThai': 'อ', 'Khudawadi': '𑊰', 'KhuenTham': 'ᩋ', 'Lao': 'ອະ', 'LaoPali': 'ອ', 'LaoTham': 'ᩋ', 'Lepcha': 'ᰣ', 'Limbu': 'ᤀ', 'LueTham': 'ᩋ', 'Mahajani': '𑅐', 'Malayalam': 'അ', 'Marchen': '𑲏', 'MasaramGondi': '𑴀', 'MeeteiMayek': 'ꯑ', 'Modi': '𑘀', 'Mon': 'အ', 'Mongolian': 'ᠠ᠋', 'Mro': '𖩒', 'Multani': '𑊀', 'Newa': '𑐀', 'OldPersian': '𐎠', 'Oriya': 'ଅ', 'PhagsPa': 'ꡝ', 'Ranjana': 'अ', 'Rejang': 'ꥆ', 'Santali': 'ᱚ', 'Saurashtra': 'ꢂ', 'Shan': 'ဢ', 'Sharada': '𑆃', 'Siddham': '𑖀', 'Sinhala': 'අ', 'SoraSompeng': '𑃦𑃨', 'Soyombo': '𑩐', 'Sundanese': 'ᮃ', 'SylotiNagri': 'ꠅ', 'Tagalog': 'ᜀ', 'Tagbanwa': 'ᝠ', 'TaiLaing': 'အ', 'TaiTham': 'ᩋ', 'Takri': '𑚀', 'Tamil': 'அ', 'TamilBrahmi': '𑀅', 'TamilExtended': 'അ', 'Telugu': 'అ', 'Thaana': 'އަ', 'Thai': 'อ', 'Tibetan': 'ཨ', 'Tirhuta': '𑒁', 'Urdu': 'اَ', 'Vatteluttu': 'அ', 'Wancho': '𞋁', 'WarangCiti': '𑣁', 'ZanabazarSquare': '𑨀', 'Hebrew': 'אַ', 'Hiragana': 'あ', 'Katakana': 'ア', 'Kawi': 'ꦄ', 'Pallava': 'ꦄ', 'Nandinagari': '𑦠', 'Makasar': '𑻱'}
+    this.chars1 = {'Ahom': '𑜒', 'Ariyaka': 'a', 'Assamese': 'অ', 'Avestan': '𐬀', 'Balinese': 'ᬅ', 'BatakKaro': 'ᯀ', 'BatakManda': 'ᯀ', 'BatakPakpak': 'ᯀ', 'BatakSima': 'ᯁ', 'BatakToba': 'ᯀ', 'Bengali': 'অ', 'Bhaiksuki': '𑰀', 'Brahmi': '𑀅', 'Buginese': 'ᨕ', 'Buhid': 'ᝀ', 'Burmese': 'အ', 'Chakma': '𑄃𑄧', 'Cham': 'ꨀ', 'Devanagari': 'अ', 'Dogra': '𑠀', 'Grantha': '𑌅', 'GranthaPandya': 'അ', 'Gujarati': 'અ', 'GunjalaGondi': '𑵠', 'Gurmukhi': 'ਅ', 'HanifiRohingya': '𐴀𐴝', 'Hanunoo': 'ᜠ', 'Javanese': 'ꦄ', 'Kaithi': '𑂃', 'Kannada': 'ಅ', 'KhamtiShan': 'ဢ', 'Kharoshthi': '𐨀', 'Khmer': 'អ', 'Khojki': '𑈀', 'KhomThai': 'อ', 'Khudawadi': '𑊰', 'KhuenTham': 'ᩋ', 'Lao': 'ອະ', 'LaoPali': 'ອ', 'LaoTham': 'ᩋ', 'Lepcha': 'ᰣ', 'Limbu': 'ᤀ', 'LueTham': 'ᩋ', 'Mahajani': '𑅐', 'Malayalam': 'അ', 'Marchen': '𑲏', 'MasaramGondi': '𑴀', 'MeeteiMayek': 'ꯑ', 'Modi': '𑘀', 'Mon': 'အ', 'Mongolian': 'ᠠ᠋', 'Mro': '𖩒', 'Multani': '𑊀', 'Newa': '𑐀', 'OldPersian': '𐎠', 'Oriya': 'ଅ', 'PhagsPa': 'ꡝ', 'Ranjana': 'अ', 'Rejang': 'ꥆ', 'Santali': 'ᱚ', 'Saurashtra': 'ꢂ', 'Shan': 'ဢ', 'Sharada': '𑆃', 'Siddham': '𑖀', 'Sinhala': 'අ', 'SoraSompeng': '𑃦𑃨', 'Soyombo': '𑩐', 'Sundanese': 'ᮃ', 'SylotiNagri': 'ꠅ', 'Tagalog': 'ᜀ', 'Tagbanwa': 'ᝠ', 'TaiLaing': 'အ', 'TaiTham': 'ᩋ', 'Takri': '𑚀', 'Tamil': 'அ', 'TamilBrahmi': '𑀅', 'TamilExtended': 'അ', 'Telugu': 'అ', 'Thaana': 'އަ', 'Thai': 'อ', 'Tibetan': 'ཨ', 'Tirhuta': '𑒁', 'Urdu': 'اَ', 'Vatteluttu': 'அ', 'Wancho': '𞋁', 'WarangCiti': '𑣁', 'ZanabazarSquare': '𑨀', 'Hebrew': 'אַ', 'Hiragana': 'あ', 'Katakana': 'ア', 'Kawi': 'ꦄ', 'Pallava': 'ꦄ', 'Nandinagari': '𑦠', 'Makasar': '𑻱', 'Arab': 'ا', 'Armi': '𐡀', 'Elym': '𐿠', 'Ethi': 'አ', 'Hatr': '𐣠', 'Mani': '𐫀', 'Narb': '𐪑', 'Nbat': '𐢁', 'Palm': '𐡠', 'Phli': '𐭠', 'Phlp': '𐮀', 'Phnx': '𐤀', 'Prti': '𐭀', 'Samr': 'ࠀ', 'Sarb': '𐩱', 'Shahmukhi': 'اَ', 'Sogd': '𐼰', 'Sogo': '𐼀', 'Syrc': 'ܐ', 'Ugar': '𐎀'}
 
-    this.charsIr = {'Ahom': 'a', 'Ariyaka': 'a', 'Assamese': 'a', 'Avestan': 'a', 'Balinese': 'a', 'BatakKaro': 'a', 'BatakManda': 'a', 'BatakPakpak': 'a', 'BatakSima': 'a', 'BatakToba': 'a', 'Bengali': 'a', 'Bhaiksuki': 'a', 'Brahmi': 'a', 'Buginese': 'a', 'Buhid': 'a', 'Burmese': 'a', 'Chakma': 'a', 'Cham': 'a', 'Devanagari': 'a', 'Dogra': 'a', 'Grantha': 'a', 'GranthaPandya': 'a', 'Gujarati': 'a', 'GunjalaGondi': 'a', 'Gurmukhi': 'a', 'HanifiRohingya': 'a', 'Hanunoo': 'a', 'Javanese': 'a', 'Kaithi': 'a', 'Kannada': 'a', 'KhamtiShan': 'a', 'Kharoshthi': 'a', 'Khmer': 'a', 'Khojki': 'a', 'KhomThai': 'a', 'Khudawadi': 'a', 'KhuenTham': 'a', 'Lao': 'a', 'LaoPali': 'a', 'LaoTham': 'a', 'Lepcha': 'a', 'Limbu': 'a', 'LueTham': 'a', 'Mahajani': 'a', 'Malayalam': 'a', 'Marchen': 'a', 'MasaramGondi': 'a', 'MeeteiMayek': 'a', 'Modi': 'a', 'Mon': 'a', 'Mongolian': 'a', 'Mro': 'a', 'Multani': 'a', 'Newa': 'a', 'OldPersian': 'a', 'Oriya': 'a', 'PhagsPa': 'a', 'Ranjana': 'a', 'Rejang': 'a', 'Santali': 'a', 'Saurashtra': 'a', 'Shan': 'a', 'Sharada': 'a', 'Siddham': 'a', 'Sinhala': 'a', 'SoraSompeng': 'a', 'Soyombo': 'a', 'Sundanese': 'a', 'SylotiNagri': 'a', 'Tagalog': 'a', 'Tagbanwa': 'a', 'TaiLaing': 'a', 'TaiTham': 'a', 'Takri': 'a', 'Tamil': 'a', 'TamilBrahmi': 'a', 'TamilExtended': 'a', 'Telugu': 'a', 'Thaana': 'a', 'Thai': 'a', 'Tibetan': 'a', 'Tirhuta': 'a', 'Urdu': 'a', 'Vatteluttu': 'a', 'Wancho': 'a', 'WarangCiti': 'a', 'ZanabazarSquare': 'a', 'Hebrew': 'a', 'Hiragana': 'a', 'Katakana': 'a', 'Kawi': 'a', 'Pallava': 'a', 'Nandinagari': 'a', 'Makasar': 'a'}
-    // this.getLetters()
+    this.charsIr = {'Ahom': 'a', 'Ariyaka': 'a', 'Assamese': 'a', 'Avestan': 'a', 'Balinese': 'a', 'BatakKaro': 'a', 'BatakManda': 'a', 'BatakPakpak': 'a', 'BatakSima': 'a', 'BatakToba': 'a', 'Bengali': 'a', 'Bhaiksuki': 'a', 'Brahmi': 'a', 'Buginese': 'a', 'Buhid': 'a', 'Burmese': 'a', 'Chakma': 'a', 'Cham': 'a', 'Devanagari': 'a', 'Dogra': 'a', 'Grantha': 'a', 'GranthaPandya': 'a', 'Gujarati': 'a', 'GunjalaGondi': 'a', 'Gurmukhi': 'a', 'HanifiRohingya': 'a', 'Hanunoo': 'a', 'Javanese': 'a', 'Kaithi': 'a', 'Kannada': 'a', 'KhamtiShan': 'a', 'Kharoshthi': 'a', 'Khmer': 'a', 'Khojki': 'a', 'KhomThai': 'a', 'Khudawadi': 'a', 'KhuenTham': 'a', 'Lao': 'a', 'LaoPali': 'a', 'LaoTham': 'a', 'Lepcha': 'a', 'Limbu': 'a', 'LueTham': 'a', 'Mahajani': 'a', 'Malayalam': 'a', 'Marchen': 'a', 'MasaramGondi': 'a', 'MeeteiMayek': 'a', 'Modi': 'a', 'Mon': 'a', 'Mongolian': 'a', 'Mro': 'a', 'Multani': 'a', 'Newa': 'a', 'OldPersian': 'a', 'Oriya': 'a', 'PhagsPa': 'a', 'Ranjana': 'a', 'Rejang': 'a', 'Santali': 'a', 'Saurashtra': 'a', 'Shan': 'a', 'Sharada': 'a', 'Siddham': 'a', 'Sinhala': 'a', 'SoraSompeng': 'a', 'Soyombo': 'a', 'Sundanese': 'a', 'SylotiNagri': 'a', 'Tagalog': 'a', 'Tagbanwa': 'a', 'TaiLaing': 'a', 'TaiTham': 'a', 'Takri': 'a', 'Tamil': 'a', 'TamilBrahmi': 'a', 'TamilExtended': 'a', 'Telugu': 'a', 'Thaana': 'a', 'Thai': 'a', 'Tibetan': 'a', 'Tirhuta': 'a', 'Urdu': 'a', 'Vatteluttu': 'a', 'Wancho': 'a', 'WarangCiti': 'a', 'ZanabazarSquare': 'a', 'Hebrew': 'a', 'Hiragana': 'a', 'Katakana': 'a', 'Kawi': 'a', 'Pallava': 'a', 'Nandinagari': 'a', 'Makasar': 'a', 'Arab': 'a', 'Armi': 'a', 'Elym': 'a', 'Ethi': 'a', 'Hatr': 'a', 'Mani': 'a', 'Narb': 'a', 'Nbat': 'a', 'Palm': 'a', 'Phli': 'a', 'Phlp': 'a', 'Phnx': 'a', 'Prti': 'a', 'Samr': 'a', 'Sarb': 'a', 'Shahmukhi': 'a', 'Sogd': 'a', 'Sogo': 'a', 'Syrc': 'a', 'Ugar': 'a'}// this.getLetters()
 
     // console.log(this.letteroptionsC)
     // console.log(this.letteroptionsV)
@@ -291,12 +316,27 @@ export default {
       } else if (this.activeButton === 'geographical') {
         this.geographical()
       }
+    },
+    typeCategory: function (newV, oldV) {
+      console.log(!this.consSemitic.includes(this.charsC))
+      if (newV === 'Semitic' && (this.charsC === '' || !this.consSemitic.includes(this.charsC))) {
+        this.charsC = 'ʾ'
+      }
+      console.log(this.charsC)
+      if (newV === 'Indic' && (this.charsC === '' || !this.cons.includes(this.charsC))) {
+        this.charsC = ''
+      }
+      this.getLetters()
     }
   },
   computed: {
     chars: function () {
       if (this.type === 'explorecard') {
-        return this.charsC + this.charsV
+        if (this.typeCategory === 'Indic') {
+          return this.charsC + this.charsV
+        } else {
+          return this.charsC
+        }
       } else {
         if (this.$q.platform.is.mobile) {
           return this.mobiledisp
@@ -349,9 +389,12 @@ export default {
     }
   },
   methods: {
+    getDescribelink: function (scriptValue) {
+      return !this.scriptSemiticList.includes(scriptValue) ? '/describe/' + scriptValue : '/describesemitic/' + scriptValue
+    },
     regionalScripts: function () {
       var scriptsCategorized = {}
-      var filteredScriptsIndicAll = this.filterScripts(this.scriptsIndic)
+      var filteredScriptsIndicAll = this.filterScripts(this.scriptsIndic.concat(this.scriptsSemitic))
 
       this.regions.forEach(function (region) {
         scriptsCategorized[region] = []
@@ -366,7 +409,7 @@ export default {
     },
     linguisticScripts: function () {
       var scriptsCategorized = {}
-      var filteredScriptsIndicAll = this.filterScripts(this.scriptsIndic)
+      var filteredScriptsIndicAll = this.filterScripts(this.scriptsIndic.concat(this.scriptsSemitic))
 
       this.languages.forEach(function (language) {
         scriptsCategorized[language] = []
@@ -381,7 +424,8 @@ export default {
     },
     alphabeticScripts: function () {
       var scriptsCategorized = {}
-      var filteredScriptsIndicAll = this.filterScripts(this.scriptsIndic)
+      var filteredScriptsIndicAll = this.filterScripts(this.scriptsIndic.concat(this.scriptsSemitic))
+      console.log(filteredScriptsIndicAll)
 
       this.alphabet.forEach(function (letter) {
         scriptsCategorized[letter] = []
@@ -395,7 +439,7 @@ export default {
     },
     statusScripts: function () {
       var scriptsCategorized = {}
-      var filteredScriptsIndicAll = this.filterScripts(this.scriptsIndic)
+      var filteredScriptsIndicAll = this.filterScripts(this.scriptsIndic.concat(this.scriptsSemitic))
 
       this.status.forEach(function (state) {
         scriptsCategorized[state] = []
@@ -409,7 +453,7 @@ export default {
     },
     derivedScripts: function () {
       var scriptsCategorized = {}
-      var filteredScriptsIndicAll = this.filterScripts(this.scriptsIndic)
+      var filteredScriptsIndicAll = this.filterScripts(this.scriptsIndic.concat(this.scriptsSemitic))
 
       this.derivation.forEach(function (state) {
         scriptsCategorized[state] = []
@@ -483,7 +527,8 @@ export default {
       this.activeButton = 'geographical'
     },
     displayAll: function () {
-      this.scriptsCategorized = {'All': this.scriptsIndic}
+      this.scriptsCategorized = {'All': this.scriptsIndic.concat(this.scriptsSemitic)}
+      console.log(this.scriptsCategorized)
       this.activeButton = 'all'
     },
     openlink: function (link) {
@@ -506,14 +551,20 @@ export default {
 
       if (this.type === 'explorecard') {
         preserveSource = true
-        script2 = 'IAST'
+        if (this.typeCategory === 'Indic') {
+          script2 = 'IAST'
+        } else {
+          script2 = 'Latn'
+        }
       } else {
         preserveSource = this.sourcePreserve
         script2 = this.script2
       }
 
+      console.log(script2)
+
       // this.chars2 = await this.convertAsync(this.script2, 'HK', JSON.stringify(this.chars), false, [], [])
-      var scriptsV = this.scriptsIndic.map(x => x.value)
+      var scriptsV = this.scriptsIndic.concat(this.scriptsSemitic).map(x => x.value)
 
       var chars1 = await this.convertLoopTgtAsync(script2, scriptsV, JSON.stringify(this.chars), preserveSource, ['RemoveDiacritics'], [])
       for (var script in chars1) {

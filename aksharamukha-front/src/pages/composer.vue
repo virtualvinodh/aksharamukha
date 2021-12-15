@@ -1,6 +1,7 @@
 <template>
   <!-- Fix Urdu ai and au -->
   <q-page class="q-pa-md" id="scrollstart">
+    <converter-menu highlight="composer"></converter-menu>
     <div class="row">
       <div class="row col-xs-12 col-md-11 col-xl-5 q-ma-md float-div print-hide">
        <div class="row">
@@ -189,6 +190,8 @@ import OutputOptions from '../components/OutputOptions'
 import InputNotice from '../components/InputNotice'
 import OutputNotice from '../components/OutputNotice'
 import OutputButtons from '../components/OutputButtons'
+import ConverterMenu from '../components/ConverterMenu'
+
 import scrollTo from 'vue-scrollto'
 import { ScriptMixin } from '../mixins/ScriptMixin'
 
@@ -223,7 +226,8 @@ export default {
     QTabs,
     QTab,
     QTabPane,
-    QRouteTab
+    QRouteTab,
+    ConverterMenu
   },
   data () {
     return {

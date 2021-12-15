@@ -11,9 +11,9 @@
    mode="out-in"
     >
     <q-card-main align="left" :key="text1"  :style="{zoom: zoomfactor, 'margin-top': !hidetitle ? '' : '5px'}" @click.native="clicked">
-      <span class="text-red-4" v-if="approx && highapprox"><font size="5"><span :class="script1.toLowerCase()">{{text1}}</span></font></span>
+      <div class="text-red-4" v-if="approx && highapprox"><font size="5"><div :class="script1.toLowerCase()">{{text1}}</div></font></div>
       <div class="text-grey-6" v-if="approx && highapprox"> <br/> {{text2}} </div>
-      <span v-else><font size="5"><span :class="script1.toLowerCase()">{{text1}}</span></font></span>
+      <div v-else><font size="5"><div :class="script1.toLowerCase()">{{text1}}</div></font></div>
     </q-card-main>
       </transition>
   </q-card>

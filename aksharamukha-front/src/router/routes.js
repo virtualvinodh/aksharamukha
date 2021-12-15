@@ -90,6 +90,14 @@ export default [
   },
 
   {
+    path: '/describesemitic/:script',
+    component: () => import('layouts/default'),
+    children: [
+      { path: '', component: () => import('pages/describesemitic') }
+    ]
+  },
+
+  {
     path: '/website',
     component: () => import('layouts/default'),
     children: [
@@ -126,6 +134,14 @@ export default [
     component: () => import('layouts/default'),
     children: [
       { path: '', component: () => import('pages/scriptmatrix') }
+    ]
+  },
+
+  {
+    path: '/semitic-matrix',
+    component: () => import('layouts/default'),
+    children: [
+      { path: '', component: () => import('pages/semitic-matrix') }
     ]
   },
 
