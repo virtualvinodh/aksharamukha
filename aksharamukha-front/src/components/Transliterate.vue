@@ -75,6 +75,7 @@ export default {
       this.apiCall.post('/convert', data)
         .then(function (response) {
           // console.log(response.data)
+          dhis.convertText = response.data
           // dhis.convertText = response.data.replaceAll('\uE001', '<br/>').replaceAll('\uE009', '<br>').replaceAll('\uE002', '<h5>').replaceAll('\uE003', '</h5>').replaceAll('\uE004', '<div>').replaceAll('\uE005', '</div>').replaceAll('\uE008', '<hr/>').replaceAll('\uE00A', '<b>').replaceAll('\uE00B', '</b>')
           dhis.loading = false
           if (typeof dhis.postOptions !== 'undefined' && dhis.postOptions.includes('siddhamap')) {

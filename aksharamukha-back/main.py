@@ -23,6 +23,8 @@ def main_site():
 
 @app.route('/api/autodetect', methods=['POST', 'GET'])
 def auto_detect_request():
+    #print('The source is ' + auto_detect(request.json['text']))
+
     return auto_detect(request.json['text'])
 
 @app.route('/api/detectpre', methods=['POST', 'GET'])
@@ -220,7 +222,7 @@ def syllabary_list():
         syllabary_guide = json.loads(syllabary_guide.replace('،', ',').replace('、', ','))
     elif script2 == 'Hebrew':
         syllabary_guide = convert(script1, script2, syllabary, False,['shvanakhall'],[])
-        print(syllabary_guide)
+        #print(syllabary_guide)
         syllabary_guide = json.loads(syllabary_guide.replace('،', ',').replace('、', ','))
     else:
         syllabary_guide = convert(script1, script2, syllabary, False,[],[])
