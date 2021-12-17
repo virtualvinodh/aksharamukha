@@ -480,6 +480,9 @@ export const ScriptMixin = {
           { label: 'Use tilde for nasalization<br/><small>kāṃ gām̐ → kā̃ gā̃</smal', value: 'NasalTilde' },
           { label: 'ē/ō → e/o', value: 'noLongEO' }
         ],
+        'Itrans': [
+          { label: 'Readable Itrans<br/><small>gR^ihalakShmI → gRRihalaxmii</small>', value: 'readableItrans' }
+        ],
         'RomanReadable': [
           { label: 'Alternate long/short e/o <br/><small>e\' e o\' o → e ae o oa</small>', value: 'RomanReadableLongEO' },
           { label: 'Capitalize sentences', value: 'capitalizeSentence' }
