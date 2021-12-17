@@ -42,6 +42,9 @@
             postOptions.includes('oldtamilortho') ">You can use the <a href="https://www.fontsc.com/font/lohit-tamil-classical">Lohit Tamil Classical</a> font to represent the old orthography for Tamil</div>
       <div class="notice q-ma-sm" v-show="(String(convertText).includes('॒') || String(convertText).includes('᳚') ||
             String(convertText).includes('॑')) && vedicScripts.includes(outputScript)">This text uses Vedic notational marks. Without an appropriate font, the text would not be rendered properly. Look into the individual <router-link :to="'/describe/' + outputScript">script</router-link> page for a working font.</div>
+
+      <div class="notice q-ma-sm" v-show="(String(convertText).includes('𑇌') || String(convertText).includes('𑇋'))">This text uses custom notations to display Kashmiri vowels. The text is best displayed using the Satisar Sharada font.</div>
+
       <div class="notice q-ma-sm" v-show="(String(inputText).includes('॒') || String(inputText).includes('᳚') ||
             String(inputText).includes('॑')) && !vedicScripts.includes(outputScript)">The input text contains combining Vedic accent marks. These have been replaced with a readable notation.</div>
       <div class="notice q-ma-sm" v-show="inputScript === 'Tamil' && outputScript === 'IPA'">The results displayed have been obtained from <a href="http://anunaadam.appspot.com" target="_blank">Anunaadam</a>. Use the tool for further options.</div>
@@ -49,7 +52,7 @@
       <div class="notice q-ma-sm" v-show="scriptSemiticList.includes(inputScript) && scriptLatinList.includes(outputScript) &&
       outputScript !== 'Latn'">You're converting from a consonantal Abjad to an Indic romanization scheme. This may result in inclusion of 'a' with every consonant. Please choose Roman (Semitic) to view the appropiate romanization.</div>
       <div class="notice q-ma-sm" v-show="scriptIndicList.includes(inputScript) && scriptLatinList.includes(outputScript) && inputScript !== 'Hebrew'">You're converting from a vocalized script to a consonantal Abjad. Short vowels will be removed and long vowels will be shown as <i>Mater Lectionis</i>.</div>
-      <div class="notice q-ma-sm" v-show="scriptSemiticList.includes(inputScript) && scriptIndicList.includes(outputScript)">You're converting from a consonantal Abjad to a vocalized script. The consonantal skeleton will be padded with an inherent 'a' to aid readability.</div>
+      <div class="notice q-ma-sm" v-show="scriptSemiticList.includes(inputScript) && scriptIndicList.includes(outputScript) && outputScript !== 'Hebrew'">You're converting from a consonantal Abjad to a vocalized script. The consonantal skeleton will be padded with an inherent 'a' to aid readability.</div>
   </span>
 </template>
 

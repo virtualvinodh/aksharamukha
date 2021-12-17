@@ -415,7 +415,10 @@ def describe_list_semitic():
     for lat, char in semitic_json['ssub']['Latn'][script1].items():
         charsScript1.append(char)
         ### add 1R as well
-        charsScript2.append(transliterate.process('Latn', script2, lat))
+        if script2 != 'Latn':
+            charsScript2.append(transliterate.process('Latn', script2, lat))
+        else:
+            charsScript2.append(lat)
         charsScript2R.append(transliterate.process(script2, script1, transliterate.process(script1, script2, char)))
         charsLatn.append(lat)
 

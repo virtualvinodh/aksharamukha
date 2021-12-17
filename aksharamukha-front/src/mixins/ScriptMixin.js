@@ -73,7 +73,8 @@ export const ScriptMixin = {
         'Kannada': 'khaṇḍam → <span class="kannada">ಖಣ್ಡಮ್</span> not <span class="kannada">ಖಂಡಂ</span> <br/> kæpôḍ → <span class="kannada">ಕೆʼಪಾʼಡ್</span> not <span class="telugu">ಕೆಪಾಡ್</span>',
         'Devanagari': 'san̆dahan → <span class="devanagari">सँˆदहन्</span> not <span class="devanagari">सँदहन्</span>',
         'Sinhala': 'kôṭ hām̐ → <span class="sinhala">කාʼට් හූංʼ</span> not <span class="sinhala">කාට් හූං</span>',
-        'Hebrew': 'svāhā → <span class="sinhala">סְוָהָ</span> not <span class="sinhala">סְבָהָה</span>'
+        'Hebrew': 'svāhā → <span class="sinhala">סְוָהָ</span> not <span class="sinhala">סְבָהָה</span>',
+        'Nandinagari': 'saṅgha → <span class="nandinagari">𑧍𑦲𑧠𑦱</span> not <span class="nandinagari">𑧍𑧞𑦱</span>'
 
       },
       preserveSourceExampleIn: {
@@ -143,8 +144,10 @@ export const ScriptMixin = {
           { label: 'Sanskrit/Pali orthography text<br/><small><span class="sinhala">e.g. නමො භගවතෙ</span></small>', value: 'SinhalaPali' }
         ],
         'Malayalam': [
-          { label: 'Show Chillus <br/><small><div class="malayalam">ധർമൻ</span> → /dharˍmanˍ/ not /dharman/</div></small>', value: 'ShowChillus' },
-          { label: 'Prakrit orthography text<br/><small><div> e.g. <span class="malayalamold">ബുംധഀ</span></div></small>', value: 'MalayalamPrakrit' }
+          { label: 'Show Chillus <br/><small><span class="malayalam">ധർമൻ</span> → <span class="iast">/dharˍmanˍ/ not /dharman/</span></small>', value: 'ShowChillus' },
+          { label: 'Prakrit orthography text<br/><small><div>e.g.<span class="malayalam">ബുംധഀ</span></div></small>', value: 'MalayalamPrakrit' },
+          { label: 'Transcribe <i>Samvrutokara</i> (extra-short-u)<br/><small><div> e.g. <span class="malayalam">അവൻ അവന്</span>‌ → <span class="iast">avan avanŭ</span></div></small>', value: 'MalayalamHalfu' },
+          { label: 'Transcribe Malayalam<div><small> e.g. <span class="malayalam"> കൊടുങ്കാട്</span> → kŏḍuṅgāḍŭ</div></small>', value: 'MalayalamTranscribe' }
         ],
         'Siddham': [
           { label: 'Devanagari-based Siddham font', value: 'siddhammukta' }
@@ -157,6 +160,22 @@ export const ScriptMixin = {
         ],
         'Arab': [
           { label: 'Transliterate /ج/ as /j/', value: 'ArabicGimelJa' }
+        ],
+        'Sogd': [
+          { label: 'Disambiguate <span class="sogd">𐽀</span> (Resh-Ayin) as [r-ʿ]', value: 'SogdReshAyin' }
+        ],
+        'Sogo': [
+          { label: 'Disambiguate <span class="sogo">𐼘</span> (Resh-Ayin-Daleth) as [r-ʿ-d]', value: 'SogoReshAyinDaleth' }
+        ],
+        'Phlp': [
+          { label: 'Disambiguate <span class="phlp">𐮋</span> (Mem-Quoph) as [m-q]', value: 'PhlpMemQoph' },
+          { label: 'Disambiguate <span class="phlp">𐮅</span> (Waw-Ayin-Resh) as [w-ʿ-r]', value: 'PhlpWawAyinResh' }
+        ],
+        'Phli': [
+          { label: 'Disambiguate <span class="phli">𐭥</span> (Waw-Ayin-Resh) as [w-ʿ-r]', value: 'PhliWawAyinResh' }
+        ],
+        'Hatr': [
+          { label: 'Disambiguate <span class="hatr">𐣣</span> (Daleth-Resh) as [d-r]', value: 'HatrDalethResh' }
         ],
         'Shahmukhi': [
           { label: 'Short vowels not shown', value: 'UrduShortNotShown' }
@@ -237,6 +256,10 @@ export const ScriptMixin = {
         'Hiragana': [
           { label: 'Vertical text', value: 'verticalKana' },
           { label: '/v/ → /b/ <br/<small>ゔぃのお → びの</small>', value: 'vtobJapanese' }
+        ],
+        'Arab': [
+          { label: 'پ /p/ → /f/ ف', value: 'arabPaFa' },
+          { label: 'چ /č/ → /s/ س', value: 'arabChaSa' }
         ],
         'Katakana': [
           { label: 'Vertical text', value: 'verticalKana' },
@@ -494,6 +517,12 @@ export const ScriptMixin = {
           { label: 'Contextual ya/ra/la/va & Repha<br/><small><span class="zanabazarsquare">𑨋𑩇𑨪 𑨋𑩇𑨫 𑨋𑩇𑨬 𑨋𑩇𑨭 𑨫𑩇𑨋 → 𑨋𑨻 𑨋𑨼 𑨋𑨽 𑨋𑨾 𑨺𑨋</span></small>', value: 'ZanabazarSquareContextual' },
           { label: 'Alternate ai/au<br/><small><span class="zanabazarsquare">𑨀𑨄𑨊 𑨀𑨆𑨊 → 𑨀𑨇 𑨀𑨈</span></small>', value: 'ZanabazarSquareAiAu' },
           { label: 'Mongolian final-mark<br/><small><span class="zanabazarsquare">𑨀𑨋𑨴 → 𑨀𑨋𑨳</span></small>', value: 'ZanabazarSquareMongolianFinal' }
+        ],
+        'Sogd': [
+          { label: 'Use <span class="sogd">𐽀</span> <i>(Resh-Ayin)</i> for Ayin', value: 'SogdReshAyin' }
+        ],
+        'Sogo': [
+          { label: 'Use <span class="sogo">𐼘</span> <i>(Resh-Ayin-Dalesh)</i> for Ayin', value: 'SogoReshAyinDaleth' }
         ]
       },
       autodetect: [
