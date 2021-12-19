@@ -159,7 +159,7 @@ export const ScriptMixin = {
           { label: 'Short vowels not shown', value: 'UrduShortNotShown' }
         ],
         'Arab': [
-          { label: 'Transliterate /ج/ as /j/', value: 'ArabicGimelJa' }
+          // { label: 'Transliterate /ج/ as /j/', value: 'ArabicGimelJa' }
         ],
         'Sogd': [
           { label: 'Disambiguate <span class="sogd">𐽀</span> (Resh-Ayin) as [r-ʿ]', value: 'SogdReshAyin' }
@@ -256,10 +256,6 @@ export const ScriptMixin = {
         'Hiragana': [
           { label: 'Vertical text', value: 'verticalKana' },
           { label: '/v/ → /b/ <br/<small>ゔぃのお → びの</small>', value: 'vtobJapanese' }
-        ],
-        'Arab': [
-          { label: 'پ /p/ → /f/ ف', value: 'arabPaFa' },
-          { label: 'چ /č/ → /s/ س', value: 'arabChaSa' }
         ],
         'Katakana': [
           { label: 'Vertical text', value: 'verticalKana' },
@@ -526,6 +522,12 @@ export const ScriptMixin = {
         ],
         'Sogo': [
           { label: 'Use <span class="sogo">𐼘</span> <i>(Resh-Ayin-Dalesh)</i> for Ayin', value: 'SogoReshAyinDaleth' }
+        ],
+        'Hebr-Ar': [
+          { label: '<span class="">עׄ</span> ← <span class="">ג</span>', value: 'gainGimel' },
+          { label: '<span class="">ת</span> ← <span class="">ת̈</span>', value: 'tavTwodot' },
+          { label: '<span class="">תׄ</span> ← <span class="">ת֒</span>', value: 'tavThreedot' },
+          { label: '<span class="">ק</span> ← <span class="">ק̈</span>', value: 'qafTwodot' }
         ]
       },
       autodetect: [
@@ -2105,6 +2107,22 @@ export const ScriptMixin = {
       ],
       scriptsSemitic: [
         {
+          label: 'Hebrew (Judeo-Arabic)',
+          value: 'Hebr-Ar',
+          sscode: 'Hebr',
+          ssdesc: 'The Hebrew script is primarily used for writing the Hebrew, Samaritan and Yiddish languages. It is also used for writing some varieties of Arabic spoken in North Africa, Iraq and Yemen; the languages of the Jewish communities in Italy and Corfu, Morocco (Berber), Spain and the Caucasus mountains; and the modern Jewish Aramaic languages. Prior to 500 BC the Hebrew language was written in the Paleo-Hebrew script, which was abandoned after the Jewish exile in the 5th century BC in favour of the Aramaic script, from which the current Hebrew script descended. It is commonly called the Hebrew alphabet, after its first two letters aleph and bet, although it is actually an abjad.',
+          omnicode: 'hebrew',
+          wikicode: 'Hebrew_alphabet',
+          font: {
+            'name': 'Noto Serif Hebrew',
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/hinted/ttf/NotoSerifHebrew/NotoSerifHebrew-Regular.ttf'
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Aramaic'],
+          region: ['West Asian']
+        },
+        {
           label: 'Ugaritic',
           value: 'Ugar',
           sscode: 'Ugar',
@@ -2431,6 +2449,24 @@ export const ScriptMixin = {
           ssdesc: 'Arabic writing is the second most broadly-used script in the world, after the Latin alphabet. It descended from the Nabataean abjad, itself a descendant of the Phoenician script, and has been used since the 4th century for writing the Arabic language. Since the words of the Prophet Muhammed can only be written in Arabic, the Arabic script has traveled far and wide with the spread of Islam and came to be used for a number of languages throughout Asia, Africa and the Middle East.',
           wikicode: 'Arabic_script',
           omnicode: 'arabic',
+          font: {
+            'name': '',
+            'url': ''
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Aramaic'],
+          region: ['West Asian']
+        },
+
+        {
+          label: 'Persian',
+          value: 'Arab-Fa',
+          sscode: '',
+          miscsrc: '(From Wikipedia)',
+          miscdesc: 'The Persian alphabet (Persian: الفبای فارسی‎, romanized: Alefbā-ye Fārsi) is a writing system used for the Persian language spoken in Iran (Western Persian) and Afghanistan (Dari Persian) since the 7th century after Muslim conquest of Persia. The Persian script is directly derived and developed from the Arabic script. After the Muslim conquest of Persia and the fall of the Sasanian Empire in the 7th century, Arabic became the language of government and especially religion in Persia for two centuries.',
+          wikicode: 'Persian_alphabet',
+          omnicode: 'persian',
           font: {
             'name': '',
             'url': ''

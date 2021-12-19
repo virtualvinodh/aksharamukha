@@ -53,6 +53,14 @@ export default [
   },
 
   {
+    path: '/composer-mp',
+    component: () => import('layouts/default-mp'),
+    children: [
+      { path: '', component: () => import('pages/composer-mp') }
+    ]
+  },
+
+  {
     path: '/documentation',
     component: () => import('layouts/default'),
     children: [

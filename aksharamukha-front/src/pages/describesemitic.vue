@@ -28,11 +28,11 @@
       </div>
 <br/><br/>
   <div class="row">
-    <div v-for="(char, index) in script1Chars" :key="char+index" class="col-xs-2 col-lg-1 q-mb-lg">
+    <div v-for="(char, index) in script1Chars" :key="char+index" class="col-xs-2 col-lg-1 q-mb-lg letter">
       <span :class="script1.toLowerCase()"> {{char}} </span> <br/><br/>
       <span :class="checkDiacritics(char) ? 'text-blue-4' : ''">
         <span :class="script2.toLowerCase()">
-          <span class="letter iast text-grey-7" :class="script1Chars[index] !== script2RChars[index] ? 'text-red-2' : ''"> {{script2Chars[index]}} <br/><br/>
+          <span class="letter iast" :class="script1Chars[index] !== script2RChars[index] ? 'text-red-2' : 'text-grey-7'"> {{script2Chars[index]}} <br/><br/>
           </span>
         </span>
       </span>
@@ -92,6 +92,9 @@
 <style scoped>
 h4 {
   margin-top: -20px;
+}
+.letter {
+  font-size: 25px;
 }
 </style>
 

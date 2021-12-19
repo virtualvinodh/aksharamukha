@@ -417,9 +417,11 @@ def describe_list_semitic():
         ### add 1R as well
         if script2 != 'Latn':
             charsScript2.append(transliterate.process('Latn', script2, lat))
+            charsScript2R.append(transliterate.process(script2, script1, transliterate.process('Latn', script2, lat)))
         else:
             charsScript2.append(lat)
-        charsScript2R.append(transliterate.process(script2, script1, transliterate.process(script1, script2, char)))
+            charsScript2R.append(transliterate.process("Latn", script1, lat))
+
         charsLatn.append(lat)
 
     results['script1'] =  charsScript1

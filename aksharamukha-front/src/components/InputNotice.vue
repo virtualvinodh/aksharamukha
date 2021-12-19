@@ -2,7 +2,7 @@
   <span>
       <div class="notice q-ma-sm" v-show="indicSubset.includes(inputScript)">Currently, only the cognate 'Indic' subset of the script is supported for conversion</div>
       <div class="notice q-ma-sm" v-show="inputScript === 'Urdu'">Urdu is an abjad. Please read the script <router-link to="/describe/Urdu">notes</router-link> to read about Urdu reading conventions.</div>
-      <div class="notice q-ma-sm" v-show="inputScript === 'Arab'">Please note that only the core Semitic characters are supported as of now. Any vowel diacrictics (Harakat) and other marks, if present, are removed during conversion.</div>
+      <div class="notice q-ma-sm" v-show="inputScript === 'Arab' || inputScript === 'Arab-Fa' || inputScript === 'Hebr-Ar'">Please note that only the core Semitic characters are supported as of now. Any vowel diacrictics (Harakat) and other marks, if present, are removed during conversion.</div>
       <div class="notice q-ma-sm" v-show="inputScript === 'Syrc'">Please note that only the core Semitic characters are supported as of now. Any vowel diacrictics and other marks, if present, are removed during conversion.</div>
       <div class="notice q-ma-sm" v-show="inputScript === 'Hebrew' && scriptSemiticList.includes(outputScript)">Please note that only the core Semitic characters are supported as of now. Any vowel diacrictics, if present, are removed during conversion.</div>
       <div class="notice q-ma-sm" v-show="inputScript === 'RussianCyrillic'">Only the subset of characters used to transliterate Indic scripts is supported for conversion</div>
