@@ -5,7 +5,7 @@
         <controls-plug v-model="options" :minimizeO="true" :key="updateMenu"> </controls-plug>
       </q-page-sticky>
     </div>
-      <transliterate :text="text" :src="name !== 'udhr' ? 'Devanagari' : 'Syrc'" :tgt="options.script" :sourcePreserve="options.sourcePreserve" :postOptions="options.postOptions">
+      <transliterate :text="text" :src="name !== 'udhr' ? 'Devanagari' : 'Syrn'" :tgt="options.script" :sourcePreserve="options.sourcePreserve" :postOptions="options.postOptions">
       </transliterate>
       <span class = "demo"></span>
   </q-page>

@@ -1,7 +1,8 @@
 <template>
   <!-- Fix Urdu ai and au -->
   <q-page class="q-pa-md" id="scrollstart">
-    <h5 id="scrollup">Manipravala Editor: <transliterate src="HK" :tgt="sanskritScript" text="maNipravALa pada"></transliterate><transliterate src="HK" :tgt="tamilScript" text="ccEyali"></transliterate></h5>
+    <h5 id="scrollup"><transliterate src="HK" :tgt="sanskritScript" text="maNi"></transliterate><transliterate src="HK" :tgt="tamilScript" text="ppavaZam" :postOptions="['TeluguTamilZha']"></transliterate>: <transliterate src="HK" :tgt="sanskritScript" text="maNipravALa  pada"></transliterate><transliterate src="HK" :tgt="tamilScript" text="ccEyali" :postOptions="['TeluguTamilZha']"></transliterate></h5>
+    <h6><span class="iso">Maṇippavaḻam: Manipravāla Editor</span></h6>
 
     <div class="row">
       <div class="row col-xs-12 col-md-11 col-xl-5 q-ma-md float-div print-hide">
@@ -118,14 +119,23 @@
       rows="10"
       :max-height="1500"
       ></q-input>
-    <q-checkbox v-if="tamilScript === 'Telugu'" v-model="transcribeTamil" label="<small>Transcribe Tamil</small><br/><small><span class='tamil'>தங்கள் அடியேன்</span> → <span class='telugu'>తంగళ్ అడియేన్ </span></small>" color="dark" />
+    <q-checkbox v-if="tamilScript === 'Telugu'" v-model="transcribeTamil" label="<small>Transcribe Tamil</small><br/><small><span class='tamil'>தங்கள் அடியேன்</span> → <span class='telugu'>తంగళ్ అడియేన్</span></small>" color="dark" />
+    <q-checkbox v-if="tamilScript === 'Devanagari'" v-model="transcribeTamil" label="<small>Transcribe Tamil</small><br/><small><span class='tamil'>தங்கள் அடியேன்</span> → <span class='telugu'>तङ्गळ् अडियेन्</span></small>" color="dark" />
     <!-- <input-options :inputScript="inputScriptComposer" :outputScript="outputScript[0]" :preOptionsInput="preOptions"
       :postOptions="postOptions" v-model="preOptions" @input="convert" v-if="inputScriptComposer !== 'ISO'"></input-options> -->
     <q-input v-model="split" maxlength="5" float-label="Split input text using" v-if="outputScript1.length > 1 && !ignore1"></q-input>
     <div class="notice q-ma-sm">
     <div class="q-body-1"><i># toggles between Tamil and Sanskrit segments</i></div>
     <div class="q-body-1 q-mt-md text-grey-8">
-      #<transliterate src="HK" :tgt="inputScriptComposer" text="maNipravALa"></transliterate>#<transliterate src="HK" :tgt="inputScriptComposer" text="ttil"></transliterate> #<transliterate src="HK" :tgt="inputScriptComposer" text="zrI vaiSNava grantha"></transliterate>#<transliterate src="HK" :tgt="inputScriptComposer" :text="swapeE('GkaLai EZutuvatu EppaTi')"></transliterate>
+    <div v-if="inputScriptComposer === 'HK'">
+      #maNipravALa#ttil #zrI vaiSNava grantha#GkaLai eZutuvatu eppaTi?
+    </div>
+    <div v-if="inputScriptComposer === 'Itrans'">
+      #maNipravALa#ttil #shrii vaiShNava grantha#~NkaLai ezhutuvatu eppaTi?
+    </div>
+    <div v-if="inputScriptComposer === 'ISO'">
+      #maṇipravāḷa#ttil #śrī vaiṣṇava grantha#ṅkaḷai eḻutuvatu eppaṭi?
+    </div>
   </div>
     </div>
   </div>
@@ -184,11 +194,15 @@
       <span v-if="outputScript1.length <= 1 || this.ignore1">
       <span v-for="(token, index) in tokensNew" :key="index" v-if="token.type !== 'param' || token.type !== 'paramin'">
         <span v-if="typeof outputScript1[0] !== 'undefined'">
-        <transliterate :text="normalizeTamil(token.value)" :src="chooseInput(token)" :tgt="!ignore1 ? outputScript1[0] : ''" :sourcePreserve="choosePS(token)" :postOptions="postOptionsScriptComposer[outputScript1[0]]" v-if="token.type=='primary' && tamilScript !== 'Telugu'"  :preOptions="preOptions">
+        <transliterate :text="normalizeTamil(token.value)" :src="chooseInput(token)" :tgt="!ignore1 ? outputScript1[0] : ''" :sourcePreserve="choosePS(token)" :postOptions="postOptionsScriptComposer[outputScript1[0]]" v-if="token.type=='primary' && tamilScript !== 'Telugu' && tamilScript !== 'Devanagari'" :preOptions="preOptions">
         </transliterate>
         <transliterate-tamil :text="normalizeTamil(token.value)" :src="chooseInput(token)" :tgt="!ignore1 ? outputScript1[0] : ''" :sourcePreserve="choosePS(token)" :postOptions="postOptionsScriptComposer[outputScript1[0]]" v-if="token.type=='primary' && tamilScript === 'Telugu' && transcribeTamil"  :preOptions="preOptions">
         </transliterate-tamil>
         <transliterate :text="normalizeTamil(token.value)" :src="chooseInput(token)" :tgt="!ignore1 ? outputScript1[0] : ''" :sourcePreserve="choosePS(token)" :postOptions="postOptionsScriptComposer[outputScript1[0]]" v-if="token.type=='primary' && tamilScript === 'Telugu' && !transcribeTamil"  :preOptions="preOptions">
+        </transliterate>
+        <transliterate-tamil :text="normalizeTamil(token.value)" :src="chooseInput(token)" :tgt="!ignore1 ? outputScript1[0] : ''" :sourcePreserve="choosePS(token)"  v-if="token.type=='primary' && tamilScript === 'Devanagari' && transcribeTamil"  :preOptions="preOptions" :postOptions="['DevanagariAnusvara']">
+        </transliterate-tamil>
+        <transliterate :text="normalizeTamil(token.value)" :src="chooseInput(token)" :tgt="!ignore1 ? outputScript1[0] : ''" :sourcePreserve="choosePS(token)" :postOptions="postOptionsScriptComposer[outputScript1[0]]" v-if="token.type=='primary' && tamilScript === 'Devanagari' && !transcribeTamil"  :preOptions="preOptions">
         </transliterate>
         </span>
         <span v-else>
@@ -324,22 +338,25 @@ export default {
       beta: true,
       model: [],
       scrolled: false,
-      inputScriptComposer: 'Aksharaa',
+      inputScriptComposer: 'HK',
       inputScript: [],
       tamilScripts: [
         {label: 'Tamil', value: 'Tamil'},
-        {label: 'Telugu', value: 'Telugu'}
+        {label: 'Telugu', value: 'Telugu'},
+        {label: 'Devanagari', value: 'Devanagari'},
+        {label: 'ISO', value: 'ISO'}
       ],
       tamilScript: 'Tamil',
       sanskritScripts: [
         {label: 'Grantha', value: 'Grantha'},
         {label: 'Tamil (Ext.)', value: 'TamilExtended'},
+        {label: 'Tamil', value: 'Tamil'},
         {label: 'Telugu', value: 'Telugu'},
-        {label: 'Tamil', value: 'Tamil'}
+        {label: 'Devanagari', value: 'Devanagari'},
+        {label: 'IAST', value: 'IAST'}
       ],
       inputScheme: [],
       inputSchemes: [
-        {label: 'Aksharaa', value: 'Aksharaa'},
         {label: 'HK', value: 'HK'},
         {label: 'Itrans', value: 'Itrans'},
         {label: 'ISO/IAST', value: 'ISO'}
@@ -348,7 +365,7 @@ export default {
       outputScript: [],
       outputScript1: ['Tamil'],
       postOptions: [],
-      preOptions: [],
+      preOptions: ['swapEe'],
       sourcePreserveComposer: true,
       options: {},
       convertText: '',
@@ -457,7 +474,7 @@ export default {
         txt = txt.replaceAll('e', 'E').replaceAll('o', 'O')
       }
       if (this.inputScriptComposer === 'Aksharaa') {
-        txt = txt.replaceAll('e', 'ee').replaceAll('o', 'oo')
+        txt = txt.replaceAll('ee', 'X').replaceAll('oo', 'Y').replaceAll('e', 'ee').replaceAll('e', 'oo').replaceAll('X', 'ee').replaceAll('Y', 'oo')
       }
       if (this.inputScriptComposer === 'Itrans') {
         txt = txt.replaceAll('^e', 'E').replaceAll('^o', 'O').replaceAll('e', 'E').replaceAll('o', 'O')
@@ -917,6 +934,10 @@ export default {
 h5 {
   margin-bottom: 0px;
   margin-top: 10px;
+}
+h6 {
+  margin-bottom: 10px;
+  margin-top: 5px;
 }
 .notice {
   color: gray;

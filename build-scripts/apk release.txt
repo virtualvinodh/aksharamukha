@@ -4,3 +4,33 @@ And then: cordova build --release android
 ##  plugins
 cordova plugin add cordova-plugin-x-socialsharing
 cordova plugin add cordova-plugin-splashscreen
+cordova plugin add save-image-gallery
+
+## solving save as image
+
+Add these to Android manifest:
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.DELETE_CACHE_FILES" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+
+Also add this:
+
+Also maintain this:
+      <preference name="android-targetSdkVersion" value="29" /> :: as 29
+
+android:requestLegacyExternalStorage="true"
+
+to the application tag
+
+https://stackoverflow.com/questions/66793666/ionic-base64togallery-plugin-not-working-in-android-targetsdkversion-29
+
+##   Create a build.json at src-cordova to sign the APK with the key details
+if signing doesn't work, create build.json to sign the apk by cordova
+
+##
+
+Add this to build.json to generate the bundle
+            "packageType": "bundle",

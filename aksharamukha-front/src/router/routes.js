@@ -209,6 +209,14 @@ export default [
     ]
   },
 
+  {
+    path: '/input-embed/:script',
+    component: () => import('layouts/default-mp'),
+    children: [
+      { path: '', component: () => import('pages/IME') }
+    ]
+  },
+
   { // Always leave this as last one
     path: '*',
     redirect: '/converter'

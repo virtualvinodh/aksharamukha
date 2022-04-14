@@ -52,8 +52,7 @@
           <q-item-side icon="translate"/>
           <q-item-main label="Converter"/>
         </q-item>
-        <!--
-        <q-item to="/composer">
+        <!-- <q-item to="/composer">
           <q-item-side icon="language" />
           <q-item-main label="Composer (Multiple scripts)"/>
         </q-item>
@@ -72,7 +71,7 @@
         </q-collapsible>
         <hr/>
 
-        <q-collapsible icon="edit" label="Scripts" >
+        <!-- <q-collapsible icon="edit" label="Scripts" >
             <q-item to="/roman">
               <q-item-main label="Roman Transliteration Schemes"/>
             </q-item>
@@ -81,14 +80,14 @@
             v-for="script in scriptAboutList" :key="script.value">
               <q-item-main :label="script.label"/>
             </q-item>
-        </q-collapsible>
+        </q-collapsible> -->
         <q-item to="/explore">
           <q-item-side icon="navigation" />
-            <q-item-main label="Script Explorer"/>
+            <q-item-main label="Scripts Info"/>
           </q-item>
         <q-item to="/script-matrix">
           <q-item-side icon="table chart" />
-            <q-item-main label="Script Matrix"/>
+            <q-item-main label="Indic Matrix"/>
           </q-item>
         <q-item to="/semitic-matrix">
           <q-item-side icon="table chart" />

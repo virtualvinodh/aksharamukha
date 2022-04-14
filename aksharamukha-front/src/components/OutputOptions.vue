@@ -15,6 +15,26 @@
         color="dark"
         type="checkbox"
         inline
+        class="q-ml-sm q-mb-sm q-mt-sm print-hide"
+        v-model="postOptions"
+        @input="convert"
+        :options="typeof postOptionsIndic[outputScript] !== 'undefined' ? postOptionsIndic[outputScript] : []"
+        v-show="typeof postOptionsIndic[outputScript] !== 'undefined' && scriptIndicList.includes(inputScript)"
+      />
+      <q-option-group
+        color="dark"
+        type="checkbox"
+        inline
+        class="q-ml-sm q-mb-sm q-mt-sm print-hide"
+        v-model="postOptions"
+        @input="convert"
+        :options="typeof postOptionsSemitic[outputScript] !== 'undefined' ? postOptionsSemitic[outputScript] : []"
+        v-show="typeof postOptionsSemitic[outputScript] !== 'undefined' && scriptSemiticListAll.includes(inputScript)"
+      />
+      <q-option-group
+        color="dark"
+        type="checkbox"
+        inline
         class="q-ml-sm q-mb-sm print-hide"
         v-model="postOptions"
         @input="convert"

@@ -13,10 +13,12 @@
         {{script1}} (Phonetic)
       </div>
     <div v-for="(char, index) in chars1['script2']" :key="char+index" :class="'col-xs-2 col-lg-1 q-mt-md ' + script1.toLowerCase()" v-if="index >= from && index <=to">
-          <span :class="{'letter': true, 'text-red-2': chars1['script2R'][index] !== chars2[index]}"> {{char}} </span>
+          <span :class="{'letter': true, 'text-red-2': chars1['script2R'][index] !== chars2[index]}">
+            {{char}}
+          </span>
     </div>
   </div>
-    <div class="row q-ma-md">
+    <div class="row q-ma-md" v-if="!hidegen">
       <div class="col-xs-2 col-lg-1 q-mr-xl q-mt-md">
         {{script1}} (Genealogical)
       </div>
@@ -34,7 +36,7 @@
       <div v-for="(char, index) in chars1[script.value]" :key="char+index" class="col-xs-2 col-lg-1 q-mb-lg" v-if="index >= from && index <=to">
           <span :class="script.value.toLowerCase()">
           <span :class="{'letter': true, 'text-red-2': chars1[script.value+'R'][index] !== chars2[index]}">
-            {{chars1[script.value][index]}}
+           <span :class="checkDiacriticsSemitic(char) ? 'text-blue-4' : ''">  {{chars1[script.value][index]}} </span>
           </span> </span>
       </div>
     </div>
@@ -48,7 +50,7 @@ import {ScriptMixin} from '../mixins/ScriptMixin'
 
 export default {
   // name: 'ComponentName',
-  props: ['chars', 'chars1', 'chars2', 'charsIr', 'script2', 'filterscripts', 'script1', 'from', 'to'],
+  props: ['chars', 'chars1', 'chars2', 'charsIr', 'script2', 'filterscripts', 'script1', 'from', 'to', 'hidegen'],
   mixins: [ScriptMixin],
   created: function () {
     this.compoundsGen()

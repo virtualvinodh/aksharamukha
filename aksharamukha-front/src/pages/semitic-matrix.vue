@@ -32,22 +32,57 @@
         </q-chip>
       </q-btn>
 </div>
-<div v-if="!$q.platform.is.mobile">
-        <list-char-all-semitic :chars="results['Latn']" :script1="script2" script2="Roman (Semitic)"
-        :chars2 = "results['Latn']" :chars1="results" :charsIr="results" :from="indexs[0]" :to="indexs[1]"
-        :filterscripts="scriptsManual"
-        v-for="indexs in Array(5).fill().map((element, index) => [(8 * index), (index * 8) + 7])" :key="indexs+'v'"
-        >
-        </list-char-all-semitic>
-</div>
-<div v-if="$q.platform.is.mobile">
-        <list-char-all-semitic :chars="results['Latn']" :script1="'Devanagari'" script2="Roman (Semitic)"
-        :chars2 = "results['Latn']" :chars1="results" :charsIr="results" :from="indexs[0]" :to="indexs[1]"
-        :filterscripts="scriptsManual"
-        v-for="indexs in Array(10).fill().map((element, index) => [(4 * index), (index * 4) + 3])" :key="indexs+'v'"
-        >
-        </list-char-all-semitic>
-</div>
+  <q-tabs color="tertiary" inverted two-lines position="top">
+    <!-- Tabs - notice slot="title" -->
+
+      <q-tab default slot="title" name="tab-1" label="Core" class="print-hide"/>
+      <q-tab slot="title" name="tab-2" label="Additional" class="print-hide"/>
+      <q-tab slot="title" name="tab-3" label="Init. Vowels" class="print-hide"/>
+      <q-tab slot="title" name="tab-4" label="Vowel Signs" class="print-hide"/>
+  <q-tab-pane name="tab-1" keep-alive>
+            <list-char-all-semitic :chars="results['core']['Latn']" :script1="script2" script2="Roman (Semitic)"
+            :chars2 = "results['core']['Latn']" :chars1="results['core']" :charsIr="results['core']"
+            :from="(i-1)*chunkSize"
+            :to="i == parseInt(results['core']['Latn'].length/chunkSize) + 1 ? results['core']['Latn'].length : i*chunkSize - 1"
+            :filterscripts="scriptsManual"
+            v-for="i in parseInt(results['core']['Latn'].length/chunkSize)+1" :key="i"
+            >
+            </list-char-all-semitic>
+  </q-tab-pane>
+  <q-tab-pane name="tab-2" keep-alive>
+            <list-char-all-semitic :chars="results['adds']['Latn']" :script1="script2" script2="Roman (Semitic)"
+            :chars2 = "results['adds']['Latn']" :chars1="results['adds']" :charsIr="results['adds']"
+            :from="(i-1)*chunkSize"
+            :to="i == parseInt(results['adds']['Latn'].length/chunkSize) + 1 ? results['adds']['Latn'].length : i*chunkSize - 1"
+            :filterscripts="scriptsManual"
+            v-for="i in parseInt(results['adds']['Latn'].length/chunkSize)+1" :key="i"
+            :hidegen="true"
+            >
+            </list-char-all-semitic>
+  </q-tab-pane>
+ <q-tab-pane name="tab-3" keep-alive>
+            <list-char-all-semitic :chars="results['initvows']['Latn']" :script1="script2" script2="Roman (Semitic)"
+            :chars2 = "results['initvows']['Latn']" :chars1="results['initvows']" :charsIr="results['initvows']"
+            :from="(i-1)*chunkSize"
+            :to="i == parseInt(results['initvows']['Latn'].length/chunkSize) + 1 ? results['initvows']['Latn'].length : i*chunkSize - 1"
+            :filterscripts="scriptsManual"
+            v-for="i in parseInt(results['initvows']['Latn'].length/chunkSize)+1" :key="i"
+            :hidegen="true"
+            >
+            </list-char-all-semitic>
+  </q-tab-pane>
+   <q-tab-pane name="tab-4" keep-alive>
+            <list-char-all-semitic :chars="results['vows']['Latn']" :script1="script2" script2="Roman (Semitic)"
+            :chars2 = "results['vows']['Latn']" :chars1="results['vows']" :charsIr="results['vows']"
+            :from="(i-1)*chunkSize"
+            :to="i == parseInt(results['vows']['Latn'].length/chunkSize) + 1 ? results['vows']['Latn'].length : i*chunkSize - 1"
+            :filterscripts="scriptsManual"
+            v-for="i in parseInt(results['vows']['Latn'].length/chunkSize)+1" :key="i"
+            :hidegen="true"
+            >
+            </list-char-all-semitic>
+  </q-tab-pane>
+  </q-tabs>
 <div class="q-body-1">Look into script pages for specific notes. General comments regarding the mapping are listed here. <br/><br/>
 The mapping has been done on a purely etymological/historical basis. Though most Semitic scripts have retained the core 22 consonants of the original Phoenician alphabet, the actual pronunciation of the letters have diverged over time (or have been adapted to suit the phonetics of the adapted langauge). For instance, the Arabic equivalent of Phoenician Gimel is ج. However, the instead of the original /g/, it now represents /j/ in many Arabic dialects. Similarly, the Phoenician Ṣādē corresponds to the Hebrew Tzade /צ/ representing /ts/ in Modern Hebrew. This must be kept in mind during transliteraion. When a letter is absent from a particular script, the closest letter is used instead.
       <br/><br/>
@@ -103,8 +138,10 @@ export default {
       options: {script: 'Devanagari', sourcePreserve: false},
       dash: _,
       loading: true,
+      chunkSize: this.$q.platform.is.mobile ? 3 : 8,
+      chunkCons: this.$q.platform.is.mobile ? 3 : 5,
       script2: 'Devanagari',
-      results: {'vinodh': ''},
+      results: {'core': ''},
       scriptsManual: ''
     }
   },

@@ -26,11 +26,26 @@
       <span class="text-red-2"> X</span> : Approximate equivalent <br/>
       <span class="text-blue-4"> Y</span> : Equivalent with diacritic <br/>
       </div>
+      <div v-if="getScriptObject(script1).value === 'Hebr'">
+        Click here to view the <a href="/describe/Hebrew">Indic mapping</a>.
+      </div>
+      <div v-if="getScriptObject(script1).value === 'Thaa'">
+        Click here to view the <a href="/describe/Thaana">Indic mapping</a>.
+      </div>
+      <div v-if="getScriptObject(script1).value === 'Arab-Ur'">
+        Click here to view the <a href="/describe/Urdu">Indic mapping</a>.
+      </div>
+      <div v-if="getScriptObject(script1).value === 'Arab-Pa'">
+        Click here to view the <a href="/describe/Shahmukhi">Indic mapping</a>.
+      </div>
 <br/><br/>
   <div class="row">
     <div v-for="(char, index) in script1Chars" :key="char+index" class="col-xs-2 col-lg-1 q-mb-lg letter">
-      <span :class="script1.toLowerCase()"> {{char}} </span> <br/><br/>
-      <span :class="checkDiacritics(char) ? 'text-blue-4' : ''">
+      <span :class="script1.toLowerCase()">
+        <span :class="script2Chars[index] !== script1RChars[index] ? 'text-red-2' : 'text-grey-7'">
+        <span :class="checkDiacriticsSemitic(char) ? 'text-blue-4' : ''">{{char}}</span> </span>
+      </span> <br/><br/>
+      <span>
         <span :class="script2.toLowerCase()">
           <span class="letter iast" :class="script1Chars[index] !== script2RChars[index] ? 'text-red-2' : 'text-grey-7'"> {{script2Chars[index]}} <br/><br/>
           </span>
@@ -67,7 +82,7 @@
       <div :class="script1.toLowerCase()"><transliterate :text="quoteHe" src="Hebr" :tgt="script1" :sourcePreserve="false" :postOptions="[]">
       </transliterate></div><br/><br/>
       <h5> Sanskrit Text </h5>
-      <div :class="script2.toLowerCase()"><transliterate :text="quoteSa" src="HK" :tgt="script2" :sourcePreserve="true" :postOptions="[]">
+      <div :class="script2.toLowerCase()"><transliterate :text="quoteSa" src="HK" :tgt="'IAST'" :sourcePreserve="true" :postOptions="[]">
       </transliterate> </div><br/>
        <div :class="script1.toLowerCase()"><transliterate :text="quoteSa" src="HK" :tgt="script1" :sourcePreserve="false" :postOptions="[]">
       </transliterate></div>
@@ -147,6 +162,7 @@ export default {
       quotePho: '𐤀𐤍𐤊 𐤕𐤁𐤍𐤕 𐤊𐤄𐤍 𐤏𐤔𐤕𐤓𐤕 𐤌𐤋𐤊 𐤑𐤃𐤍𐤌 𐤁𐤍 𐤀𐤔𐤌𐤍𐤏𐤆𐤓 𐤊𐤄𐤍 𐤏𐤔𐤕𐤓𐤕 𐤌𐤋𐤊 𐤑𐤃𐤍𐤌 𐤔𐤊𐤁 𐤁𐤀𐤓𐤍 𐤆 𐤌𐤉 𐤀𐤕 𐤊𐤋 𐤀𐤃𐤌 𐤀𐤔 𐤕𐤐𐤒 𐤀𐤉𐤕 𐤄𐤀𐤓𐤍 𐤆 𐤀𐤋 𐤀𐤋 𐤕𐤐𐤕𐤇 𐤏𐤋𐤕𐤉 𐤅𐤀𐤋 𐤕𐤓𐤂𐤆𐤍 𐤊 𐤀𐤉 𐤀𐤓𐤋𐤍 𐤊𐤎𐤐 𐤀𐤉 𐤀𐤓 𐤋𐤍 𐤇𐤓𐤑 𐤅𐤊𐤋 𐤌𐤍𐤌 𐤌𐤔𐤃 𐤁𐤋𐤕 𐤀𐤍𐤊 𐤔𐤊𐤁 𐤁𐤀𐤓𐤍 𐤆 𐤀𐤋 𐤀𐤋 𐤕𐤐𐤕𐤇 𐤏𐤋𐤕𐤉 𐤅𐤀𐤋 𐤕𐤓𐤂𐤆𐤍 𐤊 𐤕𐤏𐤁𐤕 𐤏𐤔𐤕𐤓𐤕 𐤄𐤃𐤁𐤓 𐤄𐤀 𐤅𐤀𐤌 𐤐𐤕𐤇 𐤕𐤐𐤕𐤇 𐤏𐤋𐤕𐤉 𐤅𐤓𐤂𐤆 𐤕𐤓𐤂𐤆𐤍 𐤀𐤋 𐤉𐤊𐤍 𐤋𐤊 𐤆𐤓𐤏 𐤁𐤇𐤉𐤌 𐤕𐤇𐤕 𐤔𐤌𐤔 𐤅𐤌𐤔𐤊𐤁 𐤀𐤕 𐤓𐤐𐤀𐤌',
       quoteHe: `שנן י פתיתו עביד זי מראן פרידארש מלכא קשיטא מהקשט   מן אדין זעיר מרעא לכלהם אנשן וכלהם אדושיא הובד  ובכל ארקא ראם שתי ואף זי זנה כמאכלא למראן מלכא זעיר  קטלן זנה למחזה כלהם אנשן אתהחסינן אזי נוניא אחדן  אלך אנשן פתיזבת כנם זי פרבסת הוין אלך אתהחסינן מן  פרבסתי והופתיסתי לאמוהי ולאבוהי ולמזישתיא אנסן  איך אסרהי חלקותא ולא איתי דינא לכלהם אנשיא חסין  זנה הותיר לכלהם אנשן ואוסף יהותר`,
       script1Chars: [],
+      script1RChars: [],
       script2Chars: [],
       script2RChars: [],
       scriptLatnChars: [],
@@ -157,8 +173,7 @@ export default {
         'Shahmukhi': `گوتم بدھ، سدھارتھ گوتم، ساکیہ منی یا صرف بدھ اتلے ھندستان دا اک روحانی بندہ سی جینے بدھ مت دی نیو رکھی۔ بدھ لوک اوہنوں اپنے ویلے دا بدھا کیندے نیں۔ اودا ناں سدہارتھ گوتم سی۔ اونوں شاکیہ منی وی کیا جاندا اے۔ سدہارتھ ۵۶۳ ق م چ نیپال دے اک نکے دیس کپل وستو دی نگری لمبنی چ جمیا۔ اودے پیو دا ناں راجہ سدودھنا سی تے ماں دا ناں مایادیوی سی۔ کیا جاندا اے اودھے جمن تے ای اودھی ماں مر گئی سی۔ سیانے لوکاں نیں اونوں ویکھ کے آکھیا سی کہ گوتم یاں تے بہت وڈا راجا بنے گا یا بڑا نیک انسان۔ گوتم نے ٹھاٹھ آلا جیون گزاریا اودھے پیو نے اونھوں مزہبی پڑھائی دے نیڑے نا جان دتا گوتم نوں اودھی ماسی نے پالیا۔`
       },
       notes: {
-        'Arab': 'Please note that only the core Semitic characters are supported as of now. Any vowel diacrictics (<i>Harakat</i>) and other marks, if present, are removed during conversion.',
-        'Syrc': 'Please note that only the core Semitic characters are supported as of now. Any vowel diacrictics and other marks, if present, are removed during conversion.'
+        'Arab': 'Though the script is usually an Abjad as noted earlier. It has vocalic diacritical marks that is sometimes used. <br/<br/>. Some Arabic dialectsalso  use the additional letters /ڨ ڤ پ/ to denote the foreign consonants /g v p/ in proper names such places or brands. These letters can be enabled by selecting the <i>Preserve Source</i> option. Else, an etymological approximation to /j f f/ is performed for a Semitic source script and a phonetic approximation to /ġ f b/ for an Indic source script. However, an explicit option can be enabled to use the phonetic mapping instead when converting from a Semitic script.'
       }
     }
   },
@@ -186,8 +201,10 @@ export default {
       var dhis = this
       this.apiCall.post('/describesemitic', data)
         .then(function (response) {
+          console.log(response)
           dhis.loading = false
           dhis.$set(dhis, 'script1Chars', response.data['script1'])
+          dhis.$set(dhis, 'script1RChars', response.data['script1R'])
           dhis.$set(dhis, 'script2Chars', response.data['script2'])
           dhis.$set(dhis, 'script2RChars', response.data['script2R'])
           dhis.$set(dhis, 'scriptLatnChars', response.data['scriptLatn'])

@@ -14,7 +14,7 @@
         </div>
         <div class="q-body-1">Aksharamukha aims to provide script conversion between various scripts. It also specifically provides lossless transliteration between the main Indian scripts (along with Sinhala). Apart from the simple mapping of characters, Aksharamukha also attempts to implement various script/language-specific orthographic conventions (where known) such as vowel lengths, gemination and nasalization. It also provides several customization options to fine-tune and get the desired orthography.</div> <br/>
 
-        <div class="q-body-1"><i>Aksharamukha as of now supports <router-link to="/script-matrix">{{scriptsIndic.length + 2 + scriptsSemitic.length}} scripts</router-link> and <router-link to="/roman">{{scriptsLatin.length - 2}} romanization</router-link> methods.</i> The scripts supported are:</div> <br/>
+        <div class="q-body-1"><i>Aksharamukha as of now supports <router-link to="/script-matrix">{{scriptAboutList.length}} scripts</router-link> and <router-link to="/roman">{{scriptsLatin.length - 2}} romanization</router-link> methods.</i> The scripts supported are:</div> <br/>
 
         <div class="q-body-1"><i><span v-for="script in scriptAboutList" :key="script.value"> <router-link
         :to="!scriptSemiticList.includes(script.value) ? '/describe/' + script.value : '/describesemitic/' + script.value">

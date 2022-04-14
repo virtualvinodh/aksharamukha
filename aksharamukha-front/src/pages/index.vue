@@ -110,8 +110,9 @@
       <div class="q-mt-sm"><output-buttons @fontsizeinc="fontSize += 20" @fontsizedec="fontSize -= 20"
        @printdoc="printDocument" @screenshot="imageConvert(downloadImage.bind(this))" @copytext="copy" :convertText="convertText" :content="downHTML"></output-buttons></div>
       <q-btn icon="share" label="text" class="q-ma-sm" @click="shareCordovaText" v-if="$q.platform.is.cordova"/> <q-btn icon="share" label="image" class="q-ma-sm" @click="imageConvert(shareCordovaImage.bind(this))" v-if="$q.platform.is.cordova" /> <br/>
-      <span v-if="typeof preserveSourceExampleOut[outputScript] !== 'undefined'">
-        <span><q-toggle color="dark" v-model="sourcePreserve" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-md print-hide" @input="convert" /><q-tooltip>Preserve the source as-is and don't change the text to improve readability. May use archaic characters and/or diacritics.</q-tooltip></span>
+      <span v-if="typeof preserveSourceExampleOut[outputScript] !== 'undefined' || scriptSemiticList.includes(inputScript) || ['Urdu', 'Thaana', 'Hebrew', 'Shahmukhi', 'Sindhi'].includes(inputScript)">
+        <span><q-toggle color="dark" v-model="sourcePreserve" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-md print-hide" @input="convert" /><q-tooltip>Preserve the source as-is and don't change the text to improve readability. May use archaic characters and/or diacritics. <br/><br/><div v-if="scriptSemiticList.includes(inputScript) || ['Urdu', 'Thaana', 'Hebrew', 'Shahmukhi', 'Sindhi'].includes(inputScript)">This also preserves the semitic consonants using the nukta (if present in the output script).</div></q-tooltip>
+        </span>
         <small><div class="q-ml-xl print-hide" v-html="preserveSourceExampleOut[outputScript]"></div></small>
       </span>
     <output-options :inputScript="inputScript" :outputScript="outputScript" :postOptionsInput="postOptions"
@@ -548,6 +549,12 @@ export default {
       if (this.inputScript === 'Urdu' || this.inputScript === 'Shahmukhi') {
         this.$set(this, 'preOptions', ['UrduShortNotShown'])
       }
+
+      /* if (this.outputScript === 'Arab' && !this.scriptSemiticSorted.includes(this.inputScript)) {
+        if (!this.postOptions.includes(['arabicRemoveAdditionsPhonetic'])) {
+          this.$set(this, 'postOptions', this.postOptions.concat(['arabicRemoveAdditionsPhonetic']))
+        }
+      } */
 
       if (this.inputScript === 'Oriya' && this.outputScript === 'Bengali') {
         this.$set(this, 'postOptions', ['khandatabatova'])

@@ -47,8 +47,11 @@ export const ScriptMixin = {
       consonantsSinhala: ['n*g', 'n*j', 'n*D', 'n*d', 'm*b'],
       ayogavahasAll: ['~', 'M', 'H'],
       vedicScripts: ['Assamese', 'Bengali', 'Devanagari', 'Gujarati', 'Kannada', 'Malayalam', 'Oriya', 'Gurmukhi', 'Tamil', 'Telugu', 'TamilExtended', 'Grantha'],
+      vocalized: ['Hebr', 'Syrj', 'Syrn', 'Arab-Fa', 'Latn', 'Type', 'Arab', 'Arab-Ur', 'Thaa'],
       preserveSourceExampleOut: {
         'Hiragana': 'hulasi → ほぅら゚すぃ not  ふらし',
+        'Latn': 'Differentiate initial vowels',
+        'Arab': 'g v p → ڨ ڤ پ',
         'Katakana': 'hulasi → ホゥラ゚スィ not  フラシ',
         'WarangCiti': 'akṣaramukha → <span class="warangciti">𑣁𑣌‍𑣝𑣜𑣖𑣃𑣌‍𑣙</span> not <span class="warangciti">𑣁𑣌𑣞𑣜𑣖𑣃𑣌</span>',
         'Modi': 'ki kī ku kū → <span class="modi">𑘎𑘱 𑘎𑘲 𑘎𑘳 𑘎𑘴</span> not <span class="modi">𑘎𑘲 𑘎𑘲 𑘎𑘳 𑘎𑘳</span>',
@@ -78,6 +81,22 @@ export const ScriptMixin = {
 
       },
       preserveSourceExampleIn: {
+      },
+      preOptionsIndic: {
+        'Syrj': [
+          { label: 'Lack of vowel signs as pure consonant <br/> <small> lâylēyn  ←  <span class="syrj">ܠܐܲܝܠܹܝܢ</span>', value: 'insertViramaSyriac' }
+        ],
+        'Syrn': [
+          { label: 'Lack of vowel signs as pure consonant <br/> <small> lâylēyn  ←  <span class="syrn">ܠܐܲܝܠܹܝܢ</span>', value: 'insertViramaSyriac' }
+        ],
+        'Hebrew': [
+          {
+            label: 'Vowels are not marked<br/><small>',
+            value: 'novowelshebrew'
+          }
+        ]
+      },
+      preOptionsSemitic: {
       },
       preOptionsGroup: {
         'Tamil': [
@@ -159,7 +178,11 @@ export const ScriptMixin = {
           { label: 'Short vowels not shown', value: 'UrduShortNotShown' }
         ],
         'Arab': [
-          // { label: 'Transliterate /ج/ as /j/', value: 'ArabicGimelJa' }
+          { label: '/ج/ as /g/', value: 'ArabicGimelJa' },
+          { label: 'Assume /Sukun/ at end of word <br/> <small>ʾl×muḥīṭ ʾl×hin×diy×꞉ ← الْمُحِيط الْهِنْدِيّ', value: 'removeFinalSchwaArab' }
+        ],
+        'Arab-Fa': [
+          { label: 'Assume /Jazm/ at end of word <br/> <small>ʾbut\u033D ←  بُت', value: 'removeFinalSchwaArab' }
         ],
         'Sogd': [
           { label: 'Disambiguate <span class="sogd">𐽀</span> (Resh-Ayin) as [r-ʿ]', value: 'SogdReshAyin' }
@@ -190,10 +213,6 @@ export const ScriptMixin = {
           }
         ],
         'Hebrew': [
-          {
-            label: 'Vowels are not marked<br/><small>',
-            value: 'novowelshebrew'
-          },
           {
             label: 'Treat all shvas as <i>shva nakh</i>',
             value: 'shvanakhall'
@@ -230,20 +249,56 @@ export const ScriptMixin = {
         ],
         'ISOShahmukhi': [
           { label: 'Remove all inherent /a/ <small><br/><span class="urdu">ہندوستان</span> → /hndvstān/ not /hanadavasatāna/', value: 'urduRemoveInherent' }
+        ],
+        'LatnSyrj': [
+          { label: 'Syriac convention <small><br/> v ġ ḫ f → ḇ ḡ ḵ p̄', value: 'syriacRoman' }
+        ],
+        'LatnSyrn': [
+          { label: 'Syriac convention <small><br/> v ġ ḫ f → ḇ ḡ ḵ p̄', value: 'syriacRoman' }
         ]
       },
       postOptionsRadioGroup: {
         'Ranjana': [['ranjanalantsa', 'ranjanawartu']],
         'Siddham': [['UseAlternateI1', 'UseAlternateI2'], ['siddhammukta', 'siddhamap']],
         'PhagsPa': [['PhagsPaTib', 'PhagsPaSeal']],
-        'Syrc': [['estrangelasyriac', 'easternsyriac', 'westernsyriac']],
         'Devanagari': [['devanagariuttara', 'devanagarijain', 'devanagarinepali', 'devanagaribalbodh']],
         'IAST': [['mDotAboveToBelow', 'NasalTilde']],
         'Pallava': [['sundapura', 'kawitan']],
         'Thai': [['ThaiTranscription', 'ThaiSajjhayaOrthography', 'ThaiSajjhayawithA', 'ThaiNativeConsonants']],
         'LaoPali': [['LaoTranscription', 'LaoSajjhaya', 'LaoSajjhayawithA', 'LaoPhonetic']]
       },
+      postOptionsSemitic: {
+        'Arab': [
+          { label: 'Phonetic Mapping <br/><small>/g j p b/ → /غ ج ب ب/ not /ج ج ف ب/</small>', value: 'arabicRemoveAdditionsPhonetic' }
+        ]
+      },
+      postOptionsIndic: {
+        'Arab': [
+          { label: 'أ/a/ to Alif /ا/<br/><small>ا → أ</small>', value: 'ArabAtoAleph' }
+        ]
+      },
       postOptionsGroup: {
+        'Arab': [
+          { label: 'Remove Harakat <br/><small>غَانْدِي ← غاندي</small>', value: 'removeDiacriticsArabic' },
+          { label: 'Remove Sukun at end of words <br/><small>هِنْدْ ← هِنْد</small>', value: 'removeSukunEnd' }
+        ],
+        'Arab-Fa': [
+          { label: 'Remove vowel diacritics <!--<br/><small>غَانْدِي ← غاندي</small> -->', value: 'removeDiacriticsArabic' },
+          { label: 'Remove Jazm at end of words <br/><small>هِنْدْ ← هِنْد</small>', value: 'removeSukunEnd' },
+          { label: '/p g/ پ گ → /f j/ ف ج', value: 'persianPaGaFaJa' }
+        ],
+        'Syrj': [
+          { label: 'Remove Majlīyānā<br/><small><span class="syrj">ܟ ܓ ܙ</span> → <span class="syrj">ܟ̰ ܓ̰ ܙ̰</span></small>', value: 'removeMajliyana' },
+          { label: 'Remove Rūkkāḵā <br/><small><span class="syrj">ܒ</span> → <span class="syrj">ܒ݁</span></small>', value: 'removeRukkaka' },
+          { label: 'Remove Quššāyā <br/><small><span class="syrj">ܒ</span> → <span class="syrj">ܒ݂</span></small>', value: 'removeQussaya' },
+          { label: 'Remove Vowel Diacritics <br/><small><span class="syrj">ܠ ܠ ܠܝ ܠܘ ܠ ܠ ܠܘ</span> → <span class="syrj">ܠܲ ܠܵ ܠܝܼ ܠܘܼ ܠܸ ܠܹ ܠܘܿ</span></small>', value: 'removeVowelsSyriac' }
+        ],
+        'Syrn': [
+          { label: 'Remove Majlīyānā<br/><small><span class="syrn">ܟ ܓ ܙ</span> → <span class="syrn">ܟ̰ ܓ̰ ܙ̰</span></small>', value: 'removeMajliyana' },
+          { label: 'Remove Rūkkāḵā <br/><small><span class="syrn">ܒ</span> → <span class="syrn">ܒ݁</span></small>', value: 'removeRukkaka' },
+          { label: 'Remove Quššāyā <br/><small><span class="syrn">ܒ</span> → <span class="syrn">ܒ݂</span></small>', value: 'removeQussaya' },
+          { label: 'Remove Vowel Diacritics <br/><small><span class="syrn">ܠ ܠ ܠܝ ܠܘ ܠ ܠ ܠܘ</span> → <span class="syrn">ܠܲ ܠܵ ܠܝܼ ܠܘܼ ܠܸ ܠܹ ܠܘܿ</span></small>', value: 'removeVowelsSyriac' }
+        ],
         'Pallava': [
           { label: 'Sundapura font<br/><span class="sundapura">ꦥꦭ꧀ꦭꦮ ꦒ꧀ꦫꦤ꧀', value: 'sundapura' },
           { label: 'Kawitan font<br/><span class="kawitan">ꦥꦭ꧀ꦭꦮ ꦒ꧀ꦫꦤ꧀ꦡ', value: 'kawitan' }
@@ -308,11 +363,15 @@ export const ScriptMixin = {
 
         ],
         'Hebrew': [
+          { label: 'Remove all Niqqud<br/>ב פ כ מ → בּ פּ כּ מֶּ', value: 'removeNikkud' },
           { label: 'Use Qof<br/>כּ ← ק', value: 'HeberewQoph' },
           { label: 'Use Kamats Katan for Short /o/<br/>לֹ ← לׇ', value: 'HebewShortO' }
         ],
         'Nandinagari': [
           { label: 'Use Prishtamatra orthography<br/><small><span class="nandinagari"> 𑦮𑧚 𑦮𑧜 𑦮𑧛 𑦮𑧝 → 𑦮𑧤 𑦮𑧤𑧑 𑦮𑧤𑧚 𑦮𑧤𑧜</span></small>', value: 'NandinagariPrishtamatra' }
+        ],
+        'Latn': [
+          { label: 'ʾ ʿ → ʼ ʽ', value: 'alephAyinLatnAlternate' }
         ],
         'Oriya': [
           { label: 'ଵ instead of ୱ<br/><small>ଭୱତି → ଭଵତି</small>', value: 'OriyaVaAlt' },
@@ -2107,8 +2166,24 @@ export const ScriptMixin = {
       ],
       scriptsSemitic: [
         {
-          label: 'Hebrew (Judeo-Arabic)',
-          value: 'Hebr-Ar',
+          label: 'Thaana (Dhivehi)',
+          value: 'Thaa',
+          sscode: 'Thaa',
+          ssdesc: 'The Thaana script is used for writing the Maldivian language, also known as Dhivehi, spoken by about 370,000 people in the Maldives and in Maldivian communities in India. It is one of the few alphabets in the world which does not have its roots in the Proto-Canaanite script. Rather, the first nine letters are derived from the shapes of the numerals used in Arabic writing, and the next nine from earlier forms of Maldivian letters.',
+          omnicode: 'thaana',
+          wikicode: 'Thaana',
+          font: {
+            'name': '',
+            'url': ''
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Perso-Arabic'],
+          region: ['South Asian: Other']
+        },
+        {
+          label: 'Hebrew',
+          value: 'Hebr',
           sscode: 'Hebr',
           ssdesc: 'The Hebrew script is primarily used for writing the Hebrew, Samaritan and Yiddish languages. It is also used for writing some varieties of Arabic spoken in North Africa, Iraq and Yemen; the languages of the Jewish communities in Italy and Corfu, Morocco (Berber), Spain and the Caucasus mountains; and the modern Jewish Aramaic languages. Prior to 500 BC the Hebrew language was written in the Paleo-Hebrew script, which was abandoned after the Jewish exile in the 5th century BC in favour of the Aramaic script, from which the current Hebrew script descended. It is commonly called the Hebrew alphabet, after its first two letters aleph and bet, although it is actually an abjad.',
           omnicode: 'hebrew',
@@ -2119,6 +2194,56 @@ export const ScriptMixin = {
           },
           language: ['Others'],
           status: ['Living', 'Living: Major'],
+          invented: ['Derived: Aramaic'],
+          region: ['West Asian']
+        },
+        {
+          label: 'Shahmukhi',
+          value: 'Arab-Pa',
+          sscode: '',
+          ssdesc: '',
+          wikicode: 'Shahmukhi_alphabet',
+          wikidesc: 'Shahmukhi (lit.\'from the mouth of the Shah\') is a modified Perso-Arabic alphabet used by Punjabi Muslims (primarily in Punjab, Pakistan) to write the Punjabi language.It is generally written in the Nastaʿlīq calligraphic hand, which is also used for Urdu. Perso-Arabic is one of two scripts used for Punjabi, the other being Gurmukhi, used by Sikhs and Hindus in Punjab, India. It is also used as the main alphabet to write Pahari–Pothwari in Azad Kashmir and Jammu and Kashmir',
+          omnicode: 'punjabi',
+          font: {
+            'name': 'Noto Sans Nastaliq Urdu',
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoNastaliqUrdu/NotoNastaliqUrdu-Regular.otf'
+          },
+          language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Perso-Arabic'],
+          region: ['North Indic', 'Indic']
+        },
+        {
+          label: 'Urdu',
+          value: 'Arab-Ur',
+          sscode: '',
+          ssdesc: '',
+          wikicode: 'Urdu_alphabet',
+          wikidesc: 'The Urdu alphabet is the right-to-left alphabet used for the Urdu language. It is a modification of the Persian alphabet known as Perso-Arabic, which is itself a derivative of the Arabic alphabet. The Urdu alphabet has up to 58 letters. With 39 basic letters and no distinct letter cases, the Urdu alphabet is typically written in the calligraphic Nastaʿlīq script, whereas Arabic is more commonly in the Naskh style.',
+          omnicode: 'urdu',
+          font: {
+            'name': 'Noto Sans Nastaliq Urdu',
+            'url': 'https://github.com/googlefonts/noto-fonts/blob/main/unhinted/otf/NotoNastaliqUrdu/NotoNastaliqUrdu-Regular.otf'
+          },
+          language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
+          status: ['Living', 'Living: Major'],
+          invented: ['Derived: Perso-Arabic'],
+          region: ['North Indic', 'Indic']
+        },
+        {
+          label: 'Hebrew (Judeo-Arabic)',
+          value: 'Hebr-Ar',
+          miscsrc: '(From Omniglot)',
+          miscdesc: 'The Judeo-Arabic script is a version of the Hebrew script used to write the Judeo-Arabic language - a version of Arabic with influences from Hebrew and Aramaic.',
+          omnicode: 'judeo-arabic',
+          wikicode: 'Judeo-Arabic_dialects',
+          font: {
+            'name': '',
+            'url': ''
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
           invented: ['Derived: Aramaic'],
           region: ['West Asian']
         },
@@ -2139,8 +2264,40 @@ export const ScriptMixin = {
           region: ['West Asian']
         },
         {
-          label: 'Syriac',
-          value: 'Syrc',
+          label: 'Syriac (Estrangela)',
+          value: 'Syre',
+          sscode: 'Syrc',
+          ssdesc: 'The Syriac script is attested as early as the year 6 AD. It was primarily used for writing the Syriac language, now extinct outside of the Syrian church. The Assyrian Neo-Aramaic, Chaldean Neo-Aramaic and Turoyo/Surayt languages are descended from Syriac, and are still written in the Syriac script. It can also be used for writing Arabic, known as Garshani writing. There are three ancient variations of the script: the classical liturgical script called Estrangelo, the Western variant, and the Eastern variant.',
+          wikicode: 'Syriac_alphabet',
+          omnicode: 'syriac',
+          font: {
+            'name': 'Noto Sans Syriac',
+            'url': 'https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics//NotoSansSyriac-Regular.otf'
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Aramaic'],
+          region: ['West Asian']
+        },
+        {
+          label: 'Syriac (Western)',
+          value: 'Syrj',
+          sscode: 'Syrc',
+          ssdesc: 'The Syriac script is attested as early as the year 6 AD. It was primarily used for writing the Syriac language, now extinct outside of the Syrian church. The Assyrian Neo-Aramaic, Chaldean Neo-Aramaic and Turoyo/Surayt languages are descended from Syriac, and are still written in the Syriac script. It can also be used for writing Arabic, known as Garshani writing. There are three ancient variations of the script: the classical liturgical script called Estrangelo, the Western variant, and the Eastern variant.',
+          wikicode: 'Syriac_alphabet',
+          omnicode: 'syriac',
+          font: {
+            'name': 'Noto Sans Syriac',
+            'url': 'https://cdn.jsdelivr.net/gh/virtualvinodh/aksharamukha/aksharamukha-front/src/statics//NotoSansSyriac-Regular.otf'
+          },
+          language: ['Others'],
+          status: ['Living', 'Living: Minor'],
+          invented: ['Derived: Aramaic'],
+          region: ['West Asian']
+        },
+        {
+          label: 'Syriac (Eastern)',
+          value: 'Syrn',
           sscode: 'Syrc',
           ssdesc: 'The Syriac script is attested as early as the year 6 AD. It was primarily used for writing the Syriac language, now extinct outside of the Syrian church. The Assyrian Neo-Aramaic, Chaldean Neo-Aramaic and Turoyo/Surayt languages are descended from Syriac, and are still written in the Syriac script. It can also be used for writing Arabic, known as Garshani writing. There are three ancient variations of the script: the classical liturgical script called Estrangelo, the Western variant, and the Eastern variant.',
           wikicode: 'Syriac_alphabet',
@@ -2573,6 +2730,10 @@ export const ScriptMixin = {
           value: 'Latn'
         },
         {
+          label: 'Roman (Semitic Typeable)',
+          value: 'Type'
+        },
+        {
           language: ['Others'],
           status: ['Living', 'Living: Major'],
           invented: ['Derived: Greek'],
@@ -2791,14 +2952,21 @@ export const ScriptMixin = {
     scriptsOutput: function () {
       return this.scripts.filter(function (el) {
         return el.value !== 'GranthaGrantamil'
-      })
+      }).filter(x => !['Hebr', 'Thaa', 'Arab-Ur', 'Arab-Pa'].includes(x.value))
       // return this.scripts.slice(1)
     },
     scriptsInput: function () {
-      return this.autodetect.slice().concat(this.scripts)
+      return this.autodetect.slice().concat(this.scripts).filter(x => !['Hebr', 'Thaa', 'Arab-Ur', 'Arab-Pa'].includes(x.value))
     },
     scripts: function () {
       var scriptAll = this.scriptsIndic.slice().concat(this.scriptsLatin.slice()).concat(this.scriptsSemitic.slice())
+      // console.log(scriptAll)
+      scriptAll.sort(this.compareObjects)
+      return scriptAll.filter(x => !['Hebr', 'Thaa', 'Arab-Ur', 'Arab-Pa'].includes(x.value))
+    },
+    scriptsAll: function () {
+      var scriptAll = this.scriptsIndic.slice().concat(this.scriptsLatin.slice()).concat(this.scriptsSemitic.slice())
+      // console.log(scriptAll)
       scriptAll.sort(this.compareObjects)
       return scriptAll
     },
@@ -2810,19 +2978,15 @@ export const ScriptMixin = {
     },
     scriptSemiticSortedHebr: function () {
       var scriptSemiticSort = this.scriptsSemitic.slice()
-      scriptSemiticSort.push({
-        value: 'Hebr',
-        label: 'Hebrew'
-      })
       scriptSemiticSort.sort(this.compareObjects)
       // console.log(scriptSemiticSort)
       return scriptSemiticSort
     },
     scriptAboutList: function () {
       // console.log(scriptSemiticSort)
-      var scriptList = this.scriptsIndic.concat([{label: 'Cyrillic (Russian)', value: 'RussianCyrillic'}, {label: 'IPA Indic', value: 'IPA'}]).concat(this.scriptsSemitic)
+      var scriptList = this.scriptsIndic.concat(this.scriptsSemitic).concat([this.getScriptObject('RussianCyrillic'), this.getScriptObject('IPA')])
       scriptList.sort(this.compareObjects)
-      return scriptList.filter(x => x.value !== 'Latn')
+      return scriptList.filter(x => x.value !== 'Latn' || x.value !== 'Type').filter(x => !['Hebr', 'Thaa', 'Arab-Ur', 'Arab-Pa'].includes(x.value))
     },
     scriptIndicList: function () {
       return this.scriptsIndic.map(x => x.value)
@@ -2832,6 +2996,9 @@ export const ScriptMixin = {
     },
     scriptSemiticList: function () {
       return this.scriptsSemitic.map(x => x.value)
+    },
+    scriptSemiticListAll: function () {
+      return this.scriptSemiticList.concat(['Latn', 'Type', 'Urdu', 'Thaana', 'Shahmukhi', 'Hebrew'])
     },
     compounds: function () {
       var compounds = []
@@ -2936,8 +3103,10 @@ export const ScriptMixin = {
       return 0
     },
     getScriptObject: function (name) {
-      for (const s of this.scripts) {
+      // console.log('gettingObject')
+      for (const s of this.scriptsAll) {
         if (s.value === name) {
+          // console.log(s)
           return s
         }
       }
@@ -2947,7 +3116,7 @@ export const ScriptMixin = {
       return { label: '', value: '' }
     },
     getScriptObjectLabel: function (label) {
-      for (const s of this.scripts) {
+      for (const s of this.scriptsAll) {
         if (s.label === label) {
           return s
         }
@@ -3151,6 +3320,11 @@ export const ScriptMixin = {
       })
 
       return diac
+    },
+    checkDiacriticsSemitic: function (Strng) {
+      var chars = ['ڤ', 'ڨ', 'پ']
+
+      return chars.includes(Strng)
     },
     convertAsync: function (src, tgt, txt, sourcePreserve, optionsPost, optionsPre) {
       return new Promise(resolve => {

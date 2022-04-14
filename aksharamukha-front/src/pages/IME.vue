@@ -315,6 +315,10 @@ export default {
       window.location.replace('https://satisarsharada.appspot.com')
     }
 
+    if (this.outputScript === 'Grantha') {
+      window.location.replace('https://granthavarman.appspot.com')
+    }
+
     if (['Grantha', 'Newa', 'Ranjana', 'Tirhuta', 'Siddham'].includes(this.outputScript)) {
       this.inputOptions = this.inputOptionsD
     } else if (['Saurashtra'].includes(this.outputScript)) {

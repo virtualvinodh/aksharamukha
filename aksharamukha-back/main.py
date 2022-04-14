@@ -376,28 +376,56 @@ def describe_list():
     results['script1hk'] = convert(request.json['script1'], 'HK', results['script1'], False,[],[])
     return jsonify(results)
 
+def semiticListTransliterate(charlist, script2, fix=''):
+    results = {}
+
+    results['Latn'] = charlist.replace('،',',').split(',')
+    results['script2'] =  transliterate.process('Latn', script2, charlist, nativize=False).replace('،',',').split(',')
+    results['script2R'] =  transliterate.process(script2, 'Latn', transliterate.process('Latn', script2, charlist, nativize=False))\
+        .replace('،',',').split(',')
+
+    results['script2G'] =  transliterate.process('Brahmi', script2, transliterate.process('Latn', 'Brah', charlist))\
+        .replace('،',',').split(',')
+    results['script2GR'] =  transliterate.process('Brah', 'Latn', transliterate.process('Latn', 'Brah', charlist))\
+        .replace('،',',').split(',')
+
+    for script in GeneralMap.SemiticScripts:
+        if script != 'Latn' and script != 'Arab-Ph' and script != 'Arab-Ga':
+            #print(script)
+            results[script] = transliterate.process('Latn', script, charlist, nativize=False)\
+                .replace('،',',').split(',')
+            results[script + 'R'] = transliterate.process(script, 'Latn', \
+                transliterate.process('Latn', script, charlist, nativize=False), nativize=False)\
+                .replace('،',',').split(',')
+
+    if fix == 'alephA':
+        results['script2R'][0] = 'ʾ'
+    elif fix == 'inherentA':
+        results['script2R'][0] += 'a'
+
+    return results
+
 @app.route('/api/semiticmatrix', methods=['POST', 'GET'])
 def character_matrix_semitic():
     semitic_json = get_semitic_json()
 
-    charlist = 'ʾ, b, g, d, h, w, z, ḥ, ṭ, y, k, l, m, n, s, ʿ, p, ṣ, q, r, š, t, ḍ, f, ġ, ḏ, ḵ, ḫ, j, v, č, ṯ, ẓ, ž, p̣, i, u'.replace(' ', '')
+    charlistCore = 'ʾ, b, g, d, h, w, z, ḥ, ṭ, y, k, l, m, n, s, ʿ, p, ṣ, q, r, š, t'.replace(' ', '')
+
+    charAdditional = 'ḍ, ḏ, ḫ, ġ, ṯ, ẓ, v, f, č, j, ž, ɖ, ʈ, ʂ, ɭ, ɲ, ɳ, ɽ, p̣, kʰ, gʰ, čʰ, jʰ, ʈʰ, ɖʰ, tʰ, dʰ, pʰ, bʰ, ɽʰ, ʔ, ˀy, ˀw'.replace(' ', '')
+
+    charInitVowels = 'â, ā̂, î, ī̂, û, ū̂, ê, ē̂, ô, ō̂, âŵ, âŷ, ˀâ, ˀî'.replace(' ', '')
+
+    charlistVowels = 'la, lā, li, lī, lu, lū, le, lē, lo, lō, l꞉, ̽l, lă, lĕ, lŏ, laŷ, laŵ, la̮, lā̮, laⁿ, luⁿ, liⁿ'.replace(' ', '')
+
     script2 = request.json['script2']
 
-    results = {}
-    results['Latn'] = charlist.split(',')
-    results['script2'] =  transliterate.process('Latn', script2, charlist).split(',')
-    results['script2R'] =  transliterate.process(script2, 'Latn', transliterate.process('Latn', script2, charlist)).split(',')
+    resultsAll = {}
+    resultsAll['core'] = semiticListTransliterate(charlistCore, script2, fix='alephA')
+    resultsAll['adds'] = semiticListTransliterate(charAdditional,  script2)
+    resultsAll['initvows'] = semiticListTransliterate(charInitVowels,  script2)
+    resultsAll['vows'] = semiticListTransliterate(charlistVowels,  script2, fix='inherentA')
 
-    results['script2G'] =  transliterate.process('Brahmi', script2, transliterate.process('Latn', 'Brah', charlist)).split(',')
-    results['script2GR'] =  transliterate.process('Brah', 'Latn', transliterate.process('Latn', 'Brah', charlist)).split(',')
-
-    for script in GeneralMap.SemiticScripts:
-        if script != 'Latn':
-            #print(script)
-            results[script] = transliterate.process('Latn', script, charlist).split(',')
-            results[script + 'R'] = transliterate.process(script, 'Latn', transliterate.process('Latn', script, charlist)).split(',')
-
-    return jsonify(results)
+    return jsonify(resultsAll)
 
 @app.route('/api/describesemitic', methods=['POST', 'GET'])
 def describe_list_semitic():
@@ -407,24 +435,46 @@ def describe_list_semitic():
     script2 = request.json['script2']
 
     charsScript1 = []
+    charsScript1R = []
     charsScript2 = []
     charsScript2R = []
     charsLatn = []
 
     results = {}
-    for lat, char in semitic_json['ssub']['Latn'][script1].items():
-        charsScript1.append(char)
-        ### add 1R as well
-        if script2 != 'Latn':
-            charsScript2.append(transliterate.process('Latn', script2, lat))
-            charsScript2R.append(transliterate.process(script2, script1, transliterate.process('Latn', script2, lat)))
-        else:
-            charsScript2.append(lat)
-            charsScript2R.append(transliterate.process("Latn", script1, lat))
+    vowels = GeneralMap.semiticVowelsAll
+    vowelsInitial = GeneralMap.vowelsInitialAll
 
+    m = transliterate.process('Latn', script1, 'm')
+    for lat, char in semitic_json['ssub']['Latn'][script1].items():
+        latOrig = lat
+        if lat in vowels:
+            lat = 'm' + lat
+            char = m + char
+
+        charsScript1.append(char)
+        charguide = transliterate.process('Latn', script2, lat, nativize=False)
+        charsScript2.append(charguide)
+
+        if latOrig in vowels or latOrig in vowelsInitial:
+            charguideReverse = transliterate.process(script2, script1, charguide, nativize=False)
+        else:
+            if latOrig != 'ˀâ':
+                charguideReverse = transliterate.process(script2, script1, charguide, nativize=False, \
+                    post_options = ['removeVowelsSyriac', 'removeDiacriticsArabic', 'ArabAtoAleph', ''])\
+                        .replace('\u05B7', '').replace('\u07A6', '')
+            else:
+                charguideReverse = transliterate.process(script2, script1, charguide, nativize=False)
+
+        charsScript2R.append(charguideReverse)
+
+        charReverse = transliterate.process(script1, script2, char, nativize=False)
+        charsScript1R.append(charReverse)
         charsLatn.append(lat)
 
+    #print(charsScript2R)
+
     results['script1'] =  charsScript1
+    results['script1R'] =  charsScript1R
     results['script2'] =  charsScript2
     results['script2R'] =  charsScript2R
     results['scriptLatn'] = charsLatn

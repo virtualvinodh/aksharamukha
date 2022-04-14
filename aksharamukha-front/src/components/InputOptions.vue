@@ -14,6 +14,26 @@
         color="dark"
         type="checkbox"
         inline
+        class="q-ml-sm q-mb-sm q-mt-sm print-hide"
+        v-model="preOptions"
+        @input="convert"
+        :options="typeof preOptionsIndic[inputScript] !== 'undefined' ? preOptionsIndic[inputScript] : []"
+        v-show="typeof preOptionsIndic[inputScript] !== 'undefined' && scriptIndicList.includes(outputScript)"
+      />
+      <q-option-group
+        color="dark"
+        type="checkbox"
+        inline
+        class="q-ml-sm q-mb-sm q-mt-sm print-hide"
+        v-model="preOptions"
+        @input="convert"
+        :options="typeof preOptionsSemitic[inputScript] !== 'undefined' ? preOptionsSemitic[inputScript] : []"
+        v-show="typeof preOptionsSemitic[inputScript] !== 'undefined' && scriptSemiticListAll.includes(outputScript)"
+      />
+      <q-option-group
+        color="dark"
+        type="checkbox"
+        inline
         class="q-ml-sm q-mb-sm q-mt-sm"
         v-model="preOptions"
         @input="convert"

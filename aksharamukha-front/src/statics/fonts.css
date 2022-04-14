@@ -192,6 +192,9 @@
   font-family: "Noto Serif Hebrew" !important;
   direction: rtl;
 }
+.hebr-ar {
+  direction: rtl;
+}
 .batakkaro {
   font-family: "Pangururan" !important
 }
@@ -468,19 +471,32 @@
   font-family: "Noto Sans Syriac" !important;
   direction: rtl;
 }
-.estrangelasyriac {
-  font-family: "Noto Sans Syriac" !important;
-  font-language-override: "SYRE";
+
+@font-face {
+  font-family: 'Noto Sans Syriac Eastern';
+  src: url('./NotoSansSyriacEastern-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Noto Sans Syriac Western';
+  src: url('./NotoSansSyriacWestern-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Noto Sans Syriac Estrangela';
+  src: url('./NotoSansSyriacEstrangela-Regular.ttf');
+}
+
+.syre {
+  font-family: "Noto Sans Syriac Estrangela" !important;
   direction: rtl;
 }
-.easternsyriac {
-  font-family: "Noto Sans Syriac" !important;
-  font-language-override: "SYRN";
+.syrj {
+  font-family: "Noto Sans Syriac Eastern" !important;
   direction: rtl;
 }
-.westernsyriac {
-  font-family: "Noto Sans Syriac" !important;
-  font-language-override: "SYRJ";
+.syrn {
+  font-family: "Noto Sans Syriac Western" !important;
   direction: rtl;
 }
 .sogo {
@@ -553,6 +569,10 @@
 }
 
 .arab {
+  direction: rtl;
+}
+
+.arab-fa {
   direction: rtl;
 }
 

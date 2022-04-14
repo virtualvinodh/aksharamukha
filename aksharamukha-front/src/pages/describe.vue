@@ -28,6 +28,18 @@
       <span class="text-red-2"> X</span> : Approximate equivalent <br/>
       <span class="text-blue-4"> Y</span> : Equivalent with diacritic <br/>
       </div>
+      <div v-if="getScriptObject(script1).value === 'Hebrew'">
+        Click here to view the <a href="/describesemitic/Hebr">Semitic mapping</a>.
+      </div>
+      <div v-if="getScriptObject(script1).value === 'Thaana'">
+        Click here to view the <a href="/describesemitic/Thaa">Semitic mapping</a>.
+      </div>
+      <div v-if="getScriptObject(script1).value === 'Urdu'">
+        Click here to view the <a href="/describesemitic/Arab-Ur">Semitic mapping</a>.
+      </div>
+      <div v-if="getScriptObject(script1).value === 'Shahmukhi'">
+        Click here to view the <a href="/describesemitic/Arab-Pa">Semitic mapping</a>.
+      </div>
       <h5> Vowels</h5>
       <list-char :chars="charList[0]" :script1="script1" :script2="script2" :chars1="charListC['script1'][0]"
         :chars2="charListC['script2'][0]" :charsIr="charListC['script1hk'][0]"> </list-char>
