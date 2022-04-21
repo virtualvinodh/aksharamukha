@@ -1,5 +1,5 @@
-Flask==2.0.3
-Flask-CORS==3.0.6
+Flask>=2.0.3
+Flask-CORS>=3.0.6
 Requests>=2.20.1
 pykakasi>=2.0.6
 pyyaml>=5.4.1

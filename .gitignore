@@ -59,6 +59,13 @@ pgicons-5dda86749339f/
 
 aksharamukha-front/src/libs/
 
-aksharamukha-web-plugin-api/
-
 aksharamukha-back/env/
+
+aksharamukha-web-plugin-api/resources
+
+aksharamukha-web-plugin-api/requirements.txt
+aksharamukha-web-plugin-api/main.py
+
+aksharamukha-web-plugin-api/aksharamukha
+
+aksharamukha-web-plugin-api/.gcloudignore
