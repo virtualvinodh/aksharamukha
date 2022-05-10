@@ -86,7 +86,7 @@
 <div class="q-body-1">Look into script pages for specific notes. General comments regarding the mapping are listed here. <br/><br/>
 The mapping has been done on a purely etymological/historical basis. Though most Semitic scripts have retained the core 22 consonants of the original Phoenician alphabet, the actual pronunciation of the letters have diverged over time (or have been adapted to suit the phonetics of the adapted langauge). For instance, the Arabic equivalent of Phoenician Gimel is ج. However, the instead of the original /g/, it now represents /j/ in many Arabic dialects. Similarly, the Phoenician Ṣādē corresponds to the Hebrew Tzade /צ/ representing /ts/ in Modern Hebrew. This must be kept in mind during transliteraion. When a letter is absent from a particular script, the closest letter is used instead.
       <br/><br/>
-If an Indic script has a Nukta, this has been employed to create the equivalent of the Semitic letters missing from the script.
+If an Indic script includes a Nukta in its reportoire, this has been employed to create the equivalent of the Semitic letters missing from the script.
 </div>
   </q-page>
 </template>

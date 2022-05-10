@@ -129,6 +129,10 @@
 .dogra {
   font-family: "Noto Serif Dogra" !important
 }
+.olddogra {
+  font-family: "Noto Serif Dogra" !important;
+  font-feature-settings: "ss02";
+}
 .tagalog {
   font-family: "Noto Sans Tagalog" !important
 }

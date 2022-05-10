@@ -36,7 +36,7 @@
       <div v-for="(char, index) in chars1[script.value]" :key="char+index" class="col-xs-2 col-lg-1 q-mb-lg" v-if="index >= from && index <=to">
           <span :class="script.value.toLowerCase()">
           <span :class="{'letter': true, 'text-red-2': chars1[script.value+'R'][index] !== chars2[index]}">
-           <span :class="checkDiacriticsSemitic(char) ? 'text-blue-4' : ''">  {{chars1[script.value][index]}} </span>
+           <span :class="checkDiacriticsSemitic(char, script.value) ? 'text-blue-4' : ''">  {{chars1[script.value][index]}} </span>
           </span> </span>
       </div>
     </div>

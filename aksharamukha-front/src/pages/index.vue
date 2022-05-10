@@ -28,6 +28,7 @@
        @click="updateHist" dense> <small>{{getScriptObject(inputPast).label}}</small> </q-btn>
       <q-icon name="history" size="25px" v-show="inputPast !== ''" class="print-hide"/>
       </div>
+      <q-btn class="q-ma-sm btn2 print-hide col-xs-1 col-md-1" @click="copySource" :data-clipboard-text="textInput.replace(/<br\/>/g, '\n')"> <q-icon name="file_copy" /><q-tooltip>Copy source text</q-tooltip></q-btn>
     <q-input
       v-model.trim="textInput"
       type="textarea"
@@ -47,7 +48,6 @@
     <input-options :inputScript="inputScript" :outputScript="outputScript" :preOptionsInput="preOptions"
       :postOptions="postOptions" v-model="preOptions" @input="convert"></input-options>
     <div class="">
-      <q-btn class="q-ma-sm btn2 print-hide col-xs-1 col-md-1" @click="copySource" :data-clipboard-text="textInput.replace(/<br\/>/g, '\n')"> <q-icon name="file_copy" /><q-tooltip>Copy source text</q-tooltip></q-btn>
       <q-btn class="q-ma-sm print-hide col-xs-3 col-md-3" @click="uploadImage" label="Image/PDF" v-show="displayImageButton" v-if="!$q.platform.is.cordova" icon="add photo alternate"> <q-tooltip>Upload image/PDF</q-tooltip></q-btn>
       <span v-show="showFileUpload" class="q-ma-sm">
             <q-uploader url="" clearable extensions=".jpg, .jpeg, .png, .bmp, .ico, .pdf" @add="showConvertImage" @remove:cancel="hideConvertButton"
@@ -98,6 +98,10 @@
        @click="updateHistOut" dense> <small>{{getScriptObject(outputPast).label}}</small> </q-btn>
       <q-icon name="history" size="25px" v-show="outputPast !== ''" class="print-hide"/>
       </div>
+ <div class="q-mt-sm"><output-buttons @fontsizeinc="fontSize += 20" @fontsizedec="fontSize -= 20"
+       @printdoc="printDocument" @screenshot="imageConvert(downloadImage.bind(this))" @copytext="copy" :convertText="convertText" :content="downHTML"></output-buttons></div>
+      <q-btn icon="share" label="text" class="q-ma-sm" @click="shareCordovaText" v-if="$q.platform.is.cordova"/> <q-btn icon="share" label="image" class="q-ma-sm" @click="imageConvert(shareCordovaImage.bind(this))" v-if="$q.platform.is.cordova" /> <br/>
+
     <div
       ref="brahmiText"
       class="text-output col-xs-12 col-md-12 q-pa-md q-pr-lg bg-grey-1 "
@@ -107,10 +111,7 @@
       </div>
     <output-notice :inputScript="inputScript" :outputScript="outputScript" :postOptions="postOptions"
      :convertText="convertText" :inputText="textInput"></output-notice>
-      <div class="q-mt-sm"><output-buttons @fontsizeinc="fontSize += 20" @fontsizedec="fontSize -= 20"
-       @printdoc="printDocument" @screenshot="imageConvert(downloadImage.bind(this))" @copytext="copy" :convertText="convertText" :content="downHTML"></output-buttons></div>
-      <q-btn icon="share" label="text" class="q-ma-sm" @click="shareCordovaText" v-if="$q.platform.is.cordova"/> <q-btn icon="share" label="image" class="q-ma-sm" @click="imageConvert(shareCordovaImage.bind(this))" v-if="$q.platform.is.cordova" /> <br/>
-      <span v-if="typeof preserveSourceExampleOut[outputScript] !== 'undefined' || scriptSemiticList.includes(inputScript) || ['Urdu', 'Thaana', 'Hebrew', 'Shahmukhi', 'Sindhi'].includes(inputScript)">
+          <span v-if="typeof preserveSourceExampleOut[outputScript] !== 'undefined' || scriptSemiticList.includes(inputScript) || ['Urdu', 'Thaana', 'Hebrew', 'Shahmukhi', 'Sindhi'].includes(inputScript)">
         <span><q-toggle color="dark" v-model="sourcePreserve" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-md print-hide" @input="convert" /><q-tooltip>Preserve the source as-is and don't change the text to improve readability. May use archaic characters and/or diacritics. <br/><br/><div v-if="scriptSemiticList.includes(inputScript) || ['Urdu', 'Thaana', 'Hebrew', 'Shahmukhi', 'Sindhi'].includes(inputScript)">This also preserves the semitic consonants using the nukta (if present in the output script).</div></q-tooltip>
         </span>
         <small><div class="q-ml-xl print-hide" v-html="preserveSourceExampleOut[outputScript]"></div></small>
@@ -550,14 +551,24 @@ export default {
         this.$set(this, 'preOptions', ['UrduShortNotShown'])
       }
 
-      /* if (this.outputScript === 'Arab' && !this.scriptSemiticSorted.includes(this.inputScript)) {
-        if (!this.postOptions.includes(['arabicRemoveAdditionsPhonetic'])) {
-          this.$set(this, 'postOptions', this.postOptions.concat(['arabicRemoveAdditionsPhonetic']))
-        }
-      } */
-
       if (this.inputScript === 'Oriya' && this.outputScript === 'Bengali') {
         this.$set(this, 'postOptions', ['khandatabatova'])
+      }
+
+      var nikkuds = ['\u05B7', '\u05B8', '\u05B4', '\u05B4י', '\u05BB', '\u05C2', '\u05C1', '\u05B6', '\u05B5', '\u05B9', 'וֹ', '\u05B1', '\u05B2', '\u05B3', '\u05BC', '\u05B0', '\u05C7']
+
+      console.log(nikkuds.some(nikkud => this.textInput.includes(nikkud)))
+
+      if (this.inputScript === 'Hebrew' && this.scriptSemiticListAll.includes(this.outputScript) && !nikkuds.some(nikkud => this.textInput.includes(nikkud))) {
+        this.$set(this, 'preOptions', ['novowelshebrewSemitic'])
+      } else {
+        this.$set(this, 'preOptions', [])
+      }
+
+      if (this.inputScript === 'Hebrew' && this.scriptIndicList.includes(this.outputScript) && !nikkuds.some(nikkud => this.textInput.includes(nikkud))) {
+        this.$set(this, 'preOptions', ['novowelshebrewIndic'])
+      } else {
+        this.$set(this, 'preOptions', [])
       }
 
       this.convert()

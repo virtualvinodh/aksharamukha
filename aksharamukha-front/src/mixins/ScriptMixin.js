@@ -50,7 +50,7 @@ export const ScriptMixin = {
       vocalized: ['Hebr', 'Syrj', 'Syrn', 'Arab-Fa', 'Latn', 'Type', 'Arab', 'Arab-Ur', 'Thaa'],
       preserveSourceExampleOut: {
         'Hiragana': 'hulasi → ほぅら゚すぃ not  ふらし',
-        'Latn': 'Differentiate initial vowels',
+        'Latn': 'ʼiylwn māsk → ˀîylwn mʾsk',
         'Arab': 'g v p → ڨ ڤ پ',
         'Katakana': 'hulasi → ホゥラ゚スィ not  フラシ',
         'WarangCiti': 'akṣaramukha → <span class="warangciti">𑣁𑣌‍𑣝𑣜𑣖𑣃𑣌‍𑣙</span> not <span class="warangciti">𑣁𑣌𑣞𑣜𑣖𑣃𑣌</span>',
@@ -91,12 +91,24 @@ export const ScriptMixin = {
         ],
         'Hebrew': [
           {
-            label: 'Vowels are not marked<br/><small>',
-            value: 'novowelshebrew'
+            label: 'Vowels are not marked<br/><small></small>',
+            value: 'novowelshebrewIndic'
           }
         ]
       },
+      preOptionSemiticAllIndic: [
+        {
+          label: 'Aleph as mater lectionis<br/><small> kʾ → kā</small>',
+          value: 'AlephMaterLectionis'
+        }
+      ],
       preOptionsSemitic: {
+        'Hebrew': [
+          {
+            label: 'Nikkuds not shown<br/><small>ב פ כ → k p b not v f ḵ</small>',
+            value: 'novowelshebrewSemitic'
+          }
+        ]
       },
       preOptionsGroup: {
         'Tamil': [
@@ -363,9 +375,9 @@ export const ScriptMixin = {
 
         ],
         'Hebrew': [
-          { label: 'Remove all Niqqud<br/>ב פ כ מ → בּ פּ כּ מֶּ', value: 'removeNikkud' },
-          { label: 'Use Qof<br/>כּ ← ק', value: 'HeberewQoph' },
-          { label: 'Use Kamats Katan for Short /o/<br/>לֹ ← לׇ', value: 'HebewShortO' }
+          { label: 'Remove all Niqquds<br/><small>ב פ כ מ → בּ פּ כּ מֶּ</small>', value: 'removeNikkud' },
+          { label: 'Use Qof<br/><small>כּ ← ק</small>', value: 'HeberewQoph' },
+          { label: 'Use Kamats Katan for Short /o/<br/><small>לֹ ← לׇ</small>', value: 'HebewShortO' }
         ],
         'Nandinagari': [
           { label: 'Use Prishtamatra orthography<br/><small><span class="nandinagari"> 𑦮𑧚 𑦮𑧜 𑦮𑧛 𑦮𑧝 → 𑦮𑧤 𑦮𑧤𑧑 𑦮𑧤𑧚 𑦮𑧤𑧜</span></small>', value: 'NandinagariPrishtamatra' }
@@ -411,6 +423,7 @@ export const ScriptMixin = {
           { label: 'Prishthamatra orthography<br/><small>के कै को कौ → कॎ कॎे कॎा कॎो</small>', value: 'DevanagariPrishtamatra' }
         ],
         'Dogra': [
+          { label: 'Use Old Dogra forms<br/><small><span class="dogra">𑠂 𑠄 𑠈 𑠘 𑠧</span> → <span class="olddogra">𑠂 𑠄 𑠈 𑠘 𑠧</span> </small>', value: 'olddogra' },
           { label: '<span class="dogra">𑠨</span> → <span class="dogra">𑠋</span>', value: 'DograShaKha' }
         ],
         'Takri': [
@@ -919,7 +932,7 @@ export const ScriptMixin = {
           wikicode: 'Dogri_script',
           font: {
             'name': 'Noto Serif Dogra',
-            'url': 'https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/unhinted/otf/NotoSerifDogra'
+            'url': 'https://github.com/googlefonts/noto-fonts/tree/master/unhinted/otf/NotoSerifDogra'
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Extinct', 'Extinct: Pre-Modern'],
@@ -935,7 +948,7 @@ export const ScriptMixin = {
           wikicode: 'Gunjala_Gondi_Lipi',
           font: {
             'name': 'Noto Sans Gunjala Gondi',
-            'url': 'https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/unhinted/otf/NotoSansGunjalaGondi'
+            'url': 'https://github.com/googlefonts/noto-fonts/tree/master/unhinted/otf/NotoSansGunjalaGondi'
           },
           language: ['Others'],
           status: ['Living', 'Living: Minor'],
@@ -951,7 +964,7 @@ export const ScriptMixin = {
           wikicode: 'Gondi_writing',
           font: {
             'name': 'Noto Sans Masaram Gondi',
-            'url': 'https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/unhinted/otf/NotoSansMasaramGondi'
+            'url': 'https://github.com/googlefonts/noto-fonts/tree/master/unhinted/otf/NotoSansMasaramGondi'
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali', 'Others'],
           status: ['Living', 'Living: Minor'],
@@ -1357,7 +1370,7 @@ export const ScriptMixin = {
           wikicode: 'Zhang-Zhung_language#Scripts',
           font: {
             'name': 'Noto Sans Marchen',
-            'url': 'https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/unhinted/otf/NotoSansMarchen'
+            'url': 'https://github.com/googlefonts/noto-fonts/tree/master/unhinted/otf/NotoSansMarchen'
           },
           language: ['Others'],
           status: ['Extinct', 'Extinct: Medieval'],
@@ -1441,7 +1454,7 @@ export const ScriptMixin = {
           wikicode: 'Mru_language#Script',
           font: {
             'name': 'Noto Sans Mro',
-            'url': 'https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/unhinted/otf/NotoSansMro'
+            'url': 'https://github.com/googlefonts/noto-fonts/tree/master/unhinted/otf/NotoSansMro'
           },
           language: ['Others'],
           status: ['Living', 'Living: Minor'],
@@ -2124,7 +2137,7 @@ export const ScriptMixin = {
           wikicode: 'Wancho_script',
           font: {
             'name': 'Noto Sans Wancho',
-            'url': 'https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/unhinted/otf/NotoSansWancho'
+            'url': 'https://github.com/googlefonts/noto-fonts/tree/master/unhinted/otf/NotoSansWancho'
           },
           language: ['Others'],
           status: ['Living', 'Living: Minor'],
@@ -3263,6 +3276,8 @@ export const ScriptMixin = {
         return 'easternsyriac'
       } else if (postOptions.includes('westernsyriac') && tgt === 'Syrc') {
         return 'westernsyriac'
+      } else if (postOptions.includes('olddogra') && tgt === 'Dogra') {
+        return 'olddogra'
       } else if (tgt === 'Oriya' && (String(outputText).includes('॒') || String(outputText).includes('᳚') ||
           String(outputText).includes('॑'))) {
         return 'oriyavedic'
@@ -3321,10 +3336,10 @@ export const ScriptMixin = {
 
       return diac
     },
-    checkDiacriticsSemitic: function (Strng) {
+    checkDiacriticsSemitic: function (Strng, script) {
       var chars = ['ڤ', 'ڨ', 'پ']
 
-      return chars.includes(Strng)
+      return chars.includes(Strng) && script === 'Arab'
     },
     convertAsync: function (src, tgt, txt, sourcePreserve, optionsPost, optionsPre) {
       return new Promise(resolve => {

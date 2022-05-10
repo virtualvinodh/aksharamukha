@@ -70,13 +70,11 @@
             </q-item>
         </q-collapsible>
         <hr/>
-
-        <!-- <q-collapsible icon="edit" label="Scripts" >
             <q-item to="/roman">
-              <q-item-main label="Roman Transliteration Schemes"/>
+              <q-item-side icon="spellcheck" />
+              <q-item-main label="Indic Roman"/>
             </q-item>
-          <hr/>
-            <q-item :to="!scriptSemiticList.includes(script.value) ? '/describe/' + script.value : '/describesemitic/' + script.value"
+ <!--            <q-item :to="!scriptSemiticList.includes(script.value) ? '/describe/' + script.value : '/describesemitic/' + script.value"
             v-for="script in scriptAboutList" :key="script.value">
               <q-item-main :label="script.label"/>
             </q-item>

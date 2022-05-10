@@ -75,11 +75,11 @@
       <div :class="script1.toLowerCase()"><transliterate :text="quotePho" src="Phnx" :tgt="script1" :sourcePreserve="false" :postOptions="[]">
       </transliterate></div> -->
       <h5> Aramaic Text </h5>
-      <transliterate :text="quoteHe" src="Hebr" :tgt="script2" :sourcePreserve="true" :postOptions="[]">
+      <transliterate :text="quoteHe" src="Hebr" :tgt="script2" :sourcePreserve="true" :preOptions="['novowelshebrewSemitic']">
       </transliterate><br/><br/>
       <!-- <div :class="script2.toLowerCase()"><transliterate :text="quoteHe" src="Hebr" :tgt="script2" :sourcePreserve="false" :postOptions="[]">
       </transliterate></div><br/> -->
-      <div :class="script1.toLowerCase()"><transliterate :text="quoteHe" src="Hebr" :tgt="script1" :sourcePreserve="false" :postOptions="[]">
+      <div :class="script1.toLowerCase()"><transliterate :text="quoteHe" src="Hebr" :tgt="script1" :sourcePreserve="false" :preOptions="['novowelshebrewSemitic']">
       </transliterate></div><br/><br/>
       <h5> Sanskrit Text </h5>
       <div :class="script2.toLowerCase()"><transliterate :text="quoteSa" src="HK" :tgt="'IAST'" :sourcePreserve="true" :postOptions="[]">
@@ -173,7 +173,7 @@ export default {
         'Shahmukhi': `گوتم بدھ، سدھارتھ گوتم، ساکیہ منی یا صرف بدھ اتلے ھندستان دا اک روحانی بندہ سی جینے بدھ مت دی نیو رکھی۔ بدھ لوک اوہنوں اپنے ویلے دا بدھا کیندے نیں۔ اودا ناں سدہارتھ گوتم سی۔ اونوں شاکیہ منی وی کیا جاندا اے۔ سدہارتھ ۵۶۳ ق م چ نیپال دے اک نکے دیس کپل وستو دی نگری لمبنی چ جمیا۔ اودے پیو دا ناں راجہ سدودھنا سی تے ماں دا ناں مایادیوی سی۔ کیا جاندا اے اودھے جمن تے ای اودھی ماں مر گئی سی۔ سیانے لوکاں نیں اونوں ویکھ کے آکھیا سی کہ گوتم یاں تے بہت وڈا راجا بنے گا یا بڑا نیک انسان۔ گوتم نے ٹھاٹھ آلا جیون گزاریا اودھے پیو نے اونھوں مزہبی پڑھائی دے نیڑے نا جان دتا گوتم نوں اودھی ماسی نے پالیا۔`
       },
       notes: {
-        'Arab': 'Though the script is usually an Abjad as noted earlier. It has vocalic diacritical marks that is sometimes used. <br/<br/>. Some Arabic dialectsalso  use the additional letters /ڨ ڤ پ/ to denote the foreign consonants /g v p/ in proper names such places or brands. These letters can be enabled by selecting the <i>Preserve Source</i> option. Else, an etymological approximation to /j f f/ is performed for a Semitic source script and a phonetic approximation to /ġ f b/ for an Indic source script. However, an explicit option can be enabled to use the phonetic mapping instead when converting from a Semitic script.'
+        'Arab': 'Though the script is usually an Abjad as noted earlier. It has vocalic diacritical marks that is sometimes used.<br/><br/> Some Arabic dialects also  use the additional letters /ڨ ڤ پ/ to denote the foreign consonants /g v p/ in proper names such places or brands. These letters can be enabled by selecting the <i>Preserve Source</i> option. Else, an etymological approximation to /j f f/ is performed for a Semitic source script and a phonetic approximation to /ġ f b/ for an Indic source script. However, an explicit option can be enabled to use the phonetic mapping instead when converting from a Semitic script.'
       }
     }
   },

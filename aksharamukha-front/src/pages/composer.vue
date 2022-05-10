@@ -84,6 +84,8 @@ In case of multiple outputs for the primary, the text is split into lines by def
       />
       <span><q-toggle color="dark" v-model="ignore2" label="Don't convert" class="q-ml-sm q-mb-sm q-mt-lg print-hide" @input="convert" /><q-tooltip>Ignore secondary text</q-tooltip></span>
       </div>
+<div class="q-mt-sm"><output-buttons @fontsizeinc="fontSize += 20" @fontsizedec="fontSize -= 20"
+       @printdoc="printDocument" @screenshot="imageConvert(downloadImage.bind(this))" @copytext="copy" :convertText="convertText" :content="downHTML"></output-buttons></div>
     <div class="notice q-ma-sm" v-show="outputScript1.length > 1 && textInput.includes('#')">Multiple primary output scripts detected. Secondary text will be ignored.</div>
     <div ref="brahmiText"
       class="text-output col-xs-12 col-md-12 q-pa-md q-pr-lg bg-grey-1 "
@@ -136,9 +138,7 @@ In case of multiple outputs for the primary, the text is split into lines by def
       </span>
       </div>
 
-      <div class="q-mt-sm"><output-buttons @fontsizeinc="fontSize += 20" @fontsizedec="fontSize -= 20"
-       @printdoc="printDocument" @screenshot="imageConvert(downloadImage.bind(this))" @copytext="copy" :convertText="convertText" :content="downHTML"></output-buttons></div>
-      <q-btn icon="share" label="text" class="q-ma-sm" @click="shareCordovaText" v-if="$q.platform.is.cordova"/> <q-btn icon="share" label="image" class="q-ma-sm" @click="imageConvert(shareCordovaImage.bind(this))" v-if="$q.platform.is.cordova" /> <br/>
+       <q-btn icon="share" label="text" class="q-ma-sm" @click="shareCordovaText" v-if="$q.platform.is.cordova"/> <q-btn icon="share" label="image" class="q-ma-sm" @click="imageConvert(shareCordovaImage.bind(this))" v-if="$q.platform.is.cordova" /> <br/>
       <span><q-toggle color="dark" v-model="sourcePreserveComposer" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-md print-hide" @input="convert" /><q-tooltip>Preserve the source as-is and don't change the text to improve readability</q-tooltip></span> <br/> <br/>
 
     <br/><br/>

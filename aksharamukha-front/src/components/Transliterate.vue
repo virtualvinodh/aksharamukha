@@ -72,6 +72,7 @@ export default {
         preOptions: typeof this['preOptions'] !== 'undefined' ? this.preOptions : []
       }
       var dhis = this
+      // console.log(this.preOptions)
       this.apiCall.post('/convert', data)
         .then(function (response) {
           // console.log(response.data)

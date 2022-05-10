@@ -131,7 +131,7 @@
     </transition-group>
 
   <q-modal v-model="opened"
-     :content-css="!$q.platform.is.mobile ? {maxWidth: '60vw', maxHeight: '50vh', padding: '20px'} : {minWidth: '90vw', minHeight: '90vh', padding: '20px'}">
+     :content-css="!$q.platform.is.mobile ? {maxWidth: '60vw', maxHeight: '70vh', padding: '10px'} : {minWidth: '90vw', minHeight: '90vh', padding: '10px'}">
     <div class="q-mb-md" style="text-align:right">
 
     <q-btn
@@ -362,7 +362,7 @@ export default {
         var scriptsListCategory = dhis.filterScripts(dhis.scriptsCategorized[key], key)
 
         scriptsListCategory.forEach(function (script) {
-          if (dhis.charsIr[script.value] === dhis.chars) {
+          if (dhis.charsIr[script.value].trim() === dhis.chars) {
             script['approx'] = false
             scripts[key].push(script)
           } else {

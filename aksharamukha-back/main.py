@@ -363,7 +363,7 @@ def scriptmatrix_list():
     """
 
     f = open ('resources/script_matrix/script_matrix_' + guide + charnums + '.json', 'r', encoding='utf-8')
-    results_final = json.loads(f.read(), encoding = "utf-8")
+    results_final = json.loads(f.read())
     f.close()
 
     return jsonify(results_final)
