@@ -100,6 +100,29 @@ def latinmatrix_list():
 
     guide_chars = convert('HK', guide, json.dumps(chars).replace(' ',''), False,[],[])
 
+    results_hk = convert(guide, 'HK', guide_chars, False,[],[])
+
+    results_final['results'] = results
+    results_final['resultsHK'] = results_hk
+    results_final['guideChars'] = guide_chars
+
+    return jsonify(results_final)
+
+@app.route('/api/latinsemiticmatrix', methods=['POST', 'GET'])
+def semiticmatrix_list():
+    results_final = {}
+    results = {}
+    results_hk = {}
+    guide = request.json['guide']
+    scripts = request.json['scripts']
+    chars = request.json['chars']
+
+    for script in scripts:
+        results[script] = convert('Latn', script, json.dumps(chars,ensure_ascii=False).replace(' ',''), False,[],[])
+
+    guide_chars = convert('Latn', guide, json.dumps(chars, ensure_ascii=False).replace(' ','').replace('،',','), False,[],[])
+    results_hk = convert(guide, 'Latn', guide_chars, False,[],[])
+
     results_final['results'] = results
     results_final['resultsHK'] = results_hk
     results_final['guideChars'] = guide_chars
@@ -415,7 +438,7 @@ def character_matrix_semitic():
 
     charInitVowels = 'â, ā̂, î, ī̂, û, ū̂, ê, ē̂, ô, ō̂, âŵ, âŷ, ˀâ, ˀî'.replace(' ', '')
 
-    charlistVowels = 'la, lā, li, lī, lu, lū, le, lē, lo, lō, l꞉, ̽l, lă, lĕ, lŏ, laŷ, laŵ, la̮, lā̮, laⁿ, luⁿ, liⁿ'.replace(' ', '')
+    charlistVowels = 'la, lā, li, lī, lu, lū, le, lē, lo, lō, l꞉, l̽, lă, lĕ, lŏ, laŷ, laŵ, la̮, lā̮, laⁿ, luⁿ, liⁿ'.replace(' ', '')
 
     script2 = request.json['script2']
 

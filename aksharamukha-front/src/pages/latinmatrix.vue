@@ -15,55 +15,55 @@
         :options="scriptsIndic"
       />
     </q-page-sticky>
-      <h4> Romanization Schemes <q-spinner-comment color="dark" :size="30" v-show="loading"/> </h4>
+      <h4> Indic Romanization Schemes <q-spinner-comment color="dark" :size="30" v-show="loading"/> </h4>
       <div v-if="letters.length > 0">
         <h5> Vowels</h5>
         <list-char-all-latin :chars="letters[0][i-1]" :script1="script1" :script2="script2"
         :chars2 = "guideChars[0][i-1]" :chars1="selectIndex(results,0,i-1)"
-        v-for="i in letters[0].length" :key="'v1' + i">
+        v-for="i in letters[0].length" :key="'v1' + i" :charsrev="charsRev[0][i-1]">
         </list-char-all-latin>
       <h6> South-Indic and Modern </h6>
         <list-char-all-latin :chars="letters[1][i-1]" :script1="script1" :script2="script2"
         :chars2 = "guideChars[1][i-1]" :chars1="selectIndex(results,1,i-1)"
-        v-for="i in letters[1].length" :key="'v2' + i">
+        v-for="i in letters[1].length" :key="'v2' + i" :charsrev="charsRev[1][i-1]">
         </list-char-all-latin>
         <list-char-all-latin :chars="letters[2][i-1]" :script1="script1" :script2="script2"
         :chars2 = "guideChars[2][i-1]" :chars1="selectIndex(results,2,i-1)"
-        v-for="i in letters[2].length" :key="'v3' + i">
+        v-for="i in letters[2].length" :key="'v3' + i" :charsrev="charsRev[2][i-1]">
         </list-char-all-latin>
         <h5> Consonants </h5>
         <list-char-all-latin :chars="letters[3][i-1]" :script1="script1" :script2="script2"
         :chars2 = "guideChars[3][i-1]" :chars1="selectIndex(results,3,i-1)"
-        v-for="i in letters[3].length" :key="'v4' + i">
+        v-for="i in letters[3].length" :key="'v4' + i" :charsrev="charsRev[3][i-1]">
         </list-char-all-latin>
         <list-char-all-latin :chars="letters[4][i-1]" :script1="script1" :script2="script2"
         :chars2 = "guideChars[4][i-1]" :chars1="selectIndex(results,4,i-1)"
-        v-for="i in letters[4].length" :key="'v5' + i">
+        v-for="i in letters[4].length" :key="'v5' + i" :charsrev="charsRev[4][i-1]">
         </list-char-all-latin>
       <h6> South-Indic </h6>
         <list-char-all-latin :chars="letters[5][i-1]" :script1="script1" :script2="script2"
         :chars2 = "guideChars[5][i-1]" :chars1="selectIndex(results,5,i-1)"
-        v-for="i in letters[5].length" :key="'v6' + i">
+        v-for="i in letters[5].length" :key="'v6' + i" :charsrev="charsRev[5][i-1]">
         </list-char-all-latin>
       <h6> Consonants with Nukta </h6>
         <list-char-all-latin :chars="letters[6][i-1]" :script1="script1" :script2="script2"
         :chars2 = "guideChars[6][i-1]" :chars1="selectIndex(results,6,i-1)"
-        v-for="i in letters[6].length" :key="'v7' + i">
+        v-for="i in letters[6].length" :key="'v7' + i" :charsrev="charsRev[6][i-1]">
         </list-char-all-latin>
       <h6> Sinhala Pre-nasalized </h6>
         <list-char-all-latin :chars="letters[7][i-1]" :script1="script1" :script2="script2"
         :chars2 = "guideChars[7][i-1]" :chars1="selectIndex(results,7,i-1)"
-        v-for="i in letters[7].length" :key="'v8' + i">
+        v-for="i in letters[7].length" :key="'v8' + i" :charsrev="charsRev[7][i-1]">
         </list-char-all-latin>
       <h5> Others </h5>
         <list-char-all-latin :chars="letters[8][i-1]" :script1="script1" :script2="script2"
         :chars2 = "guideChars[8][i-1]" :chars1="selectIndex(results,8,i-1)"
-        v-for="i in letters[8].length" :key="'v9' + i">
+        v-for="i in letters[8].length" :key="'v9' + i" :charsrev="charsRev[8][i-1]">
         </list-char-all-latin>
       <h5> Vedic </h5>
         <list-char-all-latin :chars="letters[9][i-1]" :script1="script1" :script2="script2"
         :chars2 = "guideChars[9][i-1]" :chars1="selectIndex(results,9,i-1)"
-        v-for="i in letters[9].length" :key="'v10' + i">
+        v-for="i in letters[9].length" :key="'v10' + i" :charsrev="charsRev[9][i-1]">
         </list-char-all-latin>
     </div>
     <h5> Joiners </h5>
@@ -128,6 +128,7 @@ export default {
       otherSymbols: ['a_i', 'a_u', '\'', 'oM', 'K', '.', '..'],
       vedic: ['a\\\'', 'a\\"', 'a\\_', '\\m+', '\\m++'],
       guideChars: {},
+      charsRev: {},
       results: {}
     }
   },
@@ -166,11 +167,12 @@ export default {
       var dhis = this
       this.apiCall.post('/latinmatrix', data)
         .then(function (response) {
+          console.log(response)
           for (var key in response.data['results']) {
-            console.log(key)
-            console.log(response.data['results'][key])
+            // console.log(key)
+            // console.log(response.data['results'][key])
             if (key === 'RomanReadable' || key === 'RomanColloquial') {
-              console.log(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱').replace('"a\\\\"', '"a"').replace('"a\\"', '"a"').replace('"a\\"', '"a","'))
+              // console.log(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱').replace('"a\\\\"', '"a"').replace('"a\\"', '"a"').replace('"a\\"', '"a","'))
               dhis.results[key] = JSON.parse(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace('"a\\\\"', '"a"').replace('"a\\"', '"a"').replace('"a\\"', '"a"'))
             } else if (key !== 'Velthuis') {
               if (key !== 'Itrans' && key !== 'SLP1' && key !== 'WX') {
@@ -181,12 +183,17 @@ export default {
                 dhis.results[key] = JSON.parse(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱').replace(/\\̎/, '̎').replace(/\\\\""/, '\\\\\\""').replace(/\\_/, '\\\\_').replace(/\\m/g, '\\\\m').replace(/a\\'/, 'a\\\\\''))
               }
             } else {
-              console.log('here333')
+              // console.log('here333')
               dhis.results[key] = JSON.parse(response.data['results'][key].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱').replace(/""/g, '"\\"').replace(/\\"\\"/g, '\\""').replace(/\\_/, '\\\\_').replace(/\\m/g, '\\\\m').replace(/\\\\""/, '\\\\\\""'))
             }
           }
-          console.log(key)
-          dhis.guideChars = JSON.parse(response.data['guideChars'].replace(/\\/g, ''))
+          // console.log(key)
+          // console.log(response.data.resultsHK.replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱').replace(/""/g, '"\\"').replace(/\\"\\"/g, '\\""').replace(/\\_/, '\\\\_').replace(/\\m/g, '\\\\m').replace(/\\\\""/, '\\\\\\""').replace(/a\\'/, "a'"))
+
+          console.log(dhis.guideChars)
+          dhis.guideChars = JSON.parse(response.data['guideChars'].replace(/\\/g, '').replaceAll('،', ','))
+          // console.log(response.data['resultsHK'].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱').replace(/""/g, '"\\"').replace(/\\"\\"/g, '\\""').replace(/\\_/, '\\\\_').replace(/\\m/g, '\\\\m').replace(/\\\\""/, '\\\\\\""').replace(/a\\'/, "a\\\\'").replace(/"\\"/, '""'))
+          dhis.charsRev = JSON.parse(response.data['resultsHK'].replace(/،/g, ',').replace(/""/g, '"\\"').replace(/"\\"/g, '""').replace(/\\g/g, 'g').replace(/\\̍/g, '̍').replace('\\\\̎', '̎').replace(/\\̱/g, '̱').replace(/""/g, '"\\"').replace(/\\"\\"/g, '\\""').replace(/\\_/, '\\\\_').replace(/\\m/g, '\\\\m').replace(/\\\\""/, '\\\\\\""').replace(/a\\'/, "a\\\\'").replace(/"\\"/, '""'))
           dhis.loading = false
         })
         .catch(function (error) {

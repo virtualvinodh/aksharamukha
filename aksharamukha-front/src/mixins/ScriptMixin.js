@@ -67,7 +67,7 @@ export const ScriptMixin = {
         'Gujarati': 'kŏl → <span class="gujarati">કો˘લ્</span> not <span class="gujarati">કોલ્</span>',
         'Oriya': 'vināyaka → <span class="oriya">ୱିନାଯକ</span> not <span class="oriya">ବିନାୟକ</span><br/>kŏlæṭ → <span class="oriya">କୋ˘ଲେʼଟ୍</span> not <span class="oriya">କୋଲେଟ୍</span>',
         'Assamese': 'vināyaka → <span class="assamese">ৱিনাযক</span> not <span class="assamese">ৱিনায়ক</span><br/>kŏlæṭ → <span class="assamese">কো˘লেʼট্</span> not <span class="assamese">কোলেট্</span>',
-        'Bengali': 'vināyaka → <span class="bengali">ৱিনাযক</span> not <span class="bengali">বিনায়ক</span><br/>kŏlæṭ → <span class="bengali">কো˘লেʼট্</span> not <span class="bengali">কোলেট্</span>',
+        'Bengali': 'vināyaka → <span class="bengali">ভ়িনাযক</span> not <span class="bengali">বিনায়ক</span><br/>kŏlæṭ → <span class="bengali">কো˘লেʼট্</span> not <span class="bengali">কোলেট্</span>',
         'Limbu': 'jha ña ṣa ṃ → <span class="limbu">ᤉ ᤊ ᤚ ᤲ</span> not <span class="limbu">ᤈ ᤏ ᤙ ᤱ</span>',
         'MeeteiMayek': 'kūṭākṣara → <span class="meeteimayek">ꯀꫬꫤꯥꯛꫪꯔ</span> not <span class="meeteimayek">ꯀꯨꯇꯥꯛꯁꯔ</span>',
         'Tamil': 'maṃtana → <span class="tamil">மம்ʼதந</span> not <span class="tamil">மந்தன</span>',
@@ -94,6 +94,114 @@ export const ScriptMixin = {
             label: 'Vowels are not marked<br/><small></small>',
             value: 'novowelshebrewIndic'
           }
+        ],
+        'Armi': [
+          {
+            label: 'Aleph as mater lectionis<br/><small> kʾ → kā</small>',
+            value: 'AlephMaterLectionis'
+          }
+        ],
+        'Elym': [
+          {
+            label: 'Aleph as mater lectionis<br/><small> kʾ → kā</small>',
+            value: 'AlephMaterLectionis'
+          }
+        ],
+        'Ethi': [
+          {
+            label: 'Aleph as mater lectionis<br/><small> kʾ → kā</small>',
+            value: 'AlephMaterLectionis'
+          }
+        ],
+        'Hatr': [
+          {
+            label: 'Aleph as mater lectionis<br/><small> kʾ → kā</small>',
+            value: 'AlephMaterLectionis'
+          }
+        ],
+        'Phli': [
+          {
+            label: 'Aleph as mater lectionis<br/><small> kʾ → kā</small>',
+            value: 'AlephMaterLectionis'
+          }
+        ],
+        'Prti': [
+          {
+            label: 'Aleph as mater lectionis<br/><small> kʾ → kā</small>',
+            value: 'AlephMaterLectionis'
+          }
+        ],
+        'Mani': [
+          {
+            label: 'Aleph as mater lectionis<br/><small> kʾ → kā</small>',
+            value: 'AlephMaterLectionis'
+          }
+        ],
+        'Nbat': [
+          {
+            label: 'Aleph as mater lectionis<br/><small> kʾ → kā</small>',
+            value: 'AlephMaterLectionis'
+          }
+        ],
+        'Narb': [
+          {
+            label: 'Aleph as mater lectionis<br/><small> kʾ → kā</small>',
+            value: 'AlephMaterLectionis'
+          }
+        ],
+        'Sogo': [
+          {
+            label: 'Aleph as mater lectionis<br/><small> kʾ → kā</small>',
+            value: 'AlephMaterLectionis'
+          }
+        ],
+        'Sarb': [
+          {
+            label: 'Aleph as mater lectionis<br/><small> kʾ → kā</small>',
+            value: 'AlephMaterLectionis'
+          }
+        ],
+        'Palm': [
+          {
+            label: 'Aleph as mater lectionis<br/><small> kʾ → kā</small>',
+            value: 'AlephMaterLectionis'
+          }
+        ],
+        'Phnx': [
+          {
+            label: 'Aleph as mater lectionis<br/><small> kʾ → kā</small>',
+            value: 'AlephMaterLectionis'
+          }
+        ],
+        'Phlp': [
+          {
+            label: 'Aleph as mater lectionis<br/><small> kʾ → kā</small>',
+            value: 'AlephMaterLectionis'
+          }
+        ],
+        'Samr': [
+          {
+            label: 'Aleph as mater lectionis<br/><small> kʾ → kā</small>',
+            value: 'AlephMaterLectionis'
+          }
+        ],
+        'Sogd': [
+          {
+            label: 'Aleph as mater lectionis<br/><small> kʾ → kā</small>',
+            value: 'AlephMaterLectionis'
+          }
+        ],
+        'Syre': [
+          {
+            label: 'Aleph as mater lectionis<br/><small> kʾ → kā</small>',
+            value: 'AlephMaterLectionis'
+          }
+        ],
+        'Ugar': [
+          {
+            label: 'Aleph as mater lectionis<br/><small> kʾ → kā</small>',
+            value: 'AlephMaterLectionis'
+          }
         ]
       },
       preOptionSemiticAllIndic: [
@@ -119,7 +227,11 @@ export const ScriptMixin = {
           { label: 'E/O for long, e/o for short', value: 'swapEeItrans' }
         ],
         'ISO': [
-          { label: 'Treat e/o as long', value: 'longEOISO' }
+          { label: 'Treat e/o as long', value: 'longEOISO' },
+          { label: '<i>tat tvam asi</i> → <i>tattvamasi</i>', value: 'joinVowelConsISO' }
+        ],
+        'IAST': [
+          { label: '<i>tat tvam asi</i> → <i>tattvamasi</i>', value: 'joinVowelConsIAST' }
         ],
         'Hiragana': [
           { label: '/ou/ and /ei/ dipthongs not /ē/ and /ō/', value: 'eiaudipthongs' },
@@ -262,6 +374,18 @@ export const ScriptMixin = {
         'ISOShahmukhi': [
           { label: 'Remove all inherent /a/ <small><br/><span class="urdu">ہندوستان</span> → /hndvstān/ not /hanadavasatāna/', value: 'urduRemoveInherent' }
         ],
+        'IASTBengali': [
+          { label: 'inherent /a/ as /ô/', value: 'inherentAO' }
+        ],
+        'ISOBengali': [
+          { label: 'inherent /a/ as /ô/', value: 'inherentAO' }
+        ],
+        'IASTOriya': [
+          { label: 'inherent /a/ as /ô/', value: 'inherentAO' }
+        ],
+        'ISOOriya': [
+          { label: 'inherent /a/ as /ô/', value: 'inherentAO' }
+        ],
         'LatnSyrj': [
           { label: 'Syriac convention <small><br/> v ġ ḫ f → ḇ ḡ ḵ p̄', value: 'syriacRoman' }
         ],
@@ -314,6 +438,9 @@ export const ScriptMixin = {
         'Pallava': [
           { label: 'Sundapura font<br/><span class="sundapura">ꦥꦭ꧀ꦭꦮ ꦒ꧀ꦫꦤ꧀', value: 'sundapura' },
           { label: 'Kawitan font<br/><span class="kawitan">ꦥꦭ꧀ꦭꦮ ꦒ꧀ꦫꦤ꧀ꦡ', value: 'kawitan' }
+        ],
+        'HebrewSBL': [
+          { label: 'ḏ ṯ ḡ → d t g', value: 'removetddash' }
         ],
         /* 'Syrc': [
           { label: 'Estrangela<br/><span class="estrangelasyriac"></span>', value: 'estrangelasyriac' },
@@ -383,14 +510,19 @@ export const ScriptMixin = {
           { label: 'Use Prishtamatra orthography<br/><small><span class="nandinagari"> 𑦮𑧚 𑦮𑧜 𑦮𑧛 𑦮𑧝 → 𑦮𑧤 𑦮𑧤𑧑 𑦮𑧤𑧚 𑦮𑧤𑧜</span></small>', value: 'NandinagariPrishtamatra' }
         ],
         'Latn': [
-          { label: 'ʾ ʿ → ʼ ʽ', value: 'alephAyinLatnAlternate' }
+          { label: 'Aleph as mater lectionis<br/><small> kʾ → kā</small>', value: 'AlephMaterLectionis' },
+          { label: 'ʾ ʿ → ʼ ʽ', value: 'alephAyinLatnAlternate' },
+          { label: 'ʾ ʿ → ʔ ʕ', value: 'alephAyinLatnAlternate2' }
         ],
         'Oriya': [
-          { label: 'ଵ instead of ୱ<br/><small>ଭୱତି → ଭଵତି</small>', value: 'OriyaVaAlt' },
+          { label: 'ଵ instead of ୱ<br/><small>ଭୱତି → ଭଵତି <br/>(Enable preserve source)</small>', value: 'OriyaVaAlt' },
           { label: 'ୟ everywhere<br/><small>ଯୟାତି ଯଜ୍ଞ → ୟୟାତି ୟଜ୍ଞ</small>', value: 'OriyaYYA' }
         ],
         'Bengali': [
           { label: 'য় everywhere<br/><small>যয়াতি যজ্ঞ → য়য়াতি য়জ্ঞ</small>', value: 'BengaliYYA' },
+          { label: 'Old Bengali /ra/ <br/><small>র → ৰ</small>', value: 'BengaliOldRA' },
+          { label: 'ৰ as /b/ & ব as /v/ <br/>', value: 'BengaliRaBa' },
+          { label: 'দৃঢ আষাঢ → দৃঢ় আষাঢ়', value: 'BengaliIntervocalicDDA' },
           { label: 'ৎব → ত্ৱ', value: 'khandatabatova' }
         ],
         'Assamese': [
@@ -2707,7 +2839,7 @@ export const ScriptMixin = {
           wikidesc: 'The International Phonetic Alphabet (IPA) is an alphabetic system of phonetic notation based primarily on the Latin alphabet. It was devised by the International Phonetic Association in the late 19th century as a standardized representation of the sounds of spoken language. The IPA is used by lexicographers, foreign language students and teachers, linguists, speech-language pathologists, singers, actors, constructed language creators and translators. The IPA is designed to represent only those qualities of speech that are part of oral language: phones, phonemes, intonation and the separation of words and syllables.'
         },
         {
-          label: 'Roman (ISO 15919)',
+          label: 'Roman (ISO 15919 Indic)',
           value: 'ISO'
         },
         {
@@ -2747,6 +2879,26 @@ export const ScriptMixin = {
           value: 'Type'
         },
         {
+          label: 'Roman (ISO 259 Hebrew)',
+          value: 'ISO259'
+        },
+        {
+          label: 'Roman (SBL Hebrew)',
+          value: 'HebrewSBL'
+        },
+        {
+          label: 'Roman (ISO 233 Arabic)',
+          value: 'ISO233'
+        },
+        /* {
+          label: 'Roman (DIN Arabic)',
+          value: 'ArabicDIN'
+        }, */
+        {
+          label: 'Roman (DMG Persian)',
+          value: 'PersianDMG'
+        },
+        {
           language: ['Others'],
           status: ['Living', 'Living: Major'],
           invented: ['Derived: Greek'],
@@ -2763,6 +2915,36 @@ export const ScriptMixin = {
             'url': ''
           },
           wikidesc: 'The Russian alphabet uses letters from the Cyrillic script. The modern Russian alphabet consists of 33 letters. The Cyrillic script is a writing system used for various alphabets across Eurasia, particularly in Eastern Europe, the Caucasus, Central Asia, and North Asia. It is based on the Early Cyrillic alphabet developed during the 9th century AD at the Preslav Literary School in the First Bulgarian Empire. It is the basis of alphabets used in various languages, especially those of Orthodox Slavic origin, and non-Slavic languages influenced by Russian.'
+        }
+      ],
+      semiticLatin: [
+        {
+          label: 'Semitic (Aksharamukha)',
+          value: 'Latn'
+        },
+        {
+          label: 'Semitic Typeable (Aksharamukha)',
+          value: 'Type'
+        },
+        {
+          label: 'ISO 259 Hebrew',
+          value: 'ISO259'
+        },
+        {
+          label: 'SBL Hebrew',
+          value: 'HebrewSBL'
+        },
+        {
+          label: 'ISO 233 Arabic',
+          value: 'ISO233'
+        },
+        /* {
+          label: 'Roman (DIN Arabic)',
+          value: 'ArabicDIN'
+        }, */
+        {
+          label: 'DMG Persian',
+          value: 'PersianDMG'
         }
       ],
       scriptsRomanization: [
@@ -3004,6 +3186,9 @@ export const ScriptMixin = {
     scriptIndicList: function () {
       return this.scriptsIndic.map(x => x.value)
     },
+    semiticLatinList: function () {
+      return this.semiticLatin.map(x => x.value)
+    },
     scriptLatinList: function () {
       return this.scriptsLatin.map(x => x.value)
     },
@@ -3011,7 +3196,7 @@ export const ScriptMixin = {
       return this.scriptsSemitic.map(x => x.value)
     },
     scriptSemiticListAll: function () {
-      return this.scriptSemiticList.concat(['Latn', 'Type', 'Urdu', 'Thaana', 'Shahmukhi', 'Hebrew'])
+      return this.scriptSemiticList.concat(['Latn', 'Type', 'Urdu', 'Thaana', 'Shahmukhi', 'Hebrew', 'ISO259', 'ISO233', 'HebrewSBL'])
     },
     compounds: function () {
       var compounds = []

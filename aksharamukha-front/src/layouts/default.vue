@@ -74,6 +74,10 @@
               <q-item-side icon="spellcheck" />
               <q-item-main label="Indic Roman"/>
             </q-item>
+            <q-item to="/roman-semitic">
+              <q-item-side icon="spellcheck" />
+              <q-item-main label="Semitic Roman"/>
+            </q-item>
  <!--            <q-item :to="!scriptSemiticList.includes(script.value) ? '/describe/' + script.value : '/describesemitic/' + script.value"
             v-for="script in scriptAboutList" :key="script.value">
               <q-item-main :label="script.label"/>

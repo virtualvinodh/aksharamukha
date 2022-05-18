@@ -122,6 +122,14 @@ export default [
   },
 
   {
+    path: '/roman-semitic',
+    component: () => import('layouts/default'),
+    children: [
+      { path: '', component: () => import('pages/semitic-latin') }
+    ]
+  },
+
+  {
     path: '/fill',
     component: () => import('layouts/default'),
     children: [

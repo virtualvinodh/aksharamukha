@@ -6,12 +6,12 @@
       </div>
     <div v-for="(char, index) in chars2" :key="char+index" class="col-xs-2 col-lg-1">
           <span :class="script2.toLowerCase()">
-             <span :class="charsrev[index] !== chars1['HK'][index] ? 'text-red-2' : ''">{{char}} </span>
+            <span :class="charsrev[index] !== chars1['Latn'][index] ? 'text-red-2' : ''">{{char}}</span>
           </span>
     </div>
   </div>
       <hr/>
-  <div v-for="script in scriptsRomanization" :key="script.value">
+  <div v-for="script in semiticLatin" :key="script.value">
     <div class="row q-ma-md">
       <div class="col-xs-2 col-lg-1 q-mr-xl">
         {{script.label}}

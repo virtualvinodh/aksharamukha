@@ -48,7 +48,7 @@
 }
 
 .russiancyrillic {
-  font-family: 'Noto Sans Regular' !important;
+  font-family: 'Noto Sans' !important;
 }
 
 .oriyavedic {
@@ -134,7 +134,7 @@
   font-feature-settings: "ss02";
 }
 .tagalog {
-  font-family: "Noto Sans Tagalog" !important
+  font-family: "Open Baybayin" !important
 }
 .tagbanwa {
   font-family: "Noto Sans Tagbanwa" !important;
@@ -489,6 +489,11 @@
 @font-face {
   font-family: 'Noto Sans Syriac Estrangela';
   src: url('./NotoSansSyriacEstrangela-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Open Baybayin';
+  src: url('./OpenBaybayin.otf');
 }
 
 .syre {

@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import {QRadio, QTooltip, QField, QBtnToggle, QToggle, QSelect, QBtn, QOptionGroup, QSlideTransition} from 'quasar'
+import {QRadio, QTooltip, QField, QBtnToggle, QToggle, QSelect, QBtn, QOptionGroup, QSlideTransition, QCollapsible} from 'quasar'
 import Transliterate from '../components/Transliterate'
 import {ScriptMixin} from '../mixins/ScriptMixin'
 
@@ -63,6 +63,7 @@ export default {
     QBtn,
     QOptionGroup,
     QSlideTransition,
+    QCollapsible,
     Transliterate,
     QTooltip
   },
