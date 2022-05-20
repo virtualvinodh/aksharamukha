@@ -220,7 +220,8 @@ export const ScriptMixin = {
       },
       preOptionsGroup: {
         'Tamil': [
-          { label: 'Transcribe Tamil <br/><small><span class="tamil">மதம், நகம்</span> → madam, nagam</small>', value: 'TamilTranscribe' },
+          { label: 'Transcribe Tamil (Standard)<br/><small><span class="tamil">மதம், பேசு</span> → madam, pēsu</small>', value: 'TamilTranscribe' },
+          { label: 'Transcribe Tamil (Dialectal)<br/><small><span class="tamil">மதம், பேசு</span> → madam, pēśu</small>', value: 'TamilTranscribeDialect' },
           { label: '<span class="tamil">க2 க3 க4 → க² க³ க⁴</span>', value: 'TamilNumeralSub' }
         ],
         'Itrans': [
@@ -271,7 +272,8 @@ export const ScriptMixin = {
           { label: 'Schwa deletion (Only word-final) <br/><small><div class="q-mt-sm">राम → rām</div></small>', value: 'SchwaFinalGujarati' }
         ],
         'Bengali': [
-          { label: 'Schwa deletion (Only word-final) <br/><small><div class="q-mt-sm">রাম → rām</div></small>', value: 'SchwaFinalBengali' }
+          { label: 'Schwa deletion (Only word-final) <br/><small><div class="q-mt-sm">রাম → rām</div></small>', value: 'SchwaFinalBengali' },
+          { label: 'য → ẏa & য় → ya', value: 'BengaliSwitchYaYYa' }
         ],
         'Gurmukhi': [
           { label: 'Schwa deletion (Only word-final) <br/><small><div class="q-mt-sm">ਰਾਮ → rām</div</small>>', value: 'SchwaFinalGurmukhi' }
@@ -520,6 +522,7 @@ export const ScriptMixin = {
         ],
         'Bengali': [
           { label: 'য় everywhere<br/><small>যয়াতি যজ্ঞ → য়য়াতি য়জ্ঞ</small>', value: 'BengaliYYA' },
+          { label: 'ẏa → য & ya → য়  ', value: 'BengaliSwitchYaYYa' },
           { label: 'Old Bengali /ra/ <br/><small>র → ৰ</small>', value: 'BengaliOldRA' },
           { label: 'ৰ as /b/ & ব as /v/ <br/>', value: 'BengaliRaBa' },
           { label: 'দৃঢ আষাঢ → দৃঢ় আষাঢ়', value: 'BengaliIntervocalicDDA' },
@@ -3537,6 +3540,25 @@ export const ScriptMixin = {
           preOptions: optionsPre
         }
         this.apiCall.post('/convert', data)
+          .then(function (response) {
+            resolve(response.data)
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      })
+    },
+    convertXMLAsync: function (src, tgt, txt, sourcePreserve, optionsPost, optionsPre) {
+      return new Promise(resolve => {
+        var data = {
+          source: src,
+          target: tgt,
+          text: txt,
+          nativize: !sourcePreserve,
+          postOptions: optionsPost,
+          preOptions: optionsPre
+        }
+        this.apiCall.post('/convert_xml', data)
           .then(function (response) {
             resolve(response.data)
           })

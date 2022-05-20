@@ -29,7 +29,8 @@
       <q-icon name="history" size="25px" v-show="inputPast !== ''" class="print-hide"/>
       </div>
       <q-btn class="q-ma-sm btn2 print-hide col-xs-1 col-md-1" @click="copySource" :data-clipboard-text="textInput.replace(/<br\/>/g, '\n')"> <q-icon name="file_copy" /><q-tooltip>Copy source text</q-tooltip></q-btn>
-      <q-collapsible sublabel="<i>Input Options</i>" icon="settings" dense class="q-mb-sm q-mt-sm">
+      <q-collapsible sublabel="<i>Input Options</i>" icon="settings" dense class="q-mb-sm q-mt-sm"
+       >
     <input-options :inputScript="inputScript" :outputScript="outputScript" :preOptionsInput="preOptions"
       :postOptions="postOptions" v-model="preOptions" @input="convert"></input-options>
       </q-collapsible>

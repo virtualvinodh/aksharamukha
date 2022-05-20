@@ -399,56 +399,15 @@ def describe_list():
     results['script1hk'] = convert(request.json['script1'], 'HK', results['script1'], False,[],[])
     return jsonify(results)
 
-def semiticListTransliterate(charlist, script2, fix=''):
-    results = {}
-
-    results['Latn'] = charlist.replace('،',',').split(',')
-    results['script2'] =  transliterate.process('Latn', script2, charlist, nativize=False).replace('،',',').split(',')
-    results['script2R'] =  transliterate.process(script2, 'Latn', transliterate.process('Latn', script2, charlist, nativize=False))\
-        .replace('،',',').split(',')
-
-    results['script2G'] =  transliterate.process('Brahmi', script2, transliterate.process('Latn', 'Brah', charlist))\
-        .replace('،',',').split(',')
-    results['script2GR'] =  transliterate.process('Brah', 'Latn', transliterate.process('Latn', 'Brah', charlist))\
-        .replace('،',',').split(',')
-
-    for script in GeneralMap.SemiticScripts:
-        if script != 'Latn' and script != 'Arab-Ph' and script != 'Arab-Ga':
-            #print(script)
-            results[script] = transliterate.process('Latn', script, charlist, nativize=False)\
-                .replace('،',',').split(',')
-            results[script + 'R'] = transliterate.process(script, 'Latn', \
-                transliterate.process('Latn', script, charlist, nativize=False), nativize=False)\
-                .replace('،',',').split(',')
-
-    if fix == 'alephA':
-        results['script2R'][0] = 'ʾ'
-    elif fix == 'inherentA':
-        results['script2R'][0] += 'a'
-
-    return results
-
 @app.route('/api/semiticmatrix', methods=['POST', 'GET'])
 def character_matrix_semitic():
-    semitic_json = get_semitic_json()
-
-    charlistCore = 'ʾ, b, g, d, h, w, z, ḥ, ṭ, y, k, l, m, n, s, ʿ, p, ṣ, q, r, š, t'.replace(' ', '')
-
-    charAdditional = 'ḍ, ḏ, ḫ, ġ, ṯ, ẓ, v, f, č, j, ž, ɖ, ʈ, ʂ, ɭ, ɲ, ɳ, ɽ, p̣, kʰ, gʰ, čʰ, jʰ, ʈʰ, ɖʰ, tʰ, dʰ, pʰ, bʰ, ɽʰ, ʔ, ˀy, ˀw'.replace(' ', '')
-
-    charInitVowels = 'â, ā̂, î, ī̂, û, ū̂, ê, ē̂, ô, ō̂, âŵ, âŷ, ˀâ, ˀî'.replace(' ', '')
-
-    charlistVowels = 'la, lā, li, lī, lu, lū, le, lē, lo, lō, l꞉, l̽, lă, lĕ, lŏ, laŷ, laŵ, la̮, lā̮, laⁿ, luⁿ, liⁿ'.replace(' ', '')
-
     script2 = request.json['script2']
 
-    resultsAll = {}
-    resultsAll['core'] = semiticListTransliterate(charlistCore, script2, fix='alephA')
-    resultsAll['adds'] = semiticListTransliterate(charAdditional,  script2)
-    resultsAll['initvows'] = semiticListTransliterate(charInitVowels,  script2)
-    resultsAll['vows'] = semiticListTransliterate(charlistVowels,  script2, fix='inherentA')
+    f = open ('resources/semitic_matrix/semitic_matrix_' + script2  + '.json', 'r', encoding='utf-8')
+    results_final = json.loads(f.read())
+    f.close()
 
-    return jsonify(resultsAll)
+    return jsonify(results_final)
 
 @app.route('/api/describesemitic', methods=['POST', 'GET'])
 def describe_list_semitic():
@@ -626,6 +585,27 @@ def convert_post():
     #print(text)
 
     return text
+
+@app.route('/api/convert_xml', methods=['POST', 'GET'])
+def convert_xml():
+    import copy
+    from lxml import etree
+
+    if 'text' in request.json:
+        parser = etree.XMLParser(ns_clean=True, remove_comments=True)
+        new_root = etree.fromstring(request.json['text'].encode("utf8"), parser)
+
+        #print(new_root.tag)
+
+        for el in new_root.iter():
+            #(el, el.text, type(el.text))
+            if el.text is not None:
+                el.text = convert(request.json['source'], request.json['target'], el.text, request.json['nativize'],
+                request.json['preOptions'], request.json['postOptions'])
+    else:
+        text = ''
+
+    return jsonify(etree.tostring(new_root, encoding='unicode'))
 
 
 @app.route('/api/convert_loop_tgt', methods=['POST', 'GET'])

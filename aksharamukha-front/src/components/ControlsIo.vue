@@ -31,19 +31,22 @@
       </span>
 
     </div>
-    <div class="row">
+    <q-collapsible sublabel="<i>Options</i>" icon="settings" dense class="q-mb-sm q-mt-sm">
+          <div class="q-ma-sm" v-if="typeof preOptionsGroup[inputScript] !== 'undefined'"><i>{{inputScript}} options</i></div>
       <q-option-group
         color="dark"
         type="checkbox"
-        class="col-xs-12 col-lg-3 q-ml-md q-mr-md"
+        inline
         v-model="preOptions[inputScript]"
         @input="update"
         :options="typeof preOptionsGroup[inputScript] !== 'undefined' ? preOptionsGroup[inputScript] : []"
       />
       <span v-if="!(outputScript instanceof Array)">
+          <div class="q-ma-sm"><i>{{outputScript}} options</i></div>
         <q-option-group
           color="dark"
           type="checkbox"
+          inline
           class="col-xs-12 col-lg-3 q-ml-md q-mr-md"
           v-model="postOptions[outputScript]"
           @input="update"
@@ -52,10 +55,11 @@
       </span>
       <span v-else>
         <span v-for="script in outputScript" :key="script" class="col-xs-12 col-lg-3 q-ml-md q-mr-md" v-if="typeof postOptionsGroup[script] !== 'undefined'">
-          <div class="q-ma-sm">{{script}} options</div>
+          <div class="q-ma-sm"><i>{{script}} options</i></div>
         <q-option-group
           color="dark"
           type="checkbox"
+          inline
           class="col-xs-12 col-lg-3 q-ml-md q-mr-md"
           v-model="postOptions[script]"
           @input="update"
@@ -63,8 +67,6 @@
         />
         </span>
       </span>
-    </div>
-    <div class="row">
       <q-option-group
         color="dark"
         type="checkbox"
@@ -83,12 +85,12 @@
         @input="update"
         :options="typeof postOptionsGroupSpecific[outputScript+inputScript] !== 'undefined' ? postOptionsGroupSpecific[outputScript+inputScript] : []"
       />
-    </div>
+    </q-collapsible>
   </div>
 </template>
 
 <script>
-import {QRadio, QField, QBtnToggle, QToggle, QSelect, QBtn, QOptionGroup, QTooltip} from 'quasar'
+import {QRadio, QField, QBtnToggle, QToggle, QSelect, QBtn, QOptionGroup, QTooltip, QCollapsible} from 'quasar'
 import {ScriptMixin} from '../mixins/ScriptMixin'
 
 export default {
@@ -103,7 +105,8 @@ export default {
     QSelect,
     QBtn,
     QOptionGroup,
-    QTooltip
+    QTooltip,
+    QCollapsible
   },
   data () {
     return {
