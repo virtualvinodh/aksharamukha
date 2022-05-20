@@ -1,6 +1,7 @@
 <template>
-     <q-collapsible :sublabel="'<i>Output Options (' + optionCount + ')</i>'" icon="settings" dense class="q-mb-xs q-mt-xs"
-        :style="{'visibility': optionCount === 0 ? 'hidden' : '' }" ref="collapse"
+     <q-collapsible :sublabel="label"
+         icon="settings" dense class="q-mb-xs q-mt-xs"
+        :style="{'visibility': optionCount === 0 ? 'none' : '', 'display': hideSourcePreserve  && optionCount === 0 ? 'none' : ''}" ref="collapse"
      >
     <div class="col-xs-12 col-md-12 print-hide">
       <q-option-group
@@ -13,7 +14,7 @@
         :options="postOptionList"
       />
     </div>
-      <span v-if="showSourcePreserve">
+      <span v-if="showSourcePreserve && !hideSourcePreserve">
         <span>
             <q-toggle color="dark" v-model="sourcePreserve" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-md print-hide" @input="convert" /><q-tooltip>Preserve the source as-is and don't change the text to improve readability. May use archaic characters and/or diacritics. <br/><br/><div v-if="scriptSemiticList.includes(inputScript) || ['Urdu', 'Thaana', 'Hebrew', 'Shahmukhi', 'Sindhi'].includes(inputScript)">This also preserves the semitic consonants using the nukta (if present in the output script).</div></q-tooltip>
         </span>
@@ -30,7 +31,7 @@ import {ScriptMixin} from '../mixins/ScriptMixin'
 export default {
   // name: 'ComponentName',
   mixins: [ScriptMixin],
-  props: ['inputScript', 'outputScript', 'postOptionsInput', 'convertText', 'sourcePreserveInput'],
+  props: ['inputScript', 'outputScript', 'postOptionsInput', 'convertText', 'sourcePreserveInput', 'hideSourcePreserve', 'showscriptName'],
   components: {
     QRadio,
     QField,
@@ -53,8 +54,20 @@ export default {
   mounted: function () {
   },
   computed: {
+    label: function () {
+      if (this.showscriptName) {
+        return '<i>' + this.outputScript + ' output options (' + this.optionCount + ')</i>'
+      } else {
+        return '<i>Output options (' + this.optionCount + ')</i>'
+      }
+    },
     optionCount: function () {
-      var optionCount = this.showSourcePreserve + this.postOptionList.length
+      var optionCount
+      if (!this.hideSourcePreserve) {
+        optionCount = this.showSourcePreserve + this.postOptionList.length
+      } else {
+        optionCount = this.postOptionList.length
+      }
       return optionCount
     },
     showSourcePreserve: function () {
@@ -100,7 +113,11 @@ export default {
       this.postOptions = this.filterRadio(this.postOptions, this.outputScript)
 
       // console.log(this.postOptions)
-      this.$emit('input', [this.postOptions, this.sourcePreserve])
+      if (!this.hideSourcePreserve) {
+        this.$emit('input', [this.postOptions, this.sourcePreserve])
+      } else {
+        this.$emit('input', this.postOptions)
+      }
     }
   }
 }

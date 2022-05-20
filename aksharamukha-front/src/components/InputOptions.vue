@@ -1,6 +1,6 @@
 <template>
-      <q-collapsible :sublabel="'<i>Input Options (' + preOptionList.length + ')</i>'" icon="settings" dense class="q-mb-xs q-mt-xs"
-      :style="{'visibility': preOptionList.length === 0 ? 'hidden' : '' }" ref="collapse2"
+      <q-collapsible :sublabel="'<i>Input options (' + preOptionList.length + ')</i>'" icon="settings" dense class="q-mb-xs q-mt-xs"
+      :style="{'visibility': preOptionList.length === 0 ? 'hidden' : '', 'display': hideSourcePreserve  && preOptionList.length === 0 ? 'none' : '' }" ref="collapse2"
       >
       <q-option-group
         color="dark"
@@ -24,7 +24,7 @@ import {ScriptMixin} from '../mixins/ScriptMixin'
 export default {
   // name: 'ComponentName',
   mixins: [ScriptMixin],
-  props: ['inputScript', 'outputScript', 'preOptionsInput', 'postOptions'],
+  props: ['inputScript', 'outputScript', 'preOptionsInput', 'postOptions', 'hideSourcePreserve'],
   components: {
     QRadio,
     QField,

@@ -31,67 +31,29 @@
       </span>
 
     </div>
-    <q-collapsible sublabel="<i>Options</i>" icon="settings" dense class="q-mb-sm q-mt-sm">
-          <div class="q-ma-sm" v-if="typeof preOptionsGroup[inputScript] !== 'undefined'"><i>{{inputScript}} options</i></div>
-      <q-option-group
-        color="dark"
-        type="checkbox"
-        inline
-        v-model="preOptions[inputScript]"
-        @input="update"
-        :options="typeof preOptionsGroup[inputScript] !== 'undefined' ? preOptionsGroup[inputScript] : []"
-      />
+    <input-options :inputScript="inputScript" :outputScript="outputScript[0]" :preOptionsInput="preOptions[inputScript]"
+    :hideSourcePreserve="true"
+      v-model="preOptions[inputScript]" @input="update"></input-options>
       <span v-if="!(outputScript instanceof Array)">
-          <div class="q-ma-sm"><i>{{outputScript}} options</i></div>
-        <q-option-group
-          color="dark"
-          type="checkbox"
-          inline
-          class="col-xs-12 col-lg-3 q-ml-md q-mr-md"
-          v-model="postOptions[outputScript]"
-          @input="update"
-          :options="typeof postOptionsGroup[outputScript] !== 'undefined' ? postOptionsGroup[outputScript] : []"
-        />
+    <output-options :inputScript="inputScript" :outputScript="outputScript" :postOptionsInput="postOptions[outputScript]"
+        :hideSourcePreserve="true" @input="update"
+        v-model="postOptions[outputScript]"></output-options>
       </span>
       <span v-else>
-        <span v-for="script in outputScript" :key="script" class="col-xs-12 col-lg-3 q-ml-md q-mr-md" v-if="typeof postOptionsGroup[script] !== 'undefined'">
-          <div class="q-ma-sm"><i>{{script}} options</i></div>
-        <q-option-group
-          color="dark"
-          type="checkbox"
-          inline
-          class="col-xs-12 col-lg-3 q-ml-md q-mr-md"
-          v-model="postOptions[script]"
-          @input="update"
-          :options="typeof postOptionsGroup[script] !== 'undefined' ? postOptionsGroup[script] : []"
-        />
+        <span v-for="script in outputScript" :key="script">
+          <output-options :inputScript="inputScript" :outputScript="script" :postOptionsInput="postOptions[script]"
+       :hideSourcePreserve="true" :showscriptName="true" @input="update"
+        v-model="postOptions[script]"></output-options>
         </span>
       </span>
-      <q-option-group
-        color="dark"
-        type="checkbox"
-        inline
-        class="col-xs-12 col-lg-3 q-ml-md q-mr-md"
-        v-model="preOptions"
-        @input="update"
-        :options="typeof preOptionsGroupSpecific[inputScript+outputScript] !== 'undefined' ? preOptionsGroupSpecific[inputScript+outputScript] : []"
-      />
-      <q-option-group
-        color="dark"
-        type="checkbox"
-        inline
-        class="col-xs-12 col-lg-3 q-ml-md q-mr-md"
-        v-model="postOptions"
-        @input="update"
-        :options="typeof postOptionsGroupSpecific[outputScript+inputScript] !== 'undefined' ? postOptionsGroupSpecific[outputScript+inputScript] : []"
-      />
-    </q-collapsible>
   </div>
 </template>
 
 <script>
 import {QRadio, QField, QBtnToggle, QToggle, QSelect, QBtn, QOptionGroup, QTooltip, QCollapsible} from 'quasar'
 import {ScriptMixin} from '../mixins/ScriptMixin'
+import InputOptions from '../components/InputOptions'
+import OutputOptions from '../components/OutputOptions'
 
 export default {
   // name: 'ComponentName',
@@ -106,7 +68,9 @@ export default {
     QBtn,
     QOptionGroup,
     QTooltip,
-    QCollapsible
+    QCollapsible,
+    InputOptions,
+    OutputOptions
   },
   data () {
     return {
@@ -129,6 +93,7 @@ export default {
   },
   methods: {
     update: function () {
+      console.log('here updating the thigns')
       var options = {}
 
       if (!this.multiple) {
@@ -144,6 +109,8 @@ export default {
         options['postOptions'] = this.postOptions
         options['preOptions'] = this.preOptions
       }
+
+      console.log(options)
 
       this.$emit('input', options)
     }

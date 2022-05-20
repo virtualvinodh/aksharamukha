@@ -141,20 +141,18 @@ In case of multiple outputs for the primary, the text is split into lines by def
        <q-btn icon="share" label="text" class="q-ma-sm" @click="shareCordovaText" v-if="$q.platform.is.cordova"/> <q-btn icon="share" label="image" class="q-ma-sm" @click="imageConvert(shareCordovaImage.bind(this))" v-if="$q.platform.is.cordova" /> <br/>
       <span><q-toggle color="dark" v-model="sourcePreserveComposer" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-md print-hide" @input="convert" /><q-tooltip>Preserve the source as-is and don't change the text to improve readability</q-tooltip></span> <br/> <br/>
 
-    <br/><br/>
     <span v-for="scriptO in outputScript1" :key="'o'+scriptO" class="print-hide" v-if="typeof postOptionsGroup[scriptO] !== 'undefined'">
-          {{scriptO}} Options <br/>
 
     <output-options :inputScript="inputScriptComposer" :outputScript="scriptO" :postOptionsInput="postOptionsScriptComposer[scriptO]"
-       :convertText="convertText"
+       :convertText="convertText" :hideSourcePreserve="true" :showscriptName="true"
         v-model="postOptionsScriptComposer[scriptO]" @input="convert"></output-options>
 
     </span>
 
         <span v-for="scriptO in outputScript2" :key="scriptO" class="print-hide" v-if="typeof postOptionsGroup[scriptO] !== 'undefined'">
-          {{scriptO}} Options <br/>
-              <output-options :inputScriptComposer="inputScriptComposer" :outputScript="scriptO" :postOptionsInput="postOptionsScriptComposer[scriptO]"
-       :convertText="convertText"
+
+              <output-options :inputScript="inputScriptComposer" :outputScript="scriptO" :postOptionsInput="postOptionsScriptComposer[scriptO]"
+       :convertText="convertText" :hideSourcePreserve="true" :showscriptName="true"
         v-model="postOptionsScriptComposer[scriptO]" @input="convert"></output-options>
         </span>
       </div>

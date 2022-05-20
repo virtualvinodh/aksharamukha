@@ -29,7 +29,7 @@
       <q-icon name="history" size="25px" v-show="inputPast !== ''" class="print-hide"/>
       </div>
       <q-btn class="q-ma-sm q-mt-md btn2 print-hide col-xs-1 col-md-1" @click="copySource" :data-clipboard-text="textInput.replace(/<br\/>/g, '\n')"> <q-icon name="file_copy" /><q-tooltip>Copy source text</q-tooltip></q-btn>
-    <input-options :inputScript="inputScript" :outputScript="outputScript" :preOptionsInput="preOptions"
+    <input-options :inputScript="inputScript" :outputScript="outputScript" :preOptionsInput="preOptions" :showscriptName="false"
       :postOptions="postOptions" v-model="preOptions" @input="convert"></input-options>
     <q-input
       v-model.trim="textInput"
@@ -101,8 +101,8 @@
  <div class="q-mt-sm"><output-buttons @fontsizeinc="fontSize += 20" @fontsizedec="fontSize -= 20"
        @printdoc="printDocument" @screenshot="imageConvert(downloadImage.bind(this))" @copytext="copy" :convertText="convertText" :content="downHTML"></output-buttons></div>
       <q-btn icon="share" label="text" class="q-ma-sm" @click="shareCordovaText" v-if="$q.platform.is.cordova"/> <q-btn icon="share" label="image" class="q-ma-sm" @click="imageConvert(shareCordovaImage.bind(this))" v-if="$q.platform.is.cordova" />
-    <output-options :inputScript="inputScript" :outputScript="outputScript" :postOptionsInput="postOptions" :sourcePreserveInput="sourcePreserve"
-       :convertText="convertText"
+    <output-options :inputScript="inputScript" :outputScript="outputScript" :postOptionsInput="postOptions" :sourcePreserveInput="sourcePreserve" :showscriptName="false"
+       :convertText="convertText" :hideSourcePreserve="false"
         @input="convertOutputOptions($event)" ></output-options>
     <div
       ref="brahmiText"

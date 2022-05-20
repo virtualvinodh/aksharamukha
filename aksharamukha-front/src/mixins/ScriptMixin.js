@@ -3037,6 +3037,10 @@ export const ScriptMixin = {
           value: 'osd'
         },
         {
+          label: 'Arabic',
+          value: 'ara'
+        },
+        {
           label: 'Assamese',
           value: 'asm'
         },
@@ -3069,8 +3073,16 @@ export const ScriptMixin = {
           value: 'guj'
         },
         {
+          label: 'Hebrew',
+          value: 'heb'
+        },
+        {
           label: 'Javanese',
           value: 'jav'
+        },
+        {
+          label: 'Japanese',
+          value: 'jpn'
         },
         {
           label: 'Kannada',
@@ -3097,12 +3109,20 @@ export const ScriptMixin = {
           value: 'ori'
         },
         {
+          label: 'Persian',
+          value: 'fas'
+        },
+        {
           label: 'Punjabi',
           value: 'pan'
         },
         {
           label: 'Sinhala',
           value: 'sin'
+        },
+        {
+          label: 'Syriac',
+          value: 'syr'
         },
         {
           label: 'Tamil',
@@ -3121,12 +3141,12 @@ export const ScriptMixin = {
           value: 'bod'
         },
         {
-          label: 'Tibetan',
-          value: 'bod'
-        },
-        {
           label: 'Urdu',
           value: 'urd'
+        },
+        {
+          label: 'Yiddish',
+          value: 'yid'
         }
       ]
     }
