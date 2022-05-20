@@ -1,5 +1,7 @@
 <template>
-  <div>
+     <q-collapsible :sublabel="'<i>Output Options (' + optionCount + ')</i>'" icon="settings" dense class="q-mb-xs q-mt-xs"
+        :style="{'visibility': optionCount === 0 ? 'hidden' : '' }" ref="collapse"
+     >
     <div class="col-xs-12 col-md-12 print-hide">
       <q-option-group
         color="dark"
@@ -8,52 +10,27 @@
         class="q-ml-sm q-mb-sm q-mt-sm print-hide"
         v-model="postOptions"
         @input="convert"
-        :options="typeof postOptionsGroup[outputScript] !== 'undefined' ? postOptionsGroup[outputScript] : []"
-        v-show="typeof postOptionsGroup[outputScript] !== 'undefined'"
-      />
-      <q-option-group
-        color="dark"
-        type="checkbox"
-        inline
-        class="q-ml-sm q-mb-sm q-mt-sm print-hide"
-        v-model="postOptions"
-        @input="convert"
-        :options="typeof postOptionsIndic[outputScript] !== 'undefined' ? postOptionsIndic[outputScript] : []"
-        v-show="typeof postOptionsIndic[outputScript] !== 'undefined' && scriptIndicList.includes(inputScript)"
-      />
-      <q-option-group
-        color="dark"
-        type="checkbox"
-        inline
-        class="q-ml-sm q-mb-sm q-mt-sm print-hide"
-        v-model="postOptions"
-        @input="convert"
-        :options="typeof postOptionsSemitic[outputScript] !== 'undefined' ? postOptionsSemitic[outputScript] : []"
-        v-show="typeof postOptionsSemitic[outputScript] !== 'undefined' && scriptSemiticListAll.includes(inputScript)"
-      />
-      <q-option-group
-        color="dark"
-        type="checkbox"
-        inline
-        class="q-ml-sm q-mb-sm print-hide"
-        v-model="postOptions"
-        @input="convert"
-        :options="typeof postOptionsGroupSpecific[outputScript+inputScript] !== 'undefined' ? postOptionsGroupSpecific[outputScript+inputScript] : []"
-        v-show="typeof postOptionsGroupSpecific[outputScript+inputScript] !== 'undefined'"
+        :options="postOptionList"
       />
     </div>
-  </div>
+      <span v-if="showSourcePreserve">
+        <span>
+            <q-toggle color="dark" v-model="sourcePreserve" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-md print-hide" @input="convert" /><q-tooltip>Preserve the source as-is and don't change the text to improve readability. May use archaic characters and/or diacritics. <br/><br/><div v-if="scriptSemiticList.includes(inputScript) || ['Urdu', 'Thaana', 'Hebrew', 'Shahmukhi', 'Sindhi'].includes(inputScript)">This also preserves the semitic consonants using the nukta (if present in the output script).</div></q-tooltip>
+        </span>
+        <small><div class="q-ml-xl print-hide" v-html="preserveSourceExampleOut[outputScript]"></div></small>
+      </span>
+     </q-collapsible>
 </template>
 
 <script>
-import {QRadio, QTooltip, QField, QBtnToggle, QToggle, QSelect, QBtn, QOptionGroup, QSlideTransition} from 'quasar'
+import {QRadio, QTooltip, QField, QBtnToggle, QToggle, QSelect, QBtn, QOptionGroup, QSlideTransition, QCollapsible} from 'quasar'
 import Transliterate from '../components/Transliterate'
 import {ScriptMixin} from '../mixins/ScriptMixin'
 
 export default {
   // name: 'ComponentName',
   mixins: [ScriptMixin],
-  props: ['inputScript', 'outputScript', 'postOptionsInput', 'convertText'],
+  props: ['inputScript', 'outputScript', 'postOptionsInput', 'convertText', 'sourcePreserveInput'],
   components: {
     QRadio,
     QField,
@@ -64,18 +41,58 @@ export default {
     QOptionGroup,
     QSlideTransition,
     Transliterate,
-    QTooltip
+    QTooltip,
+    QCollapsible
   },
   data () {
     return {
-      postOptions: this.postOptionsInput
+      postOptions: this.postOptionsInput,
+      sourcePreserve: this.sourcePreserveInput
     }
   },
   mounted: function () {
   },
+  computed: {
+    optionCount: function () {
+      var optionCount = this.showSourcePreserve + this.postOptionList.length
+      return optionCount
+    },
+    showSourcePreserve: function () {
+      var sourcePreserveExists = typeof this.preserveSourceExampleOut[this.outputScript] !== 'undefined'
+      var semiticToIndic = (this.scriptSemiticList.includes(this.inputScript) || ['Urdu', 'Thaana', 'Hebrew', 'Shahmukhi', 'Sindhi'].includes(this.inputScript)) && this.scriptIndicList.include(this.outputScript)
+      return sourcePreserveExists || semiticToIndic
+    },
+    postOptionList: function () {
+      var postOptionList = []
+      if (typeof this.postOptionsGroup[this.outputScript] !== 'undefined') {
+        postOptionList = postOptionList.concat(this.postOptionsGroup[this.outputScript])
+      }
+      if (typeof this.postOptionsIndic[this.outputScript] !== 'undefined' && this.scriptIndicList.includes(this.inputScript)) {
+        postOptionList = postOptionList.concat(this.postOptionsIndic[this.outputScript])
+      }
+      if (typeof this.postOptionsSemitic[this.outputScript] !== 'undefined' && this.scriptSemiticListAll.includes(this.inputScript)) {
+        postOptionList = postOptionList.concat(this.postOptionsSemitic[this.outputScript])
+      }
+      if (typeof this.postOptionsGroupSpecific[this.outputScript + this.inputScript] !== 'undefined') {
+        postOptionList = postOptionList.concat(this.postOptionsGroupSpecific[this.outputScript + this.inputScript])
+      }
+
+      return postOptionList
+    }
+  },
   watch: {
+    optionCount (newV, oldV) {
+      if (newV === 0) {
+        if (typeof this.$refs.collapse !== 'undefined') {
+          this.$refs.collapse.hide()
+        }
+      }
+    },
     postOptionsInput: function () {
       this.postOptions = this.postOptionsInput
+    },
+    sourcePreserveInput: function () {
+      this.sourcePreserve = this.sourcePreserveInput
     }
   },
   methods: {
@@ -83,7 +100,7 @@ export default {
       this.postOptions = this.filterRadio(this.postOptions, this.outputScript)
 
       // console.log(this.postOptions)
-      this.$emit('input', this.postOptions)
+      this.$emit('input', [this.postOptions, this.sourcePreserve])
     }
   }
 }

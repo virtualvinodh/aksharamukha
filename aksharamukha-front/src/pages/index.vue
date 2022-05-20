@@ -28,12 +28,9 @@
        @click="updateHist" dense> <small>{{getScriptObject(inputPast).label}}</small> </q-btn>
       <q-icon name="history" size="25px" v-show="inputPast !== ''" class="print-hide"/>
       </div>
-      <q-btn class="q-ma-sm btn2 print-hide col-xs-1 col-md-1" @click="copySource" :data-clipboard-text="textInput.replace(/<br\/>/g, '\n')"> <q-icon name="file_copy" /><q-tooltip>Copy source text</q-tooltip></q-btn>
-      <q-collapsible sublabel="<i>Input Options</i>" icon="settings" dense class="q-mb-sm q-mt-sm"
-       >
+      <q-btn class="q-ma-sm q-mt-md btn2 print-hide col-xs-1 col-md-1" @click="copySource" :data-clipboard-text="textInput.replace(/<br\/>/g, '\n')"> <q-icon name="file_copy" /><q-tooltip>Copy source text</q-tooltip></q-btn>
     <input-options :inputScript="inputScript" :outputScript="outputScript" :preOptionsInput="preOptions"
       :postOptions="postOptions" v-model="preOptions" @input="convert"></input-options>
-      </q-collapsible>
     <q-input
       v-model.trim="textInput"
       type="textarea"
@@ -104,16 +101,9 @@
  <div class="q-mt-sm"><output-buttons @fontsizeinc="fontSize += 20" @fontsizedec="fontSize -= 20"
        @printdoc="printDocument" @screenshot="imageConvert(downloadImage.bind(this))" @copytext="copy" :convertText="convertText" :content="downHTML"></output-buttons></div>
       <q-btn icon="share" label="text" class="q-ma-sm" @click="shareCordovaText" v-if="$q.platform.is.cordova"/> <q-btn icon="share" label="image" class="q-ma-sm" @click="imageConvert(shareCordovaImage.bind(this))" v-if="$q.platform.is.cordova" />
-     <q-collapsible sublabel="<i>Output Options</i>" icon="settings" dense class="q-mb-sm q-mt-sm">
-    <output-options :inputScript="inputScript" :outputScript="outputScript" :postOptionsInput="postOptions"
+    <output-options :inputScript="inputScript" :outputScript="outputScript" :postOptionsInput="postOptions" :sourcePreserveInput="sourcePreserve"
        :convertText="convertText"
-        v-model="postOptions" @input="convert" ></output-options>
-          <span v-if="typeof preserveSourceExampleOut[outputScript] !== 'undefined' || scriptSemiticList.includes(inputScript) || ['Urdu', 'Thaana', 'Hebrew', 'Shahmukhi', 'Sindhi'].includes(inputScript)">
-        <span><q-toggle color="dark" v-model="sourcePreserve" label="Preserve source" class="q-ml-sm q-mb-sm q-mt-md print-hide" @input="convert" /><q-tooltip>Preserve the source as-is and don't change the text to improve readability. May use archaic characters and/or diacritics. <br/><br/><div v-if="scriptSemiticList.includes(inputScript) || ['Urdu', 'Thaana', 'Hebrew', 'Shahmukhi', 'Sindhi'].includes(inputScript)">This also preserves the semitic consonants using the nukta (if present in the output script).</div></q-tooltip>
-        </span>
-        <small><div class="q-ml-xl print-hide" v-html="preserveSourceExampleOut[outputScript]"></div></small>
-      </span>
-     </q-collapsible>
+        @input="convertOutputOptions($event)" ></output-options>
     <div
       ref="brahmiText"
       class="text-output col-xs-12 col-md-12 q-pa-md q-pr-lg bg-grey-1 "
@@ -249,7 +239,8 @@ export default {
       ocrProgress: 0,
       pdfProgress: '',
       ocrStatus: '',
-      ocrLang: 'osd'
+      ocrLang: 'osd',
+      postOptionsSourcePreserve: [[], false]
     }
   },
   mounted () {
@@ -308,6 +299,8 @@ export default {
     } else {
       this.scrollExists = false
     }
+
+    this.postOptionsSourcePreserve = [this.postOptions, this.sourcePreserve]
   },
   updated: function () {
     if (window.innerWidth > document.body.clientWidth) {
@@ -374,6 +367,11 @@ export default {
         })
       })
     }, */
+    convertOutputOptions: function (event) {
+      this.postOptions = event[0]
+      this.sourcePreserve = event[1]
+      this.convert()
+    },
     downHTML: function () {
       this.downloadHTML(this.$refs.brahmiText.innerHTML)
     },
@@ -765,6 +763,7 @@ export default {
         this.postOptions = this.postOptions.filter(x => x !== 'urduRemoveInherent')
       }
 
+      console.log('Source Preserve usage is ' + this.sourcePreserve)
       var data = {
         source: this.inputScript,
         target: this.outputScript,
