@@ -10,7 +10,7 @@
         v-model="inputScript"
         placeholder="Input Script"
         class="col-xs-11 col-lg-3 q-ma-md"
-        :options="inputindic ? scriptsIndic: scripts"
+        :options="inputindic ? scriptsIndic.concat(scriptsSemitic): scripts"
       />
     <q-select
         filter

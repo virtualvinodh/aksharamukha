@@ -227,6 +227,9 @@ export const ScriptMixin = {
         'Itrans': [
           { label: 'E/O for long, e/o for short', value: 'swapEeItrans' }
         ],
+        'Burmese': [
+          { label: 'Segment Burmese Syllables <br/><small><span class="burmese">လေထဲပျော် → လေ ထဲ ပျော်</span>', value: 'segmentBurmeseSyllables' }
+        ],
         'ISO': [
           { label: 'Treat e/o as long', value: 'longEOISO' },
           { label: '<i>tat tvam asi</i> → <i>tattvamasi</i>', value: 'joinVowelConsISO' }
@@ -360,6 +363,9 @@ export const ScriptMixin = {
       postOptionsGroupSpecific: {
         'DevanagariLimbu': [
           { label: 'Limbu Devanagari conventions<small><br/><span class="limbu">ᤀᤧ ᤀᤨ ᤀᤧ᤺ ᤁᤧ ᤁᤨ ᤁᤧ᤺</span> → <span class="limbudev">ए़ ओ़ ए़ः के़ को़ के़ः</span></small>', value: 'LimbuDevanagariConvention' }
+        ],
+        'BurmeseALALCBurmese': [
+          { label: 'Join syllables<small><br/><span>le thai pyo‘ </span> → <span class="burmese">လေထဲပျော်</span></small>', value: 'removeSegmentSpacesBurmese' }
         ],
         'TamilSaurashtra': [
           { label: 'Convert Saurashtra Haaru as :<small><br/><span class="saurashtra">ꢥꢴꢷ</span> → <span class="tamil">நீ:</span></small>', value: 'SaurastraHaaruColon' }
@@ -2900,6 +2906,10 @@ export const ScriptMixin = {
         {
           label: 'Roman (DMG Persian)',
           value: 'PersianDMG'
+        },
+        {
+          label: 'Roman (LoC Burmese)',
+          value: 'ALALCBurmese'
         },
         {
           language: ['Others'],
