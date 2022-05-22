@@ -20,11 +20,10 @@
         Language Capability
       </q-btn>
     </div>
-    <div class="q-ma-sm">
-    <q-collapsible label="Click here for additional filters" icon="category" :opened="false">
+    <q-collapsible sublabel="Filters" icon="settings" :opened="false">
       <filter-tags v-model="tagsActive"></filter-tags>
     </q-collapsible>
-    </div>
+    <q-collapsible sublabel="Sample" icon="settings" :opened="false">
     <q-btn-toggle v-model="type" :options="typeoptions"  toggle-color="dark" class="col-md-2 q-ma-md"
        @input="getLetters"></q-btn-toggle>
 
@@ -107,7 +106,8 @@
       <!-- <div style="text-align: right" class="q-ma-md">
         <span class="text-red-4"> X</span> : Approximate equivalent <br/>
       </div><br/> -->
-  <div class="q-body-1 q-mt-md" v-if="$q.platform.is.mobile"> Tap on the text to view more information about the script. </div><br/>
+    </q-collapsible>
+  <div class="q-body-1 q-mt-md"> Tap on the text to view more information about the script. You can also change the categorization, filter scripts, and select the sample character/text by adjusting the default settings above. </div><br/>
   <transition-group
    enter-active-class="animated fadeIn"
    leave-active-class="animated fadeOut"
@@ -145,7 +145,7 @@
     <h5 class="q-mb-lg q-mt-sm">{{scriptcurrent.label}}</h5>
     <div class="q-ma-md">
     <span class="quotetext"><big><div :class="scriptcurrent.value.toLowerCase()" v-if="!scriptSemiticList.includes(scriptcurrent.value) && scriptcurrent.value != 'Hebrew'"><transliterate :text="$q.platform.is.mobile ? mobiletext : maintext"
-      :src="script2" :tgt="scriptcurrent.value"> </transliterate></div></big></span>
+      :src="'IAST'" :tgt="scriptcurrent.value"> </transliterate></div></big></span>
     <span class="quotetext"><big><div :class="scriptcurrent.value.toLowerCase()" v-if="scriptSemiticList.includes(scriptcurrent.value) || scriptcurrent.value == 'Hebrew'"><transliterate :text="$q.platform.is.mobile ? hebrewTextShort : hebrewTextLong"
       :src="'Hebr'" :tgt="scriptcurrent.value"> </transliterate></div></big></span>
       </div>

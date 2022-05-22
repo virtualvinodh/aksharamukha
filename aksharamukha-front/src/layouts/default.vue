@@ -64,12 +64,23 @@
           <q-item-side icon="cloud upload" />
           <q-item-main label="Convert Files (Batch)"/>
         </q-item> -->
-        <q-collapsible icon="keyboard" label="Input (Beta)" >
-            <q-item :to="'/input/' + script.value" v-for="script in scriptsIndic" :key="script.value">
-              <q-item-main :label="script.label"/>
+            <q-item to="/keyboards">
+              <q-item-side icon="keyboard" />
+              <q-item-main label="Input (IME)"/>
             </q-item>
-        </q-collapsible>
         <hr/>
+        <q-item to="/explore">
+          <q-item-side icon="navigation" />
+            <q-item-main label="Scripts Info"/>
+          </q-item>
+        <q-item to="/script-matrix">
+          <q-item-side icon="table chart" />
+            <q-item-main label="Indic Matrix"/>
+          </q-item>
+        <q-item to="/semitic-matrix">
+          <q-item-side icon="table chart" />
+            <q-item-main label="Semitic Matrix"/>
+          </q-item>
             <q-item to="/roman">
               <q-item-side icon="spellcheck" />
               <q-item-main label="Indic Roman"/>
@@ -83,18 +94,6 @@
               <q-item-main :label="script.label"/>
             </q-item>
         </q-collapsible> -->
-        <q-item to="/explore">
-          <q-item-side icon="navigation" />
-            <q-item-main label="Scripts Info"/>
-          </q-item>
-        <q-item to="/script-matrix">
-          <q-item-side icon="table chart" />
-            <q-item-main label="Indic Matrix"/>
-          </q-item>
-        <q-item to="/semitic-matrix">
-          <q-item-side icon="table chart" />
-            <q-item-main label="Semitic Matrix"/>
-          </q-item>
         <q-collapsible icon="book" label="Sample Texts"  >
             <q-item :to="'/texts/' + text.path" v-for="text in texts" :key="text.path">
               <q-item-main :label="text.name"/>

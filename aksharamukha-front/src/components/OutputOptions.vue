@@ -72,7 +72,7 @@ export default {
     },
     showSourcePreserve: function () {
       var sourcePreserveExists = typeof this.preserveSourceExampleOut[this.outputScript] !== 'undefined'
-      var semiticToIndic = (this.scriptSemiticList.includes(this.inputScript) || ['Urdu', 'Thaana', 'Hebrew', 'Shahmukhi', 'Sindhi'].includes(this.inputScript)) && this.scriptIndicList.include(this.outputScript)
+      var semiticToIndic = (this.scriptSemiticList.includes(this.inputScript) || ['Urdu', 'Thaana', 'Hebrew', 'Shahmukhi', 'Sindhi'].includes(this.inputScript)) && this.scriptIndicList.includes(this.outputScript)
       return sourcePreserveExists || semiticToIndic
     },
     postOptionList: function () {

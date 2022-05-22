@@ -364,7 +364,7 @@ export const ScriptMixin = {
         'DevanagariLimbu': [
           { label: 'Limbu Devanagari conventions<small><br/><span class="limbu">ᤀᤧ ᤀᤨ ᤀᤧ᤺ ᤁᤧ ᤁᤨ ᤁᤧ᤺</span> → <span class="limbudev">ए़ ओ़ ए़ः के़ को़ के़ः</span></small>', value: 'LimbuDevanagariConvention' }
         ],
-        'BurmeseALALCBurmese': [
+        'BurmeseIASTLOC': [
           { label: 'Join syllables<small><br/><span>le thai pyo‘ </span> → <span class="burmese">လေထဲပျော်</span></small>', value: 'removeSegmentSpacesBurmese' }
         ],
         'TamilSaurashtra': [
@@ -1985,8 +1985,8 @@ export const ScriptMixin = {
           omnicode: 'tagalog',
           wikicode: 'Baybayin',
           font: {
-            'name': 'Noto Sans Tagalog',
-            'url': 'Noto Sans Tagalog'
+            'name': 'Open Baybayin',
+            'url': 'https://github.com/ctrlcctrlv/OpenBaybayin/'
           },
           language: ['Others'],
           status: ['Living', 'Living: Minor'],
@@ -2907,10 +2907,10 @@ export const ScriptMixin = {
           label: 'Roman (DMG Persian)',
           value: 'PersianDMG'
         },
-        {
+        /* {
           label: 'Roman (LoC Burmese)',
-          value: 'ALALCBurmese'
-        },
+          value: 'IASTLOC'
+        }, */
         {
           language: ['Others'],
           status: ['Living', 'Living: Major'],

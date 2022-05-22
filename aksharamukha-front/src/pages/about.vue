@@ -12,7 +12,7 @@
         </div>
               <div class=""> — The young Buddha to his teacher (Lalitavistara Sutra) </div>
         </div>
-        <div class="q-body-1">Aksharamukha aims to provide script conversion between various scripts. It also specifically provides lossless transliteration between the main Indian scripts (along with Sinhala). Apart from the simple mapping of characters, Aksharamukha also attempts to implement various script/language-specific orthographic conventions (where known) such as vowel lengths, gemination and nasalization. It also provides several customization options to fine-tune and get the desired orthography.</div> <br/>
+        <div class="q-body-1">Aksharamukha aims to facilitate conversion between various scripts (also called as transliteration). It also specifically provides lossless transliteration between the main Indian scripts (along with Sinhala). Apart from the simple mapping of characters, Aksharamukha also attempts to implement various script/language-specific orthographic conventions (where known) such as vowel lengths, gemination and nasalization. It also provides several customization options to fine-tune and get the desired orthography.</div> <br/>
 
         <div class="q-body-1"><i>Aksharamukha as of now supports <router-link to="/script-matrix">{{scriptAboutList.length}} scripts</router-link> and <router-link to="/roman">{{scriptsLatin.length - 2}} romanization</router-link> methods.</i> The scripts supported are:</div> <br/>
 
@@ -20,7 +20,7 @@
         :to="!scriptSemiticList.includes(script.value) ? '/describe/' + script.value : '/describesemitic/' + script.value">
         {{script.label}}</router-link>, </span></i></div> <br/>
 
-        <div class="q-body-1">The Romanization Formats supported are: <i><span v-for="script in scriptsRomanization" :key="script.value">{{script.label}}, </span> Roman (Semitic)</i></div> <br/>
+        <div class="q-body-1">The Indic Romanization Formats supported are: <i><span v-for="script in scriptsRomanization" :key="script.value">{{script.label}}, </span></i>. The Semitic Romanization Formats supported are: <i><span v-for="script in semiticLatin" :key="script.value">{{script.label}}, </span></i></div> <br/>
 
         <div class="q-body-1">Aksharamukha is also available as a <a href="https://pypi.org/project/aksharamukha/">Python package</a>. You can read the usage instructions <a href="http://aksharamukha.appspot.com/#/python">here</a>. Additionally, there is a <a href="http://aksharamukha.appspot.com/#/web-api">REST API</a> for reasonable public consumption.
         </div><br/>

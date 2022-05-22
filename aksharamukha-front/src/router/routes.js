@@ -114,6 +114,14 @@ export default [
   },
 
   {
+    path: '/keyboards',
+    component: () => import('layouts/default'),
+    children: [
+      { path: '', component: () => import('pages/keyboards') }
+    ]
+  },
+
+  {
     path: '/roman',
     component: () => import('layouts/default'),
     children: [

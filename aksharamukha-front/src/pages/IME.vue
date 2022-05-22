@@ -3,6 +3,7 @@
   <q-page class="q-pa-md">
 <q-tabs color="tertiary" no-pane-border animated swipeable inverted position="top">
   <!-- Tabs - notice slot="title" -->
+  <h5 v-if="loading">Loading</h5>
   <q-tab default slot="title" name="tab-1" icon="translate" label="Type" class="print-hide"/>
   <q-tab slot="title" name="tab-2" icon="keyboard" label="Mapping" class="print-hide"/>
   <q-tab slot="title" name="tab-3" icon="settings" label="Settings" class="print-hide" v-if="typeof postOptionsGroup[outputScript] !== 'undefined' || typeof preserveSourceExampleOut[outputScript] !== 'undefined'"/>
@@ -14,17 +15,17 @@
   <q-tab-pane name="tab-1">
     <div class="row">
     <div class="row col-xs-11 col-md-11 col-xl-11 q-ma-md float-div">
-  <div class="q-ma-md print-hide">
+  <div class="q-ma-md print-hide" v-if="isIndicScript">
   <span class="q-ma-sm">Keyboard scheme: </span> <q-btn-toggle
   v-model="inputScript"
   @input="compoundsGen"
   toggle-color="dark"
   :options="inputOptions"
   :dense="$q.platform.is.mobile"
-/>
+  />
 </div>
 <span class="q-ml-lg"> Use space to trigger conversion <q-toggle class="q-ma-md" v-model="spacetrigger" color="dark"></q-toggle > </span>
-  <q-collapsible icon="functions" label="Insert special characters" :opened="false" class="print-hide">
+  <q-collapsible icon="functions" label="Insert special characters" :opened="false" class="print-hide" v-if="typeof letters[outputScript] !== 'undefined'">
     <div class="print-hide">
 <q-btn v-for="letter in letters[outputScript]" :key="letter" class="q-ma-xs" @click.native="insertChar(letter)"> <span :class="getOutputClass(outputScript, postOptions, letter)"> {{letter}} </span> </q-btn>
     </div>
@@ -146,7 +147,7 @@
     <br/>
     </div>
   </q-tab-pane>
-  <q-tab-pane name="tab-5">
+  <q-tab-pane name="tab-5" v-if="isIndicScript">
     <h5> Help </h5>
     <div class="q-body-1">See <router-link :to="'/describe/'+outputScript">here</router-link> for information about the script. The default <i>Aksharaa</i> romanization format is used below.<br/><br/></div>
     <div class="q-body-1"> {} is used to stop conjuncts formation. bud{}dha : <transliterate text="bud{}dha" src="Aksharaa" :tgt="outputScript"></transliterate> :: lak{}shha : <transliterate text="lak{}shha" src="Aksharaa" :tgt="outputScript"></transliterate></div> <br/>
@@ -306,6 +307,9 @@ export default {
   computed: {
     textInputHTML: function () {
       return this.textInput.replace(/\n/g, '<br/>') + '<br/>'
+    },
+    isIndicScript: function () {
+      return !this.scriptSemiticList.includes(this.outputScript) && this.outputScript !== 'Hebrew'
     }
   },
   mounted () {
@@ -343,6 +347,12 @@ export default {
     }
     if (localStorage.spacetrigger) {
       this.spacetrigger = JSON.parse(localStorage.spacetrigger)
+    }
+
+    if (!this.isIndicScript) {
+      this.inputScript = 'Type'
+    } else {
+      this.inputScript = 'Aksharaa'
     }
 
     this.compoundsGen()
@@ -419,29 +429,53 @@ export default {
         script2: this.inputScript
       }
       var dhis = this
-      this.apiCall.post('/syllabary', data)
-        .then(function (response) {
-          // console.log(response.data)
-          dhis.vowels1 = response.data['vowelsScript1']
-          dhis.vowels2 = response.data['vowelsScript2']
-          dhis.consonants1 = response.data['consonantsScript1']
-          dhis.consonants2 = response.data['consonantsScript2']
-          dhis.compounds1 = response.data['compoundsScript1']
-          dhis.compounds2 = response.data['compoundsScript2']
-          dhis.loading = false
-          // console.log(dhis.compounds1)
-          // console.log(dhis.compounds2)
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
+      if (this.isIndicScript) {
+        this.apiCall.post('/syllabary', data)
+          .then(function (response) {
+            // console.log(response.data)
+            dhis.vowels1 = response.data['vowelsScript1']
+            dhis.vowels2 = response.data['vowelsScript2']
+            dhis.consonants1 = response.data['consonantsScript1']
+            dhis.consonants2 = response.data['consonantsScript2']
+            dhis.compounds1 = response.data['compoundsScript1']
+            dhis.compounds2 = response.data['compoundsScript2']
+            dhis.loading = false
+            // console.log(dhis.compounds1)
+            // console.log(dhis.compounds2)
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
 
-      var symbols = this.indicSubset.includes(this.outputScript) ? this.symbolsIndic : this.symbols
+        var symbols = this.indicSubset.includes(this.outputScript) ? this.symbolsIndic : this.symbols
 
-      this.symbolsI = await this.convertAsync('HK', this.inputScript, JSON.stringify(symbols), true, [], [])
+        this.symbolsI = await this.convertAsync('HK', 'HK', JSON.stringify(symbols), true, [], [])
 
-      this.symbolsO = await this.convertAsync('HK', this.outputScript, JSON.stringify(symbols), false, [], [])
-      this.symbolsO = JSON.parse(this.symbolsO.replace(new RegExp('\\\\', 'g'), ''))
+        this.symbolsO = await this.convertAsync('HK', this.outputScript, JSON.stringify(symbols), false, [], [])
+
+        this.symbolsO = JSON.parse(this.symbolsO.replace(new RegExp('\\\\', 'g'), ''))
+      } else {
+        data = {
+          script1: this.outputScript === 'Hebrew' ? 'Hebr' : this.outputScript,
+          script2: 'Type'
+        }
+        this.apiCall.post('/describesemitic', data)
+          .then(function (response) {
+            console.log(response.data)
+            dhis.vowels1 = response.data['script1']
+            dhis.vowels2 = response.data['script2']
+            dhis.consonants1 = []
+            dhis.consonants2 = []
+            dhis.compounds1 = []
+            dhis.compounds2 = []
+            dhis.loading = false
+            // console.log(dhis.compounds1)
+            // console.log(dhis.compounds2)
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      }
     },
     insertChar: function (char) {
       var position = this.$refs['brahmiText'].$refs.input.selectionStart
@@ -477,11 +511,15 @@ export default {
       console.log(this.outputScript)
 
       // var textDiff = this.textInput.replace(this.textInputOld, '')
-
-      var textInputZ = this.textInput.replace(new RegExp('\u200C', 'g'), '{}')
-      var virama = ScriptMap[this.outputScript.toLowerCase()].vowelsigns.virama
-      textInputZ = textInputZ.replace(new RegExp('\u200D' + virama, 'g'), virama + '[]')
-      textInputZ = textInputZ.replace(new RegExp('\u200D', 'g'), '()')
+      var textInputZ
+      if (this.isIndicScript) {
+        textInputZ = this.textInput.replace(new RegExp('\u200C', 'g'), '{}')
+        var virama = ScriptMap[this.outputScript.toLowerCase()].vowelsigns.virama
+        textInputZ = textInputZ.replace(new RegExp('\u200D' + virama, 'g'), virama + '[]')
+        textInputZ = textInputZ.replace(new RegExp('\u200D', 'g'), '()')
+      } else {
+        textInputZ = this.textInput
+      }
 
       var data0 = {
         source: this.outputScript,

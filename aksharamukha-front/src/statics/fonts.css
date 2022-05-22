@@ -51,6 +51,14 @@
   font-family: 'Noto Sans' !important;
 }
 
+.iast {
+  font-family: 'Noto Sans' !important;
+}
+
+.iso {
+  font-family: 'Noto Sans' !important;
+}
+
 .oriyavedic {
   font-family: 'Lohit Oriya Vedic' !important;
 }
@@ -474,26 +482,6 @@
 .syrc {
   font-family: "Noto Sans Syriac" !important;
   direction: rtl;
-}
-
-@font-face {
-  font-family: 'Noto Sans Syriac Eastern';
-  src: url('./NotoSansSyriacEastern-Regular.ttf');
-}
-
-@font-face {
-  font-family: 'Noto Sans Syriac Western';
-  src: url('./NotoSansSyriacWestern-Regular.ttf');
-}
-
-@font-face {
-  font-family: 'Noto Sans Syriac Estrangela';
-  src: url('./NotoSansSyriacEstrangela-Regular.ttf');
-}
-
-@font-face {
-  font-family: 'Open Baybayin';
-  src: url('./OpenBaybayin.otf');
 }
 
 .syre {
