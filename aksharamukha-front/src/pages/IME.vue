@@ -3,7 +3,6 @@
   <q-page class="q-pa-md">
 <q-tabs color="tertiary" no-pane-border animated swipeable inverted position="top">
   <!-- Tabs - notice slot="title" -->
-  <h5 v-if="loading">Loading</h5>
   <q-tab default slot="title" name="tab-1" icon="translate" label="Type" class="print-hide"/>
   <q-tab slot="title" name="tab-2" icon="keyboard" label="Mapping" class="print-hide"/>
   <q-tab slot="title" name="tab-3" icon="settings" label="Settings" class="print-hide" v-if="typeof postOptionsGroup[outputScript] !== 'undefined' || typeof preserveSourceExampleOut[outputScript] !== 'undefined'"/>

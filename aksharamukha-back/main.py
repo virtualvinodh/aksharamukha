@@ -416,6 +416,13 @@ def describe_list_semitic():
     script1 = request.json['script1']
     script2 = request.json['script2']
 
+    if script2 in ['Type', 'Latn']:
+        f = open ("resources/semitic_syllabary/semitic_syllabary_" + script1 + "_" + script2  + ".json", 'r', encoding='utf-8')
+        results_final = json.loads(f.read())
+        f.close()
+
+        return jsonify(results_final)
+
     charsScript1 = []
     charsScript1R = []
     charsScript2 = []

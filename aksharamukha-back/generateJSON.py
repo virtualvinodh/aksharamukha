@@ -155,6 +155,64 @@ def generate_semitic_matrix():
     f.write(json.dumps(resultsAll, ensure_ascii = False, sort_keys=True, indent=4))
     f.close()
 
+def describe_list_semitic():
+    from main import get_semitic_json
+    from aksharamukha import GeneralMap
+
+    semitic_json = get_semitic_json()
+    script_json = [script for script in GM.SemiticScripts if script != 'Latn']
+
+    for script1 in script_json:
+        for script2 in ['Latn', 'Type']:
+            charsScript1 = []
+            charsScript1R = []
+            charsScript2 = []
+            charsScript2R = []
+            charsLatn = []
+
+            results = {}
+            vowels = GeneralMap.semiticVowelsAll
+            vowelsInitial = GeneralMap.vowelsInitialAll
+
+            m = transliterate.process('Latn', script1, 'm')
+            for lat, char in semitic_json['ssub']['Latn'][script1].items():
+                latOrig = lat
+                if lat in vowels:
+                    lat = 'm' + lat
+                    char = m + char
+
+                charsScript1.append(char)
+                charguide = transliterate.process('Latn', script2, lat, nativize=False)
+                charsScript2.append(charguide)
+
+                if latOrig in vowels or latOrig in vowelsInitial:
+                    charguideReverse = transliterate.process(script2, script1, charguide, nativize=False)
+                else:
+                    if latOrig != 'ˀâ':
+                        charguideReverse = transliterate.process(script2, script1, charguide, nativize=False, \
+                            post_options = ['removeVowelsSyriac', 'removeDiacriticsArabic', 'ArabAtoAleph', ''])\
+                                .replace('\u05B7', '').replace('\u07A6', '')
+                    else:
+                        charguideReverse = transliterate.process(script2, script1, charguide, nativize=False)
+
+                charsScript2R.append(charguideReverse)
+
+                charReverse = transliterate.process(script1, script2, char, nativize=False)
+                charsScript1R.append(charReverse)
+                charsLatn.append(lat)
+
+            #print(charsScript2R)
+
+            results['script1'] =  charsScript1
+            results['script1R'] =  charsScript1R
+            results['script2'] =  charsScript2
+            results['script2R'] =  charsScript2R
+            results['scriptLatn'] = charsLatn
+            print(script1, script2)
+            f = io.open("resources/semitic_syllabary/semitic_syllabary_" + script1 + "_" + script2  + ".json", mode="w", encoding="utf-8")
+            f.write(json.dumps(results, ensure_ascii = False, sort_keys=True, indent=4))
+            f.close()
+
 
 ## Generate Syllables
 def generate_syllables():
@@ -383,14 +441,16 @@ def generate_common_letters():
     f.close()
 
 if __name__ == "__main__":
-  #print('Generating Script Mapping as Json')
-  #generate_script_map()
-  print('Generating Script Matrix')
-  generate_script_matrix()
+  print('Generating Script Mapping as Json')
+  generate_script_map()
+  #print('Generating Script Matrix')
+  #generate_script_matrix()
   #print('Generating Semitic Matrix')
   #generate_semitic_matrix()
   #print('Generating Syllabary')
   #generate_syllables()
+  print('Print Semitic Syllabary')
+  describe_list_semitic()
   #print('Generating Conjuncts')
   #generate_conjuncts()
   #print('Generating Common Letters')

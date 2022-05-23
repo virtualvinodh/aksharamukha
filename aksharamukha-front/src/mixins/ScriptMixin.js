@@ -448,7 +448,7 @@ export const ScriptMixin = {
           { label: 'Kawitan font<br/><span class="kawitan">ꦥꦭ꧀ꦭꦮ ꦒ꧀ꦫꦤ꧀ꦡ', value: 'kawitan' }
         ],
         'HebrewSBL': [
-          { label: 'ḏ ṯ ḡ → d t g', value: 'removetddash' }
+          { label: 'ḏ ṯ ḡ → d t g & d t g → d꞉ t꞉ g꞉', value: 'removetddash' }
         ],
         /* 'Syrc': [
           { label: 'Estrangela<br/><span class="estrangelasyriac"></span>', value: 'estrangelasyriac' },

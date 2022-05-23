@@ -55,7 +55,7 @@
       !semiticLatinList.includes(outputScript)">You're converting from a consonantal Abjad to an Indic romanization scheme. This may result in inclusion of 'a' with every consonant. Please choose a semitic romanization scheme like Roman (Semitic) to view the appropiate romanization.</div>
       <div class="notice q-ma-sm" v-show="scriptIndicList.includes(inputScript) && scriptSemiticList.includes(outputScript) && !vocalized(outputScript)">You're converting from a vocalized script to a consonantal Abjad. Short vowels will be removed and long vowels will be shown as <i>Mater Lectionis</i>.</div>
       <div class="notice q-ma-sm" v-show="scriptSemiticList.includes(inputScript) && scriptIndicList.includes(outputScript)">You're converting from a consonantal Abjad to a vocalized script. The consonantal skeleton will be padded with an inherent 'a' to aid readability, if no vowels diacritics are present.</div>
-      <div class="notice q-ma-sm" v-show="outputScript === 'Latn' && String(convertText).includes('꞉')">꞉ indicates gemination of the preceding consonant. rak꞉a → rakka</div>
+      <div class="notice q-ma-sm" v-show="semiticLatinList.includes(outputScript) && String(convertText).includes('꞉')">꞉ indicates gemination of the preceding consonant. rak꞉a → rakka</div>
 
   </span>
 </template>
