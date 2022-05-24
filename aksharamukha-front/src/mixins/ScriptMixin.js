@@ -4,6 +4,7 @@ export const ScriptMixin = {
       apiCall: this.$axios.create({
         // Always use https://aksharamukha.appspot.com/api/ (with a leading slash)
         // https://aksharamukha.appspot.com/api/
+        // updating staging to production
         baseURL: 'http://localhost:8085/api/',
         timeout: 100000
       }),
@@ -90,6 +91,14 @@ export const ScriptMixin = {
           { label: 'Lack of vowel signs as pure consonant <br/> <small> lâylēyn  ←  <span class="syrn">ܠܐܲܝܠܹܝܢ</span>', value: 'insertViramaSyriac' }
         ],
         'Hebrew': [
+          {
+            label: 'Treat all shvas as <i>shva nakh</i>',
+            value: 'shvanakhall'
+          },
+          {
+            label: '<i>Holam</i> denotes long /o/',
+            value: 'holamlong'
+          },
           {
             label: 'Vowels are not marked<br/><small></small>',
             value: 'novowelshebrewIndic'
@@ -339,16 +348,6 @@ export const ScriptMixin = {
           {
             label: 'Pali orthography text<br/><small> e.g. <span class="chakma">𑄖𑄗𑄂𑄉𑄖</span></small>',
             value: 'ChakmaPali'
-          }
-        ],
-        'Hebrew': [
-          {
-            label: 'Treat all shvas as <i>shva nakh</i>',
-            value: 'shvanakhall'
-          },
-          {
-            label: '<i>Holam</i> denotes long /o/',
-            value: 'holamlong'
           }
         ]
       },
@@ -2907,10 +2906,10 @@ export const ScriptMixin = {
           label: 'Roman (DMG Persian)',
           value: 'PersianDMG'
         },
-        /* {
+        {
           label: 'Roman (LoC Burmese)',
           value: 'IASTLOC'
-        }, */
+        },
         {
           language: ['Others'],
           status: ['Living', 'Living: Major'],
