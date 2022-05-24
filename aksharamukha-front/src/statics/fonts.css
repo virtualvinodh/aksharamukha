@@ -489,11 +489,11 @@
   direction: rtl;
 }
 .syrj {
-  font-family: "Noto Sans Syriac Eastern" !important;
+  font-family: "Noto Sans Syriac Western" !important;
   direction: rtl;
 }
 .syrn {
-  font-family: "Noto Sans Syriac Western" !important;
+  font-family: "Noto Sans Syriac Eastern" !important;
   direction: rtl;
 }
 .sogo {
