@@ -5,7 +5,7 @@ export const ScriptMixin = {
         // Always use https://aksharamukha.appspot.com/api/ (with a leading slash)
         // https://aksharamukha.appspot.com/api/
         // updating staging to production
-        baseURL: 'http://localhost:8085/api/',
+        baseURL: 'https://aksharamukha.appspot.com/api/',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
