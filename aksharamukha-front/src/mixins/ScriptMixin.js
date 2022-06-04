@@ -4,7 +4,6 @@ export const ScriptMixin = {
       apiCall: this.$axios.create({
         // Always use https://aksharamukha.appspot.com/api/ (with a leading slash)
         // https://aksharamukha.appspot.com/api/
-        // updating staging to production
         baseURL: 'https://aksharamukha.appspot.com/api/',
         timeout: 100000
       }),
@@ -434,7 +433,7 @@ export const ScriptMixin = {
           { label: 'Remove Majlīyānā<br/><small><span class="syrj">ܟ ܓ ܙ</span> → <span class="syrj">ܟ̰ ܓ̰ ܙ̰</span></small>', value: 'removeMajliyana' },
           { label: 'Remove Rūkkāḵā <br/><small><span class="syrj">ܒ</span> → <span class="syrj">ܒ݁</span></small>', value: 'removeRukkaka' },
           { label: 'Remove Quššāyā <br/><small><span class="syrj">ܒ</span> → <span class="syrj">ܒ݂</span></small>', value: 'removeQussaya' },
-          { label: 'Remove Vowel Diacritics <br/><small><span class="syrj">ܠ ܠ ܠܝ ܠܘ ܠ ܠ ܠܘ</span> → <span class="syrj">ܠܲ ܠܵ ܠܝܼ ܠܘܼ ܠܸ ܠܹ ܠܘܿ</span></small>', value: 'removeVowelsSyriac' }
+          { label: 'Remove Vowel Diacritics <br/><small><span class="syrj">ܠ ܠ ܠ ܠ ܠ ܠ</span> → <span class="syrj">ܠܰ ܠܳ ܠܺ ܠܽ ܠܶ ܠّ</span></small>', value: 'removeVowelsSyriac' }
         ],
         'Syrn': [
           { label: 'Remove Majlīyānā<br/><small><span class="syrn">ܟ ܓ ܙ</span> → <span class="syrn">ܟ̰ ܓ̰ ܙ̰</span></small>', value: 'removeMajliyana' },
