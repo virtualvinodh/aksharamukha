@@ -72,8 +72,8 @@ export const ScriptMixin = {
         'MeeteiMayek': 'kūṭākṣara → <span class="meeteimayek">ꯀꫬꫤꯥꯛꫪꯔ</span> not <span class="meeteimayek">ꯀꯨꯇꯥꯛꯁꯔ</span>',
         'Tamil': 'maṃtana → <span class="tamil">மம்ʼதந</span> not <span class="tamil">மந்தன</span>',
         'Malayalam': 'daṃtam kaṉi → <span class="malayalam">ദംതമ് കഩി</span> not <span class="malayalam">ദന്തം കനി</span> <br/> kæpôḍ → <span class="malayalam">കെʼപാʼഡ്</span> not <span class="malayalam">കെപാഡ്</span>',
-        'Telugu': 'khaṇḍam → <span class="telugu">ఖణ్డమ్</span> not <span class="telugu">ఖండం</span> <br/> kæpôḍ → <span class="telugu">కెʼపాʼడ్</span> not <span class="telugu">కెపాడ్</span>',
-        'Kannada': 'khaṇḍam → <span class="kannada">ಖಣ್ಡಮ್</span> not <span class="kannada">ಖಂಡಂ</span> <br/> kæpôḍ → <span class="kannada">ಕೆʼಪಾʼಡ್</span> not <span class="telugu">ಕೆಪಾಡ್</span>',
+        'Telugu': 'khaṇḍam → <span class="telugu">ఖణ్డమ్</span> not <span class="telugu">ఖండం</span><br/>āzādī → <span class="telugunukta">ఆజ఼ాదీ</span> not <span class="telugu">ఆజాదీ</span><br/> kæpôḍ → <span class="telugu">కె॒​పొ॒​డ్</span> not <span class="telugu">కెపాడ్</span>',
+        'Kannada': 'khaṇḍam → <span class="kannada">ಖಣ್ಡಮ್</span> not <span class="kannada">ಖಂಡಂ</span> <br/> kæpôḍ → <span class="kannada">ಕೆʼಪಾʼಡ್</span> not <span class="kannada">ಕೆಪಾಡ್</span>',
         'Devanagari': 'san̆dahan → <span class="devanagari">सँˆदहन्</span> not <span class="devanagari">सँदहन्</span>',
         'Sinhala': 'kôṭ hām̐ → <span class="sinhala">කාʼට් හූංʼ</span> not <span class="sinhala">කාට් හූං</span>',
         'Hebrew': 'svāhā → <span class="sinhala">סְוָהָ</span> not <span class="sinhala">סְבָהָה</span>',
@@ -636,6 +636,7 @@ export const ScriptMixin = {
         'Telugu': [
           { label: 'Arasunna as Chandrabindu<br/><small><span class="telugu"> హూఀ → హూఁ</span></small>', value: 'TeluguArasunnaChandrabindu' },
           { label: 'Telugu repha <br/><small><i>(Valapala Gilaka)</i></small> <br/><small><span class="telugu">ధర్మ → ధర్‍మ</span></small>', value: 'TeluguReph' },
+          { label: 'Telugu Nakaara Pollu <br/><small><span class="telugunukta">భగవన్ → భగవౝ</span></small>', value: 'TeluguNakaraPollu' },
           { label: 'Tamil-Style Zha <br/><small><span class="telugu">ఆఴ్వార్</span> → <span class="teluguzha">ఆఴ్వార్</span></span></small>', value: 'TeluguTamilZha' },
           { label: 'Tamil-Style Rra <br/><small><span class="telugu">ఆఱ్ఱు</span> → <span class="teluguzha">ఆౘ్ౘు</span></small>', value: 'TeluguTamilRra' },
           { label: 'Dandas<br/><small><span class="telugu">. .. → । ॥</span></small>', value: 'RetainTeluguDanda' },
@@ -650,6 +651,8 @@ export const ScriptMixin = {
         ],
         'Kannada': [
           { label: 'Dandas<br/><small><span class="kannada">. .. → । ॥</span></small>', value: 'RetainKannadaDanda' },
+          { label: 'Avoid Repha <br/><small><span class="kannada">ಧರ್ಮ → ಧರ‍್ಮ</span></small>', value: 'KannadaNotRepha' },
+          { label: 'Kannada Nakaara Pollu <br/><small><span class="kannadapollu">ಭಗವನ್ → ಭಗವೝ</span></small>', value: 'KannadaNakaraPollu' },
           { label: 'Kannada Numerals<br/><small><span class="kannada">123 → ೧೨೩</span></small>', value: 'RetainKannadaNumerals' }
         ],
         'Grantha': [
@@ -3503,6 +3506,12 @@ export const ScriptMixin = {
       } else if (tgt === 'Gujarati' && (String(outputText).includes('॒') || String(outputText).includes('᳚') ||
           String(outputText).includes('॑'))) {
         return 'gujarativedic'
+      } else if (tgt === 'Telugu' && String(outputText).includes('\u0C3C')) {
+        return 'telugunukta'
+      } else if (tgt === 'Telugu' && String(outputText).includes('\u0C5D')) {
+        return 'telugunukta'
+      } else if (tgt === 'Kannada' && String(outputText).includes('\u0CDD')) {
+        return 'kannadapollu'
       } else if (tgt === 'Gurmukhi' && (String(outputText).includes('॒') || String(outputText).includes('᳚') ||
           String(outputText).includes('॑'))) {
         return 'gurmukhivedic'

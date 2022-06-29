@@ -55,6 +55,10 @@
   font-family: 'Noto Sans' !important;
 }
 
+.iastloc {
+  font-family: 'Noto Sans' !important;
+}
+
 .iso {
   font-family: 'Noto Sans' !important;
 }
@@ -120,6 +124,9 @@
 }
 .kannada {
   font-family: "Noto Sans Kannada" !important
+}
+.kannadapollu {
+  font-family: "Tiro Kannada" !important
 }
 .javanese {
   font-family: "Noto Sans Javanese", "Javanese Text" !important;
@@ -227,6 +234,9 @@
 }
 .teluguzha {
   font-family: "Aazhvaar Telugu" !important
+}
+.telugunukta {
+  font-family: "Tiro Telugu" !important
 }
 .khmer {
   font-family: "Noto Serif Khmer" !important
