@@ -4,7 +4,7 @@ export const ScriptMixin = {
       apiCall: this.$axios.create({
         // Always use https://aksharamukha.appspot.com/api/ (with a leading slash)
         // https://aksharamukha.appspot.com/api/
-        baseURL: 'https://aksharamukha.appspot.com/api/',
+        baseURL: 'http://localhost:8085/api/',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -668,6 +668,9 @@ export const ScriptMixin = {
         'Shahmukhi': [
           { label: 'Remove short vowels<br/><small><span class="urdu">ہِنْدُوسْتانْ ← ہندوستان</span></small>', value: 'UrduRemoveShortVowels' }
         ],
+        /* 'IASTLOC': [
+          { label: 'Capitalize sentences', value: 'capitalizeSentence' }
+        ], */
         'IAST': [
           { label: 'Capitalize sentences', value: 'capitalizeSentence' },
           { label: 'Anusvara to nasal<br/><small>gaṃgā → gaṅgā</small>', value: 'AnusvaratoNasalASTISO' },
