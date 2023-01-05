@@ -185,7 +185,7 @@
     </q-page-container>
     <q-layout-footer v-show="showFooter" class="print-hide">
         <q-toolbar color="tertiary" class="footer-quote">
-          © 2018 <a href="http://www.virtualvinodh.com">Vinodh Rajan</a>&nbsp;&nbsp;&nbsp;vinodh@virtualvinodh.com. This software is released under GNU AGPL 3.0 license.
+          © 2018 <a href="http://www.virtualvinodh.com">Vinodh Rajan</a>&nbsp;&nbsp;&nbsp;vinodh@virtualvinodh.com. This software is released under GNU GPL 3.0 license.
           <q-btn
           round
           size="md"

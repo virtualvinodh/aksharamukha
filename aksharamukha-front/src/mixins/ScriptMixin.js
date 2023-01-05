@@ -67,7 +67,7 @@ export const ScriptMixin = {
         'Gujarati': 'kŏl → <span class="gujarati">કો˘લ્</span> not <span class="gujarati">કોલ્</span>',
         'Oriya': 'vināyaka → <span class="oriya">ୱିନାଯକ</span> not <span class="oriya">ବିନାୟକ</span><br/>kŏlæṭ → <span class="oriya">କୋ˘ଲେʼଟ୍</span> not <span class="oriya">କୋଲେଟ୍</span>',
         'Assamese': 'vināyaka → <span class="assamese">ৱিনাযক</span> not <span class="assamese">ৱিনায়ক</span><br/>kŏlæṭ → <span class="assamese">কো˘লেʼট্</span> not <span class="assamese">কোলেট্</span>',
-        'Bengali': 'vināyaka → <span class="bengali">ভ়িনাযক</span> not <span class="bengali">বিনায়ক</span><br/>kŏlæṭ → <span class="bengali">কো˘লেʼট্</span> not <span class="bengali">কোলেট্</span>',
+        'Bengali': 'vināyaka → <span class="bengali">ভ়িনাযক</span> not <span class="bengali">বিনায়ক</span><br/>udvega udbodhana → <span class="bengali">উদ্বেগ উদ্‌বোধন</span> not <span class="bengali">উদ্বেগ উদ্বোধন</span><br/>kŏlæṭ → <span class="bengali">কো˘লেʼট্</span> not <span class="bengali">কোলেট্</span>',
         'Limbu': 'jha ña ṣa ṃ → <span class="limbu">ᤉ ᤊ ᤚ ᤲ</span> not <span class="limbu">ᤈ ᤏ ᤙ ᤱ</span>',
         'MeeteiMayek': 'kūṭākṣara → <span class="meeteimayek">ꯀꫬꫤꯥꯛꫪꯔ</span> not <span class="meeteimayek">ꯀꯨꯇꯥꯛꯁꯔ</span>',
         'Tamil': 'maṃtana → <span class="tamil">மம்ʼதந</span> not <span class="tamil">மந்தன</span>',
@@ -284,7 +284,8 @@ export const ScriptMixin = {
         ],
         'Bengali': [
           { label: 'Schwa deletion (Only word-final) <br/><small><div class="q-mt-sm">রাম → rām</div></small>', value: 'SchwaFinalBengali' },
-          { label: 'য → ẏa & য় → ya', value: 'BengaliSwitchYaYYa' }
+          { label: 'য → ẏa & য় → ya', value: 'BengaliSwitchYaYYa' },
+          { label: 'Show Khanda TA <br/><small><div class="q-mt-sm">উৎকল → utˍkala</div></small>', value: 'ShowKhandaTa' }
         ],
         'Gurmukhi': [
           { label: 'Schwa deletion (Only word-final) <br/><small><div class="q-mt-sm">ਰਾਮ → rām</div</small>>', value: 'SchwaFinalGurmukhi' }
@@ -653,6 +654,7 @@ export const ScriptMixin = {
           { label: 'Dandas<br/><small><span class="kannada">. .. → । ॥</span></small>', value: 'RetainKannadaDanda' },
           { label: 'Avoid Repha <br/><small><span class="kannada">ಧರ್ಮ → ಧರ‍್ಮ</span></small>', value: 'KannadaNotRepha' },
           { label: 'Kannada Nakaara Pollu <br/><small><span class="kannadapollu">ಭಗವನ್ → ಭಗವೝ</span></small>', value: 'KannadaNakaraPollu' },
+          { label: 'Use spacing Chandrabindu <br/><small><span class="kannadapollu">ಯಹಾಁ → ಯಹಾಀ</span></small>', value: 'KannadaSpacingCandrabindu' },
           { label: 'Kannada Numerals<br/><small><span class="kannada">123 → ೧೨೩</span></small>', value: 'RetainKannadaNumerals' }
         ],
         'Grantha': [

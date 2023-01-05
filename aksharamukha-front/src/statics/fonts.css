@@ -67,6 +67,18 @@
   font-family: 'Lohit Oriya Vedic' !important;
 }
 
+.bengali {
+  font-family: 'Noto Sans Bengali' !important;
+}
+
+.assamese {
+  font-family: 'Noto Sans Bengali' !important;
+}
+
+.oriya {
+  font-family: 'Noto Sans Oriya' !important;
+}
+
 .bengalivedic {
   font-family: 'Noto Sans Bengali Vedic' !important;
 }
@@ -468,7 +480,7 @@
 }
 
 .nandinagari {
-  font-family: "Nandinagari Uni" !important;
+  font-family: "Noto Sans Nandinagari" !important;
   font-size: 125%;
 }
 .marchen {
