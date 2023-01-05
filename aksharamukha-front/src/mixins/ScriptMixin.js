@@ -4,7 +4,7 @@ export const ScriptMixin = {
       apiCall: this.$axios.create({
         // Always use https://aksharamukha.appspot.com/api/ (with a leading slash)
         // https://aksharamukha.appspot.com/api/
-        baseURL: 'http://localhost:8085/api/',
+        baseURL: 'https://aksharamukha.appspot.com/api/',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -281,6 +281,11 @@ export const ScriptMixin = {
         ],
         'Gujarati': [
           { label: 'Schwa deletion (Only word-final) <br/><small><div class="q-mt-sm">राम → rām</div></small>', value: 'SchwaFinalGujarati' }
+        ],
+        'Assamese': [
+          { label: 'Schwa deletion (Only word-final) <br/><small><div class="q-mt-sm">রাম → rām</div></small>', value: 'SchwaFinalBengali' },
+          { label: 'য → ẏa & য় → ya', value: 'BengaliSwitchYaYYa' },
+          { label: 'Show Khanda TA <br/><small><div class="q-mt-sm">উৎকল → utˍkala</div></small>', value: 'ShowKhandaTa' }
         ],
         'Bengali': [
           { label: 'Schwa deletion (Only word-final) <br/><small><div class="q-mt-sm">রাম → rām</div></small>', value: 'SchwaFinalBengali' },
