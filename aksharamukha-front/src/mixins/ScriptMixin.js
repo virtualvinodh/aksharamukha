@@ -2,9 +2,9 @@ export const ScriptMixin = {
   data () {
     return {
       apiCall: this.$axios.create({
-        // Always use https://aksharamukha.appspot.com/api/ (with a leading slash)
-        // https://aksharamukha.appspot.com/api/
-        baseURL: 'https://aksharamukha.appspot.com/api/',
+        // Always use http://localhost:8085/api/ (with a leading slash)
+        // http://localhost:8085/api/
+        baseURL: 'http://localhost:8085/api/',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({

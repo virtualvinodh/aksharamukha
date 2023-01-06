@@ -1,5 +1,5 @@
 # our base image
-FROM python:3.6-slim
+FROM python:3.10-slim
 
 RUN pip install --upgrade pip
 
@@ -10,7 +10,7 @@ ADD . / /usr/backend/
 
 # install requirements
 WORKDIR /usr/backend/
-RUN pip3 install -r requirements.txt
+RUN pip3 install -r requirements_docker.txt
 RUN pip3 install aksharamukha
 
 # tell the port number the container should expose
