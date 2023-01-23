@@ -4,7 +4,7 @@ export const ScriptMixin = {
       apiCall: this.$axios.create({
         // Always use http://localhost:8085/api/ (with a leading slash)
         // http://localhost:8085/api/
-        baseURL: 'http://localhost:8085/api/',
+        baseURL: 'https://aksharamukha.appspot.com/api/',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
