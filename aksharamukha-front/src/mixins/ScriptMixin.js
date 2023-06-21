@@ -4,7 +4,7 @@ export const ScriptMixin = {
       apiCall: this.$axios.create({
         // Always use http://localhost:8085/api/ (with a leading slash)
         // http://localhost:8085/api/
-        baseURL: 'https://aksharamukha.appspot.com/api/',
+        baseURL: 'http://localhost:8085/api/',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -290,6 +290,7 @@ export const ScriptMixin = {
         'Bengali': [
           { label: 'Schwa deletion (Only word-final) <br/><small><div class="q-mt-sm">রাম → rām</div></small>', value: 'SchwaFinalBengali' },
           { label: 'য → ẏa & য় → ya', value: 'BengaliSwitchYaYYa' },
+          { label: 'স্ব দ্ব → sva dva', value: 'BengaliSubojinedVa' },
           { label: 'Show Khanda TA <br/><small><div class="q-mt-sm">উৎকল → utˍkala</div></small>', value: 'ShowKhandaTa' }
         ],
         'Gurmukhi': [
@@ -565,6 +566,7 @@ export const ScriptMixin = {
           { label: 'Use Jain OM<br/><small>ॐ → ꣽ</small>', value: 'jainomDevangari' },
           { label: 'ऍ → ॲ', value: 'DevanagariACandra' },
           { label: 'Use Anusvara to nasalize<br/><small>पञ्चगङ्गा → पंचगंगा</small>', value: 'DevanagariAnusvara' },
+          { label: 'Show explicit schwa (Hindi) <small><div class="q-mt-sm">rāma → राम॔, viracita → विर॔॔चित॔</div></small>', value: 'ShowSchwaHindi' },
           { label: 'Prishthamatra orthography<br/><small>के कै को कौ → कॎ कॎे कॎा कॎो</small>', value: 'DevanagariPrishtamatra' }
         ],
         'Dogra': [
@@ -705,6 +707,11 @@ export const ScriptMixin = {
         ],
         'RomanReadable': [
           { label: 'Alternate long/short e/o <br/><small>e\' e o\' o → e ae o oa</small>', value: 'RomanReadableLongEO' },
+          { label: 'Anusvara as n <br/><small>m\' → n\'</small>', value: 'AnusvaraAsN' },
+          { label: 'Capitalize sentences', value: 'capitalizeSentence' }
+        ],
+        'RomanColloquial': [
+          { label: 'Anusvara as n <br/><small>maim → main</small>', value: 'AnusvaraAsN' },
           { label: 'Capitalize sentences', value: 'capitalizeSentence' }
         ],
         'Khojki': [

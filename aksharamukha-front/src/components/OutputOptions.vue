@@ -1,6 +1,6 @@
 <template>
      <q-collapsible :sublabel="label"
-         icon="settings" dense class="q-mb-xs q-mt-xs"
+         icon="settings" dense class="q-mb-xs q-mt-xs print-hide"
         :style="{'visibility': optionCount === 0 ? 'hidden' : '', 'display': hideSourcePreserve && optionCount === 0 ? 'none' : ''}" ref="collapse"
      >
     <div class="col-xs-12 col-md-12 print-hide">

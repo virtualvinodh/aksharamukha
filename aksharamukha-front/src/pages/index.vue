@@ -125,11 +125,11 @@
     </div>
   </transition>
   <a :href="brahmiImg" ref="imgDownload" :style="{'display': 'none'}" download="text.png"><button>Download</button></a>
-<q-page-sticky position="top-right" :offset="[18, 18]" v-show="scrollExists">
+<q-page-sticky position="top-right" :offset="[18, 18]" v-show="scrollExists" class="print-hide">
     <span><q-btn round color="dark" @click="scrolldown" icon="arrow_downward" v-show="!scrolled"/><q-tooltip>Scroll down</q-tooltip> </span>
   </q-page-sticky>
   <q-page-sticky position="bottom-right" :offset="[18, 18]" v-back-to-top>
-    <span><q-btn round color="dark" @click="scrollup" icon="arrow_upward"/><q-tooltip>Scroll Up</q-tooltip> </span>
+    <span><q-btn round color="dark" @click="scrollup" icon="arrow_upward"  class="print-hide"/><q-tooltip>Scroll Up</q-tooltip> </span>
   </q-page-sticky>
   </q-page>
 </template>
@@ -629,6 +629,12 @@ export default {
     printDocument: function () {
       // manually hide the side menu while printing and bring it back when printing is complete
       window.print()
+      this.$q.notify({
+        type: 'info',
+        message: 'Consider hiding the side-menu before attempting to print by clicking on the icon next to the logo.',
+        position: 'center',
+        timeout: 5000
+      })
     },
     getScript: async function (text) {
       var data = {

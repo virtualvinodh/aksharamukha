@@ -1,5 +1,5 @@
 <template>
-    <span v-if="$q.platform.is.desktop">
+    <span v-if="$q.platform.is.desktop" class="print-hide">
      <q-btn-group>
         <q-btn color="grey-8" :flat="!(highlight == 'texts')" icon="notes" label="Text" to="/converter"/>
         <q-btn color="grey-8" :flat="!(highlight == 'composer')" icon="language" label="Multi-Script" to="/composer" />
