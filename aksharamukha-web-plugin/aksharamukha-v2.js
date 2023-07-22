@@ -186,7 +186,7 @@ const ScriptMixin = {
                     label: 'Use ଵ instead of ୱ<br/><small>ଭୱତି → ଭଵତି</small>',
                     value: 'OriyaVaAlt'
                 }, {
-                    label: 'Use ୟ everywhere<br/><small>ଯୟାତି ଯଜ୍ଞ → ୟୟାତି ୟଜ୍ଞ</small>',
+                    label: 'Use ୟ everywhere<br/><small>ଯଯାତି ଯଜ୍ଞ → ୟୟାତି ୟଜ୍ଞ</small>',
                     value: 'OriyaYYA'
                 }],
                 'Bengali': [{
