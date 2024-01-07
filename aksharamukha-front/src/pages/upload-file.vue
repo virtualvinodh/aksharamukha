@@ -46,7 +46,7 @@ import { ScriptMixin } from '../mixins/ScriptMixin'
 import sanitizeHtml from 'sanitize-html'
 import { saveAs } from 'file-saver'
 
-var JSZip = require('jszip')
+// var JSZip = require('jszip')
 
 export default {
   props: ['name'],
@@ -68,7 +68,8 @@ export default {
       showContent: false,
       loading: false,
       downloadWarning: false,
-      docxWarning: false
+      docxWarning: false,
+      htmlWarning: false
     }
   },
   methods: {
@@ -86,9 +87,10 @@ export default {
         })
       } else {
         this.readFiles()
-        if (this.docxWarning && !this.scriptIndicList.includes(this.optionsRet.inputScript)) {
+        console.log(this.htmlWarning)
+        if (this.docxWarning || this.htmlWarning) {
           this.$q.notify({
-            message: 'You cannot convert from Roman scripts with DocX files',
+            message: 'You cannot view DocX or HTML files. Please download them instead',
             position: 'center',
             timeout: 2000
           })
@@ -108,28 +110,18 @@ export default {
         if (ext === 'docx') {
           this.docxWarning = true
           var contentZ = await this.readFileBinary(file)
-          text = await this.readDocX(contentZ)
         } else {
+          if (ext.includes('htm')) {
+            this.htmlWarning = true
+          }
           text = await this.readFileText(file)
         }
         if (ext === 'docx') {
-          this.files.push({name: file.name, content: text[0], zip: text[1]})
+          this.files.push({name: file.name, content: contentZ})
         } else {
           this.files.push({name: file.name, content: text})
         }
       }
-    },
-    readDocX: function (contentZ) {
-      return new Promise(resolve => {
-        var newZip = new JSZip()
-        newZip.loadAsync(contentZ)
-          .then(function (zip) {
-            newZip.file('word/document.xml').async('string')
-              .then(function (content) {
-                resolve([content, newZip])
-              })
-          })
-      })
     },
     readFileBinary: function (url) {
       return new Promise(resolve => {
@@ -137,7 +129,7 @@ export default {
         reader.onload = function () {
           resolve(reader.result)
         }
-        reader.readAsBinaryString(url)
+        reader.readAsDataURL(url) // read as Base64
       })
     },
     readFileText: function (url) {
@@ -176,9 +168,14 @@ export default {
             var outputScript = this.options.outputScript[j]
             for (var i = 0; i < this.files.length; i++) {
               var file = this.files[i]
-              var content = await this.convertAsync(this.options.inputScript, outputScript, file.content, this.options.sourcePreserve, this.options.postOptions[outputScript], this.options.preOptions)
 
-              content = content.replace(new RegExp('<br/>', 'g'), '\n')
+              if (file.name.includes('.txt') || file.name.includes('.brh')) {
+                var content = await this.convertAsync(this.options.inputScript, outputScript, file.content, this.options.sourcePreserve, this.options.postOptions[outputScript], this.options.preOptions)
+
+                content = content.replace(new RegExp('<br/>', 'g'), '\n')
+              } else {
+                content = ''
+              }
               // content = content.replace(new RegExp('e-Grantamil 7', 'g'), 'Noto Sans Tamil')
               // content = content.replace(new RegExp('e-Grantamil', 'g'), 'Noto Sans Tamil')
 
@@ -198,14 +195,13 @@ export default {
                 blob = new Blob([content], {type: 'text/xml;charset=utf-8'})
                 saveAs(blob, downloadName)
               } else if (file.name.includes('.docx')) {
-                content = await this.convertXMLAsync(this.options.inputScript, outputScript, file.content, this.options.sourcePreserve, this.options.postOptions[outputScript], this.options.preOptions)
+                content = await this.convertDocXAsync(this.options.inputScript, outputScript, file.content, this.options.sourcePreserve, this.options.postOptions[outputScript], this.options.preOptions)
 
-                file.zip.file('word/document.xml', content)
-                file.zip.generateAsync({type: 'blob'})
-                  .then(function (blob) {
-                    saveAs(blob, downloadName)
-                  })
-              } else {
+                blob = await (await fetch(content)).blob()
+                saveAs(blob, downloadName)
+              } else if (file.name.includes('.htm')) {
+                content = await this.convertHTMLAsync(this.options.inputScript, outputScript, file.content, this.options.sourcePreserve, this.options.postOptions[outputScript], this.options.preOptions)
+
                 blob = new Blob([content], {type: 'plain/html;charset=utf-8'})
                 saveAs(blob, downloadName)
               }

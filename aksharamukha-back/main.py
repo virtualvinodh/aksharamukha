@@ -2,7 +2,7 @@ from aksharamukha import transliterate
 from flask import Flask, jsonify, request, redirect
 from flask_cors import CORS
 import re
-from aksharamukha import Convert,PostOptions,PostProcess,PreProcess, GeneralMap
+from aksharamukha import Convert,PostOptions,PostProcess,PreProcess, GeneralMap, transliterate_file
 import json
 import requests
 import html
@@ -10,6 +10,7 @@ import itertools
 from collections import Counter
 import unicodedata
 import io
+import base64
 
 from aksharamukha.transliterate import convert, unique_everseen, removeA, auto_detect, detect_preoptions, get_semitic_json
 
@@ -613,6 +614,23 @@ def convert_xml():
         text = ''
 
     return jsonify(etree.tostring(new_root, encoding='unicode'))
+
+@app.route('/api/convert_html', methods=['POST', 'GET'])
+def convert_docx():
+    html_convert = transliterate_file.convert_html(request.json['source'], request.json['target'], request.json['text'], request.json['nativize'], request.json['preOptions'], request.json['postOptions'], True)
+
+    return jsonify(html_convert)
+
+@app.route('/api/convert_docx', methods=['POST', 'GET'])
+def convert_html():
+    file_parts = request.json['text'].split(',')
+
+    docx_convert = transliterate_file.convert_docx(request.json['source'], request.json['target'], file_parts[1], request.json['nativize'], request.json['preOptions'], request.json['postOptions'], True)
+
+    docx_convert.seek(0)
+    docx_b64 = file_parts[0] + ',' + base64.b64encode(docx_convert.getvalue()).decode()
+
+    return jsonify(docx_b64)
 
 
 @app.route('/api/convert_loop_tgt', methods=['POST', 'GET'])
