@@ -12,6 +12,7 @@
       <div class="notice q-ma-sm" v-show="(outputScript === 'IAST' || outputScript === 'ISO' || outputScript === 'WarangCiti' || outputScript === 'RussianCyrillic' || outputScript === 'RomanReadable'|| outputScript === 'IASTLOC') &&
         postOptions.includes('capitalizeSentence')">To capitalize a specific word, add @ to the beginning of word. e.g. @<transliterate text="buddha" src="HK" :tgt="inputScript"></transliterate></div>
       <div class="notice q-ma-sm" v-show="OCRPerformed">The text has been automatically recognized from the uploaded file. Please proof-read the text for errors,</div>
+      <div class="notice q-ma-sm text-red" v-show="inputScript == 'RomanLoC' && !locScripts.includes(outputScript)"> The LoC romanization of this script is not yet supported. The input text will be treated as if it was ISO 233 if Semitic else ISO 15919.</div>
   </span>
 </template>
 

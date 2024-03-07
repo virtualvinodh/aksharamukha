@@ -64,6 +64,10 @@
       <div class="notice q-ma-sm" v-show="scriptSemiticList.includes(inputScript) && scriptIndicList.includes(outputScript)">You're converting from a consonantal Abjad to a vocalized script. The consonantal skeleton will be padded with an inherent 'a' to aid readability, if no vowels diacritics are present.</div>
       <div class="notice q-ma-sm" v-show="semiticLatinList.includes(outputScript) && String(convertText).includes('꞉')">꞉ indicates gemination of the preceding consonant. rak꞉a → rakka</div>
 
+      <div class="notice q-ma-sm" v-show="outputScript === 'Devanagari' &&
+            (String(convertText).includes('\u0956') || String(convertText).includes('\u0957'))   "> ॶ & ॷ is pronounced similar to उ ऊ but more rounded. </div>
+
+<div class="notice q-ma-sm text-red" v-show="outputScript == 'RomanLoC' && !locScripts.includes(inputScript)"> The LoC romanization of this script is not yet supported. The output text will be rendered using ISO 233 if Semitic else ISO 15919</div>
   </span>
 </template>
 

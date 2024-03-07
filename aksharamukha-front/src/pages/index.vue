@@ -48,7 +48,7 @@
     <input-notice :inputScript="inputScript" :outputScript="outputScript" :preOptions="preOptions"
        :postOptions="postOptions" :OCRPerformed="OCRPerformed"></input-notice>
     <div class="">
-      <q-btn class="q-ma-sm print-hide col-xs-3 col-md-3" @click="uploadImage" label="Image/PDF" v-show="displayImageButton" v-if="!$q.platform.is.cordova" icon="add photo alternate"> <q-tooltip>Upload image/PDF</q-tooltip></q-btn>
+      <q-btn class="q-ma-sm print-hide col-xs-3 col-md-3" @click="uploadImage" label="Use Image/PDF" v-show="displayImageButton" v-if="!$q.platform.is.cordova" icon="add photo alternate"> <q-tooltip>Upload image/PDF</q-tooltip></q-btn>
       <span v-show="showFileUpload" class="q-ma-sm">
             <q-uploader url="" clearable extensions=".jpg, .jpeg, .png, .bmp, .ico, .pdf" @add="showConvertImage" @remove:cancel="hideConvertButton"
                auto-expand hide-upload-button ref="uploadF" :style="{width:'200px'}"/>
@@ -546,6 +546,14 @@ export default {
       this.updateInput()
     },
     updateInput: function () {
+      if (this.inputScript === 'RomanLoC' && !this.locScripts.includes(this.outputScript)) {
+        console.log('This input is not supported')
+      }
+
+      if (this.outputScript === 'RomanLoC' && !this.locScripts.includes(this.inputScript)) {
+        console.log('This output is not supported')
+      }
+
       if (typeof this.preOptionsScript[this.inputScript] === 'undefined') {
         this.preOptionsScript[this.inputScript] = []
       }

@@ -9,5 +9,4 @@ regex>=2021.8.3
 fonttools[unicode]>=4.31
 lxml
 google-python-cloud-debugger
-beautifulsoup
-zipfile
+beautifulsoup4

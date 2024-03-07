@@ -58,7 +58,7 @@
   font-family: 'Noto Sans' !important;
 }
 
-.iastloc {
+.romanloc {
   font-family: 'Noto Serif' !important;
 }
 
@@ -220,7 +220,7 @@
   font-family: "Noto Sans Limbu" !important
 }
 .shan {
-  font-family: "GreatHorKham_Taunggyi" !important
+  font-family: "GreatHorKham_Yangon" !important
 }
 .hebrew {
   font-family: "Noto Serif Hebrew" !important;
@@ -301,7 +301,7 @@
   font-family: "Noto Serif Ahom" !important;
 }
 .tirhuta {
-  font-family: "MithilaUni" !important;
+  font-family: "Noto Sans Tirhuta" !important;
 }
 .oldpersian {
   font-family: "Noto Sans OldPersian" !important;

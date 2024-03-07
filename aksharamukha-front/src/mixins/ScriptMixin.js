@@ -46,6 +46,7 @@ export const ScriptMixin = {
       consontantsSpecial: ['L', 'Z', 'r2', 'n2'],
       consonantsSinhala: ['n*g', 'n*j', 'n*D', 'n*d', 'm*b'],
       ayogavahasAll: ['~', 'M', 'H'],
+      locScripts: ['Burmese', 'Khmer', 'Shan', 'KhuenTham', 'TaiTham', 'LaoTham'],
       vedicScripts: ['Assamese', 'Bengali', 'Devanagari', 'Gujarati', 'Kannada', 'Malayalam', 'Oriya', 'Gurmukhi', 'Tamil', 'Telugu', 'TamilExtended', 'Grantha'],
       vocalized: ['Hebr', 'Syrj', 'Syrn', 'Arab-Fa', 'Latn', 'Type', 'Arab', 'Arab-Ur', 'Thaa'],
       preserveSourceExampleOut: {
@@ -238,6 +239,9 @@ export const ScriptMixin = {
         'Burmese': [
           { label: 'Segment Burmese Syllables <br/><small><span class="burmese">လေထဲပျော် → လေ ထဲ ပျော်</span>', value: 'segmentBurmeseSyllables' }
         ],
+        'Shan': [
+          { label: 'Segment Shan Syllables <br/><small><span class="burmese">လႅင်းမုၼ်းမႂ်ႇ → လႅင်း မုၼ်း မႂ်ႇ</span>', value: 'segmentShanSyllables' }
+        ],
         'ISO': [
           { label: 'Treat e/o as long', value: 'longEOISO' },
           { label: '<i>tat tvam asi</i> → <i>tattvamasi</i>', value: 'joinVowelConsISO' }
@@ -287,9 +291,13 @@ export const ScriptMixin = {
           { label: 'য → ẏa & য় → ya', value: 'BengaliSwitchYaYYa' },
           { label: 'Show Khanda TA <br/><small><div class="q-mt-sm">উৎকল → utˍkala</div></small>', value: 'ShowKhandaTa' }
         ],
+        'Oriya': [
+          { label: 'ବ → va', value: 'OriyaTargetVa' }
+        ],
         'Bengali': [
           { label: 'Schwa deletion (Only word-final) <br/><small><div class="q-mt-sm">রাম → rām</div></small>', value: 'SchwaFinalBengali' },
           { label: 'য → ẏa & য় → ya', value: 'BengaliSwitchYaYYa' },
+          { label: 'ব → va', value: 'BengaliTargetVa' },
           { label: 'স্ব দ্ব → sva dva', value: 'BengaliSubojinedVa' },
           { label: 'Show Khanda TA <br/><small><div class="q-mt-sm">উৎকল → utˍkala</div></small>', value: 'ShowKhandaTa' }
         ],
@@ -369,8 +377,11 @@ export const ScriptMixin = {
         'DevanagariLimbu': [
           { label: 'Limbu Devanagari conventions<small><br/><span class="limbu">ᤀᤧ ᤀᤨ ᤀᤧ᤺ ᤁᤧ ᤁᤨ ᤁᤧ᤺</span> → <span class="limbudev">ए़ ओ़ ए़ः के़ को़ के़ः</span></small>', value: 'LimbuDevanagariConvention' }
         ],
-        'BurmeseIASTLOC': [
+        'BurmeseRomanLoC': [
           { label: 'Join syllables<small><br/><span>le thai pyo‘ </span> → <span class="burmese">လေထဲပျော်</span></small>', value: 'removeSegmentSpacesBurmese' }
+        ],
+        'ShanRomanLoC': [
+          { label: 'Join syllables<small><br/><span>lèṅʻʺ munʻʺ mài̢</span> → <span class="burmese">လႅင်းမုၼ်းမႂ်ႇ</span></small>', value: 'removeSegmentSpacesBurmese' }
         ],
         'TamilSaurashtra': [
           { label: 'Convert Saurashtra Haaru as :<small><br/><span class="saurashtra">ꢥꢴꢷ</span> → <span class="tamil">நீ:</span></small>', value: 'SaurastraHaaruColon' }
@@ -427,6 +438,15 @@ export const ScriptMixin = {
         ]
       },
       postOptionsGroup: {
+        'RomanLoC': [
+          { label: 'MARC-8 decomposed diacritics', value: 'LoCMarc8' }
+        ],
+        'HK': [
+          { label: 'E/O for long, e/o for short', value: 'swapEe' }
+        ],
+        'Velthuis': [
+          { label: 'E/O for long, e/o for short', value: 'swapEe' }
+        ],
         'Arab': [
           { label: 'Remove Harakat <br/><small>غَانْدِي ← غاندي</small>', value: 'removeDiacriticsArabic' },
           { label: 'Remove Sukun at end of words <br/><small>هِنْدْ ← هِنْد</small>', value: 'removeSukunEnd' }
@@ -683,7 +703,7 @@ export const ScriptMixin = {
         'IAST': [
           { label: 'Capitalize sentences', value: 'capitalizeSentence' },
           { label: 'Anusvara to nasal<br/><small>gaṃgā → gaṅgā</small>', value: 'AnusvaratoNasalASTISO' },
-          { label: 'Use tilde for nasalization<br/><small>kāṃ gām̐ → kā̃ gā̃</smal', value: 'NasalTilde' },
+          { label: 'Use tilde for nasalization<br/><small>kaM ka~ kaMka ka~ka → kã kã kaṅka kãka</smal', value: 'NasalTilde' },
           { label: 'ṃ → ṁ', value: 'mDotAboveToBelow' }
         ],
         'IASTPali': [
@@ -699,11 +719,12 @@ export const ScriptMixin = {
         'ISO': [
           { label: 'Capitalize sentences', value: 'capitalizeSentence' },
           { label: 'Anusvara to nasal<br/><small>gaṁgā → gaṅgā</small>', value: 'AnusvaratoNasalASTISO' },
-          { label: 'Use tilde for nasalization<br/><small>kāṃ gām̐ → kā̃ gā̃</smal', value: 'NasalTilde' },
+          { label: 'Use tilde for nasalization<br/><small>kaM ka~ kaMka ka~ka → kã kã kaṅka kãka</smal', value: 'NasalTilde' },
           { label: 'ē/ō → e/o', value: 'noLongEO' }
         ],
         'Itrans': [
-          { label: 'Readable Itrans<br/><small>gR^ihalakShmI → gRRihalaxmii</small>', value: 'readableItrans' }
+          { label: 'Readable Itrans<br/><small>gR^ihalakShmI → gRRihalaxmii</small>', value: 'readableItrans' },
+          { label: 'E/O for long, e/o for short', value: 'swapEeItrans' }
         ],
         'RomanReadable': [
           { label: 'Alternate long/short e/o <br/><small>e\' e o\' o → e ae o oa</small>', value: 'RomanReadableLongEO' },
@@ -1064,7 +1085,7 @@ export const ScriptMixin = {
           language: ['Others'],
           status: ['Living', 'Living: Minor'],
           invented: ['Derived: Brahmi', 'Derived: Pallava'],
-          region: ['South East Asian: Insular', 'South East Asian']
+          region: ['South East Asian: Mainland', 'South East Asian']
         },
         {
           label: 'Devanagari',
@@ -1644,8 +1665,8 @@ export const ScriptMixin = {
           omnicode: 'nandinagari',
           wikicode: 'Nandinagari',
           font: {
-            'name': 'Nandinagari Uni',
-            'url': 'https://www.mediafire.com/file/33dz5wnx2uig28o/nandinagariuni.zip/file'
+            'name': 'Noto Sans Nandinagari',
+            'url': 'https://fonts.google.com/noto/specimen/Noto+Sans+Nandinagari'
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Extinct', 'Extinct: Pre-Modern'],
@@ -2926,8 +2947,8 @@ export const ScriptMixin = {
           value: 'PersianDMG'
         },
         {
-          label: 'Roman (LoC Burmese)',
-          value: 'IASTLOC'
+          label: 'Roman (Library of Congress)',
+          value: 'RomanLoC'
         },
         {
           language: ['Others'],
@@ -3026,6 +3047,10 @@ export const ScriptMixin = {
         {
           label: 'Roman (Colloquial)',
           value: 'RomanColloquial'
+        },
+        {
+          label: 'Roman (Library of Congress)',
+          value: 'RomanLoC'
         }
       ],
       scriptsIME: [
@@ -3050,7 +3075,7 @@ export const ScriptMixin = {
       RegionExpand: ['Iran', 'India', 'Sri Lanka', 'Burmese', 'Philippines', 'Indonesia', 'Japan'],
       Status: ['Living', 'Extinct'],
       StatusExpand: ['Extinct', 'Living: Major', 'Living: Minor'],
-      indicSubset: ['LaoTham', 'LueTham', 'KhuenTham', 'PhagsPa', 'TaiLaing', 'Mon', 'Ahom', 'KhamtiShan', 'Shan', 'Khmer', 'Burmese', 'Lao', 'Thai', 'Balinese', 'Javanese', 'Tibetan', 'LaoPali', 'TaiTham', 'Cham', 'Lepcha', 'Ahom', 'ZanabazarSquare'],
+      indicSubset: ['LaoTham', 'LueTham', 'KhuenTham', 'PhagsPa', 'TaiLaing', 'Mon', 'Ahom', 'KhamtiShan', 'Khmer', 'Burmese', 'Lao', 'Thai', 'Balinese', 'Javanese', 'Tibetan', 'LaoPali', 'TaiTham', 'Cham', 'Lepcha', 'Ahom', 'ZanabazarSquare'],
       tagsUsageM: ['Living', 'Extinct'],
       tagsUsageS: ['Living: Minor', 'Living: Major', 'Extinct: Ancient', 'Extinct: Medieval', 'Extinct: Pre-Modern'],
       tagsLanguageM: ['Sanskrit', 'Pali', 'Others'],
