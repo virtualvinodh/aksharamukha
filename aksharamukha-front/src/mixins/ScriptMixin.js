@@ -4,7 +4,7 @@ export const ScriptMixin = {
       apiCall: this.$axios.create({
         // Always use http://localhost:8085/api/ (with a leading slash)
         // http://localhost:8085/api/
-        baseURL: 'http://localhost:8085/api/',
+        baseURL: 'api/',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -238,6 +238,9 @@ export const ScriptMixin = {
         ],
         'Burmese': [
           { label: 'Segment Burmese Syllables <br/><small><span class="burmese">လေထဲပျော် → လေ ထဲ ပျော်</span>', value: 'segmentBurmeseSyllables' }
+        ],
+        'Khmer': [
+          { label: 'Segment Khmer Words <br/><small><span class="burmese">មនុស្សទាំងអស់ → មនុស្ស ទាំងអស់</span>', value: 'KhmerWordSplit' }
         ],
         'Shan': [
           { label: 'Segment Shan Syllables <br/><small><span class="burmese">လႅင်းမုၼ်းမႂ်ႇ → လႅင်း မုၼ်း မႂ်ႇ</span>', value: 'segmentShanSyllables' }
