@@ -82,7 +82,7 @@
 
     <p class="q-body-1">You can also convert files (.docx, .html & .txt) as shown below.</p>
     <span class="code"> from aksharamukha import transliterate_file</span> <br/><br/>
-    <span class="code"> transliterate_file.process(src_path, tgt, file, nativize, pre_options, post_options)</span> <br/><br/>
+    <span class="code"> transliterate_file.process(tgt, src, file_path, nativize=True, pre_options=[], post_options=[])</span> <br/><br/>
 
   </q-page>
 </template>
