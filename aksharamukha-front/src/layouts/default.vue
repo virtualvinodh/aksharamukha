@@ -81,14 +81,17 @@
           <q-item-side icon="table chart" />
             <q-item-main label="Semitic Matrix"/>
           </q-item>
+          <q-collapsible icon="spellcheck" label="Romanization"  >
             <q-item to="/roman">
-              <q-item-side icon="spellcheck" />
-              <q-item-main label="Indic Roman"/>
+              <q-item-main label="Indic Scripts"/>
             </q-item>
             <q-item to="/roman-semitic">
-              <q-item-side icon="spellcheck" />
-              <q-item-main label="Semitic Roman"/>
+              <q-item-main label="Semitic Scripts"/>
             </q-item>
+            <q-item to="/loc">
+              <q-item-main label="Library of Congres"/>
+            </q-item>
+          </q-collapsible>
  <!--            <q-item :to="!scriptSemiticList.includes(script.value) ? '/describe/' + script.value : '/describesemitic/' + script.value"
             v-for="script in scriptAboutList" :key="script.value">
               <q-item-main :label="script.label"/>

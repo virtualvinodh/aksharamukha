@@ -1,18 +1,32 @@
 <template>
      <q-collapsible :sublabel="label"
-         icon="settings" dense class="q-mb-xs q-mt-xs print-hide"
-        :style="{'visibility': optionCount === 0 ? 'hidden' : '', 'display': hideSourcePreserve && optionCount === 0 ? 'none' : ''}" ref="collapse"
+         icon="settings" dense class="q-mb-xs q-mt-xs print-hide" ref="collapse"
      >
     <div class="col-xs-12 col-md-12 print-hide">
       <q-option-group
         color="dark"
         type="checkbox"
         inline
-        class="q-ml-sm q-mb-sm q-mt-sm print-hide"
+        class="q-ml-sm q-mt-sm print-hide"
         v-model="postOptions"
         @input="convert"
         :options="postOptionList"
       />
+      <span>
+        <q-toggle color="dark" v-model="romanNumerals" label="Indo-Arabic numerals" class="q-ml-sm q-mb-sm q-mt-md print-hide" @input="convert" v-if='!romanNumeralScripts.includes(outputScript) &&!transliterationScripts.includes(outputScript)'/><q-tooltip></q-tooltip>
+      </span>
+      <span>
+        <q-toggle color="dark" v-model="indicNumerals" label="Native numerals" class="q-ml-sm q-mb-sm q-mt-md print-hide" @input="convert" v-if='romanNumeralScripts.includes(outputScript)'/>
+        <q-tooltip></q-tooltip>
+      </span>
+      <span>
+        <q-toggle color="dark" v-model="indicDandas" label="Use dandas" class="q-ml-sm q-mb-sm q-mt-md print-hide" @input="convert" v-if='romanPunctscripts.includes(outputScript) || transliterationScripts.includes(outputScript) '/>
+        <q-tooltip></q-tooltip>
+      </span>
+      <span>
+        <q-toggle color="dark" v-model="romanFullStop" label="Use fullstop" class="q-ml-sm q-mb-sm q-mt-md print-hide" @input="convert" v-if='!romanPunctscripts.includes(outputScript) && !transliterationScripts.includes(outputScript)'/>
+        <q-tooltip></q-tooltip>
+      </span>
     </div>
       <span v-if="showSourcePreserve && !hideSourcePreserve">
         <span>
@@ -48,17 +62,32 @@ export default {
   data () {
     return {
       postOptions: this.postOptionsInput,
-      sourcePreserve: this.sourcePreserveInput
+      sourcePreserve: this.sourcePreserveInput,
+      romanNumerals: this.postOptionsInput.includes('romanNumerals'),
+      romanFullStop: this.postOptionsInput.includes('romanFullStop'),
+      indicNumerals: this.postOptionsInput.includes('indicNumerals'),
+      indicDandas: this.postOptionsInput.includes('indicDandas')
     }
   },
   mounted: function () {
   },
+  updated: function () {
+    this.romanNumerals = this.postOptionsInput.includes('romanNumerals')
+    this.romanFullStop = this.postOptionsInput.includes('romanFullStop')
+    this.indicNumerals = this.postOptionsInput.includes('indicNumerals')
+    this.indicDandas = this.postOptionsInput.includes('indicDandas')
+  },
   computed: {
+    activeOptionsCount: function () {
+      let count
+      count = this.postOptions.length + this.sourcePreserve
+      return count
+    },
     label: function () {
       if (this.showscriptName) {
-        return '<i>' + this.outputScript + ' output options (' + this.optionCount + ')</i>'
+        return '<i>' + this.outputScript + ' output options (' + this.optionCount + ')</i> : ' + this.activeOptionsCount + ' active'
       } else {
-        return '<i>Output options (' + this.optionCount + ')</i>'
+        return '<i>Output options (' + this.optionCount + ')</i> : ' + this.activeOptionsCount + ' active'
       }
     },
     optionCount: function () {
@@ -68,7 +97,9 @@ export default {
       } else {
         optionCount = this.postOptionList.length
       }
-      return optionCount
+      var numeralsDandas = (!this.romanNumeralScripts.includes(this.outputScript) && !this.transliterationScripts.includes(this.outputScript)) + this.romanNumeralScripts.includes(this.outputScript) + (this.romanPunctscripts.includes(this.outputScript) || this.transliterationScripts.includes(this.outputScript)) + (!this.romanPunctscripts.includes(this.outputScript) && !this.transliterationScripts.includes(this.outputScript))
+
+      return optionCount + numeralsDandas
     },
     showSourcePreserve: function () {
       var sourcePreserveExists = typeof this.preserveSourceExampleOut[this.outputScript] !== 'undefined'
@@ -112,7 +143,32 @@ export default {
     convert: function () {
       this.postOptions = this.filterRadio(this.postOptions, this.outputScript)
 
-      // console.log(this.postOptions)
+      if (this.romanNumerals && !this.postOptions.includes('romanNumerals')) {
+        this.postOptions = this.postOptions.concat(['romanNumerals'])
+      }
+      if (!this.romanNumerals) {
+        this.postOptions = this.postOptions.filter(item => item !== 'romanNumerals')
+      }
+      if (this.indicNumerals && !this.postOptions.includes('indicNumerals')) {
+        this.postOptions = this.postOptions.concat(['indicNumerals'])
+      }
+      if (!this.indicNumerals) {
+        this.postOptions = this.postOptions.filter(item => item !== 'indicNumerals')
+      }
+      if (this.indicDandas && !this.postOptions.includes('indicDandas')) {
+        this.postOptions = this.postOptions.concat(['indicDandas'])
+      }
+      if (!this.indicDandas) {
+        this.postOptions = this.postOptions.filter(item => item !== 'indicDandas')
+      }
+      if (this.romanFullStop && !this.postOptions.includes('romanFullStop')) {
+        this.postOptions = this.postOptions.concat(['romanFullStop'])
+      }
+      if (!this.romanFullStop) {
+        this.postOptions = this.postOptions.filter(item => item !== 'romanFullStop')
+      }
+
+      console.log(this.postOptions)
       if (!this.hideSourcePreserve) {
         this.$emit('input', [this.postOptions, this.sourcePreserve])
       } else {

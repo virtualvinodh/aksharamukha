@@ -10,3 +10,4 @@ fonttools[unicode]>=4.31
 lxml
 google-python-cloud-debugger
 beautifulsoup4
+khmer-nltk

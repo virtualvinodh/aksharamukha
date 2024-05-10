@@ -1,5 +1,5 @@
 <template>
-      <q-collapsible :sublabel="'<i>Input options (' + preOptionList.length + ')</i>'" icon="settings" dense class="q-mb-xs q-mt-xs"
+      <q-collapsible :sublabel="'<i>Input options (' + preOptionList.length + ')</i> : ' + preOptions.length + ' active'" icon="settings" dense class="q-mb-xs q-mt-xs"
       :style="{'visibility': preOptionList.length === 0 ? 'hidden' : '', 'display': hideSourcePreserve  && preOptionList.length === 0 ? 'none' : '' }" ref="collapse2"
       >
       <q-option-group
@@ -45,6 +45,11 @@ export default {
   mounted: function () {
   },
   computed: {
+    activeOptionsCount: function () {
+      let count
+      count = this.preOptionList.length
+      return count
+    },
     preOptionList: function () {
       var preOptionList = []
       if (typeof this.preOptionsGroup[this.inputScript] !== 'undefined') {

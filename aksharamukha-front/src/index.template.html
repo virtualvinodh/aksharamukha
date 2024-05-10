@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script>
+      if (window.location.toString().includes('appspot.com')) {
+        window.location = "https://www.aksharamukha.com" + window.location.pathname;
+      }
+    </script>
     <meta charset="utf-8">
     <meta name="description" content="<%= htmlWebpackPlugin.options.productDescription %>">
     <meta name="format-detection" content="telephone=no">

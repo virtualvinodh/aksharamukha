@@ -140,6 +140,9 @@
 .kannada {
   font-family: "Noto Sans Kannada" !important
 }
+.divesakuru {
+  font-family: "Noto Sans DivesAkuru" !important
+}
 .kannadapollu {
   font-family: "Tiro Kannada" !important
 }
@@ -185,7 +188,7 @@
   font-family: "Kawitan" !important
 }
 .kawi {
-  font-family: "Tantular Kawi" !important
+  font-family: "Noto Sans Kawi" !important
 }
 
 .ipa {
@@ -510,7 +513,7 @@
 }
 
 .syre {
-  font-family: "Noto Sans Syriac Estrangela" !important;
+  font-family: "Noto Sans Syriac" !important;
   direction: rtl;
 }
 .syrj {

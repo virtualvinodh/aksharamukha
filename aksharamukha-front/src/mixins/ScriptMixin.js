@@ -4,7 +4,7 @@ export const ScriptMixin = {
       apiCall: this.$axios.create({
         // Always use http://localhost:8085/api/ (with a leading slash)
         // http://localhost:8085/api/
-        baseURL: 'api/',
+        baseURL: 'http://localhost:8085/api/',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -46,7 +46,10 @@ export const ScriptMixin = {
       consontantsSpecial: ['L', 'Z', 'r2', 'n2'],
       consonantsSinhala: ['n*g', 'n*j', 'n*D', 'n*d', 'm*b'],
       ayogavahasAll: ['~', 'M', 'H'],
-      locScripts: ['Burmese', 'Khmer', 'Shan', 'KhuenTham', 'TaiTham', 'LaoTham'],
+      transliterationScripts: ['IASTPali', 'RomanReadable', 'Aksharaa', 'ISO', 'IAST', 'HK', 'Titus', 'Itrans', 'Velthuis', 'WX', 'IPA', 'RussianCyrillic', 'IASTPali', 'ISOPali', 'RomanLoC'],
+      romanNumeralScripts: ['Tamil', 'Gurmukhi', 'Malayalam', 'Telugu', 'Sinhala'],
+      romanPunctscripts: ['Tamil', 'Kannada', 'Malayalam', 'Telugu', 'Gujarati', 'TamilExtended', 'Sinhala'],
+      locScripts: ['Burmese', 'Shan', 'Khmer', 'KhuenTham', 'TaiTham', 'LaoTham', 'LueTham', 'Kannada', 'Tamil', 'Malayalam', 'Sinhala', 'Telugu', 'Kannada', 'Oriya', 'Assamese', 'Bengali', 'Gujarati', 'Devanagari', 'Balinese', 'Javanese', 'BatakKaro', 'BatakManda', 'BatakPakpak', 'BatakSima', 'BatakToba', 'Gurmukhi', 'Tibetan', 'Limbu'],
       vedicScripts: ['Assamese', 'Bengali', 'Devanagari', 'Gujarati', 'Kannada', 'Malayalam', 'Oriya', 'Gurmukhi', 'Tamil', 'Telugu', 'TamilExtended', 'Grantha'],
       vocalized: ['Hebr', 'Syrj', 'Syrn', 'Arab-Fa', 'Latn', 'Type', 'Arab', 'Arab-Ur', 'Thaa'],
       preserveSourceExampleOut: {
@@ -58,6 +61,7 @@ export const ScriptMixin = {
         'Modi': 'ki kī ku kū → <span class="modi">𑘎𑘱 𑘎𑘲 𑘎𑘳 𑘎𑘴</span> not <span class="modi">𑘎𑘲 𑘎𑘲 𑘎𑘳 𑘎𑘳</span>',
         'Multani': 'aśoka →<span class="multani">𑊀𑊥𑊂𑊄</span> not <span class="multani">𑊀𑊥𑊄</span>',
         'Ahom': 'ahoṃ →<span class="ahom">𑜒𑜑𑜦𑜪𑜡</span> not <span class="ahom">𑜒𑜑𑜪𑜨</span>',
+        'Khojki': 'ahoṃ →<span class="khojki">𑜒𑜑𑜦𑜪𑜡</span> not <span class="ahom">𑜒𑜑𑜪𑜨</span>',
         'Sundanese': 'ṛ ḷ bha → <ahoṃ class="sundanese">ᮻ ᮼ ᮽ</span> not <span class="sundanese">ᮛᮩ ᮜᮩ ᮘ</span>',
         'Avestan': 'khyat  → <span class="avestan">𐬑𐬌𐬌𐬀𐬙</span> not <span class="avestan">𐬒𐬌𐬌𐬀𐬝</span>',
         'Thaana': 'maṇi → <span class="thaana">މަޱި</span> not <span class="thaana">މަނި</span>',
@@ -67,8 +71,8 @@ export const ScriptMixin = {
         'Chakma': 'yayāti → <span class="chakma">𑄡𑄧𑄡𑄖𑄨</span> not <span class="chakma">𑄡𑄧𑄠𑄖𑄨</span>',
         'Gujarati': 'kŏl → <span class="gujarati">કો˘લ્</span> not <span class="gujarati">કોલ્</span>',
         'Oriya': 'vināyaka → <span class="oriya">ୱିନାଯକ</span> not <span class="oriya">ବିନାୟକ</span><br/>kŏlæṭ → <span class="oriya">କୋ˘ଲେʼଟ୍</span> not <span class="oriya">କୋଲେଟ୍</span>',
-        'Assamese': 'vināyaka → <span class="assamese">ৱিনাযক</span> not <span class="assamese">ৱিনায়ক</span><br/>kŏlæṭ → <span class="assamese">কো˘লেʼট্</span> not <span class="assamese">কোলেট্</span>',
-        'Bengali': 'vināyaka → <span class="bengali">ভ়িনাযক</span> not <span class="bengali">বিনায়ক</span><br/>udvega udbodhana → <span class="bengali">উদ্বেগ উদ্‌বোধন</span> not <span class="bengali">উদ্বেগ উদ্বোধন</span><br/>kŏlæṭ → <span class="bengali">কো˘লেʼট্</span> not <span class="bengali">কোলেট্</span>',
+        'Assamese': 'vināyaka → <span class="assamese">ৱিনাযক</span> not <span class="assamese">ৱিনায়ক</span><br/>kŏlæṭ → <span class="assamese">কো˘লেʼট্</span> not <span class="assamese">কোলেট্</span><br/>aṃkha kaṃpa → <span class="assamese">অংখ কংপ</span> not <span class="assamese">অঙ্খ কম্প</span>',
+        'Bengali': 'vināyaka → <span class="bengali">ভ়িনাযক</span> not <span class="bengali">বিনায়ক</span><br/>udvega udbodhana → <span class="bengali">উদ্বেগ উদ্‌বোধন</span> not <span class="bengali">উদ্বেগ উদ্বোধন</span><br/>kŏlæṭ → <span class="bengali">কো˘লেʼট্</span> not <span class="bengali">কোলেট্</span><br/>aṃkha kṃmpa → <span class="assamese">অংখ কংপ</span> not <span class="assamese">অঙ্খ কম্প</span>',
         'Limbu': 'jha ña ṣa ṃ → <span class="limbu">ᤉ ᤊ ᤚ ᤲ</span> not <span class="limbu">ᤈ ᤏ ᤙ ᤱ</span>',
         'MeeteiMayek': 'kūṭākṣara → <span class="meeteimayek">ꯀꫬꫤꯥꯛꫪꯔ</span> not <span class="meeteimayek">ꯀꯨꯇꯥꯛꯁꯔ</span>',
         'Tamil': 'maṃtana → <span class="tamil">மம்ʼதந</span> not <span class="tamil">மந்தன</span>',
@@ -76,7 +80,7 @@ export const ScriptMixin = {
         'Telugu': 'khaṇḍam → <span class="telugu">ఖణ్డమ్</span> not <span class="telugu">ఖండం</span><br/>āzādī → <span class="telugunukta">ఆజ఼ాదీ</span> not <span class="telugu">ఆజాదీ</span><br/> kæpôḍ → <span class="telugu">కె॒​పొ॒​డ్</span> not <span class="telugu">కెపాడ్</span>',
         'Kannada': 'khaṇḍam → <span class="kannada">ಖಣ್ಡಮ್</span> not <span class="kannada">ಖಂಡಂ</span> <br/> kæpôḍ → <span class="kannada">ಕೆʼಪಾʼಡ್</span> not <span class="kannada">ಕೆಪಾಡ್</span>',
         'Devanagari': 'san̆dahan → <span class="devanagari">सँˆदहन्</span> not <span class="devanagari">सँदहन्</span>',
-        'Sinhala': 'kôṭ hām̐ → <span class="sinhala">කාʼට් හූංʼ</span> not <span class="sinhala">කාට් හූං</span>',
+        'Sinhala': 'kôṭ hām̐ → <span class="sinhala">කාʼට් හූඁ</span> not <span class="sinhala">කාට් හූං</span>',
         'Hebrew': 'svāhā → <span class="sinhala">סְוָהָ</span> not <span class="sinhala">סְבָהָה</span>',
         'Nandinagari': 'saṅgha → <span class="nandinagari">𑧍𑦲𑧠𑦱</span> not <span class="nandinagari">𑧍𑧞𑦱</span>'
 
@@ -228,6 +232,18 @@ export const ScriptMixin = {
         ]
       },
       preOptionsGroup: {
+        'DivesAkuru': [
+          { label: '/y/ as vowel carrier<br/><small><span class="divesakuru">𑤀 𑤁 𑤂 𑤃 → 𑤥 𑤥𑤰 𑤥𑤱 𑤥𑤲</span></small>', value: 'DivesAkuruAlternateIndVowels' }
+        ],
+        'Kawi': [
+          { label: 'Repha as word-final /r/<br/><small><span class="kawi">𑼂𑼤𑼪 → dharma </span></small>', value: 'KawiMoveRepha' }
+        ],
+        'Javanese': [
+          { label: 'Moved repha<br/><small><span class="javanese">ꦣꦩꦂ → dharma </span></small>', value: 'JavaneseMoveRepha' }
+        ],
+        'Balinese': [
+          { label: 'Moved repha<br/><small><span class="balinese">ᬥᬫᬃ → dharma </span></small>', value: 'BalineseMoveRepha' }
+        ],
         'Tamil': [
           { label: 'Transcribe Tamil (Standard)<br/><small><span class="tamil">மதம், பேசு</span> → madam, pēsu</small>', value: 'TamilTranscribe' },
           { label: 'Transcribe Tamil (Dialectal)<br/><small><span class="tamil">மதம், பேசு</span> → madam, pēśu</small>', value: 'TamilTranscribeDialect' },
@@ -235,6 +251,7 @@ export const ScriptMixin = {
         ],
         'Itrans': [
           { label: 'E/O for long, e/o for short', value: 'swapEeItrans' }
+          // { label: 'LLi LLI → L_Li L_LI', value: 'ItransLL' }
         ],
         'Burmese': [
           { label: 'Segment Burmese Syllables <br/><small><span class="burmese">လေထဲပျော် → လေ ထဲ ပျော်</span>', value: 'segmentBurmeseSyllables' }
@@ -250,7 +267,9 @@ export const ScriptMixin = {
           { label: '<i>tat tvam asi</i> → <i>tattvamasi</i>', value: 'joinVowelConsISO' }
         ],
         'IAST': [
-          { label: '<i>tat tvam asi</i> → <i>tattvamasi</i>', value: 'joinVowelConsIAST' }
+          { label: '<i>tat tvam asi</i> → <i>tattvamasi</i>', value: 'joinVowelConsIAST' },
+          { label: 'Vedic retroflex /l/ <br/><small><span class="iast">agnimīḻe → agnimīl̤e </span>', value: 'RomanLoCSLaDotLaUnderscore' }
+
         ],
         'Hiragana': [
           { label: '/ou/ and /ei/ dipthongs not /ē/ and /ō/', value: 'eiaudipthongs' },
@@ -282,9 +301,13 @@ export const ScriptMixin = {
           { label: 'Nativized Sajjhāya text <br/><small><div class="laopali">e.g. ພຸທ໌ຘະ</div></small>', value: 'LaoSajhayaOrthographywithA' },
           { label: 'Lao Phonetic text<br/><small><div class="laopali">e.g. ບຸດຘະຕ͜ວະ</div></small>', value: 'LaoPhonetic' }
         ],
+        'TaiTham': [
+          { label: 'Segment Tham Syllables <small><div class="q-mt-sm"></div></small>', value: 'segmentThamSyllabes' }
+        ],
         'Devanagari': [
           { label: 'Schwa deletion (Hindi) <small><div class="q-mt-sm">राम → rām, सबसे → sabse</div></small>', value: 'RemoveSchwaHindi' },
           { label: 'Anusvara and Chandrabindu equivalent', value: 'AnuChandraEqDeva' }
+          // { label: 'Retain Devanagari Dandas', value: 'RetainDevangariDanda' }
         ],
         'Gujarati': [
           { label: 'Schwa deletion (Only word-final) <br/><small><div class="q-mt-sm">राम → rām</div></small>', value: 'SchwaFinalGujarati' }
@@ -295,7 +318,9 @@ export const ScriptMixin = {
           { label: 'Show Khanda TA <br/><small><div class="q-mt-sm">উৎকল → utˍkala</div></small>', value: 'ShowKhandaTa' }
         ],
         'Oriya': [
-          { label: 'ବ → va', value: 'OriyaTargetVa' }
+          { label: 'ବ → va', value: 'OriyaTargetVa' },
+          { label: 'ସ୍ବ ଦ୍ବ → sva dva', value: 'OriyaSubojinedVa' }
+
         ],
         'Bengali': [
           { label: 'Schwa deletion (Only word-final) <br/><small><div class="q-mt-sm">রাম → rām</div></small>', value: 'SchwaFinalBengali' },
@@ -374,9 +399,26 @@ export const ScriptMixin = {
         ],
         'TamilSaurashtra': [
           { label: 'Convert : as Haaru <small><br/><span class="tamil">நீ:</span> → </small><span class="saurashtra">ꢥꢴꢷ</span>', value: 'SaurastraHaaruColonTamil' }
+        ],
+        'RomanLoCDevanagari': [
+          { label: 'Use Hindi/Marathi Mapping', value: 'HindiMarathiRomanLoCFix' }
+          // add message that by default Sanskrit mapping is used
         ]
       },
       postOptionsGroupSpecific: {
+        'RomanLoCDevanagari': [
+          { label: 'Use Hindi/Marathi Mapping', value: 'HindiMarathiRomanLoCFix' }
+          // add message that by default Sanskrit mapping is used
+        ],
+        'TaiThamRomanLoC': [
+          { label: 'Pali /o/ <br/><small><span class="taitham">ᨠᩰ</span> → <span class="taitham">ᨠᩮᩣ</span></small>', value: 'UseAlternateo2' }
+        ],
+        'RomanLoCLaoTham': [
+          { label: 'Pali /o/ <br/><small><span class="laotham">ᨠᩰ</span> → <span class="laotham">ᨠᩮᩣ</span></small>', value: 'UseAlternateo2' }
+        ],
+        'RomanLoCKhuenTham': [
+          { label: 'Pali /o/ <br/><small><span class="khuentham">ᨠᩰ</span> → <span class="khuentham">ᨠᩮᩣ</span></small>', value: 'UseAlternateo2' }
+        ],
         'DevanagariLimbu': [
           { label: 'Limbu Devanagari conventions<small><br/><span class="limbu">ᤀᤧ ᤀᤨ ᤀᤧ᤺ ᤁᤧ ᤁᤨ ᤁᤧ᤺</span> → <span class="limbudev">ए़ ओ़ ए़ः के़ को़ के़ः</span></small>', value: 'LimbuDevanagariConvention' }
         ],
@@ -413,17 +455,30 @@ export const ScriptMixin = {
         'ISOOriya': [
           { label: 'inherent /a/ as /ô/', value: 'inherentAO' }
         ],
+        'IASTMalayalam': [
+          { label: 'റ്റ (ṟṟ) ന്റ (nṟa) → ṯṯ nṯ', value: 'MalayalamTTNTA' }
+        ],
+        'ISOMalayalam': [
+          { label: 'റ്റ (ṟṟ) ന്റ (nṟa) → ṯṯ nṯ', value: 'MalayalamTTNTA' }
+        ],
         'LatnSyrj': [
           { label: 'Syriac convention <small><br/> v ġ ḫ f → ḇ ḡ ḵ p̄', value: 'syriacRoman' }
         ],
         'LatnSyrn': [
           { label: 'Syriac convention <small><br/> v ġ ḫ f → ḇ ḡ ḵ p̄', value: 'syriacRoman' }
+        ],
+        'RomanLoCBalinese': [
+          { label: 'Use simplified Mapping<small><br/><span class="balinese">ᬡ ᬙ ᬣ → na ca ta</span>', value: 'BalineseSimplified' }
+        ],
+        'RomanLoCJavanese': [
+          { label: 'Use simplified Mapping<small><br/><span class="javanese">ꦟ ꦖ ꦡ → na ca ta</span>', value: 'JavaneseSimplified' }
         ]
       },
       postOptionsRadioGroup: {
         'Ranjana': [['ranjanalantsa', 'ranjanawartu']],
         'Siddham': [['UseAlternateI1', 'UseAlternateI2'], ['siddhammukta', 'siddhamap']],
         'PhagsPa': [['PhagsPaTib', 'PhagsPaSeal']],
+        'Malayalam': [['MalayalamLineVirama', 'MalayalamCircVirama']],
         'Devanagari': [['devanagariuttara', 'devanagarijain', 'devanagarinepali', 'devanagaribalbodh']],
         'IAST': [['mDotAboveToBelow', 'NasalTilde']],
         'Pallava': [['sundapura', 'kawitan']],
@@ -441,6 +496,30 @@ export const ScriptMixin = {
         ]
       },
       postOptionsGroup: {
+        'DivesAkuru': [
+          { label: '/y/ as vowel carrier<br/><small><span class="divesakuru">𑤀 𑤁 𑤂 𑤃 → 𑤥 𑤥𑤰 𑤥𑤱 𑤥𑤲</span></small>', value: 'DivesAkuruAlternateIndVowels' },
+          { label: 'Use Alt. /y/<br/><small><span class="divesakuru">𑤥 → 𑤦</span></small>', value: 'UseAlternateYA' },
+          { label: 'Use nasal sign<br/><small><span class="divesakuru">𑤐𑤾𑤎 𑤤𑤾𑤢 𑤚𑤾𑤘 𑤟𑤾𑤞 → 𑤿𑤎 𑤿𑤢 𑤿𑤘 𑤿𑤞</span></small>', value: 'DivesAkuruHomoOrganNasal' }
+        ],
+        'Ahom': [
+          { label: 'Remove Pali characters<br/><small><span class="ahom">𑝀 𑝁 𑝂 𑝃 𑝄 𑝅 𑝆 → 𑜋 𑜄 𑜌 𑜓 𑜔 𑜃 𑜎</span></small>', value: 'removePaliAhom' }
+        ],
+        'Kawi': [
+          { label: 'Use decomposed vowels<br/><small><span class="kawi">𑼅 𑼇 𑼉 → 𑼄𑼴 𑼆𑼴 𑼈𑼴</span></small>', value: 'KawiDecomposedVowel' },
+          { label: 'Use Alt. AI/AU<br/><small><span class="kawi">𑼒𑼿 𑼒𑼿𑼴 → 𑼒𑼾𑼾 𑼒𑼾𑼾𑼴</span></small>', value: 'KawiAltAiAU' },
+          { label: 'Arachaic jña<br/><small><span class="kawi">𑼙𑽂𑼛 → 𑼳</span></small>', value: 'KawiArchaicJNA' },
+          { label: 'Move Repha<br/><small><span class="kawi">𑼤𑼂𑼪 → 𑼂𑼤𑼪</span></small>', value: 'KawiMoveRepha' }
+        ],
+        'Javanese': [
+          { label: 'Use a-based indendent vowels<br/><small><span class="javanese">ꦆ ꦇ ꦈ ꦈꦴ → ꦄꦶ ꦄꦷ ꦄꦸ ꦄꦹ</span></small>', value: 'JavaneseAvowels' },
+          { label: 'Arachaic jña<br/><small><span class="javanese">ꦗ꧀ꦚ → ꦘ</span></small>', value: 'JavaneseArchaicJNA' },
+          { label: 'Move repha<br/><small><span class="javanese">ꦣꦂꦩ → ꦣꦩꦂ</span></small>', value: 'JavaneseMoveRepha' }
+        ],
+        'Balinese': [
+          { label: 'Use a-based vowels<br/><small><span class="balinese">ᬇ ᬈ ᬉ ᬊ → ᬅᬶ ᬅᬷ ᬅᬸ ᬅᬹ</span></small>', value: 'BalineseAvowels' },
+          { label: 'Arachaic jña<br/><small><span class="balinese">ᬚ᭄ᬜ → ᭌ</span></small>', value: 'BalineseArchaicJNA' },
+          { label: 'Move repha<br/><small><span class="balinese">ᬥᬃᬫ → ᬥᬫᬃ</span></small>', value: 'BalineseMoveRepha' }
+        ],
         'RomanLoC': [
           { label: 'MARC-8 decomposed diacritics', value: 'LoCMarc8' }
         ],
@@ -498,19 +577,20 @@ export const ScriptMixin = {
         'Tamil': [
           { label: 'Disable <span class="tamil">ஶ</span><br/><small><span class="tamil">ஶ → ஷ²</span></small>', value: 'TamilDisableSHA' },
           { label: 'Subscript numerals<br/><small><span class="tamil">க²க³க⁴ → க₂க₃க₄</span></small>', value: 'TamilSubScript' },
+          { label: 'Mark the first varga<br/><small><span class="tamil">தீ³பம் → தீ³ப¹ம்</span></small>', value: 'TamilAddFirstVarga' },
+          { label: 'Remove apostrophe<br/><small><span class="tamil">ருʼம்ʼ → ரும்</span></small>', value: 'TamilRemoveApostrophe' },
+          { label: 'Remove diacritic numerals<br/><small><span class="tamil">க²க³க⁴ → ககக</span></small>', value: 'TamilRemoveNumbers' },
           { label: 'Old orthography<br/><small><span class="tamil">லை னா</span> → <span class="tamilold">லை னா</span></small>', value: 'oldtamilortho' },
           { label: 'Grantha Visarga<br/><small><span class="tamil">நம꞉ → நம𑌃</span></small>', value: 'TamilGranthaVisarga' },
           { label: 'Disable ௐ<br/><small><span class="tamil">ௐ → ஓம்</span></small>', value: 'TamilOmDisable' },
-          { label: 'Remove apostrophe<br/><small><span class="tamil">ருʼம்ʼ → ரும்</span></small>', value: 'TamilRemoveApostrophe' },
-          { label: 'Remove diacritic numerals<br/><small><span class="tamil">க²க³க⁴ → ககக</span></small>', value: 'TamilRemoveNumbers' },
           { label: 'Contextual <span class="tamil">ள</><br/><small>(Experimental)</small><br/><small><span class="tamil">ப்ரலய → ப்ரளய</span></small>', value: 'ContextualLLa' },
-          { label: 'Only word-final <span class="tamil">ன</><br/><small><span class="tamil">ஆனனன் → ஆநநன்</span></small>', value: 'FinalNNa' },
-          { label: 'Dandas<br/><small><span class="tamil">. .. → । ॥</span></small>', value: 'RetainTamilDanda' },
-          { label: 'Tamil numerals<br/><small><span class="tamil">123 → ௧௨௩</span></small>', value: 'RetainTamilNumerals' }
+          { label: 'Only word-final <span class="tamil">ன</><br/><small><span class="tamil">ஆனனன் → ஆநநன்</span></small>', value: 'FinalNNa' }
+          // { label: 'Dandas<br/><small><span class="tamil">. .. → । ॥</span></small>', value: 'RetainTamilDanda' },
+          // { label: 'Tamil numerals<br/><small><span class="tamil">123 → ௧௨௩</span></small>', value: 'RetainTamilNumerals' }
           // { label: 'Medieval e/o with Pulli<br/><small><span class="tamil">ஒ ஓ கொ கோ → ஒ் ஒ கெ்ா கொ</span></small>', value: 'MedievalTamilOrthography' }
         ],
         'TamilExtended': [
-          { label: 'Dandas <br/><small><span class="tamilextended">. .. → । ॥</span></small>', value: 'Dot2Dandas' },
+          // { label: 'Dandas <br/><small><span class="tamilextended">. .. → । ॥</span></small>', value: 'Dot2Dandas' },
           { label: 'Avoid Anusvara <br/><small><span class="tamilextended">സംഘം → സങ്‌ഘമ്</span></small>', value: 'TamilExtendedAnusvara' },
           { label: 'Contextual <span class="tamil">ன</span> <br/><small><span class="tamilextended">ഗജാനനന്‌ → ഗജാഩഩഩ്‌</span></small>', value: 'TamilExtendedNNA' },
           { label: 'Tamil Style -u -ū <br/><small>(Core Grantha)</small><br/><small><span class="tamilextended">ഗുബൂഫുഭൂ → ഗ‍ുബ‍ൂഫ‍ുഭ‍ൂ</span></small>', value: 'TamilStyleUUCore' },
@@ -601,8 +681,8 @@ export const ScriptMixin = {
           { label: 'Avoid duplicated consonants<br/><small>Convert <span class="takri">𑚄𑚙𑚶𑚙𑚤</span> → <span class="takri">𑚄𑚙𑚤</span></small>', value: 'TakriRemoveGemination' }
         ],
         'Gurmukhi': [
-          { label: 'Yakaash<br/><small>ਕ੍ਯ → ਕੵ</small>', value: 'GurmukhiYakaash' },
-          { label: 'Gurmukhi numerals<br/><small>123 → ੧੨੩</small>', value: 'RetainGurmukhiNumerals' }
+          { label: 'Yakaash<br/><small>ਕ੍ਯ → ਕੵ</small>', value: 'GurmukhiYakaash' }
+          // { label: 'Gurmukhi numerals<br/><small>123 → ੧੨੩</small>', value: 'RetainGurmukhiNumerals' }
         ],
         'Thai': [
           { label: 'Thai orthography<br/><small><div>พุทฺธ → พุทธะ</div></small>', value: 'ThaiTranscription' },
@@ -623,22 +703,26 @@ export const ScriptMixin = {
         'TaiTham': [
           { label: 'Shift Mai Kang Lai<br/><small><span class="taitham">ᩈᩘᨥ</span> → <span class="taitham">ᩈᨥᩘ</span></small>', value: 'ThamShiftMaiKangLai' },
           { label: 'Tall -ā with ca/ba/ra/bha<br/><small><span class="taitham">ᨣᨧ᩠ᨨᩣᨾᩥ</span> → <span class="taitham">ᨣᨧ᩠ᨨᩤᨾᩥ</span></small>', value: 'ThamTallAOthers' },
-          { label: 'Disable explicit Tall -ā <br/><small>Font chooses the right form</small>', value: 'ThamTallADisable' }
+          { label: 'Disable explicit Tall -ā <br/><small>Font chooses the right form</small>', value: 'ThamTallADisable' },
+          { label: '<span class="taitham">ᨠᩮᩣ</span> → <span class="taitham">ᨠᩰ</span></small>', value: 'UseAlternateo1' }
         ],
         'LueTham': [
           { label: 'Shift Mai Kang Lai<br/><small><span class="luetham">ᩈᩘᨥ</span> → <span class="luetham">ᩈᨥᩘ</span></small>', value: 'ThamShiftMaiKangLai' },
           { label: 'Tall -ā with ca/ba/ra/bha<br/><small><span class="luetham">ᨣᨧ᩠ᨨᩣᨾᩥ</span> → <span class="luetham">ᨣᨧ᩠ᨨᩤᨾᩥ</span></small>', value: 'ThamTallAOthers' },
-          { label: 'Disable explicit Tall -ā <br/><small>Font chooses the right form</small>', value: 'ThamTallADisable' }
+          { label: 'Disable explicit Tall -ā <br/><small>Font chooses the right form</small>', value: 'ThamTallADisable' },
+          { label: '<span class="luetham">ᨠᩮᩣ</span> → <span class="luetham">ᨠᩰ</span></small>', value: 'UseAlternateo1' }
         ],
         'LaoTham': [
           { label: 'Shift Mai Kang Lai<br/><small><span class="laotham">ᩈᩘᨥ</span> → <span class="laotham">ᩈᨥᩘ</span></small>', value: 'ThamShiftMaiKangLai' },
           { label: 'Tall -ā with ca/ba/ra/bha<br/><small><span class="laotham">ᨣᨧ᩠ᨨᩣᨾᩥ</span> → <span class="laotham">ᨣᨧ᩠ᨨᩤᨾᩥ</span></small>', value: 'ThamTallAOthers' },
-          { label: 'Disable explicit Tall -ā <br/><small>Font chooses the right form</small>', value: 'ThamTallADisable' }
+          { label: 'Disable explicit Tall -ā <br/><small>Font chooses the right form</small>', value: 'ThamTallADisable' },
+          { label: '<span class="laotham">ᨠᩮᩣ</span> → <span class="laotham">ᨠᩰ</span></small>', value: 'UseAlternateo1' }
         ],
         'KhuenTham': [
           { label: 'Shift Mai Kang Lai<br/><small><span class="khuentham">ᩈᩘᨥ</span> → <span class="khuentham">ᩈᨥᩘ</span></small>', value: 'ThamShiftMaiKangLai' },
           { label: 'Tall -ā with ca/ba/ra/bha<br/><small><span class="khuentham">ᨣᨧ᩠ᨨᩣᨾᩥ</span> → <span class="khuentham">ᨣᨧ᩠ᨨᩤᨾᩥ</span></small>', value: 'ThamTallAOthers' },
-          { label: 'Disable explicit Tall -ā <br/><small>Font chooses the right form</small>', value: 'ThamTallADisable' }
+          { label: 'Disable explicit Tall -ā <br/><small>Font chooses the right form</small>', value: 'ThamTallADisable' },
+          { label: '<span class="khuentham">ᨠᩮᩣ</span> → <span class="khuentham">ᨠᩰ</span></small>', value: 'UseAlternateo1' }
         ],
         'Soyombo': [
           { label: 'Syllabize input<br/><small><span class="soyombo → ">𑩲𑩖𑩮𑩑𑪁𑩫𑪘𑪙𑩾 → 𑩲𑩖 𑩮𑩑 𑪁 𑩫𑪘𑪙𑩾</span></small>', value: 'SoyomboSyllabize' },
@@ -656,7 +740,7 @@ export const ScriptMixin = {
         'Tibetan': [
           { label: 'Syllabize input<br/><small><span class="tibetan → ">བོདྷིསཏྟྭ → བོ་དྷི་ས་ཏྟྭ</span></small>', value: 'TibetanSyllabize' },
           { label: 'Sanskrit palatals<br/><small><span class="tibetan">ཙ ཚ ཛ ཛྷ → ཅ ཆ ཇ ཇྷ</span></small>', value: 'TibetanSanskritPalatals' },
-          { label: 'Bindu with nada<<br/><small><span class="tibetan">ཨྃ → ཨྂ</span></small>', value: 'TibetanNada' },
+          { label: 'Bindu with nada<br/><small><span class="tibetan">ཨྃ → ཨྂ</span></small>', value: 'TibetanNada' },
           { label: 'Use space<br/><small><span class="tibetan">ན་མོ → ན མོ</span></small>', value: 'TibetanTsheg' },
           { label: 'Dbu Med (Ume) style<br/><small><span class="tibetan">བུདྡྷཿ</span> → <span class="tibetandbumed">བུདྡྷཿ</span></small>', value: 'tibetandbumed' }
         ],
@@ -669,23 +753,23 @@ export const ScriptMixin = {
           { label: 'Telugu repha <br/><small><i>(Valapala Gilaka)</i></small> <br/><small><span class="telugu">ధర్మ → ధర్‍మ</span></small>', value: 'TeluguReph' },
           { label: 'Telugu Nakaara Pollu <br/><small><span class="telugunukta">భగవన్ → భగవౝ</span></small>', value: 'TeluguNakaraPollu' },
           { label: 'Tamil-Style Zha <br/><small><span class="telugu">ఆఴ్వార్</span> → <span class="teluguzha">ఆఴ్వార్</span></span></small>', value: 'TeluguTamilZha' },
-          { label: 'Tamil-Style Rra <br/><small><span class="telugu">ఆఱ్ఱు</span> → <span class="teluguzha">ఆౘ్ౘు</span></small>', value: 'TeluguTamilRra' },
-          { label: 'Dandas<br/><small><span class="telugu">. .. → । ॥</span></small>', value: 'RetainTeluguDanda' },
-          { label: 'Telugu Numerals<br/><small><span class="telugu">123 → ౧౨౩</span></small>', value: 'RetainTeluguNumerals' }
+          { label: 'Tamil-Style Rra <br/><small><span class="telugu">ఆఱ్ఱు</span> → <span class="teluguzha">ఆౘ్ౘు</span></small>', value: 'TeluguTamilRra' }
+          // { label: 'Dandas<br/><small><span class="telugu">. .. → । ॥</span></small>', value: 'RetainTeluguDanda' },
+          // { label: 'Telugu Numerals<br/><small><span class="telugu">123 → ౧౨౩</span></small>', value: 'RetainTeluguNumerals' }
         ],
         'Gujarati': [
-          { label: 'Dandas<br/><small><span class="gujarati">. .. → । ॥</span></small>', value: 'RetainGujaratiDanda' }
+          // { label: 'Dandas<br/><small><span class="gujarati">. .. → । ॥</span></small>', value: 'RetainGujaratiDanda' }
         ],
         'PhagsPa': [
           { label: 'Tibetan style<br/><small><span class="phagspa">ꡳꡛ ᠂ ꡂꡜ</span> → <span class="phagspatib">ꡳꡛ ᠂ ꡂꡜ</span></small>', value: 'PhagsPaTib' },
           { label: 'Seal style   <br/><small><span class="phagspa">ꡳꡛ ᠂ ꡂꡜ</span> → <span class="phagspaseal">ꡳꡛ ᠂ ꡂꡜ</span></span></small>', value: 'PhagsPaSeal' }
         ],
         'Kannada': [
-          { label: 'Dandas<br/><small><span class="kannada">. .. → । ॥</span></small>', value: 'RetainKannadaDanda' },
+          // { label: 'Dandas<br/><small><span class="kannada">. .. → । ॥</span></small>', value: 'RetainKannadaDanda' },
           { label: 'Avoid Repha <br/><small><span class="kannada">ಧರ್ಮ → ಧರ‍್ಮ</span></small>', value: 'KannadaNotRepha' },
           { label: 'Kannada Nakaara Pollu <br/><small><span class="kannadapollu">ಭಗವನ್ → ಭಗವೝ</span></small>', value: 'KannadaNakaraPollu' },
-          { label: 'Use spacing Chandrabindu <br/><small><span class="kannadapollu">ಯಹಾಁ → ಯಹಾಀ</span></small>', value: 'KannadaSpacingCandrabindu' },
-          { label: 'Kannada Numerals<br/><small><span class="kannada">123 → ೧೨೩</span></small>', value: 'RetainKannadaNumerals' }
+          { label: 'Use spacing Chandrabindu <br/><small><span class="kannadapollu">ಯಹಾಁ → ಯಹಾಀ</span></small>', value: 'KannadaSpacingCandrabindu' }
+          // { label: 'Kannada Numerals<br/><small><span class="kannada">123 → ೧೨೩</span></small>', value: 'RetainKannadaNumerals' }
         ],
         'Grantha': [
           { label: 'Grantha old AU vowel sign <br/><small><span class="grantha">𑌕𑍗 → 𑌕𑍌</span></small>', value: 'GranthaOldau' },
@@ -707,7 +791,8 @@ export const ScriptMixin = {
           { label: 'Capitalize sentences', value: 'capitalizeSentence' },
           { label: 'Anusvara to nasal<br/><small>gaṃgā → gaṅgā</small>', value: 'AnusvaratoNasalASTISO' },
           { label: 'Use tilde for nasalization<br/><small>kaM ka~ kaMka ka~ka → kã kã kaṅka kãka</smal', value: 'NasalTilde' },
-          { label: 'ṃ → ṁ', value: 'mDotAboveToBelow' }
+          { label: 'ṃ → ṁ', value: 'mDotAboveToBelow' },
+          { label: 'Vedic retroflex /l/ <br/><small><span class="iast">agnimīl̤e → agnimīḻe</span>', value: 'RomanLoCSLaDotLaUnderscore' }
         ],
         'IASTPali': [
           { label: 'Capitalize sentences', value: 'capitalizeSentence' },
@@ -739,7 +824,8 @@ export const ScriptMixin = {
           { label: 'Capitalize sentences', value: 'capitalizeSentence' }
         ],
         'Khojki': [
-          { label: 'Retain spaces', value: 'KhojkiRetainSpace' }
+          { label: 'Retain spaces', value: 'KhojkiRetainSpace' },
+          { label: 'Khojki QA<br/><small><span class="sundanese">𑈈𑈶</span> → <span class="khojki">𑈿</span></small>', value: 'KhojkiQa' }
         ],
         'WarangCiti': [
           { label: 'Capitalize sentences', value: 'capitalizeSentence' }
@@ -761,9 +847,12 @@ export const ScriptMixin = {
           { label: 'Double consonants after reph<br/><small><span class="malayalam">ധർമ → ധർമ്മ</span></small>', value: 'RephaDoubleMalayalam' },
           { label: 'Archaic II & AU<br/><small><span class="malayalam">ഈ കൗ → ൟ കൌ</span></small>', value: 'archaicAIAU' },
           { label: 'Traditional orthography<br/><small><span class="malayalam">തു തൂ</span> → <span class="malayalamold">തു തൂ</span></small>', value: 'tradOrtho' },
-          { label: 'Prakrit orthography<br/><small><span class="malayalam">ബുദ്ധ → ബുംധ</span></small>', value: 'MalayalamPrakrit' },
-          { label: 'Dandas<br/><small><span class="malayalam">. .. → । ॥</span></small>', value: 'RetainMalayalamDanda' },
-          { label: 'Malayalam numerals<br/><small><span class="malayalam">123 → ൧൨൩</span></small>', value: 'RetainMalayalamNumerals' }
+          { label: 'Archaic chillus<br/><small><span class="malayalam">ൿ ൔ ൕ ൖ</small>', value: 'historicChillu' },
+          { label: 'Bar virama<br/><small><span class="malayalam">ക്</span> → <span class="malayalamold">ക഻</span></small>', value: 'MalayalamLineVirama' },
+          { label: 'Circle virama<br/><small><span class="malayalam">ക്</span> → <span class="malayalamold">ക഼</span></small>', value: 'MalayalamCircVirama' },
+          { label: 'Prakrit orthography<br/><small><span class="malayalam">ബുദ്ധ → ബുംധ</span></small>', value: 'MalayalamPrakrit' }
+          // { label: 'Dandas<br/><small><span class="malayalam">. .. → । ॥</span></small>', value: 'RetainMalayalamDanda' },
+          // { label: 'Malayalam numerals<br/><small><span class="malayalam">123 → ൧൨൩</span></small>', value: 'RetainMalayalamNumerals' }
         ],
         'ZanabazarSquare': [
           { label: 'Sanskrit palatals<br/><small><span class="zanabazarsquare">𑨣 𑨤 𑨥 → 𑨐 𑨑 𑨒</span></small>', value: 'ZanabazarSanskritPalatals' },
@@ -1107,6 +1196,22 @@ export const ScriptMixin = {
           region: ['North Indic', 'Indic']
         },
         {
+          label: 'Dives Akuru',
+          value: 'DivesAkuru',
+          sscode: 'Diak',
+          ssdesc: 'Dives Akuru (literally “island letters”) was used for writing the Maldivian language prior to the adoption of the Thaana script for this purpose. Dives Akuru descended from the southern Brahmi family of scripts. The script in its latest form developed around the 14th century, and was widely used until the early 18th century, when it began to be supplanted by the Thaana script.',
+          omnicode: 'dhivesakuru',
+          wikicode: 'Dhives_Akuru',
+          font: {
+            'name': 'Noto Serif DivesAkuru',
+            'url': 'https://cdn.jsdelivr.net/gh/notofonts/notofonts.github.io/fonts/NotoSerifDivesAkuru/hinted/ttf/NotoSerifDivesAkuru-Regular.ttf'
+          },
+          language: ['Sanskrit & Pali', 'Sanskrit', 'Pali', 'Others'],
+          status: ['Extinct', 'Extinct: Pre-Modern'],
+          invented: ['Derived: Brahmi', 'Derived: Pallava'],
+          region: ['South Asian: Other', 'Indic']
+        },
+        {
           label: 'Dogra',
           value: 'Dogra',
           sscode: 'Dogr',
@@ -1324,8 +1429,8 @@ export const ScriptMixin = {
           omnicode: 'kawi',
           wikicode: 'Kawi_script',
           font: {
-            'name': 'Tantular Kawi',
-            'url': 'https://www.fontzip.com/tantular-kawi'
+            'name': 'Noto Sans Kawi',
+            'url': 'https://cdn.jsdelivr.net/gh/notofonts/notofonts.github.io/fonts/NotoSansKawi/unhinted/otf/NotoSansKawi-Regular.otf'
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Extinct', 'Extinct: Ancient'],

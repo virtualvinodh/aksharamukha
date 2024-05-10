@@ -45,6 +45,14 @@ export default [
   },
 
   {
+    path: '/loc',
+    component: () => import('layouts/default'),
+    children: [
+      { path: '', component: () => import('pages/loc') }
+    ]
+  },
+
+  {
     path: '/composer',
     component: () => import('layouts/default'),
     children: [
