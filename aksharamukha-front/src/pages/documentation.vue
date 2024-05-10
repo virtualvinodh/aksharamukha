@@ -29,6 +29,19 @@
       </div>
     </div>
 
+    <h6> Post Options : Target-Source Specific</h6>
+    <div v-for="key in Object.keys(postOptionsGroupSpecific)" :key="key + 'post'">
+      <h6> {{key}} </h6> <br/>
+      <div>
+        <table class="q-body-1">
+          <tr v-for="opt in postOptionsGroupSpecific[key]" :key="opt.value + opt.key">
+            <td v-html="opt.label"></td>
+            <td><i>{{opt.value}}</i></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
     <h5> Pre Options </h5>
 
     <div v-for="key in Object.keys(preOptionsGroup)" :key="key+'pre'">
@@ -36,6 +49,19 @@
       <div>
         <table class="q-body-1">
           <tr v-for="opt in preOptionsGroup[key]" :key="opt.value + opt.key">
+            <td v-html="opt.label"></td>
+            <td><i>{{opt.value}}</i></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <h6> Pre Options : Source-Target Specific</h6>
+    <div v-for="key in Object.keys(preOptionsGroupSpecific)" :key="key + 'post'">
+      <h6> {{key}} </h6> <br/>
+      <div>
+        <table class="q-body-1">
+          <tr v-for="opt in preOptionsGroupSpecific[key]" :key="opt.value + opt.key">
             <td v-html="opt.label"></td>
             <td><i>{{opt.value}}</i></td>
           </tr>
