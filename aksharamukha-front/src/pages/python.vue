@@ -41,7 +41,7 @@
         <td>Various options that customize the transliteration output. An array of strings, the strings being the various options.</td>
     </tr>
     </table> <br/>
-    <p class="q-body-1">All script identifiers and the various flags for Pre- and Post-Options are listed in detail <router-link to='/documentation'>here</router-link> along with their description.</p>
+    <p class="q-body-1">All script identifiers and the various flags for Pre- and Post-Options are listed in detail <router-link to='/documentation'>here</router-link> along with their descriptions.</p>
     <hr/> <br/>
 
     <span class="code">transliterate.process('HK', 'Telugu', 'buddhaH')</span> <br/> <br/>
