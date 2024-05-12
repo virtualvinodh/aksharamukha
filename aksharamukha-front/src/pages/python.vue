@@ -41,7 +41,7 @@
         <td>Various options that customize the transliteration output. An array of strings, the strings being the various options.</td>
     </tr>
     </table> <br/>
-
+    <p class="q-body-1">All script identifiers and the various flags for Pre- and Post-Options are listed in detail <router-link to='/documentation'>here</router-link> along with their description.</p>
     <hr/> <br/>
 
     <span class="code">transliterate.process('HK', 'Telugu', 'buddhaH')</span> <br/> <br/>
@@ -77,8 +77,6 @@
     <span class="code">transliterate.process('autodetect', 'latn-iast', 'धर्म भारत की ', param="script_code")</span> <br/><br/>
     <span class="code">transliterate.process('autodetect', 'pa-arab', 'धर्म भारत की ', param="script_code")</span> <br/><br/>
     <span class="code">transliterate.process('la-HK', 'pa-guru', 'namo buddhAya', param="lang_code")</span> <br/><br/>
-
-    <p class="q-body-1">All script identifiers and the various flags for Pre- and Post-Options are listed in detail <router-link to='/documentation'>here</router-link> along with their description.</p>
 
     <p class="q-body-1">You can also convert files (.docx, .html & .txt) as shown below.</p>
     <span class="code"> from aksharamukha import transliterate_file</span> <br/><br/>

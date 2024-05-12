@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-      <h4>Library of Congresss Romanization <q-spinner-comment color="dark" :size="30" v-show="loading"/> </h4>
+      <h4>Library of Congress Romanization <q-spinner-comment color="dark" :size="30" v-show="loading"/> </h4>
       <div class="q-body-1">The romanization of the supported scripts (as shown below) follow the guidelines of the Library of Congress as much as possible (unless they involve subjective reading of certain sequences and/or require lexical context). </div> <br/>
 
       <div class="q-body-1">Please not that many LoC romanization schemes are not reversible. Transliterating the source script from an LoC scheme, depending upon the script, may not always give the exact original source text back. </div> <br/>

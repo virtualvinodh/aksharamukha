@@ -29,26 +29,8 @@
       <q-icon name="history" size="25px" v-show="inputPast !== ''" class="print-hide"/>
       </div>
       <q-btn class="q-ma-sm q-mt-md btn2 print-hide col-xs-1 col-md-1" @click="copySource" :data-clipboard-text="textInput.replace(/<br\/>/g, '\n')"> <q-icon name="file_copy" /><q-tooltip>Copy source text</q-tooltip></q-btn>
-    <input-options :inputScript="inputScript" :outputScript="outputScript" :preOptionsInput="preOptions" :showscriptName="false"
-      :postOptions="postOptions" v-model="preOptions" @input="convert"></input-options>
-    <q-input
-      v-model.trim="textInput"
-      type="textarea"
-      float-label="Input text"
-      class="text-input col-xs-12 col-md-12 q-ma-sm"
-      :class="getInputClass(inputScript, preOptions)"
-      autofocus
-      @input="throttled"
-      clearable
-      color="dark"
-      rows="10"
-      :max-height="1500"
-      @clear="OCRPerformed = false"
-      ></q-input>
-    <input-notice :inputScript="inputScript" :outputScript="outputScript" :preOptions="preOptions"
-       :postOptions="postOptions" :OCRPerformed="OCRPerformed"></input-notice>
-    <div class="">
-      <q-btn class="q-ma-sm print-hide col-xs-3 col-md-3" @click="uploadImage" label="Use Image/PDF" v-show="displayImageButton" v-if="!$q.platform.is.cordova" icon="add photo alternate"> <q-tooltip>Upload image/PDF</q-tooltip></q-btn>
+      <q-btn class="q-ma-sm q-mt-md btn2 print-hide col-xs-1 col-md-1" @click="uploadImage" :data-clipboard-text="textInput.replace(/<br\/>/g, '\n')"> <q-icon name="add photo alternate" /><q-tooltip>Upload image/PDF</q-tooltip></q-btn>
+      <div class="">
       <span v-show="showFileUpload" class="q-ma-sm">
             <q-uploader url="" clearable extensions=".jpg, .jpeg, .png, .bmp, .ico, .pdf" @add="showConvertImage" @remove:cancel="hideConvertButton"
                auto-expand hide-upload-button ref="uploadF" :style="{width:'200px'}"/>
@@ -75,6 +57,24 @@
           </span>
       </span>
     </div>
+    <input-options :inputScript="inputScript" :outputScript="outputScript" :preOptionsInput="preOptions" :showscriptName="false"
+      :postOptions="postOptions" v-model="preOptions" @input="convert"></input-options>
+    <q-input
+      v-model.trim="textInput"
+      type="textarea"
+      float-label="Input text"
+      class="text-input col-xs-12 col-md-12 q-ma-sm"
+      :class="getInputClass(inputScript, preOptions)"
+      autofocus
+      @input="throttled"
+      clearable
+      color="dark"
+      rows="10"
+      :max-height="1500"
+      @clear="OCRPerformed = false"
+      ></q-input>
+    <input-notice :inputScript="inputScript" :outputScript="outputScript" :preOptions="preOptions"
+       :postOptions="postOptions" :OCRPerformed="OCRPerformed"></input-notice>
     </div>
     <div class="q-ma-md print-hide">
       <div class="col">
@@ -100,7 +100,7 @@
       </div>
  <div class="q-mt-sm"><output-buttons @fontsizeinc="fontSize += 20" @fontsizedec="fontSize -= 20"
        @printdoc="printDocument" @screenshot="imageConvert(downloadImage.bind(this))" @copytext="copy" :convertText="convertText" :content="downHTML"></output-buttons></div>
-      <q-btn icon="share" label="text" class="q-ma-sm" @click="shareCordovaText" v-if="$q.platform.is.cordova"/> <q-btn icon="share" label="image" class="q-ma-sm" @click="imageConvert(shareCordovaImage.bind(this))" v-if="$q.platform.is.cordova" />
+      <!-- <q-btn icon="share" label="text" class="q-ma-sm" @click="shareCordovaText" v-if="$q.platform.is.cordova"/> <q-btn icon="share" label="image" class="q-ma-sm" @click="imageConvert(shareCordovaImage.bind(this))" v-if="$q.platform.is.cordova" /> -->
     <output-options :inputScript="inputScript" :outputScript="outputScript" :postOptionsInput="postOptions" :sourcePreserveInput="sourcePreserve" :showscriptName="false"
        :convertText="convertText" :hideSourcePreserve="false"
         @input="convertOutputOptions($event)" ></output-options>

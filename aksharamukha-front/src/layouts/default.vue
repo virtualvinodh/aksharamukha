@@ -89,7 +89,7 @@
               <q-item-main label="Semitic Scripts"/>
             </q-item>
             <q-item to="/loc">
-              <q-item-main label="Library of Congres"/>
+              <q-item-main label="Library of Congress"/>
             </q-item>
           </q-collapsible>
  <!--            <q-item :to="!scriptSemiticList.includes(script.value) ? '/describe/' + script.value : '/describesemitic/' + script.value"
