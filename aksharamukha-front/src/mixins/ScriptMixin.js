@@ -1998,8 +1998,8 @@ export const ScriptMixin = {
           omnicode: 'shan',
           wikicode: 'Shan_language#Alphabet',
           font: {
-            'name': '',
-            'url': ''
+            'name': 'GreatHorKham_Yangon',
+            'url': 'https://shaniit.org/fonts'
           },
           language: ['Sanskrit & Pali', 'Sanskrit', 'Pali'],
           status: ['Living', 'Living: Minor'],

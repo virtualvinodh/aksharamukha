@@ -68,6 +68,7 @@
             (String(convertText).includes('\u0956') || String(convertText).includes('\u0957'))   "> ॶ & ॷ is pronounced similar to उ ऊ but more rounded. </div>
 
 <div class="notice q-ma-sm text-red" v-show="outputScript == 'RomanLoC' && !locScripts.includes(inputScript)"> The LoC romanization of this script is not yet supported. The output text will be rendered using ISO 233 if Semitic else ISO 15919</div>
+<div class="notice q-ma-sm text-red" v-show="outputScript == 'RomanLoC' && inputScript.includes('Tham')"> The LoC romanization of this script is not official and is only used by the British Library.</div>
   </span>
 </template>
 

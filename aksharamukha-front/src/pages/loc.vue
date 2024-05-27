@@ -3,7 +3,7 @@
       <h4>Library of Congress Romanization <q-spinner-comment color="dark" :size="30" v-show="loading"/> </h4>
       <div class="q-body-1">The romanization of the supported scripts (as shown below) follow the guidelines of the Library of Congress as much as possible (unless they involve subjective reading of certain sequences and/or require lexical context). </div> <br/>
 
-      <div class="q-body-1">Please not that many LoC romanization schemes are not reversible. Transliterating the source script from an LoC scheme, depending upon the script, may not always give the exact original source text back. </div> <br/>
+      <div class="q-body-1">Please note that many LoC romanization schemes are not reversible. Transliterating the source script from an LoC scheme, depending upon the script, may not always give the exact original source text back. </div> <br/>
 
       <div class="q-body-1">If the LoC romanization of a script is not yet supported, the output text will be rendered using ISO 233 if it's a Semitic script or ISO 15919 if it's an Indic script.</div> <br/>
       <q-table
