@@ -4,7 +4,7 @@ export const ScriptMixin = {
       apiCall: this.$axios.create({
         // Always use http://localhost:8085/api/ (with a leading slash)
         // http://localhost:8085/api/
-        baseURL: 'api/',
+        baseURL: 'http://localhost:8085/api/',
         timeout: 100000
       }),
       wikipediaCall: this.$axios.create({
@@ -302,6 +302,16 @@ export const ScriptMixin = {
           { label: 'Lao Phonetic text<br/><small><div class="laopali">e.g. ບຸດຘະຕ͜ວະ</div></small>', value: 'LaoPhonetic' }
         ],
         'TaiTham': [
+          { label: 'Segment Tham Syllables <small><div class="q-mt-sm"></div></small>', value: 'segmentThamSyllabes' }
+        ],
+        'KhuenTham': [
+          { label: 'Segment Tham Syllables <small><div class="q-mt-sm"></div></small>', value: 'segmentThamSyllabes' },
+          { label: 'Ra-Haam as consontal sign /r/ <small><div class="q-mt-sm"><span class="khuentham">ᨠ᩺ ᨠ᩼</span>→kar k</div></small>', value: 'KhuenRaHaamKaren' }
+        ],
+        'LaoTham': [
+          { label: 'Segment Tham Syllables <small><div class="q-mt-sm"></div></small>', value: 'segmentThamSyllabes' }
+        ],
+        'LueTham': [
           { label: 'Segment Tham Syllables <small><div class="q-mt-sm"></div></small>', value: 'segmentThamSyllabes' }
         ],
         'Devanagari': [
