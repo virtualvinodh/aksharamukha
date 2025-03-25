@@ -52,6 +52,10 @@
           <q-item-side icon="translate"/>
           <q-item-main label="Converter"/>
         </q-item>
+        <q-item @click.native="openURL('https://uchcharaka.aksharamukha.com')" link>
+          <q-item-side icon="mic"/>
+          <q-item-main label="Transcriber"/>
+        </q-item>
         <!-- <q-item to="/composer">
           <q-item-side icon="language" />
           <q-item-main label="Composer (Multiple scripts)"/>
@@ -73,14 +77,16 @@
           <q-item-side icon="navigation" />
             <q-item-main label="Scripts Info"/>
           </q-item>
-        <q-item to="/script-matrix">
-          <q-item-side icon="table chart" />
-            <q-item-main label="Indic Matrix"/>
-          </q-item>
-        <q-item to="/semitic-matrix">
-          <q-item-side icon="table chart" />
-            <q-item-main label="Semitic Matrix"/>
-          </q-item>
+      <q-collapsible icon="table chart" label="Script Matrix"  >
+          <q-item to="/script-matrix">
+            <q-item-side icon="table chart" />
+              <q-item-main label="Indic Matrix"/>
+            </q-item>
+          <q-item to="/semitic-matrix">
+            <q-item-side icon="table chart" />
+              <q-item-main label="Semitic Matrix"/>
+            </q-item>
+          </q-collapsible>
           <q-collapsible icon="spellcheck" label="Romanization"  >
             <q-item to="/roman">
               <q-item-main label="Indic Scripts"/>
@@ -163,7 +169,7 @@
     </q-layout-drawer>
     <q-page-container class="page">
       <span v-if="!$q.platform.is.cordova">
-      <div :class="$q.platform.is.mobile ? 'alert2': 'alert'" v-if="visibleAlert && !$q.platform.is.mobile">
+      <div :class="$q.platform.is.mobile ? 'alert2': 'alert'" v-if="false && visibleAlert && !$q.platform.is.mobile">
       <br/>
       <q-alert
           color="grey-7"
@@ -172,6 +178,16 @@
           :actions="[{ label: 'Dismiss', handler: hideAlert }]"
           class="q-mb-sm"
         > Like Aksharamukha? Consider <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LRY7AE7SXDHTN&source=url">supporting</a> it! </q-alert>
+      </div>
+      <div :class="$q.platform.is.mobile ? 'alert2': 'alert'" v-if="visibleAlertTransc && !$q.platform.is.mobile">
+      <br/>
+      <q-alert
+          color="grey-7"
+          icon="mic"
+          appear
+          :actions="[{ label: 'Dismiss', handler: hideAlertTransc }]"
+          class="q-mb-sm"
+        > Transcribe languages now! Try: <a href="https://uchcharaka.aksharamukha.com">Aksharamukha: Uchcharaka</a></q-alert>
       </div>
       <div :class="$q.platform.is.mobile ? 'alert2': 'alert'" v-if="$q.platform.is.mobile && !hideAndroid">
       <br/>
@@ -235,6 +251,7 @@ export default {
       showFooter: true,
       randomScript: '',
       visibleAlert: true,
+      visibleAlertTransc: true,
       texts: [
         {
           name: 'Triratnanusmriti Sutra',
@@ -290,6 +307,9 @@ export default {
     if (localStorage.visibleAlert) {
       this.visibleAlert = JSON.parse(localStorage.visibleAlert)
     }
+    if (localStorage.visibleAlertTransc) {
+      this.visibleAlertTransc = JSON.parse(localStorage.visibleAlertTransc)
+    }
     if (localStorage.hideAndroid) {
       this.hideAndroid = JSON.parse(localStorage.hideAndroid)
     }
@@ -303,6 +323,10 @@ export default {
     hideAlert: function () {
       this.visibleAlert = false
       localStorage.visibleAlert = JSON.stringify(this.visibleAlert)
+    },
+    hideAlertTransc: function () {
+      this.visibleAlertTransc = false
+      localStorage.visibleAlertTransc = JSON.stringify(this.visibleAlertTransc)
     },
     onResize: function (size) {
       if (size.width < 992) {
